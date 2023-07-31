@@ -16,6 +16,20 @@
 		64ADA4572A7787780003E2C1 /* GetYaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4562A7787780003E2C1 /* GetYaTests.swift */; };
 		64ADA4612A7787780003E2C1 /* GetYaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4602A7787780003E2C1 /* GetYaUITests.swift */; };
 		64ADA4632A7787780003E2C1 /* GetYaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4622A7787780003E2C1 /* GetYaUITestsLaunchTests.swift */; };
+		64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4842A77887E0003E2C1 /* AppCoordinator.swift */; };
+		64ADA4872A7788840003E2C1 /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4862A7788840003E2C1 /* DTO.swift */; };
+		64ADA4892A77888C0003E2C1 /* RepositoyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4882A77888C0003E2C1 /* RepositoyProtocol.swift */; };
+		64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA48A2A7788900003E2C1 /* Entity.swift */; };
+		64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA48C2A77889D0003E2C1 /* Protocol.swift */; };
+		64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA48E2A7788AA0003E2C1 /* PresentationCoordinator.swift */; };
+		64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4902A7788B00003E2C1 /* CommonProtocl.swift */; };
+		64ADA4932A7788B60003E2C1 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4922A7788B60003E2C1 /* CommonView.swift */; };
+		64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4942A7788BC0003E2C1 /* CommonViewModel.swift */; };
+		64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4962A7788C10003E2C1 /* Etc.swift */; };
+		64ADA4992A7788C70003E2C1 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4982A7788C70003E2C1 /* Enum.swift */; };
+		64ADA49B2A7788CC0003E2C1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA49A2A7788CC0003E2C1 /* Extension.swift */; };
+		64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA49C2A7788D00003E2C1 /* Service.swift */; };
+		64ADA49F2A77890B0003E2C1 /* .swiftLint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +63,20 @@
 		64ADA45C2A7787780003E2C1 /* GetYaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GetYaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		64ADA4602A7787780003E2C1 /* GetYaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetYaUITests.swift; sourceTree = "<group>"; };
 		64ADA4622A7787780003E2C1 /* GetYaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetYaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		64ADA4842A77887E0003E2C1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		64ADA4862A7788840003E2C1 /* DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTO.swift; sourceTree = "<group>"; };
+		64ADA4882A77888C0003E2C1 /* RepositoyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoyProtocol.swift; sourceTree = "<group>"; };
+		64ADA48A2A7788900003E2C1 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		64ADA48C2A77889D0003E2C1 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		64ADA48E2A7788AA0003E2C1 /* PresentationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationCoordinator.swift; sourceTree = "<group>"; };
+		64ADA4902A7788B00003E2C1 /* CommonProtocl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonProtocl.swift; sourceTree = "<group>"; };
+		64ADA4922A7788B60003E2C1 /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
+		64ADA4942A7788BC0003E2C1 /* CommonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModel.swift; sourceTree = "<group>"; };
+		64ADA4962A7788C10003E2C1 /* Etc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Etc.swift; sourceTree = "<group>"; };
+		64ADA4982A7788C70003E2C1 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		64ADA49A2A7788CC0003E2C1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		64ADA49C2A7788D00003E2C1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftLint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +107,7 @@
 		64ADA4332A7787770003E2C1 = {
 			isa = PBXGroup;
 			children = (
+				64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */,
 				64ADA43E2A7787770003E2C1 /* GetYa */,
 				64ADA4552A7787780003E2C1 /* GetYaTests */,
 				64ADA45F2A7787780003E2C1 /* GetYaUITests */,
@@ -99,13 +128,12 @@
 		64ADA43E2A7787770003E2C1 /* GetYa */ = {
 			isa = PBXGroup;
 			children = (
-				64ADA43F2A7787770003E2C1 /* AppDelegate.swift */,
-				64ADA4412A7787770003E2C1 /* SceneDelegate.swift */,
+				64ADA4732A7787910003E2C1 /* App */,
+				64ADA4722A77878F0003E2C1 /* Data */,
+				64ADA4712A77878D0003E2C1 /* Domain */,
+				64ADA4702A77878B0003E2C1 /* Presentation */,
 				64ADA4432A7787770003E2C1 /* ViewController.swift */,
-				64ADA4452A7787770003E2C1 /* Main.storyboard */,
-				64ADA4482A7787780003E2C1 /* Assets.xcassets */,
-				64ADA44A2A7787780003E2C1 /* LaunchScreen.storyboard */,
-				64ADA44D2A7787780003E2C1 /* Info.plist */,
+				64ADA46F2A7787890003E2C1 /* Util */,
 			);
 			path = GetYa;
 			sourceTree = "<group>";
@@ -127,6 +155,188 @@
 			path = GetYaUITests;
 			sourceTree = "<group>";
 		};
+		64ADA46F2A7787890003E2C1 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA47B2A7788150003E2C1 /* Etc */,
+				64ADA47A2A7788130003E2C1 /* Enum */,
+				64ADA4792A7788110003E2C1 /* Extension */,
+				64ADA4782A77880F0003E2C1 /* Service */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		64ADA4702A77878B0003E2C1 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4742A7787C60003E2C1 /* Coordinator */,
+				64ADA4752A7787CC0003E2C1 /* Common */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		64ADA4712A77878D0003E2C1 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA47F2A7788510003E2C1 /* Entity */,
+				64ADA47D2A7788470003E2C1 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		64ADA4722A77878F0003E2C1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4812A7788630003E2C1 /* DTO */,
+				64ADA4802A77885E0003E2C1 /* Repositoy */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		64ADA4732A7787910003E2C1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4832A7788740003E2C1 /* Coordinator */,
+				64ADA43F2A7787770003E2C1 /* AppDelegate.swift */,
+				64ADA4412A7787770003E2C1 /* SceneDelegate.swift */,
+				64ADA4452A7787770003E2C1 /* Main.storyboard */,
+				64ADA4482A7787780003E2C1 /* Assets.xcassets */,
+				64ADA44A2A7787780003E2C1 /* LaunchScreen.storyboard */,
+				64ADA44D2A7787780003E2C1 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		64ADA4742A7787C60003E2C1 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA48E2A7788AA0003E2C1 /* PresentationCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		64ADA4752A7787CC0003E2C1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA47C2A7788410003E2C1 /* Protocol */,
+				64ADA4772A7787F20003E2C1 /* View */,
+				64ADA4762A7787DB0003E2C1 /* ViewModel */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		64ADA4762A7787DB0003E2C1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4942A7788BC0003E2C1 /* CommonViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		64ADA4772A7787F20003E2C1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4922A7788B60003E2C1 /* CommonView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		64ADA4782A77880F0003E2C1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA49C2A7788D00003E2C1 /* Service.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		64ADA4792A7788110003E2C1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA49A2A7788CC0003E2C1 /* Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		64ADA47A2A7788130003E2C1 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4982A7788C70003E2C1 /* Enum.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		64ADA47B2A7788150003E2C1 /* Etc */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4962A7788C10003E2C1 /* Etc.swift */,
+			);
+			path = Etc;
+			sourceTree = "<group>";
+		};
+		64ADA47C2A7788410003E2C1 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4902A7788B00003E2C1 /* CommonProtocl.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		64ADA47D2A7788470003E2C1 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA47E2A77884D0003E2C1 /* Protocol */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		64ADA47E2A77884D0003E2C1 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA48C2A77889D0003E2C1 /* Protocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		64ADA47F2A7788510003E2C1 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA48A2A7788900003E2C1 /* Entity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		64ADA4802A77885E0003E2C1 /* Repositoy */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4822A77886F0003E2C1 /* Protocol */,
+			);
+			path = Repositoy;
+			sourceTree = "<group>";
+		};
+		64ADA4812A7788630003E2C1 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4862A7788840003E2C1 /* DTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		64ADA4822A77886F0003E2C1 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4882A77888C0003E2C1 /* RepositoyProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		64ADA4832A7788740003E2C1 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4842A77887E0003E2C1 /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -137,6 +347,7 @@
 				64ADA4382A7787770003E2C1 /* Sources */,
 				64ADA4392A7787770003E2C1 /* Frameworks */,
 				64ADA43A2A7787770003E2C1 /* Resources */,
+				64ADA4A02A7789210003E2C1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -231,6 +442,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64ADA49F2A77890B0003E2C1 /* .swiftLint.yml in Resources */,
 				64ADA44C2A7787780003E2C1 /* LaunchScreen.storyboard in Resources */,
 				64ADA4492A7787780003E2C1 /* Assets.xcassets in Resources */,
 				64ADA4472A7787770003E2C1 /* Main.storyboard in Resources */,
@@ -253,14 +465,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		64ADA4A02A7789210003E2C1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		64ADA4382A7787770003E2C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64ADA49B2A7788CC0003E2C1 /* Extension.swift in Sources */,
+				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
+				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
+				64ADA4932A7788B60003E2C1 /* CommonView.swift in Sources */,
+				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
+				64ADA4992A7788C70003E2C1 /* Enum.swift in Sources */,
+				64ADA4892A77888C0003E2C1 /* RepositoyProtocol.swift in Sources */,
+				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
+				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
+				64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */,
+				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */,
 				64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */,
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
+				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
+				64ADA4872A7788840003E2C1 /* DTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +612,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -420,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -439,7 +685,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3X23G6XQ74;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GetYa/Info.plist;
+				INFOPLIST_FILE = GetYa/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -467,7 +713,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3X23G6XQ74;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GetYa/Info.plist;
+				INFOPLIST_FILE = GetYa/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
