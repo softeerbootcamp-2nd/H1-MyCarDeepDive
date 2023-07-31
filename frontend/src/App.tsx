@@ -18,15 +18,19 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button
+          onClick={() => setCount((count) => count + 1)}
+          className="bg-primaryd text-primary"
+        >
           count is {count}
         </button>
-        <p className="text-primary">
-          Edit <code>src/App.tsx</code> and save to test HMR
+        <p className="font-body4-regular">
+          Editand save <span className="font-bold">to test HMR</span>
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+      <p className="font-body4-regular">
+        Click on the Vite and React{" "}
+        <span className="font-h1-bold">logos to learn more</span>
       </p>
     </>
   );
