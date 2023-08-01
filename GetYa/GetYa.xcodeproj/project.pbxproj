@@ -29,6 +29,8 @@
 		64ADA49B2A7788CC0003E2C1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA49A2A7788CC0003E2C1 /* Extension.swift */; };
 		64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA49C2A7788D00003E2C1 /* Service.swift */; };
 		64ADA49F2A77890B0003E2C1 /* .swiftLint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */; };
+		64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4A42A789C5A0003E2C1 /* HomeViewController.swift */; };
+		64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4AA2A78A4080003E2C1 /* HomeNavigationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		64ADA49A2A7788CC0003E2C1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		64ADA49C2A7788D00003E2C1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftLint.yml; sourceTree = "<group>"; };
+		64ADA4A42A789C5A0003E2C1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		64ADA4AA2A78A4080003E2C1 /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,7 @@
 			children = (
 				64ADA4742A7787C60003E2C1 /* Coordinator */,
 				64ADA4752A7787CC0003E2C1 /* Common */,
+				64ADA4A12A789BF40003E2C1 /* Home */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -334,6 +339,15 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		64ADA4A12A789BF40003E2C1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				64ADA4AA2A78A4080003E2C1 /* HomeNavigationViewController.swift */,
+				64ADA4A42A789C5A0003E2C1 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -490,10 +504,12 @@
 				64ADA49B2A7788CC0003E2C1 /* Extension.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
+				64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */,
 				64ADA4932A7788B60003E2C1 /* CommonView.swift in Sources */,
 				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
 				64ADA4992A7788C70003E2C1 /* Enum.swift in Sources */,
 				64ADA4892A77888C0003E2C1 /* RepositoyProtocol.swift in Sources */,
+				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
 				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
 				64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */,
