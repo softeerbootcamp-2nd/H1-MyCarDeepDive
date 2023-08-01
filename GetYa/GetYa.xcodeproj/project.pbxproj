@@ -33,6 +33,7 @@
 		64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4AA2A78A4080003E2C1 /* HomeNavigationViewController.swift */; };
 		64ADA4AD2A78A7090003E2C1 /* CommonWideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4AC2A78A7090003E2C1 /* CommonWideButton.swift */; };
 		64ADA4AF2A78D34E0003E2C1 /* Home_mp4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 64ADA4AE2A78D34E0003E2C1 /* Home_mp4.mp4 */; };
+		64ADA4B12A78F82A0003E2C1 /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		64ADA4AA2A78A4080003E2C1 /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationViewController.swift; sourceTree = "<group>"; };
 		64ADA4AC2A78A7090003E2C1 /* CommonWideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWideButton.swift; sourceTree = "<group>"; };
 		64ADA4AE2A78D34E0003E2C1 /* Home_mp4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Home_mp4.mp4; path = ../../../Home_mp4.mp4; sourceTree = "<group>"; };
+		64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				64ADA49A2A7788CC0003E2C1 /* Extension.swift */,
+				64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64ADA4B12A78F82A0003E2C1 /* CGFloat+.swift in Sources */,
 				64ADA49B2A7788CC0003E2C1 /* Extension.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
