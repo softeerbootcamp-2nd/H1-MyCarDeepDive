@@ -67,9 +67,12 @@ final class CommonWideButton: UIButton {
     // MARK: - Functions
     
     private func configureUI() {
-        self.layer.cornerRadius = 6
+        self.layer.cornerRadius = CGFloat.scaledWidth(value: 6)
         self.layer.borderWidth = 1
-        self.titleLabel?.font = .systemFont(ofSize: 16, weight: UIFont.Weight(500))
+        self.titleLabel?.font = .systemFont(
+            ofSize: CGFloat.scaledWidth(value: 16),
+            weight: UIFont.Weight(500)
+        )
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
