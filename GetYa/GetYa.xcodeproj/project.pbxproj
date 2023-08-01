@@ -26,7 +26,6 @@
 		64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4942A7788BC0003E2C1 /* CommonViewModel.swift */; };
 		64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4962A7788C10003E2C1 /* Etc.swift */; };
 		64ADA4992A7788C70003E2C1 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4982A7788C70003E2C1 /* Enum.swift */; };
-		64ADA49B2A7788CC0003E2C1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA49A2A7788CC0003E2C1 /* Extension.swift */; };
 		64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA49C2A7788D00003E2C1 /* Service.swift */; };
 		64ADA49F2A77890B0003E2C1 /* .swiftLint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */; };
 		64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4A42A789C5A0003E2C1 /* HomeViewController.swift */; };
@@ -77,7 +76,6 @@
 		64ADA4942A7788BC0003E2C1 /* CommonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModel.swift; sourceTree = "<group>"; };
 		64ADA4962A7788C10003E2C1 /* Etc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Etc.swift; sourceTree = "<group>"; };
 		64ADA4982A7788C70003E2C1 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
-		64ADA49A2A7788CC0003E2C1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		64ADA49C2A7788D00003E2C1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftLint.yml; sourceTree = "<group>"; };
 		64ADA4A42A789C5A0003E2C1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 		64ADA4792A7788110003E2C1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				64ADA49A2A7788CC0003E2C1 /* Extension.swift */,
 				64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */,
 			);
 			path = Extension;
@@ -512,7 +509,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				64ADA4B12A78F82A0003E2C1 /* CGFloat+.swift in Sources */,
-				64ADA49B2A7788CC0003E2C1 /* Extension.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
 				64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */,
