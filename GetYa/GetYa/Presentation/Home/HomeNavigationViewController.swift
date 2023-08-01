@@ -16,8 +16,6 @@ final class HomeNavigationViewController: UINavigationController {
     // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override var childForStatusBarStyle: UIViewController? {
