@@ -4,15 +4,17 @@ import mainVideo from "../assets/video/Home_mp4.mp4";
 function LandingPage() {
   return (
     <div className="relative w-full h-screen">
-      <div className="fixed top-[143px] left-[128px] z-10 font-body2-regular text-grey-1000">
-        <p className="text-[28px] leading-[42px]">
-          당신의{" "}
-          <span className="font-h2-medium">
-            <span className=" text-[28px] leading-[42px]">라이프스타일</span>
-          </span>
-          에 맞게 <br />
-          차량을 추천해드려요
-        </p>
+      <div className="fixed top-[143px] left-0 w-full z-10 font-body2-regular text-grey-1000">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-[28px] leading-[42px]">
+            당신의{" "}
+            <span className="font-h2-medium">
+              <span className=" text-[28px] leading-[42px]">라이프스타일</span>
+            </span>
+            에 맞게 <br />
+            차량을 추천해드려요
+          </p>
+        </div>
       </div>
       <div className="fixed bottom-[36px] left-0 z-10 w-full flex justify-center gap-2">
         <Button
