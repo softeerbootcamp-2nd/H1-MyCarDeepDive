@@ -38,6 +38,7 @@
 		64ADA4BC2A7A22780003E2C1 /* CommonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4BB2A7A22780003E2C1 /* CommonLabel.swift */; };
 		64ADA4BE2A7A26090003E2C1 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4BD2A7A26090003E2C1 /* Int+.swift */; };
 		64ADA4C02A7A28AA0003E2C1 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4BF2A7A28AA0003E2C1 /* UIColor+.swift */; };
+		64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4C12A7A2DAC0003E2C1 /* CommonPageControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		64ADA4BB2A7A22780003E2C1 /* CommonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonLabel.swift; sourceTree = "<group>"; };
 		64ADA4BD2A7A26090003E2C1 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		64ADA4BF2A7A28AA0003E2C1 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		64ADA4C12A7A2DAC0003E2C1 /* CommonPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPageControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +260,7 @@
 				64ADA4BB2A7A22780003E2C1 /* CommonLabel.swift */,
 				64ADA4B72A7A1BF20003E2C1 /* CommonOptionImageView.swift */,
 				64ADA4B92A7A21520003E2C1 /* CommonOptionView.swift */,
+				64ADA4C12A7A2DAC0003E2C1 /* CommonPageControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				64ADA4892A77888C0003E2C1 /* RepositoyProtocol.swift in Sources */,
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
 				64ADA4BE2A7A26090003E2C1 /* Int+.swift in Sources */,
+				64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */,
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
 				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
 				64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */,
