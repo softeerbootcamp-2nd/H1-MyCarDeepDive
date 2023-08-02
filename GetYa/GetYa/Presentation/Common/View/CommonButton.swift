@@ -56,6 +56,7 @@ final class CommonButton: UIButton {
         title: String
     ) {
         super.init(frame: .zero)
+        configureUI()
         configureDetail(
             font: font,
             wideButtonBackgroundColorType: wideButtonBackgroundColorType,

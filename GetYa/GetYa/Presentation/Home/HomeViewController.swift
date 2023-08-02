@@ -12,9 +12,8 @@ class HomeViewController: UIViewController {
 
     // MARK: - UI Properties
     
-    
     // TODO: - Font 바꾸기
-    private let customWideButton = CommonButton(
+    private let customButton = CommonButton(
         font: .systemFont(
             ofSize: CGFloat.scaledWidth(value: 16),
             weight: UIFont.Weight(500)
@@ -24,7 +23,7 @@ class HomeViewController: UIViewController {
     )
     
     // TODO: - Font 바꾸기
-    private let recomandWideButton = CommonButton(
+    private let recomandButton = CommonButton(
         font: .systemFont(
             ofSize: CGFloat.scaledWidth(value: 16),
             weight: UIFont.Weight(500)
@@ -76,8 +75,8 @@ class HomeViewController: UIViewController {
     private func setupViews() {
         setupAVPlayerLayer()
         [
-            customWideButton,
-            recomandWideButton,
+            customButton,
+            recomandButton,
             titleLabel
         ].forEach {
             view.addSubview($0)
@@ -114,36 +113,36 @@ class HomeViewController: UIViewController {
     
     private func configureCustomWideButton() {
         NSLayoutConstraint.activate([
-            customWideButton.bottomAnchor.constraint(
-                equalTo: recomandWideButton.topAnchor,
+            customButton.bottomAnchor.constraint(
+                equalTo: recomandButton.topAnchor,
                 constant: -CGFloat.scaledHeight(value: 8)
             ),
-            customWideButton.leadingAnchor.constraint(
+            customButton.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: CGFloat.scaledWidth(value: 17)
             ),
-            customWideButton.trailingAnchor.constraint(
+            customButton.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: -CGFloat.scaledWidth(value: 17)
             ),
-            customWideButton.heightAnchor.constraint(equalToConstant: CGFloat.scaledHeight(value: 52))
+            customButton.heightAnchor.constraint(equalToConstant: CGFloat.scaledHeight(value: 52))
         ])
     }
     
     private func configureRecomandWideButton() {
         NSLayoutConstraint.activate([
-            recomandWideButton.bottomAnchor.constraint(
+            recomandButton.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor
             ),
-            recomandWideButton.leadingAnchor.constraint(
+            recomandButton.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: CGFloat.scaledWidth(value: 17)
             ),
-            recomandWideButton.trailingAnchor.constraint(
+            recomandButton.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: -CGFloat.scaledWidth(value: 17)
             ),
-            recomandWideButton.heightAnchor.constraint(equalToConstant: CGFloat.scaledHeight(value: 52))
+            recomandButton.heightAnchor.constraint(equalToConstant: CGFloat.scaledHeight(value: 52))
         ])
     }
     
