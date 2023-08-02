@@ -30,6 +30,7 @@ class CommonPageControl: UIPageControl {
     
     // MARK: - Functions
     private func configureUI() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.isUserInteractionEnabled = false
         self.currentPage = 0
         
