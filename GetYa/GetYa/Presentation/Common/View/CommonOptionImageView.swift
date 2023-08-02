@@ -13,8 +13,17 @@ class CommonOptionImageView: UIImageView {
     // MARK: - Properties
     
     // MARK: - LifeCycles
+    convenience init() {
+        self.init(frame: .zero)
+    }
+    
     override init(image: UIImage?) {
         super.init(image: image)
+        configureUI()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configureUI()
     }
     
