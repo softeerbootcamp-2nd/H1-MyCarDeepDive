@@ -11,12 +11,12 @@ import AVKit
 class HomeViewController: UIViewController {
 
     // MARK: - UI Properties
-    private let customWideButton = CommonWideButton(
+    private let customWideButton = CommonButton(
         wideButtonBackgroundColorType: .black,
         title: "직접 만들래요"
     )
     
-    private let recomandWideButton = CommonWideButton(
+    private let recomandWideButton = CommonButton(
         wideButtonBackgroundColorType: .white,
         title: "추천받기"
     )

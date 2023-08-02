@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommonWideButton: UIButton {
+final class CommonButton: UIButton {
     // MARK: - UI Properties
     
     // MARK: - Properties
