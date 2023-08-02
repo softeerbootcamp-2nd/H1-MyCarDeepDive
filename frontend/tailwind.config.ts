@@ -21,6 +21,7 @@ module.exports = {
           900: "#FBFBFB",
           1000: "#FFFFFF",
         },
+        bgModal: "rgba(15, 17, 20, 0.55)",
       },
     },
   },
