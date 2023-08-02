@@ -24,20 +24,38 @@ class CommonOptionView: UIView {
     // MARK: - LifeCycles
     init(image: UIImage, title: String, price: Int) {
         super.init(frame: .zero)
+        configureSubViews()
+        configureUI()
+        configureDetail(image: image, title: title, price: price)
+        configureLayout()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureSubViews()
         configureUI()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureSubViews()
         configureUI()
+        configureLayout()
     }
     
     // MARK: - Functions
-    func configureUI() {
+    private func configureSubViews() {
+        [
+            imageView,
+            titleLabel,
+            priceLabel
+        ].forEach {
+            self.addSubview($0)
+        }
+    }
+    
+    private func configureUI() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .white
     }
@@ -48,7 +66,7 @@ class CommonOptionView: UIView {
         self.priceLabel.text = price.toPriceFormat
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         configureImageViewLayout()
         configureTitleLabelLayout()
         configurePriceLabelLayout()
@@ -57,7 +75,7 @@ class CommonOptionView: UIView {
     func configureImageViewLayout() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: self.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: self.leftAnchor),
+            imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             imageView.widthAnchor.constraint(equalTo: self.heightAnchor)
         ])
@@ -82,7 +100,8 @@ class CommonOptionView: UIView {
             priceLabel.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor,
                 constant: CGFloat.scaledWidth(value: 16)
-            )
+            ),
+            priceLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
 }
