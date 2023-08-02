@@ -49,9 +49,18 @@ final class CommonButton: UIButton {
     }
     
     // MARK: - LifeCycles
-    convenience init(wideButtonBackgroundColorType: WideButtonBackgroundColorType, title: String) {
-        self.init(frame: .zero)
-        configureDetail(wideButtonBackgroundColorType: wideButtonBackgroundColorType, title: title)
+    
+    init(
+        font: UIFont,
+        wideButtonBackgroundColorType: WideButtonBackgroundColorType,
+        title: String
+    ) {
+        super.init(frame: .zero)
+        configureDetail(
+            font: font,
+            wideButtonBackgroundColorType: wideButtonBackgroundColorType,
+            title: title
+        )
     }
     
     override init(frame: CGRect) {
@@ -69,14 +78,15 @@ final class CommonButton: UIButton {
     private func configureUI() {
         self.layer.cornerRadius = CGFloat.scaledWidth(value: 6)
         self.layer.borderWidth = 1
-        self.titleLabel?.font = .systemFont(
-            ofSize: CGFloat.scaledWidth(value: 16),
-            weight: UIFont.Weight(500)
-        )
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func configureDetail(wideButtonBackgroundColorType: WideButtonBackgroundColorType, title: String) {
+    private func configureDetail(
+        font: UIFont,
+        wideButtonBackgroundColorType: WideButtonBackgroundColorType,
+        title: String
+    ) {
+        self.titleLabel?.font = font
         self.setTitle(title, for: .normal)
         self.setTitleColor(wideButtonBackgroundColorType.textColor, for: .normal)
         self.layer.backgroundColor = wideButtonBackgroundColorType.color.cgColor

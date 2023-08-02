@@ -11,12 +11,24 @@ import AVKit
 class HomeViewController: UIViewController {
 
     // MARK: - UI Properties
+    
+    
+    // TODO: - Font 바꾸기
     private let customWideButton = CommonButton(
+        font: .systemFont(
+            ofSize: CGFloat.scaledWidth(value: 16),
+            weight: UIFont.Weight(500)
+        ),
         wideButtonBackgroundColorType: .black,
         title: "직접 만들래요"
     )
     
+    // TODO: - Font 바꾸기
     private let recomandWideButton = CommonButton(
+        font: .systemFont(
+            ofSize: CGFloat.scaledWidth(value: 16),
+            weight: UIFont.Weight(500)
+        ),
         wideButtonBackgroundColorType: .white,
         title: "추천받기"
     )
