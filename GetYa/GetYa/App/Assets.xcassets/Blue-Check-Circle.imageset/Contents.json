@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "Image.png",
+      "filename" : "Blue-Check-Circle.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Blue-Check-Circle@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
