@@ -10,6 +10,8 @@ import UIKit
 class CommonOptionView: UIView {
     // MARK: - UI Properties
     private let imageView = CommonOptionImageView()
+    
+    //TODO: Color 변경
     private let titleLabel = CommonLabel(
         font: .systemFont(ofSize: 14, weight: UIFont.Weight(400)),
         color: UIColor(hexString: "696969")
