@@ -33,6 +33,7 @@
 		64ADA4AD2A78A7090003E2C1 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4AC2A78A7090003E2C1 /* CommonButton.swift */; };
 		64ADA4AF2A78D34E0003E2C1 /* Home_mp4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 64ADA4AE2A78D34E0003E2C1 /* Home_mp4.mp4 */; };
 		64ADA4B12A78F82A0003E2C1 /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */; };
+		64ADA4B82A7A1BF20003E2C1 /* CommonOptionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4B72A7A1BF20003E2C1 /* CommonOptionImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		64ADA4AC2A78A7090003E2C1 /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		64ADA4AE2A78D34E0003E2C1 /* Home_mp4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Home_mp4.mp4; path = ../../../Home_mp4.mp4; sourceTree = "<group>"; };
 		64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+.swift"; sourceTree = "<group>"; };
+		64ADA4B72A7A1BF20003E2C1 /* CommonOptionImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOptionImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 			children = (
 				64ADA4922A7788B60003E2C1 /* CommonView.swift */,
 				64ADA4AC2A78A7090003E2C1 /* CommonButton.swift */,
+				64ADA4B72A7A1BF20003E2C1 /* CommonOptionImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */,
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
 				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
+				64ADA4B82A7A1BF20003E2C1 /* CommonOptionImageView.swift in Sources */,
 				64ADA4872A7788840003E2C1 /* DTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
