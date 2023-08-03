@@ -1,7 +1,20 @@
 spring:
+  profiles:
+    active: local
+  application:
+    name: mycardeepdive
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+    import: 'aws-parameterstore:'
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: ${jpa.ddl_auto}
     properties:
       hibernate:
         format_sql: true
@@ -12,3 +25,9 @@ spring:
     url: jdbc:h2:tcp://localhost/~/mycardeepdive;MODE=MYSQL
     username: sa
     password:
+aws:
+  paramstore:
+    enabled: true
+    prefix: /config
+    profile-separator: _
+    name: mycardeepdive

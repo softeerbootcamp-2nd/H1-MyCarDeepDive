@@ -1,5 +1,7 @@
 package com.h1.mycardeepdive.exception;
 
+import static com.h1.mycardeepdive.exception.ErrorType.UNEXPECTED_SERVER_ERROR;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.ResponseEntity;
@@ -8,20 +10,19 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import static com.h1.mycardeepdive.exception.ErrorType.UNEXPECTED_SERVER_ERROR;
-
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MyCarDeepDiveException.class)
-    public ResponseEntity<ExceptionResponse> handleConnectableException(MyCarDeepDiveException exception) {
+    public ResponseEntity<ExceptionResponse> handleConnectableException(
+            MyCarDeepDiveException exception) {
         return ResponseEntity.status(exception.getHttpStatus()).body(exception.getBody());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MethodArgumentNotValidExceptionResponse>
-    handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+            handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         MethodArgumentNotValidExceptionResponse errorResponse =
                 MethodArgumentNotValidExceptionResponse.of(ErrorType.INVALID_REQUEST_ERROR);
         for (FieldError fieldError : exception.getFieldErrors()) {

@@ -6,11 +6,11 @@
 
 - [Java Style Guide](https://google.github.io/styleguide/javaguide.htmls)
 - Reformat Code
-    - MacOS: `Ctrl + Opt + L`
-    - Windows/Linux: `Ctrl + Alt + L`
+	- MacOS: `Ctrl + Opt + L`
+	- Windows/Linux: `Ctrl + Alt + L`
 - Optimize Imports
-    - MacOS: `Ctrl + Opt + O`
-    - Windows/Linux: `Ctrl + Alt + O`
+	- MacOS: `Ctrl + Opt + O`
+	- Windows/Linux: `Ctrl + Alt + O`
 
 ## Commit Message Convention
 
