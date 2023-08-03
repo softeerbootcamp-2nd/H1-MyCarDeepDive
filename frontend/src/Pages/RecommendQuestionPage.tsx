@@ -6,6 +6,7 @@ import ProgressBar from '../Components/RecommendQuestionPage/ProgressBar';
 import RecommendQuestionWrapper from '../Components/RecommendQuestionPage/RecommendQuestionWrapper';
 import { useNavigate } from 'react-router-dom';
 import QuestionBody from '../Components/RecommendQuestionPage/QuestionBody';
+import DetailQuestionButton from '../Components/RecommendQuestionPage/DetailQuestionButton';
 
 function RecommendQuestionPage() {
   const navigation = useNavigate();
@@ -36,6 +37,7 @@ function RecommendQuestionPage() {
       <ProgressBar step={step} />
       <RecommendQuestionWrapper>
         <QuestionTitle step={step} />
+        <DetailQuestionButton step={step} />
         <QuestionBody
           step={step}
           ageQuestionList={ageQuestionList}
