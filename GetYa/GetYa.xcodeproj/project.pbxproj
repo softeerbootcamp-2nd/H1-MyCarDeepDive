@@ -14,6 +14,7 @@
 		641AB5262A7BA07300CF88C0 /* CommonCheckListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5252A7BA07300CF88C0 /* CommonCheckListStackView.swift */; };
 		641AB5282A7BA0F300CF88C0 /* CommonCheckListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5272A7BA0F300CF88C0 /* CommonCheckListItemView.swift */; };
 		641AB52A2A7BA16000CF88C0 /* CharacterSelectContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */; };
+		641AB52C2A7BA4EC00CF88C0 /* CommonCheckListItemLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB52B2A7BA4EC00CF88C0 /* CommonCheckListItemLabel.swift */; };
 		64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA43F2A7787770003E2C1 /* AppDelegate.swift */; };
 		64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4412A7787770003E2C1 /* SceneDelegate.swift */; };
 		64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4432A7787770003E2C1 /* ViewController.swift */; };
@@ -74,6 +75,7 @@
 		641AB5252A7BA07300CF88C0 /* CommonCheckListStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCheckListStackView.swift; sourceTree = "<group>"; };
 		641AB5272A7BA0F300CF88C0 /* CommonCheckListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCheckListItemView.swift; sourceTree = "<group>"; };
 		641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectContentView.swift; sourceTree = "<group>"; };
+		641AB52B2A7BA4EC00CF88C0 /* CommonCheckListItemLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCheckListItemLabel.swift; sourceTree = "<group>"; };
 		64ADA43C2A7787770003E2C1 /* GetYa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetYa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64ADA43F2A7787770003E2C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64ADA4412A7787770003E2C1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				64ADA4C32A7A32950003E2C1 /* CommonOptionSelectButton.swift */,
 				641AB5252A7BA07300CF88C0 /* CommonCheckListStackView.swift */,
 				641AB5272A7BA0F300CF88C0 /* CommonCheckListItemView.swift */,
+				641AB52B2A7BA4EC00CF88C0 /* CommonCheckListItemLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */,
 				641AB52A2A7BA16000CF88C0 /* CharacterSelectContentView.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
+				641AB52C2A7BA4EC00CF88C0 /* CommonCheckListItemLabel.swift in Sources */,
 				64ADA4BC2A7A22780003E2C1 /* CommonLabel.swift in Sources */,
 				641AB5282A7BA0F300CF88C0 /* CommonCheckListItemView.swift in Sources */,
 				64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */,
