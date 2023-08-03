@@ -167,3 +167,12 @@
   opacity: 1;
   visibility: visible;
 }
+
+// letter
+.tracking-negative-03 {
+  letter-spacing: -0.3px;
+}
+
+.tracking-negative-05 {
+  letter-spacing: -0.5px;
+}

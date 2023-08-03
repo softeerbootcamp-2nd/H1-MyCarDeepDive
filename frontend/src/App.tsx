@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./Components/Common/Header/Header";
 import LandingPage from "./Pages/LandingPage";
 import RecommendQuestionPage from "./Pages/RecommendQuestionPage";
+import RecommendResultPage from "./Pages/RecommendResultPage";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/recommendQuestion" element={<RecommendQuestionPage />} />
+        <Route path="/recommend/question" element={<RecommendQuestionPage />} />
+        <Route path="/recommend/result" element={<RecommendResultPage />} />
       </Routes>
     </div>
   );
