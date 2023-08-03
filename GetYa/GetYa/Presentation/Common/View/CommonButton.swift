@@ -82,7 +82,7 @@ final class CommonButton: UIButton {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func configureDetail(
+    func configureDetail(
         font: UIFont,
         wideButtonBackgroundColorType: WideButtonBackgroundColorType,
         title: String

@@ -53,15 +53,15 @@ class CommonLabel: UILabel {
     }
     
     // TODO: Letter 간격 로직 넣기
-    private func configureFont(font: UIFont) {
+    func configureFont(font: UIFont) {
         self.font = font
     }
     
-    private func configureColor(color: UIColor) {
+    func configureColor(color: UIColor) {
         self.textColor = color
     }
     
-    private func configureText(text: String) {
+    func configureText(text: String) {
         self.text = text
     }
 }
