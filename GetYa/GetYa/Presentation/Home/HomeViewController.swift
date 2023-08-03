@@ -11,6 +11,7 @@ import AVKit
 class HomeViewController: UIViewController {
 
     // MARK: - UI Properties
+    private var contentView: HomeContentView!
     
     // MARK: - Properties
     
@@ -18,6 +19,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let contentView { contentView.player.play() }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -30,7 +37,8 @@ class HomeViewController: UIViewController {
     
     // MARK: - Functions
     private func setupViews() {
-        let contentView = HomeContentView(frame: view.safeAreaLayoutGuide.layoutFrame)
+        contentView = HomeContentView(frame: view.safeAreaLayoutGuide.layoutFrame)
+        contentView.delegate = self
         view.addSubview(contentView)
     }
     
@@ -43,5 +51,21 @@ class HomeViewController: UIViewController {
     private func configureNavigationBar() {
         let image = UIImage(named: "Logo")
         self.navigationItem.titleView = UIImageView(image: image)
+    }
+}
+
+extension HomeViewController: HomeContentDelegate {
+    func touchUpRecomandButton() {
+        self.navigationController?.pushViewController(
+            CharacterSelectViewController(),
+            animated: true
+        )
+    }
+    
+    func touchUpCustomButton() {
+        self.navigationController?.pushViewController(
+            TrimSelectViewController(),
+            animated: true
+        )
     }
 }

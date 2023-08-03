@@ -58,6 +58,8 @@ class HomeContentView: UIView {
     // MARK: - Properties
     var videoLooper: AVPlayerLooper!
     var playerLayer: AVPlayerLayer!
+    var player: AVQueuePlayer!
+    weak var delegate: HomeContentDelegate!
     
     // MARK: - LifeCycles
     convenience init() {
@@ -86,6 +88,9 @@ class HomeContentView: UIView {
         ].forEach {
             addSubview($0)
         }
+        
+        recomandButton.addTarget(self, action: #selector(touchUpRecomandButton), for: .touchUpInside)
+        customButton.addTarget(self, action: #selector(touchUpCustomButton), for: .touchUpInside)
     }
     
     private func setupAVPlayerLayer() {
@@ -94,7 +99,7 @@ class HomeContentView: UIView {
         }
         let asset = AVAsset(url: path)
         let item = AVPlayerItem(asset: asset)
-        let player = AVQueuePlayer(playerItem: item)
+        player = AVQueuePlayer(playerItem: item)
         playerLayer = AVPlayerLayer(player: player)
         videoLooper = AVPlayerLooper(player: player, templateItem: item)
         layer.addSublayer(playerLayer)
@@ -201,5 +206,15 @@ class HomeContentView: UIView {
         view.layer.addSublayer(bottomGradientLayer)
         
         playerLayer.addSublayer(view.layer)
+    }
+    
+    @objc func touchUpRecomandButton(sender: UIButton) {
+        player.pause()
+        delegate.touchUpRecomandButton()
+    }
+    
+    @objc func touchUpCustomButton(sender: UIButton) {
+        player.pause()
+        delegate.touchUpCustomButton()
     }
 }
