@@ -14,14 +14,14 @@ type LifeStyleModalProps = {
 function LifeStyleModal({ showModal, setShowModal }: LifeStyleModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const modalOutSideClick = (e: any) => {
+  const modalOutSideClick = (e: React.MouseEvent<HTMLElement>) => {
     if (modalRef.current === e.target) {
       setShowModal(false);
     }
   };
 
   useEffect(() => {
-    const eventHandler = (e: any) => {
+    const eventHandler = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setShowModal(!showModal);
       }
