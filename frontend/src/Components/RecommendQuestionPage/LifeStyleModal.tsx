@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import lifeStyleFamily from '../../assets/image/lifeStyle-family.png';
 import logoWhite from '../../assets/icon/logo-white.svg';
 import lifeStyleProfile from '../../assets/image/lifeStyle-profile1.png';
@@ -13,32 +13,40 @@ type LifeStyleModalProps = {
 
 function LifeStyleModal({ showModal, setShowModal }: LifeStyleModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const modalOutSideClick = (e: React.MouseEvent<HTMLElement>) => {
-    if (modalRef.current === e.target) {
-      setShowModal(false);
-    }
+    if (modalRef.current === e.target) setIsAnimating(false);
+  };
+
+  const eventHandler = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') setIsAnimating(false);
   };
 
   useEffect(() => {
-    const eventHandler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setShowModal(!showModal);
-      }
-    };
-    document.addEventListener('keydown', eventHandler);
+    if (showModal) {
+      document.body.classList.add('overflow-hidden');
+      document.addEventListener('keydown', eventHandler);
+      setTimeout(() => setIsAnimating(true), 10);
+    }
+  }, [showModal]);
 
-    return () => {
-      document.removeEventListener('keydown', eventHandler);
-    };
-  }, []);
+  useEffect(() => {
+    if (!isAnimating) {
+      document.body.classList.remove('overflow-hidden');
+      document.addEventListener('keydown', eventHandler);
+      setTimeout(() => setShowModal(false), 1010);
+    }
+  }, [isAnimating]);
+
+  if (!showModal) return null;
 
   return (
     <div
       ref={modalRef}
       onClick={e => modalOutSideClick(e)}
-      className={`modal-container fixed top-0 left-0 z-50 overflow-y-auto md:inset-0 min-h-screen bg-bgModal scale-100 ${
-        showModal ? 'active' : ''
+      className={`fixed top-0 left-0 z-50 overflow-y-auto md:inset-0 min-h-screen bg-bgModal scale-100 transition-opacity duration-1000 ${
+        isAnimating ? 'active opacity-100' : 'opacity-0'
       }`}
     >
       <div className='my-[90px] mx-auto shadow w-[688px] rounded-2xl h-[1318px] bg-white'>

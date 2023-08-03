@@ -10,6 +10,7 @@ export type QuestionStepProps = {
 
 export type LifeStyleRadioProps = {
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setShowLifeStyleModal: React.Dispatch<React.SetStateAction<boolean>>;
   data: {
     value: string;
     tags: string[];

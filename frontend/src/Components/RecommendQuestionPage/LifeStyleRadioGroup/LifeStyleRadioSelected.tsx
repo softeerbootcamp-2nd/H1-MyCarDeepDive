@@ -4,6 +4,7 @@ import LifeStyleTag from './LifeStyleTag';
 
 function LifeStyleRadioSelected({
   onChangeHandler,
+  setShowLifeStyleModal,
   data,
 }: LifeStyleRadioProps) {
   return (
@@ -34,10 +35,13 @@ function LifeStyleRadioSelected({
             </div>
             <img src={checkCircleBlue} alt='checkCircleBlue' />
           </div>
-          <hr className='h-px mt-5 mb-2.5 bg-grey-700 border-0' />
-          <div className='font-body4-medium text-grey-200 text-center'>
+          <hr className='h-px mt-5 bg-grey-700 border-0' />
+          <button
+            className='w-full pt-2.5 pb-3.5 font-body4-medium text-grey-200 text-center focus:outline-none'
+            onClick={() => setShowLifeStyleModal(true)}
+          >
             라이프스타일 엿보기
-          </div>
+          </button>
         </div>
       </label>
     </>
