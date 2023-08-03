@@ -9,5 +9,4 @@ public class MyCarDeepDiveApplication {
     public static void main(String[] args) {
         SpringApplication.run(MyCarDeepDiveApplication.class, args);
     }
-
 }
