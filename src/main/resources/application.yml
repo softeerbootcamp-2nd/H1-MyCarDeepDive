@@ -31,4 +31,8 @@ aws:
     prefix: /config
     profile-separator: _
     name: mycardeepdive
+swagger:
+  url: http://localhost:8080
+server:
+  port: ${server.port}
 ---
