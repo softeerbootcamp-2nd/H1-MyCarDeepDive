@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../Common/Button/Button";
 
 function Buttons() {
+  const navigation = useNavigate();
+
   return (
     <div className="fixed bottom-[36px] left-0 z-20 w-full flex justify-center gap-2">
       <Button
@@ -15,7 +18,7 @@ function Buttons() {
         height="h-[52px]"
         variant="white"
         text="추천받기"
-        onClick={() => console.log("white")}
+        onClick={() => navigation("/recommendQuestion")}
       />
     </div>
   );
