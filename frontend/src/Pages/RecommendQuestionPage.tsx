@@ -5,6 +5,7 @@ import { ageQuestionList } from '../global/constants';
 import NextStepButton from '../Components/RecommendQuestionPage/NextStepButton';
 import ProgressBar from '../Components/RecommendQuestionPage/ProgressBar';
 import RecommendQuestionWrapper from '../Components/RecommendQuestionPage/RecommendQuestionWrapper';
+import DetailQuestionButton from '../Components/RecommendQuestionPage/DetailQuestionButton';
 
 function RecommendQuestionPage() {
   const [step, setStep] = useState(1);
@@ -26,6 +27,7 @@ function RecommendQuestionPage() {
       <ProgressBar step={step} />
       <RecommendQuestionWrapper>
         <QuestionTitle step={step} />
+        <DetailQuestionButton step={step} />
         <RadioGroup
           data={ageQuestionList}
           name={'age'}
