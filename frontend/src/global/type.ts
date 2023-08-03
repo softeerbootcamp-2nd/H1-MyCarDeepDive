@@ -7,3 +7,13 @@ export type RadioProps = {
 export type QuestionStepProps = {
   step: number;
 };
+
+export type LifeStyleRadioProps = {
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  data: {
+    value: string;
+    tags: string[];
+    description: string;
+    profileImage: string;
+  };
+};
