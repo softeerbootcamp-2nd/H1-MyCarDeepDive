@@ -1,5 +1,5 @@
 //
-//  CommonCheckListStackView.swift
+//  CharacterSelectContentView.swift
 //  GetYa
 //
 //  Created by 배남석 on 2023/08/03.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommonCheckListStackView: UIStackView {
+class CharacterSelectContentView: UIView {
     // MARK: - UI Properties
     
     // MARK: - Properties
@@ -21,7 +21,7 @@ class CommonCheckListStackView: UIStackView {
         super.init(frame: frame)
     }
     
-    required init(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
