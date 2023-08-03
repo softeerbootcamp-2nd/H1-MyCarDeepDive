@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/recommendQuestion" element={<RecommendQuestionPage />} />
+        <Route path="/recommend/question" element={<RecommendQuestionPage />} />
       </Routes>
     </div>
   );
