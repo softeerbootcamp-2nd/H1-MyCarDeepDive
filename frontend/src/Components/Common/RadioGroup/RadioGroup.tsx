@@ -1,5 +1,5 @@
-import RadioSelected from "./RadioSelected";
-import RadioUnselected from "./RadioUnselected";
+import RadioSelected from './RadioSelected';
+import RadioUnselected from './RadioUnselected';
 
 type RadioGroupProps = {
   data: string[];
