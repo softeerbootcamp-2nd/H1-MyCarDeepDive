@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommonWideButton: UIButton {
+final class CommonButton: UIButton {
     // MARK: - UI Properties
     
     // MARK: - Properties
@@ -49,9 +49,19 @@ final class CommonWideButton: UIButton {
     }
     
     // MARK: - LifeCycles
-    convenience init(wideButtonBackgroundColorType: WideButtonBackgroundColorType, title: String) {
-        self.init(frame: .zero)
-        configureDetail(wideButtonBackgroundColorType: wideButtonBackgroundColorType, title: title)
+    
+    init(
+        font: UIFont,
+        wideButtonBackgroundColorType: WideButtonBackgroundColorType,
+        title: String
+    ) {
+        super.init(frame: .zero)
+        configureUI()
+        configureDetail(
+            font: font,
+            wideButtonBackgroundColorType: wideButtonBackgroundColorType,
+            title: title
+        )
     }
     
     override init(frame: CGRect) {
@@ -69,36 +79,18 @@ final class CommonWideButton: UIButton {
     private func configureUI() {
         self.layer.cornerRadius = CGFloat.scaledWidth(value: 6)
         self.layer.borderWidth = 1
-        self.titleLabel?.font = .systemFont(
-            ofSize: CGFloat.scaledWidth(value: 16),
-            weight: UIFont.Weight(500)
-        )
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func configureDetail(wideButtonBackgroundColorType: WideButtonBackgroundColorType, title: String) {
+    private func configureDetail(
+        font: UIFont,
+        wideButtonBackgroundColorType: WideButtonBackgroundColorType,
+        title: String
+    ) {
+        self.titleLabel?.font = font
         self.setTitle(title, for: .normal)
         self.setTitleColor(wideButtonBackgroundColorType.textColor, for: .normal)
         self.layer.backgroundColor = wideButtonBackgroundColorType.color.cgColor
         self.layer.borderColor = wideButtonBackgroundColorType.layerBorderColor
-    }
-}
-
-// TODO: Color Set 만들기
-fileprivate extension UIColor {
-    convenience init(red: Int, green: Int, blue: Int) {
-        self.init(red: CGFloat(red) / 255.0,
-                  green: CGFloat(green) / 255.0,
-                  blue: CGFloat(blue) / 255.0,
-                  alpha: 1.0)
-    }
-    
-    convenience init(hexString: String) {
-        let arr = Array(hexString)
-        var rgb: [Int] = []
-        for index in stride(from: 0, to: 5, by: 2) {
-            rgb.append(Int(String(arr[index...(index+1)]), radix: 16)!)
-        }
-        self.init(red: rgb[0], green: rgb[1], blue: rgb[2])
     }
 }
