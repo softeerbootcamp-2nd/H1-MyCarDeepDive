@@ -43,9 +43,10 @@ class CommonCheckListStackView: UIStackView {
     func setupItem(textArray: [String]) {
         removeAllArrangedSubViews()
         
-        textArray.forEach {
-            let itemView = CommonCheckListItemView(text: $0)
+        textArray.enumerated().forEach { (idx, text) in
+            let itemView = CommonCheckListItemView(text: text)
             itemView.delegate = self
+            if idx == 0 { itemView.isTapped = true }
             addArrangedSubview(itemView)
         }
     }
