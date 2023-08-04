@@ -31,8 +31,12 @@ aws:
     prefix: /config
     profile-separator: _
     name: mycardeepdive
-swagger:
-  url: http://localhost:8080
+springdoc:
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    url: /docs/open-api-3.0.1.json
+    path: /docs/swagger
 server:
   port: ${server.port}
 ---
