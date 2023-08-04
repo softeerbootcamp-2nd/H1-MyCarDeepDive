@@ -20,7 +20,7 @@ function RecommendQuestionPage() {
   const lifeStyleHandler = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    setLifeStyle(target.value);
+    setLifeStyle(lifeStyle === target.value ? '' : target.value);
   };
 
   useEffect(() => {
