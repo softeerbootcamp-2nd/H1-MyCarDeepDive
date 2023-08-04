@@ -37,7 +37,7 @@ function LifeStyleModal({ showModal, setShowModal }: LifeStyleModalProps) {
       document.addEventListener('keydown', eventHandler);
       setTimeout(() => setShowModal(false), 1010);
     }
-  }, [isAnimating]);
+  }, [isAnimating, setShowModal]);
 
   useEffect(() => {
     return () => {
