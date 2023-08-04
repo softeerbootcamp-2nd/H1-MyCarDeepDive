@@ -18,7 +18,7 @@ function LifeStyleRadioSelected({
         onChange={onChangeHandler}
       />
       <label htmlFor={data.value}>
-        <div className='h-[180px] p-5 rounded-lg border-[1.5px] border-primary relative mb-[44px] cursor-pointer'>
+        <div className='h-[180px] p-5 rounded-lg ring-[1.5px] ring-primary ring-inset relative mb-[44px] cursor-pointer'>
           <img
             src={data.profileImage}
             alt='lifeStyleProfile1'
