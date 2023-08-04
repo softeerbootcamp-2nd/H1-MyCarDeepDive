@@ -8,11 +8,16 @@
 import UIKit
 
 class CharacterSelectViewController: UIViewController {
-
+    // MARK: - UI Properties
+    
+    // MARK: - Properties
+    
+    // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
     }
-
+    
+    // MARK: - Functions
 }
