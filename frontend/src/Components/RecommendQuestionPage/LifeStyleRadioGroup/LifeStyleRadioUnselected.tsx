@@ -18,7 +18,7 @@ function LifeStyleRadioUnselected({
         onChange={onChangeHandler}
       />
       <label htmlFor={data.value}>
-        <div className='h-[180px] p-5 rounded-lg relative bg-primary bg-opacity-10 mb-[44px] cursor-pointer'>
+        <div className='h-[180px] p-5 rounded-lg relative bg-primary bg-opacity-10 mb-[44px] cursor-pointer transition-all duration-200 ease-in hover:ring-2 hover:ring-primary hover:ring-inset'>
           <img
             src={data.profileImage}
             alt='lifeStyleProfile2'
