@@ -39,6 +39,12 @@ function LifeStyleModal({ showModal, setShowModal }: LifeStyleModalProps) {
     }
   }, [isAnimating]);
 
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, []);
+
   if (!showModal) return null;
 
   return (

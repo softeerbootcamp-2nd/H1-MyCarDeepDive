@@ -13,7 +13,7 @@ function NextStepButton({ step, setStep, lifeStyle }: NextStepButtonProps) {
         width='w-[608px]'
         height='h-[52px]'
         variant='primary'
-        text='다음'
+        text={step === 1 ? '다음' : '선택 완료'}
         disabled={step === 2 && !lifeStyle}
         onClick={() => setStep(step + 1)}
       />
