@@ -12,7 +12,7 @@ function RecommendQuestionPage() {
   const navigation = useNavigate();
   const [step, setStep] = useState(1);
   const [age, setAge] = useState('20대');
-  const [lifeStyle, setLifeStyle] = useState('0');
+  const [lifeStyle, setLifeStyle] = useState('');
 
   const ageHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setAge(target.value);
@@ -46,7 +46,7 @@ function RecommendQuestionPage() {
           ageHandler={ageHandler}
           lifeStyleHandler={lifeStyleHandler}
         />
-        <NextStepButton step={step} setStep={setStep} />
+        <NextStepButton step={step} setStep={setStep} lifeStyle={lifeStyle} />
       </RecommendQuestionWrapper>
     </div>
   );

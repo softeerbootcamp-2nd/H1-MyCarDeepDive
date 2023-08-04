@@ -4,6 +4,7 @@ type ButtonProps = {
   type?: 'button' | 'submit';
   variant: 'primary' | 'secondary' | 'white' | 'transparent';
   text: string;
+  disabled?: boolean;
   onClick: () => void;
 };
 
@@ -16,11 +17,22 @@ const buttonStyle = {
     'bg-transparent border border-grey-1000 font-body3-medium text-grey-900',
 };
 
-function Button({ width, height, type, variant, text, onClick }: ButtonProps) {
+function Button({
+  width,
+  height,
+  type,
+  variant,
+  text,
+  disabled,
+  onClick,
+}: ButtonProps) {
   return (
     <button
       type={type || 'button'}
-      className={`${width} ${height} ${buttonStyle[variant]} rounded-md`}
+      disabled={disabled}
+      className={`${width} ${height} ${buttonStyle[variant]} rounded-md ${
+        disabled && 'text-opacity-40'
+      }`}
       onClick={onClick}
     >
       {text}
