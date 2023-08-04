@@ -17,7 +17,7 @@
 		15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95902A7C89A60093EAC7 /* LayoutSupportable.swift */; };
 		15DF95932A7C89BC0093EAC7 /* ConvenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95922A7C89BC0093EAC7 /* ConvenienceInit.swift */; };
 		15DF95952A7C89DF0093EAC7 /* GetYaFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95942A7C89DF0093EAC7 /* GetYaFont.swift */; };
-		15DF95972A7C89F50093EAC7 /* UIColor+AppPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95962A7C89F50093EAC7 /* UIColor+AppPalette.swift */; };
+		15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95962A7C89F50093EAC7 /* UIColor+GetYaPalette.swift */; };
 		15DF95992A7C8A110093EAC7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95982A7C8A110093EAC7 /* UIView+.swift */; };
 		15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */; };
 		15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+HyundaiSansConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+HyundaiSansConfigure.swift */; };
@@ -88,7 +88,7 @@
 		15DF95902A7C89A60093EAC7 /* LayoutSupportable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSupportable.swift; sourceTree = "<group>"; };
 		15DF95922A7C89BC0093EAC7 /* ConvenienceInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvenienceInit.swift; sourceTree = "<group>"; };
 		15DF95942A7C89DF0093EAC7 /* GetYaFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetYaFont.swift; sourceTree = "<group>"; };
-		15DF95962A7C89F50093EAC7 /* UIColor+AppPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppPalette.swift"; sourceTree = "<group>"; };
+		15DF95962A7C89F50093EAC7 /* UIColor+GetYaPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GetYaPalette.swift"; sourceTree = "<group>"; };
 		15DF95982A7C8A110093EAC7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+HyundaiSansConfigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+HyundaiSansConfigure.swift"; sourceTree = "<group>"; };
@@ -198,21 +198,12 @@
 			path = Text;
 			sourceTree = "<group>";
 		};
-		15DF958C2A7C894E0093EAC7 /* Model */ = {
+		15DF95A32A7C98C30093EAC7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				15DF958D2A7C89630093EAC7 /* UIMargin.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		15DF958F2A7C89920093EAC7 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				15DF95902A7C89A60093EAC7 /* LayoutSupportable.swift */,
-				15DF95922A7C89BC0093EAC7 /* ConvenienceInit.swift */,
-			);
-			path = Protocol;
 			sourceTree = "<group>";
 		};
 		641AB51B2A7B7C7300CF88C0 /* CharacterSelect */ = {
@@ -285,8 +276,6 @@
 		64ADA46F2A7787890003E2C1 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				15DF958F2A7C89920093EAC7 /* Protocol */,
-				15DF958C2A7C894E0093EAC7 /* Model */,
 				64ADA47B2A7788150003E2C1 /* Etc */,
 				64ADA47A2A7788130003E2C1 /* Enum */,
 				64ADA4792A7788110003E2C1 /* Extension */,
@@ -352,6 +341,7 @@
 				64ADA47C2A7788410003E2C1 /* Protocol */,
 				64ADA4772A7787F20003E2C1 /* View */,
 				64ADA4762A7787DB0003E2C1 /* ViewModel */,
+				15DF95A32A7C98C30093EAC7 /* Model */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -391,12 +381,12 @@
 			children = (
 				64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */,
 				64ADA4BD2A7A26090003E2C1 /* Int+.swift */,
-				64ADA4BF2A7A28AA0003E2C1 /* UIColor+.swift */,
-				15DF95962A7C89F50093EAC7 /* UIColor+AppPalette.swift */,
-				15DF95982A7C8A110093EAC7 /* UIView+.swift */,
-				15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */,
 				15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+HyundaiSansConfigure.swift */,
+				64ADA4BF2A7A28AA0003E2C1 /* UIColor+.swift */,
+				15DF95962A7C89F50093EAC7 /* UIColor+GetYaPalette.swift */,
+				15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */,
 				15DF959E2A7C8A440093EAC7 /* UILabel+.swift */,
+				15DF95982A7C8A110093EAC7 /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -421,6 +411,8 @@
 		64ADA47C2A7788410003E2C1 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				15DF95902A7C89A60093EAC7 /* LayoutSupportable.swift */,
+				15DF95922A7C89BC0093EAC7 /* ConvenienceInit.swift */,
 				64ADA4902A7788B00003E2C1 /* CommonProtocl.swift */,
 			);
 			path = Protocol;
@@ -668,7 +660,7 @@
 				64ADA4AD2A78A7090003E2C1 /* CommonButton.swift in Sources */,
 				64ADA4892A77888C0003E2C1 /* RepositoyProtocol.swift in Sources */,
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
-				15DF95972A7C89F50093EAC7 /* UIColor+AppPalette.swift in Sources */,
+				15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */,
 				641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */,
 				64ADA4BE2A7A26090003E2C1 /* Int+.swift in Sources */,
 				64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */,
