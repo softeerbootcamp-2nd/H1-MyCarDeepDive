@@ -1,5 +1,5 @@
 //
-//  UIColor+Palette.swift
+//  UIColor+GetYaPalette.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/04.
@@ -11,11 +11,11 @@ import UIKit
 /// Examples:
 /// ```
 /// let view = UIView()
-/// view.backgroundColor = UIColor.Palette.darkPrimary
+/// view.backgroundColor = UIColor.GetYaPalette.darkPrimary
 /// ```
 ///
 extension UIColor {
-  enum Palette {
+  enum GetYaPalette {
     // MARK: - Primary
     /// Blue/blue-500(Primary)
     /// #00428E
@@ -93,9 +93,5 @@ extension UIColor {
     /// #111111
     static let gray0 = UIColor(
       red: 17, green: 17, blue: 17, alpha: 1)
-    
-    static let black = UIColor.black
-    
-    static let white = UIColor.white
   }
 }
