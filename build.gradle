@@ -1,3 +1,9 @@
+buildscript {
+	ext {
+		mapStructVersion = "1.4.2.Final"
+	}
+}
+
 plugins {
     id 'java'
     id 'jacoco'
@@ -57,6 +63,9 @@ dependencies {
 
     // Cloud
     implementation group: 'io.awspring.cloud', name: 'spring-cloud-starter-aws-parameter-store-config'
+	// Mapstruct
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+	implementation "org.mapstruct:mapstruct:${mapStructVersion}"
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'
