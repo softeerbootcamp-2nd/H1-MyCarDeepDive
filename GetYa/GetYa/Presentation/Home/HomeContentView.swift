@@ -59,7 +59,7 @@ class HomeContentView: UIView {
     var videoLooper: AVPlayerLooper!
     var playerLayer: AVPlayerLayer!
     var player: AVQueuePlayer!
-    weak var delegate: HomeContentDelegate!
+    weak var delegate: HomeContentDelegate?
     
     // MARK: - LifeCycles
     convenience init() {
@@ -210,11 +210,11 @@ class HomeContentView: UIView {
     
     @objc func touchUpRecomandButton(sender: UIButton) {
         player.pause()
-        delegate.touchUpRecomandButton()
+        delegate?.touchUpRecomandButton()
     }
     
     @objc func touchUpCustomButton(sender: UIButton) {
         player.pause()
-        delegate.touchUpCustomButton()
+        delegate?.touchUpCustomButton()
     }
 }
