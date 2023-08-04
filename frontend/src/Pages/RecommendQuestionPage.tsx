@@ -30,7 +30,7 @@ function RecommendQuestionPage() {
       history.pushState(null, '', '');
       window.onpopstate = () => setStep(1);
     }
-  }, [step]);
+  }, [step, navigation]);
 
   return (
     <div className='pt-[92px] h-screen relative'>

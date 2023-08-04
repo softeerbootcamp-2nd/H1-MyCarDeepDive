@@ -35,7 +35,7 @@ function LifeStyleRadioGroup({
 
   return (
     <>
-      <div className='mt-16 grid grid-cols-2 gap-4'>{result}</div>
+      <div className='grid grid-cols-2 gap-4'>{result}</div>
       <LifeStyleModal
         showModal={showLifeStyleModal}
         setShowModal={setShowLifeStyleModal}
