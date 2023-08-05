@@ -11,22 +11,14 @@ import AVKit
 class HomeContentView: UIView {
     // MARK: - UI Properties
     
-    // TODO: - Font 바꾸기
     private let customButton = CommonButton(
-        font: .systemFont(
-            ofSize: CGFloat.scaledWidth(value: 16),
-            weight: UIFont.Weight(500)
-        ),
+        font: UIFont(hyundaiSans: .mediumBody3) ?? .systemFont(ofSize: 16),
         wideButtonBackgroundColorType: .black,
         title: "직접 만들래요"
     )
     
-    // TODO: - Font 바꾸기
     private let recomandButton = CommonButton(
-        font: .systemFont(
-            ofSize: CGFloat.scaledWidth(value: 16),
-            weight: UIFont.Weight(500)
-        ),
+        font: UIFont(hyundaiSans: .mediumBody3) ?? .systemFont(ofSize: 16),
         wideButtonBackgroundColorType: .white,
         title: "추천받기"
     )
@@ -36,17 +28,14 @@ class HomeContentView: UIView {
         let text = "당신의 라이프스타일에 맞게\n차량을 추천해드려요."
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = text
-        label.font = .systemFont(ofSize: CGFloat.scaledWidth(value: 20), weight: .medium)
+        label.font = UIFont(hyundaiSans: .regularHead2)
         label.textColor = .white
         label.numberOfLines = 0
         let attributeString = NSMutableAttributedString(string: text)
-        let otherFont = UIFont.systemFont(
-            ofSize: CGFloat.scaledWidth(value: 20),
-            weight: UIFont.Weight(500)
-        )
+        let otherFont = UIFont(hyundaiSans: .mediumHead2)
         attributeString.addAttribute(
             .font,
-            value: otherFont,
+            value: otherFont ?? .systemFont(ofSize: 16),
             range: (text as NSString).range(of: "라이프스타일")
         )
         label.attributedText = attributeString
@@ -60,6 +49,25 @@ class HomeContentView: UIView {
     var playerLayer: AVPlayerLayer!
     var player: AVQueuePlayer!
     weak var delegate: HomeContentDelegate?
+    private let customButtonLayoutCosntant = UILayout(
+        leadingMargin: 17,
+        trailingMargin: -17,
+        bottomMargin: -8,
+        height: 52
+    )
+    private let recomandButtonLayoutCosntant = UILayout(
+        leadingMargin: 17,
+        trailingMargin: -17,
+        height: 52
+    )
+    private let playerLayerLayoutConstant = UILayout(
+        height: 316,
+        width: 484
+    )
+    private let gradientLayerLayoutConstant = UILayout(
+        height: 85,
+        width: 484
+    )
     
     // MARK: - LifeCycles
     convenience init() {
@@ -108,26 +116,26 @@ class HomeContentView: UIView {
     
     private func configureUI() {
         configureRecomandWideButton()
-        configureCustomWideButton()
+        configureCustomButton()
         configureTitleLabel()
         configureAVPlayerLayer()
     }
     
-    private func configureCustomWideButton() {
+    private func configureCustomButton() {
         NSLayoutConstraint.activate([
             customButton.bottomAnchor.constraint(
                 equalTo: recomandButton.topAnchor,
-                constant: -CGFloat.scaledHeight(value: 8)
+                constant: customButtonLayoutCosntant.bottomMargin
             ),
             customButton.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: CGFloat.scaledWidth(value: 17)
+                constant: customButtonLayoutCosntant.leadingMargin
             ),
             customButton.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: -CGFloat.scaledWidth(value: 17)
+                constant: customButtonLayoutCosntant.trailingMargin
             ),
-            customButton.heightAnchor.constraint(equalToConstant: CGFloat.scaledHeight(value: 52))
+            customButton.heightAnchor.constraint(equalToConstant: customButtonLayoutCosntant.height)
         ])
     }
     
@@ -138,13 +146,13 @@ class HomeContentView: UIView {
             ),
             recomandButton.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: CGFloat.scaledWidth(value: 17)
+                constant: recomandButtonLayoutCosntant.leadingMargin
             ),
             recomandButton.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: -CGFloat.scaledWidth(value: 17)
+                constant: recomandButtonLayoutCosntant.trailingMargin
             ),
-            recomandButton.heightAnchor.constraint(equalToConstant: CGFloat.scaledHeight(value: 52))
+            recomandButton.heightAnchor.constraint(equalToConstant: recomandButtonLayoutCosntant.height)
         ])
     }
     
@@ -166,10 +174,10 @@ class HomeContentView: UIView {
         let centerY = self.bounds.maxY / 2
         
         playerLayer.frame = CGRect(
-            x: centerX - 242,
-            y: centerY - 158,
-            width: CGFloat.scaledWidth(value: 484),
-            height: CGFloat.scaledHeight(value: 316)
+            x: centerX - playerLayerLayoutConstant.width / 2,
+            y: centerY - playerLayerLayoutConstant.height / 2,
+            width: playerLayerLayoutConstant.width,
+            height: playerLayerLayoutConstant.height
         )
         
         let view = UIView(frame: playerLayer.bounds)
@@ -183,8 +191,8 @@ class HomeContentView: UIView {
         topGradientLayer.frame = CGRect(
             x: 0,
             y: 0,
-            width: CGFloat.scaledWidth(value: 484),
-            height: CGFloat.scaledHeight(value: 85)
+            width: gradientLayerLayoutConstant.width,
+            height: gradientLayerLayoutConstant.height
         )
         topGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         topGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
@@ -194,9 +202,9 @@ class HomeContentView: UIView {
         bottomGradientLayer.colors = colors
         bottomGradientLayer.frame = CGRect(
             x: 0,
-            y: view.bounds.height - CGFloat.scaledHeight(value: 85),
-            width: CGFloat.scaledWidth(value: 484),
-            height: CGFloat.scaledHeight(value: 85)
+            y: view.bounds.height - gradientLayerLayoutConstant.height,
+            width: gradientLayerLayoutConstant.width,
+            height: gradientLayerLayoutConstant.height
         )
         bottomGradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
         bottomGradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)

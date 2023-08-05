@@ -34,8 +34,6 @@ class CommonPageControl: UIPageControl {
         self.isUserInteractionEnabled = false
         self.currentPage = 0
         self.hidesForSinglePage = true
-        
-        //TODO: Color 변경
-        self.currentPageIndicatorTintColor = UIColor(hexString: "2197C9")
+        self.currentPageIndicatorTintColor = .GetYaPalette.acriveBlue
     }
 }

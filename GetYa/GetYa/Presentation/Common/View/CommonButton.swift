@@ -12,7 +12,6 @@ final class CommonButton: UIButton {
     
     // MARK: - Properties
     
-    // TODO: - Color Set 만들면 수정할 것
     enum WideButtonBackgroundColorType {
         case primary
         case black
@@ -21,7 +20,7 @@ final class CommonButton: UIButton {
         var color: UIColor {
             switch self {
             case .primary:
-                return UIColor(hexString: "00428E")
+                return .GetYaPalette.darkPrimary
             case .black:
                 return .black
             case .white:
@@ -34,7 +33,7 @@ final class CommonButton: UIButton {
             case .primary, .black:
                 return .white
             case .white:
-                return UIColor(hexString: "00428E")
+                return .GetYaPalette.darkPrimary
             }
         }
         
@@ -43,7 +42,7 @@ final class CommonButton: UIButton {
             case .white, .primary:
                 return self.color.cgColor
             case .black:
-                return UIColor(hexString: "D1D7DF").cgColor
+                return UIColor.GetYaPalette.gray600.cgColor
             }
         }
     }
@@ -77,7 +76,7 @@ final class CommonButton: UIButton {
     // MARK: - Functions
     
     private func configureUI() {
-        self.layer.cornerRadius = CGFloat.scaledWidth(value: 6)
+        self.layer.cornerRadius = 6
         self.layer.borderWidth = 1
         self.translatesAutoresizingMaskIntoConstraints = false
     }
