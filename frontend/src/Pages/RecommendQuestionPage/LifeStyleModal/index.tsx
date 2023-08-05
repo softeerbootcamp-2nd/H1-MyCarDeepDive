@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Title from '@/Components/Title';
 import UnderLine from '@/Components/UnderLine';
+import LifeStyleModalWrapper from './LifeStyleModalWrapper';
+import LifeStyleModalContentWrapper from './LifeStyleModalContentWrapper';
 import LifeStyleModalHeader from './LifeStyleModalHeader';
 import LifeStyleModalProfile from './LifeStyleModalProfile';
 import LifeStyleModalComment from './LifeStyleModalComment';
@@ -61,20 +63,18 @@ function LifeStyleModal({ showModal, setShowModal }: LifeStyleModalProps) {
         isAnimating ? 'active opacity-100' : 'opacity-0'
       }`}
     >
-      <div className='my-[90px] mx-auto shadow w-[688px] rounded-2xl h-[1318px] bg-white'>
+      <LifeStyleModalWrapper>
         <LifeStyleModalHeader
           lifeStyleFamily={lifeStyleFamily}
           logoWhite={logoWhite}
         />
-
-        <div className='w-[607px] mx-auto'>
+        <LifeStyleModalContentWrapper>
           <LifeStyleModalProfile lifeStyleProfile={lifeStyleProfile} />
           <LifeStyleModalComment
             comment={
               '“우리 아이들과 함께 타는 차는 항상\n안전해야 한다고 생각해요.”'
             }
           />
-
           <Title title={'For You'} />
           <LifeStyleModalOption
             trim={'Le Blanc(르블랑)'}
@@ -85,9 +85,7 @@ function LifeStyleModal({ showModal, setShowModal }: LifeStyleModalProps) {
               { image: smartSense, name: '현대 스마트 센스 I' },
             ]}
           />
-
           <UnderLine margin={'my-8'} />
-
           <Title title={'Interview'} />
           <LifeStyleModalInterview
             question={'어떤 용도로 차를 사용하세요?'}
@@ -101,8 +99,8 @@ function LifeStyleModal({ showModal, setShowModal }: LifeStyleModalProps) {
               '저는 차를 살 때 안전을 중요하게 생각해요. 가족들이 같이 타는 차라 항상 사고에 경각심을 갖고 있죠. 펠리세이드는 그 점에서 뒷좌석 에어백도 터지는 모델이라 안심이 되는 편이에요.'
             }
           />
-        </div>
-      </div>
+        </LifeStyleModalContentWrapper>
+      </LifeStyleModalWrapper>
     </div>
   );
 }

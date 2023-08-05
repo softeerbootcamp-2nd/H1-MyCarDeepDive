@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface RadioProps {
   name: string;
   value: string;
@@ -17,4 +19,8 @@ export interface LifeStyleRadioProps {
     description: string;
     profileImage: string;
   };
+}
+
+export interface WrapperProps {
+  children: ReactNode;
 }

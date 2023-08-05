@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ageQuestionList } from '@/global/data';
+import RecommendQuestionPageWrapper from './RecommendQuestionPageWrapper';
+import RecommendQuestionWrapper from './RecommendQuestionWrapper';
 import QuestionTitle from './QuestionTitle';
 import NextStepButton from './NextStepButton';
 import ProgressBar from './ProgressBar';
-import RecommendQuestionWrapper from './RecommendQuestionWrapper';
 import QuestionBody from './QuestionBody';
 import DetailQuestionButton from './DetailQuestionButton';
 
@@ -24,7 +25,7 @@ function RecommendQuestionPage() {
 
   if (step === undefined) return null;
   return (
-    <div className='pt-[92px] h-screen relative'>
+    <RecommendQuestionPageWrapper>
       <ProgressBar step={step} />
       <RecommendQuestionWrapper>
         <QuestionTitle step={step} />
@@ -39,7 +40,7 @@ function RecommendQuestionPage() {
         />
         <NextStepButton step={step} lifeStyle={lifeStyle} />
       </RecommendQuestionWrapper>
-    </div>
+    </RecommendQuestionPageWrapper>
   );
 }
 
