@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15DF95862A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF957F2A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf */; };
+		15DF95872A7B94E00093EAC7 /* HyundaiSansHeadKRBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF95802A7B94E00093EAC7 /* HyundaiSansHeadKRBold.ttf */; };
+		15DF95882A7B94E00093EAC7 /* HyundaiSansTextKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF95822A7B94E00093EAC7 /* HyundaiSansTextKRMedium.ttf */; };
+		15DF95892A7B94E00093EAC7 /* HyundaiSansTextKRBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF95832A7B94E00093EAC7 /* HyundaiSansTextKRBold.ttf */; };
+		15DF958A2A7B94E00093EAC7 /* HyundaiSansTextKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF95842A7B94E00093EAC7 /* HyundaiSansTextKRRegular.ttf */; };
+		15DF958B2A7B94E00093EAC7 /* Home_mp4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 15DF95852A7B94E00093EAC7 /* Home_mp4.mp4 */; };
+		15DF958E2A7C89630093EAC7 /* UIMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF958D2A7C89630093EAC7 /* UIMargin.swift */; };
+		15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95902A7C89A60093EAC7 /* LayoutSupportable.swift */; };
+		15DF95932A7C89BC0093EAC7 /* ConvenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95922A7C89BC0093EAC7 /* ConvenienceInit.swift */; };
+		15DF95952A7C89DF0093EAC7 /* GetYaFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95942A7C89DF0093EAC7 /* GetYaFont.swift */; };
+		15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95962A7C89F50093EAC7 /* UIColor+GetYaPalette.swift */; };
+		15DF95992A7C8A110093EAC7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95982A7C8A110093EAC7 /* UIView+.swift */; };
+		15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */; };
+		15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+HyundaiSansConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+HyundaiSansConfigure.swift */; };
+		15DF959F2A7C8A440093EAC7 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959E2A7C8A440093EAC7 /* UILabel+.swift */; };
 		641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */; };
 		641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */; };
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
@@ -38,7 +53,6 @@
 		64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4A42A789C5A0003E2C1 /* HomeViewController.swift */; };
 		64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4AA2A78A4080003E2C1 /* HomeNavigationViewController.swift */; };
 		64ADA4AD2A78A7090003E2C1 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4AC2A78A7090003E2C1 /* CommonButton.swift */; };
-		64ADA4AF2A78D34E0003E2C1 /* Home_mp4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 64ADA4AE2A78D34E0003E2C1 /* Home_mp4.mp4 */; };
 		64ADA4B12A78F82A0003E2C1 /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */; };
 		64ADA4B82A7A1BF20003E2C1 /* CommonOptionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4B72A7A1BF20003E2C1 /* CommonOptionImageView.swift */; };
 		64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4B92A7A21520003E2C1 /* CommonOptionView.swift */; };
@@ -67,6 +81,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15DF957F2A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
+		15DF95802A7B94E00093EAC7 /* HyundaiSansHeadKRBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRBold.ttf; sourceTree = "<group>"; };
+		15DF95822A7B94E00093EAC7 /* HyundaiSansTextKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKRMedium.ttf; sourceTree = "<group>"; };
+		15DF95832A7B94E00093EAC7 /* HyundaiSansTextKRBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKRBold.ttf; sourceTree = "<group>"; };
+		15DF95842A7B94E00093EAC7 /* HyundaiSansTextKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKRRegular.ttf; sourceTree = "<group>"; };
+		15DF95852A7B94E00093EAC7 /* Home_mp4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Home_mp4.mp4; sourceTree = "<group>"; };
+		15DF958D2A7C89630093EAC7 /* UIMargin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMargin.swift; sourceTree = "<group>"; };
+		15DF95902A7C89A60093EAC7 /* LayoutSupportable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSupportable.swift; sourceTree = "<group>"; };
+		15DF95922A7C89BC0093EAC7 /* ConvenienceInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvenienceInit.swift; sourceTree = "<group>"; };
+		15DF95942A7C89DF0093EAC7 /* GetYaFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetYaFont.swift; sourceTree = "<group>"; };
+		15DF95962A7C89F50093EAC7 /* UIColor+GetYaPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GetYaPalette.swift"; sourceTree = "<group>"; };
+		15DF95982A7C8A110093EAC7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+HyundaiSansConfigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+HyundaiSansConfigure.swift"; sourceTree = "<group>"; };
+		15DF959E2A7C8A440093EAC7 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectViewController.swift; sourceTree = "<group>"; };
 		641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectViewController.swift; sourceTree = "<group>"; };
 		641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
@@ -102,7 +131,6 @@
 		64ADA4A42A789C5A0003E2C1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		64ADA4AA2A78A4080003E2C1 /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationViewController.swift; sourceTree = "<group>"; };
 		64ADA4AC2A78A7090003E2C1 /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
-		64ADA4AE2A78D34E0003E2C1 /* Home_mp4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Home_mp4.mp4; path = ../../../Home_mp4.mp4; sourceTree = "<group>"; };
 		64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+.swift"; sourceTree = "<group>"; };
 		64ADA4B72A7A1BF20003E2C1 /* CommonOptionImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOptionImageView.swift; sourceTree = "<group>"; };
 		64ADA4B92A7A21520003E2C1 /* CommonOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOptionView.swift; sourceTree = "<group>"; };
@@ -138,6 +166,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15DF957C2A7B94E00093EAC7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				15DF957D2A7B94E00093EAC7 /* HyundaiSants */,
+				15DF95852A7B94E00093EAC7 /* Home_mp4.mp4 */,
+				64ADA4482A7787780003E2C1 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		15DF957D2A7B94E00093EAC7 /* HyundaiSants */ = {
+			isa = PBXGroup;
+			children = (
+				15DF957E2A7B94E00093EAC7 /* Head */,
+				15DF95812A7B94E00093EAC7 /* Text */,
+			);
+			path = HyundaiSants;
+			sourceTree = "<group>";
+		};
+		15DF957E2A7B94E00093EAC7 /* Head */ = {
+			isa = PBXGroup;
+			children = (
+				15DF957F2A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf */,
+				15DF95802A7B94E00093EAC7 /* HyundaiSansHeadKRBold.ttf */,
+			);
+			path = Head;
+			sourceTree = "<group>";
+		};
+		15DF95812A7B94E00093EAC7 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				15DF95822A7B94E00093EAC7 /* HyundaiSansTextKRMedium.ttf */,
+				15DF95832A7B94E00093EAC7 /* HyundaiSansTextKRBold.ttf */,
+				15DF95842A7B94E00093EAC7 /* HyundaiSansTextKRRegular.ttf */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		15DF95A32A7C98C30093EAC7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				15DF958D2A7C89630093EAC7 /* UIMargin.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		641AB51B2A7B7C7300CF88C0 /* CharacterSelect */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +242,6 @@
 		64ADA4332A7787770003E2C1 = {
 			isa = PBXGroup;
 			children = (
-				64ADA4AE2A78D34E0003E2C1 /* Home_mp4.mp4 */,
 				64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */,
 				64ADA43E2A7787770003E2C1 /* GetYa */,
 				64ADA4552A7787780003E2C1 /* GetYaTests */,
@@ -261,10 +334,10 @@
 		64ADA4732A7787910003E2C1 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				15DF957C2A7B94E00093EAC7 /* Resource */,
 				64ADA4832A7788740003E2C1 /* Coordinator */,
 				64ADA43F2A7787770003E2C1 /* AppDelegate.swift */,
 				64ADA4412A7787770003E2C1 /* SceneDelegate.swift */,
-				64ADA4482A7787780003E2C1 /* Assets.xcassets */,
 				64ADA44A2A7787780003E2C1 /* LaunchScreen.storyboard */,
 				64ADA44D2A7787780003E2C1 /* Info.plist */,
 			);
@@ -285,6 +358,7 @@
 				64ADA47C2A7788410003E2C1 /* Protocol */,
 				64ADA4772A7787F20003E2C1 /* View */,
 				64ADA4762A7787DB0003E2C1 /* ViewModel */,
+				15DF95A32A7C98C30093EAC7 /* Model */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -324,7 +398,12 @@
 			children = (
 				64ADA4B02A78F82A0003E2C1 /* CGFloat+.swift */,
 				64ADA4BD2A7A26090003E2C1 /* Int+.swift */,
+				15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+HyundaiSansConfigure.swift */,
 				64ADA4BF2A7A28AA0003E2C1 /* UIColor+.swift */,
+				15DF95962A7C89F50093EAC7 /* UIColor+GetYaPalette.swift */,
+				15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */,
+				15DF959E2A7C8A440093EAC7 /* UILabel+.swift */,
+				15DF95982A7C8A110093EAC7 /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -333,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				64ADA4982A7788C70003E2C1 /* Enum.swift */,
+				15DF95942A7C89DF0093EAC7 /* GetYaFont.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -348,6 +428,8 @@
 		64ADA47C2A7788410003E2C1 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				15DF95902A7C89A60093EAC7 /* LayoutSupportable.swift */,
+				15DF95922A7C89BC0093EAC7 /* ConvenienceInit.swift */,
 				64ADA4902A7788B00003E2C1 /* CommonProtocl.swift */,
 			);
 			path = Protocol;
@@ -525,10 +607,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64ADA4AF2A78D34E0003E2C1 /* Home_mp4.mp4 in Resources */,
+				15DF95892A7B94E00093EAC7 /* HyundaiSansTextKRBold.ttf in Resources */,
+				15DF958B2A7B94E00093EAC7 /* Home_mp4.mp4 in Resources */,
 				64ADA49F2A77890B0003E2C1 /* .swiftLint.yml in Resources */,
 				64ADA44C2A7787780003E2C1 /* LaunchScreen.storyboard in Resources */,
+				15DF958A2A7B94E00093EAC7 /* HyundaiSansTextKRRegular.ttf in Resources */,
+				15DF95862A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf in Resources */,
 				64ADA4492A7787780003E2C1 /* Assets.xcassets in Resources */,
+				15DF95872A7B94E00093EAC7 /* HyundaiSansHeadKRBold.ttf in Resources */,
+				15DF95882A7B94E00093EAC7 /* HyundaiSansTextKRMedium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,22 +662,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				64ADA4B12A78F82A0003E2C1 /* CGFloat+.swift in Sources */,
+				15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
+				15DF959F2A7C8A440093EAC7 /* UILabel+.swift in Sources */,
 				641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */,
 				641AB52A2A7BA16000CF88C0 /* CharacterSelectContentView.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
 				64ADA4BC2A7A22780003E2C1 /* CommonLabel.swift in Sources */,
 				641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */,
+				15DF958E2A7C89630093EAC7 /* UIMargin.swift in Sources */,
 				64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */,
 				64ADA4932A7788B60003E2C1 /* CommonView.swift in Sources */,
 				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
 				64ADA4992A7788C70003E2C1 /* Enum.swift in Sources */,
+				15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */,
 				64ADA4AD2A78A7090003E2C1 /* CommonButton.swift in Sources */,
 				64ADA4892A77888C0003E2C1 /* RepositoyProtocol.swift in Sources */,
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
+				15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */,
 				641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */,
 				64ADA4BE2A7A26090003E2C1 /* Int+.swift in Sources */,
 				64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */,
+				15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+HyundaiSansConfigure.swift in Sources */,
 				641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */,
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
 				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
@@ -598,11 +691,14 @@
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */,
 				64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */,
+				15DF95992A7C8A110093EAC7 /* UIView+.swift in Sources */,
+				15DF95932A7C89BC0093EAC7 /* ConvenienceInit.swift in Sources */,
 				64ADA4C02A7A28AA0003E2C1 /* UIColor+.swift in Sources */,
 				64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */,
 				641AB5242A7B821D00CF88C0 /* HomeContentDelegate.swift in Sources */,
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
+				15DF95952A7C89DF0093EAC7 /* GetYaFont.swift in Sources */,
 				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
 				64ADA4C42A7A32950003E2C1 /* CommonOptionSelectButton.swift in Sources */,
 				64ADA4B82A7A1BF20003E2C1 /* CommonOptionImageView.swift in Sources */,
