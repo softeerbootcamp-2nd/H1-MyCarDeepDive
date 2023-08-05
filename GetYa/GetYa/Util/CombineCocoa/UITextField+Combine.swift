@@ -8,7 +8,6 @@
 import UIKit
 import Combine
 
-
 @available(iOS 13.0, *)
 extension UITextField {
     /// A publisher emitting any text changes to this text field.
