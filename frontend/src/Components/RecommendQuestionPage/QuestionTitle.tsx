@@ -1,4 +1,4 @@
-import { QuestionStepProps } from '../../global/type';
+import { QuestionStepProps } from '@/global/type';
 import Step from './Step';
 
 function QuestionTitle({ step }: QuestionStepProps) {

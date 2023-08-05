@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
-import LogoWhite from '../../../assets/icon/logo-white.svg';
-import Logo from '../../../assets/icon/logo.svg';
-import headerDownArrowBlack from '../../../assets/icon/headerDownArrowBlack.svg';
-import headerDownArrow from '../../../assets/icon/headerDownArrow.svg';
+import LogoWhite from '@/assets/icon/logo-white.svg';
+import Logo from '@/assets/icon/logo.svg';
+import headerDownArrowBlack from '@/assets/icon/headerDownArrowBlack.svg';
+import headerDownArrow from '@/assets/icon/headerDownArrow.svg';
 
 function Header() {
   const location = useLocation();

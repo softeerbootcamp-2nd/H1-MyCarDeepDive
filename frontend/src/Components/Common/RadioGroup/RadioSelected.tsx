@@ -1,5 +1,5 @@
-import { RadioProps } from '../../../global/type';
-import checkCircle from '../../../assets/icon/check-circle.svg';
+import { RadioProps } from '@/global/type';
+import checkCircle from '@/assets/icon/check-circle.svg';
 
 function RadioSelected({ name, value, onChangeHandler }: RadioProps) {
   return (

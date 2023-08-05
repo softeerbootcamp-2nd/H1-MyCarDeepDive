@@ -1,4 +1,4 @@
-import { RadioProps } from '../../../global/type';
+import { RadioProps } from '@/global/type';
 
 function RadioUnselected({ name, value, onChangeHandler }: RadioProps) {
   return (

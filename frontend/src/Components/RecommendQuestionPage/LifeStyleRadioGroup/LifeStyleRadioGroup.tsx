@@ -1,8 +1,8 @@
+import { useState } from 'react';
+import { lifeStyleQuestionList } from '@/global/constants';
 import LifeStyleRadioSelected from './LifeStyleRadioSelected';
 import LifeStyleRadioUnselected from './LifeStyleRadioUnselected';
-import { lifeStyleQuestionList } from '../../../global/constants';
 import LifeStyleModal from '../LifeStyleModal/LifeStyleModal';
-import { useState } from 'react';
 
 type LifeStyleRadioGroupProps = {
   value: string;

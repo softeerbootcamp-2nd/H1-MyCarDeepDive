@@ -1,6 +1,6 @@
-import checkCircleBlue from '../../../assets/icon/check-circle-lifecycle-blue.svg';
-import { LifeStyleRadioProps } from '../../../global/type';
+import { LifeStyleRadioProps } from '@/global/type';
 import LifeStyleTag from './LifeStyleTag';
+import checkCircleBlue from '@/assets/icon/check-circle-lifecycle-blue.svg';
 
 function LifeStyleRadioSelected({
   onChangeHandler,

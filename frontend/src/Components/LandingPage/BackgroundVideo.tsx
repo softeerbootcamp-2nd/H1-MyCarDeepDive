@@ -1,4 +1,4 @@
-import mainVideo from '../../assets/video/Home_mp4.mp4';
+import mainVideo from '@/assets/video/Home_mp4.mp4';
 
 function BackgroundVideo() {
   return (

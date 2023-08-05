@@ -1,4 +1,4 @@
-import RadioGroup from '../Common/RadioGroup/RadioGroup';
+import RadioGroup from '@/Components/Common/RadioGroup/RadioGroup';
 import LifeStyleRadioGroup from './LifeStyleRadioGroup/LifeStyleRadioGroup';
 
 type QuestionBodyProps = {

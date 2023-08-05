@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { QuestionStepProps } from '../../global/type';
+import { QuestionStepProps } from '@/global/type';
 
 function DetailQuestionButton({ step }: QuestionStepProps) {
   if (step !== 2) return;

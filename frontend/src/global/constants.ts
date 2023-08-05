@@ -1,7 +1,7 @@
-import lifeStyleProfile1 from '../assets/image/lifeStyle-profile1.png';
-import lifeStyleProfile2 from '../assets/image/lifeStyle-profile2.png';
-import lifeStyleProfile3 from '../assets/image/lifeStyle-profile3.png';
-import lifeStyleProfile4 from '../assets/image/lifeStyle-profile4.png';
+import lifeStyleProfile1 from '@/assets/image/lifeStyle-profile1.png';
+import lifeStyleProfile2 from '@/assets/image/lifeStyle-profile2.png';
+import lifeStyleProfile3 from '@/assets/image/lifeStyle-profile3.png';
+import lifeStyleProfile4 from '@/assets/image/lifeStyle-profile4.png';
 
 export const ageQuestionList = ['20대', '30대', '40대', '50대 이상'];
 export const lifeStyleQuestionList = [

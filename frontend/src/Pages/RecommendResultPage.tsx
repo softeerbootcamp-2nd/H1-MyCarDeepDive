@@ -1,10 +1,10 @@
-import logoSkyBlue from '../assets/icon/logo-skyblue.svg';
-import palisade from '../assets/image/Palisade.png';
-import whitePoint from '../assets/icon/white-point.svg';
-import exteriorCrimi from '../assets/image/exterior-crimi.png';
-import exteriorArtificialLeather from '../assets/image/exterior-artificial-leather.png';
-import exteriorSmartsense from '../assets/image/exterior-smartsense.png';
-import Button from '../Components/Common/Button/Button';
+import Button from '@/Components/Common/Button/Button';
+import logoSkyBlue from '@/assets/icon/logo-skyblue.svg';
+import palisade from '@/assets/image/Palisade.png';
+import whitePoint from '@/assets/icon/white-point.svg';
+import exteriorCrimi from '@/assets/image/exterior-crimi.png';
+import exteriorArtificialLeather from '@/assets/image/exterior-artificial-leather.png';
+import exteriorSmartsense from '@/assets/image/exterior-smartsense.png';
 
 function RecommendResultPage() {
   return (

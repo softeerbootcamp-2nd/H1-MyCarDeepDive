@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import lifeStyleFamily from '../../../assets/image/lifeStyle-family.png';
-import logoWhite from '../../../assets/icon/logo-white.svg';
-import lifeStyleProfile from '../../../assets/image/lifeStyle-profile1.png';
-import comport from '../../../assets/image/comport.png';
-import smartSense from '../../../assets/image/smartSense.png';
-import Prestige from '../../../assets/image/Prestige.png';
+import Title from '@/Components/Common/Title/Title';
+import UnderLine from '@/Components/Common/UnderLine/UnderLine';
 import LifeStyleModalHeader from './LifeStyleModalHeader';
 import LifeStyleModalProfile from './LifeStyleModalProfile';
 import LifeStyleModalComment from './LifeStyleModalComment';
-import Title from '../../Common/Title/Title';
 import LifeStyleModalOption from './LifeStyleModalOption';
-import UnderLine from '../../Common/UnderLine/UnderLine';
 import LifeStyleModalInterview from './LifeStyleModalInterview';
+import lifeStyleFamily from '@/assets/image/lifeStyle-family.png';
+import logoWhite from '@/assets/icon/logo-white.svg';
+import lifeStyleProfile from '@/assets/image/lifeStyle-profile1.png';
+import comport from '@/assets/image/comport.png';
+import smartSense from '@/assets/image/smartSense.png';
+import Prestige from '@/assets/image/Prestige.png';
 
 type LifeStyleModalProps = {
   showModal: boolean;
@@ -90,14 +90,12 @@ function LifeStyleModal({ showModal, setShowModal }: LifeStyleModalProps) {
 
           <Title title={'Interview'} />
           <LifeStyleModalInterview
-            height={46}
             question={'어떤 용도로 차를 사용하세요?'}
             answer={
               '저는 차를 타고 출퇴근도 하지만 주중에 아이들 픽업하거나 마트 갈 때도 자주 타곤 합니다.'
             }
           />
           <LifeStyleModalInterview
-            height={68}
             question={'차를 살 때 가장 중요하게 생각하는 부분이 뭔가요?'}
             answer={
               '저는 차를 살 때 안전을 중요하게 생각해요. 가족들이 같이 타는 차라 항상 사고에 경각심을 갖고 있죠. 펠리세이드는 그 점에서 뒷좌석 에어백도 터지는 모델이라 안심이 되는 편이에요.'
