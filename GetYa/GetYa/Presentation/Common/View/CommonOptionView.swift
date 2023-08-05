@@ -74,7 +74,7 @@ class CommonOptionView: UIView {
         configurePriceLabelLayout()
     }
     
-    func configureImageViewLayout() {
+    private func configureImageViewLayout() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: self.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -83,7 +83,7 @@ class CommonOptionView: UIView {
         ])
     }
     
-    func configureTitleLabelLayout() {
+    private func configureTitleLabelLayout() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
             titleLabel.leadingAnchor.constraint(
@@ -93,7 +93,7 @@ class CommonOptionView: UIView {
         ])
     }
     
-    func configurePriceLabelLayout() {
+    private func configurePriceLabelLayout() {
         NSLayoutConstraint.activate([
             priceLabel.topAnchor.constraint(
                 equalTo: titleLabel.bottomAnchor,
