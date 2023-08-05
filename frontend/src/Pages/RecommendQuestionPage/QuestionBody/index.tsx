@@ -2,7 +2,7 @@ import RadioGroup from '@/Components/RadioGroup';
 import LifeStyleRadioGroup from '../LifeStyleRadioGroup';
 
 interface QuestionBodyProps {
-  step: number;
+  step: string;
   ageQuestionList: string[];
   age: string;
   lifeStyle: string;
@@ -19,7 +19,7 @@ function QuestionBody({
   lifeStyleHandler,
 }: QuestionBodyProps) {
   const question =
-    step === 1 ? (
+    step === '1' ? (
       <RadioGroup
         data={ageQuestionList}
         name={'age'}

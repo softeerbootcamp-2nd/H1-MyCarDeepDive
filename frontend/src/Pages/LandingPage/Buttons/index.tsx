@@ -18,7 +18,7 @@ function Buttons() {
         height='h-[52px]'
         variant='white'
         text='추천받기'
-        onClick={() => navigation('/recommend/question')}
+        onClick={() => navigation('/recommend/question/1')}
       />
     </div>
   );

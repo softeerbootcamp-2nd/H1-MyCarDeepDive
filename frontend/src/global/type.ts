@@ -5,7 +5,7 @@ export interface RadioProps {
 }
 
 export interface QuestionStepProps {
-  step: number;
+  step: string;
 }
 
 export interface LifeStyleRadioProps {

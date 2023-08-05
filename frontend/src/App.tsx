@@ -10,7 +10,10 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/recommend/question' element={<RecommendQuestionPage />} />
+        <Route
+          path='/recommend/question/:step'
+          element={<RecommendQuestionPage />}
+        />
         <Route path='/recommend/result' element={<RecommendResultPage />} />
       </Routes>
     </div>

@@ -5,10 +5,10 @@ function QuestionTitle({ step }: QuestionStepProps) {
   return (
     <div
       className={`mt-[48px] mx-auto flex justify-between ${
-        step === 1 && 'mb-6'
+        step === '1' && 'mb-6'
       }`}
     >
-      {step === 1 ? (
+      {step === '1' ? (
         <p className='font-h2-medium'>
           <span className='text-[22px] leading-[28px]'>나이</span>
           <span className='font-h5-regular'>

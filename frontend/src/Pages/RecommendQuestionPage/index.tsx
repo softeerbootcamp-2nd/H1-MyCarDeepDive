@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ageQuestionList } from '@/global/data';
 import QuestionTitle from './QuestionTitle';
 import NextStepButton from './NextStepButton';
@@ -9,8 +9,7 @@ import QuestionBody from './QuestionBody';
 import DetailQuestionButton from './DetailQuestionButton';
 
 function RecommendQuestionPage() {
-  const navigation = useNavigate();
-  const [step, setStep] = useState(1);
+  const step = useParams().step;
   const [age, setAge] = useState('20대');
   const [lifeStyle, setLifeStyle] = useState('');
 
@@ -23,15 +22,7 @@ function RecommendQuestionPage() {
     setLifeStyle(lifeStyle === target.value ? '' : target.value);
   };
 
-  useEffect(() => {
-    if (step === 3) return navigation('/recommend/result');
-
-    if (step === 2) {
-      history.pushState(null, '', '');
-      window.onpopstate = () => setStep(1);
-    }
-  }, [step, navigation]);
-
+  if (step === undefined) return null;
   return (
     <div className='pt-[92px] h-screen relative'>
       <ProgressBar step={step} />
@@ -46,7 +37,7 @@ function RecommendQuestionPage() {
           ageHandler={ageHandler}
           lifeStyleHandler={lifeStyleHandler}
         />
-        <NextStepButton step={step} setStep={setStep} lifeStyle={lifeStyle} />
+        <NextStepButton step={step} lifeStyle={lifeStyle} />
       </RecommendQuestionWrapper>
     </div>
   );
