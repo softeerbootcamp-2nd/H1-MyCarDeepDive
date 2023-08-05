@@ -1,23 +1,16 @@
-import LifeStyleModalOptionItem from './LifeStyleModalOptionItem';
+import OptionItem from './OptionItem';
 
-interface optionItem {
-  name: string;
-  image: string;
-}
-
-interface LifeStyleModalOptionProps {
+interface OptionProps {
   trim: string;
   attribute: string;
   carImage: string;
-  options: optionItem[];
+  options: {
+    name: string;
+    image: string;
+  }[];
 }
 
-function LifeStyleModalOption({
-  trim,
-  attribute,
-  carImage,
-  options,
-}: LifeStyleModalOptionProps) {
+function Option({ trim, attribute, carImage, options }: OptionProps) {
   return (
     <>
       <div className='mt-3 relative overflow-hidden'>
@@ -38,15 +31,11 @@ function LifeStyleModalOption({
       </div>
       <div className='flex font-body4-regular text-grey-200'>
         {options.map(item => (
-          <LifeStyleModalOptionItem
-            image={item.image}
-            name={item.name}
-            key={item.name}
-          />
+          <OptionItem image={item.image} name={item.name} key={item.name} />
         ))}
       </div>
     </>
   );
 }
 
-export default LifeStyleModalOption;
+export default Option;

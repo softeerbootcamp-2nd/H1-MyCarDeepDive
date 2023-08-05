@@ -1,5 +1,5 @@
 import { LifeStyleRadioProps } from '@/global/type';
-import LifeStyleTag from './LifeStyleTag';
+import LifeStyleTag from '../LifeStyleTag';
 import checkCircleBlue from '@/assets/icon/check-circle-lifecycle-blue.svg';
 
 function LifeStyleRadioSelected({

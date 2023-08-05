@@ -25,11 +25,10 @@ export interface WrapperProps {
   children: ReactNode;
 }
 
-export interface RecommendQuestionProps {
+export interface RecommendQuestionPageProps {
   step: string;
   lifeStyle: string;
   age: string;
-  ageQuestionList: string[];
   ageHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   lifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

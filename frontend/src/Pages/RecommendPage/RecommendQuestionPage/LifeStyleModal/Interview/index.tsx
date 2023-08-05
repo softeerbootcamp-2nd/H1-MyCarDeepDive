@@ -1,12 +1,9 @@
-interface LifeStyleModalInterviewProps {
+interface InterviewProps {
   question: string;
   answer: string;
 }
 
-function LifeStyleModalInterview({
-  question,
-  answer,
-}: LifeStyleModalInterviewProps) {
+function Interview({ question, answer }: InterviewProps) {
   return (
     <div className='font-body3-medium mt-3 mb-8'>
       <span className='text-primary leading-[22px] mr-2'>Q.</span>
@@ -20,4 +17,4 @@ function LifeStyleModalInterview({
   );
 }
 
-export default LifeStyleModalInterview;
+export default Interview;

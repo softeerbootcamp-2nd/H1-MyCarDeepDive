@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ageQuestionList } from '@/global/data';
 import RecommendResultPage from './RecommendResultPage';
 import RecommendQuestionPage from './RecommendQuestionPage';
 
@@ -23,7 +22,6 @@ function RecommendPage() {
   return (
     <RecommendQuestionPage
       step={step}
-      ageQuestionList={ageQuestionList}
       age={age}
       lifeStyle={lifeStyle}
       ageHandler={ageHandler}

@@ -1,6 +1,6 @@
 import { WrapperProps } from '@/global/type';
 
-function LifeStyleModalWrapper({ children }: WrapperProps) {
+function Wrapper({ children }: WrapperProps) {
   return (
     <div className='my-[90px] pb-14 mx-auto shadow w-[688px] rounded-2xl bg-white'>
       {children}
@@ -8,4 +8,4 @@ function LifeStyleModalWrapper({ children }: WrapperProps) {
   );
 }
 
-export default LifeStyleModalWrapper;
+export default Wrapper;

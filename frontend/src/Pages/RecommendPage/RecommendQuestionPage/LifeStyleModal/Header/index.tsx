@@ -1,14 +1,11 @@
-import LifeStyleModalHeaderTag from './LifeStyleModalHeaderTag';
+import HeaderTag from './HeaderTag';
 
-interface LifeStyleModalHeaderProps {
+interface HeaderProps {
   lifeStyleFamily: string;
   logoWhite: string;
 }
 
-function LifeStyleModalHeader({
-  lifeStyleFamily,
-  logoWhite,
-}: LifeStyleModalHeaderProps) {
+function Header({ lifeStyleFamily, logoWhite }: HeaderProps) {
   return (
     <section
       className='w-full rounded-t-2xl h-[256px] bg-cover bg-center bg-no-repeat bg-blend-multiply'
@@ -17,8 +14,8 @@ function LifeStyleModalHeader({
       <div className='pt-[36px] pl-[40px]'>
         <img src={logoWhite} alt='Hyundai-white-Logo' />
         <div className='mt-[63px] flex gap-2'>
-          <LifeStyleModalHeaderTag tag={'#주행안전'} />
-          <LifeStyleModalHeaderTag tag={'#사용편의'} />
+          <HeaderTag tag={'#주행안전'} />
+          <HeaderTag tag={'#사용편의'} />
         </div>
         <div className='mt-[8px] font-h2-medium'>
           <span className='text-[32px] leading-[44px] text-grey-1000'>
@@ -33,4 +30,4 @@ function LifeStyleModalHeader({
   );
 }
 
-export default LifeStyleModalHeader;
+export default Header;

@@ -1,4 +1,5 @@
 import { ageQuestionList } from '@/global/data';
+import { RecommendQuestionPageProps } from '@/global/type';
 import RecommendQuestionPageWrapper from './RecommendQuestionPageWrapper';
 import RecommendQuestionWrapper from './RecommendQuestionWrapper';
 import QuestionTitle from './QuestionTitle';
@@ -6,7 +7,6 @@ import NextStepButton from './NextStepButton';
 import ProgressBar from './ProgressBar';
 import QuestionBody from './QuestionBody';
 import DetailQuestionButton from './DetailQuestionButton';
-import { RecommendQuestionProps } from '@/global/type';
 
 function RecommendQuestionPage({
   step,
@@ -14,7 +14,7 @@ function RecommendQuestionPage({
   age,
   ageHandler,
   lifeStyleHandler,
-}: RecommendQuestionProps) {
+}: RecommendQuestionPageProps) {
   return (
     <RecommendQuestionPageWrapper>
       <ProgressBar step={step} />

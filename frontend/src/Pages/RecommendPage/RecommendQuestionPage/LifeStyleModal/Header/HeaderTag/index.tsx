@@ -1,8 +1,8 @@
-interface LifeStyleModalHeaderTagProps {
+interface HeaderTagProps {
   tag: string;
 }
 
-function LifeStyleModalHeaderTag({ tag }: LifeStyleModalHeaderTagProps) {
+function HeaderTag({ tag }: HeaderTagProps) {
   return (
     <div className='w-[69px] h-[30px] bg-[#0f1114] bg-opacity-80 font-caption1-medium text-grey-1000 flex items-center justify-center rounded-full'>
       {tag}
@@ -10,4 +10,4 @@ function LifeStyleModalHeaderTag({ tag }: LifeStyleModalHeaderTagProps) {
   );
 }
 
-export default LifeStyleModalHeaderTag;
+export default HeaderTag;

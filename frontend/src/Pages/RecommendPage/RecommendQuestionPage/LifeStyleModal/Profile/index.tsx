@@ -1,8 +1,8 @@
-interface LifeStyleModalProfile {
+interface Profile {
   lifeStyleProfile: string;
 }
 
-function LifeStyleModalProfile({ lifeStyleProfile }: LifeStyleModalProfile) {
+function Profile({ lifeStyleProfile }: Profile) {
   return (
     <div className='mt-10 flex gap-4'>
       <img
@@ -20,4 +20,4 @@ function LifeStyleModalProfile({ lifeStyleProfile }: LifeStyleModalProfile) {
   );
 }
 
-export default LifeStyleModalProfile;
+export default Profile;
