@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ageQuestionList } from '@/global/constants';
+import { ageQuestionList } from '@/global/data';
 import QuestionTitle from '@/Components/RecommendQuestionPage/QuestionTitle';
 import NextStepButton from '@/Components/RecommendQuestionPage/NextStepButton';
 import ProgressBar from '@/Components/RecommendQuestionPage/ProgressBar';
