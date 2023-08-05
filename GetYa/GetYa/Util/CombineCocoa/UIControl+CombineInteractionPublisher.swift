@@ -25,7 +25,7 @@ extension UIControl {
   ///     - Combine's each operator의 특징은, 새로운 퍼블리셔 타입을 반환합니다... 퍼블리셔는 값을 방출할 수 있고,
   ///     - 또 operator가 붙을 수있고.. 그렇기에 chains가 가능합니다.
   ///     - 그 퍼블리셔를 누군가는 subscriber를 할 수 있습니다.
-  struct InteractionPublihser: Publisher {
+  struct InteractionPublisher: Publisher {
     // MARK: - Constant
     typealias Output = UIControl
     typealias Failure = Never
