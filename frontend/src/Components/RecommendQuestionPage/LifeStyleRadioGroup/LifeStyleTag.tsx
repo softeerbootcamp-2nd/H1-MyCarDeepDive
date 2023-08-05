@@ -1,7 +1,7 @@
-type LifeStyleTagProps = {
+interface LifeStyleTagProps {
   text: string;
   tagType: 'selected' | 'unselected';
-};
+}
 
 function LifeStyleTag({ text, tagType }: LifeStyleTagProps) {
   const style =

@@ -1,6 +1,6 @@
-type LifeStyleModalProfile = {
+interface LifeStyleModalProfile {
   lifeStyleProfile: string;
-};
+}
 
 function LifeStyleModalProfile({ lifeStyleProfile }: LifeStyleModalProfile) {
   return (

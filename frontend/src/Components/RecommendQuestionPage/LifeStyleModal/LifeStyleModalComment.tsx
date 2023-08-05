@@ -1,6 +1,6 @@
-type LifeStyleModalCommentProps = {
+interface LifeStyleModalCommentProps {
   comment: string;
-};
+}
 
 function LifeStyleModalComment({ comment }: LifeStyleModalCommentProps) {
   return (

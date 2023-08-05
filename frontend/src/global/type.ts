@@ -1,14 +1,14 @@
-export type RadioProps = {
+export interface RadioProps {
   name: string;
   value: string;
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
-export type QuestionStepProps = {
+export interface QuestionStepProps {
   step: number;
-};
+}
 
-export type LifeStyleRadioProps = {
+export interface LifeStyleRadioProps {
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setShowLifeStyleModal: React.Dispatch<React.SetStateAction<boolean>>;
   data: {
@@ -17,4 +17,4 @@ export type LifeStyleRadioProps = {
     description: string;
     profileImage: string;
   };
-};
+}

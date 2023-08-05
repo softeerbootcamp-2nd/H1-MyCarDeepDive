@@ -1,6 +1,6 @@
-type TitleProps = {
+interface TitleProps {
   title: string;
-};
+}
 
 function Title({ title }: TitleProps) {
   return (

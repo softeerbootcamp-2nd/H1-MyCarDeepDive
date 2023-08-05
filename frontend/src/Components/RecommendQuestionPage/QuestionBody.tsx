@@ -1,14 +1,14 @@
 import RadioGroup from '@/Components/Common/RadioGroup/RadioGroup';
 import LifeStyleRadioGroup from './LifeStyleRadioGroup/LifeStyleRadioGroup';
 
-type QuestionBodyProps = {
+interface QuestionBodyProps {
   step: number;
   ageQuestionList: string[];
   age: string;
   lifeStyle: string;
   ageHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   lifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 function QuestionBody({
   step,

@@ -13,10 +13,10 @@ import comport from '@/assets/image/comport.png';
 import smartSense from '@/assets/image/smartSense.png';
 import Prestige from '@/assets/image/Prestige.png';
 
-type LifeStyleModalProps = {
+interface LifeStyleModalProps {
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 function LifeStyleModal({ showModal, setShowModal }: LifeStyleModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);

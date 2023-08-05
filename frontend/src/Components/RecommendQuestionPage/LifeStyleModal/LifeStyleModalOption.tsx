@@ -1,16 +1,16 @@
 import LifeStyleModalOptionItem from './LifeStyleModalOptionItem';
 
-type optionItem = {
+interface optionItem {
   name: string;
   image: string;
-};
+}
 
-type LifeStyleModalOptionProps = {
+interface LifeStyleModalOptionProps {
   trim: string;
   attribute: string;
   carImage: string;
   options: optionItem[];
-};
+}
 
 function LifeStyleModalOption({
   trim,

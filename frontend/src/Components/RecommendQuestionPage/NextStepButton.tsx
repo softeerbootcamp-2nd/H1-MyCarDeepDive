@@ -1,10 +1,10 @@
 import Button from '@/Components/Common/Button/Button';
 
-type NextStepButtonProps = {
+interface NextStepButtonProps {
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   lifeStyle: string;
-};
+}
 
 function NextStepButton({ step, setStep, lifeStyle }: NextStepButtonProps) {
   return (

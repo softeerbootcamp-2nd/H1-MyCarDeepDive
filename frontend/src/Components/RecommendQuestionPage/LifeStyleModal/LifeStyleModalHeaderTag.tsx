@@ -1,6 +1,6 @@
-type LifeStyleModalHeaderTagProps = {
+interface LifeStyleModalHeaderTagProps {
   tag: string;
-};
+}
 
 function LifeStyleModalHeaderTag({ tag }: LifeStyleModalHeaderTagProps) {
   return (

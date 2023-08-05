@@ -1,9 +1,9 @@
 import LifeStyleModalHeaderTag from './LifeStyleModalHeaderTag';
 
-type LifeStyleModalHeaderProps = {
+interface LifeStyleModalHeaderProps {
   lifeStyleFamily: string;
   logoWhite: string;
-};
+}
 
 function LifeStyleModalHeader({
   lifeStyleFamily,

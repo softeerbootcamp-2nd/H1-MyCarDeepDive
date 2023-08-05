@@ -4,10 +4,10 @@ import LifeStyleRadioSelected from './LifeStyleRadioSelected';
 import LifeStyleRadioUnselected from './LifeStyleRadioUnselected';
 import LifeStyleModal from '../LifeStyleModal/LifeStyleModal';
 
-type LifeStyleRadioGroupProps = {
+interface LifeStyleRadioGroupProps {
   value: string;
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 function LifeStyleRadioGroup({
   value,

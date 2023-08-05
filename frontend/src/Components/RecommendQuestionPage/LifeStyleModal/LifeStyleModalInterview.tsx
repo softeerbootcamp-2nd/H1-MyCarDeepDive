@@ -1,7 +1,7 @@
-type LifeStyleModalInterviewProps = {
+interface LifeStyleModalInterviewProps {
   question: string;
   answer: string;
-};
+}
 
 function LifeStyleModalInterview({
   question,

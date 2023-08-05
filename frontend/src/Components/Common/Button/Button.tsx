@@ -1,4 +1,4 @@
-type ButtonProps = {
+interface ButtonProps {
   width: string;
   height: string;
   type?: 'button' | 'submit';
@@ -6,7 +6,7 @@ type ButtonProps = {
   text: string;
   disabled?: boolean;
   onClick: () => void;
-};
+}
 
 const buttonStyle = {
   primary: 'bg-primary font-body3-medium text-grey-1000',

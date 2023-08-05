@@ -1,7 +1,7 @@
-type LifeStyleModalOptionItemProps = {
+interface LifeStyleModalOptionItemProps {
   image: string;
   name: string;
-};
+}
 
 function LifeStyleModalOptionItem({
   image,
