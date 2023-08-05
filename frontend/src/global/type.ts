@@ -24,3 +24,12 @@ export interface LifeStyleRadioProps {
 export interface WrapperProps {
   children: ReactNode;
 }
+
+export interface RecommendQuestionProps {
+  step: string;
+  lifeStyle: string;
+  age: string;
+  ageQuestionList: string[];
+  ageHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  lifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}

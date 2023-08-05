@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { ageQuestionList } from '@/global/data';
 import RecommendQuestionPageWrapper from './RecommendQuestionPageWrapper';
 import RecommendQuestionWrapper from './RecommendQuestionWrapper';
@@ -8,22 +6,15 @@ import NextStepButton from './NextStepButton';
 import ProgressBar from './ProgressBar';
 import QuestionBody from './QuestionBody';
 import DetailQuestionButton from './DetailQuestionButton';
+import { RecommendQuestionProps } from '@/global/type';
 
-function RecommendQuestionPage() {
-  const step = useParams().step;
-  const [age, setAge] = useState('20대');
-  const [lifeStyle, setLifeStyle] = useState('');
-
-  const ageHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    setAge(target.value);
-  };
-  const lifeStyleHandler = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setLifeStyle(lifeStyle === target.value ? '' : target.value);
-  };
-
-  if (step === undefined) return null;
+function RecommendQuestionPage({
+  step,
+  lifeStyle,
+  age,
+  ageHandler,
+  lifeStyleHandler,
+}: RecommendQuestionProps) {
   return (
     <RecommendQuestionPageWrapper>
       <ProgressBar step={step} />
