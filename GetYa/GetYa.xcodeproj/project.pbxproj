@@ -270,7 +270,9 @@
 				64ADA45F2A7787780003E2C1 /* GetYaUITests */,
 				64ADA43D2A7787770003E2C1 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		64ADA43D2A7787770003E2C1 /* Products */ = {
 			isa = PBXGroup;
