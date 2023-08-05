@@ -11,7 +11,7 @@ protocol CheckListItemViewDelegate: AnyObject {
     func tappedView(sender: UITapGestureRecognizer)
 }
 
-class CommonCheckListItemView: UIView {
+class CheckListItemView: UIView {
     // MARK: - UI Properties
     private let imageView = UIImageView(image: UIImage(named: "Blue-Check-Circle"))
     private let label = CommonLabel()

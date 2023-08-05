@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommonCheckListStackView: UIStackView {
+class CheckListStackView: UIStackView {
     // MARK: - UI Properties
     
     // MARK: - Properties
@@ -44,7 +44,7 @@ class CommonCheckListStackView: UIStackView {
         removeAllArrangedSubViews()
         
         textArray.enumerated().forEach { (idx, text) in
-            let itemView = CommonCheckListItemView(text: text)
+            let itemView = CheckListItemView(text: text)
             itemView.delegate = self
             if idx == 0 { itemView.isTapped = true }
             addArrangedSubview(itemView)
@@ -61,9 +61,9 @@ class CommonCheckListStackView: UIStackView {
 }
 
 // TODO: 고른 선택지에 대한 데이터 저장에 대해 고민해야함.
-extension CommonCheckListStackView: CheckListItemViewDelegate {
+extension CheckListStackView: CheckListItemViewDelegate {
     func tappedView(sender: UITapGestureRecognizer) {
-        arrangedSubviews.map { $0 as? CommonCheckListItemView }.forEach {
+        arrangedSubviews.map { $0 as? CheckListItemView }.forEach {
             if $0 != sender.view {
                 $0?.isTapped = false
             }
