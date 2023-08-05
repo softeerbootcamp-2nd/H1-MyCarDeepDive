@@ -1,0 +1,17 @@
+disabled_rules:
+- trailing_whitespace
+- large_tuple
+- function_body_length
+excluded:
+- GetYa/App/AppDelegate.swift
+- GetYa/App/SceneDelegate.swift
+- GetYaTests/*
+- GetYaUITests/*
+
+nesting:
+ type_level:
+  warning: 5
+  error: 6
+ function_level:
+  warning: 5
+  error: 10
