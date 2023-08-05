@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Header from '@/Components/Common/Header/Header';
+import Header from '@/Components/Header';
 import LandingPage from '@/Pages/LandingPage';
 import RecommendQuestionPage from '@/Pages/RecommendQuestionPage';
 import RecommendResultPage from '@/Pages/RecommendResultPage';

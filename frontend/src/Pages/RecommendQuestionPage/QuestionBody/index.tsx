@@ -1,5 +1,5 @@
-import RadioGroup from '@/Components/Common/RadioGroup/RadioGroup';
-import LifeStyleRadioGroup from './LifeStyleRadioGroup/LifeStyleRadioGroup';
+import RadioGroup from '@/Components/RadioGroup';
+import LifeStyleRadioGroup from '../LifeStyleRadioGroup';
 
 interface QuestionBodyProps {
   step: number;

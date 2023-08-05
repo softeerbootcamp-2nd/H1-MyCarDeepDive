@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import Title from '@/Components/Common/Title/Title';
-import UnderLine from '@/Components/Common/UnderLine/UnderLine';
+import Title from '@/Components/Title';
+import UnderLine from '@/Components/UnderLine';
 import LifeStyleModalHeader from './LifeStyleModalHeader';
 import LifeStyleModalProfile from './LifeStyleModalProfile';
 import LifeStyleModalComment from './LifeStyleModalComment';

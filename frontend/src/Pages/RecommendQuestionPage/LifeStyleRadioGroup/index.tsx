@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { lifeStyleQuestionList } from '@/global/data';
 import LifeStyleRadioSelected from './LifeStyleRadioSelected';
 import LifeStyleRadioUnselected from './LifeStyleRadioUnselected';
-import LifeStyleModal from '../LifeStyleModal/LifeStyleModal';
+import LifeStyleModal from '../LifeStyleModal';
 
 interface LifeStyleRadioGroupProps {
   value: string;

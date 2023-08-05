@@ -1,4 +1,4 @@
-import Button from '@/Components/Common/Button/Button';
+import Button from '@/Components/Button';
 import logoSkyBlue from '@/assets/icon/logo-skyblue.svg';
 import palisade from '@/assets/image/Palisade.png';
 import whitePoint from '@/assets/icon/white-point.svg';

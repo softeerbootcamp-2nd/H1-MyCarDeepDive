@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ageQuestionList } from '@/global/data';
-import QuestionTitle from '@/Components/RecommendQuestionPage/QuestionTitle';
-import NextStepButton from '@/Components/RecommendQuestionPage/NextStepButton';
-import ProgressBar from '@/Components/RecommendQuestionPage/ProgressBar';
-import RecommendQuestionWrapper from '@/Components/RecommendQuestionPage/RecommendQuestionWrapper';
-import QuestionBody from '@/Components/RecommendQuestionPage/QuestionBody';
-import DetailQuestionButton from '@/Components/RecommendQuestionPage/DetailQuestionButton';
+import QuestionTitle from './QuestionTitle';
+import NextStepButton from './NextStepButton';
+import ProgressBar from './ProgressBar';
+import RecommendQuestionWrapper from './RecommendQuestionWrapper';
+import QuestionBody from './QuestionBody';
+import DetailQuestionButton from './DetailQuestionButton';
 
 function RecommendQuestionPage() {
   const navigation = useNavigate();

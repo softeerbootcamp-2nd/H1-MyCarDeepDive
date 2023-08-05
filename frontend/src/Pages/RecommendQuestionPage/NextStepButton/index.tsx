@@ -1,4 +1,4 @@
-import Button from '@/Components/Common/Button/Button';
+import Button from '@/Components/Button';
 
 interface NextStepButtonProps {
   step: number;
