@@ -10,7 +10,7 @@ import Combine
 
 @available(iOS 13.0, *)
 public extension UIButton {
-    ///UIButton이 터치될 때 ( UIControl.Event == .touchUpInside ) 퍼블리셔로 탭 이벤트 반환
+    /// UIButton이 터치될 때 ( UIControl.Event == .touchUpInside ) 퍼블리셔로 탭 이벤트 반환
     var tap: AnyPublisher<Void, Never> {
         publisher(for: .touchUpInside)
             .map { _ in }

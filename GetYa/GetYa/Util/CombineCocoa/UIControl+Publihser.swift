@@ -10,7 +10,6 @@ import Combine
 
 @available(iOS 13.0, *)
 extension UIControl {
-    
     /// UIControl타입의 객체는 publisher를 사용할 수 있습니다
     /// InteractionSubscription은 .touchUpInside 이벤트나 .editingChanged등
     /// 다양한 UIControl.Event 중 하나를 subscription에서 addTarget함으로
