@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */; };
+		155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */; };
 		15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */; };
 		15DF95862A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF957F2A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf */; };
 		15DF95872A7B94E00093EAC7 /* HyundaiSansHeadKRBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF95802A7B94E00093EAC7 /* HyundaiSansHeadKRBold.ttf */; };
@@ -84,6 +85,7 @@
 
 /* Begin PBXFileReference section */
 		155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionSubscription.swift"; sourceTree = "<group>"; };
+		155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Publihser.swift"; sourceTree = "<group>"; };
 		15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionPublisher.swift"; sourceTree = "<group>"; };
 		15DF957F2A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
 		15DF95802A7B94E00093EAC7 /* HyundaiSansHeadKRBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRBold.ttf; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */,
 				155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */,
+				155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */,
 			);
 			path = CombineCocoa;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
 				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
 				64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */,
+				155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */,
 				64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */,
