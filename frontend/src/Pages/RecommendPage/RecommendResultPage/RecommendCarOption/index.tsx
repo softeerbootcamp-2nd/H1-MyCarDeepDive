@@ -19,6 +19,7 @@ function RecommendCarOption({ title, optionData }: RecommendCarOptionProps) {
       <div className='flex justify-between gap-4'>
         {optionData.map(item => (
           <OptionItem
+            key={item.name}
             image={item.image}
             name={item.name}
             price={item.price}
