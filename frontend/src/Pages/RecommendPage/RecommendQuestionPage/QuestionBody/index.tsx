@@ -47,7 +47,10 @@ function QuestionBody({
           );
         })}
         <AdditionQuestionTitle title={'최대 예산을 알려주세요.'} />
-        <AdditionQuestionBudgetRange myLifeStyleHandler={myLifeStyleHandler} />
+        <AdditionQuestionBudgetRange
+          budget={myLifeStyle.budget}
+          myLifeStyleHandler={myLifeStyleHandler}
+        />
       </>
     ) : null;
 

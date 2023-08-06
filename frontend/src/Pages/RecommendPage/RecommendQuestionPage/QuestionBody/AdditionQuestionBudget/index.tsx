@@ -1,6 +1,7 @@
 import { AdditionQuestionBudgetProps } from '@/global/type';
 
 function AdditionQuestionBudgetRange({
+  budget,
   myLifeStyleHandler,
 }: AdditionQuestionBudgetProps) {
   const price = {
@@ -45,6 +46,7 @@ function AdditionQuestionBudgetRange({
         max={highestPrice}
         step={rangeUnit}
         name={'budget'}
+        value={budget}
         onChange={myLifeStyleHandler}
       />
       <datalist id='trickmarks'>

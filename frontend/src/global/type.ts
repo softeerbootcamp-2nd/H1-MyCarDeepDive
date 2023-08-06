@@ -63,5 +63,6 @@ export interface AddtionQuestionTitleProps {
 }
 
 export interface AdditionQuestionBudgetProps {
+  budget: string;
   myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
