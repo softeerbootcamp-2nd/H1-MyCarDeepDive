@@ -14,7 +14,6 @@ class LifeStyleCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 1.5
         imageView.layer.borderColor = UIColor.GetYaPalette.primary.cgColor
         
         return imageView
@@ -83,8 +82,9 @@ class LifeStyleCell: UICollectionViewCell {
             tagStackView.arrangedSubviews.map { $0 as? TagView }.forEach {
                 $0?.configureBackgroundColor(color: isSelected ? .GetYaPalette.lightAcriveBlue : .GetYaPalette.gray1000)
             }
-            baseView.layer.backgroundColor = isSelected ? UIColor.GetYaPalette.lightPrimary.cgColor : UIColor.clear.cgColor
+            baseView.layer.backgroundColor = isSelected ?  UIColor.clear.cgColor : UIColor.GetYaPalette.lightPrimary.cgColor
             baseView.layer.borderWidth = isSelected ? 1.5 : 0
+            titleImageView.layer.borderWidth = isSelected ? 1.5 : 0
         }
     }
     private let titleImageViewLayoutConstant = UILayout(height: 128)
@@ -100,13 +100,13 @@ class LifeStyleCell: UICollectionViewCell {
     )
     private let selectImageViewLayoutConstant = UILayout(
         topMargin: 22,
-        trailingMargin: 20,
+        trailingMargin: -20,
         height: 28
     )
     private let lineViewLayoutConstant = UILayout(
         leadingMargin: 20,
         topMargin: 29,
-        trailingMargin: 20
+        trailingMargin: -20
     )
     private let buttonLayoutConstant = UILayout(
         topMargin: 8
@@ -115,17 +115,27 @@ class LifeStyleCell: UICollectionViewCell {
     // MARK: - LifeCycles
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupViews()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupViews()
+        configureUI()
+    }
+    
+    override func prepareForReuse() {
+        tagStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
     
     // MARK: - Functions
     private func setupViews() {
         addSubviews([
-            titleImageView,
-            baseView
+            baseView,
+            titleImageView
         ])
         
         baseView.addSubviews([
@@ -140,6 +150,11 @@ class LifeStyleCell: UICollectionViewCell {
     private func configureUI() {
         configureTitleImageView()
         configureBaseView()
+        configureTagStackView()
+        configureDescriptionLabel()
+        configureSelectImageView()
+        configureLineView()
+        configureButton()
     }
     
     private func configureTitleImageView() {
@@ -243,5 +258,19 @@ class LifeStyleCell: UICollectionViewCell {
             ),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
+    }
+    
+    func setTagViews(texts: [String]) {
+        texts.forEach {
+            tagStackView.addArrangedSubview(TagView(text: $0))
+        }
+    }
+    
+    func setDescriptionText(text: String) {
+        self.descriptionLabel.text = text
+    }
+    
+    func setTitleImage(image: UIImage) {
+        self.titleImageView.image = image
     }
 }
