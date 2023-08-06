@@ -150,14 +150,9 @@ class LifeStyleViewController: UIViewController {
     }
 }
 
-extension LifeStyleViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        return tagTexts.count
-    }
-    
+
+// MARK: - UICollectionView Delegate
+extension LifeStyleViewController: UICollectionViewDelegate {
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
@@ -174,7 +169,20 @@ extension LifeStyleViewController: UICollectionViewDelegate, UICollectionViewDat
         
         return cell
     }
-    
+}
+
+// MARK: - UICollectionView Datasource
+extension LifeStyleViewController: UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return tagTexts.count
+    }
+}
+
+// MARK: - UIScrollView Delegate
+extension LifeStyleViewController {
     func scrollViewWillEndDragging(
         _ scrollView: UIScrollView,
         withVelocity velocity: CGPoint,
