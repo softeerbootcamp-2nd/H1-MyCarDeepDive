@@ -1,6 +1,6 @@
 import RadioGroup from '@/Components/RadioGroup';
 import LifeStyleRadioGroup from './LifeStyleRadioGroup';
-import { additionQuestionList, ageQuestionList } from '@/global/data';
+import { lifeStyleAdditionQuestionList, ageQuestionList } from '@/global/data';
 import { QuestionBodyProps } from '@/global/type';
 
 function QuestionBody({
@@ -12,15 +12,6 @@ function QuestionBody({
   lifeStyleHandler,
   myLifeStyleHandler,
 }: QuestionBodyProps) {
-  const { drivingExperience, numberOfFamilyMembers, purpose, value } =
-    myLifeStyle;
-
-  const {
-    drivingExperienceList,
-    numberOfFamilyMembersList,
-    purposeList,
-    valueList,
-  } = additionQuestionList;
   const question =
     step === '1' ? (
       <RadioGroup
@@ -35,32 +26,17 @@ function QuestionBody({
         onChangeHandler={lifeStyleHandler}
       />
     ) : step === 'addition' ? (
-      <>
+      lifeStyleAdditionQuestionList.map((additionQuestion, index) => (
         <RadioGroup
-          data={drivingExperienceList}
-          name={'drivingExperience'}
-          value={drivingExperience}
+          key={index}
+          data={additionQuestion.answerList}
+          name={additionQuestion.value}
+          value={
+            myLifeStyle[additionQuestion.value as keyof typeof myLifeStyle]
+          }
           onChangeHandler={myLifeStyleHandler}
         />
-        <RadioGroup
-          data={numberOfFamilyMembersList}
-          name={'numberOfFamilyMembers'}
-          value={numberOfFamilyMembers}
-          onChangeHandler={myLifeStyleHandler}
-        />
-        <RadioGroup
-          data={purposeList}
-          name={'purpose'}
-          value={purpose}
-          onChangeHandler={myLifeStyleHandler}
-        />
-        <RadioGroup
-          data={valueList}
-          name={'value'}
-          value={value}
-          onChangeHandler={myLifeStyleHandler}
-        />
-      </>
+      ))
     ) : (
       ''
     );

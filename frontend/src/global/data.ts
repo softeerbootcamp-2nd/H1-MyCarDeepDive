@@ -31,9 +31,25 @@ export const lifeStyleQuestionList = [
   },
 ];
 
-export const additionQuestionList = {
-  drivingExperienceList: ['1년 이하', '1년 이상 ~ 5년 미만', '5년 이상'],
-  numberOfFamilyMembersList: ['1인', '2인', '3-4인', '5인 이상'],
-  purposeList: ['출퇴근용', '레저용', '가정용', '업무용'],
-  valueList: ['디자인', '성능', '안전', '편의성'],
-};
+export const lifeStyleAdditionQuestionList = [
+  {
+    value: 'drivingExperience',
+    question: '운전 경력이 어떻게 되시나요?',
+    answerList: ['1년 이하', '1년 이상 ~ 5년 미만', '5년 이상'],
+  },
+  {
+    value: 'numberOfFamilyMembers',
+    question: '가족 구성원이 몇 명인가요?',
+    answerList: ['1인', '2인', '3-4인', '5인 이상'],
+  },
+  {
+    value: 'purpose',
+    question: '어떤 목적으로 주로 차를 타시나요?',
+    answerList: ['출퇴근용', '레저용', '가정용', '업무용'],
+  },
+  {
+    value: 'value',
+    question: '자동차를 살 때 어떤 가치가 가장 중요한가요?',
+    answerList: ['디자인', '성능', '안전', '편의성'],
+  },
+];

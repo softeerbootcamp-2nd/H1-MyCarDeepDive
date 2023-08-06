@@ -5,7 +5,7 @@ import QuestionTitle from './QuestionTitle';
 import NextStepButton from './NextStepButton';
 import ProgressBar from './ProgressBar';
 import QuestionBody from './QuestionBody';
-import DetailQuestionButton from './DetailQuestionButton';
+import DetailQuestionButton from './additionQuestionLink';
 import QuestionSubTitle from './QuestionSubTitle';
 
 function RecommendQuestionPage({
