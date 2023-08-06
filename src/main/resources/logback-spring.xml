@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <!-- Console appender 설정 -->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d %-5level %logger{35} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- Slack appender 설정 -->
+    <springProperty name="SLACK_WEBHOOK_URI" source="logging.slack.webhook-error-uri"/>
+    <springProperty name="PROFILE_NAME" source="spring.profiles.active"/>
+    <appender name="SLACK" class="com.github.maricn.logback.SlackAppender">
+        <webhookUri>${SLACK_WEBHOOK_URI}</webhookUri>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d %-5level %logger{35} - %msg%n</Pattern>
+        </layout>
+        <username>${PROFILE_NAME}</username>
+        <iconEmoji>:tired_face:</iconEmoji>
+        <colorCoding>true</colorCoding>
+    </appender>
+
+
+    <!-- Slack appender 설정 -->
+    <appender name="ASYNC_SLACK" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="SLACK"/>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="Console" />
+        <appender-ref ref="ASYNC_SLACK"/>
+    </root>
+</configuration>
