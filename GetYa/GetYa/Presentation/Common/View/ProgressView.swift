@@ -9,9 +9,9 @@ import UIKit
 
 final class ProgressView: UIProgressView {
     // MARK: - Constant
-    private let maxProgressValue: Float = 1.0
+    private let maxGauge: Float = 1.0
     
-    private lazy var minProgressValue: Float = gaugeOneStepAmount
+    private lazy var minGauge: Float = gaugeOneStepAmount
     
     // MARK: - Properties
     
@@ -90,12 +90,27 @@ extension ProgressView {
     func configureStyle(_ style: UIProgressView.Style) {
         progressViewStyle = style
     }
+    
+    func increaseOneStep() {
+        let nextGauge = progress + gaugeOneStepAmount
+        let targetProgress = isOutOfGauge(nextGauge) ? maxGauge : nextGauge
+        if isWorkingAnimation {
+            
+        }
+        animate(from: targetProgress)
+    }
+    
+    func decreaseOneStep() {
+        let nextGauge = progress - gaugeOneStepAmount
+        let targetProgress = isOutOfGauge(nextGauge) ? minGauge : nextGauge
+        animate(from: targetProgress)
+    }
 }
 
 // MARK: - Private helper
 extension ProgressView {
     private func isOutOfGauge(_ gauge: Float) -> Bool {
-        !(minProgressValue...maxProgressValue).contains(gauge)
+        !(minGauge...maxGauge).contains(gauge)
     }
     
     private func animate(from targetProgress: Float) {
