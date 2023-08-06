@@ -1,6 +1,7 @@
 import { QuestionStepProps } from '@/global/type';
 
 function ProgressBar({ step }: QuestionStepProps) {
+  if (step === 'addition') return;
   return (
     <div className='w-full h-[4px] bg-grey-800 overflow-hidden'>
       <div
