@@ -13,13 +13,13 @@ class HomeContentView: UIView {
     
     private let customButton = CommonButton(
         font: UIFont(hyundaiSans: .mediumBody3) ?? .systemFont(ofSize: 16),
-        wideButtonBackgroundColorType: .black,
+        buttonBackgroundColorType: .black,
         title: "직접 만들래요"
     )
     
     private let recomandButton = CommonButton(
         font: UIFont(hyundaiSans: .mediumBody3) ?? .systemFont(ofSize: 16),
-        wideButtonBackgroundColorType: .white,
+        buttonBackgroundColorType: .white,
         title: "추천받기"
     )
     

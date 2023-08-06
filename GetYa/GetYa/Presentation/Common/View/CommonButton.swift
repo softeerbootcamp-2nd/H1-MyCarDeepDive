@@ -12,7 +12,7 @@ final class CommonButton: UIButton {
     
     // MARK: - Properties
     
-    enum WideButtonBackgroundColorType {
+    enum ButtonBackgroundColorType {
         case primary
         case black
         case white
@@ -51,14 +51,14 @@ final class CommonButton: UIButton {
     
     init(
         font: UIFont,
-        wideButtonBackgroundColorType: WideButtonBackgroundColorType,
+        buttonBackgroundColorType: ButtonBackgroundColorType,
         title: String
     ) {
         super.init(frame: .zero)
         configureUI()
         configureDetail(
             font: font,
-            wideButtonBackgroundColorType: wideButtonBackgroundColorType,
+            buttonBackgroundColorType: buttonBackgroundColorType,
             title: title
         )
     }
@@ -83,13 +83,13 @@ final class CommonButton: UIButton {
     
     func configureDetail(
         font: UIFont,
-        wideButtonBackgroundColorType: WideButtonBackgroundColorType,
+        buttonBackgroundColorType: ButtonBackgroundColorType,
         title: String
     ) {
         self.titleLabel?.font = font
         self.setTitle(title, for: .normal)
-        self.setTitleColor(wideButtonBackgroundColorType.textColor, for: .normal)
-        self.layer.backgroundColor = wideButtonBackgroundColorType.color.cgColor
-        self.layer.borderColor = wideButtonBackgroundColorType.layerBorderColor
+        self.setTitleColor(buttonBackgroundColorType.textColor, for: .normal)
+        self.layer.backgroundColor = buttonBackgroundColorType.color.cgColor
+        self.layer.borderColor = buttonBackgroundColorType.layerBorderColor
     }
 }

@@ -14,6 +14,11 @@ class LifeStyleViewController: UIViewController {
         collectionViewLayout: configureCollectionViewLayout()
     )
     private lazy var pageControl = CommonPageControl(numberOfPages: tagTexts.count)
+    private let button = CommonButton(
+        font: GetYaFont.mediumBody3.uiFont,
+        buttonBackgroundColorType: .primary,
+        title: "선택 완료"
+    )
     
     // MARK: - Properties
     let descriptionTexts: [String] = [
