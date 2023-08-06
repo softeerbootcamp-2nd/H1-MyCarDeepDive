@@ -12,8 +12,7 @@ final class CommonButton: UIButton {
     
     // MARK: - Properties
     
-    // TODO: - Color Set 만들면 수정할 것
-    enum WideButtonBackgroundColorType {
+    enum ButtonBackgroundColorType {
         case primary
         case black
         case white
@@ -21,7 +20,7 @@ final class CommonButton: UIButton {
         var color: UIColor {
             switch self {
             case .primary:
-                return UIColor(hexString: "00428E")
+                return .GetYaPalette.primary
             case .black:
                 return .black
             case .white:
@@ -34,7 +33,7 @@ final class CommonButton: UIButton {
             case .primary, .black:
                 return .white
             case .white:
-                return UIColor(hexString: "00428E")
+                return .GetYaPalette.primary
             }
         }
         
@@ -43,7 +42,7 @@ final class CommonButton: UIButton {
             case .white, .primary:
                 return self.color.cgColor
             case .black:
-                return UIColor(hexString: "D1D7DF").cgColor
+                return UIColor.GetYaPalette.gray600.cgColor
             }
         }
     }
@@ -52,16 +51,14 @@ final class CommonButton: UIButton {
     
     init(
         font: UIFont,
-        wideButtonBackgroundColorType: WideButtonBackgroundColorType,
-        title: String
-    ) {
+        buttonBackgroundColorType: ButtonBackgroundColorType,
+        title: String) {
         super.init(frame: .zero)
         configureUI()
         configureDetail(
             font: font,
-            wideButtonBackgroundColorType: wideButtonBackgroundColorType,
-            title: title
-        )
+            buttonBackgroundColorType: buttonBackgroundColorType,
+            title: title)
     }
     
     override init(frame: CGRect) {
@@ -77,20 +74,22 @@ final class CommonButton: UIButton {
     // MARK: - Functions
     
     private func configureUI() {
-        self.layer.cornerRadius = CGFloat.scaledWidth(value: 6)
+        self.layer.cornerRadius = 6
         self.layer.borderWidth = 1
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func configureDetail(
         font: UIFont,
-        wideButtonBackgroundColorType: WideButtonBackgroundColorType,
-        title: String
-    ) {
+        buttonBackgroundColorType: ButtonBackgroundColorType,
+        title: String) {
         self.titleLabel?.font = font
         self.setTitle(title, for: .normal)
-        self.setTitleColor(wideButtonBackgroundColorType.textColor, for: .normal)
-        self.layer.backgroundColor = wideButtonBackgroundColorType.color.cgColor
-        self.layer.borderColor = wideButtonBackgroundColorType.layerBorderColor
+        self.setTitleColor(buttonBackgroundColorType.textColor, for: .normal)
+        self.setTitleColor(
+            buttonBackgroundColorType.textColor.withAlphaComponent(0.5),
+            for: .disabled)
+        self.layer.backgroundColor = buttonBackgroundColorType.color.cgColor
+        self.layer.borderColor = buttonBackgroundColorType.layerBorderColor
     }
 }

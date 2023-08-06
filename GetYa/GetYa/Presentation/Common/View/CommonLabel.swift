@@ -50,6 +50,7 @@ class CommonLabel: UILabel {
     private func configureUI() {
         self.sizeToFit()
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.numberOfLines = 0
     }
     
     // TODO: Letter 간격 로직 넣기

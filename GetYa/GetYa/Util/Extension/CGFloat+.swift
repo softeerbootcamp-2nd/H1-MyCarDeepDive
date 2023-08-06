@@ -8,19 +8,19 @@
 import UIKit
 
 extension CGFloat {
-    static func scaledWidth(value: CGFloat) -> CGFloat {
+    var scaledWidth: CGFloat {
         let width: CGFloat = 375
         let screenSize = UIScreen.main.bounds.size
         
         let scale = screenSize.width / width
-        return value * scale
+        return self * scale
     }
     
-    static func scaledHeight(value: CGFloat) -> CGFloat {
+    var scaledHeight: CGFloat {
         let height: CGFloat = 812
         let screenSize = UIScreen.main.bounds.size
         
         let scale = screenSize.height / height
-        return value * scale
+        return self * scale
     }
 }

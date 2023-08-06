@@ -35,7 +35,7 @@ class CommonOptionImageView: UIImageView {
     // MARK: - Functions
     private func configureUI() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.layer.cornerRadius = CGFloat.scaledWidth(value: 4)
+        self.layer.cornerRadius = 4
         self.layer.masksToBounds = true
     }
     
