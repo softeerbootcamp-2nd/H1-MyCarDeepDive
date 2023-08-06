@@ -7,6 +7,8 @@
 
 import UIKit
 
+// TODO: QuestionNumberView 추가, LifeStyle 마지막 Cell, Cell 클릭에 따른 Button 활성화 구현
+
 class LifeStyleViewController: UIViewController {
     // MARK: - UI Properties
     private lazy var collectionView = UICollectionView(
