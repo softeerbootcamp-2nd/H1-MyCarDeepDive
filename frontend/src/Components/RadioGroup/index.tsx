@@ -28,7 +28,7 @@ function RadioGroup({ data, name, value, onChangeHandler }: RadioGroupProps) {
   });
 
   return (
-    <div className='flex flex-wrap justify-center items-center gap-[12px]'>
+    <div className='flex flex-wrap justify-center items-center gap-[12px] mb-[52px]'>
       {result}
     </div>
   );

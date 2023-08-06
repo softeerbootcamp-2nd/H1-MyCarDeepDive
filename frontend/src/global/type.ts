@@ -54,3 +54,7 @@ export interface QuestionBodyProps {
   lifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface addtionQuestionTitleProps {
+  title: string;
+}
