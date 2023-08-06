@@ -16,12 +16,24 @@ function NextStepButton({ step, lifeStyle }: NextStepButtonProps) {
   };
 
   return (
-    <div className='absolute bottom-[36px] left-0 w-full flex justify-center'>
+    <div
+      className={`${
+        step === 'addition' ? 'pb-[36px]' : 'absolute bottom-[36px]'
+      } left-0 w-full flex justify-center`}
+    >
       <Button
         width='w-[608px]'
         height='h-[52px]'
         variant='primary'
-        text={step === '1' ? '다음' : '선택 완료'}
+        text={
+          step === '1'
+            ? '다음'
+            : step === '2'
+            ? '선택 완료'
+            : step === 'addition'
+            ? '완료'
+            : ''
+        }
         disabled={step === '2' && !lifeStyle}
         onClick={clickHandler}
       />

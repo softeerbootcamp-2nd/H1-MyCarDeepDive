@@ -34,6 +34,7 @@ export interface RecommendQuestionPageProps {
     numberOfFamilyMembers: string;
     purpose: string;
     value: string;
+    budget: string;
   };
   age: string;
   ageHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -50,6 +51,7 @@ export interface QuestionBodyProps {
     numberOfFamilyMembers: string;
     purpose: string;
     value: string;
+    budget: string;
   };
   ageHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   lifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;

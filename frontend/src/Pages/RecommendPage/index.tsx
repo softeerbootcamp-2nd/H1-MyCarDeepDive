@@ -12,6 +12,7 @@ function RecommendPage() {
     numberOfFamilyMembers: '1인',
     purpose: '',
     value: '',
+    budget: '4200',
   });
 
   const ageHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
