@@ -20,7 +20,7 @@ extension UIColor {
         /// Blue/blue-500(Primary)
         /// #00428E
         /// red: 0, green: 66, blue: 142
-        static let darkPrimary = UIColor(hexString: "00428E")
+        static let primary = UIColor(hexString: "00428E")
         
         /// Blue/blue-500(Primary) 10%
         /// #00428E

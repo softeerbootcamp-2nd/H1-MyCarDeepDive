@@ -26,7 +26,7 @@ class CheckListItemView: UIView {
             self.layer.backgroundColor = isTapped ? UIColor.white.cgColor : UIColor.GetYaPalette.gray800.cgColor
             imageView.isHidden = isTapped ? false : true
             label.font = isTapped ? UIFont(hyundaiSans: .regularBody3) : UIFont(hyundaiSans: .mediumBody3)
-            label.textColor = isTapped ? .GetYaPalette.darkPrimary : .GetYaPalette.gray400
+            label.textColor = isTapped ? .GetYaPalette.primary : .GetYaPalette.gray400
             label.isHighlighted = isTapped
         }
     }
@@ -71,7 +71,7 @@ class CheckListItemView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 6
         
-        self.layer.borderColor = UIColor.GetYaPalette.darkPrimary.cgColor
+        self.layer.borderColor = UIColor.GetYaPalette.primary.cgColor
         self.isTapped = false
         
         configureLabel()

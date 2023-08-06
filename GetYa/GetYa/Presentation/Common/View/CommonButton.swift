@@ -20,7 +20,7 @@ final class CommonButton: UIButton {
         var color: UIColor {
             switch self {
             case .primary:
-                return .GetYaPalette.darkPrimary
+                return .GetYaPalette.primary
             case .black:
                 return .black
             case .white:
@@ -33,7 +33,7 @@ final class CommonButton: UIButton {
             case .primary, .black:
                 return .white
             case .white:
-                return .GetYaPalette.darkPrimary
+                return .GetYaPalette.primary
             }
         }
         

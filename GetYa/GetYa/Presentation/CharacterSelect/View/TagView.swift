@@ -9,24 +9,61 @@ import UIKit
 
 class TagView: UIView {
     // MARK: - UI Properties
+    private let label = CommonLabel(
+        font: GetYaFont.regularCaption1.uiFont,
+        color: .GetYaPalette.acriveBlue
+    )
     
     // MARK: - Properties
     
     // MARK: - LifeCycles
+    convenience init() {
+        self.init(frame: .zero)
+    }
+    
+    init(text: String) {
+        super.init(frame: .zero)
+        setupViews()
+        configureUI()
+        configureLabelText(text: text)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupViews()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupViews()
+        configureUI()
     }
     
     // MARK: - Functions
     private func setupViews() {
-        
+        addSubview(label)
     }
     
     private func configureUI() {
+        self.layer.cornerRadius = CGFloat(10).scaledWidth
         
+        configureLabel()
+        configureBackgroundColor(color: .GetYaPalette.gray1000)
+    }
+    
+    func configureBackgroundColor(color: UIColor) {
+        self.layer.backgroundColor = color.cgColor
+    }
+    
+    func configureLabelText(text: String) {
+        label.text = text
+    }
+    
+    private func configureLabel() {
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
     }
 }
