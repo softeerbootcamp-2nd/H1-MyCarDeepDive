@@ -86,16 +86,13 @@ class CheckListItemView: UIView {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(
                 equalTo: self.topAnchor,
-                constant: labelLayoutConstant.topMargin
-            ),
+                constant: labelLayoutConstant.topMargin),
             label.bottomAnchor.constraint(
                 equalTo: self.bottomAnchor,
-                constant: labelLayoutConstant.bottomMargin
-            ),
+                constant: labelLayoutConstant.bottomMargin),
             label.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: labelLayoutConstant.leadingMargin
-            )
+                constant: labelLayoutConstant.leadingMargin)
         ])
     }
     
@@ -106,16 +103,13 @@ class CheckListItemView: UIView {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(
                 equalTo: self.topAnchor,
-                constant: imageViewLayoutConstant.topMargin
-            ),
+                constant: imageViewLayoutConstant.topMargin),
             imageView.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: imageViewLayoutConstant.trailingMargin
-            ),
+                constant: imageViewLayoutConstant.trailingMargin),
             imageView.bottomAnchor.constraint(
                 equalTo: self.bottomAnchor,
-                constant: imageViewLayoutConstant.bottomMargin
-            )
+                constant: imageViewLayoutConstant.bottomMargin)
         ])
     }
     

@@ -37,8 +37,7 @@ class LifeStyleViewController: UIViewController {
         leadingMargin: 17,
         trailingMargin: -17,
         bottomMargin: -32,
-        height: 52
-    )
+        height: 52)
     let descriptionTexts: [String] = [
         "가족과 함께 타서 안전을\n중시해요",
         "매일 출퇴근하여 경제적이고\n편안한 주행을 원해요",
@@ -92,12 +91,10 @@ class LifeStyleViewController: UIViewController {
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: descriptionLabelLayoutConstant.topMargin
-            ),
+                constant: descriptionLabelLayoutConstant.topMargin),
             descriptionLabel.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
-                constant: descriptionLabelLayoutConstant.leadingMargin
-            )
+                constant: descriptionLabelLayoutConstant.leadingMargin)
         ])
     }
     
@@ -105,8 +102,7 @@ class LifeStyleViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(
             LifeStyleCell.self,
-            forCellWithReuseIdentifier: LifeStyleCell.identifier
-        )
+            forCellWithReuseIdentifier: LifeStyleCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = false
@@ -118,11 +114,9 @@ class LifeStyleViewController: UIViewController {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
                 equalTo: descriptionLabel.bottomAnchor,
-                constant: collectionViewLayoutConstant.topMargin
-            ),
+                constant: collectionViewLayoutConstant.topMargin),
             collectionView.heightAnchor.constraint(
-                equalToConstant: collectionViewLayoutConstant.height
-            ),
+                equalToConstant: collectionViewLayoutConstant.height),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -133,8 +127,7 @@ class LifeStyleViewController: UIViewController {
         NSLayoutConstraint.activate([
             pageControl.topAnchor.constraint(
                 equalTo: collectionView.bottomAnchor,
-                constant: pageControlLayoutConstant.topMargin
-            ),
+                constant: pageControlLayoutConstant.topMargin),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -145,16 +138,13 @@ class LifeStyleViewController: UIViewController {
         NSLayoutConstraint.activate([
             button.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
-                constant: buttonLayoutConstant.leadingMargin
-            ),
+                constant: buttonLayoutConstant.leadingMargin),
             button.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
-                constant: buttonLayoutConstant.trailingMargin
-            ),
+                constant: buttonLayoutConstant.trailingMargin),
             button.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor,
-                constant: buttonLayoutConstant.bottomMargin
-            ),
+                constant: buttonLayoutConstant.bottomMargin),
             button.heightAnchor.constraint(equalToConstant: buttonLayoutConstant.height)
         ])
     }
@@ -174,8 +164,7 @@ extension LifeStyleViewController: UICollectionViewDelegate, UICollectionViewDat
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: LifeStyleCell.identifier,
-            for: indexPath
-        ) as? LifeStyleCell else {
+            for: indexPath) as? LifeStyleCell else {
             return UICollectionViewCell()
         }
         
@@ -197,7 +186,6 @@ extension LifeStyleViewController: UICollectionViewDelegate, UICollectionViewDat
         pageControl.currentPage = Int(index)
         targetContentOffset.pointee = CGPoint(
             x: index * cellWidth - scrollView.contentInset.left,
-            y: scrollView.contentInset.top
-        )
+            y: scrollView.contentInset.top)
     }
 }

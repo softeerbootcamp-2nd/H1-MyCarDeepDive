@@ -46,8 +46,7 @@ class LifeStyleCell: UICollectionViewCell {
     private let selectImageView: UIImageView = {
         let imageView = UIImageView(
             image: UIImage(named: "Gray-Check-Circle"),
-            highlightedImage: UIImage(named: "Blue-Check-Circle")
-        )
+            highlightedImage: UIImage(named: "Blue-Check-Circle"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         
@@ -92,25 +91,20 @@ class LifeStyleCell: UICollectionViewCell {
         leadingMargin: 20,
         topMargin: 24,
         height: 30,
-        width: 146
-    )
+        width: 146)
     private let descriptionLabelLayoutConstant = UILayout(
         leadingMargin: 20,
-        topMargin: 12
-    )
+        topMargin: 12)
     private let selectImageViewLayoutConstant = UILayout(
         topMargin: 22,
         trailingMargin: -20,
-        height: 28
-    )
+        height: 28)
     private let lineViewLayoutConstant = UILayout(
         leadingMargin: 20,
         topMargin: 29,
-        trailingMargin: -20
-    )
+        trailingMargin: -20)
     private let buttonLayoutConstant = UILayout(
-        topMargin: 8
-    )
+        topMargin: 8)
     
     // MARK: - LifeCycles
     override init(frame: CGRect) {
@@ -164,11 +158,9 @@ class LifeStyleCell: UICollectionViewCell {
             titleImageView.topAnchor.constraint(equalTo: self.topAnchor),
             titleImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             titleImageView.widthAnchor.constraint(
-                equalToConstant: titleImageViewLayoutConstant.height
-            ),
+                equalToConstant: titleImageViewLayoutConstant.height),
             titleImageView.heightAnchor.constraint(
-                equalToConstant: titleImageViewLayoutConstant.height
-            )
+                equalToConstant: titleImageViewLayoutConstant.height)
         ])
     }
     
@@ -185,18 +177,14 @@ class LifeStyleCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             tagStackView.topAnchor.constraint(
                 equalTo: titleImageView.bottomAnchor,
-                constant: tagStackViewLayoutConstant.topMargin
-            ),
+                constant: tagStackViewLayoutConstant.topMargin),
             tagStackView.leadingAnchor.constraint(
                 equalTo: baseView.leadingAnchor,
-                constant: tagStackViewLayoutConstant.leadingMargin
-            ),
+                constant: tagStackViewLayoutConstant.leadingMargin),
             tagStackView.widthAnchor.constraint(
-                equalToConstant: tagStackViewLayoutConstant.width
-            ),
+                equalToConstant: tagStackViewLayoutConstant.width),
             tagStackView.heightAnchor.constraint(
-                equalToConstant: tagStackViewLayoutConstant.height
-            )
+                equalToConstant: tagStackViewLayoutConstant.height)
         ])
     }
     
@@ -204,12 +192,10 @@ class LifeStyleCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(
                 equalTo: self.tagStackView.bottomAnchor,
-                constant: descriptionLabelLayoutConstant.topMargin
-            ),
+                constant: descriptionLabelLayoutConstant.topMargin),
             descriptionLabel.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: descriptionLabelLayoutConstant.leadingMargin
-            )
+                constant: descriptionLabelLayoutConstant.leadingMargin)
         ])
     }
     
@@ -217,18 +203,14 @@ class LifeStyleCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             selectImageView.topAnchor.constraint(
                 equalTo: self.tagStackView.bottomAnchor,
-                constant: selectImageViewLayoutConstant.topMargin
-            ),
+                constant: selectImageViewLayoutConstant.topMargin),
             selectImageView.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: selectImageViewLayoutConstant.trailingMargin
-            ),
+                constant: selectImageViewLayoutConstant.trailingMargin),
             selectImageView.heightAnchor.constraint(
-                equalToConstant: selectImageViewLayoutConstant.height
-            ),
+                equalToConstant: selectImageViewLayoutConstant.height),
             selectImageView.widthAnchor.constraint(
-                equalToConstant: selectImageViewLayoutConstant.height
-            )
+                equalToConstant: selectImageViewLayoutConstant.height)
         ])
     }
     
@@ -236,16 +218,13 @@ class LifeStyleCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             lineView.topAnchor.constraint(
                 equalTo: self.descriptionLabel.bottomAnchor,
-                constant: lineViewLayoutConstant.topMargin
-            ),
+                constant: lineViewLayoutConstant.topMargin),
             lineView.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: lineViewLayoutConstant.leadingMargin
-            ),
+                constant: lineViewLayoutConstant.leadingMargin),
             lineView.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: lineViewLayoutConstant.trailingMargin
-            ),
+                constant: lineViewLayoutConstant.trailingMargin),
             lineView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
@@ -254,8 +233,7 @@ class LifeStyleCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(
                 equalTo: lineView.bottomAnchor,
-                constant: buttonLayoutConstant.topMargin
-            ),
+                constant: buttonLayoutConstant.topMargin),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }

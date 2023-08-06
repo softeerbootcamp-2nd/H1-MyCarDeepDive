@@ -12,12 +12,10 @@ class CommonOptionView: UIView {
     private let imageView = CommonOptionImageView()
     private let titleLabel = CommonLabel(
         font: .systemFont(ofSize: 14, weight: UIFont.Weight(400)),
-        color: .GetYaPalette.gray300
-    )
+        color: .GetYaPalette.gray300)
     private let priceLabel = CommonLabel(
         font: .systemFont(ofSize: 16, weight: UIFont.Weight(500)),
-        color: .GetYaPalette.gray100
-    )
+        color: .GetYaPalette.gray100)
     
     // MARK: - Properties
     private let titleLabelLayoutConstant = UILayout(leadingMargin: 16)
@@ -88,8 +86,7 @@ class CommonOptionView: UIView {
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
             titleLabel.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor,
-                constant: titleLabelLayoutConstant.leadingMargin
-            )
+                constant: titleLabelLayoutConstant.leadingMargin)
         ])
     }
     
@@ -97,12 +94,10 @@ class CommonOptionView: UIView {
         NSLayoutConstraint.activate([
             priceLabel.topAnchor.constraint(
                 equalTo: titleLabel.bottomAnchor,
-                constant: priceLabelLayoutConstant.topMargin
-            ),
+                constant: priceLabelLayoutConstant.topMargin),
             priceLabel.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor,
-                constant: priceLabelLayoutConstant.leadingMargin
-            ),
+                constant: priceLabelLayoutConstant.leadingMargin),
             priceLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
