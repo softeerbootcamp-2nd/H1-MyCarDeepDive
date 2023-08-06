@@ -54,8 +54,6 @@ class CheckListStackView: UIStackView {
     private func configureUI() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .vertical
-        
-        // TODO: 크기 스케일 해야할까?
         self.spacing = 12
     }
 }

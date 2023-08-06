@@ -58,14 +58,12 @@ extension HomeViewController: HomeContentDelegate {
     func touchUpRecomandButton() {
         self.navigationController?.pushViewController(
             CharacterSelectViewController(),
-            animated: true
-        )
+            animated: true)
     }
     
     func touchUpCustomButton() {
         self.navigationController?.pushViewController(
             TrimSelectViewController(),
-            animated: true
-        )
+            animated: true)
     }
 }

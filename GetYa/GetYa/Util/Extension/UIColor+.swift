@@ -7,7 +7,6 @@
 
 import UIKit
 
-// TODO: Color Set 만들기
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
         self.init(red: CGFloat(red) / 255.0,

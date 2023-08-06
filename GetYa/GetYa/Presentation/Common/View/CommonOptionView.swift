@@ -10,18 +10,16 @@ import UIKit
 class CommonOptionView: UIView {
     // MARK: - UI Properties
     private let imageView = CommonOptionImageView()
-    
-    //TODO: Color 변경
     private let titleLabel = CommonLabel(
         font: .systemFont(ofSize: 14, weight: UIFont.Weight(400)),
-        color: UIColor(hexString: "696969")
-    )
+        color: .GetYaPalette.gray300)
     private let priceLabel = CommonLabel(
         font: .systemFont(ofSize: 16, weight: UIFont.Weight(500)),
-        color: UIColor(hexString: "303030")
-    )
+        color: .GetYaPalette.gray100)
     
     // MARK: - Properties
+    private let titleLabelLayoutConstant = UILayout(leadingMargin: 16)
+    private let priceLabelLayoutConstant = UILayout(leadingMargin: 16, topMargin: 4)
     
     // MARK: - LifeCycles
     init(image: UIImage, title: String, price: Int) {
@@ -88,8 +86,7 @@ class CommonOptionView: UIView {
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
             titleLabel.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor,
-                constant: CGFloat.scaledWidth(value: 16)
-            )
+                constant: titleLabelLayoutConstant.leadingMargin)
         ])
     }
     
@@ -97,12 +94,10 @@ class CommonOptionView: UIView {
         NSLayoutConstraint.activate([
             priceLabel.topAnchor.constraint(
                 equalTo: titleLabel.bottomAnchor,
-                constant: CGFloat.scaledHeight(value: 4)
-            ),
+                constant: priceLabelLayoutConstant.topMargin),
             priceLabel.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor,
-                constant: CGFloat.scaledWidth(value: 16)
-            ),
+                constant: priceLabelLayoutConstant.leadingMargin),
             priceLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
