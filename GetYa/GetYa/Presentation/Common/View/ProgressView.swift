@@ -141,26 +141,6 @@ extension ProgressView {
                 heightAnchor.constraint(equalToConstant: height)])
         }
     }
-    
-    /// 일반 뷰 아래 레이아웃 할 경우 ( height 필수 )
-    func layout(from superView: UIView, uiConstant: UILayout) {
-        let height = uiConstant.height == 0 ? 1 : uiConstant.height
-        translatesAutoresizingMaskIntoConstraints = false
-        superView.addSubview(self)
-        _=superView.set {
-            NSLayoutConstraint.activate([
-                leadingAnchor.constraint(
-                    equalTo: $0.leadingAnchor,
-                    constant: uiConstant.leadingMargin),
-                topAnchor.constraint(
-                    equalTo: $0.topAnchor,
-                    constant: uiConstant.topMargin),
-                trailingAnchor.constraint(
-                    equalTo: $0.trailingAnchor,
-                    constant: -uiConstant.trailingMargin),
-                heightAnchor.constraint(equalToConstant: height)])
-        }
-    }
 }
 
 // MARK: - Private helper
