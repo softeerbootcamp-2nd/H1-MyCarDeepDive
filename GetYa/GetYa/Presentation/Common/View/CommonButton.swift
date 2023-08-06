@@ -89,6 +89,10 @@ final class CommonButton: UIButton {
         self.titleLabel?.font = font
         self.setTitle(title, for: .normal)
         self.setTitleColor(buttonBackgroundColorType.textColor, for: .normal)
+        self.setTitleColor(
+            buttonBackgroundColorType.textColor.withAlphaComponent(0.5),
+            for: .disabled
+        )
         self.layer.backgroundColor = buttonBackgroundColorType.color.cgColor
         self.layer.borderColor = buttonBackgroundColorType.layerBorderColor
     }
