@@ -8,18 +8,15 @@
 import UIKit
 
 final class ProgressView: UIProgressView {
-    // MARK: - Constant
+    // MARK: - Constants
     private let maxGauge: Float = 1.0
     
     private lazy var minGauge: Float = gaugeOneStepAmount
     
     // MARK: - Properties
-    
     private var progressTotalStep: Int = 0
     
     private var animationDuration: TimeInterval = 0.7
-    
-    private var isWorkingAnimation: Bool = false
     
     private var gaugeOneStepAmount: Float {
         1.0 / Float(progressTotalStep)
@@ -95,9 +92,6 @@ extension ProgressView {
     func increaseOneStep() {
         let nextGauge = progress + gaugeOneStepAmount
         let targetProgress = isOutOfGauge(nextGauge) ? maxGauge : nextGauge
-        if isWorkingAnimation {
-            
-        }
         animate(from: targetProgress)
     }
     
@@ -118,8 +112,9 @@ extension ProgressView {
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
-            options: .curveEaseInOut) {
-                self.setProgress(targetProgress, animated: true)
-            }
+            options: .curveEaseInOut
+        ) {
+            self.setProgress(targetProgress, animated: true)
+        }
     }
 }
