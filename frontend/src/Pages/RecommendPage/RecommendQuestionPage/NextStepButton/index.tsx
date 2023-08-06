@@ -12,7 +12,7 @@ function NextStepButton({ step, lifeStyle }: NextStepButtonProps) {
   const clickHandler = () => {
     step === '1'
       ? navigation('/recommend/question/2')
-      : navigation('/recommend/result');
+      : navigation('/recommend/result/basic');
   };
 
   return (

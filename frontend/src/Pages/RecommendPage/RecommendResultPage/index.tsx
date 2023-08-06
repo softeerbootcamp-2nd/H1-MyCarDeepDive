@@ -7,6 +7,9 @@ import RecommendResultPageWrapper from './RecommendResultPageWrapper';
 import CardWrapper from './CardWrapper';
 import BackgroundGradient from './BackgroundGradient';
 import Card from './Card';
+import RecommendCarWrapper from './RecommendCarWrapper';
+import RecommendCarBackground from './RecommendCarBackground';
+import RecommendCarSummary from './RecommendCarSummary';
 import RecommendBody from './RecommendBody';
 import RecommendCarInfo from './RecommendCarInfo';
 import RecommendCarOption from './RecommendCarOption';
@@ -69,13 +72,27 @@ const optionData = [
   },
 ];
 
-function RecommendResultPage() {
+interface RecommendResultPageProps {
+  step: string;
+}
+
+function RecommendResultPage({ step }: RecommendResultPageProps) {
   return (
     <RecommendResultPageWrapper>
-      <CardWrapper>
-        <BackgroundGradient />
-        <Card cardData={cardData} />
-      </CardWrapper>
+      {step === 'basic' ? (
+        <CardWrapper>
+          <BackgroundGradient />
+          <Card cardData={cardData} />
+        </CardWrapper>
+      ) : (
+        <RecommendCarWrapper>
+          <RecommendCarBackground />
+          <RecommendCarSummary
+            tag={['1년 이하', '1인', '출퇴근용', '디자인', '4200만원']}
+            carImage={palisade}
+          />
+        </RecommendCarWrapper>
+      )}
       <RecommendBody>
         <RecommendCarInfo carData={carData} />
         <UnderLine margin={'mt-4 mb-[26px]'} />

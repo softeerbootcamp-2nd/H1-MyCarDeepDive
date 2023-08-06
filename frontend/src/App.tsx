@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/recommend/:status/:step?' element={<RecommendPage />} />
+        <Route path='/recommend/:status/:step' element={<RecommendPage />} />
       </Routes>
     </div>
   );
