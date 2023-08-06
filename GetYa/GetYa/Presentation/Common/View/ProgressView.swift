@@ -41,6 +41,7 @@ final class ProgressView: UIProgressView {
         configureUIColor(
             progressTintColor: progressTintColor,
             backgroundTintColor: backgroundTintColor)
+        setProgress(gaugeOneStepAmount, animated: false)
     }
     
     convenience init(
@@ -59,7 +60,6 @@ final class ProgressView: UIProgressView {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    // TODO: - 남석이형이 수정한 빨래트로 색 변경.
     convenience init(progressTotalStep: Int) {
         self.init(
             frame: .zero,
@@ -74,6 +74,7 @@ final class ProgressView: UIProgressView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         progressViewStyle = .default
+        setProgress(gaugeOneStepAmount, animated: false)
     }
 }
 
