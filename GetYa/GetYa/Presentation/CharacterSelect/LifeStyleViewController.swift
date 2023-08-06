@@ -150,7 +150,6 @@ class LifeStyleViewController: UIViewController {
     }
 }
 
-
 // MARK: - UICollectionView Delegate
 extension LifeStyleViewController: UICollectionViewDelegate {
     func collectionView(
