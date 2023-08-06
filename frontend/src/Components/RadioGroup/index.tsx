@@ -10,11 +10,14 @@ interface RadioGroupProps {
 
 function RadioGroup({ data, name, value, onChangeHandler }: RadioGroupProps) {
   const result = data.map((item, index) => {
+    const isLong =
+      index === data.length - 1 && data.length % 2 === 1 ? true : false;
     return item === value ? (
       <RadioSelected
         key={index}
         name={name}
         value={item}
+        isLong={isLong}
         onChangeHandler={onChangeHandler}
       />
     ) : (
@@ -22,6 +25,7 @@ function RadioGroup({ data, name, value, onChangeHandler }: RadioGroupProps) {
         key={index}
         name={name}
         value={item}
+        isLong={isLong}
         onChangeHandler={onChangeHandler}
       />
     );
