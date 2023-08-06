@@ -58,6 +58,10 @@ export interface QuestionBodyProps {
   myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface addtionQuestionTitleProps {
+export interface AddtionQuestionTitleProps {
   title: string;
+}
+
+export interface AdditionQuestionBudgetProps {
+  myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
