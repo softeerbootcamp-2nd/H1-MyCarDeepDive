@@ -17,8 +17,8 @@ function RecommendPage() {
     setLifeStyle(lifeStyle === target.value ? '' : target.value);
   };
 
-  if (status === 'result') return <RecommendResultPage />;
   if (step === undefined) return null;
+  if (status === 'result') return <RecommendResultPage step={step} />;
   return (
     <RecommendQuestionPage
       step={step}
