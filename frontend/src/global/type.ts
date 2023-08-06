@@ -39,3 +39,18 @@ export interface RecommendQuestionPageProps {
   lifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface QuestionBodyProps {
+  step: string;
+  age: string;
+  lifeStyle: string;
+  myLifeStyle: {
+    drivingExperience: string;
+    numberOfFamilyMembers: string;
+    purpose: string;
+    value: string;
+  };
+  ageHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  lifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}

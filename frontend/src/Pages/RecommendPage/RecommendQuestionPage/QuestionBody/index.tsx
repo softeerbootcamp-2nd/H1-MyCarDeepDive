@@ -1,21 +1,7 @@
 import RadioGroup from '@/Components/RadioGroup';
 import LifeStyleRadioGroup from './LifeStyleRadioGroup';
 import { additionQuestionList, ageQuestionList } from '@/global/data';
-
-interface QuestionBodyProps {
-  step: string;
-  age: string;
-  lifeStyle: string;
-  myLifeStyle: {
-    drivingExperience: string;
-    numberOfFamilyMembers: string;
-    purpose: string;
-    value: string;
-  };
-  ageHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  lifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { QuestionBodyProps } from '@/global/type';
 
 function QuestionBody({
   step,
