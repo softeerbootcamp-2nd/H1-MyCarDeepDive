@@ -7,6 +7,12 @@ function RecommendPage() {
   const { status, step } = useParams();
   const [age, setAge] = useState('20대');
   const [lifeStyle, setLifeStyle] = useState('');
+  const [myLifeStyle, setMyLifeStyle] = useState({
+    drivingExperience: '1년 이하',
+    numberOfFamilyMembers: '1인',
+    purpose: '',
+    value: '',
+  });
 
   const ageHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setAge(target.value);
@@ -16,6 +22,12 @@ function RecommendPage() {
   }: React.ChangeEvent<HTMLInputElement>) => {
     setLifeStyle(lifeStyle === target.value ? '' : target.value);
   };
+  const myLifeStyleHandler = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = target;
+    setMyLifeStyle({ ...myLifeStyle, [name]: value });
+  };
 
   if (status === 'result') return <RecommendResultPage />;
   if (step === undefined) return null;
@@ -24,8 +36,10 @@ function RecommendPage() {
       step={step}
       age={age}
       lifeStyle={lifeStyle}
+      myLifeStyle={myLifeStyle}
       ageHandler={ageHandler}
       lifeStyleHandler={lifeStyleHandler}
+      myLifeStyleHandler={myLifeStyleHandler}
     />
   );
 }

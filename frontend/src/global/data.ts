@@ -30,3 +30,10 @@ export const lifeStyleQuestionList = [
     profileImage: lifeStyleProfile4,
   },
 ];
+
+export const additionQuestionList = {
+  drivingExperienceList: ['1년 이하', '1년 이상 ~ 5년 미만', '5년 이상'],
+  numberOfFamilyMembersList: ['1인', '2인', '3-4인', '5인 이상'],
+  purposeList: ['출퇴근용', '레저용', '가정용', '업무용'],
+  valueList: ['디자인', '성능', '안전', '편의성'],
+};

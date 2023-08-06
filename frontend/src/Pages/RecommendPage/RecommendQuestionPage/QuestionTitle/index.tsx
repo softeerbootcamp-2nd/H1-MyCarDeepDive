@@ -15,7 +15,7 @@ function QuestionTitle({ step }: QuestionStepProps) {
             <span className='text-[22px] leading-[28px]'>를 알려주세요.</span>
           </span>
         </p>
-      ) : (
+      ) : step === '2' ? (
         <p className='font-h5-regular'>
           <span className='text-[22px] leading-[28px]'>유사한 </span>
           <span className='font-h2-medium'>
@@ -26,8 +26,18 @@ function QuestionTitle({ step }: QuestionStepProps) {
             <br /> 차량 조합을 추천해 드려요.
           </span>
         </p>
+      ) : step === 'addition' ? (
+        <p className='font-h5-regular mb-2'>
+          <span className='text-[24px] leading-[30px]'>당신의 </span>
+          <span className='font-h2-medium'>
+            <span className='text-[24px] leading-[30px]'>라이프스타일</span>
+          </span>
+          <span className='text-[24px] leading-[30px]'>을 알려주세요 </span>
+        </p>
+      ) : (
+        ''
       )}
-      <Step step={step} />
+      {step !== 'addition' ? <Step step={step} /> : ''}
     </div>
   );
 }

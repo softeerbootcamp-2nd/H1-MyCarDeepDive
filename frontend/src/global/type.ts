@@ -28,7 +28,14 @@ export interface WrapperProps {
 export interface RecommendQuestionPageProps {
   step: string;
   lifeStyle: string;
+  myLifeStyle: {
+    drivingExperience: string;
+    numberOfFamilyMembers: string;
+    purpose: string;
+    value: string;
+  };
   age: string;
   ageHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   lifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
