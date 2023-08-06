@@ -1,6 +1,6 @@
-import { addtionQuestionTitleProps } from '@/global/type';
+import { AddtionQuestionTitleProps } from '@/global/type';
 
-function AdditionQuestionTitle({ title }: addtionQuestionTitleProps) {
+function AdditionQuestionTitle({ title }: AddtionQuestionTitleProps) {
   return <p className='mb-[18px] font-body2-medium text-grey-100'>{title} </p>;
 }
 

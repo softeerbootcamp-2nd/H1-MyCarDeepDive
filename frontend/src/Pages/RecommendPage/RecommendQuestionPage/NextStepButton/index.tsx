@@ -4,9 +4,16 @@ import Button from '@/Components/Button';
 interface NextStepButtonProps {
   step: string;
   lifeStyle: string;
+  myLifeStyle: {
+    drivingExperience: string;
+    numberOfFamilyMembers: string;
+    purpose: string;
+    value: string;
+    budget: string;
+  };
 }
 
-function NextStepButton({ step, lifeStyle }: NextStepButtonProps) {
+function NextStepButton({ step, lifeStyle, myLifeStyle }: NextStepButtonProps) {
   const navigation = useNavigate();
 
   const clickHandler = () => {
@@ -14,6 +21,10 @@ function NextStepButton({ step, lifeStyle }: NextStepButtonProps) {
       ? navigation('/recommend/question/2')
       : navigation('/recommend/result');
   };
+
+  const myLifeStyleHasEmptyValue = Object.values(myLifeStyle).some(
+    value => value === '',
+  );
 
   return (
     <div
@@ -34,7 +45,10 @@ function NextStepButton({ step, lifeStyle }: NextStepButtonProps) {
             ? '완료'
             : ''
         }
-        disabled={step === '2' && !lifeStyle}
+        disabled={
+          (step === '2' && !lifeStyle) ||
+          (step === 'addition' && myLifeStyleHasEmptyValue)
+        }
         onClick={clickHandler}
       />
     </div>

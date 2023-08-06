@@ -33,7 +33,11 @@ function RecommendQuestionPage({
           lifeStyleHandler={lifeStyleHandler}
           myLifeStyleHandler={myLifeStyleHandler}
         />
-        <NextStepButton step={step} lifeStyle={lifeStyle} />
+        <NextStepButton
+          step={step}
+          lifeStyle={lifeStyle}
+          myLifeStyle={myLifeStyle}
+        />
       </RecommendQuestionWrapper>
     </RecommendQuestionPageWrapper>
   );
