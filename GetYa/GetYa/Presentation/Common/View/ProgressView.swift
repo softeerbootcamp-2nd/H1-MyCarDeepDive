@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class ProgressView: UIProgressView {
     // MARK: - Constants
@@ -14,13 +15,18 @@ final class ProgressView: UIProgressView {
     private lazy var minGauge: Float = gaugeOneStepAmount
     
     // MARK: - Properties
-    private var progressTotalStep: Int = 0
+    /// 프로그래스가 이동할 수 있는 총 단계입니다. 페이지 총 개수와 동일해야 합니다.
+    private var progressTotalStep: Int
     
     private var animationDuration: TimeInterval = 0.7
     
     private var gaugeOneStepAmount: Float {
         1.0 / Float(progressTotalStep)
     }
+    
+    private var subscription: AnyCancellable?
+    
+    private var autoUpdateProgress = PassthroughSubject<Int, Never>()
     
     // MARK: - Lifecycles
     init(
@@ -39,6 +45,7 @@ final class ProgressView: UIProgressView {
             progressTintColor: progressTintColor,
             backgroundTintColor: backgroundTintColor)
         setProgress(gaugeOneStepAmount, animated: false)
+        bind()
     }
     
     convenience init(
@@ -68,10 +75,17 @@ final class ProgressView: UIProgressView {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
+    /// 실제로 이 경우에 required init?일때 반드시 필요한 progressTotalStep의 값은 어떻게 받아야 할까?.. progressTotal Step은 어디서 받아야할까?
     required init?(coder: NSCoder) {
+        progressTotalStep = 0
         super.init(coder: coder)
         progressViewStyle = .default
         setProgress(gaugeOneStepAmount, animated: false)
+        bind()
+    }
+    
+    deinit {
+        subscription = nil
     }
 }
 
@@ -89,6 +103,13 @@ extension ProgressView {
         progressViewStyle = style
     }
     
+    /// 화면 전환될 page index.
+    /// **index는 0부터** 시작합니다!!!
+    /// 안전하게 하려면 page total count도 받아서 progressTotalStep와 일치하는지 아니면 -1 인지 비교하면 되는데,,
+    func setProgress(with index: Int) {
+        autoUpdateProgress.send(index + 1)
+    }
+    
     func increaseOneStep() {
         let nextGauge = progress + gaugeOneStepAmount
         let targetProgress = isOutOfGauge(nextGauge) ? maxGauge : nextGauge
@@ -99,6 +120,46 @@ extension ProgressView {
         let nextGauge = progress - gaugeOneStepAmount
         let targetProgress = isOutOfGauge(nextGauge) ? minGauge : nextGauge
         animate(from: targetProgress)
+    }
+    
+    /// 네비게이션 바 아래 레이아웃 할 경우 ( height 필수 )
+    func layoutViewBelowNavigationBar(using superView: UIView, uiConstant: UILayout) {
+        let height = uiConstant.height == 0 ? 1 : uiConstant.height
+        translatesAutoresizingMaskIntoConstraints = false
+        superView.addSubview(self)
+        _=superView.set {
+            NSLayoutConstraint.activate([
+                leadingAnchor.constraint(
+                    equalTo: $0.leadingAnchor,
+                    constant: uiConstant.leadingMargin),
+                topAnchor.constraint(
+                    equalTo: $0.safeAreaLayoutGuide.topAnchor,
+                    constant: uiConstant.topMargin),
+                trailingAnchor.constraint(
+                    equalTo: $0.trailingAnchor,
+                    constant: -uiConstant.trailingMargin),
+                heightAnchor.constraint(equalToConstant: height)])
+        }
+    }
+    
+    /// 일반 뷰 아래 레이아웃 할 경우 ( height 필수 )
+    func layout(from superView: UIView, uiConstant: UILayout) {
+        let height = uiConstant.height == 0 ? 1 : uiConstant.height
+        translatesAutoresizingMaskIntoConstraints = false
+        superView.addSubview(self)
+        _=superView.set {
+            NSLayoutConstraint.activate([
+                leadingAnchor.constraint(
+                    equalTo: $0.leadingAnchor,
+                    constant: uiConstant.leadingMargin),
+                topAnchor.constraint(
+                    equalTo: $0.topAnchor,
+                    constant: uiConstant.topMargin),
+                trailingAnchor.constraint(
+                    equalTo: $0.trailingAnchor,
+                    constant: -uiConstant.trailingMargin),
+                heightAnchor.constraint(equalToConstant: height)])
+        }
     }
 }
 
@@ -116,5 +177,26 @@ extension ProgressView {
         ) {
             self.setProgress(targetProgress, animated: true)
         }
+    }
+    
+    private func bind() {
+        subscription = autoUpdateProgress
+            .map { [weak self] value -> Float in
+                guard let progressTotalStep = self?.progressTotalStep else {
+                    return 0.0
+                }
+                return Float(value) / Float(progressTotalStep)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                guard let progress = self?.progress else {
+                    return
+                }
+                if value > progress {
+                    self?.increaseOneStep()
+                    return
+                }
+                self?.decreaseOneStep()
+            }
     }
 }
