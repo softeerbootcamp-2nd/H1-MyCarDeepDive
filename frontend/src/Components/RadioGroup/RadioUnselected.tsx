@@ -17,7 +17,7 @@ function RadioUnselected({ name, value, isLong, onChangeHandler }: RadioProps) {
             isLong === false ? 'w-[298px]' : 'w-[608px]'
           } h-[56px] rounded-[6px] bg-grey-800 cursor-pointer transition-all duration-200 ease-in hover:ring hover:ring-grey-800`}
         >
-          <div className='my-[20px] mx-[12px] w-full  h-[24px] flex items-center justify-between '>
+          <div className='py-[20px] px-[12px] w-full h-[24px] flex items-center justify-between '>
             <span className=' text-grey-500 font-body2-medium'>{value}</span>
           </div>
         </div>
