@@ -8,13 +8,15 @@
 import UIKit
 
 class LifeStyleCell: UICollectionViewCell {
+    typealias Palette = UIColor.GetYaPalette
+    
     // MARK: - UI Properties
     private let titleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.borderColor = UIColor.GetYaPalette.primary.cgColor
+        imageView.layer.borderColor = Palette.primary.cgColor
         
         return imageView
     }()
@@ -23,8 +25,8 @@ class LifeStyleCell: UICollectionViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = CGFloat(16).scaledWidth
-        view.layer.borderColor = UIColor.GetYaPalette.primary.cgColor
-        view.layer.backgroundColor = UIColor.GetYaPalette.lightPrimary.cgColor
+        view.layer.borderColor = Palette.primary.cgColor
+        view.layer.backgroundColor = Palette.lightPrimary.cgColor
         
         return view
     }()
@@ -40,7 +42,7 @@ class LifeStyleCell: UICollectionViewCell {
     
     private let descriptionLabel = CommonLabel(
         font: GetYaFont.mediumBody2.uiFont,
-        color: .GetYaPalette.gray0
+        color: Palette.gray0
     )
     
     private let selectImageView: UIImageView = {
@@ -56,7 +58,7 @@ class LifeStyleCell: UICollectionViewCell {
     private let lineView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .GetYaPalette.gray900
+        view.backgroundColor = Palette.gray900
         
         return view
     }()
@@ -65,7 +67,7 @@ class LifeStyleCell: UICollectionViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("라이프스타일 엿보기", for: .normal)
-        button.setTitleColor(.GetYaPalette.gray200, for: .normal)
+        button.setTitleColor(Palette.gray200, for: .normal)
         button.titleLabel?.font = GetYaFont.mediumBody4.uiFont
         
         return button
@@ -75,13 +77,13 @@ class LifeStyleCell: UICollectionViewCell {
     static let identifier: String = "LifeStyleCell"
     override var isSelected: Bool {
         didSet {
-            lineView.backgroundColor = isSelected ? .GetYaPalette.gray700 : .GetYaPalette.gray900
+            lineView.backgroundColor = isSelected ? Palette.gray700 : Palette.gray900
             selectImageView.isHighlighted = isSelected
-            descriptionLabel.textColor = isSelected ? .GetYaPalette.primary : .GetYaPalette.gray0
+            descriptionLabel.textColor = isSelected ? Palette.primary : Palette.gray0
             tagStackView.arrangedSubviews.map { $0 as? TagView }.forEach {
-                $0?.configureBackgroundColor(color: isSelected ? .GetYaPalette.lightAcriveBlue : .GetYaPalette.gray1000)
+                $0?.configureBackgroundColor(color: isSelected ? Palette.lightAcriveBlue : Palette.gray1000)
             }
-            baseView.layer.backgroundColor = isSelected ?  UIColor.clear.cgColor : UIColor.GetYaPalette.lightPrimary.cgColor
+            baseView.layer.backgroundColor = isSelected ?  UIColor.clear.cgColor : Palette.lightPrimary.cgColor
             baseView.layer.borderWidth = isSelected ? 1.5 : 0
             titleImageView.layer.borderWidth = isSelected ? 1.5 : 0
         }
