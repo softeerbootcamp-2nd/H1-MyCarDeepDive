@@ -33,6 +33,11 @@ extension UIColor {
         /// red: 33, green: 151, blue: 202
         static let acriveBlue = UIColor(hexString: "2197C9")
         
+        /// active blue 10%
+        /// #2197C9
+        /// red: 33, green: 151, blue: 202 alpha: 0.1
+        static let lightAcriveBlue = UIColor(hexString: "2197C9").withAlphaComponent(0.1)
+        
         // MARK: - Gray Scale
         /// Grey Scale/grey-1000
         /// #FFFFFF
