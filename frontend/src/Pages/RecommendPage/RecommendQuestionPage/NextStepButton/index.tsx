@@ -19,7 +19,11 @@ function NextStepButton({ step, lifeStyle, myLifeStyle }: NextStepButtonProps) {
   const clickHandler = () => {
     step === '1'
       ? navigation('/recommend/question/2')
-      : navigation('/recommend/result/basic');
+      : step === '2'
+      ? navigation('/recommend/result/basic')
+      : step === 'addition'
+      ? navigation('/recommend/result/addition')
+      : null;
   };
 
   const myLifeStyleHasEmptyValue = Object.values(myLifeStyle).some(

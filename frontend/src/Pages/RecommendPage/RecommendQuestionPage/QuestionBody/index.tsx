@@ -30,19 +30,22 @@ function QuestionBody({
       />
     ) : step === 'addition' ? (
       <>
-        {lifeStyleAdditionQuestionList.map((additionQuestion, index) => (
-          <Fragment key={index}>
-            <AdditionQuestionTitle title={additionQuestion.question} />
-            <RadioGroup
-              data={additionQuestion.answerList}
-              name={additionQuestion.value}
-              value={
-                myLifeStyle[additionQuestion.value as keyof typeof myLifeStyle]
-              }
-              onChangeHandler={myLifeStyleHandler}
-            />
-          </Fragment>
-        ))}
+        {lifeStyleAdditionQuestionList.map((additionQuestion, index) => {
+          const { question, answerList, value } = additionQuestion;
+          const radioValue =
+            myLifeStyle[additionQuestion.value as keyof typeof myLifeStyle];
+          return (
+            <Fragment key={index}>
+              <AdditionQuestionTitle title={question} />
+              <RadioGroup
+                data={answerList}
+                name={value}
+                value={radioValue}
+                onChangeHandler={myLifeStyleHandler}
+              />
+            </Fragment>
+          );
+        })}
         <AdditionQuestionTitle title={'최대 예산을 알려주세요.'} />
         <AdditionQuestionBudgetRange myLifeStyleHandler={myLifeStyleHandler} />
       </>
