@@ -36,7 +36,7 @@ function AdditionQuestionBudgetRange({
         </span>
       </p>
 
-      <div className='w-full h-6 relative flex items-center mb-[6px]'>
+      <div className='w-full h-6 relative flex items-center mb-1.5'>
         <div className='w-6 h-6 border border-grey-500 bg-grey-1000 rounded-full absolute top-0 left-0 z-10' />
         <div className='w-full h-2 rounded-full bg-grey-700 relative'>
           <div

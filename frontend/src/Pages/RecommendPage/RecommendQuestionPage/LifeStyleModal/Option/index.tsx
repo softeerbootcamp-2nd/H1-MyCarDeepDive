@@ -14,7 +14,7 @@ function Option({ trim, attribute, carImage, options }: OptionProps) {
   return (
     <>
       <div className='mt-3 relative overflow-hidden'>
-        <div className='h-[80px] bg-grey-100'>
+        <div className='h-20 bg-grey-100'>
           <div className='h-full flex flex-col justify-center ml-5'>
             <div className='font-body4-medium text-grey-1000'>{trim}</div>
             <div className='font-caption1-regular text-grey-500'>
@@ -22,7 +22,7 @@ function Option({ trim, attribute, carImage, options }: OptionProps) {
             </div>
           </div>
         </div>
-        <div className='h-[80px] bg-grey-500'></div>
+        <div className='h-20 bg-grey-500'></div>
         <img
           src={carImage}
           alt='Prestige'

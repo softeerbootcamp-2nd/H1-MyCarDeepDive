@@ -10,8 +10,8 @@ interface RadioGroupProps {
 
 function RadioGroup({ data, name, value, onChangeHandler }: RadioGroupProps) {
   const result = data.map((item, index) => {
-    const isLong =
-      index === data.length - 1 && data.length % 2 === 1 ? true : false;
+    const isLong = index === data.length - 1 && data.length % 2 === 1;
+
     return item === value ? (
       <RadioSelected
         key={index}
@@ -32,7 +32,7 @@ function RadioGroup({ data, name, value, onChangeHandler }: RadioGroupProps) {
   });
 
   return (
-    <div className='flex flex-wrap justify-center items-center gap-[12px] mb-[52px]'>
+    <div className='flex flex-wrap justify-center items-center gap-3 mb-[52px]'>
       {result}
     </div>
   );

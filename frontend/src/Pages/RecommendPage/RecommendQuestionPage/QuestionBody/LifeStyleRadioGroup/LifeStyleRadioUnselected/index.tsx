@@ -18,11 +18,11 @@ function LifeStyleRadioUnselected({
         onChange={onChangeHandler}
       />
       <label htmlFor={data.value}>
-        <div className='h-[180px] p-5 rounded-lg relative bg-primary bg-opacity-10 mb-[44px] cursor-pointer transition-all duration-200 ease-in hover:ring-2 hover:ring-primary hover:ring-inset'>
+        <div className='h-[180px] p-5 rounded-lg relative bg-primary bg-opacity-10 mb-11 cursor-pointer transition-all duration-200 ease-in hover:ring-2 hover:ring-primary hover:ring-inset'>
           <img
             src={data.profileImage}
             alt='lifeStyleProfile2'
-            className='absolute right-[20px] -top-[40px] w-[88px] h-[88px] rounded-full'
+            className='absolute right-5 -top-10 w-[88px] h-[88px] rounded-full'
           />
           <div className='flex gap-2'>
             {data.tags.map(item => (

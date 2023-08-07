@@ -9,7 +9,11 @@ function Header() {
   const isHome: boolean = location.pathname === '/';
 
   return (
-    <header className='fixed w-full h-[92px] z-30 top-0 left-0'>
+    <header
+      className={`fixed w-full h-[92px] z-30 top-0 left-0 ${
+        !isHome && 'bg-grey-1000'
+      }`}
+    >
       <div className='max-w-5xl h-full mx-auto flex items-center'>
         <img
           src={isHome ? LogoWhite : Logo}
@@ -26,7 +30,7 @@ function Header() {
         <img
           src={isHome ? headerDownArrowBlack : headerDownArrow}
           alt='headerDownArrow'
-          className='w-[20px]'
+          className='w-5'
         />
       </div>
     </header>

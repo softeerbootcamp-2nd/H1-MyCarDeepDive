@@ -33,7 +33,7 @@ function NextStepButton({ step, lifeStyle, myLifeStyle }: NextStepButtonProps) {
   return (
     <div
       className={`${
-        step === 'addition' ? 'pb-[36px]' : 'absolute bottom-[36px]'
+        step === 'addition' ? 'pb-9' : 'absolute bottom-9'
       } left-0 w-full flex justify-center`}
     >
       <Button

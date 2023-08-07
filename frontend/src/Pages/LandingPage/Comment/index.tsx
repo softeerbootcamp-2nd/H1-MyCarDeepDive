@@ -5,7 +5,7 @@ function Comment() {
         <p className='text-[28px] leading-[42px]'>
           당신의{' '}
           <span className='font-h2-medium'>
-            <span className=' text-[28px] leading-[42px]'>라이프스타일</span>
+            <span className='text-[28px] leading-[42px]'>라이프스타일</span>
           </span>
           에 맞게 <br />
           차량을 추천해드려요

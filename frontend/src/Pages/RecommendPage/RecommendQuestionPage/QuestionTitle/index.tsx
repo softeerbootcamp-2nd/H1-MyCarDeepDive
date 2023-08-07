@@ -4,9 +4,7 @@ import Step from './Step';
 function QuestionTitle({ step }: QuestionStepProps) {
   return (
     <div
-      className={`mt-[48px] mx-auto flex justify-between ${
-        step === '1' && 'mb-6'
-      }`}
+      className={`mt-12 mx-auto flex justify-between ${step === '1' && 'mb-6'}`}
     >
       {step === '1' ? (
         <p className='font-h2-medium'>

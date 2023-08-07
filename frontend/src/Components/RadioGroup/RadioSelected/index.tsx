@@ -14,11 +14,11 @@ function RadioSelected({ name, value, isLong, onChangeHandler }: RadioProps) {
       />
       <label htmlFor={value}>
         <div
-          className={`flex items-center justify-center flex-shrink-0 gap-[16px] ${
+          className={`flex items-center justify-center flex-shrink-0 gap-4 ${
             isLong === false ? 'w-[298px]' : 'w-[608px]'
-          } h-[56px] rounded-[6px] bg-grey-1000 border-[1.5px] border-primary cursor-pointer`}
+          } h-14 rounded-md bg-grey-1000 border-[1.5px] border-primary cursor-pointer`}
         >
-          <div className='py-[20px] px-[12px] w-full h-[24px] flex items-center justify-between'>
+          <div className='py-5 px-3 w-full h-6 flex items-center justify-between'>
             <span className='text-primary font-body2-bold'>
               <span className='leading-[22px]'>{value}</span>
             </span>

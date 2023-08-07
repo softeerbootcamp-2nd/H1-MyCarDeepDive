@@ -18,11 +18,11 @@ function LifeStyleRadioSelected({
         onChange={onChangeHandler}
       />
       <label htmlFor={data.value}>
-        <div className='h-[180px] p-5 rounded-lg ring-[1.5px] ring-primary ring-inset relative mb-[44px] cursor-pointer'>
+        <div className='h-[180px] p-5 rounded-lg ring-[1.5px] ring-primary ring-inset relative mb-11 cursor-pointer'>
           <img
             src={data.profileImage}
             alt='lifeStyleProfile1'
-            className='absolute right-[20px] -top-[40px] w-[88px] h-[88px] rounded-full border-[1.5px] border-primary'
+            className='absolute right-5 -top-10 w-[88px] h-[88px] rounded-full border-[1.5px] border-primary'
           />
           <div className='flex gap-2'>
             {data.tags.map(item => (

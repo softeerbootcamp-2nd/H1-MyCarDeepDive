@@ -8,7 +8,7 @@ function Profile({ lifeStyleProfile }: Profile) {
       <img
         src={lifeStyleProfile}
         alt='profile'
-        className='w-[48px] h-[48px] rounded-full'
+        className='w-12 h-12 rounded-full'
       />
       <div className='flex flex-col justify-center'>
         <div className='font-body3-medium text-grey-50'>김현대</div>
