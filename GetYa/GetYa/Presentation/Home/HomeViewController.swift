@@ -57,7 +57,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: HomeContentDelegate {
     func touchUpRecomandButton() {
         self.navigationController?.pushViewController(
-            CharacterSelectViewController(),
+            LifeStyleViewController(),
             animated: true)
     }
     

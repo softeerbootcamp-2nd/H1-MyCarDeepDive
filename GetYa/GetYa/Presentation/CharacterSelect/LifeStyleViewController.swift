@@ -22,10 +22,13 @@ class LifeStyleViewController: UIViewController {
         title: "선택 완료"
     )
     private let descriptionLabel = CommonLabel(
-        font: GetYaFont.regularHead2.uiFont,
+        fontType: GetYaFont.regularHead2,
         color: .GetYaPalette.gray0,
         text: "유사한 라이프스타일을 선택하면\n차량 조합을 추천해 드려요."
-    )
+    ).set {
+        $0.configurePartTextFont(otherFontType: .mediumHead2, partText: "라이프스타일")
+    }
+    private let questionNumberView = QuestionNumberView(text: "2/2")
     
     // MARK: - Properties
     private let collectionViewLayoutConstant = UILayout(topMargin: 43, height: 320)
@@ -33,6 +36,11 @@ class LifeStyleViewController: UIViewController {
     private let cellSpacing: CGFloat = 8
     private let descriptionLabelLayoutConstant = UILayout(leadingMargin: 16, topMargin: 29)
     private let pageControlLayoutConstant = UILayout(topMargin: 32)
+    private let questionNumberViewLayoutConstant = UILayout(
+        topMargin: 24,
+        trailingMargin: -16,
+        height: 40,
+        width: 65)
     private let buttonLayoutConstant = UILayout(
         leadingMargin: 17,
         trailingMargin: -17,
@@ -74,6 +82,7 @@ class LifeStyleViewController: UIViewController {
     private func setupViews() {
         view.addSubviews([
             descriptionLabel,
+            questionNumberView,
             collectionView,
             pageControl,
             button
@@ -83,6 +92,7 @@ class LifeStyleViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
         configureDescriptionLabel()
+        configureQuestionNumberView()
         configureCollectionView()
         configurePageControl()
         configureButton()
@@ -96,6 +106,21 @@ class LifeStyleViewController: UIViewController {
             descriptionLabel.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: descriptionLabelLayoutConstant.leadingMargin)
+        ])
+    }
+    
+    private func configureQuestionNumberView() {
+        NSLayoutConstraint.activate([
+            questionNumberView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: questionNumberViewLayoutConstant.topMargin),
+            questionNumberView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: questionNumberViewLayoutConstant.trailingMargin),
+            questionNumberView.heightAnchor.constraint(
+                equalToConstant: questionNumberViewLayoutConstant.height),
+            questionNumberView.widthAnchor.constraint(
+                equalToConstant: questionNumberViewLayoutConstant.width)
         ])
     }
     

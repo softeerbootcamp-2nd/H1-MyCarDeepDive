@@ -41,7 +41,7 @@ class LifeStyleCell: UICollectionViewCell {
     }()
     
     private let descriptionLabel = CommonLabel(
-        font: GetYaFont.mediumBody2.uiFont,
+        fontType: GetYaFont.mediumBody2,
         color: Palette.gray0
     )
     
