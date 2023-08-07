@@ -5,7 +5,7 @@ function DetailQuestionButton({ step }: QuestionStepProps) {
   if (step !== '2') return;
   return (
     <Link
-      to='/'
+      to='/recommend/question/addition'
       className='inline-block mt-4 mb-[52px] font-body4-medium text-secondary underline underline-offset-4'
     >
       <span className=' leading-4 tracking-[-0.07px]'>

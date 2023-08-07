@@ -1,8 +1,5 @@
+import { useEffect } from 'react';
 import UnderLine from '@/Components/UnderLine';
-import palisade from '@/assets/image/Palisade.png';
-import exteriorCrimi from '@/assets/image/exterior-crimi.png';
-import exteriorArtificialLeather from '@/assets/image/exterior-artificial-leather.png';
-import exteriorSmartsense from '@/assets/image/exterior-smartsense.png';
 import RecommendResultPageWrapper from './RecommendResultPageWrapper';
 import CardWrapper from './CardWrapper';
 import BackgroundGradient from './BackgroundGradient';
@@ -15,6 +12,10 @@ import RecommendCarInfo from './RecommendCarInfo';
 import RecommendCarOption from './RecommendCarOption';
 import RecommendTotalPrice from './RecommendTotalPrice';
 import BottomButtons from './BottomButtons';
+import palisade from '@/assets/image/Palisade.png';
+import exteriorCrimi from '@/assets/image/exterior-crimi.png';
+import exteriorArtificialLeather from '@/assets/image/exterior-artificial-leather.png';
+import exteriorSmartsense from '@/assets/image/exterior-smartsense.png';
 
 const cardData = {
   title: '펠리세이드 - Le Blanc(르블랑)',
@@ -25,6 +26,8 @@ const cardData = {
   image: palisade,
   bubble: '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요',
 };
+
+const tagData = ['1년 이하', '1인', '출퇴근용', '디자인', '4200만원'];
 
 const carData = {
   name: '펠리세이드',
@@ -77,6 +80,10 @@ interface RecommendResultPageProps {
 }
 
 function RecommendResultPage({ step }: RecommendResultPageProps) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <RecommendResultPageWrapper>
       {step === 'basic' ? (
@@ -87,10 +94,7 @@ function RecommendResultPage({ step }: RecommendResultPageProps) {
       ) : (
         <RecommendCarWrapper>
           <RecommendCarBackground />
-          <RecommendCarSummary
-            tag={['1년 이하', '1인', '출퇴근용', '디자인', '4200만원']}
-            carImage={palisade}
-          />
+          <RecommendCarSummary tag={tagData} carImage={palisade} />
         </RecommendCarWrapper>
       )}
       <RecommendBody>

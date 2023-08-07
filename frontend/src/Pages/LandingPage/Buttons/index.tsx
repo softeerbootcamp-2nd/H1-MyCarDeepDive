@@ -5,7 +5,7 @@ function Buttons() {
   const navigation = useNavigate();
 
   return (
-    <div className='fixed bottom-[36px] left-0 z-20 w-full flex justify-center gap-2'>
+    <div className='fixed bottom-9 left-0 z-20 w-full flex justify-center gap-2'>
       <Button
         width='w-[300px]'
         height='h-[52px]'
