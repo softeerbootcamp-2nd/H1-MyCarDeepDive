@@ -202,3 +202,17 @@
 .progress-bar-2 {
   animation: progress-full 2s ease-in-out;
 }
+
+.slider {
+  -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #ffffff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #a4a4a4;
+  cursor: pointer;
+}
