@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		155EAB3A2A80824B00833B0E /* CharacterSelectSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */; };
 		155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */; };
 		155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */; };
 		155ED7202A7E5B890052896A /* UIButton+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71F2A7E5B890052896A /* UIButton+Combine.swift */; };
@@ -88,6 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewController.swift; sourceTree = "<group>"; };
 		155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionSubscription.swift"; sourceTree = "<group>"; };
 		155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Publihser.swift"; sourceTree = "<group>"; };
 		155ED71F2A7E5B890052896A /* UIButton+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Combine.swift"; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				647FBF132A7CB5C900507AE9 /* View */,
 				641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */,
 				641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */,
+				155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */,
 			);
 			path = CharacterSelect;
 			sourceTree = "<group>";
@@ -700,6 +703,7 @@
 				641AB52A2A7BA16000CF88C0 /* CharacterSelectContentView.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
+				155EAB3A2A80824B00833B0E /* CharacterSelectSuccessViewController.swift in Sources */,
 				64ADA4BC2A7A22780003E2C1 /* CommonLabel.swift in Sources */,
 				641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */,
 				155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */,
