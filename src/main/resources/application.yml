@@ -31,6 +31,11 @@ aws:
     prefix: /config
     profile-separator: _
     name: mycardeepdive
+logging:
+  slack:
+    webhook-error-uri: ${slack-error-uri}
+    webhook-log-uri: ${slack-log-uri}
+  config: classpath:logback-spring.xml
 springdoc:
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
