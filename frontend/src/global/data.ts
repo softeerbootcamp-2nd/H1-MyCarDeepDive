@@ -53,3 +53,10 @@ export const lifeStyleAdditionQuestionList = [
     answerList: ['디자인', '성능', '안전', '편의성'],
   },
 ];
+
+export const price = {
+  lowestPrice: 4200,
+  highestPrice: 6900,
+  rangeUnit: 300,
+  priceUnit: '만원',
+};

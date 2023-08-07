@@ -21,9 +21,8 @@ function QuestionTitle({ step }: QuestionStepProps) {
           <span className='font-h2-medium'>
             <span className='text-[22px] leading-[28px]'>라이프스타일을 </span>
           </span>
-          <span className='text-[22px] leading-[28px]'>
-            선택하면
-            <br /> 차량 조합을 추천해 드려요.
+          <span className='text-[22px] leaading-[28px] whitespace-pre'>
+            {'선택하면\n차량 조합을 추천해 드려요.'}
           </span>
         </p>
       ) : step === 'addition' ? (

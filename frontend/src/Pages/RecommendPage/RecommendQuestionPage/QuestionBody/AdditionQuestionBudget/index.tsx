@@ -1,16 +1,11 @@
 import { AdditionQuestionBudgetProps } from '@/global/type';
+import { price } from '@/global/data';
 
 function AdditionQuestionBudgetRange({
   budget,
   myLifeStyleHandler,
 }: AdditionQuestionBudgetProps) {
-  const price = {
-    lowestPrice: 4200,
-    highestPrice: 6900,
-  };
-  const { lowestPrice, highestPrice } = price;
-  const unit = '만원';
-  const rangeUnit = 300;
+  const { lowestPrice, highestPrice, rangeUnit, priceUnit } = price;
   const currentBudget = `${
     ((Number(budget) - lowestPrice) / (highestPrice - lowestPrice)) * 100
   }%`;
@@ -23,7 +18,7 @@ function AdditionQuestionBudgetRange({
         </span>
         <span className='font-h5-regular'>
           <span className='text-[24px] leading-[26px] tracking-[-0.2px]'>
-            {unit}
+            {priceUnit}
           </span>
           <span className='text-[22px] leading-[26px] tracking-[-0.2px] mx-2'>
             ~
@@ -36,7 +31,7 @@ function AdditionQuestionBudgetRange({
         </span>
         <span className='font-h5-regular'>
           <span className='text-[24px] leading-[26px] tracking-[-0.2px]'>
-            {unit}
+            {priceUnit}
           </span>
         </span>
       </p>
@@ -61,8 +56,8 @@ function AdditionQuestionBudgetRange({
         />
       </div>
       <div className='flex justify-between font-body4-regular text-grey-400 mb-[52px]'>
-        <p>{`${lowestPrice} ${unit}`}</p>
-        <p>{`${highestPrice} ${unit}`}</p>
+        <p>{`${lowestPrice} ${priceUnit}`}</p>
+        <p>{`${highestPrice} ${priceUnit}`}</p>
       </div>
     </>
   );
