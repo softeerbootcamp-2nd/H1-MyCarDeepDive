@@ -48,6 +48,8 @@ class QuestionContentView: UIView {
         questionCount: Int,
         buttonTitle: String) {
             super.init(frame: .zero)
+            setupViews()
+            configureUI()
             configureDetail(
                 descriptionText: descriptionText,
                 partText: partText,
@@ -79,6 +81,7 @@ class QuestionContentView: UIView {
     
     private func configureUI() {
         self.backgroundColor = .white
+        
         configureDescriptionLabel()
         configureQuestionNumberView()
         configureButton()
