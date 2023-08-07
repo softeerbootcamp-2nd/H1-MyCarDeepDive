@@ -11,21 +11,16 @@ import Combine
 final class ProgressView: UIProgressView {
     // MARK: - Constants
     private let maxGauge: Float = 1.0
-    
     private lazy var minGauge: Float = gaugeOneStepAmount
     
     // MARK: - Properties
     /// 프로그래스가 이동할 수 있는 총 단계입니다. 페이지 총 개수와 동일해야 합니다.
     private var progressTotalStep: Int
-    
     private var animationDuration: TimeInterval = 0.7
-    
     private var gaugeOneStepAmount: Float {
         1.0 / Float(progressTotalStep)
     }
-    
     private var subscription: AnyCancellable?
-    
     private var autoUpdateProgress = PassthroughSubject<Int, Never>()
     
     // MARK: - Lifecycles
