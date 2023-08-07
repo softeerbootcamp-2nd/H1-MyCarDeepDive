@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		155EAB372A7F5FCD00833B0E /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB362A7F5FCD00833B0E /* ProgressView.swift */; };
 		155EAB3A2A80824B00833B0E /* CharacterSelectSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */; };
 		155EAB3C2A80826A00833B0E /* CharacterSelectSuccessCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB3B2A80826A00833B0E /* CharacterSelectSuccessCollectionView.swift */; };
-		155EAB372A7F5FCD00833B0E /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB362A7F5FCD00833B0E /* ProgressView.swift */; };
+		155EAB3F2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */; };
 		155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */; };
 		155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */; };
 		155ED7202A7E5B890052896A /* UIButton+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71F2A7E5B890052896A /* UIButton+Combine.swift */; };
@@ -95,9 +96,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		155EAB362A7F5FCD00833B0E /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewController.swift; sourceTree = "<group>"; };
 		155EAB3B2A80826A00833B0E /* CharacterSelectSuccessCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessCollectionView.swift; sourceTree = "<group>"; };
-		155EAB362A7F5FCD00833B0E /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessSectionDividerView.swift; sourceTree = "<group>"; };
 		155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionSubscription.swift"; sourceTree = "<group>"; };
 		155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Publihser.swift"; sourceTree = "<group>"; };
 		155ED71F2A7E5B890052896A /* UIButton+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Combine.swift"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				155EAB3B2A80826A00833B0E /* CharacterSelectSuccessCollectionView.swift */,
+				155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */,
 			);
 			path = CharacterSeleectSuccessView;
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
 				15DF95952A7C89DF0093EAC7 /* GetYaFont.swift in Sources */,
+				155EAB3F2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift in Sources */,
 				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
 				15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */,
 				64ADA4C42A7A32950003E2C1 /* CommonOptionSelectButton.swift in Sources */,
