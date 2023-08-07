@@ -45,7 +45,7 @@ struct UILayout {
       self.leadingMargin = leadingMargin.scaledWidth
       self.trailingMargin = trailingMargin.scaledWidth
       self.bottomMargin = bottomMargin.scaledHeight
-      self.height = height
-      self.width = width
+      self.height = height.scaledHeight
+      self.width = width.scaledWidth
   }
 }
