@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		155EAB3A2A80824B00833B0E /* CharacterSelectSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */; };
+		155EAB3C2A80826A00833B0E /* CharacterSelectSuccessContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB3B2A80826A00833B0E /* CharacterSelectSuccessContentView.swift */; };
 		155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */; };
 		155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */; };
 		155ED7202A7E5B890052896A /* UIButton+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71F2A7E5B890052896A /* UIButton+Combine.swift */; };
@@ -90,6 +91,7 @@
 
 /* Begin PBXFileReference section */
 		155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewController.swift; sourceTree = "<group>"; };
+		155EAB3B2A80826A00833B0E /* CharacterSelectSuccessContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessContentView.swift; sourceTree = "<group>"; };
 		155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionSubscription.swift"; sourceTree = "<group>"; };
 		155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Publihser.swift"; sourceTree = "<group>"; };
 		155ED71F2A7E5B890052896A /* UIButton+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Combine.swift"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */,
 				641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */,
 				155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */,
+				155EAB3B2A80826A00833B0E /* CharacterSelectSuccessContentView.swift */,
 			);
 			path = CharacterSelect;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				15DF95932A7C89BC0093EAC7 /* ConvenienceInit.swift in Sources */,
 				64ADA4C02A7A28AA0003E2C1 /* UIColor+.swift in Sources */,
 				64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */,
+				155EAB3C2A80826A00833B0E /* CharacterSelectSuccessContentView.swift in Sources */,
 				641AB5242A7B821D00CF88C0 /* HomeContentDelegate.swift in Sources */,
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
