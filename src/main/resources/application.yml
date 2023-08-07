@@ -36,4 +36,12 @@ logging:
     webhook-error-uri: ${slack-error-uri}
     webhook-log-uri: ${slack-log-uri}
   config: classpath:logback-spring.xml
+springdoc:
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    url: /docs/open-api-3.0.1.json
+    path: /docs/swagger
+server:
+  port: ${server.port}
 ---
