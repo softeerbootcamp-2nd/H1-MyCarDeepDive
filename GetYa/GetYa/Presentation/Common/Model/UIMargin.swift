@@ -25,7 +25,7 @@ import Foundation
 ///   ...
 /// }
 /// ```
-struct UIMargin {
+struct UILayout {
   let top: CGFloat
   let leading: CGFloat
   let trailing: CGFloat
@@ -37,9 +37,9 @@ struct UIMargin {
     trailing: CGFloat = 0,
     bottom: CGFloat = 0
   ) {
-    self.top = top
-    self.leading = leading
-    self.trailing = trailing
-    self.bottom = bottom
+      self.top = top.scaledHeight
+      self.leading = leading.scaledWidth
+      self.trailing = trailing.scaledWidth
+      self.bottom = bottom.scaledHeight
   }
 }

@@ -18,14 +18,15 @@ class CheckListItemView: UIView {
     
     // MARK: - Properties
     weak var delegate: CheckListItemViewDelegate?
+    private let labelLayoutConstant = UILayout(leadingMargin: 12, topMargin: 16, bottomMargin: -16)
+    private let imageViewLayoutConstant = UILayout(topMargin: 16, trailingMargin: -16, bottomMargin: -16)
     var isTapped: Bool = false {
         didSet {
-            // TODO: Font와 Color 바꿔야함.
             self.layer.borderWidth = isTapped ? 2 : 0
-            self.layer.backgroundColor = isTapped ? UIColor.white.cgColor : UIColor(hexString: "F0F0F0").cgColor
+            self.layer.backgroundColor = isTapped ? UIColor.white.cgColor : UIColor.GetYaPalette.gray800.cgColor
             imageView.isHidden = isTapped ? false : true
-            label.font = isTapped ? UIFont.systemFont(ofSize: 16, weight: .bold) : UIFont.systemFont(ofSize: 16, weight: .regular)
-            label.textColor = isTapped ? UIColor(hexString: "00428E") : UIColor(hexString: "777777")
+            label.font = isTapped ? UIFont(hyundaiSans: .regularBody3) : UIFont(hyundaiSans: .mediumBody3)
+            label.textColor = isTapped ? .GetYaPalette.primary : .GetYaPalette.gray400
             label.isHighlighted = isTapped
         }
     }
@@ -70,8 +71,7 @@ class CheckListItemView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 6
         
-        // TODO: 색깔 재정의가 필요함.
-        self.layer.borderColor = UIColor(hexString: "00428E").cgColor
+        self.layer.borderColor = UIColor.GetYaPalette.primary.cgColor
         self.isTapped = false
         
         configureLabel()
@@ -80,31 +80,36 @@ class CheckListItemView: UIView {
     
     func setLabelText(text: String) {
         label.text = text
-        label.layer.borderColor = UIColor(hexString: "00428E").cgColor
     }
     
     private func configureLabel() {
-        // TODO: 크기에 관해서 재정의 해줘야함.
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
-            label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12)
+            label.topAnchor.constraint(
+                equalTo: self.topAnchor,
+                constant: labelLayoutConstant.topMargin),
+            label.bottomAnchor.constraint(
+                equalTo: self.bottomAnchor,
+                constant: labelLayoutConstant.bottomMargin),
+            label.leadingAnchor.constraint(
+                equalTo: self.leadingAnchor,
+                constant: labelLayoutConstant.leadingMargin)
         ])
     }
     
     private func configureImageView() {
-        // TODO: 크기에 관해서 재정의 해줘야함.
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
         
         NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(
+                equalTo: self.topAnchor,
+                constant: imageViewLayoutConstant.topMargin),
             imageView.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: -16
-            ),
-            imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 24),
-            imageView.widthAnchor.constraint(equalToConstant: 24)
+                constant: imageViewLayoutConstant.trailingMargin),
+            imageView.bottomAnchor.constraint(
+                equalTo: self.bottomAnchor,
+                constant: imageViewLayoutConstant.bottomMargin)
         ])
     }
     
