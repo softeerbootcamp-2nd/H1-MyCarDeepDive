@@ -24,6 +24,11 @@ final class ProgressView: UIProgressView {
     private var autoUpdateProgress = PassthroughSubject<Int, Never>()
     
     // MARK: - Lifecycles
+    private override init(frame: CGRect) {
+        progressTotalStep = 0
+        super.init(frame: frame)
+    }
+    
     init(
         frame: CGRect,
         progressTotalStep: Int,
