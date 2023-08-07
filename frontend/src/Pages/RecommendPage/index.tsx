@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import usePrevious from '@/hooks/usePrevious';
 import RecommendResultPage from './RecommendResultPage';
 import RecommendQuestionPage from './RecommendQuestionPage';
 
 function RecommendPage() {
   const { status, step } = useParams();
+  const prevStep = usePrevious(step);
   const [age, setAge] = useState('20대');
   const [lifeStyle, setLifeStyle] = useState('');
   const [myLifeStyle, setMyLifeStyle] = useState({
@@ -35,6 +37,7 @@ function RecommendPage() {
   return (
     <RecommendQuestionPage
       step={step}
+      prevStep={prevStep}
       age={age}
       lifeStyle={lifeStyle}
       myLifeStyle={myLifeStyle}

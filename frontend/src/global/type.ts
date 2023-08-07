@@ -28,6 +28,7 @@ export interface WrapperProps {
 
 export interface RecommendQuestionPageProps {
   step: string;
+  prevStep: string | undefined;
   lifeStyle: string;
   myLifeStyle: {
     drivingExperience: string;

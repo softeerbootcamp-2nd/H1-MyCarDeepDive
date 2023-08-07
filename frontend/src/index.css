@@ -195,12 +195,23 @@
     width: 100%;
   }
 }
+@keyframes progress-half-reverse {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 50%;
+  }
+}
 
 .progress-bar-1 {
   animation: progress-half 2s ease-in-out;
 }
 .progress-bar-2 {
   animation: progress-full 2s ease-in-out;
+}
+.progress-bar-1-reverse {
+  animation: progress-half-reverse 2s ease-in-out;
 }
 
 .slider {

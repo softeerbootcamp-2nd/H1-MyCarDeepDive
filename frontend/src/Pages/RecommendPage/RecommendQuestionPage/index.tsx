@@ -10,6 +10,7 @@ import QuestionSubTitle from './QuestionSubTitle';
 
 function RecommendQuestionPage({
   step,
+  prevStep,
   lifeStyle,
   age,
   myLifeStyle,
@@ -19,7 +20,7 @@ function RecommendQuestionPage({
 }: RecommendQuestionPageProps) {
   return (
     <RecommendQuestionPageWrapper>
-      <ProgressBar step={step} />
+      <ProgressBar step={step} prevStep={prevStep} />
       <RecommendQuestionWrapper>
         <QuestionTitle step={step} />
         <QuestionSubTitle step={step} />
