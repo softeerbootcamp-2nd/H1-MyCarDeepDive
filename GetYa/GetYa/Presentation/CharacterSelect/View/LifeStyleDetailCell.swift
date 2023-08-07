@@ -1,4 +1,3 @@
-
 //
 //  LifeStyleLastCell.swift
 //  GetYa
@@ -37,8 +36,9 @@ class LifeStyleDetailCell: UICollectionViewCell {
     
     private let button = CommonButton(
         font: GetYaFont.mediumBody4.uiFont,
-        buttonBackgroundColorType: .primary,
-        title: "라이프스타일 상세 선택")
+        buttonBackgroundColorType: .primary).set {
+            $0.setTitle("라이프스타일 상세 선택", for: .normal)
+        }
     
     // MARK: - Properties
     static let identifier: String = "LifeStyleDetailCell"
