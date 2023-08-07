@@ -16,6 +16,10 @@ class QuestionNumberView: UIView {
     // MARK: - Properties
     
     // MARK: - LifeCycles
+    convenience init() {
+        self.init(frame: .zero)
+    }
+    
     convenience init(text: String) {
         self.init(frame: .zero)
         setText(text: text)
