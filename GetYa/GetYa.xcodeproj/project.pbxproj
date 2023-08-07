@@ -33,6 +33,7 @@
 		6412D07E2A7E6A6A001E4005 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D07D2A7E6A6A001E4005 /* TagView.swift */; };
 		6412D0802A7F75DB001E4005 /* LifeStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */; };
 		6412D0842A80ABCA001E4005 /* QuestionNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0832A80ABCA001E4005 /* QuestionNumberView.swift */; };
+		6412D0862A80AC92001E4005 /* LifeStyleLastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0852A80AC92001E4005 /* LifeStyleLastCell.swift */; };
 		641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */; };
 		641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */; };
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
@@ -118,6 +119,7 @@
 		6412D07D2A7E6A6A001E4005 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStyleViewController.swift; sourceTree = "<group>"; };
 		6412D0832A80ABCA001E4005 /* QuestionNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionNumberView.swift; sourceTree = "<group>"; };
+		6412D0852A80AC92001E4005 /* LifeStyleLastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStyleLastCell.swift; sourceTree = "<group>"; };
 		641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectViewController.swift; sourceTree = "<group>"; };
 		641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectViewController.swift; sourceTree = "<group>"; };
 		641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				6412D07D2A7E6A6A001E4005 /* TagView.swift */,
 				6412D07B2A7E607D001E4005 /* LifeStyleCell.swift */,
 				6412D0832A80ABCA001E4005 /* QuestionNumberView.swift */,
+				6412D0852A80AC92001E4005 /* LifeStyleLastCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
 				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
 				64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */,
+				6412D0862A80AC92001E4005 /* LifeStyleLastCell.swift in Sources */,
 				155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */,
 				155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
