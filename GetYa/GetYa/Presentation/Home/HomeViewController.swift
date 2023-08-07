@@ -50,14 +50,17 @@ class HomeViewController: UIViewController {
     
     private func configureNavigationBar() {
         let image = UIImage(named: "Logo")
+        self.navigationItem.title = ""
         self.navigationItem.titleView = UIImageView(image: image)
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "arrow.left")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left")
     }
 }
 
 extension HomeViewController: HomeContentDelegate {
     func touchUpRecomandButton() {
         self.navigationController?.pushViewController(
-            LifeStyleViewController(),
+            CharacterSelectViewController(),
             animated: true)
     }
     
