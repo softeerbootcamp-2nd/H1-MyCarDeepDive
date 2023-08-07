@@ -28,7 +28,6 @@
 		15DF95992A7C8A110093EAC7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95982A7C8A110093EAC7 /* UIView+.swift */; };
 		15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */; };
 		15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+.swift */; };
-		15DF959F2A7C8A440093EAC7 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959E2A7C8A440093EAC7 /* UILabel+.swift */; };
 		6412D07A2A7E57B0001E4005 /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6412D0792A7E57B0001E4005 /* HyundaiSansHeadKRRegular.ttf */; };
 		6412D07C2A7E607D001E4005 /* LifeStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D07B2A7E607D001E4005 /* LifeStyleCell.swift */; };
 		6412D07E2A7E6A6A001E4005 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D07D2A7E6A6A001E4005 /* TagView.swift */; };
@@ -113,7 +112,6 @@
 		15DF95982A7C8A110093EAC7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+.swift"; sourceTree = "<group>"; };
-		15DF959E2A7C8A440093EAC7 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		6412D0792A7E57B0001E4005 /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
 		6412D07B2A7E607D001E4005 /* LifeStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStyleCell.swift; sourceTree = "<group>"; };
 		6412D07D2A7E6A6A001E4005 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -443,7 +441,6 @@
 				64ADA4BF2A7A28AA0003E2C1 /* UIColor+.swift */,
 				15DF95962A7C89F50093EAC7 /* UIColor+GetYaPalette.swift */,
 				15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */,
-				15DF959E2A7C8A440093EAC7 /* UILabel+.swift */,
 				15DF95982A7C8A110093EAC7 /* UIView+.swift */,
 			);
 			path = Extension;
@@ -709,7 +706,6 @@
 				6412D0802A7F75DB001E4005 /* LifeStyleViewController.swift in Sources */,
 				15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
-				15DF959F2A7C8A440093EAC7 /* UILabel+.swift in Sources */,
 				641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */,
 				641AB52A2A7BA16000CF88C0 /* CharacterSelectContentView.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
@@ -718,7 +714,7 @@
 				641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */,
 				15DF958E2A7C89630093EAC7 /* UILayout.swift in Sources */,
 				155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */,
-				15DF958E2A7C89630093EAC7 /* UIMargin.swift in Sources */,
+				15DF958E2A7C89630093EAC7 /* UILayout.swift in Sources */,
 				64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */,
 				64ADA4932A7788B60003E2C1 /* CommonView.swift in Sources */,
 				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
