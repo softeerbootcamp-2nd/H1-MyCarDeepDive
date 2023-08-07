@@ -24,7 +24,7 @@ final class ProgressView: UIProgressView {
     private var autoUpdateProgress = PassthroughSubject<Int, Never>()
     
     // MARK: - Lifecycles
-    private override init(frame: CGRect) {
+    override init(frame: CGRect) {
         progressTotalStep = 0
         super.init(frame: frame)
     }
@@ -92,6 +92,16 @@ final class ProgressView: UIProgressView {
 
 // MARK: - Helper
 extension ProgressView {
+    func configureProgressTotalStep(with totalStep: Int) {
+        if totalStep <= 0 { return }
+        progressTotalStep = totalStep
+    }
+    
+    func configureAnimationDuration(with duration: TimeInterval) {
+        if duration <= 0.0 { return }
+        animationDuration = duration
+    }
+    
     func configureUIColor(
         progressTintColor: UIColor?,
         backgroundTintColor: UIColor?
