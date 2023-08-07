@@ -25,6 +25,13 @@ extension LayoutSupportable where Self: UIView {
     }
 }
 
+extension LayoutSupportable where Self: UIViewController {
+    func configureSubviewUI(with subviews: UIView...) {
+        view.addSubviews(subviews)
+        configureConstraints()
+    }
+}
+
 extension LayoutSupportable where Self: UICollectionViewCell {
     // 함수 호출시 superView에 포함될 subviews 포함
     func configureSubviewUI(with subviews: UIView...) {
