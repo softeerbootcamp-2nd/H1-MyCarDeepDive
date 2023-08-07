@@ -45,22 +45,6 @@ class LifeStyleViewController: UIViewController {
         configureUI()
     }
     
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        
-        contentView.frame = view.frame
-        contentView.configureDetail(
-            descriptionText: "유사한 라이프스타일을 선택하면\n차량을 추천해 드려요.",
-            partText: "라이프스타일",
-            questionNumber: 1,
-            questionCount: 2,
-            buttonTitle: "선택 완료"
-        )
-        
-        configureCollectionView()
-        configurePageControl()
-    }
-    
     // MARK: - Functions
     private func createCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
@@ -73,10 +57,6 @@ class LifeStyleViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.addSubviews([
-            contentView
-        ])
-        
         contentView.addSubviews([
             collectionView,
             pageControl
@@ -85,6 +65,17 @@ class LifeStyleViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
+        contentView.configureDetail(
+            descriptionText: "유사한 라이프스타일을 선택하면\n차량을 추천해 드려요.",
+            partText: "라이프스타일",
+            questionNumber: 2,
+            questionCount: 2,
+            buttonTitle: "선택 완료"
+        )
+        view = contentView
+        
+        configureCollectionView()
+        configurePageControl()
     }
     
     private func configureCollectionView() {
