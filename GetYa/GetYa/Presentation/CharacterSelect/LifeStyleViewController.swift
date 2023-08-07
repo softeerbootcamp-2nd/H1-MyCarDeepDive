@@ -7,7 +7,7 @@
 
 import UIKit
 
-// TODO: QuestionNumberView 추가, LifeStyle 마지막 Cell, Cell 클릭에 따른 Button 활성화 구현
+// TODO: Cell 클릭에 따른 Button 활성화 구현
 
 class LifeStyleViewController: UIViewController {
     // MARK: - UI Properties
@@ -15,7 +15,7 @@ class LifeStyleViewController: UIViewController {
         frame: .zero,
         collectionViewLayout: createCollectionViewLayout()
     )
-    private lazy var pageControl = CommonPageControl(numberOfPages: tagTexts.count)
+    private lazy var pageControl = CommonPageControl(numberOfPages: tagTexts.count + 1)
     private let button = CommonButton(
         font: GetYaFont.mediumBody3.uiFont,
         buttonBackgroundColorType: .primary,
@@ -129,6 +129,9 @@ class LifeStyleViewController: UIViewController {
         collectionView.register(
             LifeStyleCell.self,
             forCellWithReuseIdentifier: LifeStyleCell.identifier)
+        collectionView.register(
+            LifeStyleDetailCell.self,
+            forCellWithReuseIdentifier: LifeStyleDetailCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = false
@@ -182,19 +185,30 @@ extension LifeStyleViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: LifeStyleCell.identifier,
-            for: indexPath) as? LifeStyleCell else {
-            return UICollectionViewCell()
+        if indexPath.row == tagTexts.count {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LifeStyleDetailCell.identifier,
+                for: indexPath) as? LifeStyleDetailCell else {
+                return UICollectionViewCell()
+            }
+            
+            return cell
+            
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LifeStyleCell.identifier,
+                for: indexPath) as? LifeStyleCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.setDescriptionText(text: descriptionTexts[indexPath.row])
+            cell.setTitleImage(image: UIImage(systemName: "house")!)
+            cell.setTagViews(texts: tagTexts[indexPath.row])
+            cell.isSelected = indexPath == selectedIndexPath
+            cell.configureByIsSelected(isSelected: cell.isSelected)
+            
+            return cell
         }
-        
-        cell.setDescriptionText(text: descriptionTexts[indexPath.row])
-        cell.setTitleImage(image: UIImage(systemName: "house")!)
-        cell.setTagViews(texts: tagTexts[indexPath.row])
-        cell.isSelected = indexPath == selectedIndexPath
-        cell.configureByIsSelected(isSelected: cell.isSelected)
-        
-        return cell
     }
     
     func collectionView(
@@ -211,7 +225,7 @@ extension LifeStyleViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return tagTexts.count
+        return tagTexts.count + 1
     }
 }
 
