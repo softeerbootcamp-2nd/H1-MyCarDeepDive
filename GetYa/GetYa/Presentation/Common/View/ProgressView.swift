@@ -28,8 +28,8 @@ final class ProgressView: UIProgressView {
         frame: CGRect,
         progressTotalStep: Int,
         style: UIProgressView.Style,
-        progressTintColor: UIColor?,
-        backgroundTintColor: UIColor?,
+        progressTintColor: UIColor? = nil,
+        backgroundTintColor: UIColor? = nil,
         animationDuration: TimeInterval
     ) {
         self.progressTotalStep = progressTotalStep
@@ -37,8 +37,8 @@ final class ProgressView: UIProgressView {
         super.init(frame: frame)
         progressViewStyle = style
         configureUIColor(
-            progressTintColor: progressTintColor,
-            backgroundTintColor: backgroundTintColor)
+            progressTintColor: progressTintColor ?? .GetYaPalette.acriveBlue,
+            backgroundTintColor: backgroundTintColor ?? .GetYaPalette.gray800)
         setProgress(gaugeOneStepAmount, animated: false)
         bind()
     }
@@ -64,8 +64,6 @@ final class ProgressView: UIProgressView {
             frame: .zero,
             progressTotalStep: progressTotalStep,
             style: .bar,
-            progressTintColor: .GetYaPalette.acriveBlue,
-            backgroundTintColor: .GetYaPalette.gray800,
             animationDuration: 0.7)
         translatesAutoresizingMaskIntoConstraints = false
     }
@@ -76,6 +74,9 @@ final class ProgressView: UIProgressView {
         super.init(coder: coder)
         progressViewStyle = .default
         setProgress(gaugeOneStepAmount, animated: false)
+        configureUIColor(
+            progressTintColor: .GetYaPalette.acriveBlue,
+            backgroundTintColor: .GetYaPalette.gray800)
         bind()
     }
     
@@ -98,7 +99,7 @@ extension ProgressView {
         progressViewStyle = style
     }
     
-    /// 화면 전환될 page index.
+    // TODO: 화면 전환될 page index.
     /// **index는 0부터** 시작합니다!!!
     /// 안전하게 하려면 page total count도 받아서 progressTotalStep와 일치하는지 아니면 -1 인지 비교하면 되는데,,
     func setProgress(with index: Int) {
