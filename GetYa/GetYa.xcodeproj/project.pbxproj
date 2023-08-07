@@ -260,8 +260,8 @@
 			children = (
 				647FBF132A7CB5C900507AE9 /* View */,
 				641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */,
-				6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */,
 				641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */,
+				6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */,
 				6412D0872A80C385001E4005 /* AgeViewController.swift */,
 			);
 			path = CharacterSelect;
@@ -942,7 +942,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3X23G6XQ74;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GetYa/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -954,7 +954,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "NamSeok-Bae.GetYa";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.softeer.H2O;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -969,7 +969,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3X23G6XQ74;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GetYa/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -981,7 +981,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "NamSeok-Bae.GetYa";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.softeer.H2O;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
