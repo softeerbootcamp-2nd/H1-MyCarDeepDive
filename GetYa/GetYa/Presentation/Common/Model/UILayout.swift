@@ -15,7 +15,7 @@ import Foundation
 ///   enum Constant {
 ///     enum ImageView {
 ///       static let margin = UIMargin(
-///         top: 0, leading: 20, trailing: -10, bottom: -10)
+///         top: 0, leading: 20, trailing: -10, bottom: -10, width: 30)
 ///     }
 ///
 ///     enum Title {
@@ -26,26 +26,26 @@ import Foundation
 /// }
 /// ```
 struct UILayout {
-  let topMargin: CGFloat
-  let leadingMargin: CGFloat
-  let trailingMargin: CGFloat
-  let bottomMargin: CGFloat
+    let topMargin: CGFloat
+    let leadingMargin: CGFloat
+    let trailingMargin: CGFloat
+    let bottomMargin: CGFloat
     let height: CGFloat
     let width: CGFloat
-  
-  init(
-    leadingMargin: CGFloat = 0,
-    topMargin: CGFloat = 0,
-    trailingMargin: CGFloat = 0,
-    bottomMargin: CGFloat = 0,
-    height: CGFloat = 0,
-    width: CGFloat = 0
-  ) {
-      self.topMargin = topMargin.scaledHeight
-      self.leadingMargin = leadingMargin.scaledWidth
-      self.trailingMargin = trailingMargin.scaledWidth
-      self.bottomMargin = bottomMargin.scaledHeight
-      self.height = height
-      self.width = width
-  }
+    
+    init(
+        leadingMargin: CGFloat = 0,
+        topMargin: CGFloat = 0,
+        trailingMargin: CGFloat = 0,
+        bottomMargin: CGFloat = 0,
+        height: CGFloat = 0,
+        width: CGFloat = 0
+    ) {
+        self.topMargin = topMargin.scaledHeight
+        self.leadingMargin = leadingMargin.scaledWidth
+        self.trailingMargin = trailingMargin.scaledWidth
+        self.bottomMargin = bottomMargin.scaledHeight
+        self.height = height
+        self.width = width
+    }
 }
