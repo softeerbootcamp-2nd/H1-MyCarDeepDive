@@ -11,41 +11,18 @@ import UIKit
 
 class LifeStyleViewController: UIViewController {
     // MARK: - UI Properties
+    private let contentView = QuestionContentView()
     private lazy var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: createCollectionViewLayout()
     )
     private lazy var pageControl = CommonPageControl(numberOfPages: tagTexts.count + 1)
-    private let button = CommonButton(
-        font: GetYaFont.mediumBody3.uiFont,
-        buttonBackgroundColorType: .primary,
-        title: "선택 완료"
-    )
-    private let descriptionLabel = CommonLabel(
-        fontType: GetYaFont.regularHead2,
-        color: .GetYaPalette.gray0,
-        text: "유사한 라이프스타일을 선택하면\n차량 조합을 추천해 드려요."
-    ).set {
-        $0.configurePartTextFont(otherFontType: .mediumHead2, partText: "라이프스타일")
-    }
-    private let questionNumberView = QuestionNumberView(text: "2/2")
     
     // MARK: - Properties
     private let collectionViewLayoutConstant = UILayout(topMargin: 43, height: 320)
     private let cellLayoutConstant = UILayout(height: 320, width: 278)
     private let cellSpacing: CGFloat = 8
-    private let descriptionLabelLayoutConstant = UILayout(leadingMargin: 16, topMargin: 29)
     private let pageControlLayoutConstant = UILayout(topMargin: 32)
-    private let questionNumberViewLayoutConstant = UILayout(
-        topMargin: 24,
-        trailingMargin: -16,
-        height: 40,
-        width: 65)
-    private let buttonLayoutConstant = UILayout(
-        leadingMargin: 17,
-        trailingMargin: -17,
-        bottomMargin: -32,
-        height: 52)
     let descriptionTexts: [String] = [
         "가족과 함께 타서 안전을\n중시해요",
         "매일 출퇴근하여 경제적이고\n편안한 주행을 원해요",
@@ -68,8 +45,24 @@ class LifeStyleViewController: UIViewController {
         configureUI()
     }
     
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        
+        contentView.frame = view.frame
+        contentView.configureDetail(
+            descriptionText: "유사한 라이프스타일을 선택하면\n차량을 추천해 드려요.",
+            partText: "라이프스타일",
+            questionNumber: 1,
+            questionCount: 2,
+            buttonTitle: "선택 완료"
+        )
+        
+        configureCollectionView()
+        configurePageControl()
+    }
+    
     // MARK: - Functions
-    func createCollectionViewLayout() -> UICollectionViewFlowLayout {
+    private func createCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: cellLayoutConstant.width, height: cellLayoutConstant.height)
         flowLayout.minimumLineSpacing = cellSpacing
@@ -81,47 +74,17 @@ class LifeStyleViewController: UIViewController {
     
     private func setupViews() {
         view.addSubviews([
-            descriptionLabel,
-            questionNumberView,
+            contentView
+        ])
+        
+        contentView.addSubviews([
             collectionView,
-            pageControl,
-            button
+            pageControl
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .white
-        configureDescriptionLabel()
-        configureQuestionNumberView()
-        configureCollectionView()
-        configurePageControl()
-        configureButton()
-    }
-    
-    private func configureDescriptionLabel() {
-        NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: descriptionLabelLayoutConstant.topMargin),
-            descriptionLabel.leadingAnchor.constraint(
-                equalTo: view.leadingAnchor,
-                constant: descriptionLabelLayoutConstant.leadingMargin)
-        ])
-    }
-    
-    private func configureQuestionNumberView() {
-        NSLayoutConstraint.activate([
-            questionNumberView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: questionNumberViewLayoutConstant.topMargin),
-            questionNumberView.trailingAnchor.constraint(
-                equalTo: view.trailingAnchor,
-                constant: questionNumberViewLayoutConstant.trailingMargin),
-            questionNumberView.heightAnchor.constraint(
-                equalToConstant: questionNumberViewLayoutConstant.height),
-            questionNumberView.widthAnchor.constraint(
-                equalToConstant: questionNumberViewLayoutConstant.width)
-        ])
     }
     
     private func configureCollectionView() {
@@ -142,7 +105,7 @@ class LifeStyleViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
-                equalTo: descriptionLabel.bottomAnchor,
+                equalTo: contentView.descriptionLabel.bottomAnchor,
                 constant: collectionViewLayoutConstant.topMargin),
             collectionView.heightAnchor.constraint(
                 equalToConstant: collectionViewLayoutConstant.height),
@@ -160,27 +123,27 @@ class LifeStyleViewController: UIViewController {
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
-    
-    private func configureButton() {
-        button.isEnabled = false
-        
-        NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(
-                equalTo: view.leadingAnchor,
-                constant: buttonLayoutConstant.leadingMargin),
-            button.trailingAnchor.constraint(
-                equalTo: view.trailingAnchor,
-                constant: buttonLayoutConstant.trailingMargin),
-            button.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor,
-                constant: buttonLayoutConstant.bottomMargin),
-            button.heightAnchor.constraint(equalToConstant: buttonLayoutConstant.height)
-        ])
-    }
 }
 
 // MARK: - UICollectionView Delegate
 extension LifeStyleViewController: UICollectionViewDelegate {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        selectedIndexPath = indexPath
+    }
+}
+
+// MARK: - UICollectionView Datasource
+extension LifeStyleViewController: UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return tagTexts.count + 1
+    }
+    
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
@@ -209,23 +172,6 @@ extension LifeStyleViewController: UICollectionViewDelegate {
             
             return cell
         }
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        didSelectItemAt indexPath: IndexPath
-    ) {
-        selectedIndexPath = indexPath
-    }
-}
-
-// MARK: - UICollectionView Datasource
-extension LifeStyleViewController: UICollectionViewDataSource {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        return tagTexts.count + 1
     }
 }
 
