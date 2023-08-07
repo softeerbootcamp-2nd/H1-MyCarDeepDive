@@ -77,15 +77,7 @@ class LifeStyleCell: UICollectionViewCell {
     static let identifier: String = "LifeStyleCell"
     override var isSelected: Bool {
         didSet {
-            lineView.backgroundColor = isSelected ? Palette.gray700 : Palette.gray900
-            selectImageView.isHighlighted = isSelected
-            descriptionLabel.textColor = isSelected ? Palette.primary : Palette.gray0
-            tagStackView.arrangedSubviews.map { $0 as? TagView }.forEach {
-                $0?.configureBackgroundColor(color: isSelected ? Palette.lightAcriveBlue : Palette.gray1000)
-            }
-            baseView.layer.backgroundColor = isSelected ?  UIColor.clear.cgColor : Palette.lightPrimary.cgColor
-            baseView.layer.borderWidth = isSelected ? 1.5 : 0
-            titleImageView.layer.borderWidth = isSelected ? 1.5 : 0
+            configureByIsSelected(isSelected: isSelected)
         }
     }
     private let titleImageViewLayoutConstant = UILayout(height: 128)
@@ -238,6 +230,18 @@ class LifeStyleCell: UICollectionViewCell {
                 constant: buttonLayoutConstant.topMargin),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
+    }
+    
+    func configureByIsSelected(isSelected: Bool) {
+        lineView.backgroundColor = isSelected ? Palette.gray700 : Palette.gray900
+        selectImageView.isHighlighted = isSelected
+        descriptionLabel.textColor = isSelected ? Palette.primary : Palette.gray0
+        tagStackView.arrangedSubviews.map { $0 as? TagView }.forEach {
+            $0?.configureBackgroundColor(color: isSelected ? Palette.lightAcriveBlue : Palette.gray1000)
+        }
+        baseView.layer.backgroundColor = isSelected ?  UIColor.clear.cgColor : Palette.lightPrimary.cgColor
+        baseView.layer.borderWidth = isSelected ? 1.5 : 0
+        titleImageView.layer.borderWidth = isSelected ? 1.5 : 0
     }
     
     func setTagViews(texts: [String]) {

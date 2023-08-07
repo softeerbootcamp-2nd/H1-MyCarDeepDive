@@ -50,6 +50,7 @@ class LifeStyleViewController: UIViewController {
         ["#주행안전", "#주차/출차"],
         ["#스타일", "#퍼포먼스"]
     ]
+    private var selectedIndexPath: IndexPath?
     
     // MARK: - LifeCycles
     override func viewDidLoad() {
@@ -165,8 +166,17 @@ extension LifeStyleViewController: UICollectionViewDelegate {
         cell.setDescriptionText(text: descriptionTexts[indexPath.row])
         cell.setTitleImage(image: UIImage(systemName: "house")!)
         cell.setTagViews(texts: tagTexts[indexPath.row])
+        cell.isSelected = indexPath == selectedIndexPath
+        cell.configureByIsSelected(isSelected: cell.isSelected)
         
         return cell
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        selectedIndexPath = indexPath
     }
 }
 
