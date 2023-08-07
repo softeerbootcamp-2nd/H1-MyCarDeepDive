@@ -13,7 +13,7 @@ extension CGFloat {
         let screenSize = UIScreen.main.bounds.size
         
         let scale = screenSize.width / width
-        return self * scale
+        return (self * scale).rounded()
     }
     
     var scaledHeight: CGFloat {
@@ -21,6 +21,6 @@ extension CGFloat {
         let screenSize = UIScreen.main.bounds.size
         
         let scale = screenSize.height / height
-        return self * scale
+        return (self * scale).rounded()
     }
 }
