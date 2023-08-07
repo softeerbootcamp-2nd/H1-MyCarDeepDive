@@ -28,7 +28,7 @@ function AdditionQuestionBudgetRange({
         </span>{' '}
         <span className='font-h2-medium'>
           <span className='text-[24px] leading-[26px] tracking-[-0.2px]'>
-            {highestPrice.toLocaleString('en-US')}
+            {(+budget).toLocaleString('en-US')}
           </span>
         </span>
         <span className='font-h5-regular'>
@@ -40,7 +40,6 @@ function AdditionQuestionBudgetRange({
 
       <input
         className='w-full mb-[14px] slider'
-        list='trickmarks'
         type='range'
         min={lowestPrice}
         max={highestPrice}
@@ -49,18 +48,6 @@ function AdditionQuestionBudgetRange({
         value={budget}
         onChange={myLifeStyleHandler}
       />
-      <datalist id='trickmarks'>
-        <option value='4200' />
-        <option value='4500' />
-        <option value='4800' />
-        <option value='5100' />
-        <option value='5400' />
-        <option value='5700' />
-        <option value='6000' />
-        <option value='6300' />
-        <option value='6600' />
-        <option value='6900' />
-      </datalist>
 
       <div className='flex justify-between font-body4-regular text-grey-400 mb-[52px]'>
         <p>{`${lowestPrice} ${unit}`}</p>
