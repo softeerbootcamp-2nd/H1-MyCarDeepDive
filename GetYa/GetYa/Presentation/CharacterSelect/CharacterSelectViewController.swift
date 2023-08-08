@@ -124,6 +124,6 @@ extension CharacterSelectViewController: AgeViewControllerDelegate {
 // MARK: - LifeStyleViewController Delegate
 extension CharacterSelectViewController: LifeStyleViewControllerDelegate {
     func touchUpSuccessButton(sender: UIButton) {
-        
+        // TODO: CharacterSelectSuccessViewController로 화면 전환
     }
 }
