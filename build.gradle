@@ -1,8 +1,18 @@
+buildscript {
+	ext {
+		restdocsApiSpecVersion = '0.16.2'
+		mapStructVersion = "1.4.2.Final"
+	}
+}
+
 plugins {
 	id 'java'
+	id 'jacoco'
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id "com.diffplug.spotless" version "6.10.0"
+	id "com.diffplug.spotless" version '6.10.0'
+	id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
+	id 'org.hidetake.swagger.generator' version '2.18.2'
 }
 
 group = 'com.h1'
@@ -39,12 +49,17 @@ allprojects {
 	}
 }
 
+
 dependencies {
 	// Spring
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// Monitoring
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'io.micrometer:micrometer-core'
 
 	// Database
 	runtimeOnly 'com.h2database:h2'
@@ -56,15 +71,84 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	// Mapstruct
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+	implementation "org.mapstruct:mapstruct:${mapStructVersion}"
+
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// String-Utils
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+
+
+	// Slack logback appender
+	implementation 'com.github.maricn:logback-slack-appender:1.6.1'
+
+	// Swagger
+	implementation "org.springdoc:springdoc-openapi-ui:1.6.11"
+
+	// RestDocs
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	testImplementation 'com.epages:restdocs-api-spec-mockmvc:' + restdocsApiSpecVersion
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
+	finalizedBy 'jacocoTestReport'
+}
+
+tasks.withType(GenerateSwaggerUI) {
+	dependsOn 'openapi3'
+
+	delete file('src/main/resources/static/docs/')
+	copy {
+		from "build/resources/main/static/docs"
+		into "src/main/resources/static/docs/"
+
+	}
+}
+
+bootJar {
+	dependsOn(':openapi3')
+}
+
+openapi3 {
+	server = "https://api.make-my-car.shop"
+	title = "MyCarDeepDive API Documentation"
+	description = "API documentation of MyCarDeepDive project by Team H1"
+	version = "0.0.1"
+	outputFileNamePrefix = 'open-api-3.0.1'
+	format = 'json'
+
+	outputDirectory = 'build/resources/main/static/docs'
+}
+
+jacoco {
+	toolVersion = '0.8.8'
+}
+
+jacocoTestReport {
+	reports {
+		html.required.set(true)
+	}
+	finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				counter = 'LINE'
+				value = 'COVEREDRATIO'
+				minimum = 0.85
+			}
+		}
+	}
+}
+
+tasks.jar {
+	enabled = false
 }
 
 spotless {
