@@ -35,6 +35,22 @@ final class CharacterSelectSuccessSectionDividerView: UIView {
         font: .init(hyundaiSans: Constant.SectionTitle.font) ?? .init()
     )
     
+    override init(frame: CGRect) {
+        configureSubviewUI(
+            with: onePixelDivider, sectionTitle)
+    }
+    
+    convenience init() {
+        self.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configureSubviewUI(
+            with: onePixelDivider, sectionTitle)
+    }
+    
     // MARK: - Helper
     // TODO: 폰트 새로 적용된거로 바꿔야함. NSMutableAttributed string
     func configureSectionTitle(with text: String) {
