@@ -1,25 +1,31 @@
-import SelectionCarImg from '@/assets/icon/image-358.svg';
+import TrimSelectRadioGroup from './FeatureSelectRadioGroup';
+import SelectionCarBackground from './SelecetionCarBackground';
+import SelectionCarImage from './SelectionCarImage';
+import FeatureGuideLink from './FeatureGuideLink';
+import TrimSelectRadioGroupWrapper from './FeatureSelectRadioGroupWrapper';
+import SelectionCarWrapper from './SelectionCarWrapper';
+
 function SelectPage() {
   return (
     <>
-      <div
-        className={`fixed top-[120px] selectCarBackground flex justify-center items-center `}
-      >
-        <div
-          className='absolute top-0 h-[55%] w-full'
-          style={{ background: 'rgba(0, 66, 142, 0.10)' }}
-        ></div>
-        <div
-          className='absolute bottom-0 h-[45%] w-full'
-          style={{
-            background:
-              'linear-gradient(180deg, rgba(0, 66, 142, 0.30) 0%, rgba(255, 255, 255, 0.00) 100%)',
-          }}
-        ></div>
-        <img src={SelectionCarImg} className='w-[85%] z-10 ml-16'></img>
-      </div>
+      <SelectionCarWrapper>
+        <SelectionCarBackground />
+        <SelectionCarImage />
+      </SelectionCarWrapper>
 
-      <div className='absolute top-0 w-[416px] right-0 mt-[120px] px-12 py-[51px]'></div>
+      <div className='absolute top-0 w-[416px] right-0 mt-[120px] px-12 py-[51px]'>
+        <FeatureGuideLink />
+        <TrimSelectRadioGroupWrapper>
+          <TrimSelectRadioGroup />
+        </TrimSelectRadioGroupWrapper>
+
+        <div className='mt-8 flex justify-between mb-[2px]'>
+          <p className='font-h2-medium'>트림</p>
+          <div className='w-[65px] h-[30px] justify-center items-center gap-[10px] inline-flex rounded-[20px] border border-grey-700 font-caption1-regular text-grey-0'>
+            <span className='leading-[22px] tracking-[-0.2px]'> 비교하기</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

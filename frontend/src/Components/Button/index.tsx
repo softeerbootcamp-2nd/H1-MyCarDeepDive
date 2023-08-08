@@ -12,7 +12,7 @@ interface ButtonProps {
     | 'primaryBody4';
   text: string;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const buttonStyle = {

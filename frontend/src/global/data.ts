@@ -75,3 +75,21 @@ export const detailSelectionList = [
     value: '컴포트 II, 현대 스마트 센스 I, 주차 보조 시스템',
   },
 ];
+
+export const carFeatureList = [
+  {
+    name: 'engine',
+    description: '엔진',
+    valueList: ['디젤 2.2', '가솔린 3.8'],
+  },
+  {
+    name: 'body',
+    description: '바디',
+    valueList: ['7인승', '8인승'],
+  },
+  {
+    name: 'operation',
+    description: '구동방식',
+    valueList: ['2WD', '4WD'],
+  },
+];
