@@ -22,8 +22,6 @@ extension NSMutableAttributedString {
             range: .init(location: 0, length: string.count))
     }
     
-    
-    
     private func configureHyundaiSansAttributes(
         with font: UIFont,
         type: GetYaFont
