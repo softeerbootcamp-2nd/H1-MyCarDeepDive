@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterSelectSuccessMainHeader: UICollectionReusableView {
+final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
     static let id = String(
         describing: CharacterSelectSuccessMainHeader.self)
     enum Constant {
@@ -15,7 +15,7 @@ final class CharacterSelectSuccessMainHeader: UICollectionReusableView {
             let thumbnailViewHeight = CharacterSelectSuccessThumbnailView
             .Constant
             .intrinsicContentHeight
-            let recommendCarInfoHeight = CharacterSelectSuccessRecommendCarInfoView
+            let recommendCarInfoHeight = CharacterSSRecommendCarInfoView
                 .Constant
                 .intrinsicContentHeight
             let sectionDividerHeight = CharacterSelectSuccessSectionDividerView
@@ -27,17 +27,16 @@ final class CharacterSelectSuccessMainHeader: UICollectionReusableView {
     
     // MARK: - UI properties
     private let thumbnailView = CharacterSelectSuccessThumbnailView()
-    private let recommendCarInfo = CharacterSelectSuccessRecommendCarInfoView()
+    private let recommendCarInfoView = CharacterSSRecommendCarInfoView()
     private let sectionDivider = CharacterSelectSuccessSectionDividerView()
     
     // MARK: - Lifecycles
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         configureSubviewUI(
             with: thumbnailView,
-            recommendCarInfo,
+            recommendCarInfoView,
             sectionDivider)
-        print(Constant.intrinsicContentHeight)
     }
     
     convenience init() {
@@ -48,7 +47,7 @@ final class CharacterSelectSuccessMainHeader: UICollectionReusableView {
         super.init(coder: coder)
         configureSubviewUI(
             with: thumbnailView,
-            recommendCarInfo,
+            recommendCarInfoView,
             sectionDivider)
     }
     
@@ -57,17 +56,12 @@ final class CharacterSelectSuccessMainHeader: UICollectionReusableView {
     /// 0 = 차량 한글, 1 = 차량 영어 2 = 차량 가격 3 = 차량 옵션 리스트
     /// 그리고 추천 완료된 차량의 키워드를 가져와 TagView를 갱신해야 합니다.
     func configure(
-        with thumbnailKeywordTexts: [String],
-        carInfo: [String],
+        thumbnailKeywordTexts: [String],
+        recommendCarInfo: RecommendCarInfoEntity,
         firstSectionTitle: String
     ) {
-        thumbnailView.configureRecommendKeywordStackView(
-            thumbnailKeywordTexts)
-        recommendCarInfo.configure(
-            with: carInfo[0],
-            carInfo[1],
-            carInfo[2],
-            carInfo[3])
+        thumbnailView.configureRecommendKeywordStackView(thumbnailKeywordTexts)
+        recommendCarInfoView.configure(with: recommendCarInfo)
         sectionDivider.configureSectionTitle(with: firstSectionTitle)
     }
 }
@@ -93,15 +87,15 @@ private extension CharacterSelectSuccessMainHeader {
     }
     
     var recommendCarInfoConstraints: [NSLayoutConstraint] {
-        [recommendCarInfo.leadingAnchor.constraint(equalTo: leadingAnchor),
-         recommendCarInfo.trailingAnchor.constraint(equalTo: trailingAnchor),
-         recommendCarInfo.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor)]
+        [recommendCarInfoView.leadingAnchor.constraint(equalTo: leadingAnchor),
+         recommendCarInfoView.trailingAnchor.constraint(equalTo: trailingAnchor),
+         recommendCarInfoView.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor)]
     }
     
     var sectionDividerConstraints: [NSLayoutConstraint] {
         [sectionDivider.leadingAnchor.constraint(equalTo: leadingAnchor),
         sectionDivider.trailingAnchor.constraint(equalTo: trailingAnchor),
-         sectionDivider.topAnchor.constraint(equalTo: recommendCarInfo.bottomAnchor),
+         sectionDivider.topAnchor.constraint(equalTo: recommendCarInfoView.bottomAnchor),
          sectionDivider.bottomAnchor.constraint(equalTo: bottomAnchor)]
     }
 }
