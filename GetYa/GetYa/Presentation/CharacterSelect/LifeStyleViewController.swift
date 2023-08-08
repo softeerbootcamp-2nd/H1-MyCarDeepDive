@@ -218,7 +218,7 @@ extension LifeStyleViewController: LifeStyleCellDelegate {
     func touchUpButton(cell: UICollectionViewCell) {
         if cell is LifeStyleDetailCell {
             navigationController?.pushViewController(
-                LifeStyleDetailViewController(),
+                DetailLifeStyleSelectViewController(),
                 animated: true)
         } else {
             // TODO: 라이프스타일 엿보기 뷰컨트롤러로 이동

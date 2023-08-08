@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LifeStyleDetailViewController: UIViewController {
+class LifeStylePeekViewController: UIViewController {
     // MARK: - UI properties
     
     // MARK: - Properties
