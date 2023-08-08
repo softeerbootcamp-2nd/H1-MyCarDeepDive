@@ -207,9 +207,6 @@
 			children = (
 				155EAB442A81F0A200833B0E /* MainHeader */,
 				155EAB3B2A80826A00833B0E /* CharacterSelectSuccessCollectionView.swift */,
-				155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */,
-				155EAB402A810A6300833B0E /* CharacterSelectSuccessRecommendCarInfo.swift */,
-				155EAB422A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift */,
 			);
 			path = CharacterSeleectSuccessView;
 			sourceTree = "<group>";
@@ -217,6 +214,9 @@
 		155EAB442A81F0A200833B0E /* MainHeader */ = {
 			isa = PBXGroup;
 			children = (
+				155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */,
+				155EAB402A810A6300833B0E /* CharacterSelectSuccessRecommendCarInfo.swift */,
+				155EAB422A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift */,
 				155EAB452A81F0AF00833B0E /* CharacterSelectSuccessMainHeader.swift */,
 			);
 			path = MainHeader;
