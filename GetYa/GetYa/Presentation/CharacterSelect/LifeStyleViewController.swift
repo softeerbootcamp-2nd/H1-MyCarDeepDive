@@ -130,7 +130,22 @@ extension LifeStyleViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        selectedIndexPath = indexPath
+        // TODO: 좀 더 효율적인 방법 찾아보기
+        if indexPath.row != tagTexts.count {
+            selectedIndexPath = indexPath
+            
+            collectionView.visibleCells.forEach {
+                $0.isSelected = false
+            }
+            
+            guard let cell = collectionView.cellForItem(at: indexPath) as? LifeStyleCell else { return }
+            cell.configureByIsSelected(isSelected: true)
+        } else {
+            if let selectedIndexPath {
+                guard let cell = collectionView.cellForItem(at: selectedIndexPath) as? LifeStyleCell else { return }
+                cell.configureByIsSelected(isSelected: true)
+            }
+        }
     }
 }
 
@@ -153,6 +168,7 @@ extension LifeStyleViewController: UICollectionViewDataSource {
                 for: indexPath) as? LifeStyleDetailCell else {
                 return UICollectionViewCell()
             }
+            cell.delegate = self
             
             return cell
             
@@ -162,7 +178,7 @@ extension LifeStyleViewController: UICollectionViewDataSource {
                 for: indexPath) as? LifeStyleCell else {
                 return UICollectionViewCell()
             }
-            
+            cell.delegate = self
             cell.setDescriptionText(text: descriptionTexts[indexPath.row])
             cell.setTitleImage(image: UIImage(systemName: "house")!)
             cell.setTagViews(texts: tagTexts[indexPath.row])
@@ -188,5 +204,18 @@ extension LifeStyleViewController {
         targetContentOffset.pointee = CGPoint(
             x: index * cellWidth - scrollView.contentInset.left,
             y: scrollView.contentInset.top)
+    }
+}
+
+// MARK: - LifeStyleCell Delegate
+extension LifeStyleViewController: LifeStyleCellDelegate {
+    func touchUpButton(cell: UICollectionViewCell) {
+        if cell is LifeStyleDetailCell {
+            navigationController?.pushViewController(
+                LifeStyleDetailViewController(),
+                animated: true)
+        } else {
+            // TODO: 라이프스타일 엿보기 뷰컨트롤러로 이동
+        }
     }
 }
