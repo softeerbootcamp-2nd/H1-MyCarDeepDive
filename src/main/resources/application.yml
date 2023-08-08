@@ -40,3 +40,72 @@ springdoc:
 server:
   port: ${server.port}
 ---
+spring:
+  config:
+    activate:
+      on-profile: dev
+    import: 'aws-parameterstore:'
+  jpa:
+    hibernate:
+      ddl-auto: ${jpa.ddl_auto}
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${jdbc.url}
+    username: ${jdbc.username}
+    password: ${jdbc.password}
+    hikari:
+      connection-timeout: 200000
+aws:
+  paramstore:
+    enabled: true
+    prefix: /config
+    profile-separator: _
+    name: mycardeepdive
+springdoc:
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    url: /docs/open-api-3.0.1.json
+    path: /docs/swagger
+server:
+  port: ${server.port}
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+    import: 'aws-parameterstore:'
+  jpa:
+    hibernate:
+      ddl-auto: ${jpa.ddl_auto}
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${jdbc.url}
+    username: ${jdbc.username}
+    password: ${jdbc.password}
+    hikari:
+      connection-timeout: 200000
+aws:
+  paramstore:
+    enabled: true
+    prefix: /config
+    profile-separator: _
+    name: mycardeepdive
+springdoc:
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    url: /docs/open-api-3.0.1.json
+    path: /docs/swagger
+server:
+  port: ${server.port}
