@@ -52,8 +52,6 @@ class HomeViewController: UIViewController {
         let image = UIImage(named: "Logo")
         self.navigationItem.title = ""
         self.navigationItem.titleView = UIImageView(image: image)
-        self.navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "arrow.left")
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left")
     }
 }
 
