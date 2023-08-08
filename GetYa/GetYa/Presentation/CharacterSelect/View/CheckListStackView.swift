@@ -8,10 +8,6 @@
 import UIKit
 
 class CheckListStackView: UIStackView {
-    // MARK: - UI Properties
-    
-    // MARK: - Properties
-    
     // MARK: - LifeCycles
     convenience init() {
         self.init(frame: .zero)
@@ -43,9 +39,10 @@ class CheckListStackView: UIStackView {
     func setupItem(textArray: [String]) {
         removeAllArrangedSubViews()
         
-        textArray.forEach { text in
+        textArray.enumerated().forEach { (idx, text) in
             let itemView = CheckListItemView(text: text)
             itemView.delegate = self
+            if idx == 0 { itemView.isTapped = true }
             addArrangedSubview(itemView)
         }
     }
