@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol AgeViewControllerDelegate: AnyObject {
+    func touchUpNextButton(sender: UIButton)
+}
+
 class AgeViewController: UIViewController {
     // MARK: - UI Properties
     private let contentView = QuestionContentView()
     private let checkListStackView = CheckListStackView()
     
     // MARK: - Properties
+    weak var delegate: AgeViewControllerDelegate?
     private let checkListStackViewLayoutConstant = UILayout(
         leadingMargin: 16,
         topMargin: 72,
@@ -39,12 +44,14 @@ class AgeViewController: UIViewController {
     
     private func configureUI() {
         self.view.backgroundColor = .white
+        contentView.delegate = self
         contentView.configureDetail(
             descriptionText: "나이를 알려주세요.",
             partText: "나이",
             questionNumber: 1,
             questionCount: 2,
-            buttonTitle: "다음"
+            buttonTitle: "다음",
+            buttonIsEnabled: true
         )
         view = contentView
         configureCheckListStackView()
@@ -64,5 +71,12 @@ class AgeViewController: UIViewController {
                 equalTo: view.trailingAnchor,
                 constant: checkListStackViewLayoutConstant.trailingMargin)
         ])
+    }
+}
+
+// MARK: - QuestionContentView Delegate
+extension AgeViewController: QuestionContentViewDelegate {
+    func touchUpButton(sender: UIButton) {
+        delegate?.touchUpNextButton(sender: sender)
     }
 }
