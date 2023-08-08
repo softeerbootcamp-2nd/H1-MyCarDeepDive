@@ -15,7 +15,6 @@ final class CharacterSelectSuccessRecommendCarInfo: UIView {
                 leadingMargin: 16, topMargin: 13)
             static let fontColor: UIColor = .GetYaPalette.gray50
             static let font: GetYaFont = .mediumHead2
-            
         }
         
         enum CarEnNameLabel {
@@ -54,6 +53,12 @@ final class CharacterSelectSuccessRecommendCarInfo: UIView {
             carPriceLabel,
             carOptionsLabel)
     }
+    
+    convenience init() {
+        self.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     
     required init?(coder: NSCoder) {
         return nil

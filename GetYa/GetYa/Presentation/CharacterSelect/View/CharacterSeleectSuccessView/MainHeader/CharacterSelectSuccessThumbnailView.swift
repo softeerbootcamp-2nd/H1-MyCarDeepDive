@@ -83,6 +83,11 @@ final class CharacterSelectSuccessThumbnailView: UIView {
         configureUI()
     }
     
+    convenience init() {
+        self.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureUI()
