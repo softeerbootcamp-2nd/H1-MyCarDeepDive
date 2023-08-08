@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'HyundaiSansHeadKRBold';
+  src: url('./assets/font/HyundaiSansHeadKRBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'HyundaiSansHeadKRMedium';
+  src: url('./assets/font/HyundaiSansHeadKRMedium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'HyundaiSansHeadKRRegular';
+  src: url('./assets/font/HyundaiSansHeadKRRegular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'HyundaiSansTextKRBold';
+  src: url('./assets/font/HyundaiSansTextKRBold.woff') format('woff2');
+}
+@font-face {
+  font-family: 'HyundaiSansTextKRMedium';
+  src: url('./assets/font/HyundaiSansTextKRMedium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'HyundaiSansTextKRRegular';
+  src: url('./assets/font/HyundaiSansTextKRRegular.woff2') format('woff2');
+}
+
+.font-h1-bold {
+  font-family: 'HyundaiSansHeadKRBold';
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+}
+
+.font-h2-medium {
+  font-family: 'HyundaiSansHeadKRMedium';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: -0.3px;
+}
+
+.font-h3-medium {
+  font-family: 'HyundaiSansHeadKRMedium';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+}
+
+.font-h4-medium {
+  font-family: 'HyundaiSansHeadKRMedium';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: -0.3px;
+}
+
+.font-h5-regular {
+  font-family: 'HyundaiSansHeadKRRegular';
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+}
+
+.font-body1-bold {
+  font-family: 'HyundaiSansTextKRBold';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.2px;
+}
+
+.font-body1-medium {
+  font-family: 'HyundaiSansTextKRMedium';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.2px;
+}
+
+.font-body2-bold {
+  font-family: 'HyundaiSansTextKRBold';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+}
+
+.font-body2-medium {
+  font-family: 'HyundaiSansTextKRMedium';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+}
+
+.font-body2-regular {
+  font-family: 'HyundaiSansTextKRRegular';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+}
+
+.font-body3-medium {
+  font-family: 'HyundaiSansTextKRMedium';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+
+.font-body3-regular {
+  font-family: 'HyundaiSansTextKRRegular';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+
+.font-body4-medium {
+  font-family: 'HyundaiSansTextKRMedium';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+}
+
+.font-body4-regular {
+  font-family: 'HyundaiSansTextKRRegular';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+}
+
+.font-caption1-medium {
+  font-family: 'HyundaiSansTextKRMedium';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.font-caption1-regular {
+  font-family: 'HyundaiSansTextKRRegular';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+/* letter */
+.tracking-negative-03 {
+  letter-spacing: -0.3px;
+}
+
+.tracking-negative-05 {
+  letter-spacing: -0.5px;
+}
+
+/* progress */
+@keyframes progress-half {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 50%;
+  }
+}
+@keyframes progress-full {
+  0% {
+    width: 50%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes progress-half-reverse {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 50%;
+  }
+}
+
+.progress-bar-1 {
+  animation: progress-half 2s ease-in-out;
+}
+.progress-bar-2 {
+  animation: progress-full 2s ease-in-out;
+}
+.progress-bar-1-reverse {
+  animation: progress-half-reverse 2s ease-in-out;
+}
+
+.slider {
+  -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #ffffff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #a4a4a4;
+  cursor: pointer;
+}
+
+.selectCarBackground {
+  width: calc(100vw - 416px);
+  height: calc(100vh - 120px);
+}
