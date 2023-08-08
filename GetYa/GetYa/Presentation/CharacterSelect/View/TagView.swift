@@ -15,6 +15,8 @@ class TagView: UIView {
     )
     
     // MARK: - Properties
+    private var leadingConstraints: NSLayoutConstraint?
+    private var trailingConstraints: NSLayoutConstraint?
     
     // MARK: - LifeCycles
     convenience init() {
@@ -61,19 +63,55 @@ class TagView: UIView {
     }
     
     func configureBorderColor(with: UIColor) {
-        label.layer.borderColor = with.cgColor
+        layer.borderColor = with.cgColor
     }
     
     func configureBorderWidth(with: CGFloat) {
-        label.layer.borderWidth = with
+        layer.borderWidth = with
     }
     
-    func configureBackgroundColor(color: UIColor) {
-        self.layer.backgroundColor = color.cgColor
+    func configureBackgroundColor(color: UIColor?) {
+        backgroundColor = color
     }
     
     func configureLabelText(text: String) {
         label.text = text
+    }
+    
+    func configureLabelFont(with font: UIFont) {
+        label.font = font
+    }
+    
+    func configureTextLabelLeadingMargin(with margin: CGFloat) {
+        guard let leadingConstraints else {
+            leadingConstraints = label.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: margin)
+            leadingConstraints?.isActive = true
+            return
+        }
+        leadingConstraints.isActive = false
+        self.leadingConstraints = label.leadingAnchor.constraint(
+            equalTo: leadingAnchor,
+            constant: margin)
+        leadingConstraints.isActive = true
+        layoutIfNeeded()
+    }
+    
+    func configureTextLabeltrailingMargin(with margin: CGFloat) {
+        guard let trailingConstraints else {
+            trailingConstraints = label.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -margin)
+            trailingConstraints?.isActive = true
+            return
+        }
+        trailingConstraints.isActive = false
+        self.trailingConstraints = label.leadingAnchor.constraint(
+            equalTo: leadingAnchor,
+            constant: margin)
+        trailingConstraints.isActive = true
+        layoutIfNeeded()
     }
     
     private func configureLabel() {
