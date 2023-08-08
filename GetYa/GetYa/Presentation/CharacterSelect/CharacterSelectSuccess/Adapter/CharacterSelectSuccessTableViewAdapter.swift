@@ -7,21 +7,6 @@
 
 import UIKit
 
-// TODO:  옮기기 엔터팉
-struct RecommendCarInfoEntity {
-    var carKrName: String
-    var carEnTrimName: String
-    var carPrice: String
-    var carOptions: String
-}
-
-struct RecommendCarProductOptionEntity {
-    let optionImage: String
-    let optionName: String
-    let optionPrice: String
-    let optionReview: String
-}
-
 final class CharacterSelectSuccessTableViewAdapter: NSObject {
     private var dataSource: CharacterSSTableViewAdapterDataSource
     
