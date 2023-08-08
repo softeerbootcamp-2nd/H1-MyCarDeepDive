@@ -73,9 +73,9 @@ class LifeStyleViewController: UIViewController {
             partText: "라이프스타일",
             questionNumber: 2,
             questionCount: 2,
-            buttonTitle: "선택 완료",
-            buttonIsEnabled: false
+            buttonTitle: "선택 완료"
         )
+        contentView.setButtonIsEnabled(isEnabled: false)
         view = contentView
         
         configureCollectionView()

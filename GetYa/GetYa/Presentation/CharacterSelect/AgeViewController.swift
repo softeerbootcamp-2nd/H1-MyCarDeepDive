@@ -50,8 +50,7 @@ class AgeViewController: UIViewController {
             partText: "나이",
             questionNumber: 1,
             questionCount: 2,
-            buttonTitle: "다음",
-            buttonIsEnabled: true
+            buttonTitle: "다음"
         )
         view = contentView
         configureCheckListStackView()

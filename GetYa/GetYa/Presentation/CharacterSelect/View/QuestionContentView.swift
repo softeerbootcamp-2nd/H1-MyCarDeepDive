@@ -7,14 +7,16 @@
 
 import UIKit
 
+protocol QuestionContentViewDelegate: AnyObject {
+    func touchUpButton(sender: UIButton)
+}
+
 class QuestionContentView: UIView {
     // MARK: - UI Properties
     private let button = CommonButton(
         font: GetYaFont.mediumBody3.uiFont,
         buttonBackgroundColorType: .primary
-    ).set {
-        $0.isEnabled = false
-    }
+    )
     let descriptionLabel = CommonLabel(
         fontType: GetYaFont.regularHead2,
         color: .GetYaPalette.gray0
@@ -22,6 +24,7 @@ class QuestionContentView: UIView {
     private let questionNumberView = QuestionNumberView()
     
     // MARK: - Properties
+    weak var delegate: QuestionContentViewDelegate?
     private let descriptionLabelLayoutConstant = UILayout(leadingMargin: 16, topMargin: 29)
     private let questionNumberViewLayoutConstant = UILayout(
         topMargin: 24,
@@ -46,7 +49,8 @@ class QuestionContentView: UIView {
         partText: String,
         questionNumber: Int,
         questionCount: Int,
-        buttonTitle: String) {
+        buttonTitle: String
+    ) {
             super.init(frame: .zero)
             setupViews()
             configureUI()
@@ -114,6 +118,7 @@ class QuestionContentView: UIView {
     }
     
     private func configureButton() {
+        button.addTarget(self, action: #selector(touchUpButton(_:)), for: .touchUpInside)
         NSLayoutConstraint.activate([
             button.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
@@ -142,6 +147,12 @@ class QuestionContentView: UIView {
             otherFontType: .mediumHead2,
             partText: partText)
     }
+    
+    func setButtonIsEnabled(isEnabled: Bool) {
+        button.isEnabled = isEnabled
+    }
+    
+    @objc private func touchUpButton(_ sender: UIButton) {
+        delegate?.touchUpButton(sender: sender)
+    }
 }
-
-// PageViewController 만들기, 버튼 액션 처리
