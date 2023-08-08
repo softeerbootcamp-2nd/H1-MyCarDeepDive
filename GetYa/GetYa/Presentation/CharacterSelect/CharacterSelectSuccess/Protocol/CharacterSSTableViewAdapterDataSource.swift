@@ -10,12 +10,12 @@ protocol CharacterSSTableViewAdapterDataSource: AnyObject {
     var numberOfSectionSectionItems: Int { get }
     func firstSectionCellItem(
         at index: Int
-    ) -> RecommendCarProductOptionEntity
+    ) -> RecommendCarProductOptionModel
     func secondSectionCellItem(
         at index: Int
-    ) -> RecommendCarProductOptionEntity
+    ) -> RecommendCarProductOptionModel
     var mainSectionHeaderItem: (
         thumbnailKeywords: [String],
-        recommendCarProductOption: RecommendCarInfoEntity,
+        recommendCarProductOption: RecommendCarInfoModel,
         firstSectionTitle: String) { get }
 }
