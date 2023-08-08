@@ -10,18 +10,26 @@ import UIKit
 final class CharacterSelectSuccessSectionDividerView: UIView {
     // MARK: - Constants
     enum Constant {
+        static let intrinsicContentHeight: CGFloat = {
+           return 00000
+        }()
         enum OnePixelDivider {
             static let uiConstant: UILayout = .init(
                 leadingMargin: 16, topMargin: 16, trailingMargin: 16, height: 1)
             static let bgColor: UIColor = .GetYaPalette.gray700
+            static let intrinsicContentHeight: CGFloat = {
+                return uiConstant.height + uiConstant.topMargin
+            }()
         }
         
         enum SectionTitle {
             static let uiConstant: UILayout = .init(
                 leadingMargin: 16, topMargin: 20)
-            static let color: UIColor = .GetYaPalette.gray300
+            static let fontColor: UIColor = .GetYaPalette.gray300
             static let font: GetYaFont = .regularCaption1
-            static let size: CGFloat = 12
+            static let intrinsicContentHeight: CGFloat = {
+                uiConstant.topMargin + font.lineHeight
+            }()
         }
     }
     
@@ -31,9 +39,7 @@ final class CharacterSelectSuccessSectionDividerView: UIView {
         $0.backgroundColor = Constant.OnePixelDivider.bgColor
     }
     
-    private let sectionTitle = CommonLabel(
-        font: .init(hyundaiSans: Constant.SectionTitle.font) ?? .init()
-    )
+    private let sectionTitle = CommonLabel(frame: .zero)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,11 +59,13 @@ final class CharacterSelectSuccessSectionDividerView: UIView {
     }
     
     // MARK: - Helper
-    // TODO: 폰트 새로 적용된거로 바꿔야함. NSMutableAttributed string
     func configureSectionTitle(with text: String) {
-        sectionTitle.text = text
-        sectionTitle.setFont(
-            type: Constant.SectionTitle.font)
+        let const = Constant.SectionTitle.self
+        _=sectionTitle.set {
+            $0.configureText(text: text)
+            $0.configureFont(font: const.font.uiFont)
+            $0.configureColor(color: const.fontColor)
+        }
     }
 }
 
