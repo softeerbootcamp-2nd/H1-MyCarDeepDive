@@ -36,6 +36,15 @@
   letter-spacing: -0.3px;
 }
 
+.font-h1-medium {
+  font-family: 'HyundaiSansHeadKRMedium';
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+}
+
 .font-h2-medium {
   font-family: 'HyundaiSansHeadKRMedium';
   font-size: 20px;
