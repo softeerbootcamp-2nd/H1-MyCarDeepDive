@@ -12,7 +12,7 @@ final class CharacterSelectSuccessRecommendCarInfo: UIView {
     enum Constant {
         enum CarKrNameLabel {
             static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 13)
+                leadingMargin: 16, topMargin: 24)
             static let fontColor: UIColor = .GetYaPalette.gray50
             static let font: GetYaFont = .mediumHead2
         }
@@ -26,7 +26,7 @@ final class CharacterSelectSuccessRecommendCarInfo: UIView {
         enum CarPriceLabel {
             static let uiConstant: UILayout = .init(trailingMargin: 16)
             static let fontColor: UIColor = .GetYaPalette.gray100
-            static let font: GetYaFont = .regularCaption1
+            static let font: GetYaFont = .mediumHead4
         }
         
         enum CarOptionsLabel {
@@ -59,7 +59,6 @@ final class CharacterSelectSuccessRecommendCarInfo: UIView {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    
     required init?(coder: NSCoder) {
         return nil
     }
@@ -73,15 +72,27 @@ final class CharacterSelectSuccessRecommendCarInfo: UIView {
         _ carPrice: String,
         _ carOptions: String
     ) {
-        carKrNameLabel.text = carKrName
-        carEnNameLabel.text = carEnName
-        carPriceLabel.text = carPrice
-        carOptionsLabel.text = carOptions
         
-        carKrNameLabel.setFont(type: Constant.CarKrNameLabel.font)
-        carEnNameLabel.setFont(type: Constant.CarEnNameLabel.font)
-        carPriceLabel.setFont(type: Constant.CarPriceLabel.font)
-        carOptionsLabel.setFont(type: Constant.CarOptionsLabel.font)
+        _=carKrNameLabel.set {
+            $0.configureText(text: carKrName)
+            $0.configureFont(font: Constant.CarKrNameLabel.font.uiFont)
+            $0.configureColor(color: Constant.CarKrNameLabel.fontColor)
+        }
+        _=carEnNameLabel.set {
+            $0.configureText(text: carEnName)
+            $0.configureFont(font: Constant.CarEnNameLabel.font.uiFont)
+            $0.configureColor(color: Constant.CarEnNameLabel.fontColor)
+        }
+        _=carPriceLabel.set {
+            $0.configureText(text: carPrice)
+            $0.configureFont(font: Constant.CarPriceLabel.font.uiFont)
+            $0.configureColor(color: Constant.CarPriceLabel.fontColor)
+        }
+        _=carOptionsLabel.set {
+            $0.configureText(text: carOptions)
+            $0.configureFont(font: Constant.CarOptionsLabel.font.uiFont)
+            $0.configureColor(color: Constant.CarOptionsLabel.fontColor)
+        }
     }
 }
 
