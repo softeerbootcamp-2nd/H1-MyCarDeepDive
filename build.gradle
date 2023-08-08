@@ -153,6 +153,7 @@ tasks.jar {
 
 spotless {
 	ratchetFrom 'origin/be-main'
+	ratchetFrom 'origin/be-develop'
 
 	format 'misc', {
 		target '*.gradle', '*.md', '.gitignore'
