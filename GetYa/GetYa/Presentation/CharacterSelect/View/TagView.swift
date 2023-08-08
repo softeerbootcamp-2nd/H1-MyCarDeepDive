@@ -51,6 +51,22 @@ class TagView: UIView {
         configureLabel()
         configureBackgroundColor(color: .GetYaPalette.gray1000)
     }
+     
+    func configureCornerRadius(with radius: CGFloat) {
+        layer.cornerRadius = radius
+    }
+    
+    func configureTextColor(with: UIColor) {
+        label.textColor = with
+    }
+    
+    func configureBorderColor(with: UIColor) {
+        label.layer.borderColor = with.cgColor
+    }
+    
+    func configureBorderWidth(with: CGFloat) {
+        label.layer.borderWidth = with
+    }
     
     func configureBackgroundColor(color: UIColor) {
         self.layer.backgroundColor = color.cgColor
