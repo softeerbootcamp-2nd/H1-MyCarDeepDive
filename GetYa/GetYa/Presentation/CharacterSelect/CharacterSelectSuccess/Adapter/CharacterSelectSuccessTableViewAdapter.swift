@@ -48,7 +48,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
         else {
             return .init(style: .default, reuseIdentifier: CharacterSelectSuccessTableViewCell.id)
         }
-        var item: RecommendCarProductOptionEntity
+        var item: RecommendCarProductOptionModel
         switch indexPath.section {
         case 0:
             item = dataSource.firstSectionCellItem(at: index)
