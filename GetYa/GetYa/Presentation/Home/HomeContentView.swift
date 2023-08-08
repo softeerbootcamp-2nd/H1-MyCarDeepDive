@@ -8,9 +8,10 @@
 import UIKit
 import AVKit
 
+// TODO: 백그라운드로 나갔다오면 video가 재생안됨. 멈춰있음
+
 class HomeContentView: UIView {
     // MARK: - UI Properties
-    
     private let customButton = CommonButton(
         font: UIFont(hyundaiSans: .mediumBody3) ?? .systemFont(ofSize: 16),
         buttonBackgroundColorType: .black).set {
