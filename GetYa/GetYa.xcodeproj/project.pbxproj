@@ -11,6 +11,9 @@
 		155EAB3A2A80824B00833B0E /* CharacterSelectSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */; };
 		155EAB3C2A80826A00833B0E /* CharacterSelectSuccessCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB3B2A80826A00833B0E /* CharacterSelectSuccessCollectionView.swift */; };
 		155EAB3F2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */; };
+		155EAB412A810A6300833B0E /* CharacterSelectSuccessRecommendCarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB402A810A6300833B0E /* CharacterSelectSuccessRecommendCarInfo.swift */; };
+		155EAB432A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift */; };
+		155EAB462A81F0AF00833B0E /* CharacterSelectSuccessMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB452A81F0AF00833B0E /* CharacterSelectSuccessMainHeader.swift */; };
 		155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */; };
 		155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */; };
 		155ED7202A7E5B890052896A /* UIButton+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71F2A7E5B890052896A /* UIButton+Combine.swift */; };
@@ -100,6 +103,9 @@
 		155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewController.swift; sourceTree = "<group>"; };
 		155EAB3B2A80826A00833B0E /* CharacterSelectSuccessCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessCollectionView.swift; sourceTree = "<group>"; };
 		155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessSectionDividerView.swift; sourceTree = "<group>"; };
+		155EAB402A810A6300833B0E /* CharacterSelectSuccessRecommendCarInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessRecommendCarInfo.swift; sourceTree = "<group>"; };
+		155EAB422A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessThumbnailView.swift; sourceTree = "<group>"; };
+		155EAB452A81F0AF00833B0E /* CharacterSelectSuccessMainHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessMainHeader.swift; sourceTree = "<group>"; };
 		155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionSubscription.swift"; sourceTree = "<group>"; };
 		155ED71D2A7E5AD60052896A /* UIControl+Publihser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Publihser.swift"; sourceTree = "<group>"; };
 		155ED71F2A7E5B890052896A /* UIButton+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Combine.swift"; sourceTree = "<group>"; };
@@ -199,10 +205,21 @@
 		155EAB3D2A80993B00833B0E /* CharacterSeleectSuccessView */ = {
 			isa = PBXGroup;
 			children = (
+				155EAB442A81F0A200833B0E /* MainHeader */,
 				155EAB3B2A80826A00833B0E /* CharacterSelectSuccessCollectionView.swift */,
 				155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */,
+				155EAB402A810A6300833B0E /* CharacterSelectSuccessRecommendCarInfo.swift */,
+				155EAB422A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift */,
 			);
 			path = CharacterSeleectSuccessView;
+			sourceTree = "<group>";
+		};
+		155EAB442A81F0A200833B0E /* MainHeader */ = {
+			isa = PBXGroup;
+			children = (
+				155EAB452A81F0AF00833B0E /* CharacterSelectSuccessMainHeader.swift */,
+			);
+			path = MainHeader;
 			sourceTree = "<group>";
 		};
 		15837B992A7E5900000FE728 /* CombineCocoa */ = {
@@ -754,9 +771,11 @@
 				64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */,
 				15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+.swift in Sources */,
 				641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */,
+				155EAB412A810A6300833B0E /* CharacterSelectSuccessRecommendCarInfo.swift in Sources */,
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
 				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
 				64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */,
+				155EAB462A81F0AF00833B0E /* CharacterSelectSuccessMainHeader.swift in Sources */,
 				155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */,
 				155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
@@ -764,6 +783,7 @@
 				64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */,
 				15DF95992A7C8A110093EAC7 /* UIView+.swift in Sources */,
 				15DF95932A7C89BC0093EAC7 /* ConvenienceInit.swift in Sources */,
+				155EAB432A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift in Sources */,
 				64ADA4C02A7A28AA0003E2C1 /* UIColor+.swift in Sources */,
 				155EAB372A7F5FCD00833B0E /* ProgressView.swift in Sources */,
 				64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */,
@@ -950,7 +970,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3X23G6XQ74;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GetYa/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -962,7 +982,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "NamSeok-Bae.GetYa";
+				PRODUCT_BUNDLE_IDENTIFIER = "kr.codesquad.softeer.H1-MyCarDeepDive";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -977,7 +997,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3X23G6XQ74;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GetYa/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -989,7 +1009,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "NamSeok-Bae.GetYa";
+				PRODUCT_BUNDLE_IDENTIFIER = "kr.codesquad.softeer.H1-MyCarDeepDive";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
