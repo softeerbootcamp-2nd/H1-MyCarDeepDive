@@ -15,7 +15,7 @@ final class CharacterSelectSuccessThumbnailView: UIView {
             UIColor(red: 0.95, green: 0.96, blue: 0.97, alpha: 1)]
         enum RecommendKeywordStackView {
             static let uiConstant: UILayout = .init(
-             leadingMargin: 16, topMargin: 41, height: 28)
+                leadingMargin: 16, topMargin: 41, trailingMargin: 16, height: 28)
             static let interItemSpacing: CGFloat = 6
         }
         enum TagView {
@@ -28,14 +28,14 @@ final class CharacterSelectSuccessThumbnailView: UIView {
         }
         enum RecommendDiscriptionView {
             static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 16)
-            static let font: GetYaFont = .boldHead1
+                leadingMargin: 16, topMargin: 85)
+            static let font: GetYaFont = .mediumHead2
             static let fontColor: UIColor = .GetYaPalette.gray0
         }
         enum RecommendSubDiscriptionView {
             static let uiConstant: UILayout = .init(
                 leadingMargin: 16, topMargin: 4)
-            static let font: GetYaFont = .mediumHead2
+            static let font: GetYaFont = .regularBody4
             static let fontColor: UIColor = .GetYaPalette.gray200
         }
         enum RecommendCarImageView {
@@ -81,6 +81,18 @@ final class CharacterSelectSuccessThumbnailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        setCarImageAnimation()
+    }
+    
+    override var bounds: CGRect {
+        didSet {
+            print("hfiwehfiwehfiwehfiowhfoiwhfiowh")
+            print("\(bounds)")
+            let gradient = CAGradientLayer()
+            gradient.frame = bounds
+            gradient.colors = Constant.layerColors.map { $0.cgColor }
+            layer.insertSublayer(gradient, at: 0)
+        }
     }
     
     convenience init() {
@@ -97,18 +109,12 @@ final class CharacterSelectSuccessThumbnailView: UIView {
 // MARK: - Helper
 extension CharacterSelectSuccessThumbnailView {
     func configureUI() {
-        let gradient = CAGradientLayer()
-        gradient.frame = bounds
-        gradient.colors = Constant.layerColors
-        layer.insertSublayer(gradient, at: 0)
-        
         configureSubviewUI(
             with: recommendKeywordStackView,
             recommendDiscriptionView,
             recommendSubDiscriptionView,
             recommendCarImageView,
             recommendCarBackgroundView)
-
         bringSubviewToFront(recommendCarImageView)
     }
     
@@ -121,6 +127,24 @@ extension CharacterSelectSuccessThumbnailView {
                 $0.configureBorderWidth(with: const.borderWidth)
                 $0.configureBorderColor(with: const.borderColor)
             })
+        }
+    }
+    
+    func setCarImageAnimation() {
+        _=recommendCarImageView.set {
+            $0.alpha = 0.777
+            $0.transform = .init(translationX: 27, y: 0.777)
+        }
+        
+        UIView.animate(
+            withDuration: 0.2,
+            delay: 0.23,
+            options: [.curveEaseIn, .curveLinear, .curveEaseOut]
+        ) {
+            _=self.recommendCarImageView.set {
+                $0.alpha = 1
+                $0.transform = .identity
+            }
         }
     }
 }
@@ -147,7 +171,8 @@ private extension CharacterSelectSuccessThumbnailView {
                 equalTo: leadingAnchor,
                 constant: const.uiConstant.leadingMargin),
             recommendKeywordStackView.trailingAnchor.constraint(
-                lessThanOrEqualTo: trailingAnchor),
+                equalTo: trailingAnchor,
+                constant: -const.uiConstant.trailingMargin),
             recommendKeywordStackView.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: const.uiConstant.topMargin),
@@ -162,7 +187,7 @@ private extension CharacterSelectSuccessThumbnailView {
                 equalTo: leadingAnchor,
                 constant: const.uiConstant.leadingMargin),
             recommendDiscriptionView.topAnchor.constraint(
-                equalTo: recommendKeywordStackView.bottomAnchor,
+                equalTo: topAnchor,
                 constant: const.uiConstant.topMargin)]
     }
     
