@@ -38,7 +38,11 @@ class LifeStyleViewController: UIViewController {
         ["#주행안전", "#주차/출차"],
         ["#스타일", "#퍼포먼스"]
     ]
-    private var selectedIndexPath: IndexPath?
+    private var selectedIndexPath: IndexPath? {
+        didSet {
+            contentView.setButtonIsEnabled(isEnabled: selectedIndexPath == nil ? false : true)
+        }
+    }
     
     // MARK: - LifeCycles
     override func viewDidLoad() {
