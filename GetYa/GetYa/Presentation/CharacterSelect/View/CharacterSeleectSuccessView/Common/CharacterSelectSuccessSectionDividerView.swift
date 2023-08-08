@@ -36,6 +36,7 @@ final class CharacterSelectSuccessSectionDividerView: UIView {
     )
     
     override init(frame: CGRect) {
+        super.init(frame: frame)
         configureSubviewUI(
             with: onePixelDivider, sectionTitle)
     }
