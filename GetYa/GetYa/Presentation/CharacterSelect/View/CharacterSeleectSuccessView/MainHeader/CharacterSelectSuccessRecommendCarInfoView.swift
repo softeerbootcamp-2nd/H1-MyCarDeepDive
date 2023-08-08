@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessRecommendCarInfo.swift
+//  CharacterSelectSuccessRecommendCarInfoView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/07.
@@ -7,14 +7,23 @@
 
 import UIKit
 
-final class CharacterSelectSuccessRecommendCarInfo: UIView {
+final class CharacterSelectSuccessRecommendCarInfoView: UIView {
     // MARK: - Constant
     enum Constant {
+        static let intrinsicContentHeight: CGFloat = {
+            let carKrNameHeight = CarKrNameLabel.intrinsicContentHeight
+            let carOptionsLabelHeight = CarOptionsLabel.intrinsicContentHeight
+            return carKrNameHeight + carOptionsLabelHeight
+        }()
+        
         enum CarKrNameLabel {
             static let uiConstant: UILayout = .init(
                 leadingMargin: 16, topMargin: 24)
             static let fontColor: UIColor = .GetYaPalette.gray50
             static let font: GetYaFont = .mediumHead2
+            static let intrinsicContentHeight = {
+                return uiConstant.topMargin + font.lineHeight
+            }()
         }
         
         enum CarEnNameLabel {
@@ -35,6 +44,9 @@ final class CharacterSelectSuccessRecommendCarInfo: UIView {
             static let size: CGFloat = 0
             static let fontColor: UIColor = .GetYaPalette.gray400
             static let font: GetYaFont = .regularCaption1
+            static let intrinsicContentHeight = {
+                return uiConstant.topMargin + font.lineHeight
+            }()
         }
     }
     
@@ -97,7 +109,7 @@ final class CharacterSelectSuccessRecommendCarInfo: UIView {
 }
 
 // MARK: - LayoutSupportable
-extension CharacterSelectSuccessRecommendCarInfo: LayoutSupportable {
+extension CharacterSelectSuccessRecommendCarInfoView: LayoutSupportable {
     func configureConstraints() {
         _=[carKrNameLabelConstraints,
            carEnNameLabelConstraints,
@@ -108,7 +120,7 @@ extension CharacterSelectSuccessRecommendCarInfo: LayoutSupportable {
 }
 
 // MARK: - Private layout supportable
-private extension CharacterSelectSuccessRecommendCarInfo {
+private extension CharacterSelectSuccessRecommendCarInfoView {
     var carKrNameLabelConstraints: [NSLayoutConstraint] {
         let const = Constant.CarKrNameLabel.uiConstant
         return [
