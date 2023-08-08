@@ -9,6 +9,7 @@ import UIKit
 
 enum GetYaFont: CaseIterable {
     case boldHead1
+    case mediumHead1
     case mediumHead2
     case mediumHead3
     case mediumHead4
@@ -28,6 +29,8 @@ enum GetYaFont: CaseIterable {
     var size: CGFloat {
         switch self {
         case .boldHead1:
+            return 22
+        case .mediumHead1:
             return 22
         case .mediumHead2:
             return 20
@@ -66,6 +69,8 @@ enum GetYaFont: CaseIterable {
         switch self {
         case .boldHead1:
             return -0.4
+        case .mediumHead1:
+            return -0.4
         case .mediumHead2:
             return -0.3
         case .mediumHead3:
@@ -103,6 +108,8 @@ enum GetYaFont: CaseIterable {
         switch self {
         case .boldHead1:
             return 28
+        case .mediumHead1:
+            return 28
         case .mediumHead2:
             return 26
         case .regularHead2:
@@ -136,12 +143,12 @@ enum GetYaFont: CaseIterable {
         }
     }
     
-    // TODO: 폰트 파일 명 따로 분리해야한다. 피그마에 general component로 사용 안된 폰트가 있어서,,
-    
     var name: String {
         switch self {
         case .boldHead1:
             return "HyundaiSansHeadKRBold"
+        case .mediumHead1:
+            return "HyundaiSansHeadKRMedium"
         case .mediumHead2:
             return "HyundaiSansHeadKRMedium"
         case .mediumHead3:
