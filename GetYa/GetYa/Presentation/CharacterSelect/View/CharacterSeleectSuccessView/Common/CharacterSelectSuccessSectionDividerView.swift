@@ -11,7 +11,10 @@ final class CharacterSelectSuccessSectionDividerView: UIView {
     // MARK: - Constants
     enum Constant {
         static let intrinsicContentHeight: CGFloat = {
-           return 00000
+            let onePixelDividerHeight = OnePixelDivider.intrinsicContentHeight
+            let sectionTitleHeight = SectionTitle.intrinsicContentHeight
+            
+           return onePixelDividerHeight + sectionTitleHeight
         }()
         enum OnePixelDivider {
             static let uiConstant: UILayout = .init(
