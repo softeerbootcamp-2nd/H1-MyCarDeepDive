@@ -38,6 +38,12 @@ class LifeStyleViewController: UIViewController {
         ["#주행안전", "#주차/출차"],
         ["#스타일", "#퍼포먼스"]
     ]
+    let titleImages: [UIImage?] = [
+        UIImage(named: "Family"),
+        UIImage(named: "Businessman"),
+        UIImage(named: "Junior"),
+        UIImage(named: "Trendy")
+    ]
     private var selectedIndexPath: IndexPath? {
         didSet {
             contentView.setButtonIsEnabled(isEnabled: selectedIndexPath == nil ? false : true)
@@ -180,7 +186,7 @@ extension LifeStyleViewController: UICollectionViewDataSource {
             }
             cell.delegate = self
             cell.setDescriptionText(text: descriptionTexts[indexPath.row])
-            cell.setTitleImage(image: UIImage(systemName: "house")!)
+            cell.setTitleImage(image: titleImages[indexPath.row])
             cell.setTagViews(texts: tagTexts[indexPath.row])
             cell.isSelected = indexPath == selectedIndexPath
             cell.configureByIsSelected(isSelected: cell.isSelected)

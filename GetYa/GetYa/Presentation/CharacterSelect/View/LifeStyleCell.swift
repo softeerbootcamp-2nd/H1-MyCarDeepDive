@@ -262,7 +262,7 @@ class LifeStyleCell: UICollectionViewCell {
         self.descriptionLabel.text = text
     }
     
-    func setTitleImage(image: UIImage) {
+    func setTitleImage(image: UIImage?) {
         self.titleImageView.image = image
     }
     
