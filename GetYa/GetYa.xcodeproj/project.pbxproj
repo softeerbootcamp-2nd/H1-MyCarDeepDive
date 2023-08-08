@@ -37,6 +37,7 @@
 		6412D0862A80AC92001E4005 /* LifeStyleDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0852A80AC92001E4005 /* LifeStyleDetailCell.swift */; };
 		6412D0882A80C385001E4005 /* AgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0872A80C385001E4005 /* AgeViewController.swift */; };
 		6412D08A2A80C419001E4005 /* QuestionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0892A80C419001E4005 /* QuestionContentView.swift */; };
+		6412D08C2A81E5C1001E4005 /* LifeStyleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D08B2A81E5C1001E4005 /* LifeStyleDetailViewController.swift */; };
 		641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */; };
 		641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */; };
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
@@ -126,6 +127,7 @@
 		6412D0852A80AC92001E4005 /* LifeStyleDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStyleDetailCell.swift; sourceTree = "<group>"; };
 		6412D0872A80C385001E4005 /* AgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeViewController.swift; sourceTree = "<group>"; };
 		6412D0892A80C419001E4005 /* QuestionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionContentView.swift; sourceTree = "<group>"; };
+		6412D08B2A81E5C1001E4005 /* LifeStyleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStyleDetailViewController.swift; sourceTree = "<group>"; };
 		641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectViewController.swift; sourceTree = "<group>"; };
 		641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectViewController.swift; sourceTree = "<group>"; };
 		641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */,
 				6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */,
 				6412D0872A80C385001E4005 /* AgeViewController.swift */,
+				6412D08B2A81E5C1001E4005 /* LifeStyleDetailViewController.swift */,
 			);
 			path = CharacterSelect;
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 				6412D0882A80C385001E4005 /* AgeViewController.swift in Sources */,
 				64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */,
 				6412D0862A80AC92001E4005 /* LifeStyleDetailCell.swift in Sources */,
+				6412D08C2A81E5C1001E4005 /* LifeStyleDetailViewController.swift in Sources */,
 				155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */,
 				155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
