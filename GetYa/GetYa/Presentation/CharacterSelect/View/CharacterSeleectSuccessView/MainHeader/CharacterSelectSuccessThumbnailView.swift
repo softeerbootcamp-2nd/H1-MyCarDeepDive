@@ -42,7 +42,7 @@ final class CharacterSelectSuccessThumbnailView: UIView {
         }
         enum RecommendSubDiscriptionView {
             static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 4, bottomMargin: 79 + 131)
+                leadingMargin: 16, topMargin: 3, bottomMargin: 79 + 131)
             static let font: GetYaFont = .regularBody4
             static let fontColor: UIColor = .GetYaPalette.gray200
             static let intrinsicContentHeight: CGFloat = uiConstant.topMargin + font
