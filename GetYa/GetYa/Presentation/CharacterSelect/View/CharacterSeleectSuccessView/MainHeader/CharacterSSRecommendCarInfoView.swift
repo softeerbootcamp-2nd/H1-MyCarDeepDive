@@ -7,6 +7,7 @@
 
 import UIKit
 
+// CharacterSelectSuccessRecommendCarInfoView
 final class CharacterSSRecommendCarInfoView: UIView {
     // MARK: - Constant
     enum Constant {
@@ -76,7 +77,7 @@ final class CharacterSSRecommendCarInfoView: UIView {
     }
     
     // MARK: - Helper
-    // TODO: 추후 남석이형이 업뎃하면 그거 적용,, setFont자동화 + header호출시점에 configure(with:_:_:_:)로 데이터 주입
+    // TODO: 추후 남석이형이 업뎃하면 그거 적용,, setFont자동화 + header호출시점에
     // 값 주입해야함.
     func configure(with recommendCarInfo: RecommendCarInfoEntity) {
         _=carKrNameLabel.set {
