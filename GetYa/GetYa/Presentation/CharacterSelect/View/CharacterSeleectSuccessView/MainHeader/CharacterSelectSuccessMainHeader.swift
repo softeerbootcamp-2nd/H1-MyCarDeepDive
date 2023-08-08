@@ -57,7 +57,7 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
     /// 그리고 추천 완료된 차량의 키워드를 가져와 TagView를 갱신해야 합니다.
     func configure(
         thumbnailKeywordTexts: [String],
-        recommendCarInfo: RecommendCarInfoEntity,
+        recommendCarInfo: RecommendCarInfoModel,
         firstSectionTitle: String
     ) {
         thumbnailView.configureRecommendKeywordStackView(thumbnailKeywordTexts)
