@@ -221,7 +221,9 @@ extension LifeStyleViewController: LifeStyleCellDelegate {
                 DetailLifeStyleSelectViewController(),
                 animated: true)
         } else {
-            // TODO: 라이프스타일 엿보기 뷰컨트롤러로 이동
+            navigationController?.pushViewController(
+                LifeStylePeekViewController(),
+                animated: true)
         }
     }
 }
