@@ -20,16 +20,9 @@ extension NSMutableAttributedString {
     }
     
     func configureHyundaiSans(type: GetYaFont, otherType: GetYaFont, text: String) {
-        let font = type.uiFont
+        configureHyundaiSans(type: type)
+        
         let otherFont = otherType.uiFont
-        let attributes = configureHyundaiSansAttributes(
-            with: font,
-            type: type)
-        
-        addAttributes(
-            attributes,
-            range: .init(location: 0, length: string.count))
-        
         let otherAttributes = configureHyundaiSansAttributes(
             with: otherFont,
             type: otherType)
