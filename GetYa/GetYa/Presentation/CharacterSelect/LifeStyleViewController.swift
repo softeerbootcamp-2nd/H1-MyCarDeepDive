@@ -39,10 +39,10 @@ class LifeStyleViewController: UIViewController {
         ["#스타일", "#퍼포먼스"]
     ]
     let titleImages: [UIImage?] = [
-        UIImage(named: "Family"),
-        UIImage(named: "Businessman"),
-        UIImage(named: "Junior"),
-        UIImage(named: "Trendy")
+        UIImage(named: "family"),
+        UIImage(named: "businessman"),
+        UIImage(named: "junior"),
+        UIImage(named: "trendy")
     ]
     private var selectedIndexPath: IndexPath? {
         didSet {
