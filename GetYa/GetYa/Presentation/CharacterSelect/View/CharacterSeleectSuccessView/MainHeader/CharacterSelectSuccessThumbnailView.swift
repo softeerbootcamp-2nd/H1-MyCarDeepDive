@@ -45,7 +45,8 @@ final class CharacterSelectSuccessThumbnailView: UIView {
                 leadingMargin: 16, topMargin: 4, bottomMargin: 79 + 131)
             static let font: GetYaFont = .regularBody4
             static let fontColor: UIColor = .GetYaPalette.gray200
-            static let intrinsicContentHeight: CGFloat = uiConstant.topMargin + font.lineHeight + uiConstant.bottomMargin
+            static let intrinsicContentHeight: CGFloat = uiConstant.topMargin + font
+                .lineHeight + uiConstant.bottomMargin
         }
         enum RecommendCarImageView {
             static let uiConstant: UILayout = .init(
@@ -123,7 +124,7 @@ extension CharacterSelectSuccessThumbnailView {
         bringSubviewToFront(recommendCarImageView)
     }
     
-    func setRecommendKeywordStackView(_ texts: [String]) {
+    func configureRecommendKeywordStackView(_ texts: [String]) {
         let const = Constant.TagView.self
         _=texts.map { text in
             recommendKeywordStackView.addArrangedSubview(TagView(text: text).set {
