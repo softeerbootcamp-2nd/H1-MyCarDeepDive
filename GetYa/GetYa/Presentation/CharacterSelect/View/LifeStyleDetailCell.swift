@@ -36,12 +36,14 @@ class LifeStyleDetailCell: UICollectionViewCell {
     
     private let button = CommonButton(
         font: GetYaFont.mediumBody4.uiFont,
-        buttonBackgroundColorType: .primary).set {
-            $0.setTitle("라이프스타일 상세 선택", for: .normal)
-        }
+        buttonBackgroundColorType: .primary
+    ).set {
+        $0.setTitle("라이프스타일 상세 선택", for: .normal)
+    }
     
     // MARK: - Properties
     static let identifier: String = "LifeStyleDetailCell"
+    weak var delegate: LifeStyleCellDelegate?
     private let baseViewLayoutConstant = UILayout(topMargin: 64)
     private let descriptionLabelLayoutConstant = UILayout(topMargin: 26)
     private let imageViewLayoutConstant = UILayout(
@@ -68,6 +70,10 @@ class LifeStyleDetailCell: UICollectionViewCell {
         super.init(coder: coder)
         setupViews()
         configureUI()
+    }
+    
+    override func prepareForReuse() {
+        delegate = nil
     }
     
     // MARK: - Functions
@@ -124,6 +130,8 @@ class LifeStyleDetailCell: UICollectionViewCell {
     }
     
     private func configureButton() {
+        button.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(
                 equalTo: imageView.bottomAnchor,
@@ -134,5 +142,9 @@ class LifeStyleDetailCell: UICollectionViewCell {
                 equalToConstant: buttonLayoutConstant.width),
             button.centerXAnchor.constraint(equalTo: baseView.centerXAnchor)
         ])
+    }
+    
+    @objc private func touchUpButton() {
+        delegate?.touchUpButton(cell: self)
     }
 }
