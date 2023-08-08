@@ -7,7 +7,9 @@
 
 import UIKit
 
-// TODO: Cell 클릭에 따른 Button 활성화 구현
+protocol LifeStyleViewControllerDelegate: AnyObject {
+    func touchUpSuccessButton(sender: UIButton)
+}
 
 class LifeStyleViewController: UIViewController {
     // MARK: - UI Properties
@@ -19,6 +21,7 @@ class LifeStyleViewController: UIViewController {
     private lazy var pageControl = CommonPageControl(numberOfPages: tagTexts.count + 1)
     
     // MARK: - Properties
+    weak var delegate: LifeStyleViewControllerDelegate?
     private let collectionViewLayoutConstant = UILayout(topMargin: 43, height: 320)
     private let cellLayoutConstant = UILayout(height: 320, width: 278)
     private let cellSpacing: CGFloat = 8
@@ -70,7 +73,8 @@ class LifeStyleViewController: UIViewController {
             partText: "라이프스타일",
             questionNumber: 2,
             questionCount: 2,
-            buttonTitle: "선택 완료"
+            buttonTitle: "선택 완료",
+            buttonIsEnabled: false
         )
         view = contentView
         
