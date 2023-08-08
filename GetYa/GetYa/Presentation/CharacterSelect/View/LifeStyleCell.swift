@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LifeStyleCellDelegate: AnyObject {
+    func touchUpButton(cell: UICollectionViewCell)
+}
+
 class LifeStyleCell: UICollectionViewCell {
     typealias Palette = UIColor.GetYaPalette
     
@@ -75,6 +79,7 @@ class LifeStyleCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let identifier: String = "LifeStyleCell"
+    weak var delegate: LifeStyleCellDelegate?
     override var isSelected: Bool {
         didSet {
             configureByIsSelected(isSelected: isSelected)
@@ -114,6 +119,7 @@ class LifeStyleCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        delegate = nil
         tagStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
@@ -224,6 +230,8 @@ class LifeStyleCell: UICollectionViewCell {
     }
     
     private func configureButton() {
+        button.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(
                 equalTo: lineView.bottomAnchor,
@@ -256,5 +264,9 @@ class LifeStyleCell: UICollectionViewCell {
     
     func setTitleImage(image: UIImage) {
         self.titleImageView.image = image
+    }
+    
+    @objc private func touchUpButton() {
+        delegate?.touchUpButton(cell: self)
     }
 }
