@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterSelectSuccessRecommendCarInfoView: UIView {
+final class CharacterSSRecommendCarInfoView: UIView {
     // MARK: - Constant
     enum Constant {
         static let intrinsicContentHeight: CGFloat = {
@@ -26,7 +26,7 @@ final class CharacterSelectSuccessRecommendCarInfoView: UIView {
             }()
         }
         
-        enum CarEnNameLabel {
+        enum CarEnTrimLabel {
             static let uiConstant: UILayout = .init(leadingMargin: 7.5)
             static let fontColor: UIColor = .GetYaPalette.gray300
             static let font: GetYaFont = .mediumBody2
@@ -52,7 +52,7 @@ final class CharacterSelectSuccessRecommendCarInfoView: UIView {
     
     // MARK: - UI properties
     private let carKrNameLabel: CommonLabel = .init(frame: .zero)
-    private let carEnNameLabel: CommonLabel = .init(frame: .zero)
+    private let carEnTrimLabel: CommonLabel = .init(frame: .zero)
     private let carPriceLabel: CommonLabel = .init(frame: .zero)
     private let carOptionsLabel: CommonLabel = .init(frame: .zero)
     
@@ -61,7 +61,7 @@ final class CharacterSelectSuccessRecommendCarInfoView: UIView {
         super.init(frame: frame)
         configureSubviewUI(
             with: carKrNameLabel,
-            carEnNameLabel,
+            carEnTrimLabel,
             carPriceLabel,
             carOptionsLabel)
     }
@@ -78,30 +78,24 @@ final class CharacterSelectSuccessRecommendCarInfoView: UIView {
     // MARK: - Helper
     // TODO: 추후 남석이형이 업뎃하면 그거 적용,, setFont자동화 + header호출시점에 configure(with:_:_:_:)로 데이터 주입
     // 값 주입해야함.
-    func configure(
-        with carKrName: String,
-        _ carEnName: String,
-        _ carPrice: String,
-        _ carOptions: String
-    ) {
-        
+    func configure(with recommendCarInfo: RecommendCarInfoEntity) {
         _=carKrNameLabel.set {
-            $0.configureText(text: carKrName)
+            $0.configureText(text: recommendCarInfo.carKrName)
             $0.configureFont(font: Constant.CarKrNameLabel.font.uiFont)
             $0.configureColor(color: Constant.CarKrNameLabel.fontColor)
         }
-        _=carEnNameLabel.set {
-            $0.configureText(text: carEnName)
-            $0.configureFont(font: Constant.CarEnNameLabel.font.uiFont)
-            $0.configureColor(color: Constant.CarEnNameLabel.fontColor)
+        _=carEnTrimLabel.set {
+            $0.configureText(text: recommendCarInfo.carEnTrimName)
+            $0.configureFont(font: Constant.CarEnTrimLabel.font.uiFont)
+            $0.configureColor(color: Constant.CarEnTrimLabel.fontColor)
         }
         _=carPriceLabel.set {
-            $0.configureText(text: carPrice)
+            $0.configureText(text: recommendCarInfo.carPrice)
             $0.configureFont(font: Constant.CarPriceLabel.font.uiFont)
             $0.configureColor(color: Constant.CarPriceLabel.fontColor)
         }
         _=carOptionsLabel.set {
-            $0.configureText(text: carOptions)
+            $0.configureText(text: recommendCarInfo.carOptions)
             $0.configureFont(font: Constant.CarOptionsLabel.font.uiFont)
             $0.configureColor(color: Constant.CarOptionsLabel.fontColor)
         }
@@ -109,7 +103,7 @@ final class CharacterSelectSuccessRecommendCarInfoView: UIView {
 }
 
 // MARK: - LayoutSupportable
-extension CharacterSelectSuccessRecommendCarInfoView: LayoutSupportable {
+extension CharacterSSRecommendCarInfoView: LayoutSupportable {
     func configureConstraints() {
         _=[carKrNameLabelConstraints,
            carEnNameLabelConstraints,
@@ -120,7 +114,7 @@ extension CharacterSelectSuccessRecommendCarInfoView: LayoutSupportable {
 }
 
 // MARK: - Private layout supportable
-private extension CharacterSelectSuccessRecommendCarInfoView {
+private extension CharacterSSRecommendCarInfoView {
     var carKrNameLabelConstraints: [NSLayoutConstraint] {
         let const = Constant.CarKrNameLabel.uiConstant
         return [
@@ -133,12 +127,12 @@ private extension CharacterSelectSuccessRecommendCarInfoView {
     }
     
     var carEnNameLabelConstraints: [NSLayoutConstraint] {
-        let const = Constant.CarEnNameLabel.uiConstant
+        let const = Constant.CarEnTrimLabel.uiConstant
         return [
-            carEnNameLabel.leadingAnchor.constraint(
+            carEnTrimLabel.leadingAnchor.constraint(
                 equalTo: carKrNameLabel.trailingAnchor,
                 constant: const.leadingMargin),
-            carEnNameLabel.centerYAnchor.constraint(
+            carEnTrimLabel.centerYAnchor.constraint(
                 equalTo: carKrNameLabel.centerYAnchor)
         ]
     }
