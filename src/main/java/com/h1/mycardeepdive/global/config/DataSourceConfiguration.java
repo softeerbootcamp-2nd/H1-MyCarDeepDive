@@ -1,5 +1,7 @@
 package com.h1.mycardeepdive.global.config;
 
+import java.util.HashMap;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -7,9 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
-
-import javax.sql.DataSource;
-import java.util.HashMap;
 
 @Configuration
 public class DataSourceConfiguration {
@@ -23,15 +22,13 @@ public class DataSourceConfiguration {
     @Qualifier(MASTER_SERVER)
     @ConfigurationProperties(prefix = DATASOURCE_MASTER)
     public DataSource masterDataSource() {
-        return DataSourceBuilder.create()
-                .build();
+        return DataSourceBuilder.create().build();
     }
 
     @Bean
     public DataSource routingDataSource(
             @Qualifier(MASTER_SERVER) DataSource masterDataSource,
-            @Qualifier(SLAVE_SERVER) DataSource slaveDataSource
-    ) {
+            @Qualifier(SLAVE_SERVER) DataSource slaveDataSource) {
         RoutingDataSource routingDataSource = new RoutingDataSource();
 
         HashMap<Object, Object> dataSourceMap = new HashMap<>();
@@ -55,7 +52,6 @@ public class DataSourceConfiguration {
     @Qualifier(SLAVE_SERVER)
     @ConfigurationProperties(prefix = DATASOURCE_SLAVE)
     public DataSource slaveDataSource() {
-        return DataSourceBuilder.create()
-                .build();
+        return DataSourceBuilder.create().build();
     }
 }

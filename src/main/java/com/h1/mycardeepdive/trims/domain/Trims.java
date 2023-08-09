@@ -1,10 +1,9 @@
 package com.h1.mycardeepdive.trims.domain;
 
 import com.h1.mycardeepdive.car.domain.Car;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Getter

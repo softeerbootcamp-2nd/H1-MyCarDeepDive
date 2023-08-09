@@ -1,10 +1,9 @@
 package com.h1.mycardeepdive.color.domain;
 
+import java.util.List;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter

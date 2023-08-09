@@ -1,11 +1,10 @@
 package com.h1.mycardeepdive.car.domain;
 
+import java.util.Objects;
+import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -35,7 +34,10 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return price == car.price && Objects.equals(id, car.id) && Objects.equals(name, car.name) && Objects.equals(comment, car.comment);
+        return price == car.price
+                && Objects.equals(id, car.id)
+                && Objects.equals(name, car.name)
+                && Objects.equals(comment, car.comment);
     }
 
     @Override

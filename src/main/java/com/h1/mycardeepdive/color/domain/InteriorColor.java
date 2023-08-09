@@ -1,9 +1,8 @@
 package com.h1.mycardeepdive.color.domain;
 
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Getter
@@ -23,5 +22,4 @@ public class InteriorColor {
     private String comment;
 
     private String interior_img_url;
-
 }
