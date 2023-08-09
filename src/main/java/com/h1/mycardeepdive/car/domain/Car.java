@@ -13,8 +13,11 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "car_id")
     private Long id;
+
     private String name;
+
     private int price;
+
     private String comment;
 
 }
