@@ -18,8 +18,14 @@ final class CharacterSelectSuccessViewController: UIViewController {
         $0.register(
             CharacterSelectSuccessTableViewCell.self,
             forCellReuseIdentifier: CharacterSelectSuccessTableViewCell.id)
+        $0.register(
+            CharacterSelectSuccesSecondSectionHeader.self,
+            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccesSecondSectionHeader.id)
         $0.separatorStyle = .none
         $0.estimatedSectionHeaderHeight = UITableView.automaticDimension
+        $0.estimatedRowHeight = CharacterSelectSuccessTableViewCell
+            .Constant
+            .intrinsicContentHeight
     }
     
     private var adapter: CharacterSelectSuccessTableViewAdapter!
