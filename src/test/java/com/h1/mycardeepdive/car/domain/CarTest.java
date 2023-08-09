@@ -19,7 +19,7 @@ class CarTest {
         String name = "팰리세이드";
 
         // when
-        Car car = Car.builder().id(idx).name(name).price(1000000000).comment("매우 좋은 현대차").build();
+        Car car = Car.builder().id(idx).name(name).comment("매우 좋은 현대차").build();
 
         // then
         assertEquals(car.getId(), idx);

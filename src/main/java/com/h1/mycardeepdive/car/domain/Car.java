@@ -17,15 +17,12 @@ public class Car {
 
     private String name;
 
-    private int price;
-
     private String comment;
 
     @Builder
-    public Car(Long id, String name, int price, String comment) {
+    public Car(Long id, String name, String comment) {
         this.id = id;
         this.name = name;
-        this.price = price;
         this.comment = comment;
     }
 
@@ -34,14 +31,13 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return price == car.price
-                && Objects.equals(id, car.id)
+        return Objects.equals(id, car.id)
                 && Objects.equals(name, car.name)
                 && Objects.equals(comment, car.comment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, comment);
+        return Objects.hash(id, name, comment);
     }
 }
