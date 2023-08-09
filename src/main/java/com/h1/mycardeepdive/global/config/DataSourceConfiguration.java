@@ -1,4 +1,4 @@
-package com.h1.mycardeepdive;
+package com.h1.mycardeepdive.global.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,4 +1,4 @@
-package com.h1.mycardeepdive;
+package com.h1.mycardeepdive.global.config;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
