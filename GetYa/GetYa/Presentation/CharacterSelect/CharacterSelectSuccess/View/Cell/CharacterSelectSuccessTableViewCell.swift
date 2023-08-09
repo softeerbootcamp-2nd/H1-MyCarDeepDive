@@ -23,19 +23,26 @@ final class CharacterSelectSuccessTableViewCell: UITableViewCell {
         }
 
         enum ReviewdTextView {
-            // TODO: 이거 내부 text spacing 고쳐짐(풀리퀘받았을 떄 추후 변경해야함)
             static let height: CGFloat = .init(46).scaledHeight
             static let leadingMargin: CGFloat = .init(16).scaledWidth
             static let topMargin: CGFloat = .init(12).scaledHeight
             static let bottomMargin: CGFloat = .init(10).scaledHeight
             static let trailingMargin: CGFloat = .init(16).scaledWidth
+            static let radius: CGFloat = .init(8).scaledWidth
         }
     }
     static let id = String(describing: CharacterSelectSuccessTableViewCell.self)
     
     // MARK: - UI properties
     private let recommendCarOptionView = CommonOptionView()
-    private let reviewdTextView = CommonTextView()
+    private let reviewdTextView = CommonTextView(
+        backgroundColor: .GetYaPalette.lightAcriveBlue,
+        textColor: .GetYaPalette.acriveBlue,
+        fontType: .regularBody4,
+        textAlignment: .center
+    ).set {
+        $0.configureCornerRadius(with: Constant.ReviewdTextView.radius)
+    }
     
     // MARK: - Lifecycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
