@@ -33,12 +33,12 @@ extension CharacterSelectSuccesSecondSectionHeader: LayoutSupportable {
     func configureConstraints() {
         NSLayoutConstraint.activate([
             sectionTitleAndLineDividerView.leadingAnchor.constraint(
-                equalTo: contentView.leadingAnchor),
+                equalTo: leadingAnchor),
             sectionTitleAndLineDividerView.topAnchor.constraint(
-                equalTo: contentView.topAnchor),
+                equalTo: topAnchor),
             sectionTitleAndLineDividerView.trailingAnchor.constraint(
-                equalTo: contentView.trailingAnchor),
+                equalTo: trailingAnchor),
             sectionTitleAndLineDividerView.bottomAnchor.constraint(
-                equalTo: contentView.bottomAnchor)])
+                equalTo: bottomAnchor)])
     }
 }
