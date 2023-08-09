@@ -230,6 +230,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		155DDD0B2A83F204009AE2BC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		155EAB442A81F0A200833B0E /* MainHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +279,7 @@
 		159B2CF52A825CC5003F47D6 /* CharacterSelectSuccess */ = {
 			isa = PBXGroup;
 			children = (
+				155DDD0B2A83F204009AE2BC /* ViewController */,
 				155DDD032A82D028009AE2BC /* ViewModel */,
 				155EAB472A81F27200833B0E /* Common */,
 				159B2CF22A823723003F47D6 /* Adapter */,
@@ -354,7 +363,6 @@
 				641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */,
 				6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */,
 				641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */,
-				155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */,
 			);
 			path = CharacterSelect;
 			sourceTree = "<group>";
