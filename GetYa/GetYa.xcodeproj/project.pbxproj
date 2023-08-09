@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		155DDD052A82D040009AE2BC /* CharacterSelectSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD042A82D040009AE2BC /* CharacterSelectSuccessViewModel.swift */; };
 		155DDD072A82D3B2009AE2BC /* CharacterSelectSuccessViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* CharacterSelectSuccessViewModelable.swift */; };
+		155DDD0A2A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD092A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift */; };
 		155EAB372A7F5FCD00833B0E /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB362A7F5FCD00833B0E /* ProgressView.swift */; };
 		155EAB3A2A80824B00833B0E /* CharacterSelectSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */; };
 		155EAB3F2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */; };
@@ -106,6 +107,7 @@
 /* Begin PBXFileReference section */
 		155DDD042A82D040009AE2BC /* CharacterSelectSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewModel.swift; sourceTree = "<group>"; };
 		155DDD062A82D3B2009AE2BC /* CharacterSelectSuccessViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewModelable.swift; sourceTree = "<group>"; };
+		155DDD092A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccesSecondSectionHeader.swift; sourceTree = "<group>"; };
 		155EAB362A7F5FCD00833B0E /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewController.swift; sourceTree = "<group>"; };
 		155EAB3E2A80F14900833B0E /* CharacterSelectSuccessSectionDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessSectionDividerView.swift; sourceTree = "<group>"; };
@@ -220,6 +222,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		155DDD082A834FD3009AE2BC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				159B2CFD2A825F5F003F47D6 /* CharacterSelectSuccessTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		155EAB442A81F0A200833B0E /* MainHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,8 +283,9 @@
 		159B2CF62A825CD7003F47D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				155DDD092A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift */,
+				155DDD082A834FD3009AE2BC /* Cell */,
 				155EAB442A81F0A200833B0E /* MainHeader */,
-				159B2CFD2A825F5F003F47D6 /* CharacterSelectSuccessTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -809,6 +820,7 @@
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
 				155EAB3A2A80824B00833B0E /* CharacterSelectSuccessViewController.swift in Sources */,
+				155DDD0A2A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift in Sources */,
 				64ADA4BC2A7A22780003E2C1 /* CommonLabel.swift in Sources */,
 				159B2CF92A825D07003F47D6 /* CharacterSSTableViewAdapterDataSource.swift in Sources */,
 				159B2CFE2A825F5F003F47D6 /* CharacterSelectSuccessTableViewCell.swift in Sources */,
