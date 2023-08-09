@@ -16,36 +16,30 @@ public class DataSourceConfiguration {
 
     private static final String MASTER_SERVER = "MASTER";
     private static final String SLAVE_SERVER = "SLAVE";
+    public static final String DATASOURCE_MASTER = "spring.datasource.master";
+    public static final String DATASOURCE_SLAVE = "spring.datasource.slave";
 
     @Bean
     @Qualifier(MASTER_SERVER)
-    @ConfigurationProperties(prefix = "spring.datasource.master")
+    @ConfigurationProperties(prefix = DATASOURCE_MASTER)
     public DataSource masterDataSource() {
         return DataSourceBuilder.create()
                 .build();
     }
 
     @Bean
-    @Qualifier(SLAVE_SERVER)
-    @ConfigurationProperties(prefix = "spring.datasource.slave")
-    public DataSource slaveDataSource() {
-        return DataSourceBuilder.create()
-                .build();
-    }
-
-    @Bean
     public DataSource routingDataSource(
-            @Qualifier(MASTER_SERVER) DataSource masterDataSource, // (1)
+            @Qualifier(MASTER_SERVER) DataSource masterDataSource,
             @Qualifier(SLAVE_SERVER) DataSource slaveDataSource
     ) {
-        RoutingDataSource routingDataSource = new RoutingDataSource(); // (2)
+        RoutingDataSource routingDataSource = new RoutingDataSource();
 
-        HashMap<Object, Object> dataSourceMap = new HashMap<>(); // (3)
+        HashMap<Object, Object> dataSourceMap = new HashMap<>();
         dataSourceMap.put("master", masterDataSource);
         dataSourceMap.put("slave", slaveDataSource);
 
-        routingDataSource.setTargetDataSources(dataSourceMap); // (4)
-        routingDataSource.setDefaultTargetDataSource(masterDataSource); // (5)
+        routingDataSource.setTargetDataSources(dataSourceMap);
+        routingDataSource.setDefaultTargetDataSource(masterDataSource);
 
         return routingDataSource;
     }
@@ -55,5 +49,13 @@ public class DataSourceConfiguration {
     public DataSource dataSource() {
         DataSource determinedDataSource = routingDataSource(masterDataSource(), slaveDataSource());
         return new LazyConnectionDataSourceProxy(determinedDataSource);
+    }
+
+    @Bean
+    @Qualifier(SLAVE_SERVER)
+    @ConfigurationProperties(prefix = DATASOURCE_SLAVE)
+    public DataSource slaveDataSource() {
+        return DataSourceBuilder.create()
+                .build();
     }
 }
