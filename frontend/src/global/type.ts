@@ -111,3 +111,8 @@ export interface NavBarCategoryProps {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;
 }
+
+export interface setPriceInfoProps {
+  priceInfo: boolean;
+  setPriceInfo: (value: boolean) => void;
+}

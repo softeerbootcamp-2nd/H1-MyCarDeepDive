@@ -3,17 +3,27 @@ import LogoWhite from '@/assets/icon/logo-white.svg';
 import Logo from '@/assets/icon/logo.svg';
 import headerDownArrowBlack from '@/assets/icon/headerDownArrowBlack.svg';
 import headerDownArrow from '@/assets/icon/headerDownArrow.svg';
-import Navigation from './Navigation';
+
+import { useState } from 'react';
+import NavigationRadioGroup from './NavigationRadioGroup';
+import PriceDetailButton from './priceDetailButton';
+import ShowQuotationButton from './showQuotation';
 
 function Header() {
   const location = useLocation();
   const isHome: boolean = location.pathname === '/';
   const isSelectionPage: boolean = location.pathname.startsWith('/select/');
 
+  const [priceInfo, setPriceInfo] = useState(false);
+
   return (
     <header
       className={`fixed w-full ${
-        isSelectionPage === true ? 'h-[120px] shadow-md' : 'h-[92px]'
+        isSelectionPage
+          ? !priceInfo
+            ? 'h-[120px] shadow-md'
+            : 'h-[322px] shadow-md'
+          : 'h-[92px]'
       } z-30 top-0 left-0 ${!isHome && 'bg-grey-1000'}`}
     >
       <div className='max-w-5xl mx-auto'>
@@ -36,7 +46,19 @@ function Header() {
             className='w-5'
           />
         </div>
-        {isSelectionPage && <Navigation />}
+
+        {isSelectionPage && (
+          <div className='flex'>
+            <NavigationRadioGroup />
+            <div className='mt-[10px] flex'>
+              <PriceDetailButton
+                priceInfo={priceInfo}
+                setPriceInfo={setPriceInfo}
+              />
+              <ShowQuotationButton />
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
