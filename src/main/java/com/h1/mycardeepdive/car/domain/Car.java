@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -29,4 +30,16 @@ public class Car {
         this.comment = comment;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return price == car.price && Objects.equals(id, car.id) && Objects.equals(name, car.name) && Objects.equals(comment, car.comment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, comment);
+    }
 }
