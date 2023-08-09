@@ -74,3 +74,12 @@ export interface NavigationRadioProps {
   value: string;
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface FeatureSelectRadioGroupProps {
+  carFeature: {
+    engine: string;
+    body: string;
+    operation: string;
+  };
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}

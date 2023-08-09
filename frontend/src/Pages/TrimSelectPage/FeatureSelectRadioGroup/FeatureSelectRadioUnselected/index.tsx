@@ -1,6 +1,6 @@
 import { RadioProps } from '@/global/type';
 
-function TrimSelectRadioUnselected({
+function FeatureSelectRadioUnselected({
   name,
   value,
   onChangeHandler,
@@ -26,4 +26,4 @@ function TrimSelectRadioUnselected({
   );
 }
 
-export default TrimSelectRadioUnselected;
+export default FeatureSelectRadioUnselected;
