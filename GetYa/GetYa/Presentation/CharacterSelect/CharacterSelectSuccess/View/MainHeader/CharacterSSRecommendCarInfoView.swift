@@ -166,6 +166,8 @@ private extension CharacterSSRecommendCarInfoView {
                 equalTo: carKrNameLabel.bottomAnchor,
                 constant: const.topMargin),
             carOptionsLabel.bottomAnchor.constraint(
-                equalTo: bottomAnchor)]
+                equalTo: bottomAnchor),
+            carOptionsLabel.heightAnchor.constraint(
+                equalToConstant: Constant.CarOptionsLabel.font.lineHeight)]
     }
 }
