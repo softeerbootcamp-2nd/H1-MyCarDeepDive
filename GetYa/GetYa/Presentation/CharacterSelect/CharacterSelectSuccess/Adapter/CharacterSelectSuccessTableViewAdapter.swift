@@ -49,7 +49,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
         item = dataSource.cellItem(in: indexPath.section, indexPath.row)
         
         // TODO: 이거 셀 만들고 레이아웃 해야함
-        print(item)
+        cell.configure(with: item)
         return cell
     }
 }
@@ -73,33 +73,40 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard
-            section == 0,
-            let header = tableView.dequeueReusableHeaderFooterView(
-                withIdentifier: CharacterSelectSuccessMainHeader.id
-            ) as? CharacterSelectSuccessMainHeader
-        else { return nil }
-        let thumbnailKeywords = dataSource.mainSectionHeaderItem.thumbnailKeywords
-        let carProductionOption = dataSource.mainSectionHeaderItem.recommendCarProductOption
-        let firstSectionTitle = dataSource.mainSectionHeaderItem.firstSectionTitle
-        
-        return header.set {
-            $0.configure(
-                thumbnailKeywordTexts: thumbnailKeywords,
-                recommendCarInfo: carProductionOption,
-                firstSectionTitle: firstSectionTitle)
+        if section == 0, let header = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: CharacterSelectSuccessMainHeader.id
+        ) as? CharacterSelectSuccessMainHeader {
+            let thumbnailKeywords = dataSource.mainSectionHeaderItem.thumbnailKeywords
+            let carProductionOption = dataSource.mainSectionHeaderItem.recommendCarProductOption
+            let firstSectionTitle = dataSource.mainSectionHeaderItem.firstSectionTitle
+            
+            return header.set {
+                $0.configure(
+                    thumbnailKeywordTexts: thumbnailKeywords,
+                    recommendCarInfo: carProductionOption,
+                    firstSectionTitle: firstSectionTitle)
+            }
+        } else if section == 1, let header = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: CharacterSelectSuccesSecondSectionHeader.id
+        ) as? CharacterSelectSuccesSecondSectionHeader {
+            return header.set {
+                $0.configure(with: dataSource.seciondSectionHeaderItem)
+            }
         }
+        return .init(frame: .zero)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            print(CharacterSelectSuccessMainHeader.Constant.intrinsicContentHeight)
             return CharacterSelectSuccessMainHeader.Constant.intrinsicContentHeight
+        } else if section == 1 {
+            // TODO: 요고도,, COnstant로 끌어와보자
+            return 50
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        return CharacterSelectSuccessTableViewCell.Constant.intrinsicContentHeight
     }
 }
