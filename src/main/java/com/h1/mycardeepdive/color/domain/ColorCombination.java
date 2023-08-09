@@ -17,4 +17,9 @@ public class ColorCombination {
     @ManyToOne
     @JoinColumn(name = "exterior_color_id")
     private ExteriorColor exteriorColor;
+
+    public void setExteriorColor(ExteriorColor exteriorColor) {
+        this.exteriorColor = exteriorColor;
+        exteriorColor.getColorCombinationList().add(this);
+    }
 }

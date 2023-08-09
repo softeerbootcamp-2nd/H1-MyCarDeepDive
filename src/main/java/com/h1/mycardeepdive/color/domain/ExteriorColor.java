@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,4 +25,6 @@ public class ExteriorColor {
 
     private String exterior_img_url;
 
+    @OneToMany(mappedBy = "exteriorColor", fetch = FetchType.LAZY)
+    private List<ColorCombination> colorCombinationList;
 }
