@@ -216,13 +216,18 @@ extension LifeStyleViewController {
 // MARK: - LifeStyleCell Delegate
 extension LifeStyleViewController: LifeStyleCellDelegate {
     func touchUpButton(cell: UICollectionViewCell) {
-        if cell is LifeStyleDetailCell {
+        if let cell = cell as? LifeStyleDetailCell {
             navigationController?.pushViewController(
                 DetailLifeStyleSelectViewController(),
                 animated: true)
-        } else {
+        } else if let cell = cell as? LifeStyleCell {
+            let viewController = LifeStylePeekViewController()
+            viewController.setupContentView(
+                tagTexts: cell.tagTexts,
+                descriptionText: cell.descriptionText,
+                image: cell.titleImage)
             navigationController?.pushViewController(
-                LifeStylePeekViewController(),
+                viewController,
                 animated: true)
         }
     }
