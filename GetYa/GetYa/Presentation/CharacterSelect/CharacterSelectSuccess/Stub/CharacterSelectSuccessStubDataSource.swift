@@ -16,7 +16,7 @@ struct CharacterSelectSuccessStubDataSource {
         carPrice: "43,460,000"+"원",
         carOptions: "가솔린 ・ 2WD ・ 8인승")
     
-    //추천에 의한 결과 데이터
+    // 추천에 의한 결과 데이터
     let recommendCarThumbnailKeywords = ["1년 이하", "1인", "출퇴근용", "디자인", "4200만원"]
     
     // 추천된 차량의 옵션들
