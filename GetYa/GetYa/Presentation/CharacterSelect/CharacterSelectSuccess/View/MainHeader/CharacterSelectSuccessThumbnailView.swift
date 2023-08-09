@@ -16,7 +16,7 @@ final class CharacterSelectSuccessThumbnailView: UIView {
         static let intrinsicContentHeight: CGFloat = {
             let discriptionViewHeight = RecommendDiscriptionView.intrinsicContentHeight
             let subDiscriptionViewHeight =  RecommendSubDiscriptionView.intrinsicContentHeight
-           return discriptionViewHeight + subDiscriptionViewHeight
+            return discriptionViewHeight + subDiscriptionViewHeight + RecommendCarBackgroundView.uiConstant.height
         }()
         enum RecommendKeywordStackView {
             static let uiConstant: UILayout = .init(
@@ -42,7 +42,7 @@ final class CharacterSelectSuccessThumbnailView: UIView {
         }
         enum RecommendSubDiscriptionView {
             static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 3, bottomMargin: 79 + 131)
+                leadingMargin: 16, topMargin: 3, bottomMargin: 79)
             static let font: GetYaFont = .regularBody4
             static let fontColor: UIColor = .GetYaPalette.gray200
             static let intrinsicContentHeight: CGFloat = uiConstant.topMargin + font
@@ -68,11 +68,13 @@ final class CharacterSelectSuccessThumbnailView: UIView {
     private let recommendDiscriptionView: CommonLabel = .init(
         font: Constant.RecommendDiscriptionView.font.uiFont,
         color: Constant.RecommendDiscriptionView.fontColor,
-        text: "질문에 기반한 추천 차량이에요")
+        text: "질문에 기반한 추천 차량이에요"
+    )
     private let recommendSubDiscriptionView: CommonLabel = .init(
         font: Constant.RecommendSubDiscriptionView.font.uiFont,
         color: Constant.RecommendSubDiscriptionView.fontColor,
-        text: "전국의 Car master 분들이 엄선하여 추천했어요")
+        text: "전국의 Car master 분들이 엄선하여 추천했어요"
+    )
     private let recommendCarImageView = UIImageView(
         image: .init(named: Constant.RecommendCarImageView.imageName)
     ).set {
@@ -84,12 +86,11 @@ final class CharacterSelectSuccessThumbnailView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = const.bgColor
     }
-
+    
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        setCarImageAnimation()
     }
     
     override var bounds: CGRect {
@@ -138,7 +139,7 @@ extension CharacterSelectSuccessThumbnailView {
                     with: const.leadingMargin)
                 $0.configureTextLabeltrailingMargin(
                     with: const.trailingMargin)
-                
+                $0.sizeToFit()
             })
         }
     }
@@ -166,10 +167,10 @@ extension CharacterSelectSuccessThumbnailView {
 extension CharacterSelectSuccessThumbnailView: LayoutSupportable {
     func configureConstraints() {
         _=[recommendKeywordStackViewConstraints,
-         recommendDiscriptionViewConstraints,
-         recommendSubDiscriptionViewConstraints,
-         recommendCarImageViewConstraints,
-         recommendCarBackgroundViewConstraints].map {
+           recommendDiscriptionViewConstraints,
+           recommendSubDiscriptionViewConstraints,
+           recommendCarImageViewConstraints,
+           recommendCarBackgroundViewConstraints].map {
             NSLayoutConstraint.activate($0)
         }
     }
@@ -201,7 +202,9 @@ private extension CharacterSelectSuccessThumbnailView {
                 constant: const.uiConstant.leadingMargin),
             recommendDiscriptionView.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: const.uiConstant.topMargin)]
+                constant: const.uiConstant.topMargin),
+            recommendDiscriptionView.heightAnchor.constraint(
+                lessThanOrEqualToConstant: const.font.lineHeight)]
     }
     
     var recommendSubDiscriptionViewConstraints: [NSLayoutConstraint] {
@@ -214,8 +217,10 @@ private extension CharacterSelectSuccessThumbnailView {
                 equalTo: recommendDiscriptionView.bottomAnchor,
                 constant: const.uiConstant.topMargin),
             recommendSubDiscriptionView.bottomAnchor.constraint(
-                lessThanOrEqualTo: bottomAnchor,
-                constant: -const.uiConstant.bottomMargin)]
+                equalTo: recommendCarBackgroundView.topAnchor,
+                constant: -const.uiConstant.bottomMargin),
+            recommendSubDiscriptionView.heightAnchor.constraint(
+                lessThanOrEqualToConstant: const.font.lineHeight)]
     }
     
     var recommendCarImageViewConstraints: [NSLayoutConstraint] {
