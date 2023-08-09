@@ -13,4 +13,5 @@ protocol CharacterSSTableViewAdapterDataSource: AnyObject {
         thumbnailKeywords: [String],
         recommendCarProductOption: RecommendCarInfoModel,
         firstSectionTitle: String) { get }
+    var seciondSectionHeaderItem: String { get }
 }
