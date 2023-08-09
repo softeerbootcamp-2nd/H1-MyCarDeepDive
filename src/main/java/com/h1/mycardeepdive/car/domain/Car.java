@@ -1,5 +1,6 @@
 package com.h1.mycardeepdive.car.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,5 +20,13 @@ public class Car {
     private int price;
 
     private String comment;
+
+    @Builder
+    public Car(Long id, String name, int price, String comment) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.comment = comment;
+    }
 
 }
