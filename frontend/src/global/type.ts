@@ -83,3 +83,19 @@ export interface FeatureSelectRadioGroupProps {
   };
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface TrimSelectionRadioGroupProps {
+  selectedTrim: string;
+  carFeature: {
+    engine: string;
+    body: string;
+    operation: string;
+  };
+  trim?: {
+    name: string;
+    description: string;
+    basicOption: string[];
+    price: number;
+  };
+  mycarTrimHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
