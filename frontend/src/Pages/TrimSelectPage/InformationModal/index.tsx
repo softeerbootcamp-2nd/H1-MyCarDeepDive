@@ -54,7 +54,7 @@ function InformationModal({ showModal, setShowModal }: ModalProps) {
 
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
-      <div className='w-[800px] h-[535px] mx-auto mt-[148px] bg-grey-1000 rounded-xl'>
+      <div className='w-[800px] h-[535px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-grey-1000 rounded-xl'>
         <div className='w-full h-[70px] mb-8 relative'>
           <NavBar
             offsetX={offsetX}

@@ -79,3 +79,10 @@ export interface NavBarCategoryProps {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;
 }
+
+export interface TrimChangeUnlockProps {
+  unlockList: {
+    image: string;
+    name: string;
+  }[];
+}
