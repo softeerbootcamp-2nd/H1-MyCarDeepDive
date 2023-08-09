@@ -1,13 +1,11 @@
 import { useLocation } from 'react-router-dom';
-import LogoWhite from '@/assets/icon/logo-white.svg';
-import Logo from '@/assets/icon/logo.svg';
-import headerDownArrowBlack from '@/assets/icon/headerDownArrowBlack.svg';
-import headerDownArrow from '@/assets/icon/headerDownArrow.svg';
-
 import { useState } from 'react';
 import NavigationRadioGroup from './NavigationRadioGroup';
 import PriceDetailButton from './priceDetailButton';
 import ShowQuotationButton from './showQuotation';
+import HeaderLogo from './HeaderLogo';
+import HeaderTitle from './HeaderTitle';
+import DropDownIcon from './DropDownIcon';
 
 function Header() {
   const location = useLocation();
@@ -28,23 +26,9 @@ function Header() {
     >
       <div className='max-w-5xl mx-auto'>
         <div className='flex mt-[33px]'>
-          <img
-            src={isHome ? LogoWhite : Logo}
-            alt='Hyundai-Logo'
-            className='w-[129px]'
-          />
-          <p
-            className={`font-body4-medium mr-1 ml-4 flex items-center ${
-              isHome ? 'text-grey-600' : 'text-grey-50'
-            }`}
-          >
-            팰리세이드
-          </p>
-          <img
-            src={isHome ? headerDownArrowBlack : headerDownArrow}
-            alt='headerDownArrow'
-            className='w-5'
-          />
+          <HeaderLogo />
+          <HeaderTitle />
+          <DropDownIcon />
         </div>
 
         {isSelectionPage && (
