@@ -23,18 +23,15 @@ final class CharacterSelectSuccessTableViewAdapter: NSObject {
 
 // MARK: - UITableViewDataSource
 extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dataSource.numberOfSections
+    }
+    
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        switch section {
-        case 0:
-            return dataSource.numberOfFirstSectionItems
-        case 1:
-            return dataSource.numberOfSectionSectionItems
-        default:
-            return 0
-        }
+        return dataSource.numberOfRows(in: section)
     }
     
     func tableView(
@@ -49,20 +46,15 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
             return .init(style: .default, reuseIdentifier: CharacterSelectSuccessTableViewCell.id)
         }
         var item: RecommendCarProductOptionModel
-        switch indexPath.section {
-        case 0:
-            item = dataSource.firstSectionCellItem(at: index)
-        case 1:
-            item = dataSource.secondSectionCellItem(at: index)
-        default:
-            return .init(style: .default, reuseIdentifier: CharacterSelectSuccessTableViewCell.id)
-        }
-        // TODO: 이거 해야함
+        item = dataSource.cellItem(in: indexPath.section, indexPath.row)
+        
+        // TODO: 이거 셀 만들고 레이아웃 해야함
         print(item)
         return cell
     }
 }
 
+// MARK: - UITableViewDelegate
 extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard
