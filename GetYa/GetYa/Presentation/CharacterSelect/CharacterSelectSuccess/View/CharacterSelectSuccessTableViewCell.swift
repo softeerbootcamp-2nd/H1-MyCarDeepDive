@@ -15,7 +15,7 @@ final class CharacterSelectSuccessTableViewCell: UITableViewCell {
     // MARK: - Lifecycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .systemPink.withAlphaComponent(0.8)
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {

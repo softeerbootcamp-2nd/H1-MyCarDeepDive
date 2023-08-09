@@ -38,6 +38,8 @@ final class CharacterSelectSuccessViewModel {
          .init(optionImage: "nil", optionName: "라", optionPrice: "마", optionReview: "바")],
         [.init(optionImage: "nil", optionName: "사", optionPrice: "아", optionReview: "자"),
          .init(optionImage: "nil", optionName: "차", optionPrice: "카", optionReview: "파")]]
+    
+    private var sectionHeaderDataSource: [String] = ["색상", "옵션"]
 }
 
 // MARK: - CharacterSelectSuccessViewModelable
@@ -73,6 +75,7 @@ private extension CharacterSelectSuccessViewModel {
     }
 }
 
+// MARK: - CharacterSSTableViewAdapterDataSource
 extension CharacterSelectSuccessViewModel: CharacterSSTableViewAdapterDataSource {
     var numberOfSections: Int {
         dataSource.count
@@ -87,6 +90,6 @@ extension CharacterSelectSuccessViewModel: CharacterSSTableViewAdapterDataSource
     }
     
     var mainSectionHeaderItem: (thumbnailKeywords: [String], recommendCarProductOption: RecommendCarInfoModel, firstSectionTitle: String) {
-        (recommendCarThumbnailKeywords, recommendCarInfoModel, "옵션")
+        (recommendCarThumbnailKeywords, recommendCarInfoModel, sectionHeaderDataSource[0])
     }
 }

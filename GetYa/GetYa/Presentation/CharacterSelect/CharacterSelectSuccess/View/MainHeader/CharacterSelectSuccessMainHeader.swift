@@ -29,6 +29,7 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
     private let thumbnailView = CharacterSelectSuccessThumbnailView()
     private let recommendCarInfoView = CharacterSSRecommendCarInfoView()
     private let sectionDivider = CharacterSelectSuccessSectionDividerView()
+    private var isConfigured = false
     
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {
@@ -60,9 +61,22 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
         recommendCarInfo: RecommendCarInfoModel,
         firstSectionTitle: String
     ) {
-        thumbnailView.configureRecommendKeywordStackView(thumbnailKeywordTexts)
-        recommendCarInfoView.configure(with: recommendCarInfo)
-        sectionDivider.configureSectionTitle(with: firstSectionTitle)
+        if !isConfigured {
+            isConfigured.toggle()
+            thumbnailView.configureRecommendKeywordStackView(thumbnailKeywordTexts)
+            recommendCarInfoView.configure(with: recommendCarInfo)
+            sectionDivider.configureSectionTitle(with: firstSectionTitle)
+        }
+    }
+    
+    func showAnimation() {
+        thumbnailView.setCarImageAnimation()
+    }
+    
+    func setSubviewsLayoutPriority() {
+        thumbnailView.setContentHuggingPriority(.init(252), for: .vertical)
+        recommendCarInfoView.setContentCompressionResistancePriority(.init(998), for: .vertical)
+        sectionDivider.setContentCompressionResistancePriority(.init(999), for: .vertical)
     }
 }
 

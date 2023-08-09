@@ -81,24 +81,32 @@ final class CharacterSSRecommendCarInfoView: UIView {
     // 값 주입해야함.
     func configure(with recommendCarInfo: RecommendCarInfoModel) {
         _=carKrNameLabel.set {
+            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.configureText(text: recommendCarInfo.carKrName)
             $0.configureFont(font: Constant.CarKrNameLabel.font.uiFont)
             $0.configureColor(color: Constant.CarKrNameLabel.fontColor)
+            $0.sizeToFit()
         }
         _=carEnTrimLabel.set {
+            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.configureText(text: recommendCarInfo.carEnTrimName)
             $0.configureFont(font: Constant.CarEnTrimLabel.font.uiFont)
             $0.configureColor(color: Constant.CarEnTrimLabel.fontColor)
+            $0.sizeToFit()
         }
         _=carPriceLabel.set {
+            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.configureText(text: recommendCarInfo.carPrice)
             $0.configureFont(font: Constant.CarPriceLabel.font.uiFont)
             $0.configureColor(color: Constant.CarPriceLabel.fontColor)
+            $0.sizeToFit()
         }
         _=carOptionsLabel.set {
+            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.configureText(text: recommendCarInfo.carOptions)
             $0.configureFont(font: Constant.CarOptionsLabel.font.uiFont)
             $0.configureColor(color: Constant.CarOptionsLabel.fontColor)
+            $0.sizeToFit()
         }
     }
 }

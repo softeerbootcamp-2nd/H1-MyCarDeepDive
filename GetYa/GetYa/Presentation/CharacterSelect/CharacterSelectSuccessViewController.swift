@@ -9,7 +9,8 @@ import UIKit
 
 final class CharacterSelectSuccessViewController: UIViewController {
     // MARK: - Properties
-    private let tableView: UITableView = UITableView(frame: .zero).set {
+    private let tableView: UITableView = UITableView(frame: .zero, style: .grouped).set {
+        $0.backgroundColor = .white
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.register(
             CharacterSelectSuccessMainHeader.self,
@@ -17,8 +18,8 @@ final class CharacterSelectSuccessViewController: UIViewController {
         $0.register(
             CharacterSelectSuccessTableViewCell.self,
             forCellReuseIdentifier: CharacterSelectSuccessTableViewCell.id)
-        $0.rowHeight = 65
-        $0.estimatedRowHeight = 50
+        $0.separatorStyle = .none
+        $0.estimatedSectionHeaderHeight = UITableView.automaticDimension
     }
     
     private var adapter: CharacterSelectSuccessTableViewAdapter!
@@ -39,10 +40,16 @@ final class CharacterSelectSuccessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSubviewUI(with: tableView)
+        configureUI()
         adapter = .init(
             tableView: tableView,
             dataSource: viewModel)
+        
+    }
+    // MARK: - Functions
+    func configureUI() {
+        configureSubviewUI(with: tableView)
+        view.backgroundColor = .white
     }
 }
 
