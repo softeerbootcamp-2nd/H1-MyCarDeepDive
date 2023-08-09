@@ -21,10 +21,16 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/mycardeepdive;MODE=MYSQL
-    username: sa
-    password:
+    master:
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:tcp://localhost/~/Downloads/mycardeepdive;MODE=MYSQL
+    slave:
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:tcp://localhost/~/Downloads/mycardeepdive;MODE=MYSQL
 aws:
   paramstore:
     enabled: true
@@ -56,8 +62,19 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
+  datasource:
+    master:
+      username: ${master.username}
+      password: ${master.password}
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: ${master.jdbc-url}
+    slave:
+      username: ${slave.username}
+      password: ${slave.password}
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: ${slave.jdbc-url}
 aws:
   paramstore:
     enabled: true
@@ -89,8 +106,19 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
+  datasource:
+    master:
+      username: ${master.username}
+      password: ${master.password}
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: ${master.jdbc-url}
+    slave:
+      username: ${slave.username}
+      password: ${slave.password}
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: ${slave.jdbc-url}
 aws:
   paramstore:
     enabled: true
