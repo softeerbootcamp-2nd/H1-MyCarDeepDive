@@ -6,7 +6,7 @@ import { FeatureSelectRadioGroupProps } from '@/global/type';
 
 function FeatureSelectRadioGroup({
   carFeature,
-  onChangeHandler,
+  mycarFeatureHandler,
 }: FeatureSelectRadioGroupProps) {
   return (
     <>
@@ -25,14 +25,14 @@ function FeatureSelectRadioGroup({
                     key={index}
                     name={name}
                     value={value}
-                    onChangeHandler={onChangeHandler}
+                    onChangeHandler={mycarFeatureHandler}
                   />
                 ) : (
                   <FeatureSelectRadioUnselected
                     key={index}
                     name={name}
                     value={value}
-                    onChangeHandler={onChangeHandler}
+                    onChangeHandler={mycarFeatureHandler}
                   />
                 ),
               )}

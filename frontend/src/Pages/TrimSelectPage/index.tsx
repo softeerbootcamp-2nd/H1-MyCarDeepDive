@@ -11,6 +11,8 @@ import TrimSelectionHeader from './TrimSelectionHeader';
 import TrimSelectionRadioGroup from './TrimSelectionRadioGroup';
 import { useState } from 'react';
 import FeatureSelectRadioGroup from './FeatureSelectRadioGroup';
+import ColorChoiceButtonWrapper from './ColorChoiceButtonWrapper';
+import FeatureAndTrimSelectionWrapper from './FeatureAndTrimSelectionWrapper';
 
 function SelectPage() {
   const [carFeature, setCarFeature] = useState({
@@ -42,12 +44,12 @@ function SelectPage() {
         <SelectionCarImage />
       </SelectionCarWrapper>
 
-      <div className='absolute top-0 w-[416px] right-0 mt-[120px] px-12 py-[51px]'>
+      <FeatureAndTrimSelectionWrapper>
         <FeatureGuideLink />
         <FeatureSelectRadioGroupWrapper>
           <FeatureSelectRadioGroup
             carFeature={carFeature}
-            onChangeHandler={mycarFeatureHandler}
+            mycarFeatureHandler={mycarFeatureHandler}
           />
         </FeatureSelectRadioGroupWrapper>
 
@@ -62,7 +64,7 @@ function SelectPage() {
           mycarTrimHandler={mycarTrimHandler}
         />
 
-        <div className='mt-6'>
+        <ColorChoiceButtonWrapper>
           <Button
             width='w-full'
             height='h-[52px]'
@@ -70,8 +72,8 @@ function SelectPage() {
             text='색상 선택'
             onClick={() => console.log('primary')}
           />
-        </div>
-      </div>
+        </ColorChoiceButtonWrapper>
+      </FeatureAndTrimSelectionWrapper>
     </>
   );
 }
