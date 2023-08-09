@@ -6,14 +6,9 @@
 //
 
 protocol CharacterSSTableViewAdapterDataSource: AnyObject {
-    var numberOfFirstSectionItems: Int { get }
-    var numberOfSectionSectionItems: Int { get }
-    func firstSectionCellItem(
-        at index: Int
-    ) -> RecommendCarProductOptionModel
-    func secondSectionCellItem(
-        at index: Int
-    ) -> RecommendCarProductOptionModel
+    var numberOfSections: Int { get }
+    func numberOfRows(in section: Int) -> Int
+    func cellItem(in section: Int, _ row: Int) -> RecommendCarProductOptionModel
     var mainSectionHeaderItem: (
         thumbnailKeywords: [String],
         recommendCarProductOption: RecommendCarInfoModel,
