@@ -30,6 +30,18 @@ class AgeViewController: UIViewController {
     ]
     
     // MARK: - LifeCycles
+    override func loadView() {
+        contentView.delegate = self
+        contentView.configureDetail(
+            descriptionText: "나이를 알려주세요.",
+            partText: "나이",
+            questionNumber: 1,
+            questionCount: 2,
+            buttonTitle: "다음"
+        )
+        view = contentView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,15 +56,6 @@ class AgeViewController: UIViewController {
     
     private func configureUI() {
         self.view.backgroundColor = .white
-        contentView.delegate = self
-        contentView.configureDetail(
-            descriptionText: "나이를 알려주세요.",
-            partText: "나이",
-            questionNumber: 1,
-            questionCount: 2,
-            buttonTitle: "다음"
-        )
-        view = contentView
         configureCheckListStackView()
     }
     

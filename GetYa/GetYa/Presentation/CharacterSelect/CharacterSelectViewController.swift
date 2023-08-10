@@ -8,6 +8,12 @@
 import UIKit
 
 class CharacterSelectViewController: UIViewController {
+    enum Constants {
+        enum ProgressView {
+            static let height = CGFloat(4).scaledHeight
+        }
+    }
+    
     // MARK: - UI Properties
     private let pageViewController = UIPageViewController(
         transitionStyle: .scroll,
@@ -27,31 +33,26 @@ class CharacterSelectViewController: UIViewController {
         configureUI()
     }
     
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        
-        configureProgressView()
-        configurePageViewController()
-    }
-    
     // MARK: - Functions
     private func setupViews() {
         addChild(pageViewController)
         view.addSubviews([progressView, pageViewController.view])
         pageViewController.didMove(toParent: self)
         
-        let ageViewController = AgeViewController()
-        let lifeStyleViewController = LifeStyleViewController()
-        ageViewController.delegate = self
-        lifeStyleViewController.delegate = self
-        
+        let ageViewController = AgeViewController().set {
+            $0.delegate = self
+        }
+        let lifeStyleViewController = LifeStyleViewController().set {
+            $0.delegate = self
+        }
         viewControllers = [ageViewController, lifeStyleViewController]
-        progressView.configureProgressTotalStep(with: viewControllers.count)
     }
     
     private func configureUI() {
         view.backgroundColor = .white
         configureNavigationBar()
+        configureProgressView()
+        configurePageViewController()
     }
     
     private func configureNavigationBar() {
@@ -68,27 +69,32 @@ class CharacterSelectViewController: UIViewController {
     }
     
     private func configureProgressView() {
-        let safeAreaLayout = view.safeAreaLayoutGuide.layoutFrame
-        progressView.frame = CGRect(
-            x: 0,
-            y: safeAreaLayout.minY,
-            width: view.bounds.width,
-            height: 4)
+        progressView.configureProgressTotalStep(with: viewControllers.count)
+        progressView.transform = progressView.transform.scaledBy(
+            x: 1,
+            y: Constants.ProgressView.height)
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
     
     private func configurePageViewController() {
-        let safeAreaLayout = view.safeAreaLayoutGuide.layoutFrame
-        pageViewController.view.frame = CGRect(
-            x: 0,
-            y: safeAreaLayout.minY + 3,
-            width: view.bounds.width,
-            height: view.bounds.height - safeAreaLayout.minY)
         if let firstViewController = viewControllers.first {
             pageViewController.setViewControllers(
                 [firstViewController],
                 direction: .forward,
                 animated: true)
         }
+        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pageViewController.view.topAnchor.constraint(equalTo: progressView.bottomAnchor),
+            pageViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pageViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pageViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     @objc private func touchUpNavigationBackButton() {

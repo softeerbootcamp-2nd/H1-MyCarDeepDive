@@ -49,7 +49,6 @@
 		641AB5242A7B821D00CF88C0 /* HomeContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5232A7B821D00CF88C0 /* HomeContentDelegate.swift */; };
 		641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */; };
 		641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */; };
-		641AB52A2A7BA16000CF88C0 /* CharacterSelectContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */; };
 		64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA43F2A7787770003E2C1 /* AppDelegate.swift */; };
 		64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4412A7787770003E2C1 /* SceneDelegate.swift */; };
 		64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4432A7787770003E2C1 /* ViewController.swift */; };
@@ -144,7 +143,6 @@
 		641AB5232A7B821D00CF88C0 /* HomeContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentDelegate.swift; sourceTree = "<group>"; };
 		641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListStackView.swift; sourceTree = "<group>"; };
 		641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListItemView.swift; sourceTree = "<group>"; };
-		641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectContentView.swift; sourceTree = "<group>"; };
 		64ADA43C2A7787770003E2C1 /* GetYa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetYa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64ADA43F2A7787770003E2C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64ADA4412A7787770003E2C1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -272,7 +270,6 @@
 			children = (
 				647FBF132A7CB5C900507AE9 /* View */,
 				641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */,
-				641AB5292A7BA16000CF88C0 /* CharacterSelectContentView.swift */,
 				6412D08D2A81F1FB001E4005 /* DetailLifeStyleSelectViewController.swift */,
 				6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */,
 				6412D0872A80C385001E4005 /* AgeViewController.swift */,
@@ -740,7 +737,6 @@
 				15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
 				641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */,
-				641AB52A2A7BA16000CF88C0 /* CharacterSelectContentView.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
 				6412D0842A80ABCA001E4005 /* QuestionNumberView.swift in Sources */,
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
