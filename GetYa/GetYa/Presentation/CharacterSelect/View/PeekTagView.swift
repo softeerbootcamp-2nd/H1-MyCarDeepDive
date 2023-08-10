@@ -1,17 +1,17 @@
 //
-//  TagView.swift
+//  PeekTagView.swift
 //  GetYa
 //
-//  Created by 배남석 on 2023/08/05.
+//  Created by 배남석 on 2023/08/08.
 //
 
 import UIKit
 
-class TagView: UIView {
+class PeekTagView: UIView {
     // MARK: - UI Properties
     private let label = CommonLabel(
         fontType: GetYaFont.regularCaption1,
-        color: .GetYaPalette.acriveBlue
+        color: .GetYaPalette.gray900
     )
     
     // MARK: - Properties
@@ -46,14 +46,10 @@ class TagView: UIView {
     }
     
     private func configureUI() {
-        self.layer.cornerRadius = CGFloat(10).scaledWidth
+        self.layer.cornerRadius = CGFloat(4).scaledWidth
+        self.layer.backgroundColor = UIColor.black.cgColor
         
         configureLabel()
-        configureBackgroundColor(color: .GetYaPalette.gray1000)
-    }
-    
-    func configureBackgroundColor(color: UIColor) {
-        self.layer.backgroundColor = color.cgColor
     }
     
     func configureLabelText(text: String) {

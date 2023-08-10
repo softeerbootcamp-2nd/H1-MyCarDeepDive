@@ -50,6 +50,7 @@ class HomeViewController: UIViewController {
     
     private func configureNavigationBar() {
         let image = UIImage(named: "Logo")
+        self.navigationItem.title = ""
         self.navigationItem.titleView = UIImageView(image: image)
     }
 }
