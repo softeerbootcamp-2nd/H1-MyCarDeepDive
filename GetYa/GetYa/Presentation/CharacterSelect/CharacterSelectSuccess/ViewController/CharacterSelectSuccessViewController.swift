@@ -21,10 +21,13 @@ final class CharacterSelectSuccessViewController: UIViewController {
         $0.register(
             CharacterSelectSuccesSecondSectionHeader.self,
             forHeaderFooterViewReuseIdentifier: CharacterSelectSuccesSecondSectionHeader.id)
+        $0.register(
+            CharacterSelectSuccessFooter.self,
+            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessFooter.id)
         $0.separatorStyle = .none
         $0.estimatedSectionHeaderHeight = UITableView.automaticDimension
         $0.estimatedRowHeight = UITableView.automaticDimension
-        $0.sectionFooterHeight = 0
+        $0.estimatedSectionFooterHeight = UITableView.automaticDimension
     }
     
     // MARK: - Properties

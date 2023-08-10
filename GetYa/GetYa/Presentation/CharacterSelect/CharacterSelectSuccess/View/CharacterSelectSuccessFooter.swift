@@ -9,26 +9,121 @@ import UIKit
 
 final class CharacterSelectSuccessFooter: UITableViewHeaderFooterView {
     static let id = String(describing: CharacterSelectSuccessFooter.self)
+    enum Constants {
+        enum OnePixelDivider {
+            static let uiConstant: UILayout = .init(
+                leadingMargin: 16, topMargin: 20, trailingMargin: 16, height: 1)
+            static let bgColor: UIColor = .GetYaPalette.gray700
+            static let intrinsicContentHeight: CGFloat = {
+                return uiConstant.height + uiConstant.topMargin
+            }()
+        }
+        
+        enum TotalMoneyDescriptionLabel {
+            static let topMargin: CGFloat = .init(16).scaledHeight
+            static let leadingMargin: CGFloat = .init(16).scaledWidth
+            static let trailingMargin: CGFloat = .init(16).scaledWidth
+        }
+        
+        enum PaymentAmountLabel {
+            static let trailingMargin: CGFloat = .init(16).scaledWidth
+        }
+        
+        enum EmptySpacingView {
+            static let height: CGFloat = .init(94).scaledHeight
+        }
+    }
     
     // MARK: - UIProperties
+    private let onePixelDivider: UIView = UIView(frame: .zero).set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = Constants.OnePixelDivider.bgColor
+    }
     private let totalMoneyDescriptionLabel = CommonLabel(
         fontType: GetYaFont.mediumBody3, color: .GetYaPalette.gray400, text: "총 금액")
     private let paymentAmountLabel = CommonLabel(
         fontType: GetYaFont.mediumHead3, color: .black, text: "0원")
+    private let emptySpacingView = UIView(frame: .zero).set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     // MARK: - Constant
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
+        configureSubviewUI(
+            with: onePixelDivider, totalMoneyDescriptionLabel, paymentAmountLabel, emptySpacingView)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureSubviewUI(
+            with: onePixelDivider, totalMoneyDescriptionLabel, paymentAmountLabel, emptySpacingView)
     }
     
-    // MARK: - Function
-    
-    ///여기서해야할거는 CommonLabel이거 바꾸는 거다 이거 초기에 지정하는데 현대산스 폰트 적용안됨
+    // MARK: - Functions
     func configure(with paymentAmount: String) {
-        
+        paymentAmountLabel.text = paymentAmount
+    }
+}
+
+// MARK: - LayoutSupportable
+extension CharacterSelectSuccessFooter: LayoutSupportable {
+    func configureConstraints() {
+        _=[onePixelDividerConstraints,
+           totalMoneyDescriptionLabelConstraints,
+           paymentAmountLabelConstriants,
+           emptySpacingViewConstraints
+        ].map { NSLayoutConstraint.activate($0) }
+    }
+    
+    // MARK: - LayoutSupportable private functions
+    private var onePixelDividerConstraints: [NSLayoutConstraint] {
+        let const = Constants.OnePixelDivider.self
+        return [
+            onePixelDivider.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: const.uiConstant.leadingMargin),
+            onePixelDivider.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -const.uiConstant.trailingMargin),
+            onePixelDivider.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: const.uiConstant.topMargin),
+            onePixelDivider.heightAnchor.constraint(
+                equalToConstant: const.uiConstant.height)]
+    }
+    
+    private var totalMoneyDescriptionLabelConstraints: [NSLayoutConstraint] {
+        let const = Constants.TotalMoneyDescriptionLabel.self
+        return [
+            totalMoneyDescriptionLabel.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: const.leadingMargin),
+            totalMoneyDescriptionLabel.topAnchor.constraint(
+                equalTo: onePixelDivider.bottomAnchor,
+                constant: const.topMargin),
+            totalMoneyDescriptionLabel.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -const.trailingMargin)]
+    }
+    
+    private var paymentAmountLabelConstriants: [NSLayoutConstraint] {
+        let const = Constants.PaymentAmountLabel.self
+        return [
+            paymentAmountLabel.centerYAnchor.constraint(
+                equalTo: totalMoneyDescriptionLabel.centerYAnchor),
+            paymentAmountLabel.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -const.trailingMargin)]
+    }
+    
+    private var emptySpacingViewConstraints: [NSLayoutConstraint] {
+        let const = Constants.EmptySpacingView.self
+        return [
+            emptySpacingView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            emptySpacingView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            emptySpacingView.topAnchor.constraint(equalTo: totalMoneyDescriptionLabel.bottomAnchor),
+            emptySpacingView.heightAnchor.constraint(greaterThanOrEqualToConstant: const.height),
+            emptySpacingView.bottomAnchor.constraint(equalTo: bottomAnchor)]
     }
 }
