@@ -8,7 +8,7 @@
 import UIKit
 
 final class CharacterSelectSuccessViewController: UIViewController {
-    // MARK: - Properties
+    // MARK: - UI Properties
     private let tableView: UITableView = UITableView(frame: .zero, style: .grouped).set {
         $0.backgroundColor = .white
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -26,10 +26,11 @@ final class CharacterSelectSuccessViewController: UIViewController {
         $0.estimatedRowHeight = CharacterSelectSuccessTableViewCell
             .Constant
             .intrinsicContentHeight
+        $0.sectionFooterHeight = 0
     }
     
+    // MARK: - Properties
     private var adapter: CharacterSelectSuccessTableViewAdapter!
-    
     private var viewModel: (any CharacterSelectSuccessViewModelable & CharacterSSTableViewAdapterDataSource)!
     
     // MARK: - Lifecycles
@@ -38,7 +39,6 @@ final class CharacterSelectSuccessViewController: UIViewController {
         self.viewModel = viewModel
     }
     
-    // @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         viewModel = CharacterSelectSuccessViewModel()
@@ -50,8 +50,8 @@ final class CharacterSelectSuccessViewController: UIViewController {
         adapter = .init(
             tableView: tableView,
             dataSource: viewModel)
-        
     }
+    
     // MARK: - Functions
     func configureUI() {
         configureSubviewUI(with: tableView)
