@@ -64,6 +64,7 @@ final class CharacterSelectSuccessTableViewCell: UITableViewCell {
             title: productOptionModel.optionName,
             price: productOptionModel.optionPrice)
         reviewdTextView.configureText(text: productOptionModel.optionReview)
+        layoutIfNeeded()
     }
     // MARK: - Objc Functions
 }
@@ -74,6 +75,9 @@ extension CharacterSelectSuccessTableViewCell: LayoutSupportable {
         _=[recommendCarOptionViewConstraints,
            reviewdTextViewConstraints
         ].map { NSLayoutConstraint.activate($0) }
+        recommendCarOptionView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        recommendCarOptionView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        reviewdTextView.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
     
     private var recommendCarOptionViewConstraints: [NSLayoutConstraint] {
@@ -88,7 +92,8 @@ extension CharacterSelectSuccessTableViewCell: LayoutSupportable {
             recommendCarOptionView.heightAnchor.constraint(
                 equalToConstant: const.height)]
     }
-    
+    //와 대박 예전에 동적으로 데이터올 때 높이 구하는 방식을,, 그냥 텍스트 받으면 텍스트에 따라 UILabel이랑 font생성해서 width명시하고 높이가 몇으로되는지에 따라 높이를 구해줬는데
+    // 지금처럼하니까 되네, 그대신 tableview의 cell사이즈를 동적으로하기로했음.. 헉대박;;;
     private var reviewdTextViewConstraints: [NSLayoutConstraint] {
         let const = Constant.ReviewdTextView.self
         return [
@@ -101,8 +106,10 @@ extension CharacterSelectSuccessTableViewCell: LayoutSupportable {
             reviewdTextView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
                 constant: -const.trailingMargin),
-            reviewdTextView.heightAnchor.constraint(
-                equalToConstant: const.height)
+            reviewdTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: const.height),
+            reviewdTextView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ]
+        //            reviewdTextView.heightAnchor.constraint(
+        //                equalToConstant: const.height)
     }
 }

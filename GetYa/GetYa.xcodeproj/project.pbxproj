@@ -58,8 +58,8 @@
 		6412D0922A822D5A001E4005 /* LifeStylePeekContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0912A822D5A001E4005 /* LifeStylePeekContentView.swift */; };
 		6412D0942A823A89001E4005 /* PeekTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0932A823A89001E4005 /* PeekTagView.swift */; };
 		6412D0982A8323CD001E4005 /* CommonTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0972A8323CD001E4005 /* CommonTextView.swift */; };
-		6412D09D2A8387E6001E4005 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D09C2A8387E6001E4005 /* TooltipView.swift */; };
 		6412D09A2A8332E5001E4005 /* PeekQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0992A8332E5001E4005 /* PeekQuestionView.swift */; };
+		6412D09D2A8387E6001E4005 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D09C2A8387E6001E4005 /* TooltipView.swift */; };
 		641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */; };
 		641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */; };
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
@@ -169,8 +169,8 @@
 		6412D0912A822D5A001E4005 /* LifeStylePeekContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStylePeekContentView.swift; sourceTree = "<group>"; };
 		6412D0932A823A89001E4005 /* PeekTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekTagView.swift; sourceTree = "<group>"; };
 		6412D0972A8323CD001E4005 /* CommonTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextView.swift; sourceTree = "<group>"; };
-		6412D09C2A8387E6001E4005 /* TooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		6412D0992A8332E5001E4005 /* PeekQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekQuestionView.swift; sourceTree = "<group>"; };
+		6412D09C2A8387E6001E4005 /* TooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectViewController.swift; sourceTree = "<group>"; };
 		641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectViewController.swift; sourceTree = "<group>"; };
 		641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
@@ -330,10 +330,10 @@
 		159B2CF62A825CD7003F47D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				155DDD152A84A808009AE2BC /* CharacterSelectSuccessFooter.swift */,
 				155DDD092A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift */,
 				155DDD082A834FD3009AE2BC /* Cell */,
 				155EAB442A81F0A200833B0E /* MainHeader */,
-				155DDD152A84A808009AE2BC /* CharacterSelectSuccessFooter.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
