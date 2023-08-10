@@ -64,7 +64,6 @@ final class CharacterSelectSuccessTableViewCell: UITableViewCell {
             title: productOptionModel.optionName,
             price: productOptionModel.optionPrice)
         reviewdTextView.configureText(text: productOptionModel.optionReview)
-        layoutIfNeeded()
     }
     // MARK: - Objc Functions
 }
