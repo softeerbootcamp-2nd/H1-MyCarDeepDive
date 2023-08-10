@@ -2,7 +2,6 @@ package com.h1.mycardeepdive.options.service;
 
 import com.h1.mycardeepdive.options.domain.repository.OptionsRepository;
 import com.h1.mycardeepdive.options.mapper.OptionsMapper;
-import com.h1.mycardeepdive.options.ui.dto.WheelOptionResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +17,5 @@ public class OptionsService {
 
     private final OptionsRepository optionsRepository;
 
-    public List<WheelOptionResponse> findAllWheelOptions() {
-        return optionsRepository.findAll().stream()
-                .map(OptionsMapper.INSTANCE::entityToResponse)
-                .collect(Collectors.toList());
     }
 }
