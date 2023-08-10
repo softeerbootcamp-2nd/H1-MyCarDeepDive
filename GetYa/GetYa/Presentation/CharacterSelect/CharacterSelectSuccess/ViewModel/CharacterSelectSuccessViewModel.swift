@@ -33,15 +33,15 @@ final class CharacterSelectSuccessViewModel {
     // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
     private var dataSource: [[RecommendCarProductOptionModel]]
-    
     private var mainSectionHeader: MainSectionHeaderModel
-    
     private var sectionHeaders: [String]
+    private var secondSectionFooter: String
     
     init() {
         mainSectionHeader = .mock
         dataSource = RecommendCarProductOptionModel.mocks
         sectionHeaders = CharacterSelectSuccessSectionHeaders.lists
+        secondSectionFooter = "48,120,000원"
     }
 }
 
@@ -80,12 +80,16 @@ private extension CharacterSelectSuccessViewModel {
 
 // MARK: - CharacterSSTableViewAdapterDataSource
 extension CharacterSelectSuccessViewModel: CharacterSSTableViewAdapterDataSource {
+    var secondSectionFooterItem: String {
+        secondSectionFooter
+    }
+    
     var mainSectionHeaderItem: MainSectionHeaderModel {
         mainSectionHeader
     }
     
     // TODO: 이거도 나중에 섹션 헤더만 주는 함수 합쳐버리자,, 리빌딩해야함
-    var seciondSectionHeaderItem: String {
+    var secondSectionHeaderItem: String {
         sectionHeaders[1]
     }
     
