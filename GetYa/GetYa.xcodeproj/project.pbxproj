@@ -43,6 +43,7 @@
 		6412D0942A823A89001E4005 /* PeekTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0932A823A89001E4005 /* PeekTagView.swift */; };
 		6412D0982A8323CD001E4005 /* CommonTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0972A8323CD001E4005 /* CommonTextView.swift */; };
 		6412D09A2A8332E5001E4005 /* PeekQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0992A8332E5001E4005 /* PeekQuestionView.swift */; };
+		6412D09F2A84AB89001E4005 /* TrimSubOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D09E2A84AB89001E4005 /* TrimSubOptionView.swift */; };
 		641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */; };
 		641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */; };
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
@@ -137,6 +138,7 @@
 		6412D0932A823A89001E4005 /* PeekTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekTagView.swift; sourceTree = "<group>"; };
 		6412D0972A8323CD001E4005 /* CommonTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextView.swift; sourceTree = "<group>"; };
 		6412D0992A8332E5001E4005 /* PeekQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekQuestionView.swift; sourceTree = "<group>"; };
+		6412D09E2A84AB89001E4005 /* TrimSubOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionView.swift; sourceTree = "<group>"; };
 		641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectViewController.swift; sourceTree = "<group>"; };
 		641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectViewController.swift; sourceTree = "<group>"; };
 		641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */,
+				6412D09E2A84AB89001E4005 /* TrimSubOptionView.swift */,
 			);
 			path = TrimSelect;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 				15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
 				641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */,
+				6412D09F2A84AB89001E4005 /* TrimSubOptionView.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
 				6412D0842A80ABCA001E4005 /* QuestionNumberView.swift in Sources */,
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
