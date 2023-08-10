@@ -8,22 +8,23 @@
 import UIKit
 
 enum GetYaFont: CaseIterable {
-  case boldHead1
-  case mediumHead2
-  case mediumHead3
-  case mediumHead4
-  case regularHead2
-  case boldBody1
-  case mediumBody1
-  case boldBody2
-  case mediumBody2
-  case regularBody2
-  case mediumBody3
-  case regularBody3
-  case mediumBody4
-  case regularBody4
-  case mediumCaption1
-  case regularCaption1
+    
+    case boldHead1
+    case mediumHead2
+    case mediumHead3
+    case mediumHead4
+    case regularHead2
+    case boldBody1
+    case mediumBody1
+    case boldBody2
+    case mediumBody2
+    case regularBody2
+    case mediumBody3
+    case regularBody3
+    case mediumBody4
+    case regularBody4
+    case mediumCaption1
+    case regularCaption1
   
   var size: CGFloat {
     switch self {
