@@ -5,7 +5,10 @@ interface NavBarSelectedProps {
 function NavBarSelected({ offsetX }: NavBarSelectedProps) {
   return (
     <hr
-      className={`w-24 h-0.5 bg-primary border-0 absolute bottom-0 translate-x-[${offsetX}px] transition-transform duration-300 ease-in-out`}
+      className={`w-24 h-0.5 bg-primary border-0 absolute bottom-0 transition-transform duration-300 ease-in-out`}
+      style={{
+        transform: `translateX(${offsetX}px)`,
+      }}
     />
   );
 }
