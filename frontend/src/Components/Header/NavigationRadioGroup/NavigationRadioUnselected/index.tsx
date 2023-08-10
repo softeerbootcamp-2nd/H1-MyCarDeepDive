@@ -24,7 +24,17 @@ function NavigationRadioUnselected({
           </span>
         </p>
       </label>
-      <p className='font-body4-regular text-grey-400 flex items-center justify-center'>
+      <p
+        className='font-body4-regular text-grey-400 flex items-center justify-center'
+        style={{
+          display: '-webkit-box',
+          WebkitBoxOrient: 'vertical',
+          WebkitLineClamp: 1,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          maxWidth: '238px',
+        }}
+      >
         {value}
       </p>
     </>

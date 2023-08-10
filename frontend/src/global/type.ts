@@ -118,3 +118,8 @@ export interface TrimChangeUnlockProps {
     name: string;
   }[];
 }
+
+export interface setShowPriceInfoProps {
+  showPriceInfo: boolean;
+  setShowPriceInfo: (value: boolean) => void;
+}
