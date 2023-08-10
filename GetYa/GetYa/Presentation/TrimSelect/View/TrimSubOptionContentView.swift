@@ -7,6 +7,8 @@
 
 import UIKit
 
+// TODO: 데이터에 따라 초기 옵션 선택하는 로직 짜야함
+
 class TrimSubOptionContentView: UIView {
     enum Constants {
         enum StackView {
