@@ -9,11 +9,7 @@ import lombok.Getter;
 public abstract class OptionBaseEntity {
     protected String name;
 
-    protected String imgUrl;
-
     protected String summary;
-
-    protected String description;
 
     protected long price;
 

@@ -1,11 +1,10 @@
 package com.h1.mycardeepdive.tags.domain;
 
+import java.util.Objects;
+import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @NoArgsConstructor

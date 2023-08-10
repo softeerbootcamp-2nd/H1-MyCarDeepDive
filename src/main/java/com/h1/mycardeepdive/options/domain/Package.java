@@ -18,19 +18,10 @@ public class Package extends OptionBaseEntity {
 
     @Builder
     public Package(
-            Long id,
-            String name,
-            String imgUrl,
-            String summary,
-            String description,
-            long price,
-            double chooseRate,
-            Badge badgeName) {
+            Long id, String name, String summary, long price, double chooseRate, Badge badgeName) {
         this.id = id;
         this.name = name;
-        this.imgUrl = imgUrl;
         this.summary = summary;
-        this.description = description;
         this.price = price;
         this.chooseRate = chooseRate;
         this.badgeName = badgeName;

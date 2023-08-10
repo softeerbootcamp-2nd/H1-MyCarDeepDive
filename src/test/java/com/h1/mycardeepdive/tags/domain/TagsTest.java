@@ -1,31 +1,26 @@
 package com.h1.mycardeepdive.tags.domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class TagsTest {
     @DisplayName("태그를 빌더 패턴을 활용하여 생성할 수 있다")
     @Test
     public void createTags() throws Exception {
-        //given
+        // given
         Long id = 1L;
         String name = "tag_name";
         String img_url = "img.jpg";
 
-        //when
-        Tags tags = Tags.builder()
-                .id(id)
-                .name(name)
-                .img_url(img_url)
-                .build();
+        // when
+        Tags tags = Tags.builder().id(id).name(name).img_url(img_url).build();
 
-        //then
+        // then
         assertThat(tags.getId()).isEqualTo(id);
         assertThat(tags.getName()).isEqualTo(name);
         assertThat(tags.getImg_url()).isEqualTo(img_url);

@@ -15,9 +15,7 @@ class PackageTest {
         // given
         Long id = 1L;
         String name = "name";
-        String imgUrl = "img.jpg";
         double chooseRate = 5.5;
-        String description = "description";
         long price = 1200000;
         String summary = "summary";
 
@@ -26,10 +24,8 @@ class PackageTest {
                 Package.builder()
                         .id(id)
                         .name(name)
-                        .imgUrl(imgUrl)
                         .chooseRate(chooseRate)
                         .badgeName(Badge.H_GENUINE)
-                        .description(description)
                         .price(price)
                         .summary(summary)
                         .build();
@@ -37,10 +33,8 @@ class PackageTest {
         // then
         assertThat(_package.getId()).isEqualTo(id);
         assertThat(_package.getName()).isEqualTo(name);
-        assertThat(_package.getImgUrl()).isEqualTo(imgUrl);
         assertThat(_package.getChooseRate()).isEqualTo(chooseRate);
         assertThat(_package.getBadgeName()).isEqualTo(Badge.H_GENUINE);
-        assertThat(_package.getDescription()).isEqualTo(description);
         assertThat(_package.getPrice()).isEqualTo(price);
         assertThat(_package.getSummary()).isEqualTo(summary);
     }

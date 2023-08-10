@@ -19,6 +19,10 @@ public class Options extends OptionBaseEntity {
     @Column(name = "is_basic_option")
     private boolean isBasicOption;
 
+    private String imgUrl;
+
+    private String description;
+
     @Builder
     public Options(
             Long id,
