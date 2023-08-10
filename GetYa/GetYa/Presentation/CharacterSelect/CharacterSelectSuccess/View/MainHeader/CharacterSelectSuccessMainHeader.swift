@@ -29,7 +29,6 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
     private let thumbnailView = CharacterSelectSuccessThumbnailView()
     private let recommendCarInfoView = CharacterSSRecommendCarInfoView()
     private let sectionDivider = CharacterSelectSuccessSectionDividerView()
-    private var isConfigured = false
     
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {
@@ -52,31 +51,34 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
             sectionDivider)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailView.prepareForReuse()
+    }
+    
     // MARK: - Functions
-    // TODO: 추천 완료된 차량의 엔터티 생성해야 합니다.
-    /// 0 = 차량 한글, 1 = 차량 영어 2 = 차량 가격 3 = 차량 옵션 리스트
-    /// 그리고 추천 완료된 차량의 키워드를 가져와 TagView를 갱신해야 합니다.
-    func configure(
-        thumbnailKeywordTexts: [String],
-        recommendCarInfo: RecommendCarInfoModel,
-        firstSectionTitle: String
-    ) {
-        if !isConfigured {
-            isConfigured.toggle()
-            thumbnailView.configureRecommendKeywordStackView(thumbnailKeywordTexts)
-            recommendCarInfoView.configure(with: recommendCarInfo)
-            sectionDivider.configureSectionTitle(with: firstSectionTitle)
-        }
+    func configure(with: MainSectionHeaderModel) {
+        setThumbnailView(with.thumbnailKeywords)
+        setRecommendCarInfoView(with.recommendCarProductOption)
+        setSectionDivider(with.firstSectionTitle)
     }
     
     func showAnimation() {
-        thumbnailView.setCarImageAnimation()
+        thumbnailView.setInitialCarImageForAnimation()
+        thumbnailView.showCarImageAnimation()
     }
     
-    func setSubviewsLayoutPriority() {
-        thumbnailView.setContentHuggingPriority(.init(252), for: .vertical)
-        recommendCarInfoView.setContentCompressionResistancePriority(.init(998), for: .vertical)
-        sectionDivider.setContentCompressionResistancePriority(.init(999), for: .vertical)
+    // MARK: - Private functions
+    private func setThumbnailView(_ thumbnailKeywords: [String]) {
+        thumbnailView.configureRecommendKeywordStackView(thumbnailKeywords)
+    }
+    
+    private func setRecommendCarInfoView(_ carInfo: RecommendCarInfoModel) {
+        recommendCarInfoView.configure(with: carInfo)
+    }
+    
+    private func setSectionDivider(_ title: String) {
+        sectionDivider.configureSectionTitle(with: title)
     }
 }
 

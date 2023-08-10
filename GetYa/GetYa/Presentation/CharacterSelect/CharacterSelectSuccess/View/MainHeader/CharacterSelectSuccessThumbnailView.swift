@@ -135,31 +135,35 @@ extension CharacterSelectSuccessThumbnailView {
                 $0.configureLabelFont(with: const.font)
                 $0.configureTextColor(with: const.textColor)
                 $0.configureBackgroundColor(color: .none)
-                $0.configureTextLabelLeadingMargin(
-                    with: const.leadingMargin)
-                $0.configureTextLabeltrailingMargin(
-                    with: const.trailingMargin)
+                $0.configureTextLabelLeadingMargin(with: const.leadingMargin)
+                $0.configureTextLabeltrailingMargin(with: const.trailingMargin)
                 $0.sizeToFit()
             })
         }
     }
     
-    func setCarImageAnimation() {
+    func setInitialCarImageForAnimation() {
         _=recommendCarImageView.set {
             $0.alpha = 0.777
             $0.transform = .init(translationX: 27, y: 0.777)
         }
-        
+    }
+    
+    func showCarImageAnimation() {
         UIView.animate(
-            withDuration: 0.2,
-            delay: 0.23,
-            options: [.curveEaseIn, .curveLinear, .curveEaseOut]
+            withDuration: 0.7,
+            delay: 0,
+            options: [.curveEaseOut]
         ) {
             _=self.recommendCarImageView.set {
                 $0.alpha = 1
                 $0.transform = .identity
             }
         }
+    }
+    
+    func prepareForReuse() {
+        _=recommendKeywordStackView.arrangedSubviews.map { $0.removeFromSuperview() }
     }
 }
 
