@@ -8,7 +8,7 @@ function FeatureGuideLink() {
   return (
     <>
       <button
-        className='flex mb-4 gap-[2px]'
+        className='flex mb-4 gap-[2px] focus:outline-none'
         onClick={() => setShowModal(true)}
       >
         <img src={QuestionMarkImg} alt='물음표' className='my-auto' />
