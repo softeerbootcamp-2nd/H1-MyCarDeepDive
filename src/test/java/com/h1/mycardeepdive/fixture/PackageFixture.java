@@ -10,8 +10,7 @@ public class PackageFixture {
         Long id = 0L;
         String name = "컴포트 II";
         double chooseRate = 5.5;
-        String summary =
-                "편의성을 위해 구성된 세트 옵션";
+        String summary = "편의성을 위해 구성된 세트 옵션";
         long price = 10090000;
 
         return Package.builder()
