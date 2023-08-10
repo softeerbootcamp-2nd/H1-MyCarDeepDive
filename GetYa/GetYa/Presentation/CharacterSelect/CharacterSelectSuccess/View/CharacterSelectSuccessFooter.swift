@@ -12,9 +12,9 @@ final class CharacterSelectSuccessFooter: UITableViewHeaderFooterView {
     
     // MARK: - UIProperties
     private let totalMoneyDescriptionLabel = CommonLabel(
-        font: GetYaFont.mediumBody3.uiFont, color: .GetYaPalette.gray400, text: "총 금액")
+        fontType: GetYaFont.mediumBody3, color: .GetYaPalette.gray400, text: "총 금액")
     private let paymentAmountLabel = CommonLabel(
-        font: GetYaFont.mediumHead3.uiFont, color: .black, text: "0원")
+        fontType: GetYaFont.mediumHead3, color: .black, text: "0원")
     
     // MARK: - Constant
     override init(reuseIdentifier: String?) {

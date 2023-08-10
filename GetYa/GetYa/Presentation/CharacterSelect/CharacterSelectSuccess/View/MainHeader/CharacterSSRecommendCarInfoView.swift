@@ -52,10 +52,18 @@ final class CharacterSSRecommendCarInfoView: UIView {
     }
     
     // MARK: - UI properties
-    private let carKrNameLabel: CommonLabel = .init(frame: .zero)
-    private let carEnTrimLabel: CommonLabel = .init(frame: .zero)
-    private let carPriceLabel: CommonLabel = .init(frame: .zero)
-    private let carOptionsLabel: CommonLabel = .init(frame: .zero)
+    private let carKrNameLabel: CommonLabel = .init(
+        fontType: Constant.CarKrNameLabel.font,
+        color: Constant.CarKrNameLabel.fontColor)
+    private let carEnTrimLabel: CommonLabel = .init(
+        fontType: Constant.CarEnTrimLabel.font,
+        color: Constant.CarEnTrimLabel.fontColor)
+    private let carPriceLabel: CommonLabel = .init(
+        fontType: Constant.CarPriceLabel.font,
+        color: Constant.CarPriceLabel.fontColor)
+    private let carOptionsLabel: CommonLabel = .init(
+        fontType: Constant.CarOptionsLabel.font,
+        color: Constant.CarOptionsLabel.fontColor)
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -77,35 +85,25 @@ final class CharacterSSRecommendCarInfoView: UIView {
     }
     
     // MARK: - Helper
-    // TODO: 추후 남석이형이 업뎃하면 그거 적용,, setFont자동화 + header호출시점에
-    // 값 주입해야함.
     func configure(with recommendCarInfo: RecommendCarInfoModel) {
         _=carKrNameLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.configureText(text: recommendCarInfo.carKrName)
-            $0.configureFont(font: Constant.CarKrNameLabel.font.uiFont)
-            $0.configureColor(color: Constant.CarKrNameLabel.fontColor)
+            $0.text = recommendCarInfo.carKrName
             $0.sizeToFit()
         }
         _=carEnTrimLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.configureText(text: recommendCarInfo.carEnTrimName)
-            $0.configureFont(font: Constant.CarEnTrimLabel.font.uiFont)
-            $0.configureColor(color: Constant.CarEnTrimLabel.fontColor)
+            $0.text = recommendCarInfo.carEnTrimName
             $0.sizeToFit()
         }
         _=carPriceLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.configureText(text: recommendCarInfo.carPrice)
-            $0.configureFont(font: Constant.CarPriceLabel.font.uiFont)
-            $0.configureColor(color: Constant.CarPriceLabel.fontColor)
+            $0.text = recommendCarInfo.carPrice
             $0.sizeToFit()
         }
         _=carOptionsLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.configureText(text: recommendCarInfo.carOptions)
-            $0.configureFont(font: Constant.CarOptionsLabel.font.uiFont)
-            $0.configureColor(color: Constant.CarOptionsLabel.fontColor)
+            $0.text = recommendCarInfo.carOptions
             $0.sizeToFit()
         }
     }
@@ -166,8 +164,6 @@ private extension CharacterSSRecommendCarInfoView {
                 equalTo: carKrNameLabel.bottomAnchor,
                 constant: const.topMargin),
             carOptionsLabel.bottomAnchor.constraint(
-                equalTo: bottomAnchor),
-            carOptionsLabel.heightAnchor.constraint(
-                equalToConstant: Constant.CarOptionsLabel.font.lineHeight)]
+                equalTo: bottomAnchor)]
     }
 }

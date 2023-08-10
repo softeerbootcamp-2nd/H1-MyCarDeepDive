@@ -51,14 +51,12 @@ final class CommonButton: UIButton {
     
     init(
         font: UIFont,
-        buttonBackgroundColorType: ButtonBackgroundColorType,
-        title: String) {
+        buttonBackgroundColorType: ButtonBackgroundColorType) {
         super.init(frame: .zero)
         configureUI()
         configureDetail(
             font: font,
-            buttonBackgroundColorType: buttonBackgroundColorType,
-            title: title)
+            buttonBackgroundColorType: buttonBackgroundColorType)
     }
     
     override init(frame: CGRect) {
@@ -81,10 +79,8 @@ final class CommonButton: UIButton {
     
     func configureDetail(
         font: UIFont,
-        buttonBackgroundColorType: ButtonBackgroundColorType,
-        title: String) {
+        buttonBackgroundColorType: ButtonBackgroundColorType) {
         self.titleLabel?.font = font
-        self.setTitle(title, for: .normal)
         self.setTitleColor(buttonBackgroundColorType.textColor, for: .normal)
         self.setTitleColor(
             buttonBackgroundColorType.textColor.withAlphaComponent(0.5),

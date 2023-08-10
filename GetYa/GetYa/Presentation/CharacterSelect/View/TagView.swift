@@ -10,7 +10,7 @@ import UIKit
 class TagView: UIView {
     // MARK: - UI Properties
     private let label = CommonLabel(
-        font: GetYaFont.regularCaption1.uiFont,
+        fontType: GetYaFont.regularCaption1,
         color: .GetYaPalette.acriveBlue
     )
     

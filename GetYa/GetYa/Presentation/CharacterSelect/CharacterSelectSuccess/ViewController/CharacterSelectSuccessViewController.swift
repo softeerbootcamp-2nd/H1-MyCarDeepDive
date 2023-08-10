@@ -23,9 +23,6 @@ final class CharacterSelectSuccessViewController: UIViewController {
             forHeaderFooterViewReuseIdentifier: CharacterSelectSuccesSecondSectionHeader.id)
         $0.separatorStyle = .none
         $0.estimatedSectionHeaderHeight = UITableView.automaticDimension
-        $0.estimatedRowHeight = CharacterSelectSuccessTableViewCell
-            .Constant
-            .intrinsicContentHeight
         $0.sectionFooterHeight = 0
     }
     

@@ -66,12 +66,12 @@ final class CharacterSelectSuccessThumbnailView: UIView {
         $0.spacing = const.interItemSpacing
     }
     private let recommendDiscriptionView: CommonLabel = .init(
-        font: Constant.RecommendDiscriptionView.font.uiFont,
+        fontType: Constant.RecommendDiscriptionView.font,
         color: Constant.RecommendDiscriptionView.fontColor,
         text: "질문에 기반한 추천 차량이에요"
     )
     private let recommendSubDiscriptionView: CommonLabel = .init(
-        font: Constant.RecommendSubDiscriptionView.font.uiFont,
+        fontType: Constant.RecommendSubDiscriptionView.font,
         color: Constant.RecommendSubDiscriptionView.fontColor,
         text: "전국의 Car master 분들이 엄선하여 추천했어요"
     )

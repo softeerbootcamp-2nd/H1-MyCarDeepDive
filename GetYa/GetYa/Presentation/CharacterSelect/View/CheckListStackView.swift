@@ -8,10 +8,6 @@
 import UIKit
 
 class CheckListStackView: UIStackView {
-    // MARK: - UI Properties
-    
-    // MARK: - Properties
-    
     // MARK: - LifeCycles
     convenience init() {
         self.init(frame: .zero)

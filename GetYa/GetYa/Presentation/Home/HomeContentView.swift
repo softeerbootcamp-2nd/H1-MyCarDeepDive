@@ -8,18 +8,21 @@
 import UIKit
 import AVKit
 
+// TODO: 백그라운드로 나갔다오면 video가 재생안됨. 멈춰있음
+
 class HomeContentView: UIView {
     // MARK: - UI Properties
-    
     private let customButton = CommonButton(
         font: UIFont(hyundaiSans: .mediumBody3) ?? .systemFont(ofSize: 16),
-        buttonBackgroundColorType: .black,
-        title: "직접 만들래요")
+        buttonBackgroundColorType: .black).set {
+            $0.setTitle("직접 만들래요", for: .normal)
+        }
     
     private let recomandButton = CommonButton(
         font: UIFont(hyundaiSans: .mediumBody3) ?? .systemFont(ofSize: 16),
-        buttonBackgroundColorType: .white,
-        title: "추천받기")
+        buttonBackgroundColorType: .white).set {
+            $0.setTitle("추천받기", for: .normal)
+        }
     
     private let titleLabel: UILabel = {
         let label = UILabel()

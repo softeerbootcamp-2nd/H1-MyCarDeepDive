@@ -32,20 +32,20 @@ struct UILayout {
     let bottomMargin: CGFloat
     let height: CGFloat
     let width: CGFloat
-    
-    init(
-        leadingMargin: CGFloat = 0,
-        topMargin: CGFloat = 0,
-        trailingMargin: CGFloat = 0,
-        bottomMargin: CGFloat = 0,
-        height: CGFloat = 0,
-        width: CGFloat = 0
-    ) {
-        self.topMargin = topMargin.scaledHeight
-        self.leadingMargin = leadingMargin.scaledWidth
-        self.trailingMargin = trailingMargin.scaledWidth
-        self.bottomMargin = bottomMargin.scaledHeight
-        self.height = height
-        self.width = width
-    }
+  
+  init(
+    leadingMargin: CGFloat = 0,
+    topMargin: CGFloat = 0,
+    trailingMargin: CGFloat = 0,
+    bottomMargin: CGFloat = 0,
+    height: CGFloat = 0,
+    width: CGFloat = 0
+  ) {
+      self.topMargin = topMargin.scaledHeight
+      self.leadingMargin = leadingMargin.scaledWidth
+      self.trailingMargin = trailingMargin.scaledWidth
+      self.bottomMargin = bottomMargin.scaledHeight
+      self.height = height.scaledHeight
+      self.width = width.scaledWidth
+  }
 }

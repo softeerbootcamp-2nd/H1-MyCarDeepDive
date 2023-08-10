@@ -14,8 +14,11 @@ final class ProgressView: UIProgressView {
     private lazy var minGauge: Float = gaugeOneStepAmount
     
     // MARK: - Properties
-    /// 프로그래스가 이동할 수 있는 총 단계입니다. 페이지 총 개수와 동일해야 합니다.
-    private var progressTotalStep: Int
+    private var progressTotalStep: Int = 0 {
+        didSet {
+            setProgress(gaugeOneStepAmount, animated: true)
+        }
+    }
     private var animationDuration: TimeInterval = 0.7
     private var gaugeOneStepAmount: Float {
         1.0 / Float(progressTotalStep)
@@ -25,8 +28,21 @@ final class ProgressView: UIProgressView {
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
-        progressTotalStep = 0
         super.init(frame: frame)
+        progressViewStyle = .bar
+        configureUIColor(
+            progressTintColor: .GetYaPalette.acriveBlue,
+            backgroundTintColor: .GetYaPalette.gray800)
+        bind()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        progressViewStyle = .bar
+        configureUIColor(
+            progressTintColor: .GetYaPalette.acriveBlue,
+            backgroundTintColor: .GetYaPalette.gray800)
+        bind()
     }
     
     init(
@@ -44,8 +60,11 @@ final class ProgressView: UIProgressView {
         configureUIColor(
             progressTintColor: progressTintColor ?? .GetYaPalette.acriveBlue,
             backgroundTintColor: backgroundTintColor ?? .GetYaPalette.gray800)
-        setProgress(gaugeOneStepAmount, animated: false)
         bind()
+    }
+    
+    convenience init() {
+        self.init(frame: .zero)
     }
     
     convenience init(
@@ -65,24 +84,9 @@ final class ProgressView: UIProgressView {
     }
     
     convenience init(progressTotalStep: Int) {
-        self.init(
-            frame: .zero,
-            progressTotalStep: progressTotalStep,
-            style: .bar,
-            animationDuration: 0.7)
+        self.init(frame: .zero)
+        self.progressTotalStep = progressTotalStep
         translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    /// 실제로 이 경우에 required init?일때 반드시 필요한 progressTotalStep의 값은 어떻게 받아야 할까?.. progressTotal Step은 어디서 받아야할까?
-    required init?(coder: NSCoder) {
-        progressTotalStep = 0
-        super.init(coder: coder)
-        progressViewStyle = .default
-        setProgress(gaugeOneStepAmount, animated: false)
-        configureUIColor(
-            progressTintColor: .GetYaPalette.acriveBlue,
-            backgroundTintColor: .GetYaPalette.gray800)
-        bind()
     }
     
     deinit {
@@ -114,10 +118,7 @@ extension ProgressView {
         progressViewStyle = style
     }
     
-    // TODO: 화면 전환될 page index.
-    /// **index는 0부터** 시작합니다!!!
-    /// 안전하게 하려면 page total count도 받아서 progressTotalStep와 일치하는지 아니면 -1 인지 비교하면 되는데,,
-    func setProgress(with index: Int) {
+    func setProgress(by index: Int) {
         autoUpdateProgress.send(index + 1)
     }
     
@@ -153,21 +154,17 @@ extension ProgressView {
     private func bind() {
         subscription = autoUpdateProgress
             .map { [weak self] value -> Float in
-                guard let progressTotalStep = self?.progressTotalStep else {
-                    return 0.0
-                }
+                guard let self else { return 0.0 }
                 return Float(value) / Float(progressTotalStep)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] value in
-                guard let progress = self?.progress else {
-                    return
-                }
+                guard let self else { return }
                 if value > progress {
-                    self?.increaseOneStep()
+                    increaseOneStep()
                     return
                 }
-                self?.decreaseOneStep()
+                decreaseOneStep()
             }
     }
 }

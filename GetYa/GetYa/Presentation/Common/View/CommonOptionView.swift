@@ -11,10 +11,10 @@ class CommonOptionView: UIView {
     // MARK: - UI Properties
     private let imageView = CommonOptionImageView()
     private let titleLabel = CommonLabel(
-        font: .systemFont(ofSize: 14, weight: UIFont.Weight(400)),
+        fontType: GetYaFont.regularBody4,
         color: .GetYaPalette.gray300)
     private let priceLabel = CommonLabel(
-        font: .systemFont(ofSize: 16, weight: UIFont.Weight(500)),
+        fontType: GetYaFont.mediumHead4,
         color: .GetYaPalette.gray100)
     
     // MARK: - Properties

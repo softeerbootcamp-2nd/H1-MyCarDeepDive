@@ -2,6 +2,8 @@ disabled_rules:
 - trailing_whitespace
 - large_tuple
 - function_body_length
+- type_body_length
+- file_length
 excluded:
 - GetYa/App/AppDelegate.swift
 - GetYa/App/SceneDelegate.swift

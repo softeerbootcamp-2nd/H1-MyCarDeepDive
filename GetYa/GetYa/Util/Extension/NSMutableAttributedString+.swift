@@ -1,5 +1,5 @@
 //
-//  NSMutableAttributedString+.swift
+//  NSMutableAttributedString+HyundaiSansConfigure.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/04.
@@ -8,11 +8,8 @@
 import UIKit
 
 extension NSMutableAttributedString {
-    func configureHyundaiSans(with type: GetYaFont) {
-        guard let font = UIFont(hyundaiSans: type) else {
-            print("DEBUG: Filed to create hyundaiSans font.")
-            return
-        }
+    func configureHyundaiSans(type: GetYaFont) {
+        let font = type.uiFont
         let attributes = configureHyundaiSansAttributes(
             with: font,
             type: type)
@@ -20,6 +17,19 @@ extension NSMutableAttributedString {
         addAttributes(
             attributes,
             range: .init(location: 0, length: string.count))
+    }
+    
+    func configureHyundaiSans(type: GetYaFont, otherType: GetYaFont, text: String) {
+        configureHyundaiSans(type: type)
+        
+        let otherFont = otherType.uiFont
+        let otherAttributes = configureHyundaiSansAttributes(
+            with: otherFont,
+            type: otherType)
+        
+        addAttributes(
+            otherAttributes,
+            range: (string as NSString).range(of: text))
     }
     
     private func configureHyundaiSansAttributes(
