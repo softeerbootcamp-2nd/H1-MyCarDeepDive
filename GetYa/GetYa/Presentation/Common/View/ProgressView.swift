@@ -65,11 +65,6 @@ final class ProgressView: UIProgressView {
     
     convenience init() {
         self.init(frame: .zero)
-        progressViewStyle = .bar
-        configureUIColor(
-            progressTintColor: .GetYaPalette.acriveBlue,
-            backgroundTintColor: .GetYaPalette.gray800)
-        bind()
     }
     
     convenience init(

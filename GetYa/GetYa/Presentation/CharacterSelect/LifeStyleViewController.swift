@@ -51,6 +51,18 @@ class LifeStyleViewController: UIViewController {
     }
     
     // MARK: - LifeCycles
+    override func loadView() {
+        contentView.configureDetail(
+            descriptionText: "유사한 라이프스타일을 선택하면\n차량을 추천해 드려요.",
+            partText: "라이프스타일",
+            questionNumber: 2,
+            questionCount: 2,
+            buttonTitle: "선택 완료"
+        )
+        contentView.setButtonIsEnabled(isEnabled: false)
+        view = contentView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,15 +90,6 @@ class LifeStyleViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
-        contentView.configureDetail(
-            descriptionText: "유사한 라이프스타일을 선택하면\n차량을 추천해 드려요.",
-            partText: "라이프스타일",
-            questionNumber: 2,
-            questionCount: 2,
-            buttonTitle: "선택 완료"
-        )
-        contentView.setButtonIsEnabled(isEnabled: false)
-        view = contentView
         
         configureCollectionView()
         configurePageControl()
