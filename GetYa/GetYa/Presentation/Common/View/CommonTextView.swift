@@ -78,6 +78,10 @@ class CommonTextView: UIView {
         self.label.text = text
     }
     
+    func configureCornerRadius(with radius: CGFloat) {
+        layer.cornerRadius = radius
+    }
+    
     func updateLabelMargins(leading: CGFloat, top: CGFloat, trailing: CGFloat, bottom: CGFloat) {
         _=labelConstraints.map {
             $0.isActive = false
