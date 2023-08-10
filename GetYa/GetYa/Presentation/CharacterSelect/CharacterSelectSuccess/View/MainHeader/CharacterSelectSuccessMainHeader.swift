@@ -110,8 +110,8 @@ private extension CharacterSelectSuccessMainHeader {
     
     var sectionDividerConstraints: [NSLayoutConstraint] {
         [sectionDivider.leadingAnchor.constraint(equalTo: leadingAnchor),
-        sectionDivider.trailingAnchor.constraint(equalTo: trailingAnchor),
+         sectionDivider.trailingAnchor.constraint(equalTo: trailingAnchor),
          sectionDivider.topAnchor.constraint(equalTo: recommendCarInfoView.bottomAnchor),
-         sectionDivider.bottomAnchor.constraint(equalTo: bottomAnchor)]
+         sectionDivider.bottomAnchor.constraint(greaterThanOrEqualTo: bottomAnchor)]
     }
 }

@@ -89,22 +89,18 @@ final class CharacterSSRecommendCarInfoView: UIView {
         _=carKrNameLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carKrName
-            $0.sizeToFit()
         }
         _=carEnTrimLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carEnTrimName
-            $0.sizeToFit()
         }
         _=carPriceLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carPrice
-            $0.sizeToFit()
         }
         _=carOptionsLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carOptions
-            $0.sizeToFit()
         }
     }
 }
