@@ -76,7 +76,7 @@ final class CommonButton: UIButton {
         self.layer.borderWidth = 1
         self.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+    // TODO: hyendai sans font로 변경해야 합니다. 
     func configureDetail(
         font: UIFont,
         buttonBackgroundColorType: ButtonBackgroundColorType) {
