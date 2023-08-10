@@ -1,11 +1,23 @@
 import { TrimSelectionRadioGroupProps } from '@/global/type';
 import checkCircleBlue from '@/assets/icon/check-circle-lifecycle-blue.svg';
+import { useState } from 'react';
+import TrimChangeModal from '@/Pages/TrimSelectPage/TrimChangeModal';
 
 function TrimSelectionRadioSelected({
   carFeature,
   trim,
   mycarTrimHandler,
+  setWantedTrim,
 }: TrimSelectionRadioGroupProps) {
+  const [showModal, setShowModal] = useState(false);
+
+  const showTrimChangePopup = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLInputElement>) => {
+    setWantedTrim(currentTarget.value);
+    setShowModal(true);
+  };
+
   const { engine, body, operation } = carFeature;
   return (
     <>
@@ -15,7 +27,7 @@ function TrimSelectionRadioSelected({
         id={trim?.name}
         value={trim?.name}
         className='hidden'
-        onChange={mycarTrimHandler}
+        onClick={showTrimChangePopup}
       />
       <label htmlFor={trim?.name}>
         <div className='relative cursor-pointer'>
@@ -54,6 +66,12 @@ function TrimSelectionRadioSelected({
           </div>
         </div>
       </label>
+      <TrimChangeModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        mycarTrimHandler={mycarTrimHandler}
+        setWantedTrim={setWantedTrim}
+      />
     </>
   );
 }

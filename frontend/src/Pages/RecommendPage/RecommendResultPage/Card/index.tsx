@@ -18,7 +18,7 @@ interface CardProps {
 
 function Card({ cardData }: CardProps) {
   return (
-    <div className='relative w-[300px] h-[419px] rounded-xl border-2 border-grey-1000 border-opacity-50 bg-grey-1000 bg-opacity-30'>
+    <div className='relative w-[300px] h-[419px] rounded-xl border-2 border-grey-1000 border-opacity-50 bg-grey-1000 bg-opacity-30 overflow-hidden'>
       <img
         src={logoSkyBlue}
         alt='Hyundai-logo'

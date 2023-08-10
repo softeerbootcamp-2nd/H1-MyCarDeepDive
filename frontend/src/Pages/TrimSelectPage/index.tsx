@@ -22,6 +22,7 @@ function SelectPage() {
   });
 
   const [selectedTrim, setSelectedTrim] = useState('Le Blanc');
+  const [wantedTrim, setWantedTrim] = useState('');
 
   const mycarFeatureHandler = ({
     target,
@@ -30,10 +31,8 @@ function SelectPage() {
     setCarFeature({ ...carFeature, [name]: value });
   };
 
-  const mycarTrimHandler = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedTrim(target.value);
+  const mycarTrimHandler = () => {
+    setSelectedTrim(wantedTrim);
   };
 
   return (
@@ -62,6 +61,7 @@ function SelectPage() {
           selectedTrim={selectedTrim}
           carFeature={carFeature}
           mycarTrimHandler={mycarTrimHandler}
+          setWantedTrim={setWantedTrim}
         />
 
         <ColorChoiceButtonWrapper>

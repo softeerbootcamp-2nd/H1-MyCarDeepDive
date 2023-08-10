@@ -2,16 +2,13 @@ import { TrimSelectionRadioGroupProps } from '@/global/type';
 import { trimList } from '@/global/data';
 import TrimSelectionRadioSelected from './TrimSelectionRadioSelected';
 import TrimSelectionRadioUnselected from './TrimSelectionRadioUnselected';
-import { useEffect } from 'react';
 
 function TrimSelectionRadioGroup({
   selectedTrim,
   carFeature,
   mycarTrimHandler,
+  setWantedTrim,
 }: TrimSelectionRadioGroupProps) {
-  useEffect(() => {
-    console.log(selectedTrim);
-  }, [selectedTrim]);
   return trimList.map((trim, index) => {
     const { name } = trim;
     return name === selectedTrim ? (
@@ -21,6 +18,7 @@ function TrimSelectionRadioGroup({
         selectedTrim={selectedTrim}
         carFeature={carFeature}
         mycarTrimHandler={mycarTrimHandler}
+        setWantedTrim={setWantedTrim}
       />
     ) : (
       <TrimSelectionRadioUnselected
@@ -29,6 +27,7 @@ function TrimSelectionRadioGroup({
         selectedTrim={selectedTrim}
         carFeature={carFeature}
         mycarTrimHandler={mycarTrimHandler}
+        setWantedTrim={setWantedTrim}
       />
     );
   });

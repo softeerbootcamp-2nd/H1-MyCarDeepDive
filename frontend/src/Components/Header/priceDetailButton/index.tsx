@@ -1,10 +1,10 @@
 import Button from '@/Components/Button';
-import { setPriceInfoProps } from '@/global/type';
+import { setShowPriceInfoProps } from '@/global/type';
 
 function PriceDetailButton({
   setShowPriceInfo,
   showPriceInfo,
-}: setPriceInfoProps) {
+}: setShowPriceInfoProps) {
   return (
     <div className='ml-[50px]'>
       <Button
