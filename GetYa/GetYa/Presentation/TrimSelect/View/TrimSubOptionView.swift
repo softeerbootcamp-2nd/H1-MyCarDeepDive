@@ -10,11 +10,13 @@ import UIKit
 class TrimSubOptionView: UIView {
     enum Constants {
         enum Label {
-            static let leadingMaring = CGFloat(8).scaledWidth
+            static let leadingMarinn = CGFloat(8).scaledWidth
+            static let topMarinn = CGFloat(9).scaledWidth
+            static let bottomMarinn = CGFloat(-9).scaledWidth
         }
         enum OptionStackView {
             static let spacing = CGFloat(8).scaledWidth
-            static let leadingMargin = CGFloat(43).scaledWidth
+            static let width = CGFloat(248).scaledWidth
         }
     }
     
@@ -71,20 +73,18 @@ class TrimSubOptionView: UIView {
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: Constants.Label.leadingMaring),
-            label.centerXAnchor.constraint(equalTo: centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: centerYAnchor)
+                constant: Constants.Label.leadingMarinn),
+            label.topAnchor.constraint(equalTo: topAnchor, constant: Constants.Label.topMarinn),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.Label.bottomMarinn)
         ])
     }
     
     private func configureOptionStackView() {
         NSLayoutConstraint.activate([
-            optionStackView.leadingAnchor.constraint(
-                equalTo: label.trailingAnchor,
-                constant: Constants.OptionStackView.leadingMargin),
             optionStackView.topAnchor.constraint(equalTo: topAnchor),
             optionStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            optionStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            optionStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            optionStackView.widthAnchor.constraint(equalToConstant: Constants.OptionStackView.width)
         ])
     }
     
@@ -94,8 +94,23 @@ class TrimSubOptionView: UIView {
     }
     
     func setOptionTypes(texts: [String]) {
-        
+        texts.forEach {
+            let button = TrimSubOptionButton(text: $0).set {
+                $0.delegate = self
+            }
+            optionStackView.addArrangedSubview(button)
+        }
     }
     
     // MARK: - Objc Functions 
+}
+
+// MARK: - TrimSubOptionButton Delegate
+extension TrimSubOptionView: TrimSubOptionButtonDelegate {
+    func toucuUpButton(sender: UIButton) {
+        _=optionStackView.arrangedSubviews.map {
+            let button = $0 as? UIButton
+            button?.isSelected = button == sender
+        }
+    }
 }
