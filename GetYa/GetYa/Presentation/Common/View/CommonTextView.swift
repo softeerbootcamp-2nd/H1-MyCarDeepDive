@@ -8,6 +8,15 @@
 import UIKit
 
 class CommonTextView: UIView {
+    enum Constants {
+        enum Label {
+            static let leadingMargin = CGFloat(12).scaledWidth
+            static let trailingMargin = CGFloat(-12).scaledWidth
+            static let topMargin = CGFloat(12).scaledHeight
+            static let bottomMargin = CGFloat(-12).scaledHeight
+        }
+    }
+    
     // MARK: - UI properties
     private let label = CommonLabel()
     
@@ -24,6 +33,19 @@ class CommonTextView: UIView {
         self.layer.backgroundColor = backgroundColor.cgColor
         configureTextFont(fontType: fontType)
         configureTextAlignment(textAlignment: textAlignment)
+        configureTextColor(color: textColor)
+    }
+    
+    init(
+        backgroundColor: UIColor,
+        textColor: UIColor,
+        fontType: GetYaFont
+    ) {
+        super.init(frame: .zero)
+        setupViews()
+        configureUI()
+        self.layer.backgroundColor = backgroundColor.cgColor
+        configureTextFont(fontType: fontType)
         configureTextColor(color: textColor)
     }
     
@@ -52,10 +74,18 @@ class CommonTextView: UIView {
     
     private func configureLabel() {
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor),
-            label.topAnchor.constraint(equalTo: topAnchor),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor)
+            label.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: Constants.Label.leadingMargin),
+            label.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: Constants.Label.topMargin),
+            label.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: Constants.Label.trailingMargin),
+            label.bottomAnchor.constraint(
+                equalTo: bottomAnchor,
+                constant: Constants.Label.bottomMargin)
         ])
     }
     

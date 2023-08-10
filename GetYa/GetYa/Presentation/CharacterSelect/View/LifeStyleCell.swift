@@ -80,6 +80,23 @@ class LifeStyleCell: UICollectionViewCell {
     // MARK: - Properties
     static let identifier: String = "LifeStyleCell"
     weak var delegate: LifeStyleCellDelegate?
+    private(set) var tagTexts: [String] = [] {
+        didSet {
+            tagTexts.forEach {
+                tagStackView.addArrangedSubview(TagView(text: $0))
+            }
+        }
+    }
+    private(set) var descriptionText: String = "" {
+        didSet {
+            self.descriptionLabel.text = descriptionText
+        }
+    }
+    private(set) var titleImage: UIImage? {
+        didSet {
+            self.titleImageView.image = titleImage
+        }
+    }
     override var isSelected: Bool {
         didSet {
             configureByIsSelected(isSelected: isSelected)
@@ -253,17 +270,15 @@ class LifeStyleCell: UICollectionViewCell {
     }
     
     func setTagViews(texts: [String]) {
-        texts.forEach {
-            tagStackView.addArrangedSubview(TagView(text: $0))
-        }
+        tagTexts = texts
     }
     
     func setDescriptionText(text: String) {
-        self.descriptionLabel.text = text
+        descriptionText = text
     }
     
     func setTitleImage(image: UIImage?) {
-        self.titleImageView.image = image
+        titleImage = image
     }
     
     @objc private func touchUpButton() {
