@@ -98,5 +98,10 @@ extension UIColor {
         /// #111111
         /// red: 17, green: 17, blue: 17
         static let gray0 = UIColor(hexString: "111111")
+        
+        /// Tooltip
+        /// #2E3D51
+        /// red: 46, green: 61, blue: 81
+        static let tooltip = UIColor(hexString: "2E3D51")
     }
 }
