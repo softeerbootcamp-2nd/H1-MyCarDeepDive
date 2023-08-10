@@ -6,8 +6,7 @@ export interface ModalProps {
 }
 
 export interface TrimChangeModalProps extends ModalProps {
-  mycarTrimHandler: React.Dispatch<React.SetStateAction<string>>;
-  setWantedTrim: React.Dispatch<React.SetStateAction<string>>;
+  mycarTrimHandler: React.Dispatch<React.SetStateAction<void>>;
 }
 
 export interface RadioProps {
@@ -107,7 +106,7 @@ export interface TrimSelectionRadioGroupProps {
     basicOption: string[];
     price: number;
   };
-  mycarTrimHandler: React.Dispatch<React.SetStateAction<string>>;
+  mycarTrimHandler: React.Dispatch<React.SetStateAction<void>>;
   setWantedTrim: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -131,5 +130,5 @@ export interface setShowPriceInfoProps {
 }
 
 export interface TrimChangeButtonProps {
-  mycarTrimHandler: React.Dispatch<React.SetStateAction<string>>;
+  mycarTrimHandler: React.Dispatch<React.SetStateAction<void>>;
 }

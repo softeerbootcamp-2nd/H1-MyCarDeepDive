@@ -69,7 +69,6 @@ function TrimSelectionRadioUnselected({
         showModal={showModal}
         setShowModal={setShowModal}
         mycarTrimHandler={mycarTrimHandler}
-        setWantedTrim={setWantedTrim}
       />
     </>
   );

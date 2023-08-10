@@ -17,7 +17,10 @@ function BottomButton({ mycarTrimHandler }: TrimChangeButtonProps) {
         height='h-[46px]'
         variant='primary'
         text='변경하기'
-        onClick={() => mycarTrimHandler('')}
+        onClick={() => {
+          closeModalHandler();
+          mycarTrimHandler();
+        }}
       />
     </div>
   );
