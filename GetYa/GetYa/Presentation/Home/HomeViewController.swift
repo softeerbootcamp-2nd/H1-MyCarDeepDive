@@ -56,8 +56,10 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: HomeContentDelegate {
     func touchUpRecomandButton() {
+        let viewModel = CharacterSelectSuccessViewModel()
         self.navigationController?.pushViewController(
-            CharacterSelectViewController(),
+//            CharacterSelectViewController(),
+            CharacterSelectSuccessViewController(viewModel: viewModel),
             animated: true)
     }
     
