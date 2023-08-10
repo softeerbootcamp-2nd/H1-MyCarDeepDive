@@ -23,23 +23,25 @@ struct RecommendCarProductOptionModel {
     let optionReview: String
 }
 
+struct MainSectionHeaderModel {
+    var thumbnailKeywords: [String]
+    var recommendCarProductOption: RecommendCarInfoModel
+    var firstSectionTitle: String
+}
+
 final class CharacterSelectSuccessViewModel {
     // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
-    private var recommendCarInfoModel: RecommendCarInfoModel = .init(
-        carKrName: "", carEnTrimName: "", carPrice: "7", carOptions: "")
-    private var recommendCarThumbnailKeywords: [String] = []
+    private var dataSource: [[RecommendCarProductOptionModel]]
     
-    private var dataSource: [[RecommendCarProductOptionModel]] = [[]]
+    private var mainSectionHeader: MainSectionHeaderModel
     
-    private var sectionHeaderDataSource: [String] = []
+    private var sectionHeaders: [String]
     
     init() {
-        var stubDataSource = CharacterSelectSuccessStubDataSource()
-        recommendCarInfoModel = stubDataSource.reccomendCarInfo
-        recommendCarThumbnailKeywords = stubDataSource.recommendCarThumbnailKeywords
-        dataSource = stubDataSource.recommendCarOptionsDataSource
-        sectionHeaderDataSource = stubDataSource.sectionHeaderDataSource
+        mainSectionHeader = .mock
+        dataSource = RecommendCarProductOptionModel.mocks
+        sectionHeaders = CharacterSelectSuccessSectionHeaders.lists
     }
 }
 
@@ -78,9 +80,13 @@ private extension CharacterSelectSuccessViewModel {
 
 // MARK: - CharacterSSTableViewAdapterDataSource
 extension CharacterSelectSuccessViewModel: CharacterSSTableViewAdapterDataSource {
+    var mainSectionHeaderItem: MainSectionHeaderModel {
+        mainSectionHeader
+    }
+    
     // TODO: 이거도 나중에 섹션 헤더만 주는 함수 합쳐버리자,, 리빌딩해야함
     var seciondSectionHeaderItem: String {
-        sectionHeaderDataSource[1]
+        sectionHeaders[1]
     }
     
     var numberOfSections: Int {
@@ -93,13 +99,5 @@ extension CharacterSelectSuccessViewModel: CharacterSSTableViewAdapterDataSource
     
     func cellItem(in section: Int, _ row: Int) -> RecommendCarProductOptionModel {
         return dataSource[section][row]
-    }
-    
-    var mainSectionHeaderItem: (
-        thumbnailKeywords: [String],
-        recommendCarProductOption: RecommendCarInfoModel,
-        firstSectionTitle: String
-    ) {
-        (recommendCarThumbnailKeywords, recommendCarInfoModel, sectionHeaderDataSource[0])
     }
 }
