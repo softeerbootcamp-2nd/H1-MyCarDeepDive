@@ -96,6 +96,7 @@ extension CharacterSelectSuccessSectionDividerView: LayoutSupportable {
                 constant: -const.trailingMargin),
             onePixelDivider.heightAnchor.constraint(equalToConstant: const.height)]
     }
+    
     // TODO: 이거 문제 발생하는게 lineheight가 지정 명확하게 아직안되서,,
     // 추후에 풀리퀘 받고 새로 개선된 common label 써야함..
     private var sectionTitleConstraints: [NSLayoutConstraint] {
@@ -107,7 +108,8 @@ extension CharacterSelectSuccessSectionDividerView: LayoutSupportable {
             sectionTitle.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: const.leadingMargin),
-            sectionTitle.bottomAnchor.constraint(equalTo: bottomAnchor)
+            sectionTitle.bottomAnchor.constraint(equalTo: bottomAnchor),
+            sectionTitle.heightAnchor.constraint(equalToConstant: Constant.SectionTitle.font.lineHeight)
         ]
     }
 }
