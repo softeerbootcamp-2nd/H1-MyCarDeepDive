@@ -1,7 +1,10 @@
 import Button from '@/Components/Button';
 import { setPriceInfoProps } from '@/global/type';
 
-function PriceDetailButton({ setPriceInfo, priceInfo }: setPriceInfoProps) {
+function PriceDetailButton({
+  setShowPriceInfo,
+  showPriceInfo,
+}: setPriceInfoProps) {
   return (
     <div className='ml-[50px]'>
       <Button
@@ -10,7 +13,7 @@ function PriceDetailButton({ setPriceInfo, priceInfo }: setPriceInfoProps) {
         rounded='4px'
         variant='grey400'
         text='요금 상세'
-        onClick={() => setPriceInfo(!priceInfo)}
+        onClick={() => setShowPriceInfo(!showPriceInfo)}
       />
     </div>
   );

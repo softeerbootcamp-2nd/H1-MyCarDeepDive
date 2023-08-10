@@ -113,6 +113,6 @@ export interface NavBarCategoryProps {
 }
 
 export interface setPriceInfoProps {
-  priceInfo: boolean;
-  setPriceInfo: (value: boolean) => void;
+  showPriceInfo: boolean;
+  setShowPriceInfo: (value: boolean) => void;
 }

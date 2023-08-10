@@ -6,19 +6,20 @@ import ShowQuotationButton from './showQuotation';
 import HeaderLogo from './HeaderLogo';
 import HeaderTitle from './HeaderTitle';
 import DropDownIcon from './DropDownIcon';
+import upArrowIcon from '@/assets/icon/up-arrow-icon.svg';
 
 function Header() {
   const location = useLocation();
   const isHome: boolean = location.pathname === '/';
   const isSelectionPage: boolean = location.pathname.startsWith('/select/');
 
-  const [priceInfo, setPriceInfo] = useState(false);
+  const [showPriceInfo, setShowPriceInfo] = useState(false);
 
   return (
     <header
       className={`fixed w-full ${
         isSelectionPage
-          ? !priceInfo
+          ? !showPriceInfo
             ? 'h-[120px] shadow-md'
             : 'h-[322px] shadow-md'
           : 'h-[92px]'
@@ -32,18 +33,68 @@ function Header() {
         </div>
 
         {isSelectionPage && (
-          <div className='flex'>
+          <div className='flex justify-between'>
             <NavigationRadioGroup />
             <div className='mt-[10px] flex'>
               <PriceDetailButton
-                priceInfo={priceInfo}
-                setPriceInfo={setPriceInfo}
+                showPriceInfo={showPriceInfo}
+                setShowPriceInfo={setShowPriceInfo}
               />
               <ShowQuotationButton />
             </div>
           </div>
         )}
       </div>
+      {showPriceInfo && isSelectionPage && (
+        <>
+          <hr className='w-full stroke-1 stroke-grey-700 mt-4' />
+          <div className='max-w-5xl mx-auto'>
+            <div className=' border-b h-[135px] flex overflow-scroll'>
+              <div className='flex my-auto'>
+                <div className='flex flex-col gap-1.5 justify-start mr-4 font-body4-regular text-grey-300 '>
+                  <p>가솔린</p>
+                  <p>7인승</p>
+                  <p>2WD</p>
+                </div>
+
+                <p className='font-body4-medium text-grey-100'>43,460,000원</p>
+
+                <div className='h-[94px] my-auto mx-4 border-[0.5px] border-grey-700'></div>
+
+                <div className='flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                  <div className='flex gap-4 justify-between'>
+                    <p>크리미 화이트</p>
+                    <p className='font-body4-medium text-grey-100'>0원</p>
+                  </div>
+                  <div className='flex gap-4 justify-between'>
+                    <p>인조가죽(블랙)</p>
+                    <p className='font-body4-medium text-grey-100'>0원</p>
+                  </div>
+                </div>
+
+                <div className='h-[94px] my-auto mx-4 border-[0.5px] border-grey-700'></div>
+
+                <div className='flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                  <div className='flex gap-4 justify-between'>
+                    <p>컴포트2</p>
+                    <p className='font-body4-medium text-grey-100'>500,000원</p>
+                  </div>
+                  <div className='flex gap-4 justify-between'>
+                    <p>현대 스마트센스</p>
+                    <p className='font-body4-medium text-grey-100'>300,000원</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='flex justify-end mt-4'>
+              <img className='mr-1' src={upArrowIcon} alt='' />
+              <p className='font-h1-medium'>
+                <span className='text-[24px] text-grey-50'>51,460,000원</span>
+              </p>
+            </div>
+          </div>
+        </>
+      )}
     </header>
   );
 }
