@@ -176,10 +176,4 @@ enum GetYaFont: CaseIterable {
     var uiFont: UIFont {
         UIFont(name: self.name, size: self.size) ?? .systemFont(ofSize: 16)
     }
-  
-  func makeNSMutableAttributedString(with text: String) -> NSMutableAttributedString {
-    return NSMutableAttributedString(string: text).set {
-      $0.configureHyundaiSans(with: self)
-    }
-  }
 }

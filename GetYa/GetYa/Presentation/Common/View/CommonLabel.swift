@@ -11,29 +11,35 @@ class CommonLabel: UILabel {
     // MARK: - UI Properties
     
     // MARK: - Properties
+    private var fontType: GetYaFont?
+    override var text: String? {
+        didSet {
+            configureFont()
+        }
+    }
     
     // MARK: - LifeCycles
     convenience init() {
         self.init(frame: .zero)
     }
     
-    convenience init(font: UIFont) {
+    convenience init(fontType: GetYaFont) {
         self.init(frame: .zero)
-        configureFont(font: font)
+        configureFontType(fontType: fontType)
     }
     
-    convenience init(font: UIFont, color: UIColor) {
+    convenience init(fontType: GetYaFont, color: UIColor) {
         self.init(frame: .zero)
-        configureFont(font: font)
-        configureColor(color: color)
+        configureFontType(fontType: fontType)
+        self.textColor = color
     }
     
-    init(font: UIFont, color: UIColor, text: String) {
+    init(fontType: GetYaFont, color: UIColor, text: String) {
         super.init(frame: .zero)
         configureUI()
-        configureFont(font: font)
-        configureColor(color: color)
-        configureText(text: text)
+        configureFontType(fontType: fontType)
+        self.textColor = color
+        self.text = text
     }
     
     override init(frame: CGRect) {
@@ -53,16 +59,25 @@ class CommonLabel: UILabel {
         self.numberOfLines = 0
     }
     
-    // TODO: Letter 간격 로직 넣기
-    func configureFont(font: UIFont) {
-        self.font = font
+    private func configureFont() {
+        if let text, let fontType {
+            self.attributedText = NSMutableAttributedString(string: text).set {
+                $0.configureHyundaiSans(type: fontType)
+            }
+        }
     }
     
-    func configureColor(color: UIColor) {
-        self.textColor = color
+    func configureFontType(fontType: GetYaFont) {
+        self.fontType = fontType
     }
     
-    func configureText(text: String) {
-        self.text = text
+    func configurePartTextFont(otherFontType: GetYaFont, partText: String) {
+        if let text, let fontType {
+            self.attributedText = NSMutableAttributedString(string: text).set {
+                $0.configureHyundaiSans(
+                    type: fontType,
+                    otherType: otherFontType, text: partText)
+            }
+        }
     }
 }

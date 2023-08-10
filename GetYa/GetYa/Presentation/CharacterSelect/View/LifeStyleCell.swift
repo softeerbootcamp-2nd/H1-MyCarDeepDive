@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LifeStyleCellDelegate: AnyObject {
+    func touchUpButton(cell: UICollectionViewCell)
+}
+
 class LifeStyleCell: UICollectionViewCell {
     typealias Palette = UIColor.GetYaPalette
     
@@ -41,7 +45,7 @@ class LifeStyleCell: UICollectionViewCell {
     }()
     
     private let descriptionLabel = CommonLabel(
-        font: GetYaFont.mediumBody2.uiFont,
+        fontType: GetYaFont.mediumBody2,
         color: Palette.gray0
     )
     
@@ -75,17 +79,10 @@ class LifeStyleCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let identifier: String = "LifeStyleCell"
+    weak var delegate: LifeStyleCellDelegate?
     override var isSelected: Bool {
         didSet {
-            lineView.backgroundColor = isSelected ? Palette.gray700 : Palette.gray900
-            selectImageView.isHighlighted = isSelected
-            descriptionLabel.textColor = isSelected ? Palette.primary : Palette.gray0
-            tagStackView.arrangedSubviews.map { $0 as? TagView }.forEach {
-                $0?.configureBackgroundColor(color: isSelected ? Palette.lightAcriveBlue : Palette.gray1000)
-            }
-            baseView.layer.backgroundColor = isSelected ?  UIColor.clear.cgColor : Palette.lightPrimary.cgColor
-            baseView.layer.borderWidth = isSelected ? 1.5 : 0
-            titleImageView.layer.borderWidth = isSelected ? 1.5 : 0
+            configureByIsSelected(isSelected: isSelected)
         }
     }
     private let titleImageViewLayoutConstant = UILayout(height: 128)
@@ -122,6 +119,7 @@ class LifeStyleCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        delegate = nil
         tagStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
@@ -232,12 +230,26 @@ class LifeStyleCell: UICollectionViewCell {
     }
     
     private func configureButton() {
+        button.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(
                 equalTo: lineView.bottomAnchor,
                 constant: buttonLayoutConstant.topMargin),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
+    }
+    
+    func configureByIsSelected(isSelected: Bool) {
+        lineView.backgroundColor = isSelected ? Palette.gray700 : Palette.gray900
+        selectImageView.isHighlighted = isSelected
+        descriptionLabel.textColor = isSelected ? Palette.primary : Palette.gray0
+        tagStackView.arrangedSubviews.map { $0 as? TagView }.forEach {
+            $0?.configureBackgroundColor(color: isSelected ? Palette.lightAcriveBlue : Palette.gray1000)
+        }
+        baseView.layer.backgroundColor = isSelected ?  UIColor.clear.cgColor : Palette.lightPrimary.cgColor
+        baseView.layer.borderWidth = isSelected ? 1.5 : 0
+        titleImageView.layer.borderWidth = isSelected ? 1.5 : 0
     }
     
     func setTagViews(texts: [String]) {
@@ -250,7 +262,11 @@ class LifeStyleCell: UICollectionViewCell {
         self.descriptionLabel.text = text
     }
     
-    func setTitleImage(image: UIImage) {
+    func setTitleImage(image: UIImage?) {
         self.titleImageView.image = image
+    }
+    
+    @objc private func touchUpButton() {
+        delegate?.touchUpButton(cell: self)
     }
 }

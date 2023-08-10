@@ -7,37 +7,25 @@
 
 import UIKit
 
-// TODO: QuestionNumberView 추가, LifeStyle 마지막 Cell, Cell 클릭에 따른 Button 활성화 구현
+protocol LifeStyleViewControllerDelegate: AnyObject {
+    func touchUpSuccessButton(sender: UIButton)
+}
 
 class LifeStyleViewController: UIViewController {
     // MARK: - UI Properties
+    private let contentView = QuestionContentView()
     private lazy var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: createCollectionViewLayout()
     )
-    private lazy var pageControl = CommonPageControl(numberOfPages: tagTexts.count)
-    private let button = CommonButton(
-        font: GetYaFont.mediumBody3.uiFont,
-        buttonBackgroundColorType: .primary,
-        title: "선택 완료"
-    )
-    private let descriptionLabel = CommonLabel(
-        font: GetYaFont.regularHead2.uiFont,
-        color: .GetYaPalette.gray0,
-        text: "유사한 라이프스타일을 선택하면\n차량 조합을 추천해 드려요."
-    )
+    private lazy var pageControl = CommonPageControl(numberOfPages: tagTexts.count + 1)
     
     // MARK: - Properties
+    weak var delegate: LifeStyleViewControllerDelegate?
     private let collectionViewLayoutConstant = UILayout(topMargin: 43, height: 320)
     private let cellLayoutConstant = UILayout(height: 320, width: 278)
     private let cellSpacing: CGFloat = 8
-    private let descriptionLabelLayoutConstant = UILayout(leadingMargin: 16, topMargin: 29)
     private let pageControlLayoutConstant = UILayout(topMargin: 32)
-    private let buttonLayoutConstant = UILayout(
-        leadingMargin: 17,
-        trailingMargin: -17,
-        bottomMargin: -32,
-        height: 52)
     let descriptionTexts: [String] = [
         "가족과 함께 타서 안전을\n중시해요",
         "매일 출퇴근하여 경제적이고\n편안한 주행을 원해요",
@@ -50,8 +38,31 @@ class LifeStyleViewController: UIViewController {
         ["#주행안전", "#주차/출차"],
         ["#스타일", "#퍼포먼스"]
     ]
+    let titleImages: [UIImage?] = [
+        UIImage(named: "family"),
+        UIImage(named: "businessman"),
+        UIImage(named: "junior"),
+        UIImage(named: "trendy")
+    ]
+    private var selectedIndexPath: IndexPath? {
+        didSet {
+            contentView.setButtonIsEnabled(isEnabled: selectedIndexPath == nil ? false : true)
+        }
+    }
     
     // MARK: - LifeCycles
+    override func loadView() {
+        contentView.configureDetail(
+            descriptionText: "유사한 라이프스타일을 선택하면\n차량을 추천해 드려요.",
+            partText: "라이프스타일",
+            questionNumber: 2,
+            questionCount: 2,
+            buttonTitle: "선택 완료"
+        )
+        contentView.setButtonIsEnabled(isEnabled: false)
+        view = contentView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,7 +71,7 @@ class LifeStyleViewController: UIViewController {
     }
     
     // MARK: - Functions
-    func createCollectionViewLayout() -> UICollectionViewFlowLayout {
+    private func createCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: cellLayoutConstant.width, height: cellLayoutConstant.height)
         flowLayout.minimumLineSpacing = cellSpacing
@@ -71,31 +82,17 @@ class LifeStyleViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.addSubviews([
-            descriptionLabel,
+        contentView.addSubviews([
             collectionView,
-            pageControl,
-            button
+            pageControl
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .white
-        configureDescriptionLabel()
+        
         configureCollectionView()
         configurePageControl()
-        configureButton()
-    }
-    
-    private func configureDescriptionLabel() {
-        NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: descriptionLabelLayoutConstant.topMargin),
-            descriptionLabel.leadingAnchor.constraint(
-                equalTo: view.leadingAnchor,
-                constant: descriptionLabelLayoutConstant.leadingMargin)
-        ])
     }
     
     private func configureCollectionView() {
@@ -103,6 +100,9 @@ class LifeStyleViewController: UIViewController {
         collectionView.register(
             LifeStyleCell.self,
             forCellWithReuseIdentifier: LifeStyleCell.identifier)
+        collectionView.register(
+            LifeStyleDetailCell.self,
+            forCellWithReuseIdentifier: LifeStyleDetailCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = false
@@ -113,7 +113,7 @@ class LifeStyleViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
-                equalTo: descriptionLabel.bottomAnchor,
+                equalTo: contentView.descriptionLabel.bottomAnchor,
                 constant: collectionViewLayoutConstant.topMargin),
             collectionView.heightAnchor.constraint(
                 equalToConstant: collectionViewLayoutConstant.height),
@@ -131,42 +131,30 @@ class LifeStyleViewController: UIViewController {
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
-    
-    private func configureButton() {
-        button.isEnabled = false
-        
-        NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(
-                equalTo: view.leadingAnchor,
-                constant: buttonLayoutConstant.leadingMargin),
-            button.trailingAnchor.constraint(
-                equalTo: view.trailingAnchor,
-                constant: buttonLayoutConstant.trailingMargin),
-            button.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor,
-                constant: buttonLayoutConstant.bottomMargin),
-            button.heightAnchor.constraint(equalToConstant: buttonLayoutConstant.height)
-        ])
-    }
 }
 
 // MARK: - UICollectionView Delegate
 extension LifeStyleViewController: UICollectionViewDelegate {
     func collectionView(
         _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: LifeStyleCell.identifier,
-            for: indexPath) as? LifeStyleCell else {
-            return UICollectionViewCell()
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        // TODO: 좀 더 효율적인 방법 찾아보기
+        if indexPath.row != tagTexts.count {
+            selectedIndexPath = indexPath
+            
+            collectionView.visibleCells.forEach {
+                $0.isSelected = false
+            }
+            
+            guard let cell = collectionView.cellForItem(at: indexPath) as? LifeStyleCell else { return }
+            cell.configureByIsSelected(isSelected: true)
+        } else {
+            if let selectedIndexPath {
+                guard let cell = collectionView.cellForItem(at: selectedIndexPath) as? LifeStyleCell else { return }
+                cell.configureByIsSelected(isSelected: true)
+            }
         }
-        
-        cell.setDescriptionText(text: descriptionTexts[indexPath.row])
-        cell.setTitleImage(image: UIImage(systemName: "house")!)
-        cell.setTagViews(texts: tagTexts[indexPath.row])
-        
-        return cell
     }
 }
 
@@ -176,7 +164,38 @@ extension LifeStyleViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return tagTexts.count
+        return tagTexts.count + 1
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        if indexPath.row == tagTexts.count {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LifeStyleDetailCell.identifier,
+                for: indexPath) as? LifeStyleDetailCell else {
+                return UICollectionViewCell()
+            }
+            cell.delegate = self
+            
+            return cell
+            
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LifeStyleCell.identifier,
+                for: indexPath) as? LifeStyleCell else {
+                return UICollectionViewCell()
+            }
+            cell.delegate = self
+            cell.setDescriptionText(text: descriptionTexts[indexPath.row])
+            cell.setTitleImage(image: titleImages[indexPath.row])
+            cell.setTagViews(texts: tagTexts[indexPath.row])
+            cell.isSelected = indexPath == selectedIndexPath
+            cell.configureByIsSelected(isSelected: cell.isSelected)
+            
+            return cell
+        }
     }
 }
 
@@ -194,5 +213,20 @@ extension LifeStyleViewController {
         targetContentOffset.pointee = CGPoint(
             x: index * cellWidth - scrollView.contentInset.left,
             y: scrollView.contentInset.top)
+    }
+}
+
+// MARK: - LifeStyleCell Delegate
+extension LifeStyleViewController: LifeStyleCellDelegate {
+    func touchUpButton(cell: UICollectionViewCell) {
+        if cell is LifeStyleDetailCell {
+            navigationController?.pushViewController(
+                DetailLifeStyleSelectViewController(),
+                animated: true)
+        } else {
+            navigationController?.pushViewController(
+                LifeStylePeekViewController(),
+                animated: true)
+        }
     }
 }

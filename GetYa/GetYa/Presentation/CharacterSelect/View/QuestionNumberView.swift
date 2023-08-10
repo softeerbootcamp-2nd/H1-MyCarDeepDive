@@ -1,18 +1,17 @@
 //
-//  TagView.swift
+//  QuestionNumberView.swift
 //  GetYa
 //
-//  Created by 배남석 on 2023/08/05.
+//  Created by 배남석 on 2023/08/07.
 //
 
 import UIKit
 
-class TagView: UIView {
+class QuestionNumberView: UIView {
+    typealias Palette = UIColor.GetYaPalette
+    
     // MARK: - UI Properties
-    private let label = CommonLabel(
-        fontType: GetYaFont.regularCaption1,
-        color: .GetYaPalette.acriveBlue
-    )
+    private let label = CommonLabel(fontType: .mediumHead4, color: Palette.gray400)
     
     // MARK: - Properties
     
@@ -21,11 +20,9 @@ class TagView: UIView {
         self.init(frame: .zero)
     }
     
-    init(text: String) {
-        super.init(frame: .zero)
-        setupViews()
-        configureUI()
-        configureLabelText(text: text)
+    convenience init(text: String) {
+        self.init(frame: .zero)
+        setText(text: text)
     }
     
     override init(frame: CGRect) {
@@ -42,22 +39,15 @@ class TagView: UIView {
     
     // MARK: - Functions
     private func setupViews() {
-        addSubview(label)
+        addSubviews([label])
     }
     
     private func configureUI() {
-        self.layer.cornerRadius = CGFloat(10).scaledWidth
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.layer.backgroundColor = Palette.gray900.cgColor
+        self.layer.cornerRadius = CGFloat(22).scaledWidth
         
         configureLabel()
-        configureBackgroundColor(color: .GetYaPalette.gray1000)
-    }
-    
-    func configureBackgroundColor(color: UIColor) {
-        self.layer.backgroundColor = color.cgColor
-    }
-    
-    func configureLabelText(text: String) {
-        label.text = text
     }
     
     private func configureLabel() {
@@ -65,5 +55,9 @@ class TagView: UIView {
             label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
+    }
+    
+    func setText(text: String) {
+        label.text = text
     }
 }
