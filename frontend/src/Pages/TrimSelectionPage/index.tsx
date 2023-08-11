@@ -17,7 +17,7 @@ import ToolTip from './ToolTip';
 import TrimWrapper from './TrimWrapper';
 import TrimChangeModal from './TrimChangeModal';
 
-function SelectPage() {
+function TrimSelectionPage() {
   const [carFeature, setCarFeature] = useState({
     engine: '디젤 2.2',
     body: '7인승',
@@ -119,4 +119,4 @@ function SelectPage() {
   );
 }
 
-export default SelectPage;
+export default TrimSelectionPage;

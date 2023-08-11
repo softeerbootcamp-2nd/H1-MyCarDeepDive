@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from '@/Components/Header';
 import LandingPage from '@/Pages/LandingPage';
-import RecommendPage from '@/Pages/RecommendPage';
-import SelectPage from './Pages/TrimSelectPage';
+import RecommendationPage from '@/Pages/RecommendationPage';
+import TrimSelectionPage from './Pages/TrimSelectionPage';
 
 function App() {
   return (
@@ -10,8 +10,11 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/recommend/:status/:step' element={<RecommendPage />} />
-        <Route path='/select/:property' element={<SelectPage />} />
+        <Route
+          path='/recommend/:status/:step'
+          element={<RecommendationPage />}
+        />
+        <Route path='/select/' element={<TrimSelectionPage />} />
       </Routes>
     </div>
   );

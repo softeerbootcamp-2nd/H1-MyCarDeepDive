@@ -79,7 +79,7 @@ interface RecommendResultPageProps {
   step: string;
 }
 
-function RecommendResultPage({ step }: RecommendResultPageProps) {
+function ResultPage({ step }: RecommendResultPageProps) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -117,4 +117,4 @@ function RecommendResultPage({ step }: RecommendResultPageProps) {
   );
 }
 
-export default RecommendResultPage;
+export default ResultPage;

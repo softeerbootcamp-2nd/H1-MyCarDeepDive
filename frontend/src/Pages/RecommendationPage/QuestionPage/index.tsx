@@ -4,11 +4,11 @@ import RecommendQuestionWrapper from './RecommendQuestionWrapper';
 import QuestionTitle from './QuestionTitle';
 import NextStepButton from './NextStepButton';
 import ProgressBar from './ProgressBar';
-import QuestionBody from './QuestionBody';
-import DetailQuestionButton from './additionQuestionLink';
+import Body from './Body';
+import LifeStyleLink from './LifeStyleLink';
 import QuestionSubTitle from './QuestionSubTitle';
 
-function RecommendQuestionPage({
+function QuestionPage({
   step,
   prevStep,
   lifeStyle,
@@ -24,8 +24,8 @@ function RecommendQuestionPage({
       <RecommendQuestionWrapper>
         <QuestionTitle step={step} />
         <QuestionSubTitle step={step} />
-        <DetailQuestionButton step={step} />
-        <QuestionBody
+        <LifeStyleLink step={step} />
+        <Body
           step={step}
           age={age}
           lifeStyle={lifeStyle}
@@ -44,4 +44,4 @@ function RecommendQuestionPage({
   );
 }
 
-export default RecommendQuestionPage;
+export default QuestionPage;

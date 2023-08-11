@@ -4,9 +4,9 @@ import { lifeStyleAdditionQuestionList, ageQuestionList } from '@/global/data';
 import { QuestionBodyProps } from '@/global/type';
 import AdditionQuestionTitle from './AdditionQuestionTitle';
 import { Fragment } from 'react';
-import AdditionQuestionBudgetRange from './AdditionQuestionBudget';
+import Budget from './Budget';
 
-function QuestionBody({
+function Body({
   step,
   age,
   lifeStyle,
@@ -47,7 +47,7 @@ function QuestionBody({
           );
         })}
         <AdditionQuestionTitle title={'최대 예산을 알려주세요.'} />
-        <AdditionQuestionBudgetRange
+        <Budget
           budget={myLifeStyle.budget}
           myLifeStyleHandler={myLifeStyleHandler}
         />
@@ -57,4 +57,4 @@ function QuestionBody({
   return <>{question}</>;
 }
 
-export default QuestionBody;
+export default Body;

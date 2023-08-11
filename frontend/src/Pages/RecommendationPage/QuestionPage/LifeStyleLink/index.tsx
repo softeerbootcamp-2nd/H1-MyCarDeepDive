@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { QuestionStepProps } from '@/global/type';
 
-function DetailQuestionButton({ step }: QuestionStepProps) {
+function LifeStyleLink({ step }: QuestionStepProps) {
   if (step !== '2') return;
   return (
     <Link
@@ -15,4 +15,4 @@ function DetailQuestionButton({ step }: QuestionStepProps) {
   );
 }
 
-export default DetailQuestionButton;
+export default LifeStyleLink;

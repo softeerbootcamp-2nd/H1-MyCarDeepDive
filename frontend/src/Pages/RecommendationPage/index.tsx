@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import usePrevious from '@/hooks/usePrevious';
-import RecommendResultPage from './RecommendResultPage';
-import RecommendQuestionPage from './RecommendQuestionPage';
+import ResultPage from './ResultPage';
+import QuestionPage from './QuestionPage';
 
 function RecommendPage() {
   const { status, step } = useParams();
@@ -33,9 +33,9 @@ function RecommendPage() {
   };
 
   if (step === undefined) return null;
-  if (status === 'result') return <RecommendResultPage step={step} />;
+  if (status === 'result') return <ResultPage step={step} />;
   return (
-    <RecommendQuestionPage
+    <QuestionPage
       step={step}
       prevStep={prevStep}
       age={age}

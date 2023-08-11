@@ -1,10 +1,7 @@
 import { AdditionQuestionBudgetProps } from '@/global/type';
 import { price } from '@/global/data';
 
-function AdditionQuestionBudgetRange({
-  budget,
-  myLifeStyleHandler,
-}: AdditionQuestionBudgetProps) {
+function Budget({ budget, myLifeStyleHandler }: AdditionQuestionBudgetProps) {
   const { lowestPrice, highestPrice, rangeUnit, priceUnit } = price;
   const currentBudget = `${
     ((Number(budget) - lowestPrice) / (highestPrice - lowestPrice)) * 100
@@ -63,4 +60,4 @@ function AdditionQuestionBudgetRange({
   );
 }
 
-export default AdditionQuestionBudgetRange;
+export default Budget;
