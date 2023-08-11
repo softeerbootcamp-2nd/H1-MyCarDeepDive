@@ -7,7 +7,7 @@ import com.h1.mycardeepdive.car.domain.Engine;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CarSpecRepository extends JpaRepository<CarSpec, Long> {
+public interface CarSpecRepository extends JpaRepository<CarSpec, Long>, CarSpecRepositoryCustom {
     List<CarSpec> findByEngineAndDrivingSystemAndBody(
             Engine engine, DrivingSystem drivingSystem, Body body);
 }
