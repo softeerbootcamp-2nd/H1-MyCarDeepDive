@@ -31,13 +31,11 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(id, car.id)
-                && Objects.equals(name, car.name)
-                && Objects.equals(comment, car.comment);
+        return Objects.equals(id, car.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, comment);
+        return Objects.hash(id);
     }
 }
