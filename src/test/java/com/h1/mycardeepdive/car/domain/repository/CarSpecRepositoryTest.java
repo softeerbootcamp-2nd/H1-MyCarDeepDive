@@ -1,22 +1,19 @@
 package com.h1.mycardeepdive.car.domain.repository;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.h1.mycardeepdive.car.domain.CarSpec;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.List;
-
-import static com.mysema.commons.lang.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 @DataJpaTest
 class CarSpecRepositoryTest {
 
-    @Autowired
-    CarSpecRepository carSpecRepository;
+    @Autowired CarSpecRepository carSpecRepository;
 
     @BeforeEach
     void setUp() {
