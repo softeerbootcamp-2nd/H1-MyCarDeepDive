@@ -12,4 +12,10 @@ public class DrivingSystem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "driving_system_id")
     private Long id;
+
+    private String name;
+
+    private String description;
+
+    private String imgUrl;
 }
