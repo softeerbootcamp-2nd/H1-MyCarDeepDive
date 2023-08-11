@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CarSpecResponse {
     private String trims_name;
-    private String price;
+    private long price;
     private String summary;
     private Long car_spec_id;
     private Long trims_id;
