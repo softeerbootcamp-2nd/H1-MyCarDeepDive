@@ -1,5 +1,10 @@
 import { ReactNode } from 'react';
 
+export interface ModalProps {
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface RadioProps {
   name: string;
   value: string;
@@ -66,4 +71,18 @@ export interface AddtionQuestionTitleProps {
 export interface AdditionQuestionBudgetProps {
   budget: string;
   myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface NavBarCategoryProps {
+  category: string;
+  categoryClickHandler: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void;
+}
+
+export interface TrimChangeUnlockProps {
+  unlockList: {
+    image: string;
+    name: string;
+  }[];
 }
