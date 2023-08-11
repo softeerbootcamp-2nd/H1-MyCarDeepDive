@@ -73,15 +73,11 @@ class LeftAndRightButtonsView: UIStackView {
     
     private func bind() {
         leftButton.tap.sink { [weak self] in
-            self?.touchAnimation(target: self?.leftButton) {
-                self?.delegate?.didTapLeftButton()
-            }
+            self?.delegate?.didTapLeftButton()
         }.store(in: &subscriptions)
         
         rightButton.tap.sink { [weak self] in
-            self?.touchAnimation(target: self?.rightButton) {
-                self?.delegate?.didTapRightButton()
-            }
+            self?.delegate?.didTapRightButton()
         }.store(in: &subscriptions)
     }
     
@@ -112,23 +108,5 @@ class LeftAndRightButtonsView: UIStackView {
                     layerBorderColor: with.borderColor,
                     color: with.backgroundColor))
         }
-    }
-    
-    /// 왼쪽버튼과 오른쪽 버튼사이 간격 설정하기!!
-    func setSpacing(_ spacing: CGFloat) {
-        self.spacing = spacing
-    }
-    
-    func touchAnimation(target: UIButton?, completionHandler: @escaping () -> Void) {
-        UIView.animate(
-            withDuration: 0.07,
-            delay: 0,
-            options: .curveEaseInOut,
-            animations: {
-                target?.alpha = 0.777
-            }, completion: { _ in
-                completionHandler()
-                UIView.animate(withDuration: 0.12, animations: { target?.alpha = 1 })
-            })
     }
 }
