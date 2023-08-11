@@ -236,3 +236,8 @@
   border: 1px solid #a4a4a4;
   cursor: pointer;
 }
+
+.carSelectBackground {
+  width: calc(100vw - 416px);
+  height: calc(100vh - 120px);
+}

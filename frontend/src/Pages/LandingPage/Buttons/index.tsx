@@ -11,7 +11,7 @@ function Buttons() {
         height='h-[52px]'
         variant='transparent'
         text='직접 만들래요'
-        onClick={() => console.log('transparent')}
+        onClick={() => navigation('/select/trim')}
       />
       <Button
         width='w-[300px]'

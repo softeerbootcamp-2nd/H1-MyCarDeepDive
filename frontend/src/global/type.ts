@@ -5,6 +5,10 @@ export interface ModalProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface TrimChangeModalProps extends ModalProps {
+  mycarTrimHandler: React.Dispatch<React.SetStateAction<void>>;
+}
+
 export interface RadioProps {
   name: string;
   value: string;
@@ -73,6 +77,45 @@ export interface AdditionQuestionBudgetProps {
   myLifeStyleHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+export interface NavigationRadioProps {
+  name: string;
+  index: number;
+  value: string;
+  address?: string;
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface FeatureSelectRadioGroupProps {
+  carFeature: {
+    engine: string;
+    body: string;
+    operation: string;
+  };
+  mycarFeatureHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface TrimSelectionRadioGroupProps {
+  selectedTrim: string;
+  carFeature: {
+    engine: string;
+    body: string;
+    operation: string;
+  };
+  trim?: {
+    name: string;
+    description: string;
+    basicOption: string[];
+    price: number;
+  };
+  setWantedTrim: React.Dispatch<React.SetStateAction<string>>;
+  setShowModal: (value: boolean) => void;
+  optionToolTipHandler: (
+    x: number | undefined,
+    y: number | undefined,
+    target: string,
+  ) => void;
+}
+
 export interface NavBarCategoryProps {
   category: string;
   categoryClickHandler: (
@@ -85,4 +128,13 @@ export interface TrimChangeUnlockProps {
     image: string;
     name: string;
   }[];
+}
+
+export interface setShowPriceInfoProps {
+  showPriceInfo: boolean;
+  setShowPriceInfo: (value: boolean) => void;
+}
+
+export interface TrimChangeButtonProps {
+  mycarTrimHandler: React.Dispatch<React.SetStateAction<void>>;
 }

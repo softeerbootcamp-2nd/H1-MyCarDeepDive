@@ -71,6 +71,77 @@ export const price = {
   priceUnit: '만원',
 };
 
+export const detailSelectionList = [
+  {
+    name: '트림',
+    value: 'Le Blanc(르블랑)',
+    address: 'trim',
+  },
+  {
+    name: '색상',
+    value: '어비스 블랙펄 / 퀄팅천연 (블랙)',
+    address: 'color',
+  },
+  {
+    name: '옵션',
+    value: '컴포트 II, 현대 스마트 센스 I, 주차 보조 시스템',
+    address: 'option',
+  },
+];
+
+export const carFeatureList = [
+  {
+    name: 'engine',
+    description: '엔진',
+    valueList: ['디젤 2.2', '가솔린 3.8'],
+  },
+  {
+    name: 'body',
+    description: '바디',
+    valueList: ['7인승', '8인승'],
+  },
+  {
+    name: 'operation',
+    description: '구동방식',
+    valueList: ['2WD', '4WD'],
+  },
+];
+
+export const trimList = [
+  {
+    name: 'Exclusive',
+    description: '합리적인 당신을 위한',
+    basicOption: [
+      '12인치 내비게이션',
+      '내비 기반 크루즈 컨트롤',
+      '세이프티 파워 윈도우',
+    ],
+    price: 43460100,
+  },
+  {
+    name: 'Le Blanc',
+    description: '필수적인 옵션만 모은',
+    basicOption: ['20인치 알로이 휠', '12인치 클러스터', '서라운드 뷰 모니터'],
+    price: 43460200,
+  },
+  {
+    name: 'Prestige',
+    description: '가치있는 드라이빙 경험을 주는',
+    basicOption: ['2열 통풍시트', '스마트 자세제어', '2열 수동식 도어 커튼'],
+    price: 43460300,
+  },
+  {
+    name: 'Caligraphy',
+    description: '남들과 차별화된 경험',
+    basicOption: [
+      '20인치 캘리그라피 전용 휠',
+      'KRELL 프리미엄 사운드',
+      '블랙 에디션',
+    ],
+    price: 43460400,
+  },
+];
+
 export const trimCompareData = [
   {
     carImage: Exclusive,
