@@ -1,7 +1,6 @@
 package com.h1.mycardeepdive.options.ui;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 
@@ -9,7 +8,6 @@ import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import com.h1.mycardeepdive.ControllerTestConfig;
 import com.h1.mycardeepdive.options.service.OptionsService;
-import com.h1.mycardeepdive.options.ui.dto.WheelOptionResponse;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

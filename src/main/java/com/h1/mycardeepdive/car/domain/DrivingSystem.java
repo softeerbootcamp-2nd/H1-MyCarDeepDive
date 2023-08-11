@@ -1,12 +1,10 @@
 package com.h1.mycardeepdive.car.domain;
 
+import java.util.Objects;
 import javax.persistence.*;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.Objects;
 
 @Entity
 @Getter

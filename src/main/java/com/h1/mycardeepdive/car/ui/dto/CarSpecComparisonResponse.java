@@ -1,8 +1,7 @@
 package com.h1.mycardeepdive.car.ui.dto;
 
-import lombok.*;
-
 import java.util.List;
+import lombok.*;
 
 @Getter
 @Setter

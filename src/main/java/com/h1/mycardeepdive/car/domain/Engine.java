@@ -1,12 +1,10 @@
 package com.h1.mycardeepdive.car.domain;
 
+import java.util.Objects;
 import javax.persistence.*;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -28,7 +26,13 @@ public class Engine {
     private String maxTorque;
 
     @Builder
-    public Engine(Long id, String name, String description, String imgUrl, String maxPower, String maxTorque) {
+    public Engine(
+            Long id,
+            String name,
+            String description,
+            String imgUrl,
+            String maxPower,
+            String maxTorque) {
         this.id = id;
         this.name = name;
         this.description = description;
