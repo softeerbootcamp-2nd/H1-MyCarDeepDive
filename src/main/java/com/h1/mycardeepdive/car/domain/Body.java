@@ -12,4 +12,10 @@ public class Body {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "body_id")
     private Long id;
+
+    private String name;
+
+    private String description;
+
+    private String imgUrl;
 }
