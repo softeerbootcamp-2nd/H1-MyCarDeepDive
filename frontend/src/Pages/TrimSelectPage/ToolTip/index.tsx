@@ -43,7 +43,7 @@ function ToolTip({ toolTipInfo, showToolTip, setShowToolTip }: ToolTipProps) {
       className='transform z-40'
       style={{
         position: 'fixed',
-        top: toolTipInfo.y,
+        top: Math.max(toolTipInfo.y, 130),
         left: toolTipInfo.x,
         transform: `translateY(-${toolTipInfo.name === 'engine' ? 74 : 96}px)`,
       }}
