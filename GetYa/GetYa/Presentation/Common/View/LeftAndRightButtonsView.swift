@@ -15,7 +15,7 @@ protocol LeftAndRightButtonsViewDelegate: AnyObject {
 
 class LeftAndRightButtonsView: UIStackView {
     struct ButtonAppearance {
-        let text: String
+        var text: String?
         let fontType: GetYaFont
         let backgroundColor: UIColor
         let borderColor: UIColor
@@ -87,21 +87,31 @@ class LeftAndRightButtonsView: UIStackView {
     
     // MARK: - Functions
     func configureLeftButton(with: ButtonAppearance) {
-        leftButton.configureDetail(
-            text: with.text,
-            fontType: with.fontType,
-            backgroundColor: with.backgroundColor,
-            borderColor: with.borderColor,
-            textColor: with.textColor)
+        _=leftButton.set {
+            if with.text != nil {
+                $0.setTitle(with.text, for: .normal)
+            }
+            $0.configureDetail(
+                font: with.fontType.uiFont,
+                buttonBackgroundColorType: .custom(
+                    textColor: with.textColor,
+                    layerBorderColor: with.borderColor,
+                    color: with.backgroundColor))
+        }
     }
     
     func configureRightButton(with: ButtonAppearance) {
-        rightButton.configureDetail(
-            text: with.text,
-            fontType: with.fontType,
-            backgroundColor: with.backgroundColor,
-            borderColor: with.borderColor,
-            textColor: with.textColor)
+        _=rightButton.set {
+            if with.text != nil {
+                $0.setTitle(with.text, for: .normal)
+            }
+            $0.configureDetail(
+                font: with.fontType.uiFont,
+                buttonBackgroundColorType: .custom(
+                    textColor: with.textColor,
+                    layerBorderColor: with.borderColor,
+                    color: with.backgroundColor))
+        }
     }
     
     /// 왼쪽버튼과 오른쪽 버튼사이 간격 설정하기!!
