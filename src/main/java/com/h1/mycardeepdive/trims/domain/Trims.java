@@ -18,17 +18,19 @@ public class Trims {
 
     private String description;
 
-    private String img_url;
+    private String imgUrl;
 
-    private String wheel_name;
+    private String wheelName;
 
-    private double wheel_size;
+    private double wheelSize;
 
-    private String seat_name;
+    private String seatName;
 
-    private double navigation_size;
+    private double navigationSize;
 
-    private double cluster_size;
+    private double clusterSize;
+
+    private String summary;
 
     @ManyToOne
     @JoinColumn(name = "car_id")

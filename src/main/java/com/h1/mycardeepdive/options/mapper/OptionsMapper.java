@@ -6,5 +6,4 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface OptionsMapper {
     OptionsMapper INSTANCE = Mappers.getMapper(OptionsMapper.class);
-
 }
