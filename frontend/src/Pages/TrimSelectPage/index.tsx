@@ -1,18 +1,20 @@
+import { useState } from 'react';
+import Button from '@/Components/Button';
 import SelectionCarBackground from './SelecetionCarBackground';
 import SelectionCarImage from './SelectionCarImage';
 import FeatureGuideLink from './FeatureGuideLink';
 import FeatureSelectRadioGroupWrapper from './FeatureSelectRadioGroupWrapper';
 import SelectionCarWrapper from './SelectionCarWrapper';
-import Button from '@/Components/Button';
 import ReRecommendCardLink from './ReRecommendCarLink';
 import TrimSelectionTitle from './TrimSelectionTitle';
 import TrimComparisionButton from './TrimComparisonButton';
 import TrimSelectionHeader from './TrimSelectionHeader';
 import TrimSelectionRadioGroup from './TrimSelectionRadioGroup';
-import { useState } from 'react';
 import FeatureSelectRadioGroup from './FeatureSelectRadioGroup';
 import ColorChoiceButtonWrapper from './ColorChoiceButtonWrapper';
 import FeatureAndTrimSelectionWrapper from './FeatureAndTrimSelectionWrapper';
+import ToolTip from './ToolTip';
+import TrimWrapper from './TrimWrapper';
 
 function SelectPage() {
   const [carFeature, setCarFeature] = useState({
@@ -20,8 +22,13 @@ function SelectPage() {
     body: '7인승',
     operation: '2WD',
   });
-
   const [selectedTrim, setSelectedTrim] = useState('Le Blanc');
+  const [showToolTip, setShowToolTip] = useState(false);
+  const [toolTipInfo, setToolTopInfo] = useState({
+    x: 0,
+    y: 0,
+    name: '',
+  });
 
   const mycarFeatureHandler = ({
     target,
@@ -34,6 +41,20 @@ function SelectPage() {
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedTrim(target.value);
+  };
+
+  const toolTipHandler = (
+    x: number | undefined,
+    y: number | undefined,
+    target: string,
+  ) => {
+    if (!x || !y) return;
+    setToolTopInfo({
+      x: x - 12,
+      y: y,
+      name: target,
+    });
+    setShowToolTip(true);
   };
 
   return (
@@ -50,19 +71,25 @@ function SelectPage() {
           <FeatureSelectRadioGroup
             carFeature={carFeature}
             mycarFeatureHandler={mycarFeatureHandler}
+            toolTipHandler={toolTipHandler}
+            setShowToolTip={setShowToolTip}
           />
         </FeatureSelectRadioGroupWrapper>
 
-        <TrimSelectionHeader>
-          <TrimSelectionTitle />
-          <TrimComparisionButton />
-        </TrimSelectionHeader>
-
-        <TrimSelectionRadioGroup
-          selectedTrim={selectedTrim}
-          carFeature={carFeature}
-          mycarTrimHandler={mycarTrimHandler}
-        />
+        <TrimWrapper
+          toolTipHandler={toolTipHandler}
+          setShowToolTip={setShowToolTip}
+        >
+          <TrimSelectionHeader>
+            <TrimSelectionTitle />
+            <TrimComparisionButton />
+          </TrimSelectionHeader>
+          <TrimSelectionRadioGroup
+            selectedTrim={selectedTrim}
+            carFeature={carFeature}
+            mycarTrimHandler={mycarTrimHandler}
+          />
+        </TrimWrapper>
 
         <ColorChoiceButtonWrapper>
           <Button
@@ -74,6 +101,11 @@ function SelectPage() {
           />
         </ColorChoiceButtonWrapper>
       </FeatureAndTrimSelectionWrapper>
+      <ToolTip
+        toolTipInfo={toolTipInfo}
+        showToolTip={showToolTip}
+        setShowToolTip={setShowToolTip}
+      />
     </>
   );
 }

@@ -1,21 +1,55 @@
+import { useRef } from 'react';
 import { carFeatureList } from '@/global/data';
-import { Fragment } from 'react';
+import { FeatureSelectRadioGroupProps } from '@/global/type';
 import FeatureSelectRadioSelected from './FeatureSelectRadioSelected';
 import FeatureSelectRadioUnselected from './FeatureSelectRadioUnselected';
-import { FeatureSelectRadioGroupProps } from '@/global/type';
+
+interface Props extends FeatureSelectRadioGroupProps {
+  toolTipHandler: (
+    x: number | undefined,
+    y: number | undefined,
+    target: string,
+  ) => void;
+  setShowToolTip: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 function FeatureSelectRadioGroup({
   carFeature,
   mycarFeatureHandler,
-}: FeatureSelectRadioGroupProps) {
+  toolTipHandler,
+  setShowToolTip,
+}: Props) {
+  const refs = [
+    useRef<HTMLParagraphElement | null>(null),
+    useRef<HTMLParagraphElement | null>(null),
+    useRef<HTMLParagraphElement | null>(null),
+  ];
+
+  const hoverHandler = (index: number, name: string) => {
+    const x: number | undefined =
+      refs[index].current?.getBoundingClientRect().x;
+    const y: number | undefined =
+      refs[index].current?.getBoundingClientRect().y;
+
+    toolTipHandler(x, y, name);
+  };
+
   return (
     <>
       {carFeatureList.map((feature, index) => {
         const { name, description, valueList } = feature;
         const radioValue = carFeature[feature.name as keyof typeof carFeature];
+
         return (
-          <Fragment key={index}>
-            <p className='font-body4-medium mb-1 text-grey-200'>
+          <div
+            key={index}
+            onMouseEnter={() => hoverHandler(index, name)}
+            onMouseLeave={() => setShowToolTip(false)}
+          >
+            <p
+              className='font-body4-medium mb-1 text-grey-200'
+              ref={refs[index]}
+            >
               {description}
             </p>
             <div className='flex justify-center items-center'>
@@ -37,7 +71,7 @@ function FeatureSelectRadioGroup({
                 ),
               )}
             </div>
-          </Fragment>
+          </div>
         );
       })}
     </>
