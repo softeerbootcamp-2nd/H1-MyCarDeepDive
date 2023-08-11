@@ -12,4 +12,14 @@ public class Engine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "engine_id")
     private Long id;
+
+    private String name;
+
+    private String description;
+
+    private String imgUrl;
+
+    private String maxPower;
+
+    private String maxTorque;
 }
