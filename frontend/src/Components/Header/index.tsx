@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavigationRadioGroup from './NavigationRadioGroup';
 import PriceDetailButton from './priceDetailButton';
 import ShowQuotationButton from './showQuotation';
@@ -7,6 +7,7 @@ import HeaderLogo from './HeaderLogo';
 import HeaderTitle from './HeaderTitle';
 import DropDownIcon from './DropDownIcon';
 import upArrowIcon from '@/assets/icon/up-arrow-icon.svg';
+import UnderLine from '../UnderLine';
 
 function Header() {
   const location = useLocation();
@@ -14,16 +15,27 @@ function Header() {
   const isSelectionPage: boolean = location.pathname.startsWith('/select/');
 
   const [showPriceInfo, setShowPriceInfo] = useState(false);
+  const [displayPriceInfo, setDisplayPriceInfo] = useState(false);
+
+  useEffect(() => {
+    if (!showPriceInfo) return setDisplayPriceInfo(false);
+
+    setTimeout(() => {
+      setDisplayPriceInfo(true);
+    }, 700);
+  }, [showPriceInfo]);
 
   return (
     <header
       className={`fixed w-full ${
         isSelectionPage
           ? !showPriceInfo
-            ? 'h-[120px] shadow-md'
-            : 'h-[322px] shadow-md'
-          : 'h-[92px]'
-      } z-30 top-0 left-0 ${!isHome && 'bg-grey-1000'}`}
+            ? 'shadow-md z-30 h-[120px]'
+            : 'shadow-md z-50 h-[322px]'
+          : 'h-[92px] z-30'
+      } top-0 left-0 transition-height duration-700 ${
+        !isHome && 'bg-grey-1000'
+      }`}
     >
       <div className='max-w-5xl mx-auto'>
         <div className='flex mt-[33px]'>
@@ -45,23 +57,30 @@ function Header() {
           </div>
         )}
       </div>
-      {showPriceInfo && isSelectionPage && (
+      {displayPriceInfo && isSelectionPage && (
         <>
-          <hr className='w-full stroke-1 stroke-grey-700 mt-4' />
+          <UnderLine margin='mt-4' />
           <div className='max-w-5xl mx-auto'>
-            <div className=' border-b h-[135px] flex overflow-scroll'>
+            <div className='h-[135px] flex overflow-scroll'>
               <div className='flex my-auto'>
-                <div className='flex flex-col gap-1.5 justify-start mr-4 font-body4-regular text-grey-300 '>
-                  <p>가솔린</p>
-                  <p>7인승</p>
-                  <p>2WD</p>
+                <div className='w-[8.3rem] flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                  <div className='flex gap-4 justify-between'>
+                    <p>가솔린</p>
+                    <p className='font-body4-medium text-grey-100'>
+                      43,460,000원
+                    </p>
+                  </div>
+                  <div className='flex gap-4 justify-between'>
+                    <p>7인승</p>
+                  </div>
+                  <div className='flex gap-4 justify-between'>
+                    <p>2WD</p>
+                  </div>
                 </div>
-
-                <p className='font-body4-medium text-grey-100'>43,460,000원</p>
 
                 <div className='h-[94px] my-auto mx-4 border-[0.5px] border-grey-700'></div>
 
-                <div className='flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                <div className='w-52 flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   <div className='flex gap-4 justify-between'>
                     <p>크리미 화이트</p>
                     <p className='font-body4-medium text-grey-100'>0원</p>
@@ -74,7 +93,7 @@ function Header() {
 
                 <div className='h-[94px] my-auto mx-4 border-[0.5px] border-grey-700'></div>
 
-                <div className='flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                <div className='w-[17rem] flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   <div className='flex gap-4 justify-between'>
                     <p>컴포트2</p>
                     <p className='font-body4-medium text-grey-100'>500,000원</p>
@@ -86,8 +105,15 @@ function Header() {
                 </div>
               </div>
             </div>
-            <div className='flex justify-end mt-4'>
-              <img className='mr-1' src={upArrowIcon} alt='' />
+            <UnderLine margin='mb-4' />
+            <div className='flex justify-end'>
+              <button className='mr-1'>
+                <img
+                  src={upArrowIcon}
+                  alt='upArrowIcon'
+                  onClick={() => setShowPriceInfo(false)}
+                />
+              </button>
               <p className='font-h1-medium'>
                 <span className='text-[24px] text-grey-50'>51,460,000원</span>
               </p>
