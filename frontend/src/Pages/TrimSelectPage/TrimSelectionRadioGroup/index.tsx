@@ -6,7 +6,7 @@ import TrimSelectionRadioUnselected from './TrimSelectionRadioUnselected';
 function TrimSelectionRadioGroup({
   selectedTrim,
   carFeature,
-  mycarTrimHandler,
+  setShowModal,
   setWantedTrim,
 }: TrimSelectionRadioGroupProps) {
   return trimList.map((trim, index) => {
@@ -17,8 +17,8 @@ function TrimSelectionRadioGroup({
         trim={trim}
         selectedTrim={selectedTrim}
         carFeature={carFeature}
-        mycarTrimHandler={mycarTrimHandler}
         setWantedTrim={setWantedTrim}
+        setShowModal={setShowModal}
       />
     ) : (
       <TrimSelectionRadioUnselected
@@ -26,8 +26,8 @@ function TrimSelectionRadioGroup({
         trim={trim}
         selectedTrim={selectedTrim}
         carFeature={carFeature}
-        mycarTrimHandler={mycarTrimHandler}
         setWantedTrim={setWantedTrim}
+        setShowModal={setShowModal}
       />
     );
   });

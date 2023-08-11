@@ -106,8 +106,8 @@ export interface TrimSelectionRadioGroupProps {
     basicOption: string[];
     price: number;
   };
-  mycarTrimHandler: React.Dispatch<React.SetStateAction<void>>;
   setWantedTrim: React.Dispatch<React.SetStateAction<string>>;
+  setShowModal: (value: boolean) => void;
 }
 
 export interface NavBarCategoryProps {

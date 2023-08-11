@@ -18,8 +18,8 @@ function BottomButton({ mycarTrimHandler }: TrimChangeButtonProps) {
         variant='primary'
         text='변경하기'
         onClick={() => {
-          closeModalHandler();
           mycarTrimHandler();
+          closeModalHandler();
         }}
       />
     </div>

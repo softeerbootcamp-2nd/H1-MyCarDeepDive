@@ -1,15 +1,12 @@
 import { TrimSelectionRadioGroupProps } from '@/global/type';
 import checkCircleGrey from '@/assets/icon/trim-select-circle-grey.svg';
-import { useState } from 'react';
-import TrimChangeModal from '../../TrimChangeModal';
 
 function TrimSelectionRadioUnselected({
   carFeature,
   trim,
-  mycarTrimHandler,
+  setShowModal,
   setWantedTrim,
 }: TrimSelectionRadioGroupProps) {
-  const [showModal, setShowModal] = useState(false);
   const showTrimChangePopup = ({
     currentTarget,
   }: React.MouseEvent<HTMLInputElement>) => {
@@ -65,11 +62,6 @@ function TrimSelectionRadioUnselected({
           </div>
         </div>
       </label>
-      <TrimChangeModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        mycarTrimHandler={mycarTrimHandler}
-      />
     </>
   );
 }

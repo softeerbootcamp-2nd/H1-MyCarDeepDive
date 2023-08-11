@@ -9,10 +9,11 @@ import TrimSelectionTitle from './TrimSelectionTitle';
 import TrimComparisionButton from './TrimComparisonButton';
 import TrimSelectionHeader from './TrimSelectionHeader';
 import TrimSelectionRadioGroup from './TrimSelectionRadioGroup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FeatureSelectRadioGroup from './FeatureSelectRadioGroup';
 import ColorChoiceButtonWrapper from './ColorChoiceButtonWrapper';
 import FeatureAndTrimSelectionWrapper from './FeatureAndTrimSelectionWrapper';
+import TrimChangeModal from './TrimChangeModal';
 
 function SelectPage() {
   const [carFeature, setCarFeature] = useState({
@@ -23,6 +24,7 @@ function SelectPage() {
 
   const [selectedTrim, setSelectedTrim] = useState('Le Blanc');
   const [wantedTrim, setWantedTrim] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const mycarFeatureHandler = ({
     target,
@@ -32,8 +34,13 @@ function SelectPage() {
   };
 
   const mycarTrimHandler = () => {
+    console.log('here');
     setSelectedTrim(wantedTrim);
   };
+
+  useEffect(() => {
+    console.log(wantedTrim, selectedTrim);
+  });
 
   return (
     <>
@@ -60,8 +67,8 @@ function SelectPage() {
         <TrimSelectionRadioGroup
           selectedTrim={selectedTrim}
           carFeature={carFeature}
-          mycarTrimHandler={mycarTrimHandler}
           setWantedTrim={setWantedTrim}
+          setShowModal={setShowModal}
         />
 
         <ColorChoiceButtonWrapper>
@@ -74,6 +81,12 @@ function SelectPage() {
           />
         </ColorChoiceButtonWrapper>
       </FeatureAndTrimSelectionWrapper>
+
+      <TrimChangeModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        mycarTrimHandler={mycarTrimHandler}
+      />
     </>
   );
 }

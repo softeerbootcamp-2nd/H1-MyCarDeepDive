@@ -1,15 +1,10 @@
 import { TrimSelectionRadioGroupProps } from '@/global/type';
 import checkCircleBlue from '@/assets/icon/check-circle-lifecycle-blue.svg';
-import { useState } from 'react';
-import TrimChangeModal from '@/Pages/TrimSelectPage/TrimChangeModal';
 
 function TrimSelectionRadioSelected({
   carFeature,
   trim,
-  mycarTrimHandler,
 }: TrimSelectionRadioGroupProps) {
-  const [showModal, setShowModal] = useState(false);
-
   const { engine, body, operation } = carFeature;
   return (
     <>
@@ -57,11 +52,6 @@ function TrimSelectionRadioSelected({
           </div>
         </div>
       </label>
-      <TrimChangeModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        mycarTrimHandler={mycarTrimHandler}
-      />
     </>
   );
 }
