@@ -29,4 +29,29 @@ public class OptionFixture {
                 .summary(summary)
                 .build();
     }
+
+    public static Options createOptionStopSystem() {
+        Long id = 1L;
+        String name = "다중 충돌방지 자동 제동 시스템";
+        String imgUrl =
+                "https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg";
+        double chooseRate = 100;
+        boolean isBasicOption = true;
+        String description =
+                "차량의 정면 또는 측면 충돌사고로 에어백 전개 시 차량에 적절한 자동 긴급 제동을 통해 2차 사고 및 다중 충돌을 경감시켜줍니다.";
+        long price = 0;
+        String summary = null;
+
+        return Options.builder()
+                .id(id)
+                .name(name)
+                .imgUrl(imgUrl)
+                .chooseRate(chooseRate)
+                .isBasicOption(isBasicOption)
+                .badgeName(null)
+                .description(description)
+                .price(price)
+                .summary(summary)
+                .build();
+    }
 }
