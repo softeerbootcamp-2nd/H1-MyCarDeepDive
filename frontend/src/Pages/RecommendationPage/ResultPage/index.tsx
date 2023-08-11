@@ -2,16 +2,16 @@ import { useEffect } from 'react';
 import UnderLine from '@/Components/UnderLine';
 import RecommendResultPageWrapper from './RecommendResultPageWrapper';
 import CardWrapper from './CardWrapper';
-import BackgroundGradient from './BackgroundGradient';
+import Gradient from './Gradient';
 import Card from './Card';
-import RecommendCarWrapper from './RecommendCarWrapper';
-import RecommendCarBackground from './RecommendCarBackground';
-import RecommendCarSummary from './RecommendCarSummary';
-import RecommendBody from './RecommendBody';
-import RecommendCarInfo from './RecommendCarInfo';
-import RecommendCarOption from './RecommendCarOption';
-import RecommendTotalPrice from './RecommendTotalPrice';
-import BottomButtons from './BottomButtons';
+import CarWrapper from './CarWrapper';
+import CarBackground from './CarBackground';
+import CarSummary from './CarSummary';
+import Body from './Body';
+import CarInfo from './CarInfo';
+import CarOption from './CarOption';
+import TotalPrice from './TotalPrice';
+import Buttons from './Buttons';
 import palisade from '@/assets/image/Palisade.png';
 import exteriorCrimi from '@/assets/image/exterior-crimi.png';
 import exteriorArtificialLeather from '@/assets/image/exterior-artificial-leather.png';
@@ -88,31 +88,31 @@ function ResultPage({ step }: RecommendResultPageProps) {
     <RecommendResultPageWrapper>
       {step === 'basic' ? (
         <CardWrapper>
-          <BackgroundGradient />
+          <Gradient />
           <Card cardData={cardData} />
         </CardWrapper>
       ) : (
-        <RecommendCarWrapper>
-          <RecommendCarBackground />
-          <RecommendCarSummary tag={tagData} carImage={palisade} />
-        </RecommendCarWrapper>
+        <CarWrapper>
+          <CarBackground />
+          <CarSummary tag={tagData} carImage={palisade} />
+        </CarWrapper>
       )}
-      <RecommendBody>
-        <RecommendCarInfo carData={carData} />
+      <Body>
+        <CarInfo carData={carData} />
         <UnderLine margin={'mt-4 mb-[26px]'} />
-        <RecommendCarOption
+        <CarOption
           title={optionData[0].title}
           optionData={optionData[0].data}
         />
         <UnderLine margin={'mt-10 mb-6'} />
-        <RecommendCarOption
+        <CarOption
           title={optionData[1].title}
           optionData={optionData[1].data}
         />
         <UnderLine margin={'mt-10 mb-4'} />
-        <RecommendTotalPrice totalPrice={'48,120,000'} />
-        <BottomButtons />
-      </RecommendBody>
+        <TotalPrice totalPrice={'48,120,000'} />
+        <Buttons />
+      </Body>
     </RecommendResultPageWrapper>
   );
 }

@@ -14,7 +14,7 @@ function App() {
           path='/recommend/:status/:step'
           element={<RecommendationPage />}
         />
-        <Route path='/select/' element={<TrimSelectionPage />} />
+        <Route path='/select/:property' element={<TrimSelectionPage />} />
       </Routes>
     </div>
   );

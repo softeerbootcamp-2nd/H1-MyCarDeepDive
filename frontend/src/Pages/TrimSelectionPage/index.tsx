@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import Button from '@/Components/Button';
-import SelectionCarBackground from './SelecetionCarBackground';
-import SelectionCarImage from './SelectionCarImage';
-import FeatureGuideLink from './FeatureGuideLink';
+
 import FeatureSelectRadioGroupWrapper from './FeatureSelectRadioGroupWrapper';
 import SelectionCarWrapper from './SelectionCarWrapper';
-import ReRecommendCardLink from './ReRecommendCarLink';
-import TrimSelectionTitle from './TrimSelectionTitle';
-import TrimComparisionButton from './TrimComparisonButton';
+
 import TrimSelectionHeader from './TrimSelectionHeader';
-import TrimSelectionRadioGroup from './TrimSelectionRadioGroup';
-import FeatureSelectRadioGroup from './FeatureSelectRadioGroup';
+
 import ColorChoiceButtonWrapper from './ColorChoiceButtonWrapper';
 import FeatureAndTrimSelectionWrapper from './FeatureAndTrimSelectionWrapper';
 import ToolTip from './ToolTip';
 import TrimWrapper from './TrimWrapper';
-import TrimChangeModal from './TrimChangeModal';
+
+import Background from './Car/Background';
+import ReRecommendCardLink from './Car/ReRecommendCarLink';
+import CarImage from './Car/CarImage';
+import Guide from './Feature/Guide';
+import FeatureRadio from './Feature/FeatureRadio';
+import Title from './Trim/Title';
+import CompareButton from './Trim/CompareButton';
+import TrimRadio from './Trim/TrimRadio';
+import ChangeModal from './Trim/ChangeModal';
 
 function TrimSelectionPage() {
   const [carFeature, setCarFeature] = useState({
@@ -62,14 +66,14 @@ function TrimSelectionPage() {
     <>
       <SelectionCarWrapper>
         <ReRecommendCardLink />
-        <SelectionCarBackground />
-        <SelectionCarImage />
+        <Background />
+        <CarImage />
       </SelectionCarWrapper>
 
       <FeatureAndTrimSelectionWrapper>
-        <FeatureGuideLink />
+        <Guide />
         <FeatureSelectRadioGroupWrapper>
-          <FeatureSelectRadioGroup
+          <FeatureRadio
             carFeature={carFeature}
             mycarFeatureHandler={mycarFeatureHandler}
             toolTipHandler={toolTipHandler}
@@ -82,10 +86,10 @@ function TrimSelectionPage() {
           setShowToolTip={setShowToolTip}
         >
           <TrimSelectionHeader>
-            <TrimSelectionTitle />
-            <TrimComparisionButton />
+            <Title />
+            <CompareButton />
           </TrimSelectionHeader>
-          <TrimSelectionRadioGroup
+          <TrimRadio
             selectedTrim={selectedTrim}
             carFeature={carFeature}
             setWantedTrim={setWantedTrim}
@@ -110,7 +114,7 @@ function TrimSelectionPage() {
         setShowToolTip={setShowToolTip}
       />
 
-      <TrimChangeModal
+      <ChangeModal
         showModal={showModal}
         setShowModal={setShowModal}
         mycarTrimHandler={mycarTrimHandler}

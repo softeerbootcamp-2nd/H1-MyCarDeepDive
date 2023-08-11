@@ -1,12 +1,12 @@
 import { RecommendQuestionPageProps } from '@/global/type';
 import RecommendQuestionPageWrapper from './RecommendQuestionPageWrapper';
 import RecommendQuestionWrapper from './RecommendQuestionWrapper';
-import QuestionTitle from './QuestionTitle';
+import Title from './Title';
 import NextStepButton from './NextStepButton';
 import ProgressBar from './ProgressBar';
 import Body from './Body';
+import SubTitle from './SubTitle';
 import LifeStyleLink from './LifeStyleLink';
-import QuestionSubTitle from './QuestionSubTitle';
 
 function QuestionPage({
   step,
@@ -22,8 +22,8 @@ function QuestionPage({
     <RecommendQuestionPageWrapper>
       <ProgressBar step={step} prevStep={prevStep} />
       <RecommendQuestionWrapper>
-        <QuestionTitle step={step} />
-        <QuestionSubTitle step={step} />
+        <Title step={step} />
+        <SubTitle step={step} />
         <LifeStyleLink step={step} />
         <Body
           step={step}

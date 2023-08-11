@@ -1,4 +1,4 @@
-import OptionItem from './OptionItem';
+import Item from './Item';
 
 interface OptionProps {
   trim: string;
@@ -31,7 +31,7 @@ function Option({ trim, attribute, carImage, options }: OptionProps) {
       </div>
       <div className='flex font-body4-regular text-grey-200'>
         {options.map(item => (
-          <OptionItem image={item.image} name={item.name} key={item.name} />
+          <Item image={item.image} name={item.name} key={item.name} />
         ))}
       </div>
     </>

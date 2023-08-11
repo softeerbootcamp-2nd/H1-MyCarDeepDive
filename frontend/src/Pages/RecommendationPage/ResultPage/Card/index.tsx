@@ -1,8 +1,8 @@
 import logoSkyBlue from '@/assets/icon/logo-skyblue.svg';
-import CardTitle from './CardTitle';
-import CardDescription from './CardDescription';
-import CardCarImage from './CardCarImage';
-import CardBubble from './CardBubble';
+import Title from './Title';
+import Description from './Description';
+import CarImage from './CarImage';
+import Bubble from './Bubble';
 
 interface CardProps {
   cardData: {
@@ -24,10 +24,10 @@ function Card({ cardData }: CardProps) {
         alt='Hyundai-logo'
         className='absolute top-[17px] left-[19px]'
       />
-      <CardTitle title={cardData.title} />
-      <CardDescription description={cardData.description} />
-      <CardCarImage image={cardData.image} />
-      <CardBubble bubble={cardData.bubble} />
+      <Title title={cardData.title} />
+      <Description description={cardData.description} />
+      <CarImage image={cardData.image} />
+      <Bubble bubble={cardData.bubble} />
     </div>
   );
 }

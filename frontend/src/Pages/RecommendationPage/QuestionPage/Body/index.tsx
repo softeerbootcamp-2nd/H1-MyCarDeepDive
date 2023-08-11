@@ -1,8 +1,8 @@
 import RadioGroup from '@/Components/RadioGroup';
-import LifeStyleRadioGroup from './LifeStyleRadioGroup';
+import LifeStyleRadio from './LifeStyleRadio';
 import { lifeStyleAdditionQuestionList, ageQuestionList } from '@/global/data';
 import { QuestionBodyProps } from '@/global/type';
-import AdditionQuestionTitle from './AdditionQuestionTitle';
+import Title from './Title';
 import { Fragment } from 'react';
 import Budget from './Budget';
 
@@ -24,10 +24,7 @@ function Body({
         onChangeHandler={ageHandler}
       />
     ) : step === '2' ? (
-      <LifeStyleRadioGroup
-        value={lifeStyle}
-        onChangeHandler={lifeStyleHandler}
-      />
+      <LifeStyleRadio value={lifeStyle} onChangeHandler={lifeStyleHandler} />
     ) : step === 'addition' ? (
       <>
         {lifeStyleAdditionQuestionList.map((additionQuestion, index) => {
@@ -36,7 +33,7 @@ function Body({
             myLifeStyle[additionQuestion.value as keyof typeof myLifeStyle];
           return (
             <Fragment key={index}>
-              <AdditionQuestionTitle title={question} />
+              <Title title={question} />
               <RadioGroup
                 data={answerList}
                 name={value}
@@ -46,7 +43,7 @@ function Body({
             </Fragment>
           );
         })}
-        <AdditionQuestionTitle title={'최대 예산을 알려주세요.'} />
+        <Title title={'최대 예산을 알려주세요.'} />
         <Budget
           budget={myLifeStyle.budget}
           myLifeStyleHandler={myLifeStyleHandler}
