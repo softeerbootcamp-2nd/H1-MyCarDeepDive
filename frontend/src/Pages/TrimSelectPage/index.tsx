@@ -15,6 +15,7 @@ import ColorChoiceButtonWrapper from './ColorChoiceButtonWrapper';
 import FeatureAndTrimSelectionWrapper from './FeatureAndTrimSelectionWrapper';
 import ToolTip from './ToolTip';
 import TrimWrapper from './TrimWrapper';
+import TrimChangeModal from './TrimChangeModal';
 
 function SelectPage() {
   const [carFeature, setCarFeature] = useState({
@@ -23,6 +24,8 @@ function SelectPage() {
     operation: '2WD',
   });
   const [selectedTrim, setSelectedTrim] = useState('Le Blanc');
+  const [wantedTrim, setWantedTrim] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
   const [toolTipInfo, setToolTopInfo] = useState({
     x: 0,
@@ -37,10 +40,8 @@ function SelectPage() {
     setCarFeature({ ...carFeature, [name]: value });
   };
 
-  const mycarTrimHandler = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedTrim(target.value);
+  const mycarTrimHandler = () => {
+    setSelectedTrim(wantedTrim);
   };
 
   const toolTipHandler = (
@@ -87,7 +88,8 @@ function SelectPage() {
           <TrimSelectionRadioGroup
             selectedTrim={selectedTrim}
             carFeature={carFeature}
-            mycarTrimHandler={mycarTrimHandler}
+            setWantedTrim={setWantedTrim}
+            setShowModal={setShowModal}
           />
         </TrimWrapper>
 
@@ -101,10 +103,17 @@ function SelectPage() {
           />
         </ColorChoiceButtonWrapper>
       </FeatureAndTrimSelectionWrapper>
+
       <ToolTip
         toolTipInfo={toolTipInfo}
         showToolTip={showToolTip}
         setShowToolTip={setShowToolTip}
+      />
+
+      <TrimChangeModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        mycarTrimHandler={mycarTrimHandler}
       />
     </>
   );

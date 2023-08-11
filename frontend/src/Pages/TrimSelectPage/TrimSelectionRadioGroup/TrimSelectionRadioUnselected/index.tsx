@@ -4,8 +4,16 @@ import checkCircleGrey from '@/assets/icon/trim-select-circle-grey.svg';
 function TrimSelectionRadioUnselected({
   carFeature,
   trim,
-  mycarTrimHandler,
+  setShowModal,
+  setWantedTrim,
 }: TrimSelectionRadioGroupProps) {
+  const showTrimChangePopup = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLInputElement>) => {
+    setWantedTrim(currentTarget.value);
+    setShowModal(true);
+  };
+
   const { engine, body, operation } = carFeature;
   return (
     <>
@@ -15,7 +23,7 @@ function TrimSelectionRadioUnselected({
         id={trim?.name}
         value={trim?.name}
         className='hidden'
-        onChange={mycarTrimHandler}
+        onClick={showTrimChangePopup}
       />
       <label htmlFor={trim?.name}>
         <div className='relative cursor-pointer'>

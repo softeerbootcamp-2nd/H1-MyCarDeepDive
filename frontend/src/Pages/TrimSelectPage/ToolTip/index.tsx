@@ -1,6 +1,6 @@
+import { useEffect } from 'react';
 import toolTip from '@/assets/icon/tool-tip.svg';
 import toolTipSharp from '@/assets/icon/tool-tip-sharp.svg';
-import { useEffect } from 'react';
 
 interface toolTipDataType {
   [key: string]: string;

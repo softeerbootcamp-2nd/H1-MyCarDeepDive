@@ -5,6 +5,10 @@ export interface ModalProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface TrimChangeModalProps extends ModalProps {
+  mycarTrimHandler: React.Dispatch<React.SetStateAction<void>>;
+}
+
 export interface RadioProps {
   name: string;
   value: string;
@@ -102,7 +106,8 @@ export interface TrimSelectionRadioGroupProps {
     basicOption: string[];
     price: number;
   };
-  mycarTrimHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setWantedTrim: React.Dispatch<React.SetStateAction<string>>;
+  setShowModal: (value: boolean) => void;
 }
 
 export interface NavBarCategoryProps {
@@ -122,4 +127,8 @@ export interface TrimChangeUnlockProps {
 export interface setShowPriceInfoProps {
   showPriceInfo: boolean;
   setShowPriceInfo: (value: boolean) => void;
+}
+
+export interface TrimChangeButtonProps {
+  mycarTrimHandler: React.Dispatch<React.SetStateAction<void>>;
 }

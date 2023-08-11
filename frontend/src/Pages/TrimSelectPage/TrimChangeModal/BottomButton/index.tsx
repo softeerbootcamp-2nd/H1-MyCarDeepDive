@@ -1,7 +1,8 @@
 import Button from '@/Components/Button';
+import { TrimChangeButtonProps } from '@/global/type';
 import { closeModalHandler } from '@/utils';
 
-function BottomButton() {
+function BottomButton({ mycarTrimHandler }: TrimChangeButtonProps) {
   return (
     <div className='flex justify-end gap-2.5'>
       <Button
@@ -16,7 +17,10 @@ function BottomButton() {
         height='h-[46px]'
         variant='primary'
         text='변경하기'
-        onClick={() => console.log('first')}
+        onClick={() => {
+          mycarTrimHandler();
+          closeModalHandler();
+        }}
       />
     </div>
   );

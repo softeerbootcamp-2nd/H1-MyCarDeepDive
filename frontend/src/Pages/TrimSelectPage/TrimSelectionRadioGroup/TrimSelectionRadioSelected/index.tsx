@@ -4,7 +4,6 @@ import checkCircleBlue from '@/assets/icon/check-circle-lifecycle-blue.svg';
 function TrimSelectionRadioSelected({
   carFeature,
   trim,
-  mycarTrimHandler,
 }: TrimSelectionRadioGroupProps) {
   const { engine, body, operation } = carFeature;
   return (
@@ -15,10 +14,9 @@ function TrimSelectionRadioSelected({
         id={trim?.name}
         value={trim?.name}
         className='hidden'
-        onChange={mycarTrimHandler}
       />
       <label htmlFor={trim?.name}>
-        <div className='relative cursor-pointer'>
+        <div className='relative'>
           <div className='flex justify-between pt-6 mb-1'>
             <div className='flex justify-between items-center gap-2 '>
               <p className='font-body4-medium text-grey-300'>{trim?.name}</p>
@@ -45,7 +43,7 @@ function TrimSelectionRadioSelected({
               {trim?.basicOption.map((option, index) => (
                 <p
                   key={index}
-                  className='gap-y-[6px] font-body4-regular text-secondary underline underline-offset-4 cursor-pointer'
+                  className='gap-y-[6px] font-body4-regular text-secondary underline underline-offset-4'
                 >
                   {option}
                 </p>

@@ -1,4 +1,4 @@
-import { ModalProps } from '@/global/type';
+import { TrimChangeModalProps } from '@/global/type';
 import Modal from '@/Components/Modal';
 import CloseModal from '@/Components/Modal/CloseModal';
 import ModalContentsWrapper from './ModalContentsWrapper';
@@ -19,7 +19,11 @@ const UnlockOptionData = [
   { image: comport2Square, name: '컴포트 II' },
 ];
 
-function TrimChangeModal({ showModal, setShowModal }: ModalProps) {
+function TrimChangeModal({
+  showModal,
+  setShowModal,
+  mycarTrimHandler,
+}: TrimChangeModalProps) {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <ModalContentsWrapper>
@@ -28,7 +32,7 @@ function TrimChangeModal({ showModal, setShowModal }: ModalProps) {
           <ModalTitle />
           <UnlockColor unlockList={UnlockColorData} />
           <UnlockOption unlockList={UnlockOptionData} />
-          <BottomButton />
+          <BottomButton mycarTrimHandler={mycarTrimHandler} />
         </div>
       </ModalContentsWrapper>
     </Modal>
