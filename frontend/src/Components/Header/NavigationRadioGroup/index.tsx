@@ -13,7 +13,7 @@ function NavigationRadioGroup() {
   return (
     <div className='flex gap-[25px] mt-[25px]'>
       {detailSelectionList.map((data, index) => {
-        const { name, value } = data;
+        const { name, value, address } = data;
         return (
           <div
             key={index}
@@ -32,6 +32,7 @@ function NavigationRadioGroup() {
                 index={index}
                 value={value}
                 onChangeHandler={onChangeHandler}
+                address={address}
               />
             )}
           </div>

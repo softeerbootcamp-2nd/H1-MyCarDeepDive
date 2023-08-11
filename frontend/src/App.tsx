@@ -1,8 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import Header from '@/Components/Header';
 import LandingPage from '@/Pages/LandingPage';
 import RecommendPage from '@/Pages/RecommendPage';
-import SelectPage from './Pages/TrimSelectPage';
+import TrimSelectPage from './Pages/TrimSelectPage';
+import ColorSelectPage from './Pages/ColorSelectPage';
+import OptionSelectPage from './Pages/OptionSelectPage';
 
 function App() {
   return (
@@ -11,7 +13,11 @@ function App() {
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/recommend/:status/:step' element={<RecommendPage />} />
-        <Route path='/select/:property' element={<SelectPage />} />
+        <Route path='/select' element={<Outlet />}>
+          <Route path='trim' element={<TrimSelectPage />} />
+          <Route path='color' element={<ColorSelectPage />} />
+          <Route path='option' element={<OptionSelectPage />} />
+        </Route>
       </Routes>
     </div>
   );

@@ -75,14 +75,17 @@ export const detailSelectionList = [
   {
     name: '트림',
     value: 'Le Blanc(르블랑)',
+    address: 'trim',
   },
   {
     name: '색상',
     value: '어비스 블랙펄 / 퀄팅천연 (블랙)',
+    address: 'color',
   },
   {
     name: '옵션',
     value: '컴포트 II, 현대 스마트 센스 I, 주차 보조 시스템',
+    address: 'option',
   },
 ];
 

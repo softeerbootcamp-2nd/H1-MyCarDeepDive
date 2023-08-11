@@ -22,7 +22,7 @@ function Header() {
 
     setTimeout(() => {
       setDisplayPriceInfo(true);
-    }, 700);
+    }, 550);
   }, [showPriceInfo]);
 
   return (

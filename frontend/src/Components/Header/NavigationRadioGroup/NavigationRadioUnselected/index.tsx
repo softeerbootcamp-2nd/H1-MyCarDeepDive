@@ -1,11 +1,14 @@
 import { NavigationRadioProps } from '@/global/type';
+import { useNavigate } from 'react-router-dom';
 
 function NavigationRadioUnselected({
   name,
   index,
   value,
+  address,
   onChangeHandler,
 }: NavigationRadioProps) {
+  const navigation = useNavigate();
   return (
     <>
       <input
@@ -16,7 +19,11 @@ function NavigationRadioUnselected({
         className='hidden'
         onChange={onChangeHandler}
       />{' '}
-      <label htmlFor={name} className='cursor-pointer'>
+      <label
+        htmlFor={name}
+        className='cursor-pointer'
+        onClick={() => navigation(`/select/${address}`)}
+      >
         <p className='text-grey-600 font-h5-regular'>
           <span className='text-[14px] flex items-center justify-center'>
             {' '}

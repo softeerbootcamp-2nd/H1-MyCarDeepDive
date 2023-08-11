@@ -16,8 +16,9 @@ import FeatureAndTrimSelectionWrapper from './FeatureAndTrimSelectionWrapper';
 import ToolTip from './ToolTip';
 import TrimWrapper from './TrimWrapper';
 import TrimChangeModal from './TrimChangeModal';
+import OptionToolTip from './OptionToolTip';
 
-function SelectPage() {
+function TrimSelectPage() {
   const [carFeature, setCarFeature] = useState({
     engine: '디젤 2.2',
     body: '7인승',
@@ -115,8 +116,10 @@ function SelectPage() {
         setShowModal={setShowModal}
         mycarTrimHandler={mycarTrimHandler}
       />
+
+      <OptionToolTip />
     </>
   );
 }
 
-export default SelectPage;
+export default TrimSelectPage;
