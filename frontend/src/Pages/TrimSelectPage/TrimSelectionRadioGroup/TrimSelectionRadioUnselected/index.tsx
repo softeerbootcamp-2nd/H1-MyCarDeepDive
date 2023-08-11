@@ -1,11 +1,13 @@
 import { TrimSelectionRadioGroupProps } from '@/global/type';
 import checkCircleGrey from '@/assets/icon/trim-select-circle-grey.svg';
+import { useCallback, useRef } from 'react';
 
 function TrimSelectionRadioUnselected({
   carFeature,
   trim,
   setShowModal,
   setWantedTrim,
+  optionToolTipHandler,
 }: TrimSelectionRadioGroupProps) {
   const showTrimChangePopup = ({
     currentTarget,
@@ -13,8 +15,24 @@ function TrimSelectionRadioUnselected({
     setWantedTrim(currentTarget.value);
     setShowModal(true);
   };
+  const optionRefs = [
+    useRef<HTMLButtonElement | null>(null),
+    useRef<HTMLButtonElement | null>(null),
+    useRef<HTMLButtonElement | null>(null),
+  ];
+
+  const optionClickHandler = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>, index: number, option: string) => {
+      const x = optionRefs[index].current?.getBoundingClientRect().x;
+      const y = optionRefs[index].current?.getBoundingClientRect().y;
+      optionToolTipHandler(x, y, option);
+      e.stopPropagation();
+    },
+    [],
+  );
 
   const { engine, body, operation } = carFeature;
+
   return (
     <>
       <input
@@ -51,12 +69,14 @@ function TrimSelectionRadioUnselected({
 
             <div className='mb-6 flex flex-wrap gap-3'>
               {trim?.basicOption.map((option, index) => (
-                <p
+                <button
+                  ref={optionRefs[index]}
                   key={index}
                   className='gap-y-[6px] font-body4-regular text-secondary underline underline-offset-4 cursor-pointer'
+                  onClick={e => optionClickHandler(e, index, option)}
                 >
                   {option}
-                </p>
+                </button>
               ))}
             </div>
           </div>

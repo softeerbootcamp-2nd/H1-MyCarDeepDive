@@ -40,7 +40,7 @@ function ToolTip({ toolTipInfo, showToolTip, setShowToolTip }: ToolTipProps) {
   if (!showToolTip) return null;
   return (
     <div
-      className='transform z-50'
+      className='transform z-40'
       style={{
         position: 'fixed',
         top: toolTipInfo.y,
@@ -48,7 +48,7 @@ function ToolTip({ toolTipInfo, showToolTip, setShowToolTip }: ToolTipProps) {
         transform: `translateY(-${toolTipInfo.name === 'engine' ? 74 : 96}px)`,
       }}
     >
-      <div className='z-50 w-80 bg-[#2E3D51] font-body4-regular text-grey-900 py-3 px-3.5 flex gap-2.5 rounded-lg'>
+      <div className='z-40 w-80 bg-[#2E3D51] font-body4-regular text-grey-900 py-3 px-3.5 flex gap-2.5 rounded-lg'>
         <img src={toolTip} alt='toolTip' />
         <div>{toolTipData[toolTipInfo.name]}</div>
       </div>

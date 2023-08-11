@@ -28,7 +28,13 @@ function TrimSelectPage() {
   const [wantedTrim, setWantedTrim] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
-  const [toolTipInfo, setToolTopInfo] = useState({
+  const [toolTipInfo, setToolTipInfo] = useState({
+    x: 0,
+    y: 0,
+    name: '',
+  });
+  const [showOptionToolTip, setShowOptionToolTip] = useState(false);
+  const [optionToolTipInfo, setOptionToolTopInfo] = useState({
     x: 0,
     y: 0,
     name: '',
@@ -51,12 +57,26 @@ function TrimSelectPage() {
     target: string,
   ) => {
     if (!x || !y) return;
-    setToolTopInfo({
+    setToolTipInfo({
       x: x - 12,
       y: y,
       name: target,
     });
     setShowToolTip(true);
+  };
+
+  const optionToolTipHandler = (
+    x: number | undefined,
+    y: number | undefined,
+    target: string,
+  ) => {
+    if (!x || !y) return;
+    setOptionToolTopInfo({
+      x: x - 12,
+      y: y,
+      name: target,
+    });
+    setShowOptionToolTip(true);
   };
 
   return (
@@ -91,6 +111,7 @@ function TrimSelectPage() {
             carFeature={carFeature}
             setWantedTrim={setWantedTrim}
             setShowModal={setShowModal}
+            optionToolTipHandler={optionToolTipHandler}
           />
         </TrimWrapper>
 
@@ -117,7 +138,11 @@ function TrimSelectPage() {
         mycarTrimHandler={mycarTrimHandler}
       />
 
-      <OptionToolTip />
+      <OptionToolTip
+        optionToolTipInfo={optionToolTipInfo}
+        showOptionToolTip={showOptionToolTip}
+        setShowOptionToolTip={setShowOptionToolTip}
+      />
     </>
   );
 }

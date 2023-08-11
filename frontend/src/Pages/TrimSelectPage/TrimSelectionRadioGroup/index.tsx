@@ -8,6 +8,7 @@ function TrimSelectionRadioGroup({
   carFeature,
   setShowModal,
   setWantedTrim,
+  optionToolTipHandler,
 }: TrimSelectionRadioGroupProps) {
   return trimList.map((trim, index) => {
     const { name } = trim;
@@ -19,6 +20,7 @@ function TrimSelectionRadioGroup({
         carFeature={carFeature}
         setWantedTrim={setWantedTrim}
         setShowModal={setShowModal}
+        optionToolTipHandler={optionToolTipHandler}
       />
     ) : (
       <TrimSelectionRadioUnselected
@@ -28,6 +30,7 @@ function TrimSelectionRadioGroup({
         carFeature={carFeature}
         setWantedTrim={setWantedTrim}
         setShowModal={setShowModal}
+        optionToolTipHandler={optionToolTipHandler}
       />
     );
   });

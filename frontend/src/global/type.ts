@@ -109,6 +109,11 @@ export interface TrimSelectionRadioGroupProps {
   };
   setWantedTrim: React.Dispatch<React.SetStateAction<string>>;
   setShowModal: (value: boolean) => void;
+  optionToolTipHandler: (
+    x: number | undefined,
+    y: number | undefined,
+    target: string,
+  ) => void;
 }
 
 export interface NavBarCategoryProps {

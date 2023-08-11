@@ -1,14 +1,64 @@
+import { useCallback, useEffect, useRef } from 'react';
+import { hasChild } from '@/utils';
 import closeIcon from '@/assets/icon/x-modal-icon.svg';
 import smartCruiseControl from '@/assets/image/smart-cruise-control.png';
 
-function OptionToolTip() {
+interface OptionToolTipProps {
+  optionToolTipInfo: {
+    x: number;
+    y: number;
+    name: string;
+  };
+  showOptionToolTip: boolean;
+  setShowOptionToolTip: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function OptionToolTip({
+  optionToolTipInfo,
+  showOptionToolTip,
+  setShowOptionToolTip,
+}: OptionToolTipProps) {
+  const toolTipRef = useRef<HTMLDivElement | null>(null);
+
+  const clickHandler = useCallback((e: MouseEvent) => {
+    if (!hasChild(e.target, toolTipRef.current)) setShowOptionToolTip(false);
+  }, []);
+
+  useEffect(() => {
+    if (showOptionToolTip) {
+      setTimeout(() => {
+        document.body.addEventListener('click', clickHandler);
+      }, 10);
+    } else {
+      document.body.removeEventListener('click', clickHandler);
+    }
+
+    return () => {
+      document.body.removeEventListener('click', clickHandler);
+    };
+  }, [showOptionToolTip, clickHandler]);
+
+  useEffect(() => {
+    if (!showOptionToolTip) return;
+
+    const handleScroll = () => setShowOptionToolTip(false);
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [showOptionToolTip]);
+
+  if (!showOptionToolTip) return null;
   return (
     <div
-      className='w-[300px] bg-grey-1000 transform z-50 px-6 py-5 rounded-lg shadow-xl'
+      ref={toolTipRef}
+      className='w-[300px] bg-grey-1000 transform z-50 px-6 py-5 rounded-lg shadow-lg -translate-x-full'
       style={{
         position: 'fixed',
-        top: 300,
-        left: 300,
+        top: Math.min(optionToolTipInfo.y, window.innerHeight - 450),
+        left: optionToolTipInfo.x,
       }}
     >
       <div className='relative'>
@@ -19,7 +69,7 @@ function OptionToolTip() {
           src={closeIcon}
           alt='close-modal'
           className='absolute top-0 right-0 cursor-pointer rounded hover:bg-grey-700'
-          // onClick={closeModalHandler}
+          onClick={() => setShowOptionToolTip(false)}
         />
       </div>
       <img
