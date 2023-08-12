@@ -32,6 +32,16 @@ class TrimSubOptionView: UIView {
     }
     
     // MARK: - Properties
+    private(set) var selectedButtonIndex: Int = 0 {
+        didSet {
+            optionStackView.arrangedSubviews
+                .map { $0 as? TrimSubOptionButton }
+                .enumerated()
+                .forEach {
+                    $0.element?.isSelected = $0.offset == selectedButtonIndex
+                }
+        }
+    }
     
     // MARK: - Lifecycles
     init(titleText: String, optionTypeTexts: [String]) {
@@ -89,15 +99,20 @@ class TrimSubOptionView: UIView {
     }
     
     // MARK: - Functions
+    func setSelectedButtonIndex(index: Int) {
+        self.selectedButtonIndex = index
+    }
+    
     func setOptionTitle(text: String) {
         self.label.text = text
     }
     
     func setOptionTypes(texts: [String]) {
-        texts.forEach {
-            let button = TrimSubOptionButton(text: $0).set {
+        texts.enumerated().forEach { (idx, text) in
+            let button = TrimSubOptionButton(text: text).set {
                 $0.delegate = self
             }
+            if idx == selectedButtonIndex { button.isSelected = true }
             optionStackView.addArrangedSubview(button)
         }
     }
