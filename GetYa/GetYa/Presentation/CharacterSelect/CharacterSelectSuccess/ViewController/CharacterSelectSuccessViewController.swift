@@ -69,6 +69,26 @@ final class CharacterSelectSuccessViewController: UIViewController {
         configureSubviewUI(
             with: tableView,
             bottomCustomOrQuoteView)
+        configureNavigationBar()
+    }
+    
+    // MARK: - Private functions
+    private func configureNavigationBar() {
+        let image = UIImage(named: "Black_Logo")
+        self.navigationItem.title = ""
+        self.navigationItem.titleView = UIImageView(image: image)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "arrow.left")?.withTintColor(
+                .GetYaPalette.gray0,
+                renderingMode: .alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: #selector(didTapNavigationBackButton))
+    }
+    
+    // MARK: - @Objc functions
+    @objc func didTapNavigationBackButton() {
+        navigationController?.popViewController(animated: true)
     }
 }
 
