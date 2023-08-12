@@ -8,7 +8,13 @@
 import UIKit
 
 class TrimOptionContentCollectionView: UICollectionView {
-    // MARK: - UI properties
+    enum Constants {
+        enum Cell {
+            static let spacing: CGFloat = 1
+            static let height: CGFloat = CGFloat(168).scaledHeight
+            static let expandedHeight: CGFloat = CGFloat(459).scaledHeight
+        }
+    }
     
     // MARK: - Properties
     private(set) var selectedIndexPath: IndexPath?
@@ -113,8 +119,8 @@ extension TrimOptionContentCollectionView: UICollectionViewDataSource {
         cell.learnMoreView.setContentView(view: TrimOptionDetailView(
             exteriorColorArray: [.red, .black, .blue],
             interiorColorArray: [.orange],
-            optionImages: [],
-            optionDescriptionTexts: []))
+            optionImages: [UIImage(systemName: "house"), UIImage(systemName: "person"), UIImage(systemName: "sun.min")],
+            optionDescriptionTexts: ["20인치 알로이 휠", "12.3인치 클러스터(컬러 LCD)", "서라운드 뷰 모니터"]))
         
         return cell
     }
@@ -127,18 +133,23 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 1
+        return Constants.Cell.spacing
     }
     
+    // TODO: 기본 옵션의 개수가 4개 이상 넘어가면 크기 로직 짜야함
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         if expandedIndexPath.contains(indexPath) {
-            return CGSize(width: frame.width, height: CGFloat(459).scaledHeight)
+            return CGSize(
+                width: frame.width,
+                height: Constants.Cell.expandedHeight)
         } else {
-            return CGSize(width: frame.width, height: CGFloat(168).scaledHeight)
+            return CGSize(
+                width: frame.width,
+                height: Constants.Cell.height)
         }
     }
 }
