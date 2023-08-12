@@ -7,15 +7,15 @@
 
 import UIKit
 
+// TODO: isHighlight 를 흰색이나 아니면 애니메이션 공동으로 적용시키기!!
 final class CommonButton: UIButton {
-    // MARK: - UI Properties
-    
-    // MARK: - Properties
-    
     enum ButtonBackgroundColorType {
         case primary
         case black
         case white
+        case custom(textColor: UIColor,
+                    layerBorderColor: UIColor,
+                    color: UIColor)
         
         var color: UIColor {
             switch self {
@@ -25,6 +25,8 @@ final class CommonButton: UIButton {
                 return .black
             case .white:
                 return .white
+            case .custom(_, _, let color):
+                return color
             }
         }
         
@@ -34,6 +36,8 @@ final class CommonButton: UIButton {
                 return .white
             case .white:
                 return .GetYaPalette.primary
+            case .custom(let textColor, _, _):
+                return textColor
             }
         }
         
@@ -43,15 +47,17 @@ final class CommonButton: UIButton {
                 return self.color.cgColor
             case .black:
                 return UIColor.GetYaPalette.gray600.cgColor
+            case .custom(_, let layerBorderColor, _):
+                return layerBorderColor.cgColor
             }
         }
     }
     
     // MARK: - LifeCycles
-    
     init(
         font: UIFont,
-        buttonBackgroundColorType: ButtonBackgroundColorType) {
+        buttonBackgroundColorType: ButtonBackgroundColorType
+    ) {
         super.init(frame: .zero)
         configureUI()
         configureDetail(
@@ -70,7 +76,6 @@ final class CommonButton: UIButton {
     }
     
     // MARK: - Functions
-    
     private func configureUI() {
         self.layer.cornerRadius = 6
         self.layer.borderWidth = 1
@@ -79,7 +84,8 @@ final class CommonButton: UIButton {
     
     func configureDetail(
         font: UIFont,
-        buttonBackgroundColorType: ButtonBackgroundColorType) {
+        buttonBackgroundColorType: ButtonBackgroundColorType
+    ) {
         self.titleLabel?.font = font
         self.setTitleColor(buttonBackgroundColorType.textColor, for: .normal)
         self.setTitleColor(
