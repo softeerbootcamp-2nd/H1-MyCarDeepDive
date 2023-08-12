@@ -11,7 +11,6 @@ public class OptionFixture {
         String name = "빌트인 캠(보조배터리 포함)";
         String imgUrl = "https://img.etnews.com/photonews/2011/1352481_20201113164311_199_0001.jpg";
         double chooseRate = 5.5;
-        boolean isBasicOption = false;
         String description =
                 "빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.";
         long price = 1090000;
@@ -22,7 +21,6 @@ public class OptionFixture {
                 .name(name)
                 .imgUrl(imgUrl)
                 .chooseRate(chooseRate)
-                .isBasicOption(isBasicOption)
                 .badgeName(Badge.H_GENUINE)
                 .description(description)
                 .price(price)
@@ -36,18 +34,16 @@ public class OptionFixture {
         String imgUrl =
                 "https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg";
         double chooseRate = 100;
-        boolean isBasicOption = true;
         String description =
                 "차량의 정면 또는 측면 충돌사고로 에어백 전개 시 차량에 적절한 자동 긴급 제동을 통해 2차 사고 및 다중 충돌을 경감시켜줍니다.";
         long price = 0;
-        String summary = null;
+        String summary = "차량의 정면 또는 측면 충돌사고로 에어백 전개 시 차량에 적절한 자동 긴급 제동을 통해 2차 사고 및 다중 충돌을 경감시켜줍니다.";
 
         return Options.builder()
                 .id(id)
                 .name(name)
                 .imgUrl(imgUrl)
                 .chooseRate(chooseRate)
-                .isBasicOption(isBasicOption)
                 .badgeName(null)
                 .description(description)
                 .price(price)

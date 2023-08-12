@@ -16,9 +16,6 @@ public class Options extends OptionBaseEntity {
     @Column(name = "option_id")
     private Long id;
 
-    @Column(name = "is_basic_option")
-    private boolean isBasicOption;
-
     private String imgUrl;
 
     private String description;
@@ -32,8 +29,7 @@ public class Options extends OptionBaseEntity {
             String description,
             long price,
             double chooseRate,
-            Badge badgeName,
-            boolean isBasicOption) {
+            Badge badgeName) {
         this.id = id;
         this.name = name;
         this.imgUrl = imgUrl;
@@ -42,7 +38,6 @@ public class Options extends OptionBaseEntity {
         this.price = price;
         this.chooseRate = chooseRate;
         this.badgeName = badgeName;
-        this.isBasicOption = isBasicOption;
     }
 
     @Override

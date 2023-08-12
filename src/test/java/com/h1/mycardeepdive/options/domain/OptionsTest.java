@@ -17,7 +17,6 @@ class OptionsTest {
         String name = "tag_name";
         String imgUrl = "img.jpg";
         double chooseRate = 5.5;
-        boolean isBasicOption = false;
         String description = "tag description";
         long price = 100000;
         String summary = "tag summary";
@@ -29,7 +28,6 @@ class OptionsTest {
                         .name(name)
                         .imgUrl(imgUrl)
                         .chooseRate(chooseRate)
-                        .isBasicOption(isBasicOption)
                         .badgeName(Badge.H_GENUINE)
                         .description(description)
                         .price(price)
@@ -41,7 +39,6 @@ class OptionsTest {
         assertThat(options.getName()).isEqualTo(name);
         assertThat(options.getImgUrl()).isEqualTo(imgUrl);
         assertThat(options.getChooseRate()).isEqualTo(chooseRate);
-        assertThat(options.isBasicOption()).isEqualTo(isBasicOption);
         assertThat(options.getBadgeName()).isEqualTo(Badge.H_GENUINE);
         assertThat(options.getDescription()).isEqualTo(description);
         assertThat(options.getPrice()).isEqualTo(price);
