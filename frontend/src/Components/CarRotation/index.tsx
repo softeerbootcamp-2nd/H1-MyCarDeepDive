@@ -6,6 +6,8 @@ interface CarRotationProps {
 }
 
 function CarRotation({ rotation }: CarRotationProps) {
+  const [appear, setAppear] = useState(false);
+  const [isAnimate, setIsAnimate] = useState(false);
   const [carList, setCarList] = useState<{ path: string }[]>([]);
   const [focus, setFocus] = useState<number>(10);
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -53,7 +55,6 @@ function CarRotation({ rotation }: CarRotationProps) {
     setIsClicked(false);
   };
 
-  const [isAnimate, setIsAnimate] = useState(false);
   useEffect(() => {
     if (!isAnimate) return;
 
@@ -76,9 +77,15 @@ function CarRotation({ rotation }: CarRotationProps) {
     setIsAnimate(true);
   }, [rotation, setIsAnimate]);
 
+  useEffect(() => {
+    setAppear(true);
+  }, [setAppear]);
+
   return (
     <div
-      className='w-full z-40 relative'
+      className={`w-full z-40 relative transition-transform duration-1000 ease-out ${
+        appear ? 'translate-x-0' : 'translate-x-[100%]'
+      }`}
       onMouseDown={onMouseDownHandler}
       onMouseMove={onMouseMoveHandler}
       onMouseUp={onMouseOverHandler}
