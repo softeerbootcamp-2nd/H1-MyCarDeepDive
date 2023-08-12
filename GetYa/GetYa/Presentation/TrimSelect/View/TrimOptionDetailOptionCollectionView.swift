@@ -75,7 +75,6 @@ extension TrimOptionDetailOptionCollectionView: UICollectionViewDelegate {
 // MARK: - UICollectionView DataSource
 extension TrimOptionDetailOptionCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(optionImages.count)
         return optionImages.count
     }
     
