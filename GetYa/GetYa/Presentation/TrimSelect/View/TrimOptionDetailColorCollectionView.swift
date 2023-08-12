@@ -21,10 +21,7 @@ class TrimOptionDetailColorCollectionView: UICollectionView {
     
     // MARK: - Lifecycles
     convenience init(colorArray: [UIColor]) {
-        self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().set {
-            $0.itemSize = CGSize(width: Constants.Cell.width, height: Constants.Cell.height)
-            $0.minimumLineSpacing = Constants.Cell.spacing
-        })
+        self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         setColorArray(colorArray: colorArray)
     }
