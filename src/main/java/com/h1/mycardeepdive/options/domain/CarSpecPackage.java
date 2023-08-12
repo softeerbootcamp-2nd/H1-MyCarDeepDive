@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Getter
-public class CarSpecOptions {
+public class CarSpecPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "carspec_option_id")
+    @Column(name = "carspec_package_id")
     private Long id;
 
     @ManyToOne
@@ -21,26 +21,22 @@ public class CarSpecOptions {
     private CarSpec carSpec;
 
     @ManyToOne
-    @JoinColumn(name = "option_id")
-    private Options options;
-
-    @Column(name = "is_basic_option")
-    private boolean isBasicOption;
+    @JoinColumn(name = "package_id")
+    private Package _package;
 
     @Builder
-    public CarSpecOptions(Long id, CarSpec carSpec, Options options, boolean isBasicOption) {
+    public CarSpecPackage(Long id, CarSpec carSpec, Package _package) {
         this.id = id;
         this.carSpec = carSpec;
-        this.options = options;
-        this.isBasicOption = isBasicOption;
+        this._package = _package;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CarSpecOptions carSpecOptions = (CarSpecOptions) o;
-        return Objects.equals(id, carSpecOptions.id);
+        CarSpecPackage carSpecPackage = (CarSpecPackage) o;
+        return Objects.equals(id, carSpecPackage.id);
     }
 
     @Override

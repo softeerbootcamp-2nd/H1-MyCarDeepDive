@@ -1,16 +1,15 @@
 package com.h1.mycardeepdive.options.domain;
 
-import com.h1.mycardeepdive.car.domain.CarSpec;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import static com.h1.mycardeepdive.fixture.OptionFixture.createOptionBuiltInCam;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.h1.mycardeepdive.car.domain.CarSpec;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class CarSpecOptionsTest {
     @DisplayName("CarSpecOption 관계를 빌더 패턴을 활용하여 생성할 수 있다")
@@ -25,7 +24,8 @@ class CarSpecOptionsTest {
                 CarSpecOptions.builder()
                         .options(options)
                         .isBasicOption(false)
-                        .carSpec(carSpec).build();
+                        .carSpec(carSpec)
+                        .build();
 
         // then
         assertEquals(options, carSpecOptions.getOptions());
@@ -41,7 +41,8 @@ class CarSpecOptionsTest {
         // when
         CarSpecOptions carSpecOptions1 = CarSpecOptions.builder().id(id).build();
         CarSpecOptions carSpecOptions2 = CarSpecOptions.builder().id(id).build();
-        Set<CarSpecOptions> carSpecOptionsSet = new HashSet<>(Arrays.asList(carSpecOptions1, carSpecOptions2));
+        Set<CarSpecOptions> carSpecOptionsSet =
+                new HashSet<>(Arrays.asList(carSpecOptions1, carSpecOptions2));
 
         // then
         assertThat(carSpecOptions1).isEqualTo(carSpecOptions2);
