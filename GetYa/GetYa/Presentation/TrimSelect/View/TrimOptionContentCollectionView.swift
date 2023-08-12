@@ -14,6 +14,9 @@ class TrimOptionContentCollectionView: UICollectionView {
             static let height: CGFloat = CGFloat(168).scaledHeight
             static let expandedHeight: CGFloat = CGFloat(459).scaledHeight
         }
+        enum HeaderView {
+            static let height: CGFloat = CGFloat(52).scaledHeight
+        }
     }
     
     // MARK: - Properties
@@ -66,17 +69,18 @@ class TrimOptionContentCollectionView: UICollectionView {
     
     // MARK: - Private Functions
     private func configureUI() {
-        self.delegate = self
-        self.dataSource = self
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .GetYaPalette.gray700
-        self.register(
+        delegate = self
+        dataSource = self
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .GetYaPalette.gray700
+        register(
             TrimOptionContentCell.self,
             forCellWithReuseIdentifier: TrimOptionContentCell.identifier)
-        self.register(
+        register(
             TrimOptionContentHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: TrimOptionContentHeaderView.identifier)
+        isScrollEnabled = false
     }
     
     // MARK: - Functions    
@@ -120,7 +124,10 @@ extension TrimOptionContentCollectionView: UICollectionViewDataSource {
             return UICollectionReusableView()
         }
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         return titleTexts.count
     }
     
@@ -182,7 +189,7 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int
     ) -> CGSize {
-        return CGSize(width: frame.width, height: 52)
+        return CGSize(width: frame.width, height: Constants.HeaderView.height)
     }
 }
 
