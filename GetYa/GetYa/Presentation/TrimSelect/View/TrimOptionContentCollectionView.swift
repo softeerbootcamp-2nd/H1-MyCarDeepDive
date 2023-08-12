@@ -33,6 +33,10 @@ class TrimOptionContentCollectionView: UICollectionView {
     private(set) var priceValues: [Int] = []
     
     // MARK: - Lifecycles
+    convenience init() {
+        self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
     init(
         titleTexts: [String],
         tagTexts: [[String]],
@@ -69,6 +73,10 @@ class TrimOptionContentCollectionView: UICollectionView {
         self.register(
             TrimOptionContentCell.self,
             forCellWithReuseIdentifier: TrimOptionContentCell.identifier)
+        self.register(
+            TrimOptionContentHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: TrimOptionContentHeaderView.identifier)
     }
     
     // MARK: - Functions    
@@ -96,6 +104,22 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegate {
 
 // MARK: - UICollectionView Datasource
 extension TrimOptionContentCollectionView: UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: TrimOptionContentHeaderView.identifier,
+                for: indexPath)
+            return headerView
+        default:
+            return UICollectionReusableView()
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titleTexts.count
     }
@@ -151,6 +175,14 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegateFlowLayout {
                 width: frame.width,
                 height: Constants.Cell.height)
         }
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int
+    ) -> CGSize {
+        return CGSize(width: frame.width, height: 52)
     }
 }
 

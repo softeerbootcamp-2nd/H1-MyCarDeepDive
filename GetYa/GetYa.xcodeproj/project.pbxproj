@@ -97,6 +97,7 @@
 		64ADA4C02A7A28AA0003E2C1 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4BF2A7A28AA0003E2C1 /* UIColor+.swift */; };
 		64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4C12A7A2DAC0003E2C1 /* CommonPageControl.swift */; };
 		64ADA4C42A7A32950003E2C1 /* CommonOptionSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4C32A7A32950003E2C1 /* CommonOptionSelectButton.swift */; };
+		64E269F92A87EB2400F6BC3A /* TrimOptionContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E269F82A87EB2400F6BC3A /* TrimOptionContentHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +212,7 @@
 		64ADA4BF2A7A28AA0003E2C1 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		64ADA4C12A7A2DAC0003E2C1 /* CommonPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPageControl.swift; sourceTree = "<group>"; };
 		64ADA4C32A7A32950003E2C1 /* CommonOptionSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOptionSelectButton.swift; sourceTree = "<group>"; };
+		64E269F82A87EB2400F6BC3A /* TrimOptionContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimOptionContentHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +307,7 @@
 				6412D0A22A84D41A001E4005 /* TrimSubOptionContentStackView.swift */,
 				6412D0A82A85CFBB001E4005 /* TrimOptionContentCell.swift */,
 				6412D0B82A878A86001E4005 /* TrimOptionContentCollectionView.swift */,
+				64E269F82A87EB2400F6BC3A /* TrimOptionContentHeaderView.swift */,
 				6412D0A42A84E7E1001E4005 /* TrimTooltipView.swift */,
 				6412D0B02A872933001E4005 /* TrimLearnMoreView.swift */,
 				6412D0B22A87337C001E4005 /* TrimOptionDetailView.swift */,
@@ -845,6 +848,7 @@
 				64ADA4C02A7A28AA0003E2C1 /* UIColor+.swift in Sources */,
 				6412D08A2A80C419001E4005 /* QuestionContentView.swift in Sources */,
 				6412D0BD2A8792F4001E4005 /* TrimOptionDetailOptionCell.swift in Sources */,
+				64E269F92A87EB2400F6BC3A /* TrimOptionContentHeaderView.swift in Sources */,
 				155DDD182A855182009AE2BC /* LeftAndRightButtonsView.swift in Sources */,
 				155EAB372A7F5FCD00833B0E /* ProgressView.swift in Sources */,
 				64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */,
