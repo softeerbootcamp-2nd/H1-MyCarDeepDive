@@ -55,8 +55,7 @@ class TrimHeaderView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        print(frame, frame.maxY)
+
         configureGradient()
     }
     
