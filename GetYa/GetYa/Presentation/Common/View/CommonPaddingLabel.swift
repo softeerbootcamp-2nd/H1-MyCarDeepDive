@@ -12,9 +12,22 @@ class CommonPaddingLabel: CommonLabel {
     private var padding = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
     
     // MARK: - Lifecycles
+    convenience init() {
+        self.init(frame: .zero)
+    }
+    
+    convenience init(padding: UIEdgeInsets) {
+        self.init(frame: .zero)
+        self.padding = padding
+    }
+    
     init(padding: UIEdgeInsets, fontType: GetYaFont, color: UIColor, text: String) {
         super.init(fontType: fontType, color: color, text: text)
         self.padding = padding
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
@@ -31,5 +44,9 @@ class CommonPaddingLabel: CommonLabel {
         contentSize.width += padding.left + padding.right
 
         return contentSize
+    }
+    
+    func setPadding(padding: UIEdgeInsets) {
+        self.padding = padding
     }
 }
