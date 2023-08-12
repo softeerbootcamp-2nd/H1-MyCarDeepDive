@@ -23,10 +23,6 @@ class TrimLearnMoreView: LearnMoreView {
     
     // MARK: - UI properties
     private let label = CommonLabel(fontType: .mediumBody4, color: .GetYaPalette.primary)
-    private var contentView: UIView = UIView().set {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .red
-    }
     
     // MARK: - Properties
     
@@ -57,8 +53,7 @@ class TrimLearnMoreView: LearnMoreView {
     // MARK: - Private Functions
     private func setupViews() {
         addSubviews([
-            label,
-            contentView
+            label
         ])
     }
     
@@ -66,10 +61,9 @@ class TrimLearnMoreView: LearnMoreView {
         clipsToBounds = true
         
         configureLabel()
-        configureContentView()
     }
     
-    private func configureContentView() {
+    private func configureContentView(contentView: UIView) {
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(
                 equalTo: label.bottomAnchor,
@@ -106,7 +100,8 @@ class TrimLearnMoreView: LearnMoreView {
     }
     
     func setContentView(view: UIView) {
-        contentView = view
+        addSubview(view)
+        configureContentView(contentView: view)
     }
     
     // MARK: - Objc Functions
