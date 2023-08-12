@@ -31,12 +31,12 @@ class TrimHeaderView: UIView {
     // MARK: - Properties
     
     // MARK: - Lifecycles
-    init(image: UIImage?) {
+    init(titleImage: UIImage?) {
         super.init(frame: .zero)
         
         setupViews()
         configureUI()
-        setImage(image: image)
+        setImage(image: titleImage)
     }
     
     override init(frame: CGRect) {
