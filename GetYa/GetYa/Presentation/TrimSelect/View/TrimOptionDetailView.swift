@@ -23,6 +23,10 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
         enum OptionLabel {
             static let topMargin = CGFloat(20).scaledHeight
         }
+        enum OptionCollectionView {
+            static let topMargin = CGFloat(4).scaledHeight
+            static let bottomMargin = CGFloat(-8).scaledHeight
+        }
     }
     
     // MARK: - UI properties
@@ -42,6 +46,9 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
         fontType: .regularCaption1,
         color: .GetYaPalette.gray300,
         text: "기본 포함 옵션")
+    private lazy var optionCollectionView = TrimOptionDetailOptionCollectionView(
+        optionImages: optionImages,
+        optionDescriptionTexts: optionDescriptionTexts)
     
     // MARK: - Properties
     private var exteriorColorArray: [UIColor] = [] {
@@ -52,6 +59,16 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
     private var interiorColorArray: [UIColor] = [] {
         didSet {
             interiorColorCollectionView.setColorArray(colorArray: interiorColorArray)
+        }
+    }
+    private var optionImages: [UIImage?] = [] {
+        didSet {
+            optionCollectionView.setOptionImages(images: optionImages)
+        }
+    }
+    private var optionDescriptionTexts: [String] = [] {
+        didSet {
+            optionCollectionView.setDescriptionTexts(texts: optionDescriptionTexts)
         }
     }
     
@@ -66,8 +83,10 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
         
         setupViews()
         configureUI()
-        configureExteriorColorArray(colorArray: exteriorColorArray)
-        configureInteriorColorArray(colorArray: interiorColorArray)
+        setExteriorColorArray(colorArray: exteriorColorArray)
+        setInteriorColorArray(colorArray: interiorColorArray)
+        setOptionImages(images: optionImages)
+        setOptionDescriptionTexts(texts: optionDescriptionTexts)
     }
     
     override init(frame: CGRect) {
@@ -91,7 +110,8 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
             exteriorColorCollectionview,
             interiorLabel,
             interiorColorCollectionView,
-            optionlabel
+            optionlabel,
+            optionCollectionView
         ])
     }
     
@@ -99,10 +119,11 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
         translatesAutoresizingMaskIntoConstraints = false
         
         configureExteriorLabel()
-        configureInteriorLabel()
         configureExteriorColorCollectionView()
+        configureInteriorLabel()
         configureInteriorColorCollectionView()
         configureOptionLabel()
+        configureOptionCollectionView()
     }
     
     private func configureExteriorLabel() {
@@ -154,12 +175,33 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
         ])
     }
     
+    private func configureOptionCollectionView() {
+        NSLayoutConstraint.activate([
+            optionCollectionView.topAnchor.constraint(
+                equalTo: optionlabel.bottomAnchor,
+                constant: Constants.OptionCollectionView.topMargin),
+            optionCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            optionCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            optionCollectionView.bottomAnchor.constraint(
+                equalTo: bottomAnchor,
+                constant: Constants.OptionCollectionView.bottomMargin)
+        ])
+    }
+    
     // MARK: - Functions
-    func configureExteriorColorArray(colorArray: [UIColor]) {
+    func setExteriorColorArray(colorArray: [UIColor]) {
         exteriorColorArray = colorArray
     }
     
-    func configureInteriorColorArray(colorArray: [UIColor]) {
+    func setInteriorColorArray(colorArray: [UIColor]) {
         interiorColorArray = colorArray
+    }
+    
+    func setOptionImages(images: [UIImage?]) {
+        optionImages = images
+    }
+    
+    func setOptionDescriptionTexts(texts: [String]) {
+        optionDescriptionTexts = texts
     }
 }
