@@ -10,6 +10,7 @@ function ColorRadio({
     name: string;
     chooseRate: number;
     url: string;
+    trim?: string;
   }[];
   radioHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   radioTarget: string;
@@ -19,16 +20,28 @@ function ColorRadio({
     <div className='flex flex-wrap gap-x-4'>
       {data.map((color, index) => {
         return (
-          <div key={index} className='flex flex-col w-[68px] mb-6'>
+          <div
+            key={index}
+            className={`flex flex-col w-[68px] ${
+              type === 'other' ? 'mb-3' : 'mb-6'
+            }`}
+          >
             <input
               type='radio'
               id={color.name}
-              name='exteriorColor'
+              name={type}
               value={color.name}
               className='hidden'
               onChange={radioHandler}
             />
             <label htmlFor={color.name} className='cursor-pointer'>
+              {type === 'other' && (
+                <p className='font-body2-bold'>
+                  <span className='text-[11px] leading-normal text-secondary'>
+                    {color.trim}
+                  </span>
+                </p>
+              )}
               <div className='relative mb-2 flex justify-center items-center'>
                 <img
                   src={color.url}
@@ -61,7 +74,7 @@ function ColorRadio({
                 )}
               </div>
             </label>
-            <p className='font-caption1-regular'>{color.name}</p>
+            <p className='font-caption1-regular text-grey-100'>{color.name}</p>
           </div>
         );
       })}

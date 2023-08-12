@@ -13,6 +13,7 @@ import Graphite from '@/assets/image/exterior-graphite.png';
 import Creamy from '@/assets/image/exterior-creamy.png';
 import Quilted from '@/assets/image/interior-quilted.png';
 import CoolGray from '@/assets/image/interior-coolgray.png';
+import Robust from '@/assets/image/exterior-robust.png';
 import ColorTitle from './ColorTitle';
 import Description from './Description';
 import ColorRadio from './ColorRadio';
@@ -67,6 +68,66 @@ const interiorColor = [
   },
 ];
 
+const otherExteriorColor = [
+  {
+    name: '인조가죽(블랙)',
+    trim: 'Caligraphy',
+    chooseRate: 70,
+    url: Robust,
+  },
+];
+
+const otherInteriorColor = [
+  {
+    name: '인조가죽(블랙)',
+    trim: 'Exclusive',
+    chooseRate: 70,
+    url: Robust,
+  },
+  {
+    name: '네이비',
+    trim: 'Prestige',
+    chooseRate: 60,
+    url: Robust,
+  },
+  {
+    name: '블랙',
+    trim: 'Prestige',
+    chooseRate: 50,
+    url: Robust,
+  },
+  {
+    name: '버건디',
+    trim: 'Prestige',
+    chooseRate: 40,
+    url: Robust,
+  },
+  {
+    name: '네이비/웜그레이 투톤',
+    trim: 'Caligraphy',
+    chooseRate: 30,
+    url: Robust,
+  },
+  {
+    name: '블랙(고급)',
+    trim: 'Caligraphy',
+    chooseRate: 20,
+    url: Robust,
+  },
+  {
+    name: '블랙원톤(블랙에디션전용)',
+    trim: 'Caligraphy',
+    chooseRate: 10,
+    url: Robust,
+  },
+  {
+    name: '브라운',
+    trim: 'Caligraphy',
+    chooseRate: 5,
+    url: Robust,
+  },
+];
+
 function getColorChooseRate({
   colorData,
   selectedColor,
@@ -93,6 +154,7 @@ function ColorSelectionPage() {
   }: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedExteriorColor(target.value);
   };
+
   const interiorColorHandler = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,7 +172,6 @@ function ColorSelectionPage() {
         <Background />
         <CarImage />
       </SelectionCarWrapper>
-
       <FeatureAndTrimSelectionWrapper>
         <ColorTitle title={'외장 색상'} />
         <Description
@@ -120,19 +181,18 @@ function ColorSelectionPage() {
             selectedColor: selectedExteriorColor,
           })}
         />
-
         <ColorRadio
           data={exteriorColor}
           radioTarget={selectedExteriorColor}
           radioHandler={exteriorColorHandler}
           type='exterior'
         />
-
-        <DropDown phrase={'다른 외장 색상을 찾고 있나요?'} />
+        <DropDown
+          phrase={'다른 외장 색상을 찾고 있나요?'}
+          data={otherExteriorColor}
+        />
         <UnderLine margin='mb-6' />
-
         <ColorTitle title={'내장 색상'} />
-
         <Description
           color={selectedInteriorColor}
           rate={getColorChooseRate({
@@ -140,15 +200,16 @@ function ColorSelectionPage() {
             selectedColor: selectedInteriorColor,
           })}
         />
-
         <ColorRadio
           data={interiorColor}
           radioTarget={selectedInteriorColor}
           radioHandler={interiorColorHandler}
           type='interior'
         />
-
-        <DropDown phrase={'다른 내장 색상을 찾고 있나요?'} />
+        <DropDown
+          phrase={'다른 내장 색상을 찾고 있나요?'}
+          data={otherInteriorColor}
+        />
         <Buttons />
       </FeatureAndTrimSelectionWrapper>
     </>

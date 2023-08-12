@@ -1,6 +1,8 @@
 import Button from '@/Components/Button';
+import { useNavigate } from 'react-router-dom';
 
 function Buttons() {
+  const navigation = useNavigate();
   return (
     <div className='flex gap-2'>
       <Button
@@ -8,7 +10,7 @@ function Buttons() {
         height='h-[52px]'
         variant='secondary'
         text='트림 선택'
-        onClick={() => console.log('secondary')}
+        onClick={() => navigation('/select/trim')}
       />
       <Button
         width='w-[300px]'
