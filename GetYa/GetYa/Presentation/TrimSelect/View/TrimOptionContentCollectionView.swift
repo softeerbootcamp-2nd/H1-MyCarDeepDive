@@ -111,7 +111,7 @@ extension TrimOptionContentCollectionView: UICollectionViewDataSource {
         cell.configureNameText(text: titleTexts[indexPath.row])
         cell.configureTagTexts(texts: tagTexts[indexPath.row])
         cell.configurePriceText(price: priceValues[indexPath.row])
-        cell.isSelected = indexPath == selectedIndexPath
+        cell.setSelectButtonIsSelected(isSelected: indexPath == selectedIndexPath)
         cell.learnMoreView.button.isSelected = expandedIndexPath.contains(indexPath)
         cell.delegate = self
         
@@ -157,6 +157,19 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegateFlowLayout {
 // MARK: - TrimOptionContentCell Delegate
 extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
     func touchUpSelectButton(sender: UICollectionViewCell) {
+        visibleCells.map { $0 as? TrimOptionContentCell }.forEach {
+            $0?.setSelectButtonIsSelected(isSelected: false)
+        }
+        let indexPath = self.indexPath(for: sender)
+        if selectedIndexPath != indexPath {
+            selectedIndexPath = indexPath
+            if let cell = sender as? TrimOptionContentCell {
+                cell.setSelectButtonIsSelected(isSelected: true)
+            }
+        }
+    }
+    
+    func touchUpLearnMoreViewButton(sender: UICollectionViewCell) {
         if let indexPath = self.indexPath(for: sender) {
             if expandedIndexPath.contains(indexPath) {
                 expandedIndexPath = expandedIndexPath.filter { $0 != indexPath }

@@ -8,6 +8,7 @@
 import UIKit
 
 protocol TrimOptionContentCellDelegate: AnyObject {
+    func touchUpLearnMoreViewButton(sender: UICollectionViewCell)
     func touchUpSelectButton(sender: UICollectionViewCell)
 }
 
@@ -225,15 +226,19 @@ class TrimOptionContentCell: UICollectionViewCell {
         priceLabel.text = price.toPriceFormat
     }
     
+    func setSelectButtonIsSelected(isSelected: Bool) {
+        selectButton.isSelected = isSelected
+    }
+    
     // MARK: - Objc Functions
     @objc private func touchUpSelectButton(sender: UIButton) {
-        sender.isSelected = !sender.isSelected
+        delegate?.touchUpSelectButton(sender: self)
     }
 }
 
 // MARK: - LearnMoreView Delegate
 extension TrimOptionContentCell: LearnMoreViewDelegate {
     func touchUpExpandButtonByIsSelected(isSelected: Bool) {
-        delegate?.touchUpSelectButton(sender: self)
+        delegate?.touchUpLearnMoreViewButton(sender: self)
     }
 }
