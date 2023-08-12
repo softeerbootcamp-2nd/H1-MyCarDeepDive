@@ -23,4 +23,12 @@ extension CGFloat {
         let scale = screenSize.height / height
         return floor(self * scale)
     }
+    
+    init(scaledVertical: CGFloat) {
+        self = scaledVertical.scaledHeight
+    }
+    
+    init(scaledHorizontal: CGFloat) {
+        self = scaledHorizontal.scaledWidth
+    }
 }
