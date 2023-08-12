@@ -303,9 +303,7 @@
 				6412D0A22A84D41A001E4005 /* TrimSubOptionContentView.swift */,
 				6412D0A82A85CFBB001E4005 /* TrimOptionContentCell.swift */,
 				6412D0B82A878A86001E4005 /* TrimOptionContentCollectionView.swift */,
-				6412D09C2A8387E6001E4005 /* TooltipView.swift */,
 				6412D0A42A84E7E1001E4005 /* TrimTooltipView.swift */,
-				6412D0A62A8511AE001E4005 /* LearnMoreView.swift */,
 				6412D0B02A872933001E4005 /* TrimLearnMoreView.swift */,
 				6412D0B22A87337C001E4005 /* TrimOptionDetailView.swift */,
 				6412D0B42A8738E3001E4005 /* TrimOptionDetailColorCollectionView.swift */,
@@ -503,6 +501,8 @@
 				64ADA4C32A7A32950003E2C1 /* CommonOptionSelectButton.swift */,
 				155EAB362A7F5FCD00833B0E /* ProgressView.swift */,
 				155DDD172A855182009AE2BC /* LeftAndRightButtonsView.swift */,
+				6412D09C2A8387E6001E4005 /* TooltipView.swift */,
+				6412D0A62A8511AE001E4005 /* LearnMoreView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
