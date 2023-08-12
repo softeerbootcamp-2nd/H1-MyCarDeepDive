@@ -13,10 +13,6 @@ protocol LearnMoreViewDelegate: AnyObject {
 
 class LearnMoreView: UIView {
     enum Constants {
-        enum Label {
-            static let leadingMargin = CGFloat(12).scaledWidth
-            static let topMargin = CGFloat(12).scaledHeight
-        }
         enum Button {
             static let topMargin = CGFloat(12).scaledHeight
             static let trailingMargin = CGFloat(-12).scaledWidth
@@ -26,8 +22,7 @@ class LearnMoreView: UIView {
     }
     
     // MARK: - UI properties
-    private let label = CommonLabel(fontType: .mediumBody4, color: .GetYaPalette.primary)
-    private lazy var button: UIButton = UIButton().set {
+    private(set) lazy var button: UIButton = UIButton().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         $0.setImage(UIImage(systemName: "chevron.up"), for: .selected)
@@ -38,12 +33,6 @@ class LearnMoreView: UIView {
     weak var delegate: LearnMoreViewDelegate?
     
     // MARK: - Lifecycles
-    convenience init(text: String) {
-        self.init(frame: .zero)
-        
-        configureText(text: text)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -61,7 +50,6 @@ class LearnMoreView: UIView {
     // MARK: - Private Functions
     private func setupViews() {
         addSubviews([
-            label,
             button
         ])
     }
@@ -72,19 +60,7 @@ class LearnMoreView: UIView {
         layer.borderWidth = 1
         layer.cornerRadius = CGFloat(8).scaledHeight
         
-        configureLabel()
         configureButton()
-    }
-    
-    private func configureLabel() {
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: Constants.Label.topMargin),
-            label.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
-                constant: Constants.Label.leadingMargin)
-        ])
     }
     
     private func configureButton() {
@@ -101,9 +77,6 @@ class LearnMoreView: UIView {
     }
     
     // MARK: - Functions
-    func configureText(text: String) {
-        label.text = text
-    }
     
     // MARK: - Objc Functions
     @objc private func touchUpButton(sender: UIButton) {
