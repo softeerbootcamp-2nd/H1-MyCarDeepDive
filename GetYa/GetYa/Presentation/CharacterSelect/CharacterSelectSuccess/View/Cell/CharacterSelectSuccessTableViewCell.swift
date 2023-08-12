@@ -39,7 +39,7 @@ final class CharacterSelectSuccessTableViewCell: UITableViewCell {
         backgroundColor: .GetYaPalette.lightAcriveBlue,
         textColor: .GetYaPalette.acriveBlue,
         fontType: .regularBody4,
-        textAlignment: .center
+        textAlignment: .left
     ).set {
         $0.configureCornerRadius(with: Constant.ReviewdTextView.radius)
     }
