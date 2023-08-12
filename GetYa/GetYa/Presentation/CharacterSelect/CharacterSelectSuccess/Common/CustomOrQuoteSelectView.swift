@@ -21,6 +21,7 @@ final class CustomOrQuoteSelectView: UIView {
         static var gradientLayerHeight: CGFloat {
            intrinsicContentHeight - height
         }
+        static let width: CGFloat = UIScreen.main.bounds.width
     }
     
     // MARK: - UI properties
@@ -38,36 +39,27 @@ final class CustomOrQuoteSelectView: UIView {
             backgroundColor: .GetYaPalette.acriveBlue,
             borderColor: .clear,
             textColor: .white))
+        $0.backgroundColor = .white
     }
     
-    private let layer0 = CAGradientLayer().set {
-        $0.colors = [
-            UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor,
-            UIColor(red: 1, green: 1, blue: 1, alpha: 0).cgColor]
-        $0.locations = [0, 1]
-        $0.startPoint = CGPoint(x: 0.25, y: 0.5)
-        $0.endPoint = CGPoint(x: 0.75, y: 0.5)
-        $0.transform = CATransform3DMakeAffineTransform(.init(
-            a: 0, b: 0.35, c: -0.35, d: 0, tx: 0.68, ty: 0.65))
+    private var gradientView: UIView = UIView(frame: .init(
+        x: 0,
+        y: 0, width: Constants.width,
+        height: Constants.gradientLayerHeight)
+    ).set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .none
     }
     
     // MARK: - Properties
     weak var delegate: CustomOrQuoteSelectViewDelegate?
     
-    override var bounds: CGRect {
-        didSet {
-            layer0.bounds = bounds.insetBy(
-                dx: -0.5*bounds.size.width,
-                dy: -0.5*bounds.size.height)
-            layer0.position = center
-            layer.addSublayer(layer0)
-        }
-    }
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
         customOrQuoteButtonsView.delegate = self
+        setGradient()
     }
     
     convenience init() {
@@ -78,11 +70,26 @@ final class CustomOrQuoteSelectView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureUI()
+        customOrQuoteButtonsView.delegate = self
+        setGradient()
     }
     
     // MARK: - Private Functions
     func configureUI() {
-        configureSubviewUI(with: customOrQuoteButtonsView)
+        configureSubviewUI(with: gradientView, customOrQuoteButtonsView)
+    }
+    
+    func setGradient() {
+        gradientView.layer.addSublayer(CAGradientLayer().set {
+            $0.frame = gradientView.bounds
+            $0.colors = [
+                UIColor.white.withAlphaComponent(0).cgColor,
+                UIColor.white.cgColor]
+            $0.locations = [0, 1]
+            $0.startPoint = CGPoint(x: 0.5, y: 0.35)
+            $0.endPoint = CGPoint(x: 0.5, y: 1)
+            $0.position = gradientView.center
+        })
     }
 }
 
@@ -100,6 +107,14 @@ extension CustomOrQuoteSelectView: LayoutSupportable {
                 equalTo: bottomAnchor),
             customOrQuoteButtonsView.heightAnchor.constraint(
                 equalToConstant: Constants.height)])
+        
+        NSLayoutConstraint.activate([
+            gradientView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            gradientView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            gradientView.heightAnchor.constraint(
+                equalToConstant: Constants.gradientLayerHeight),
+            gradientView.bottomAnchor.constraint(
+                equalTo: customOrQuoteButtonsView.topAnchor)])
     }
 }
 

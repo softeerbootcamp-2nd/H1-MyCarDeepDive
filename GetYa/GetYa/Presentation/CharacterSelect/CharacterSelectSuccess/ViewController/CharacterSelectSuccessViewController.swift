@@ -8,6 +8,13 @@
 import UIKit
 
 final class CharacterSelectSuccessViewController: UIViewController {
+    private enum Constants {
+        enum BottomCustomOrQuoteView {
+            static let height: CGFloat = CustomOrQuoteSelectView
+                .Constants.intrinsicContentHeight
+        }
+    }
+    
     // MARK: - UI Properties
     private let tableView: UITableView = UITableView(frame: .zero, style: .grouped).set {
         $0.backgroundColor = .white
@@ -30,6 +37,8 @@ final class CharacterSelectSuccessViewController: UIViewController {
         $0.estimatedSectionFooterHeight = UITableView.automaticDimension
     }
     
+    private let bottomCustomOrQuoteView = CustomOrQuoteSelectView()
+    
     // MARK: - Properties
     private var adapter: CharacterSelectSuccessTableViewAdapter!
     private var viewModel: (any CharacterSelectSuccessViewModelable & CharacterSSTableViewAdapterDataSource)!
@@ -51,12 +60,15 @@ final class CharacterSelectSuccessViewController: UIViewController {
         adapter = .init(
             tableView: tableView,
             dataSource: viewModel)
+        
     }
     
     // MARK: - Functions
     func configureUI() {
-        configureSubviewUI(with: tableView)
         view.backgroundColor = .white
+        configureSubviewUI(
+            with: tableView,
+            bottomCustomOrQuoteView)
     }
 }
 
@@ -67,9 +79,17 @@ extension CharacterSelectSuccessViewController: LayoutSupportable {
             NSLayoutConstraint.activate([
                 $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                $0.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
+        }
+        _=bottomCustomOrQuoteView.set {
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 $0.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                $0.bottomAnchor.constraint(
-                    equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
+                $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                $0.heightAnchor.constraint(equalToConstant: Constants.BottomCustomOrQuoteView.height),
+                $0.topAnchor.constraint(
+                    equalTo: tableView.bottomAnchor,
+                    constant: -CustomOrQuoteSelectView.Constants.gradientLayerHeight)])
         }
     }
 }

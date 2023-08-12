@@ -71,8 +71,7 @@ extension CharacterSelectSuccessFooter: LayoutSupportable {
     func configureConstraints() {
         _=[onePixelDividerConstraints,
            totalMoneyDescriptionLabelConstraints,
-           paymentAmountLabelConstriants,
-           emptySpacingViewConstraints
+           paymentAmountLabelConstriants
         ].map { NSLayoutConstraint.activate($0) }
     }
     
@@ -104,7 +103,9 @@ extension CharacterSelectSuccessFooter: LayoutSupportable {
                 constant: const.topMargin),
             totalMoneyDescriptionLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: -const.trailingMargin)]
+                constant: -const.trailingMargin),
+            totalMoneyDescriptionLabel.bottomAnchor.constraint(
+                equalTo: bottomAnchor)]
     }
     
     private var paymentAmountLabelConstriants: [NSLayoutConstraint] {
@@ -115,15 +116,5 @@ extension CharacterSelectSuccessFooter: LayoutSupportable {
             paymentAmountLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
                 constant: -const.trailingMargin)]
-    }
-    
-    private var emptySpacingViewConstraints: [NSLayoutConstraint] {
-        let const = Constants.EmptySpacingView.self
-        return [
-            emptySpacingView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            emptySpacingView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            emptySpacingView.topAnchor.constraint(equalTo: totalMoneyDescriptionLabel.bottomAnchor),
-            emptySpacingView.heightAnchor.constraint(greaterThanOrEqualToConstant: const.height),
-            emptySpacingView.bottomAnchor.constraint(equalTo: bottomAnchor)]
     }
 }
