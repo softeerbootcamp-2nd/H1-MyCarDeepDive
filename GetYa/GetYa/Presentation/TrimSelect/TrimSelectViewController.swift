@@ -8,11 +8,43 @@
 import UIKit
 
 class TrimSelectViewController: UIViewController {
-
+    
+    // MARK: - UI properties
+    private let contentView = TrimSelectContentView()
+    
+    // MARK: - Properties
+    
+    // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        setupViews()
+        configureUI()
     }
-
+    
+    // MARK: - Private Functions
+    private func setupViews() {
+        view.addSubviews([
+            contentView
+        ])
+    }
+    
+    private func configureUI() {
+        view.backgroundColor = .white
+        
+        configureContentView()
+    }
+    
+    private func configureContentView() {
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    // MARK: - Functions
+    
+    // MARK: - Objc Functions
 }
