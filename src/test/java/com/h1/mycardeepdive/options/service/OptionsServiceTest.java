@@ -10,11 +10,11 @@ import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
 import com.h1.mycardeepdive.options.domain.*;
 import com.h1.mycardeepdive.options.domain.Packages;
 import com.h1.mycardeepdive.options.domain.repository.*;
-import com.h1.mycardeepdive.options.ui.dto.AdditionalOptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionResponse;
-import com.h1.mycardeepdive.options.ui.dto.PackageOptionResponse;
 import com.h1.mycardeepdive.tags.domain.Tags;
 import com.h1.mycardeepdive.tags.domain.repository.TagRepository;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,13 +50,13 @@ class OptionsServiceTest {
 
     @BeforeEach
     void setUp() {
-        optionsRepository.deleteAll();
-        packageRepository.deleteAll();
-        optionPackageRepository.deleteAll();
-        tagRepository.deleteAll();
-        carSpecRepository.deleteAll();
         carSpecOptionsRepository.deleteAll();
         carSpecPackageRepository.deleteAll();
+        optionPackageRepository.deleteAll();
+        optionsRepository.deleteAll();
+        packageRepository.deleteAll();
+        tagRepository.deleteAll();
+        carSpecRepository.deleteAll();
 
         carSpec = CarSpec.builder().build();
         carSpec = carSpecRepository.save(carSpec);
@@ -82,13 +82,25 @@ class OptionsServiceTest {
         optionPackageComfortII = optionPackageRepository.save(optionPackageComfortII);
 
         carSpecOptions1 =
-                CarSpecOptions.builder().carSpec(carSpec).options(optionBuiltInCam).isBasicOption(false).build();
+                CarSpecOptions.builder()
+                        .carSpec(carSpec)
+                        .options(optionBuiltInCam)
+                        .isBasicOption(false)
+                        .build();
         carSpecOptions1 = carSpecOptionsRepository.save(carSpecOptions1);
         carSpecOptions2 =
-                CarSpecOptions.builder().carSpec(carSpec).options(optionDarkWheel).isBasicOption(false).build();
+                CarSpecOptions.builder()
+                        .carSpec(carSpec)
+                        .options(optionDarkWheel)
+                        .isBasicOption(false)
+                        .build();
         carSpecOptions2 = carSpecOptionsRepository.save(carSpecOptions2);
         carSpecOptions3 =
-                CarSpecOptions.builder().carSpec(carSpec).options(optionStopSystem).isBasicOption(true).build();
+                CarSpecOptions.builder()
+                        .carSpec(carSpec)
+                        .options(optionStopSystem)
+                        .isBasicOption(true)
+                        .build();
         carSpecOptions3 = carSpecOptionsRepository.save(carSpecOptions3);
 
         carSpecPackage =
@@ -107,10 +119,18 @@ class OptionsServiceTest {
         // then
         assertEquals(options.getOptionPackageList().size(), 1);
         assertEquals(options.getAdditionalOptionList().size(), 1);
-
     }
+
+    @DisplayName("차사양에 해당하는 기본 옵션들을 전부 조회한다.")
+    @Test
+    void findAllBasicOptions() {
+        // given
+
+        // when
+        List<BasicOptionResponse> basicOptions =
+                optionsService.findAllBasicOptions(carSpec.getId());
+
         // then
-        assertEquals(options.getOptionPackageList().size(), 1);
-        assertEquals(options.getAdditionalOptionList().size(), 1);
+        assertEquals(basicOptions.size(), 1);
     }
 }

@@ -2,6 +2,7 @@ package com.h1.mycardeepdive.options.ui;
 
 import com.h1.mycardeepdive.global.response.ApiResponse;
 import com.h1.mycardeepdive.options.service.OptionsService;
+import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,12 @@ public class OptionsController {
     public ApiResponse<OptionResponse> getAllAdditionalOptions(
             @PathVariable("car-spec-id") Long carSpecId) {
         return new ApiResponse<>(optionsService.findAllAdditionalOptions(carSpecId));
+    }
+
+    @GetMapping("/car-spec/{car-spec-id}/basic-options")
+    public ApiResponse<List<BasicOptionResponse>> getAllBasicOptions(
+            @PathVariable("car-spec-id") Long carSpecId) {
+        return new ApiResponse<>(optionsService.findAllBasicOptions(carSpecId));
     }
 
 }

@@ -50,4 +50,13 @@ public class OptionsService {
                         .collect(Collectors.toList());
         return new OptionResponse(packageOptionResponses, additionalOptionResponses);
     }
+
+    public List<BasicOptionResponse> findAllBasicOptions(Long carSpecId) {
+        return optionsRepository.findBasicOptions(carSpecId).stream()
+                .map(
+                        options ->
+                                OptionMapper.optionToBasicOptionResponse(
+                                        options, tagRepository.findTagsByOptionId(options.getId())))
+                .collect(Collectors.toList());
+    }
 }

@@ -9,6 +9,7 @@ import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import com.h1.mycardeepdive.ControllerTestConfig;
 import com.h1.mycardeepdive.options.service.OptionsService;
 import com.h1.mycardeepdive.options.ui.dto.AdditionalOptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionResponse;
 import com.h1.mycardeepdive.options.ui.dto.PackageOptionResponse;
 import java.util.List;
@@ -71,13 +72,51 @@ class OptionsControllerTest extends ControllerTestConfig {
                                         .accept(MediaType.APPLICATION_JSON))
                         .andDo(
                                 MockMvcRestDocumentationWrapper.document(
-                                        "options-docs",
+                                        "options-docs1",
                                         preprocessRequest(prettyPrint()),
                                         preprocessResponse(prettyPrint()),
                                         resource(
                                                 ResourceSnippetParameters.builder()
                                                         .tag("옵션")
                                                         .description("차량 사양에 따른 추가 옵션 목록 리스트 조회")
+                                                        .requestFields()
+                                                        .responseFields()
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @DisplayName("차량 사양의 모든 기본 옵션을 조회에 성공한다.")
+    @Test
+    void getAllBasicOptions() throws Exception {
+        // given
+        Long carSpecId = 1L;
+        when(optionsService.findAllBasicOptions(carSpecId))
+                .thenReturn(
+                        List.of(
+                                new BasicOptionResponse(
+                                        1L,
+                                        "https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg",
+                                        "다중 충돌방지 자동 제동 시스템",
+                                        List.of("대표", "주행안전"))));
+
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.get(
+                                                DEFAULT_URL
+                                                        + "/car-spec/{car-spec-id}/basic-options",
+                                                carSpecId)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "options-docs2",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("옵션")
+                                                        .description("차량 사양에 따른 기본 옵션 목록 리스트 조회")
                                                         .requestFields()
                                                         .responseFields()
                                                         .build())));

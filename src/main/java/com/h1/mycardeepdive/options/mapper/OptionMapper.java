@@ -3,6 +3,7 @@ package com.h1.mycardeepdive.options.mapper;
 import com.h1.mycardeepdive.options.domain.Options;
 import com.h1.mycardeepdive.options.domain.Packages;
 import com.h1.mycardeepdive.options.ui.dto.AdditionalOptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
 import com.h1.mycardeepdive.options.ui.dto.PackageOptionResponse;
 import com.h1.mycardeepdive.tags.domain.Tags;
 import java.util.List;
@@ -34,5 +35,14 @@ public class OptionMapper {
                 tagsList.stream().map(Tags::getName).collect(Collectors.toList()),
                 _packages.getBadgeName().getViewName(),
                 _packages.getPrice());
+    }
+
+    public static BasicOptionResponse optionToBasicOptionResponse(
+            Options options, List<Tags> tagsList) {
+        return new BasicOptionResponse(
+                options.getId(),
+                options.getImgUrl(),
+                options.getName(),
+                tagsList.stream().map(Tags::getName).collect(Collectors.toList()));
     }
 }

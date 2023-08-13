@@ -62,4 +62,18 @@ public class OptionsRepositoryImpl implements OptionsRepositoryCustom {
                 .where(optionPackage.packages.id.eq(packageId))
                 .fetchOne();
     }
+
+    @Override
+    public List<Options> findBasicOptions(Long carSpecId) {
+        return queryFactory
+                .selectFrom(options)
+                .innerJoin(carSpecOptions)
+                .on(options.id.eq(carSpecOptions.options.id))
+                .where(
+                        carSpecOptions
+                                .isBasicOption
+                                .isTrue()
+                                .and(carSpecOptions.carSpec.id.eq(carSpecId)))
+                .fetch();
+    }
 }
