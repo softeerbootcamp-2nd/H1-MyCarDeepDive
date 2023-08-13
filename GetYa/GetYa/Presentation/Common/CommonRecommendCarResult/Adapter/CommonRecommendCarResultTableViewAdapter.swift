@@ -1,5 +1,5 @@
 //
-//  CommonRecommendResultTableViewAdapter.swift
+//  CommonRecommendCarResultTableViewAdapter.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/14.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-class CommonRecommendResultTableViewAdapter: NSObject {
+class CommonRecommendCarResultTableViewAdapter: NSObject {
     // MARK: - Properties
-    private var dataSource: CommonRecommendResultTableViewAdapterDataSource
+    private var dataSource: CommonRecommendCarResultTableViewAdapterDataSource
     
     // MARK: - Lifecycles
     init(
         tableView: UITableView,
-        dataSource: CommonRecommendResultTableViewAdapterDataSource
+        dataSource: CommonRecommendCarResultTableViewAdapterDataSource
     ) {
         self.dataSource = dataSource
         super.init()
@@ -23,7 +23,7 @@ class CommonRecommendResultTableViewAdapter: NSObject {
 }
 
 // MARK: - UITableViewDataSource
-extension CommonRecommendResultTableViewAdapter: UITableViewDataSource {
+extension CommonRecommendCarResultTableViewAdapter: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataSource.numberOfSections
     }
@@ -40,12 +40,12 @@ extension CommonRecommendResultTableViewAdapter: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CommonRecommendResultTableViewCell.identifier,
+            withIdentifier: CommonRecommendCarResultTableViewCell.identifier,
             for: indexPath
-        ) as? CommonRecommendResultTableViewCell else {
+        ) as? CommonRecommendCarResultTableViewCell else {
             return .init(
                 style: .default,
-                reuseIdentifier: CommonRecommendResultTableViewCell.identifier)
+                reuseIdentifier: CommonRecommendCarResultTableViewCell.identifier)
         }
         let item = dataSource.cellItem(in: indexPath.section, indexPath.row)
         cell.configure(with: item)

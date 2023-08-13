@@ -1,5 +1,5 @@
 //
-//  CommonRecommendResultTableView.swift
+//  CommonRecommendCarResultTableView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/13.
@@ -7,15 +7,15 @@
 
 import UIKit
 
-class CommonRecommendResultTableView: UITableView {
+class CommonRecommendCarResultTableView: UITableView {
     // MARK: - Properties
     private var calculateMaximumCellHeight: CGFloat {
         let maximumReviewdTextViewHeightAndTopMargin = {
-            typealias Const = CommonRecommendResultTableViewCell.Constants.ReviewdTextView
+            typealias Const = CommonRecommendCarResultTableViewCell.Constants.ReviewdTextView
             return Const.maximumHeight + Const.topMargin
         }()
         let commonOptionViewHeightAndTopMargin = {
-            typealias Const = CommonRecommendResultTableViewCell.Constants.RecommendCarOptionView
+            typealias Const = CommonRecommendCarResultTableViewCell.Constants.RecommendCarOptionView
             return Const.height + Const.topMargin
         }()
         return maximumReviewdTextViewHeightAndTopMargin + commonOptionViewHeightAndTopMargin
@@ -38,8 +38,8 @@ class CommonRecommendResultTableView: UITableView {
         }
         backgroundColor = .white
         register(
-            CommonRecommendResultTableViewCell.self,
-            forCellReuseIdentifier: CommonRecommendResultTableViewCell.identifier)
+            CommonRecommendCarResultTableViewCell.self,
+            forCellReuseIdentifier: CommonRecommendCarResultTableViewCell.identifier)
         separatorStyle = .none
         estimatedRowHeight = calculateMaximumCellHeight
         

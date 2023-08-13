@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailRecommendCarResultTableViewAdapter: CommonRecommendResultTableViewAdapter {
+final class DetailRecommendCarResultTableViewAdapter: CommonRecommendCarResultTableViewAdapter {
     // MARK: - Properties
     private var dataSource: DetailRecommendCarResultTableViewAdapterDataSource
     private var isWorkedMainHeaderInitialAnimation = false
@@ -16,7 +16,7 @@ final class DetailRecommendCarResultTableViewAdapter: CommonRecommendResultTable
     // MARK: - Lifecycles
     init(
         tableView: UITableView,
-        dataSource: DetailRecommendCarResultTableViewAdapterDataSource & CommonRecommendResultTableViewAdapterDataSource
+        dataSource: DetailRecommendCarResultTableViewAdapterDataSource & CommonRecommendCarResultTableViewAdapterDataSource
     ) {
         self.dataSource = dataSource
         super.init(tableView: tableView, dataSource: dataSource)
@@ -58,7 +58,7 @@ extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
         if section == 0 {
             return DetailRecommendCarResultMainHeader.Constants.intrinsicContentHeight
         } else if section == 1 {
-            return CommonRecommendResultSectionDividerTitleView
+            return CommonRecommendCarResultSectionDividerTitleView
                 .Constants.intrinsicContentHeight
         }
         return 0

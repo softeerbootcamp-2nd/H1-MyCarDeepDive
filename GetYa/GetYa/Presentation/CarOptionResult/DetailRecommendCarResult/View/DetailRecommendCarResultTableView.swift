@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailRecommendCarResultTableView: CommonRecommendResultTableView {
+final class DetailRecommendCarResultTableView: CommonRecommendCarResultTableView {
     // MARK: - Lifecycles
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

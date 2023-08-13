@@ -1,5 +1,5 @@
 //
-//  CommonRecommendResultTableViewCell.swift
+//  CommonRecommendCarResultTableViewCell.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/08.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommonRecommendResultTableViewCell: UITableViewCell {
+final class CommonRecommendCarResultTableViewCell: UITableViewCell {
     enum Constants {
         enum RecommendCarOptionView {
             static let height: CGFloat = .init(60).scaledHeight
@@ -50,7 +50,7 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
             }
         }
     }
-    static let identifier = String(describing: CommonRecommendResultTableViewCell.self)
+    static let identifier = String(describing: CommonRecommendCarResultTableViewCell.self)
     
     // MARK: - UI properties
     private let recommendCarOptionView = CommonOptionView()
@@ -105,7 +105,7 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
 }
 
 // MARK: - LayoutSupportable
-extension CommonRecommendResultTableViewCell: LayoutSupportable {
+extension CommonRecommendCarResultTableViewCell: LayoutSupportable {
     func configureConstraints() {
         _=[recommendCarOptionViewConstraints,
            reviewdTextViewConstraints

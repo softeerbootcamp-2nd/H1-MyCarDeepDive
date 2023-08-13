@@ -14,10 +14,10 @@ final class DetailRecommendCarResultMainHeader: UITableViewHeaderFooterView {
             let thumbnailViewHeight = DetailRecommendCarResultThumbnailView
             .Constants
             .intrinsicContentHeight
-            let recommendCarInfoHeight = CommonRecommendResultCarInfoView
+            let recommendCarInfoHeight = CommonRecommendCarResultCarInfoView
                 .Constants
                 .intrinsicContentHeight
-            let sectionDividerHeight = CommonRecommendResultSectionDividerTitleView
+            let sectionDividerHeight = CommonRecommendCarResultSectionDividerTitleView
                 .Constants
                 .intrinsicContentHeight
             return thumbnailViewHeight + recommendCarInfoHeight + sectionDividerHeight
@@ -26,8 +26,8 @@ final class DetailRecommendCarResultMainHeader: UITableViewHeaderFooterView {
     
     // MARK: - UI properties
     private let thumbnailView = DetailRecommendCarResultThumbnailView()
-    private let recommendCarInfoView = CommonRecommendResultCarInfoView()
-    private let sectionDivider = CommonRecommendResultSectionDividerTitleView()
+    private let recommendCarInfoView = CommonRecommendCarResultCarInfoView()
+    private let sectionDivider = CommonRecommendCarResultSectionDividerTitleView()
     
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {
