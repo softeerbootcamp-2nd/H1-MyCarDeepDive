@@ -106,6 +106,7 @@
 		64E26A052A881FA000F6BC3A /* OptionSummaryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A042A881FA000F6BC3A /* OptionSummaryContentView.swift */; };
 		64E26A072A88203F00F6BC3A /* OptionNamAndPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A062A88203F00F6BC3A /* OptionNamAndPriceView.swift */; };
 		64E26A092A894C0500F6BC3A /* CarSettingSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A082A894C0500F6BC3A /* CarSettingSelectViewController.swift */; };
+		64E26A0B2A894CE200F6BC3A /* SettingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A0A2A894CE200F6BC3A /* SettingProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,6 +230,7 @@
 		64E26A042A881FA000F6BC3A /* OptionSummaryContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSummaryContentView.swift; sourceTree = "<group>"; };
 		64E26A062A88203F00F6BC3A /* OptionNamAndPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionNamAndPriceView.swift; sourceTree = "<group>"; };
 		64E26A082A894C0500F6BC3A /* CarSettingSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarSettingSelectViewController.swift; sourceTree = "<group>"; };
+		64E26A0A2A894CE200F6BC3A /* SettingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +339,7 @@
 				64E26A002A880D1100F6BC3A /* BottomSheetLargeContentView.swift */,
 				64E26A042A881FA000F6BC3A /* OptionSummaryContentView.swift */,
 				64E26A062A88203F00F6BC3A /* OptionNamAndPriceView.swift */,
+				64E26A0A2A894CE200F6BC3A /* SettingProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -833,6 +836,7 @@
 				6412D0942A823A89001E4005 /* PeekTagView.swift in Sources */,
 				155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */,
 				6412D0922A822D5A001E4005 /* LifeStylePeekContentView.swift in Sources */,
+				64E26A0B2A894CE200F6BC3A /* SettingProgressView.swift in Sources */,
 				15DF958E2A7C89630093EAC7 /* UILayout.swift in Sources */,
 				64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */,
 				6412D0B12A872933001E4005 /* TrimLearnMoreView.swift in Sources */,
