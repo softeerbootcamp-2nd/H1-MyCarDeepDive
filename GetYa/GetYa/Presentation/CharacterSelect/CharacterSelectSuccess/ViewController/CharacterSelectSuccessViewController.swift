@@ -23,8 +23,8 @@ final class CharacterSelectSuccessViewController: UIViewController {
             CharacterSelectSuccessMainHeader.self,
             forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessMainHeader.id)
         $0.register(
-            CharacterSelectSuccessTableViewCell.self,
-            forCellReuseIdentifier: CharacterSelectSuccessTableViewCell.id)
+            CommonRecommendResultTableViewCell.self,
+            forCellReuseIdentifier: CommonRecommendResultTableViewCell.id)
         $0.register(
             CharacterSelectSuccesSecondSectionHeader.self,
             forHeaderFooterViewReuseIdentifier: CharacterSelectSuccesSecondSectionHeader.id)

@@ -43,12 +43,12 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CharacterSelectSuccessTableViewCell.id,
+            withIdentifier: CommonRecommendResultTableViewCell.id,
             for: indexPath
-        ) as? CharacterSelectSuccessTableViewCell else {
+        ) as? CommonRecommendResultTableViewCell else {
             return .init(
                 style: .default,
-                reuseIdentifier: CharacterSelectSuccessTableViewCell.id)
+                reuseIdentifier: CommonRecommendResultTableViewCell.id)
         }
         var item: RecommendCarProductOptionModel
         item = dataSource.cellItem(in: indexPath.section, indexPath.row)
@@ -115,7 +115,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CharacterSelectSuccessTableViewCell.Constant.intrinsicContentHeight
+        return CommonRecommendResultTableViewCell.Constant.intrinsicContentHeight
     }
 }
 

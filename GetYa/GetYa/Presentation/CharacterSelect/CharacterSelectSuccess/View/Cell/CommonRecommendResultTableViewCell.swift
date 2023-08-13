@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessTableViewCell.swift
+//  CommonRecommendResultTableViewCell.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/08.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterSelectSuccessTableViewCell: UITableViewCell {
+final class CommonRecommendResultTableViewCell: UITableViewCell {
     enum Constant {
         static var intrinsicContentHeight: CGFloat {
             let carOptionConst = RecommendCarOptionView.self
@@ -31,7 +31,7 @@ final class CharacterSelectSuccessTableViewCell: UITableViewCell {
             static let radius: CGFloat = .init(8).scaledWidth
         }
     }
-    static let id = String(describing: CharacterSelectSuccessTableViewCell.self)
+    static let id = String(describing: CommonRecommendResultTableViewCell.self)
     
     // MARK: - UI properties
     private let recommendCarOptionView = CommonOptionView()
@@ -69,7 +69,7 @@ final class CharacterSelectSuccessTableViewCell: UITableViewCell {
 }
 
 // MARK: - LayoutSupportable
-extension CharacterSelectSuccessTableViewCell: LayoutSupportable {
+extension CommonRecommendResultTableViewCell: LayoutSupportable {
     func configureConstraints() {
         _=[recommendCarOptionViewConstraints,
            reviewdTextViewConstraints
