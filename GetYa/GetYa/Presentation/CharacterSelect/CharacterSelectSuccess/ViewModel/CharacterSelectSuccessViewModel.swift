@@ -16,32 +16,24 @@ struct RecommendCarInfoModel {
     var carOptions: String
 }
 
-struct RecommendCarProductOptionModel {
-    let optionImage: String?
-    let optionName: String?
-    let optionPrice: Int?
-    let optionReview: String?
-}
-
 struct MainSectionHeaderModel {
     var thumbnailKeywords: [String]
     var recommendCarProductOption: RecommendCarInfoModel
     var firstSectionTitle: String
 }
 
-final class CharacterSelectSuccessViewModel {
+final class CharacterSelectSuccessViewModel: CommonRecommendResultTableViewModel {
     // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
-    private var dataSource: [[RecommendCarProductOptionModel]]
     private var mainSectionHeader: MainSectionHeaderModel
     private var sectionHeaders: [String]
     private var secondSectionFooter: String
     
-    init() {
+    override init() {
         mainSectionHeader = .mock
-        dataSource = RecommendCarProductOptionModel.mocks
         sectionHeaders = CharacterSelectSuccessSectionHeaders.lists
         secondSectionFooter = "48,120,000원"
+        super.init(dataSource: RecommendCarProductOptionModel.mocks)
     }
 }
 
@@ -88,20 +80,7 @@ extension CharacterSelectSuccessViewModel: CharacterSSTableViewAdapterDataSource
         mainSectionHeader
     }
     
-    // TODO: 이거도 나중에 섹션 헤더만 주는 함수 합쳐버리자,, 리빌딩해야함
     var secondSectionHeaderItem: String {
         sectionHeaders[1]
-    }
-    
-    var numberOfSections: Int {
-        dataSource.count
-    }
-    
-    func numberOfRows(in section: Int) -> Int {
-        return dataSource[section].count
-    }
-    
-    func cellItem(in section: Int, _ row: Int) -> RecommendCarProductOptionModel {
-        return dataSource[section][row]
     }
 }
