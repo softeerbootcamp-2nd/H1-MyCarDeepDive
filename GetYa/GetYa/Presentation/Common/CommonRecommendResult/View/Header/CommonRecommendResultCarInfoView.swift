@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommonRecommendResultCarInfoView: UIView {
+class CommonRecommendResultCarInfoView: UIView {
     enum Constants {
         static var intrinsicContentHeight: CGFloat {
             let carKrNameHeight = CarKrNameLabel.intrinsicContentHeight

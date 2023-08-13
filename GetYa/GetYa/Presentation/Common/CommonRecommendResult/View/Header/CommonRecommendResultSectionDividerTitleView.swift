@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommonRecommendResultSectionDividerTitleView: UIView {
+class CommonRecommendResultSectionDividerTitleView: UIView {
     enum Constants {
         static var intrinsicContentHeight: CGFloat {
             let onePixelDividerHeight = OnePixelDivider.intrinsicContentHeight
