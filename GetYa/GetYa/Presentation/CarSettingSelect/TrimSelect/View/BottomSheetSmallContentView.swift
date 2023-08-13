@@ -9,6 +9,7 @@ import UIKit
 
 protocol BottomSheetSmallContentDelegate: AnyObject {
     func touchUpChevronUpButton()
+    func touchUpNextButton()
 }
 
 class BottomSheetSmallContentView: UIView {
@@ -39,16 +40,24 @@ class BottomSheetSmallContentView: UIView {
                 .black,
                 renderingMode: .alwaysOriginal),
             for: .normal)
-        $0.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside)
+        $0.addTarget(
+            self,
+            action: #selector(touchUpCenvronButton),
+            for: .touchUpInside)
     }
     private let priceLabel = CommonLabel(
         fontType: .custom(size: 18, kern: -0.3, lineHeight: 18, nameType: .mediumHead),
         color: .GetYaPalette.gray0)
     private let nextButton = CommonButton(
         font: GetYaFont.mediumBody3.uiFont,
-        buttonBackgroundColorType: .primary).set {
-            $0.setTitle("다음", for: .normal)
-        }
+        buttonBackgroundColorType: .primary
+    ).set {
+        $0.setTitle("다음", for: .normal)
+        $0.addTarget(
+            self,
+            action: #selector(touchUpNextButton),
+            for: .touchUpInside)
+    }
     
     // MARK: - Properties
     weak var delegate: BottomSheetSmallContentDelegate?
@@ -144,8 +153,12 @@ class BottomSheetSmallContentView: UIView {
     }
     
     // MARK: - Objc Functions
-    @objc private func touchUpButton(sender: UIButton) {
+    @objc private func touchUpCenvronButton(sender: UIButton) {
         delegate?.touchUpChevronUpButton()
         isHidden = true
+    }
+    
+    @objc private func touchUpNextButton(sender: UIButton) {
+        delegate?.touchUpNextButton()
     }
 }

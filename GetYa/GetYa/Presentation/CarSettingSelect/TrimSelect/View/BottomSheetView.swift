@@ -10,6 +10,7 @@ import UIKit
 protocol BottomSheetDelegate: AnyObject {
     func contractedBottomSheet(completion: @escaping () -> Void)
     func expandedBottomSheet(completion: @escaping () -> Void)
+    func transitionNextSettingSelect()
 }
 
 class BottomSheetView: UIView {
@@ -169,5 +170,9 @@ extension BottomSheetView: BottomSheetLargeContentDelegate {
             guard let self else { return }
             self.smallContentView.isHidden = false
         })
+    }
+    
+    func touchUpNextButton() {
+        delegate?.transitionNextSettingSelect()
     }
 }
