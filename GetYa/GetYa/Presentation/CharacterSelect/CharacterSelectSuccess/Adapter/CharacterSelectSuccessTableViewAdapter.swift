@@ -43,21 +43,19 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CommonRecommendResultTableViewCell.id,
+            withIdentifier: CommonRecommendResultTableViewCell.identifier,
             for: indexPath
         ) as? CommonRecommendResultTableViewCell else {
             return .init(
                 style: .default,
-                reuseIdentifier: CommonRecommendResultTableViewCell.id)
+                reuseIdentifier: CommonRecommendResultTableViewCell.identifier)
         }
-        var item: RecommendCarProductOptionModel
-        item = dataSource.cellItem(in: indexPath.section, indexPath.row)
+        var item = dataSource.cellItem(in: indexPath.section, indexPath.row)
         cell.configure(with: item)
         return cell
     }
 }
 
-// TODO: 리뷰 line만큼 계산된 tableView cell dynamic한 높이로 반영 해야합니다.
 // MARK: - UITableViewDelegate
 extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     func tableView(
@@ -113,10 +111,6 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
             }
         }
         return nil
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CommonRecommendResultTableViewCell.Constant.intrinsicContentHeight
     }
 }
 
