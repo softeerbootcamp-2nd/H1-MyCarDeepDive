@@ -17,9 +17,13 @@ class SettingProgressView: UIView {
         }
         enum FirstChevronRight {
             static let leadingMargin: CGFloat = CGFloat(12).scaledWidth
+            static let height: CGFloat = CGFloat(20).scaledHeight
+            static let width: CGFloat = CGFloat(20).scaledHeight
         }
         enum SecondChevronRight {
             static let leadingMargin: CGFloat = CGFloat(12).scaledWidth
+            static let height: CGFloat = CGFloat(20).scaledHeight
+            static let width: CGFloat = CGFloat(20).scaledHeight
         }
     }
     enum ProgressType {
@@ -77,10 +81,16 @@ class SettingProgressView: UIView {
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setupViews()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        
+        setupViews()
+        configureUI()
     }
     
     // MARK: - Private Functions
@@ -107,49 +117,52 @@ class SettingProgressView: UIView {
     
     private func configureTrimLabel() {
         NSLayoutConstraint.activate([
-            trimLabel.topAnchor.constraint(equalTo: topAnchor),
             trimLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            trimLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            trimLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     
     private func configureFirstChevronRight() {
         NSLayoutConstraint.activate([
-            firstChevronRight.topAnchor.constraint(equalTo: topAnchor),
             firstChevronRight.leadingAnchor.constraint(
                 equalTo: trimLabel.trailingAnchor,
                 constant: Constants.FirstChevronRight.leadingMargin),
-            firstChevronRight.bottomAnchor.constraint(equalTo: bottomAnchor)
+            firstChevronRight.centerYAnchor.constraint(equalTo: centerYAnchor),
+            firstChevronRight.heightAnchor.constraint(
+                equalToConstant: Constants.FirstChevronRight.height),
+            firstChevronRight.widthAnchor.constraint(
+                equalToConstant: Constants.FirstChevronRight.width)
         ])
     }
     
     private func configureColorLabel() {
         NSLayoutConstraint.activate([
-            colorLabel.topAnchor.constraint(equalTo: topAnchor),
             colorLabel.leadingAnchor.constraint(
-                equalTo: trimLabel.trailingAnchor,
+                equalTo: firstChevronRight.trailingAnchor,
                 constant: Constants.ColorLabel.leadingMargin),
-            colorLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            colorLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     
     private func configureSecondChevronRight() {
         NSLayoutConstraint.activate([
-            secondChevronRight.topAnchor.constraint(equalTo: topAnchor),
             secondChevronRight.leadingAnchor.constraint(
-                equalTo: trimLabel.trailingAnchor,
+                equalTo: colorLabel.trailingAnchor,
                 constant: Constants.SecondChevronRight.leadingMargin),
-            secondChevronRight.bottomAnchor.constraint(equalTo: bottomAnchor)
+            secondChevronRight.centerYAnchor.constraint(equalTo: centerYAnchor),
+            secondChevronRight.heightAnchor.constraint(
+                equalToConstant: Constants.FirstChevronRight.height),
+            secondChevronRight.widthAnchor.constraint(
+                equalToConstant: Constants.FirstChevronRight.width)
         ])
     }
     
     private func configureOptionLabel() {
         NSLayoutConstraint.activate([
-            optionLabel.topAnchor.constraint(equalTo: topAnchor),
             optionLabel.leadingAnchor.constraint(
-                equalTo: trimLabel.trailingAnchor,
+                equalTo: secondChevronRight.trailingAnchor,
                 constant: Constants.OptionLabel.leadingMargin),
-            optionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            optionLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     
@@ -160,16 +173,19 @@ class SettingProgressView: UIView {
             kern: -0.3,
             lineHeight: 26,
             nameType: .regularHead))
+        colorLabel.textColor = .GetYaPalette.gray400
         trimLabel.configureFontType(fontType: .custom(
             size: 16,
             kern: -0.3,
             lineHeight: 26,
             nameType: .regularHead))
+        trimLabel.textColor = .GetYaPalette.gray400
         optionLabel.configureFontType(fontType: .custom(
             size: 16,
             kern: -0.3,
             lineHeight: 26,
             nameType: .regularHead))
+        optionLabel.textColor = .GetYaPalette.gray400
         
         switch type {
         case .trim:
@@ -178,18 +194,21 @@ class SettingProgressView: UIView {
                 kern: -0.3,
                 lineHeight: 26,
                 nameType: .mediumHead))
+            trimLabel.textColor = .GetYaPalette.gray50
         case .color:
             colorLabel.configureFontType(fontType: .custom(
                 size: 16,
                 kern: -0.3,
                 lineHeight: 26,
                 nameType: .mediumHead))
+            colorLabel.textColor = .GetYaPalette.gray50
         case .option:
             optionLabel.configureFontType(fontType: .custom(
                 size: 16,
                 kern: -0.3,
                 lineHeight: 26,
                 nameType: .mediumHead))
+            optionLabel.textColor = .GetYaPalette.gray50
         }
     }
 }
