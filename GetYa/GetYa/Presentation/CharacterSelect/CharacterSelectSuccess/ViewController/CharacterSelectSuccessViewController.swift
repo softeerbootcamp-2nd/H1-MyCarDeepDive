@@ -34,11 +34,11 @@ final class CharacterSelectSuccessViewController: UIViewController {
         $0.separatorStyle = .none
         
         let maximumReviewdTextViewHeightAndTopMargin = {
-            typealias Const = CommonRecommendResultTableViewCell.Constant.ReviewdTextView
+            typealias Const = CommonRecommendResultTableViewCell.Constants.ReviewdTextView
             return Const.maximumHeight + Const.topMargin
         }()
         let commonOptionViewHeightAndTopMargin = {
-            typealias Const = CommonRecommendResultTableViewCell.Constant.RecommendCarOptionView
+            typealias Const = CommonRecommendResultTableViewCell.Constants.RecommendCarOptionView
             return Const.height + Const.topMargin
         }()
         

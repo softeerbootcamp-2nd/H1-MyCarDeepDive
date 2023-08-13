@@ -17,10 +17,10 @@ struct RecommendCarInfoModel {
 }
 
 struct RecommendCarProductOptionModel {
-    let optionImage: String
-    let optionName: String
-    let optionPrice: Int
-    let optionReview: String
+    let optionImage: String?
+    let optionName: String?
+    let optionPrice: Int?
+    let optionReview: String?
 }
 
 struct MainSectionHeaderModel {

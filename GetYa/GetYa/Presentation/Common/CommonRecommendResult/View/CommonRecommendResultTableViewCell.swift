@@ -48,7 +48,6 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
                     width: tempPaddingLabelWidth,
                     height: 0)
 
-                // tempPaddingLabel.text = reviewText
                 return tempPaddingLabel.intrinsicContentSize.height
             }
         }
@@ -86,16 +85,20 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
         super.prepareForReuse()
         let reset = RecommendCarProductOptionModel(
             optionImage: nil,
-            optionName: "",
-            optionPrice: 0,
-            optionReview: "")
+            optionName: nil,
+            optionPrice: nil,
+            optionReview: nil)
         configure(with: reset)
     }
     
     // MARK: - Functions
     func configure(with productOptionModel: RecommendCarProductOptionModel) {
+        var image: UIImage?
+        if let imageName = productOptionModel.optionImage {
+            image = UIImage(named: imageName)
+        }
         recommendCarOptionView.configureDetail(
-            image: UIImage(named: productOptionModel.optionImage ?? ""),
+            image: image,
             title: productOptionModel.optionName,
             price: productOptionModel.optionPrice)
         reviewdTextView.text = productOptionModel.optionReview
@@ -127,6 +130,7 @@ extension CommonRecommendResultTableViewCell: LayoutSupportable {
             recommendCarOptionView.heightAnchor.constraint(
                 equalToConstant: Const.height)]
     }
+    
     private var reviewdTextViewConstraints: [NSLayoutConstraint] {
         typealias Const = Constants.ReviewdTextView
         return [
