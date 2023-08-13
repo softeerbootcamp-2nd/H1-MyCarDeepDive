@@ -14,7 +14,6 @@
 		155DDD0E2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift */; };
 		155DDD102A846077009AE2BC /* RecommendCarInfoModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */; };
 		155DDD122A84610A009AE2BC /* RecommendCarProductOptionModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD112A84610A009AE2BC /* RecommendCarProductOptionModel+Mock.swift */; };
-		155DDD142A846354009AE2BC /* MainSectionHeaderModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD132A846354009AE2BC /* MainSectionHeaderModel+Mock.swift */; };
 		155DDD162A84A808009AE2BC /* CharacterSelectSuccessFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD152A84A808009AE2BC /* CharacterSelectSuccessFooter.swift */; };
 		155DDD182A855182009AE2BC /* LeftAndRightButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD172A855182009AE2BC /* LeftAndRightButtonsView.swift */; };
 		155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD1B2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift */; };
@@ -146,7 +145,6 @@
 		155DDD0D2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecommendCarResultSectionHeaders.swift; sourceTree = "<group>"; };
 		155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecommendCarInfoModel+Mock.swift"; sourceTree = "<group>"; };
 		155DDD112A84610A009AE2BC /* RecommendCarProductOptionModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecommendCarProductOptionModel+Mock.swift"; sourceTree = "<group>"; };
-		155DDD132A846354009AE2BC /* MainSectionHeaderModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainSectionHeaderModel+Mock.swift"; sourceTree = "<group>"; };
 		155DDD152A84A808009AE2BC /* CharacterSelectSuccessFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessFooter.swift; sourceTree = "<group>"; };
 		155DDD172A855182009AE2BC /* LeftAndRightButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAndRightButtonsView.swift; sourceTree = "<group>"; };
 		155DDD1B2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrQuoteSelectView.swift; sourceTree = "<group>"; };
@@ -343,7 +341,6 @@
 				155DDD0D2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift */,
 				155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */,
 				155DDD112A84610A009AE2BC /* RecommendCarProductOptionModel+Mock.swift */,
-				155DDD132A846354009AE2BC /* MainSectionHeaderModel+Mock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1013,7 +1010,6 @@
 				64ADA4992A7788C70003E2C1 /* Enum.swift in Sources */,
 				15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */,
 				64ADA4AD2A78A7090003E2C1 /* CommonButton.swift in Sources */,
-				155DDD142A846354009AE2BC /* MainSectionHeaderModel+Mock.swift in Sources */,
 				64ADA4892A77888C0003E2C1 /* RepositoyProtocol.swift in Sources */,
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
 				15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */,
