@@ -1,10 +1,23 @@
 import { detailSelectionList } from '@/global/data';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavigationRadioUnselected from './NavigationRadioUnselected';
 import NavigationRadioSelected from './NavigationRadioSelected';
 
 function NavigationRadioGroup() {
-  const [property, setProperty] = useState('트림');
+  const [property, setProperty] = useState('');
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/select/trim') {
+      setProperty('트림');
+    } else if (path === '/select/color') {
+      setProperty('색상');
+    } else if (path === '/select/option') {
+      setProperty('옵션');
+    } else {
+      setProperty('');
+    }
+  }, [location.pathname]);
 
   const onChangeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setProperty(target.value);

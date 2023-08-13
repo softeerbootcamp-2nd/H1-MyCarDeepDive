@@ -17,7 +17,7 @@ function Buttons() {
         height='h-[52px]'
         variant='primary'
         text='옵션 선택'
-        onClick={() => console.log('primary')}
+        onClick={() => navigation('/select/option')}
       />
     </div>
   );

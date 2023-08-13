@@ -17,6 +17,7 @@ import Title from './Trim/Title';
 import CompareButton from './Trim/CompareButton';
 import TrimRadio from './Trim/TrimRadio';
 import ChangeModal from './Trim/ChangeModal';
+import { useNavigate } from 'react-router-dom';
 
 function TrimSelectionPage() {
   const [carFeature, setCarFeature] = useState({
@@ -79,6 +80,8 @@ function TrimSelectionPage() {
     setShowOptionToolTip(true);
   };
 
+  const navigation = useNavigate();
+
   return (
     <>
       <SelectionCarWrapper>
@@ -121,7 +124,7 @@ function TrimSelectionPage() {
             height='h-[52px]'
             variant='primary'
             text='색상 선택'
-            onClick={() => console.log('primary')}
+            onClick={() => navigation('/select/color')}
           />
         </ColorChoiceButtonWrapper>
       </FeatureAndTrimSelectionWrapper>
