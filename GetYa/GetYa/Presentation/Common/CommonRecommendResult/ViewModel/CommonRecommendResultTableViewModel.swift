@@ -29,7 +29,7 @@ class CommonRecommendResultTableViewModel {
 }
 
 // MARK: - CommonRecommendResultTableViewDataSource
-extension CommonRecommendResultTableViewModel: CommonRecommendResultTableViewDataSource {
+extension CommonRecommendResultTableViewModel: CommonRecommendResultTableViewAdapterDataSource {
     func cellItem(in section: Int, _ row: Int) -> RecommendCarProductOptionModel {
         return dataSource[section][row]
     }
