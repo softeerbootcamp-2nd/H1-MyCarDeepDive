@@ -11,12 +11,12 @@ final class DetailRecommendCarResultTableViewAdapter: CommonRecommendCarResultTa
     // MARK: - Properties
     private var dataSource: DetailRecommendCarResultTableViewAdapterDataSource
     private var isWorkedMainHeaderInitialAnimation = false
-    private var isConfiguredMainHeader = false
     
     // MARK: - Lifecycles
     init(
         tableView: UITableView,
-        dataSource: DetailRecommendCarResultTableViewAdapterDataSource & CommonRecommendCarResultTableViewAdapterDataSource
+        dataSource: DetailRecommendCarResultTableViewAdapterDataSource
+        & CommonRecommendCarResultTableViewAdapterDataSource
     ) {
         self.dataSource = dataSource
         super.init(tableView: tableView, dataSource: dataSource)
@@ -86,10 +86,10 @@ extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
 // MARK: - UIScrollViewDelegate
 extension DetailRecommendCarResultTableViewAdapter {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard isWorkedMainHeaderInitialAnimation else { return }
         let offSetY = scrollView.contentOffset.y
         let svContentHeight = scrollView.contentSize.height
         let scrollableMaximumY = svContentHeight - scrollView.bounds.height
-        guard scrollableMaximumY > 0 else { return }
         if offSetY < 0 {
             scrollView.contentOffset.y = 0
         } else if offSetY > scrollableMaximumY {
