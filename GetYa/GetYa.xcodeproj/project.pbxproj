@@ -369,10 +369,10 @@
 		159B2CF62A825CD7003F47D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				15D8CC962A894C66009B19B9 /* CharacterSelectSuccessTableView.swift */,
 				155DDD152A84A808009AE2BC /* CharacterSelectSuccessFooter.swift */,
 				155DDD092A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift */,
 				155EAB442A81F0A200833B0E /* MainHeader */,
-				15D8CC962A894C66009B19B9 /* CharacterSelectSuccessTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
