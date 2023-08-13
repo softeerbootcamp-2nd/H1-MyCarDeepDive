@@ -33,7 +33,7 @@ class CommonRecommendResultTableView: UITableView {
     
     // MARK: - Private Functions
     private func configureUI() {
-        if frame != .zero {
+        if frame == .zero {
             translatesAutoresizingMaskIntoConstraints = false
         }
         backgroundColor = .white
