@@ -28,4 +28,9 @@ public class OptionsController {
         return new ApiResponse<>(optionsService.findAllBasicOptions(carSpecId));
     }
 
+    @PostMapping("/options/activity-log/{option-id}")
+    public ApiResponse<Boolean> userClickedOptionLog(@PathVariable("option-id") Long optionId) {
+        return new ApiResponse<>(optionsService.userClickedOptionLog(optionId));
+    }
+
 }

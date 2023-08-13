@@ -4,6 +4,7 @@ import static com.h1.mycardeepdive.fixture.OptionFixture.*;
 import static com.h1.mycardeepdive.fixture.PackageFixture.createPackageComfortII;
 import static com.h1.mycardeepdive.fixture.TagsFixture.createSafetyTag;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
@@ -132,5 +133,15 @@ class OptionsServiceTest {
 
         // then
         assertEquals(basicOptions.size(), 1);
+    }
+
+    @DisplayName("옵션 로그 전송에 성공한다.")
+    @Test
+    void sendUserOptionClickLog() {
+        // given
+        boolean result = optionsService.userClickedOptionLog(optionBuiltInCam.getId());
+
+        // when&then
+        assertTrue(result);
     }
 }

@@ -59,4 +59,9 @@ public class OptionsService {
                                         options, tagRepository.findTagsByOptionId(options.getId())))
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public boolean userClickedOptionLog(Long optionId) {
+        return true;
+    }
 }
