@@ -8,7 +8,7 @@
 import UIKit
 
 final class CharacterSelectSuccessFooter: UITableViewHeaderFooterView {
-    static let id = String(describing: CharacterSelectSuccessFooter.self)
+    static let identifier = "CharacterSelectSuccessFooter"
     enum Constants {
         static let intrinsicContentHeight: CGFloat = OnePixelDivider.uiConstant
             .topMargin + TotalMoneyDescriptionLabel.topMargin + GetYaFont.mediumBody3.lineHeight

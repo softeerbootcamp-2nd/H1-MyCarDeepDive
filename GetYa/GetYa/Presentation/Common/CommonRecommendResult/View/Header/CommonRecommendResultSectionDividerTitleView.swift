@@ -1,5 +1,5 @@
 //
-//  CommonResommendResultSectionDividerTitleView.swift
+//  CommonRecommendResultSectionDividerTitleView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/07.
@@ -7,26 +7,26 @@
 
 import UIKit
 
-final class CommonResommendResultSectionDividerTitleView: UIView {
-    enum Constant {
-        static let intrinsicContentHeight: CGFloat = {
+final class CommonRecommendResultSectionDividerTitleView: UIView {
+    enum Constants {
+        static var intrinsicContentHeight: CGFloat {
             let onePixelDividerHeight = OnePixelDivider.intrinsicContentHeight
             let sectionTitleHeight = SectionTitle.intrinsicContentHeight
             
            return onePixelDividerHeight + sectionTitleHeight
-        }()
+        }
         enum OnePixelDivider {
-            static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
-            static let topMargin: CGFloat = CGFloat(16).scaledHeight
-            static let trailingMargin: CGFloat = CGFloat(16).scaledWidth
-            static let height: CGFloat = CGFloat(1).scaledWidth
+            static let leadingMargin = CGFloat(16).scaledWidth
+            static let topMargin = CGFloat(16).scaledHeight
+            static let trailingMargin = CGFloat(16).scaledWidth
+            static let height = CGFloat(1).scaledWidth
             static let bgColor: UIColor = .GetYaPalette.gray700
             static var intrinsicContentHeight: CGFloat {
                 height + topMargin
             }
         }
         enum SectionTitle {
-            static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let leadingMargin = CGFloat(16).scaledWidth
             static let topMargin = CGFloat(20).scaledHeight
             static let fontColor: UIColor = .GetYaPalette.gray300
             static let font: GetYaFont = .regularBody4
@@ -37,7 +37,7 @@ final class CommonResommendResultSectionDividerTitleView: UIView {
     // MARK: - UI properties
     private let onePixelDivider: UIView = UIView(frame: .zero).set {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = Constant.OnePixelDivider.bgColor
+        $0.backgroundColor = Constants.OnePixelDivider.bgColor
     }
     
     private let sectionTitle = CommonLabel(
@@ -70,7 +70,7 @@ final class CommonResommendResultSectionDividerTitleView: UIView {
 }
 
 // MARK: - LayoutSupportable
-extension CommonResommendResultSectionDividerTitleView: LayoutSupportable {
+extension CommonRecommendResultSectionDividerTitleView: LayoutSupportable {
     func configureConstraints() {
         _=[onePixelDividerConstraints,
            sectionTitleConstraints].map {
@@ -80,30 +80,29 @@ extension CommonResommendResultSectionDividerTitleView: LayoutSupportable {
     
     // MARK: - Private layout supportable helper
     private var onePixelDividerConstraints: [NSLayoutConstraint] {
-        let const = Constant.OnePixelDivider.self
+        typealias Const = Constants.OnePixelDivider
         return [
             onePixelDivider.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: const.leadingMargin),
+                constant: Const.leadingMargin),
             onePixelDivider.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: const.topMargin),
+                constant: Const.topMargin),
             onePixelDivider.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: -const.trailingMargin),
-            onePixelDivider.heightAnchor.constraint(equalToConstant: const.height)]
+                constant: -Const.trailingMargin),
+            onePixelDivider.heightAnchor.constraint(equalToConstant: Const.height)]
     }
 
     private var sectionTitleConstraints: [NSLayoutConstraint] {
-        let const = Constant.SectionTitle.self
-        
+        typealias Const = Constants.SectionTitle
         return [
             sectionTitle.topAnchor.constraint(
                 equalTo: onePixelDivider.bottomAnchor,
-                constant: const.topMargin),
+                constant: Const.topMargin),
             sectionTitle.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: const.leadingMargin),
+                constant: Const.leadingMargin),
             sectionTitle.bottomAnchor.constraint(equalTo: bottomAnchor)
         ]
     }

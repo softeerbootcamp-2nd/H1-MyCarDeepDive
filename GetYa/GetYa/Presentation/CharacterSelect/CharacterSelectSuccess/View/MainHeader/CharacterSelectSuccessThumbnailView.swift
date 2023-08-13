@@ -8,19 +8,20 @@
 import UIKit
 
 final class CharacterSelectSuccessThumbnailView: UIView {
-    // MARK: - Constant
-    enum Constant {
+    enum Constants {
         static let layerColors: [UIColor] = [
             UIColor(red: 0.9, green: 0.92, blue: 0.94, alpha: 1),
             UIColor(red: 0.95, green: 0.96, blue: 0.97, alpha: 1)]
         static let intrinsicContentHeight: CGFloat = {
             let discriptionViewHeight = RecommendDiscriptionView.intrinsicContentHeight
             let subDiscriptionViewHeight =  RecommendSubDiscriptionView.intrinsicContentHeight
-            return discriptionViewHeight + subDiscriptionViewHeight + RecommendCarBackgroundView.uiConstant.height
+            return discriptionViewHeight + subDiscriptionViewHeight + RecommendCarBackgroundView.height
         }()
         enum RecommendKeywordStackView {
-            static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 41, trailingMargin: 16, height: 28)
+            static let leadingMargin = CGFloat(16).scaledWidth
+            static let topMargin = CGFloat(41).scaledHeight
+            static let trailingMargin = CGFloat(16).scaledWidth
+            static let height = CGFloat(28).scaledHeight
             static let interItemSpacing: CGFloat = 6
         }
         enum TagView {
@@ -28,66 +29,69 @@ final class CharacterSelectSuccessThumbnailView: UIView {
             static let height: CGFloat = UILayout.init(height: 28).height
             static let cornerRadius: CGFloat = height/2
             static let font: UIFont = UIFont.systemFont(ofSize: 12, weight: .semibold)
-            static let leadingMargin: CGFloat = .init(10).scaledWidth
-            static let trailingMargin: CGFloat = .init(10).scaledWidth
+            static let leadingMargin = CGFloat(10).scaledWidth
+            static let trailingMargin = CGFloat(10).scaledWidth
             static let borderWidth: CGFloat = 1
             static let borderColor: UIColor = .GetYaPalette.gray600
         }
         enum RecommendDiscriptionView {
-            static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 85)
+            static let leadingMargin = CGFloat(16).scaledWidth
+            static let topMargin = CGFloat(85).scaledHeight
             static let font: GetYaFont = .mediumHead1
             static let fontColor: UIColor = .GetYaPalette.gray0
-            static let intrinsicContentHeight: CGFloat = uiConstant.topMargin + font.lineHeight
+            static let intrinsicContentHeight: CGFloat = topMargin + font.lineHeight
         }
         enum RecommendSubDiscriptionView {
-            static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 3, bottomMargin: 79)
+            static let leadingMargin = CGFloat(16).scaledWidth
+            static let topMargin = CGFloat(3).scaledHeight
+            static let bottomMargin = CGFloat(79).scaledHeight
             static let font: GetYaFont = .regularBody4
             static let fontColor: UIColor = .GetYaPalette.gray200
-            static let intrinsicContentHeight: CGFloat = uiConstant.topMargin + font
-                .lineHeight + uiConstant.bottomMargin
+            static let intrinsicContentHeight: CGFloat = topMargin + font
+                .lineHeight + bottomMargin
         }
         enum RecommendCarImageView {
-            static let uiConstant: UILayout = .init(
-                leadingMargin: 62, topMargin: 145, bottomMargin: 11)
+            static let leadingMargin = CGFloat(62).scaledWidth
+            static let topMargin = CGFloat(145).scaledHeight
+            static let bottomMargin = CGFloat(11).scaledHeight
             static let imageName: String = "characterSelectSuccessCar"
         }
         enum RecommendCarBackgroundView {
-            static let uiConstant: UILayout = .init(height: 131)
+            static let height = CGFloat(131).scaledHeight
             static let bgColor: UIColor = .GetYaPalette.gray300
         }
     }
+    
     // MARK: - UI properties
     private let recommendKeywordStackView: UIStackView = .init(arrangedSubviews: []).set {
-        let const = Constant.RecommendKeywordStackView.self
+        let const = Constants.RecommendKeywordStackView.self
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .horizontal
         $0.spacing = const.interItemSpacing
     }
     private let recommendDiscriptionView: CommonLabel = .init(
-        fontType: Constant.RecommendDiscriptionView.font,
-        color: Constant.RecommendDiscriptionView.fontColor,
+        fontType: Constants.RecommendDiscriptionView.font,
+        color: Constants.RecommendDiscriptionView.fontColor,
         text: "질문에 기반한 추천 차량이에요"
     )
     private let recommendSubDiscriptionView: CommonLabel = .init(
-        fontType: Constant.RecommendSubDiscriptionView.font,
-        color: Constant.RecommendSubDiscriptionView.fontColor,
+        fontType: Constants.RecommendSubDiscriptionView.font,
+        color: Constants.RecommendSubDiscriptionView.fontColor,
         text: "전국의 Car master 분들이 엄선하여 추천했어요"
     )
     private let recommendCarImageView = UIImageView(
-        image: .init(named: Constant.RecommendCarImageView.imageName)
+        image: .init(named: Constants.RecommendCarImageView.imageName)
     ).set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
     }
     private let recommendCarBackgroundView = UIView(frame: .zero).set {
-        let const = Constant.RecommendCarBackgroundView.self
+        let const = Constants.RecommendCarBackgroundView.self
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = const.bgColor
     }
     
-    // MARK: - Lifecycle
+    // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -97,7 +101,7 @@ final class CharacterSelectSuccessThumbnailView: UIView {
         didSet {
             let gradient = CAGradientLayer()
             gradient.frame = bounds
-            gradient.colors = Constant.layerColors.map { $0.cgColor }
+            gradient.colors = Constants.layerColors.map { $0.cgColor }
             layer.insertSublayer(gradient, at: 0)
         }
     }
@@ -126,7 +130,7 @@ extension CharacterSelectSuccessThumbnailView {
     }
     
     func configureRecommendKeywordStackView(_ texts: [String]) {
-        let const = Constant.TagView.self
+        let const = Constants.TagView.self
         _=texts.map { text in
             recommendKeywordStackView.addArrangedSubview(TagView(text: text).set {
                 $0.configureCornerRadius(with: const.cornerRadius)
@@ -183,69 +187,68 @@ extension CharacterSelectSuccessThumbnailView: LayoutSupportable {
 // MARK: - Layout supportable private helper
 private extension CharacterSelectSuccessThumbnailView {
     var recommendKeywordStackViewConstraints: [NSLayoutConstraint] {
-        let const = Constant.RecommendKeywordStackView.self
+        typealias Const = Constants.RecommendKeywordStackView
         return [
             recommendKeywordStackView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: const.uiConstant.leadingMargin),
+                constant: Const.leadingMargin),
             recommendKeywordStackView.trailingAnchor.constraint(
                 lessThanOrEqualTo: trailingAnchor,
-                constant: -const.uiConstant.trailingMargin),
+                constant: -Const.trailingMargin),
             recommendKeywordStackView.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: const.uiConstant.topMargin),
+                constant: Const.topMargin),
             recommendKeywordStackView.heightAnchor.constraint(
-                equalToConstant: const.uiConstant.height)]
+                equalToConstant: Const.height)]
     }
     
     var recommendDiscriptionViewConstraints: [NSLayoutConstraint] {
-        let const = Constant.RecommendDiscriptionView.self
+        typealias Const = Constants.RecommendDiscriptionView
         return [
             recommendDiscriptionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: const.uiConstant.leadingMargin),
+                constant: Const.leadingMargin),
             recommendDiscriptionView.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: const.uiConstant.topMargin),
+                constant: Const.topMargin),
             recommendDiscriptionView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: const.font.lineHeight)]
+                lessThanOrEqualToConstant: Const.font.lineHeight)]
     }
     
     var recommendSubDiscriptionViewConstraints: [NSLayoutConstraint] {
-        let const = Constant.RecommendSubDiscriptionView.self
+        typealias Const = Constants.RecommendSubDiscriptionView
         return [
             recommendSubDiscriptionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: const.uiConstant.leadingMargin),
+                constant: Const.leadingMargin),
             recommendSubDiscriptionView.topAnchor.constraint(
                 equalTo: recommendDiscriptionView.bottomAnchor,
-                constant: const.uiConstant.topMargin),
+                constant: Const.topMargin),
             recommendSubDiscriptionView.bottomAnchor.constraint(
                 equalTo: recommendCarBackgroundView.topAnchor,
-                constant: -const.uiConstant.bottomMargin),
+                constant: -Const.bottomMargin),
             recommendSubDiscriptionView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: const.font.lineHeight)]
+                lessThanOrEqualToConstant: Const.font.lineHeight)]
     }
     
     var recommendCarImageViewConstraints: [NSLayoutConstraint] {
-        let const = Constant.RecommendCarImageView.self
+        typealias Const = Constants.RecommendCarImageView
         return [
             recommendCarImageView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: const.uiConstant.leadingMargin),
+                constant: Const.leadingMargin),
             recommendCarImageView.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: -const.uiConstant.bottomMargin),
+                constant: -Const.bottomMargin),
             recommendCarImageView.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
-                constant: -const.uiConstant.trailingMargin),
+                equalTo: trailingAnchor),
             recommendCarImageView.topAnchor.constraint(
                 greaterThanOrEqualTo: topAnchor,
-                constant: const.uiConstant.topMargin)]
+                constant: Const.topMargin)]
     }
     
     var recommendCarBackgroundViewConstraints: [NSLayoutConstraint] {
-        let const = Constant.RecommendCarBackgroundView.self
+        typealias Const = Constants.RecommendCarBackgroundView
         return [
             recommendCarBackgroundView.leadingAnchor.constraint(
                 equalTo: leadingAnchor),
@@ -254,6 +257,6 @@ private extension CharacterSelectSuccessThumbnailView {
             recommendCarBackgroundView.bottomAnchor.constraint(
                 equalTo: bottomAnchor),
             recommendCarBackgroundView.heightAnchor.constraint(
-                equalToConstant: const.uiConstant.height)]
+                equalToConstant: Const.height)]
     }
 }

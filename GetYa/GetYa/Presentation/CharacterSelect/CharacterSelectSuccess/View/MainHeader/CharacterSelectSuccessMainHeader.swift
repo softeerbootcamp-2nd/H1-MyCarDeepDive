@@ -8,18 +8,17 @@
 import UIKit
 
 final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
-    static let id = String(
-        describing: CharacterSelectSuccessMainHeader.self)
-    enum Constant {
+    static let identifier = "CharacterSelectSuccessMainHeader"
+    enum Constants {
         static let intrinsicContentHeight: CGFloat = {
             let thumbnailViewHeight = CharacterSelectSuccessThumbnailView
-            .Constant
+            .Constants
             .intrinsicContentHeight
             let recommendCarInfoHeight = CommonRecommendResultCarInfoView
-                .Constant
+                .Constants
                 .intrinsicContentHeight
-            let sectionDividerHeight = CommonResommendResultSectionDividerTitleView
-                .Constant
+            let sectionDividerHeight = CommonRecommendResultSectionDividerTitleView
+                .Constants
                 .intrinsicContentHeight
             return thumbnailViewHeight + recommendCarInfoHeight + sectionDividerHeight
         }()
@@ -28,7 +27,7 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
     // MARK: - UI properties
     private let thumbnailView = CharacterSelectSuccessThumbnailView()
     private let recommendCarInfoView = CommonRecommendResultCarInfoView()
-    private let sectionDivider = CommonResommendResultSectionDividerTitleView()
+    private let sectionDivider = CommonRecommendResultSectionDividerTitleView()
     
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {

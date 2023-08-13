@@ -14,7 +14,6 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
             static let leadingMargin: CGFloat = .init(16).scaledWidth
             static let topMargin: CGFloat = .init(10).scaledHeight
         }
-
         enum ReviewdTextView {
             static let leadingMargin: CGFloat = .init(16).scaledWidth
             static let topMargin: CGFloat = .init(12).scaledHeight
@@ -29,7 +28,6 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
                 let numberOfThreeLineText = "테스트테스트\n테스트중간\n마지막글"
                 return calculateHeight(from: numberOfThreeLineText)
             }
-            
             static func calculateHeight(from reviewText: String) -> CGFloat {
                 let tempPaddingLabel = CommonPaddingLabel(
                     padding: innerEdgeInset,
@@ -113,7 +111,7 @@ extension CommonRecommendResultTableViewCell: LayoutSupportable {
            reviewdTextViewConstraints
         ].map { NSLayoutConstraint.activate($0) }
         
-        recommendCarOptionView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        recommendCarOptionView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         recommendCarOptionView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         reviewdTextView.setContentHuggingPriority(.defaultLow, for: .vertical)
     }

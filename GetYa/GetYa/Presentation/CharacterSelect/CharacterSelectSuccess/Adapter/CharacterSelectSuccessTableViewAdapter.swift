@@ -50,7 +50,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
                 style: .default,
                 reuseIdentifier: CommonRecommendResultTableViewCell.identifier)
         }
-        var item = dataSource.cellItem(in: indexPath.section, indexPath.row)
+        let item = dataSource.cellItem(in: indexPath.section, indexPath.row)
         cell.configure(with: item)
         return cell
     }
@@ -74,11 +74,11 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0, let header = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: CharacterSelectSuccessMainHeader.id
+            withIdentifier: CharacterSelectSuccessMainHeader.identifier
         ) as? CharacterSelectSuccessMainHeader {
             return header.set { $0.configure(with: dataSource.mainSectionHeaderItem) }
         } else if section == 1, let header = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: CharacterSelectSuccesSecondSectionHeader.id
+            withIdentifier: CharacterSelectSuccesSecondSectionHeader.identifier
         ) as? CharacterSelectSuccesSecondSectionHeader {
             return header.set { $0.configure(with: dataSource.secondSectionHeaderItem) }
         }
@@ -87,10 +87,10 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return CharacterSelectSuccessMainHeader.Constant.intrinsicContentHeight
+            return CharacterSelectSuccessMainHeader.Constants.intrinsicContentHeight
         } else if section == 1 {
-            return CommonResommendResultSectionDividerTitleView
-                .Constant.intrinsicContentHeight
+            return CommonRecommendResultSectionDividerTitleView
+                .Constants.intrinsicContentHeight
         }
         return 0
     }
@@ -104,7 +104,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 1, let footer = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: CharacterSelectSuccessFooter.id
+            withIdentifier: CharacterSelectSuccessFooter.identifier
         ) as? CharacterSelectSuccessFooter {
             return footer.set {
                 $0.configure(with: dataSource.secondSectionFooterItem)

@@ -8,36 +8,29 @@
 import UIKit
 
 final class CommonRecommendResultCarInfoView: UIView {
-    // MARK: - Constant
-    enum Constant {
-        static let intrinsicContentHeight: CGFloat = {
+    enum Constants {
+        static var intrinsicContentHeight: CGFloat {
             let carKrNameHeight = CarKrNameLabel.intrinsicContentHeight
             let carOptionsLabelHeight = CarOptionsLabel.intrinsicContentHeight
             return carKrNameHeight + carOptionsLabelHeight
-        }()
-        
+        }
         enum CarKrNameLabel {
             static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
             static let topMargin: CGFloat = CGFloat(24).scaledHeight
             static let fontColor: UIColor = .GetYaPalette.gray50
             static let font: GetYaFont = .mediumHead2
-            static let intrinsicContentHeight = {
-                return topMargin + font.lineHeight
-            }()
+            static var intrinsicContentHeight = topMargin + font.lineHeight
         }
-        
         enum CarEnTrimLabel {
             static let leadingMargin: CGFloat = CGFloat(7.5).scaledWidth
             static let fontColor: UIColor = .GetYaPalette.gray300
             static let font: GetYaFont = .mediumBody2
         }
-        
         enum CarPriceLabel {
             static let trailingMargin: CGFloat = CGFloat(16).scaledWidth
             static let fontColor: UIColor = .GetYaPalette.gray100
             static let font: GetYaFont = .mediumHead4
         }
-        
         enum CarOptionsLabel {
             static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
             static let topMargin: CGFloat = CGFloat(5).scaledWidth
@@ -50,19 +43,19 @@ final class CommonRecommendResultCarInfoView: UIView {
     
     // MARK: - UI properties
     private let carKrNameLabel: CommonLabel = .init(
-        fontType: Constant.CarKrNameLabel.font,
-        color: Constant.CarKrNameLabel.fontColor)
+        fontType: Constants.CarKrNameLabel.font,
+        color: Constants.CarKrNameLabel.fontColor)
     private let carEnTrimLabel: CommonLabel = .init(
-        fontType: Constant.CarEnTrimLabel.font,
-        color: Constant.CarEnTrimLabel.fontColor)
+        fontType: Constants.CarEnTrimLabel.font,
+        color: Constants.CarEnTrimLabel.fontColor)
     private let carPriceLabel: CommonLabel = .init(
-        fontType: Constant.CarPriceLabel.font,
-        color: Constant.CarPriceLabel.fontColor)
+        fontType: Constants.CarPriceLabel.font,
+        color: Constants.CarPriceLabel.fontColor)
     private let carOptionsLabel: CommonLabel = .init(
-        fontType: Constant.CarOptionsLabel.font,
-        color: Constant.CarOptionsLabel.fontColor)
+        fontType: Constants.CarOptionsLabel.font,
+        color: Constants.CarOptionsLabel.fontColor)
     
-    // MARK: - Lifecycle
+    // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureSubviewUI(
@@ -116,46 +109,46 @@ extension CommonRecommendResultCarInfoView: LayoutSupportable {
 // MARK: - Private layout supportable
 private extension CommonRecommendResultCarInfoView {
     var carKrNameLabelConstraints: [NSLayoutConstraint] {
-        let const = Constant.CarKrNameLabel.self
+        typealias Const = Constants.CarKrNameLabel
         return [
             carKrNameLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: const.leadingMargin),
+                constant: Const.leadingMargin),
             carKrNameLabel.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: const.topMargin)]
+                constant: Const.topMargin)]
     }
     
     var carEnNameLabelConstraints: [NSLayoutConstraint] {
-        let const = Constant.CarEnTrimLabel.self
+        typealias Const = Constants.CarEnTrimLabel
         return [
             carEnTrimLabel.leadingAnchor.constraint(
                 equalTo: carKrNameLabel.trailingAnchor,
-                constant: const.leadingMargin),
+                constant: Const.leadingMargin),
             carEnTrimLabel.centerYAnchor.constraint(
                 equalTo: carKrNameLabel.centerYAnchor)
         ]
     }
     
     var carPriceLabelConstraints: [NSLayoutConstraint] {
-        let const = Constant.CarPriceLabel.self
+        typealias Const = Constants.CarPriceLabel
         return [
             carPriceLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: -const.trailingMargin),
+                constant: -Const.trailingMargin),
             carPriceLabel.centerYAnchor.constraint(
                 equalTo: carKrNameLabel.centerYAnchor)]
     }
     
     var carOptionsLabelConstraints: [NSLayoutConstraint] {
-        let const = Constant.CarOptionsLabel.self
+        typealias Const = Constants.CarOptionsLabel
         return [
             carOptionsLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: const.leadingMargin),
+                constant: Const.leadingMargin),
             carOptionsLabel.topAnchor.constraint(
                 equalTo: carKrNameLabel.bottomAnchor,
-                constant: const.topMargin),
+                constant: Const.topMargin),
             carOptionsLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor)]
     }

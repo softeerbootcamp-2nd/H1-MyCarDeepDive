@@ -21,16 +21,16 @@ final class CharacterSelectSuccessViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.register(
             CharacterSelectSuccessMainHeader.self,
-            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessMainHeader.id)
+            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessMainHeader.identifier)
         $0.register(
             CommonRecommendResultTableViewCell.self,
             forCellReuseIdentifier: CommonRecommendResultTableViewCell.identifier)
         $0.register(
             CharacterSelectSuccesSecondSectionHeader.self,
-            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccesSecondSectionHeader.id)
+            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccesSecondSectionHeader.identifier)
         $0.register(
             CharacterSelectSuccessFooter.self,
-            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessFooter.id)
+            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessFooter.identifier)
         $0.separatorStyle = .none
         
         let maximumReviewdTextViewHeightAndTopMargin = {
@@ -105,12 +105,21 @@ final class CharacterSelectSuccessViewController: UIViewController {
 // MARK: - LayoutSupportable
 extension CharacterSelectSuccessViewController: LayoutSupportable {
     func configureConstraints() {
+        configureTableViewConstriants()
+        configureBottomCustomOrQuoteView()
+    }
+    
+    // MARK: - LayoutSupportable private helper
+    private func configureTableViewConstriants() {
         _=tableView.set {
             NSLayoutConstraint.activate([
                 $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
                 $0.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
         }
+    }
+    
+    private func configureBottomCustomOrQuoteView() {
         _=bottomCustomOrQuoteView.set {
             NSLayoutConstraint.activate([
                 $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),

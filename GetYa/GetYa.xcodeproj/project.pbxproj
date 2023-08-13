@@ -20,7 +20,7 @@
 		155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD1B2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift */; };
 		155EAB372A7F5FCD00833B0E /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB362A7F5FCD00833B0E /* ProgressView.swift */; };
 		155EAB3A2A80824B00833B0E /* CharacterSelectSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */; };
-		155EAB3F2A80F14900833B0E /* CommonResommendResultSectionDividerTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB3E2A80F14900833B0E /* CommonResommendResultSectionDividerTitleView.swift */; };
+		155EAB3F2A80F14900833B0E /* CommonRecommendResultSectionDividerTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB3E2A80F14900833B0E /* CommonRecommendResultSectionDividerTitleView.swift */; };
 		155EAB432A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift */; };
 		155EAB462A81F0AF00833B0E /* CharacterSelectSuccessMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB452A81F0AF00833B0E /* CharacterSelectSuccessMainHeader.swift */; };
 		155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */; };
@@ -139,7 +139,7 @@
 		155DDD1B2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrQuoteSelectView.swift; sourceTree = "<group>"; };
 		155EAB362A7F5FCD00833B0E /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		155EAB392A80824B00833B0E /* CharacterSelectSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewController.swift; sourceTree = "<group>"; };
-		155EAB3E2A80F14900833B0E /* CommonResommendResultSectionDividerTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResommendResultSectionDividerTitleView.swift; sourceTree = "<group>"; };
+		155EAB3E2A80F14900833B0E /* CommonRecommendResultSectionDividerTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRecommendResultSectionDividerTitleView.swift; sourceTree = "<group>"; };
 		155EAB422A81163300833B0E /* CharacterSelectSuccessThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessThumbnailView.swift; sourceTree = "<group>"; };
 		155EAB452A81F0AF00833B0E /* CharacterSelectSuccessMainHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessMainHeader.swift; sourceTree = "<group>"; };
 		155ED71B2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionSubscription.swift"; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 		15059ABE2A88A48200303C01 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				155EAB3E2A80F14900833B0E /* CommonResommendResultSectionDividerTitleView.swift */,
+				155EAB3E2A80F14900833B0E /* CommonRecommendResultSectionDividerTitleView.swift */,
 				15059ABF2A88A54200303C01 /* CommonRecommendResultCarInfoView.swift */,
 			);
 			path = Header;
@@ -980,7 +980,7 @@
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
 				15DF95952A7C89DF0093EAC7 /* GetYaFont.swift in Sources */,
-				155EAB3F2A80F14900833B0E /* CommonResommendResultSectionDividerTitleView.swift in Sources */,
+				155EAB3F2A80F14900833B0E /* CommonRecommendResultSectionDividerTitleView.swift in Sources */,
 				155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */,
 				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
 				15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */,
