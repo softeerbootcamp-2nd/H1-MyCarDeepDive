@@ -8,6 +8,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CarSpecRepository extends JpaRepository<CarSpec, Long> {
-    List<CarSpec> findByEngineAndDrivingSystemAndBody(
-            Engine engine, DrivingSystem drivingSystem, Body body);
+    List<CarSpec> findByEngine_engineNameAndDrivingSystem_drivingSystemNameAndBody_bodyName(
+            String engineName, String drivingSystemName, String bodyName);
 }

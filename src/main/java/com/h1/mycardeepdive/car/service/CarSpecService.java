@@ -1,21 +1,16 @@
 package com.h1.mycardeepdive.car.service;
 
-import com.h1.mycardeepdive.car.domain.Body;
 import com.h1.mycardeepdive.car.domain.CarSpec;
-import com.h1.mycardeepdive.car.domain.DrivingSystem;
-import com.h1.mycardeepdive.car.domain.Engine;
-import com.h1.mycardeepdive.car.domain.repository.BodyRepository;
 import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
-import com.h1.mycardeepdive.car.domain.repository.DrivingSystemRepository;
-import com.h1.mycardeepdive.car.domain.repository.EngineRepository;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -24,17 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class CarSpecService {
 
     private final CarSpecRepository carSpecRepository;
-    private final EngineRepository engineRepository;
-    private final BodyRepository bodyRepository;
-    private final DrivingSystemRepository drivingSystemRepository;
 
     public List<CarSpecResponse> findCarSpecsBySpec(
             String engineName, String bodyName, String drivingSystemName) {
-        Engine engine = engineRepository.findByName(engineName);
-        Body body = bodyRepository.findByName(bodyName);
-        DrivingSystem drivingSystem = drivingSystemRepository.findByName(drivingSystemName);
         List<CarSpec> carSpecs =
-                carSpecRepository.findByEngineAndDrivingSystemAndBody(engine, drivingSystem, body);
+                carSpecRepository.findByEngine_engineNameAndDrivingSystem_drivingSystemNameAndBody_bodyName(engineName, drivingSystemName, bodyName);
         List<CarSpecResponse> carSpecResponses = new ArrayList<>();
         for (CarSpec carSpec : carSpecs) {
             CarSpecResponse carSpecResponse =
@@ -54,11 +43,8 @@ public class CarSpecService {
 
     public List<CarSpecComparisonResponse> findCarSpecComparisonsBySpec(
             String engineName, String bodyName, String drivingSystemName) {
-        Engine engine = engineRepository.findByName(engineName);
-        Body body = bodyRepository.findByName(bodyName);
-        DrivingSystem drivingSystem = drivingSystemRepository.findByName(drivingSystemName);
         List<CarSpec> carSpecs =
-                carSpecRepository.findByEngineAndDrivingSystemAndBody(engine, drivingSystem, body);
+                carSpecRepository.findByEngine_engineNameAndDrivingSystem_drivingSystemNameAndBody_bodyName(engineName, drivingSystemName, bodyName);
         List<CarSpecComparisonResponse> carSpecComparisonResponses = new ArrayList<>();
         for (CarSpec carSpec : carSpecs) {
             CarSpecComparisonResponse carSpecComparisonResponse =
