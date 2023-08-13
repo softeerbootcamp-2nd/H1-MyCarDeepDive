@@ -152,4 +152,35 @@ class OptionsControllerTest extends ControllerTestConfig {
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+    @DisplayName("패키지옵션 로그 전송 기능에 성공한다.")
+    @Test
+    void clickPackageLogTest() throws Exception {
+        // given
+        Long optionId = 1L;
+        when(optionsService.userClickedPackageLog(optionId)).thenReturn(true);
+
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.post(
+                                                DEFAULT_URL
+                                                        + "/package-options/activity-log/{option-id}",
+                                                optionId)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "options-docs4",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("옵션")
+                                                        .description("패키지 옵션 클릭 시, 로그 전송")
+                                                        .requestFields()
+                                                        .responseFields()
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }

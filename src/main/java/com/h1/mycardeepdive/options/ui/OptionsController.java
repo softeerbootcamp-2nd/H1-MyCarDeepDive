@@ -33,4 +33,8 @@ public class OptionsController {
         return new ApiResponse<>(optionsService.userClickedOptionLog(optionId));
     }
 
+    @PostMapping("/package-options/activity-log/{option-id}")
+    public ApiResponse<Boolean> userClickedPackageLog(@PathVariable("option-id") Long optionId) {
+        return new ApiResponse<>(optionsService.userClickedPackageLog(optionId));
+    }
 }

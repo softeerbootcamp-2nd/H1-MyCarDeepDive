@@ -64,4 +64,9 @@ public class OptionsService {
     public boolean userClickedOptionLog(Long optionId) {
         return true;
     }
+
+    @Transactional
+    public boolean userClickedPackageLog(Long optionId) {
+        return true;
+    }
 }

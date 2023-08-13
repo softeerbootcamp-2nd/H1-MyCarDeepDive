@@ -144,4 +144,14 @@ class OptionsServiceTest {
         // when&then
         assertTrue(result);
     }
+
+    @DisplayName("패키지옵션 로그 전송에 성공한다.")
+    @Test
+    void sendUserPackageClickLog() {
+        // given
+        boolean result = optionsService.userClickedPackageLog(optionPackageComfortII.getId());
+
+        // when&then
+        assertTrue(result);
+    }
 }
