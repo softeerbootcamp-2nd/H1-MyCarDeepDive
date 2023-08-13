@@ -32,7 +32,7 @@ extension RecommendCarProductOptionModel {
               optionPrice: 1390000,
               optionReview: "해당 옵션이 후석 승객 알림이 있어서 좋아요. 뒷자리 아이들을 확인할 수 있거든요."),
         .init(optionImage: "recommendCarOption",
-              optionName: "현대 스마트센스 I",
+              optionName: "현대 스마트센스 ㅌI",
               optionPrice: 790000,
               optionReview: "전방 충돌 방지 보조 기능이 있어 안전을 위해서라면 무조건 추가해야 하는 옵션이에요.")]
     
