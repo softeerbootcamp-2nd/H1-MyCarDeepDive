@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterSelectSuccessTableViewAdapter: NSObject {
+final class CharacterSelectSuccessTableViewAdapter: CommonRecommendResultTableViewAdapter {
     // MARK: - Properties
     private var dataSource: CharacterSSTableViewAdapterDataSource
     private var isWorkedMainHeaderInitialAnimation = false
@@ -16,43 +16,12 @@ final class CharacterSelectSuccessTableViewAdapter: NSObject {
     // MARK: - Lifecycles
     init(
         tableView: UITableView,
-        dataSource: CharacterSSTableViewAdapterDataSource
+        dataSource: CharacterSSTableViewAdapterDataSource & CommonRecommendResultTableViewAdapterDataSource
     ) {
         self.dataSource = dataSource
-        super.init()
+        super.init(tableView: tableView, dataSource: dataSource)
         tableView.dataSource = self
         tableView.delegate = self
-    }
-}
-
-// MARK: - UITableViewDataSource
-extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource.numberOfSections
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
-        return dataSource.numberOfRows(in: section)
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CommonRecommendResultTableViewCell.identifier,
-            for: indexPath
-        ) as? CommonRecommendResultTableViewCell else {
-            return .init(
-                style: .default,
-                reuseIdentifier: CommonRecommendResultTableViewCell.identifier)
-        }
-        let item = dataSource.cellItem(in: indexPath.section, indexPath.row)
-        cell.configure(with: item)
-        return cell
     }
 }
 
