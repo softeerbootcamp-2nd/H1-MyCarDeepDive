@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		15059AC02A88A54200303C01 /* CommonRecommendResultCarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15059ABF2A88A54200303C01 /* CommonRecommendResultCarInfoView.swift */; };
+		155729FF2A89563200D136C6 /* MainSectionHeaderModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155729FE2A89563200D136C6 /* MainSectionHeaderModel+Mock.swift */; };
 		155DDD052A82D040009AE2BC /* CharacterSelectSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD042A82D040009AE2BC /* CharacterSelectSuccessViewModel.swift */; };
 		155DDD072A82D3B2009AE2BC /* CharacterSelectSuccessViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* CharacterSelectSuccessViewModelable.swift */; };
 		155DDD0A2A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD092A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift */; };
@@ -139,6 +140,7 @@
 
 /* Begin PBXFileReference section */
 		15059ABF2A88A54200303C01 /* CommonRecommendResultCarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRecommendResultCarInfoView.swift; sourceTree = "<group>"; };
+		155729FE2A89563200D136C6 /* MainSectionHeaderModel+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainSectionHeaderModel+Mock.swift"; sourceTree = "<group>"; };
 		155DDD042A82D040009AE2BC /* CharacterSelectSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewModel.swift; sourceTree = "<group>"; };
 		155DDD062A82D3B2009AE2BC /* CharacterSelectSuccessViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewModelable.swift; sourceTree = "<group>"; };
 		155DDD092A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccesSecondSectionHeader.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 			children = (
 				155DDD0D2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift */,
 				155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */,
+				155729FE2A89563200D136C6 /* MainSectionHeaderModel+Mock.swift */,
 				155DDD112A84610A009AE2BC /* RecommendCarProductOptionModel+Mock.swift */,
 			);
 			path = Mock;
@@ -1058,6 +1061,7 @@
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
+				155729FF2A89563200D136C6 /* MainSectionHeaderModel+Mock.swift in Sources */,
 				15DF95952A7C89DF0093EAC7 /* GetYaFont.swift in Sources */,
 				155EAB3F2A80F14900833B0E /* CommonRecommendResultSectionDividerTitleView.swift in Sources */,
 				155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */,
