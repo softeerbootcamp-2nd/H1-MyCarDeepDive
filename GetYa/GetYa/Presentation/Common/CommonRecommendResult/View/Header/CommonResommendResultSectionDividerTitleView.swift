@@ -1,5 +1,5 @@
 //
-//  CommonResommendResultSectionDividerView.swift
+//  CommonResommendResultSectionDividerTitleView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/07.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommonResommendResultSectionDividerView: UIView {
+final class CommonResommendResultSectionDividerTitleView: UIView {
     enum Constant {
         static let intrinsicContentHeight: CGFloat = {
             let onePixelDividerHeight = OnePixelDivider.intrinsicContentHeight
@@ -70,7 +70,7 @@ final class CommonResommendResultSectionDividerView: UIView {
 }
 
 // MARK: - LayoutSupportable
-extension CommonResommendResultSectionDividerView: LayoutSupportable {
+extension CommonResommendResultSectionDividerTitleView: LayoutSupportable {
     func configureConstraints() {
         _=[onePixelDividerConstraints,
            sectionTitleConstraints].map {
