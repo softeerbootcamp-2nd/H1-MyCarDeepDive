@@ -369,7 +369,7 @@
 			path = Adapter;
 			sourceTree = "<group>";
 		};
-		159B2CF52A825CC5003F47D6 /* CharacterSelectSuccess */ = {
+		159B2CF52A825CC5003F47D6 /* AdditionalRecommendCarResult */ = {
 			isa = PBXGroup;
 			children = (
 				155DDD0C2A840F41009AE2BC /* Mock */,
@@ -379,7 +379,7 @@
 				159B2CF72A825CE0003F47D6 /* Protocol */,
 				159B2CF62A825CD7003F47D6 /* View */,
 			);
-			path = CharacterSelectSuccess;
+			path = AdditionalRecommendCarResult;
 			sourceTree = "<group>";
 		};
 		159B2CF62A825CD7003F47D6 /* View */ = {
@@ -497,7 +497,7 @@
 		641AB51B2A7B7C7300CF88C0 /* CharacterSelect */ = {
 			isa = PBXGroup;
 			children = (
-				159B2CF52A825CC5003F47D6 /* CharacterSelectSuccess */,
+				159B2CF52A825CC5003F47D6 /* AdditionalRecommendCarResult */,
 				647FBF132A7CB5C900507AE9 /* View */,
 				641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */,
 				6412D08D2A81F1FB001E4005 /* DetailLifeStyleSelectViewController.swift */,
