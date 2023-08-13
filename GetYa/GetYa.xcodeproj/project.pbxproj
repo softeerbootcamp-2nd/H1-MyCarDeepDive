@@ -269,10 +269,10 @@
 		15059ABC2A88A18D00303C01 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				15D8CC8B2A89242B009B19B9 /* CommonRecommendResultTableView.swift */,
 				159B2CFD2A825F5F003F47D6 /* CommonRecommendResultTableViewCell.swift */,
 				155DDD1B2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift */,
 				15059ABE2A88A48200303C01 /* Header */,
-				15D8CC8B2A89242B009B19B9 /* CommonRecommendResultTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
