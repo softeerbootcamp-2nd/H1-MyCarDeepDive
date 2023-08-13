@@ -44,7 +44,7 @@ public class OptionFixture {
                 .name(name)
                 .imgUrl(imgUrl)
                 .chooseRate(chooseRate)
-                .badgeName(null)
+                .badgeName(Badge.NONE)
                 .description(description)
                 .price(price)
                 .summary(summary)
