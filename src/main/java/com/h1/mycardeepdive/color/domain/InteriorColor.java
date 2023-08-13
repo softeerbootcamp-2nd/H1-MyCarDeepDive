@@ -4,6 +4,8 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -22,4 +24,7 @@ public class InteriorColor {
     private String comment;
 
     private String interior_img_url;
+
+    @OneToMany(mappedBy = "interiorColor", fetch = FetchType.LAZY)
+    private List<ColorCombination> colorCombinationList;
 }
