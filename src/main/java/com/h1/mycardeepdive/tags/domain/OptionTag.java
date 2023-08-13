@@ -24,11 +24,17 @@ public class OptionTag {
     @JoinColumn(name = "tag_id")
     private Tags tag;
 
+    private double position_x;
+
+    private double position_y;
+
     @Builder
-    public OptionTag(Long id, Options option, Tags tag) {
+    public OptionTag(Long id, Options option, Tags tag, double position_x, double position_y) {
         this.id = id;
         this.option = option;
         this.tag = tag;
+        this.position_x = position_x;
+        this.position_y = position_y;
     }
 
     @Override
