@@ -44,11 +44,11 @@ final class CustomOrQuoteSelectView: UIView {
     
     private var gradientView: UIView = UIView(frame: .init(
         x: 0,
-        y: 0, width: Constants.width,
+        y: 0,
+        width: Constants.width,
         height: Constants.gradientLayerHeight)
     ).set {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .none
     }
     
     // MARK: - Properties
