@@ -58,10 +58,10 @@ class BottomSheetLargeContentView: UIView {
         $0.isLayoutMarginsRelativeArrangement = true
     }
     private let trimNameLabel = CommonLabel(
-        fontType: .custom(14, -0.2, 14, "HyundaiSansHeadKRRegular"),
+        fontType: .custom(size: 14, kern: -0.2, lineHeight: 14, nameType: .regularHead),
         color: .GetYaPalette.gray500)
     private let totalPriceLabel = CommonLabel(
-        fontType: .custom(18, -0.3, 18, "HyundaiSansHeadKRMedium"),
+        fontType: .custom(size: 18, kern: -0.3, lineHeight: 18, nameType: .mediumHead),
         color: .GetYaPalette.gray0)
     private let quoteButton = CommonButton(
         font: GetYaFont.mediumBody3.uiFont,
