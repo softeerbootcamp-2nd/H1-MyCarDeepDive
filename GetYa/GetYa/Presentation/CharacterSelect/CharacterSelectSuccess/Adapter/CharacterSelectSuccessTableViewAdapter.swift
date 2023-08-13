@@ -57,6 +57,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
     }
 }
 
+// TODO: 리뷰 line만큼 계산된 tableView cell dynamic한 높이로 반영 해야합니다.
 // MARK: - UITableViewDelegate
 extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     func tableView(
