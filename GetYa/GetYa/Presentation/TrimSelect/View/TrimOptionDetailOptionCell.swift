@@ -30,15 +30,6 @@ class TrimOptionDetailOptionCell: UICollectionViewCell {
     static let identifier = "TrimOptionDetailOptionCell"
     
     // MARK: - Lifecycles
-    init(image: UIImage?, text: String) {
-        super.init(frame: .zero)
-        
-        setupViews()
-        configureUI()
-        setImage(image: image)
-        setText(text: text)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
