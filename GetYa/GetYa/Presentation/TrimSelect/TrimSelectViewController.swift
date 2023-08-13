@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: 페이지 뷰컨으로 바꾸고 네비게이션 바 밑에 뷰 추가
 class TrimSelectViewController: UIViewController {
     // MARK: - UI properties
     private let contentView = TrimSelectContentView()
@@ -36,8 +37,22 @@ class TrimSelectViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
         
+        configureNavigationBar()
         configureContentView()
         configureBottomSheetView()
+    }
+    
+    private func configureNavigationBar() {
+        let image = UIImage(named: "Black_Logo")
+        self.navigationItem.title = ""
+        self.navigationItem.titleView = UIImageView(image: image)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "arrow.left")?.withTintColor(
+                .GetYaPalette.gray0,
+                renderingMode: .alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: #selector(touchUpNavigationBackButton))
     }
     
     private func configureContentView() {
@@ -63,6 +78,11 @@ class TrimSelectViewController: UIViewController {
     // MARK: - Functions
     
     // MARK: - Objc Functions
+    
+    // TODO: - 페이지 뷰컨 상태에 따라 Pop 로직이 바뀌도록 해야함.
+    @objc private func touchUpNavigationBackButton() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 // MARK: - BottomSheetDelegate
