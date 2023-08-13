@@ -81,7 +81,7 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        let reset = RecommendCarProductOptionModel(
+        let reset = DetailRecommendCarProductOptionModel(
             optionImage: nil,
             optionName: nil,
             optionPrice: nil,
@@ -90,7 +90,7 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
     }
     
     // MARK: - Functions
-    func configure(with productOptionModel: RecommendCarProductOptionModel) {
+    func configure(with productOptionModel: DetailRecommendCarProductOptionModel) {
         var image: UIImage?
         if let imageName = productOptionModel.optionImage {
             image = UIImage(named: imageName)

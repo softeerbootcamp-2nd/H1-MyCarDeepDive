@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessThumbnailView.swift
+//  DetailRecommendCarResultThumbnailView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/07.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterSelectSuccessThumbnailView: UIView {
+final class DetailRecommendCarResultThumbnailView: UIView {
     enum Constants {
         static let layerColors: [UIColor] = [
             UIColor(red: 0.9, green: 0.92, blue: 0.94, alpha: 1),
@@ -118,7 +118,7 @@ final class CharacterSelectSuccessThumbnailView: UIView {
 }
 
 // MARK: - Helper
-extension CharacterSelectSuccessThumbnailView {
+extension DetailRecommendCarResultThumbnailView {
     func configureUI() {
         configureSubviewUI(
             with: recommendKeywordStackView,
@@ -172,7 +172,7 @@ extension CharacterSelectSuccessThumbnailView {
 }
 
 // MARK: - LayoutSupportable
-extension CharacterSelectSuccessThumbnailView: LayoutSupportable {
+extension DetailRecommendCarResultThumbnailView: LayoutSupportable {
     func configureConstraints() {
         _=[recommendKeywordStackViewConstraints,
            recommendDiscriptionViewConstraints,
@@ -185,7 +185,7 @@ extension CharacterSelectSuccessThumbnailView: LayoutSupportable {
 }
 
 // MARK: - Layout supportable private helper
-private extension CharacterSelectSuccessThumbnailView {
+private extension DetailRecommendCarResultThumbnailView {
     var recommendKeywordStackViewConstraints: [NSLayoutConstraint] {
         typealias Const = Constants.RecommendKeywordStackView
         return [

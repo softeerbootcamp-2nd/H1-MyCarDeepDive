@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessTableViewAdapter.swift
+//  DetailRecommendCarResultTableViewAdapter.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/08.
@@ -7,16 +7,16 @@
 
 import UIKit
 
-final class CharacterSelectSuccessTableViewAdapter: CommonRecommendResultTableViewAdapter {
+final class DetailRecommendCarResultTableViewAdapter: CommonRecommendResultTableViewAdapter {
     // MARK: - Properties
-    private var dataSource: CharacterSSTableViewAdapterDataSource
+    private var dataSource: DetailRecommendCarResultTableViewAdapterDataSource
     private var isWorkedMainHeaderInitialAnimation = false
     private var isConfiguredMainHeader = false
     
     // MARK: - Lifecycles
     init(
         tableView: UITableView,
-        dataSource: CharacterSSTableViewAdapterDataSource & CommonRecommendResultTableViewAdapterDataSource
+        dataSource: DetailRecommendCarResultTableViewAdapterDataSource & CommonRecommendResultTableViewAdapterDataSource
     ) {
         self.dataSource = dataSource
         super.init(tableView: tableView, dataSource: dataSource)
@@ -26,7 +26,7 @@ final class CharacterSelectSuccessTableViewAdapter: CommonRecommendResultTableVi
 }
 
 // MARK: - UITableViewDelegate
-extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
+extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
         willDisplayHeaderView view: UIView,
@@ -35,7 +35,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
         guard
             !isWorkedMainHeaderInitialAnimation,
             section == 0,
-            let header = view as? CharacterSelectSuccessMainHeader
+            let header = view as? DetailRecommendCarResultMainHeader
         else { return }
         isWorkedMainHeaderInitialAnimation.toggle()
         header.showAnimation()
@@ -43,12 +43,12 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0, let header = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: CharacterSelectSuccessMainHeader.identifier
-        ) as? CharacterSelectSuccessMainHeader {
+            withIdentifier: DetailRecommendCarResultMainHeader.identifier
+        ) as? DetailRecommendCarResultMainHeader {
             return header.set { $0.configure(with: dataSource.mainSectionHeaderItem) }
         } else if section == 1, let header = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: CharacterSelectSuccesSecondSectionHeader.identifier
-        ) as? CharacterSelectSuccesSecondSectionHeader {
+            withIdentifier: DetailRecommendCarResultSecondSectionHeader.identifier
+        ) as? DetailRecommendCarResultSecondSectionHeader {
             return header.set { $0.configure(with: dataSource.secondSectionHeaderItem) }
         }
         return .init(frame: .zero)
@@ -56,7 +56,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return CharacterSelectSuccessMainHeader.Constants.intrinsicContentHeight
+            return DetailRecommendCarResultMainHeader.Constants.intrinsicContentHeight
         } else if section == 1 {
             return CommonRecommendResultSectionDividerTitleView
                 .Constants.intrinsicContentHeight
@@ -66,15 +66,15 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 1 {
-            return CharacterSelectSuccessFooter.Constants.intrinsicContentHeight
+            return DetailRecommendCarResultFooter.Constants.intrinsicContentHeight
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 1, let footer = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: CharacterSelectSuccessFooter.identifier
-        ) as? CharacterSelectSuccessFooter {
+            withIdentifier: DetailRecommendCarResultFooter.identifier
+        ) as? DetailRecommendCarResultFooter {
             return footer.set {
                 $0.configure(with: dataSource.secondSectionFooterItem)
             }
@@ -84,7 +84,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
 }
 
 // MARK: - UIScrollViewDelegate
-extension CharacterSelectSuccessTableViewAdapter {
+extension DetailRecommendCarResultTableViewAdapter {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offSetY = scrollView.contentOffset.y
         let svContentHeight = scrollView.contentSize.height

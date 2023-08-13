@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessFooter.swift
+//  DetailRecommendCarResultFooter.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/10.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class CharacterSelectSuccessFooter: UITableViewHeaderFooterView {
-    static let identifier = "CharacterSelectSuccessFooter"
+final class DetailRecommendCarResultFooter: UITableViewHeaderFooterView {
+    static let identifier = "DetailRecommendCarResultFooter"
     enum Constants {
         static let intrinsicContentHeight: CGFloat = OnePixelDivider.uiConstant
             .topMargin + TotalMoneyDescriptionLabel.topMargin + GetYaFont.mediumBody3.lineHeight
@@ -65,7 +65,7 @@ final class CharacterSelectSuccessFooter: UITableViewHeaderFooterView {
 }
 
 // MARK: - LayoutSupportable
-extension CharacterSelectSuccessFooter: LayoutSupportable {
+extension DetailRecommendCarResultFooter: LayoutSupportable {
     func configureConstraints() {
         _=[onePixelDividerConstraints,
            totalMoneyDescriptionLabelConstraints,

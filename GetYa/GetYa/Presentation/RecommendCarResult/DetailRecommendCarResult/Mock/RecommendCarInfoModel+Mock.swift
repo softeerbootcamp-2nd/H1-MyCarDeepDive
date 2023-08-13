@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension RecommendCarInfoModel {
+extension DetailRecommendCarInfoModel {
     static let palisadeMock: Self = .init(
         carKrName: "팰리세이드",
         carEnTrimName: "Prestige",

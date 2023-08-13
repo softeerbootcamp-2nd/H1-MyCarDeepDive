@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessViewController.swift
+//  DetailRecommendCarResultViewController.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/07.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterSelectSuccessViewController: UIViewController {
+final class DetailRecommendCarResultViewController: UIViewController {
     private enum Constants {
         enum BottomCustomOrQuoteView {
             static let height: CGFloat = CustomOrQuoteSelectView
@@ -16,20 +16,20 @@ final class CharacterSelectSuccessViewController: UIViewController {
     }
     
     // MARK: - UI Properties
-    private let tableView = CharacterSelectSuccessTableView(frame: .zero, style: .grouped)
+    private let tableView = DetailRecommendCarResultTableView(frame: .zero, style: .grouped)
     private let bottomCustomOrQuoteView = CustomOrQuoteSelectView()
     
     // MARK: - Properties
-    private var adapter: CharacterSelectSuccessTableViewAdapter!
+    private var adapter: DetailRecommendCarResultTableViewAdapter!
     private var viewModel: (
         any CharacterSelectSuccessViewModelable
-        & CharacterSSTableViewAdapterDataSource
+        & DetailRecommendCarResultTableViewAdapterDataSource
         & CommonRecommendResultTableViewAdapterDataSource)!
     
     // MARK: - Lifecycles
     init(
         viewModel: some CharacterSelectSuccessViewModelable
-        & CharacterSSTableViewAdapterDataSource
+        & DetailRecommendCarResultTableViewAdapterDataSource
         & CommonRecommendResultTableViewAdapterDataSource
     ) {
         super.init(nibName: nil, bundle: nil)
@@ -38,7 +38,7 @@ final class CharacterSelectSuccessViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        viewModel = CharacterSelectSuccessViewModel()
+        viewModel = DetailRecommendCarResultViewModel()
     }
     
     override func viewDidLoad() {
@@ -80,7 +80,7 @@ final class CharacterSelectSuccessViewController: UIViewController {
 }
 
 // MARK: - LayoutSupportable
-extension CharacterSelectSuccessViewController: LayoutSupportable {
+extension DetailRecommendCarResultViewController: LayoutSupportable {
     func configureConstraints() {
         configureTableViewConstriants()
         configureBottomCustomOrQuoteView()

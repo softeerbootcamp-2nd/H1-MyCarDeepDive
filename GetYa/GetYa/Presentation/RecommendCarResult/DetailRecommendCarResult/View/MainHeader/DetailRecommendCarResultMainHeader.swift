@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessMainHeader.swift
+//  DetailRecommendCarResultMainHeader.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/08.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
-    static let identifier = "CharacterSelectSuccessMainHeader"
+final class DetailRecommendCarResultMainHeader: UITableViewHeaderFooterView {
+    static let identifier = "DetailRecommendCarResultMainHeader"
     enum Constants {
         static let intrinsicContentHeight: CGFloat = {
-            let thumbnailViewHeight = CharacterSelectSuccessThumbnailView
+            let thumbnailViewHeight = DetailRecommendCarResultThumbnailView
             .Constants
             .intrinsicContentHeight
             let recommendCarInfoHeight = CommonRecommendResultCarInfoView
@@ -25,7 +25,7 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
     }
     
     // MARK: - UI properties
-    private let thumbnailView = CharacterSelectSuccessThumbnailView()
+    private let thumbnailView = DetailRecommendCarResultThumbnailView()
     private let recommendCarInfoView = CommonRecommendResultCarInfoView()
     private let sectionDivider = CommonRecommendResultSectionDividerTitleView()
     
@@ -56,7 +56,7 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
     }
     
     // MARK: - Functions
-    func configure(with: MainSectionHeaderModel) {
+    func configure(with: DetailRecommendCarResultMainHeaderModel) {
         setThumbnailView(with.thumbnailKeywords)
         setRecommendCarInfoView(with.recommendCarProductOption)
         setSectionDivider(with.firstSectionTitle)
@@ -72,7 +72,7 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
         thumbnailView.configureRecommendKeywordStackView(thumbnailKeywords)
     }
     
-    private func setRecommendCarInfoView(_ carInfo: RecommendCarInfoModel) {
+    private func setRecommendCarInfoView(_ carInfo: DetailRecommendCarInfoModel) {
         recommendCarInfoView.configure(with: carInfo)
     }
     
@@ -82,7 +82,7 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
 }
 
 // MARK: - LayoutSupportable
-extension CharacterSelectSuccessMainHeader: LayoutSupportable {
+extension DetailRecommendCarResultMainHeader: LayoutSupportable {
     func configureConstraints() {
         _=[thumbnailViewConstraints,
            recommendCarInfoConstraints,
@@ -92,7 +92,7 @@ extension CharacterSelectSuccessMainHeader: LayoutSupportable {
 }
 
 // MARK: - LayoutSupportable private functions
-private extension CharacterSelectSuccessMainHeader {
+private extension DetailRecommendCarResultMainHeader {
     var thumbnailViewConstraints: [NSLayoutConstraint] {
         [thumbnailView.leadingAnchor.constraint(
             equalTo: leadingAnchor),

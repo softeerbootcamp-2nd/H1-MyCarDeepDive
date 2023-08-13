@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessViewModel.swift
+//  DetailRecommendCarResultViewModel.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/09.
@@ -9,23 +9,23 @@ import Foundation
 import Combine
 
 // MARK: - View Model
-struct RecommendCarInfoModel {
+struct DetailRecommendCarInfoModel {
     var carKrName: String
     var carEnTrimName: String
     var carPrice: String
     var carOptions: String
 }
 
-struct MainSectionHeaderModel {
+struct DetailRecommendCarResultMainHeaderModel {
     var thumbnailKeywords: [String]
-    var recommendCarProductOption: RecommendCarInfoModel
+    var recommendCarProductOption: DetailRecommendCarInfoModel
     var firstSectionTitle: String
 }
 
-final class CharacterSelectSuccessViewModel: CommonRecommendResultTableViewModel {
+final class DetailRecommendCarResultViewModel: CommonRecommendResultTableViewModel {
     // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
-    private var mainSectionHeader: MainSectionHeaderModel
+    private var mainSectionHeader: DetailRecommendCarResultMainHeaderModel
     private var sectionHeaders: [String]
     private var secondSectionFooter: String
     
@@ -33,12 +33,12 @@ final class CharacterSelectSuccessViewModel: CommonRecommendResultTableViewModel
         mainSectionHeader = .mock
         sectionHeaders = DetailRecommendCarResultSectionHeaders.lists
         secondSectionFooter = "48,120,000원"
-        super.init(dataSource: RecommendCarProductOptionModel.mocks)
+        super.init(dataSource: DetailRecommendCarProductOptionModel.mocks)
     }
 }
 
 // MARK: - CharacterSelectSuccessViewModelable
-extension CharacterSelectSuccessViewModel: CharacterSelectSuccessViewModelable {
+extension DetailRecommendCarResultViewModel: CharacterSelectSuccessViewModelable {
     func transform(input: Input) -> Output {
         return Publishers.MergeMany(
             customButtonEventChains(input),
@@ -49,7 +49,7 @@ extension CharacterSelectSuccessViewModel: CharacterSelectSuccessViewModelable {
 }
 
 // MARK: - CharacterSelectSuccessViewModelable private function
-private extension CharacterSelectSuccessViewModel {
+private extension DetailRecommendCarResultViewModel {
     func customButtonEventChains(_ input: Input) -> Output {
         return input.customButtonEvent
             .map { _ -> State in return .gotoCustomPage }
@@ -71,12 +71,12 @@ private extension CharacterSelectSuccessViewModel {
 }
 
 // MARK: - CharacterSSTableViewAdapterDataSource
-extension CharacterSelectSuccessViewModel: CharacterSSTableViewAdapterDataSource {
+extension DetailRecommendCarResultViewModel: DetailRecommendCarResultTableViewAdapterDataSource {
     var secondSectionFooterItem: String {
         secondSectionFooter
     }
     
-    var mainSectionHeaderItem: MainSectionHeaderModel {
+    var mainSectionHeaderItem: DetailRecommendCarResultMainHeaderModel {
         mainSectionHeader
     }
     

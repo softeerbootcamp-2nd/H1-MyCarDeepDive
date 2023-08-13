@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccesSecondSectionHeader.swift
+//  DetailRecommendCarResultSecondSectionHeader.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/09.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class CharacterSelectSuccesSecondSectionHeader: UITableViewHeaderFooterView {
-    static let identifier = "CharacterSelectSuccesSecondSectionHeader"
+final class DetailRecommendCarResultSecondSectionHeader: UITableViewHeaderFooterView {
+    static let identifier = "DetailRecommendCarResultSecondSectionHeader"
     // MARK: - UI properties
     private let sectionTitleAndLineDividerView = CommonRecommendResultSectionDividerTitleView()
     
@@ -29,7 +29,7 @@ final class CharacterSelectSuccesSecondSectionHeader: UITableViewHeaderFooterVie
 }
 
 // MARK: - LayoutSupportable
-extension CharacterSelectSuccesSecondSectionHeader: LayoutSupportable {
+extension DetailRecommendCarResultSecondSectionHeader: LayoutSupportable {
     func configureConstraints() {
         NSLayoutConstraint.activate([
             sectionTitleAndLineDividerView.leadingAnchor.constraint(

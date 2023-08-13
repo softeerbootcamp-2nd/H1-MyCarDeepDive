@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessTableView.swift
+//  DetailRecommendCarResultTableView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/14.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterSelectSuccessTableView: CommonRecommendResultTableView {
+final class DetailRecommendCarResultTableView: CommonRecommendResultTableView {
     // MARK: - Lifecycles
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -22,14 +22,14 @@ final class CharacterSelectSuccessTableView: CommonRecommendResultTableView {
     // MARK: - Private functions
     private func configureUI() {
         register(
-            CharacterSelectSuccessMainHeader.self,
-            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessMainHeader.identifier)
+            DetailRecommendCarResultMainHeader.self,
+            forHeaderFooterViewReuseIdentifier: DetailRecommendCarResultMainHeader.identifier)
         register(
-            CharacterSelectSuccesSecondSectionHeader.self,
-            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccesSecondSectionHeader.identifier)
+            DetailRecommendCarResultSecondSectionHeader.self,
+            forHeaderFooterViewReuseIdentifier: DetailRecommendCarResultSecondSectionHeader.identifier)
         register(
-            CharacterSelectSuccessFooter.self,
-            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessFooter.identifier)
+            DetailRecommendCarResultFooter.self,
+            forHeaderFooterViewReuseIdentifier: DetailRecommendCarResultFooter.identifier)
         estimatedSectionHeaderHeight = UITableView.automaticDimension
         estimatedSectionFooterHeight = UITableView.automaticDimension
     }

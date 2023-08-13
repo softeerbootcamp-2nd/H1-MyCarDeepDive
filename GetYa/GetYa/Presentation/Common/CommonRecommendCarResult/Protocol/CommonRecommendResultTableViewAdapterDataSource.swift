@@ -6,7 +6,7 @@
 //
 
 protocol CommonRecommendResultTableViewAdapterDataSource {
-    func cellItem(in section: Int, _ row: Int) -> RecommendCarProductOptionModel
+    func cellItem(in section: Int, _ row: Int) -> DetailRecommendCarProductOptionModel
     func numberOfRows(in section: Int) -> Int
     var numberOfSections: Int { get }
 }

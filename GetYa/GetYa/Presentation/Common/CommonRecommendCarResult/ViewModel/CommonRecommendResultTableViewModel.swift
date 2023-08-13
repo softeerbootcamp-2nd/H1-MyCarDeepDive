@@ -6,7 +6,7 @@
 //
 
 // MARK: - View model
-struct RecommendCarProductOptionModel {
+struct DetailRecommendCarProductOptionModel {
     let optionImage: String?
     let optionName: String?
     let optionPrice: Int?
@@ -16,26 +16,26 @@ struct RecommendCarProductOptionModel {
 // MARK: - ViewModel
 class CommonRecommendResultTableViewModel {
     // MARK: - Properties
-    private var dataSource: [[RecommendCarProductOptionModel]]
+    private var dataSource: [[DetailRecommendCarProductOptionModel]]
     
     // MARK: - Lifecycles
-    init(dataSource: [[RecommendCarProductOptionModel]]) {
+    init(dataSource: [[DetailRecommendCarProductOptionModel]]) {
         self.dataSource = dataSource
     }
     
     init() {
-        dataSource = RecommendCarProductOptionModel.mocks
+        dataSource = DetailRecommendCarProductOptionModel.mocks
     }
     
     // MARK: - Functions
-    func setDataSource(with dataSource: [[RecommendCarProductOptionModel]]) {
+    func setDataSource(with dataSource: [[DetailRecommendCarProductOptionModel]]) {
         self.dataSource = dataSource
     }
 }
 
 // MARK: - CommonRecommendResultTableViewDataSource
 extension CommonRecommendResultTableViewModel: CommonRecommendResultTableViewAdapterDataSource {
-    func cellItem(in section: Int, _ row: Int) -> RecommendCarProductOptionModel {
+    func cellItem(in section: Int, _ row: Int) -> DetailRecommendCarProductOptionModel {
         return dataSource[section][row]
     }
     
