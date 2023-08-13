@@ -73,7 +73,7 @@ extension TrimOptionDetailColorCollectionView: UICollectionViewDataSource {
             withReuseIdentifier: TrimOptionDetailColorCell.identifier,
             for: indexPath
         ) as? TrimOptionDetailColorCell else { return UICollectionViewCell()}
-        cell.configureBackgroundColor(color: colorArray[indexPath.row])
+        cell.layer.backgroundColor = colorArray[indexPath.row].cgColor
         
         return cell
     }

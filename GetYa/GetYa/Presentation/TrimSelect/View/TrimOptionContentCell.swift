@@ -76,17 +76,6 @@ class TrimOptionContentCell: UICollectionViewCell {
     weak var delegate: TrimOptionContentCellDelegate?
     
     // MARK: - Lifecycles
-    init(nameText: String, tagTexts: [String], descriptionText: String, price: Int) {
-        super.init(frame: .zero)
-        
-        setupViews()
-        configureUI()
-        configureNameText(text: nameText)
-        configureTagTexts(texts: tagTexts)
-        configureDescriptionText(text: descriptionText)
-        configurePriceText(price: price)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         

@@ -12,12 +12,6 @@ class TrimOptionDetailColorCell: UICollectionViewCell {
     static let identifier = "TrimOptionDetailColorCell"
     
     // MARK: - Lifecycles
-    convenience init(color: UIColor) {
-        self.init(frame: .zero)
-        
-        configureBackgroundColor(color: color)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
