@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: 서버에서 옵션이나 색상에 대한 설명, 가격등이 정보가 왔을떄 너무 긴 경우에 대비해 trailing을 화면 subview별로 지정해줘야합니다.
 class CommonRecommendCarResultTableView: UITableView {
     // MARK: - Properties
     private var calculateMaximumCellHeight: CGFloat {
