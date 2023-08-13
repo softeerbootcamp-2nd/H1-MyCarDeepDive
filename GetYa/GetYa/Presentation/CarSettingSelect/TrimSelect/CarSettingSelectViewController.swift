@@ -1,44 +1,62 @@
 //
-//  TrimSelectViewController.swift
+//  CarSettingSelectViewController.swift
 //  GetYa
 //
-//  Created by 배남석 on 2023/08/03.
+//  Created by 배남석 on 2023/08/14.
 //
 
 import UIKit
 
-// TODO: 페이지 뷰컨으로 바꾸고 네비게이션 바 밑에 뷰 추가
-class TrimSelectViewController: UIViewController {
+class CarSettingSelectViewController: UIViewController {
+    enum Constatns {
+        enum SettingProgressView {
+            static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let height: CGFloat = CGFloat(34).scaledHeight
+        }
+    }
+    
     // MARK: - UI properties
-    private let contentView = TrimSelectContentView()
+    private let pageViewController = UIPageViewController(
+        transitionStyle: .scroll,
+        navigationOrientation: .horizontal)
+    private let settingProgressView = SettingProgressView()
     private lazy var bottomSheetView = BottomSheetView(frame: .zero).set {
         $0.delegate = self
     }
     private var bottomSheetViewHeightConstaint: NSLayoutConstraint!
     
     // MARK: - Properties
+    private var viewControllers: [UIViewController] = []
     
-    // MARK: - Lifecycles
+    // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupViews()
         configureUI()
     }
     
-    // MARK: - Private Functions
+    // MARK: - Functions
     private func setupViews() {
+        addChild(pageViewController)
         view.addSubviews([
-            contentView,
+            settingProgressView,
+            pageViewController.view,
             bottomSheetView
         ])
+        pageViewController.didMove(toParent: self)
+        
+        let trimSelectViewController = TrimSelectViewController()
+        
+        viewControllers = [trimSelectViewController]
     }
     
     private func configureUI() {
         view.backgroundColor = .white
         
         configureNavigationBar()
-        configureContentView()
+        configureSettingProgressView()
+        configurePageViewController()
         configureBottomSheetView()
     }
     
@@ -55,12 +73,31 @@ class TrimSelectViewController: UIViewController {
             action: #selector(touchUpNavigationBackButton))
     }
     
-    private func configureContentView() {
+    private func configureSettingProgressView() {
+        settingProgressView.setCurrentSettingProgress(type: .trim)
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            settingProgressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            settingProgressView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constatns.SettingProgressView.leadingMargin),
+            settingProgressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            settingProgressView.heightAnchor.constraint(equalToConstant: Constatns.SettingProgressView.height)
+        ])
+    }
+    
+    private func configurePageViewController() {
+        if let firstViewController = viewControllers.first {
+            pageViewController.setViewControllers(
+                [firstViewController],
+                direction: .forward,
+                animated: true)
+        }
+        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pageViewController.view.topAnchor.constraint(equalTo: settingProgressView.bottomAnchor),
+            pageViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pageViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pageViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -86,7 +123,7 @@ class TrimSelectViewController: UIViewController {
 }
 
 // MARK: - BottomSheetDelegate
-extension TrimSelectViewController: BottomSheetDelegate {
+extension CarSettingSelectViewController: BottomSheetDelegate {
     func contractedBottomSheet(completion: @escaping () -> Void) {
         bottomSheetViewHeightConstaint.isActive = false
         bottomSheetViewHeightConstaint = bottomSheetView.heightAnchor.constraint(

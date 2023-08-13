@@ -454,7 +454,7 @@
 				64ADA4752A7787CC0003E2C1 /* Common */,
 				64ADA4A12A789BF40003E2C1 /* Home */,
 				641AB51B2A7B7C7300CF88C0 /* CharacterSelect */,
-				641AB51C2A7B7C8B00CF88C0 /* TrimSelect */,
+				64E26A0E2A895B9C00F6BC3A /* CarSettingSelect */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -653,6 +653,30 @@
 				641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		64E26A0C2A895B7E00F6BC3A /* ColorSelect */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ColorSelect;
+			sourceTree = "<group>";
+		};
+		64E26A0D2A895B8600F6BC3A /* OptionSelect */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OptionSelect;
+			sourceTree = "<group>";
+		};
+		64E26A0E2A895B9C00F6BC3A /* CarSettingSelect */ = {
+			isa = PBXGroup;
+			children = (
+				641AB51C2A7B7C8B00CF88C0 /* TrimSelect */,
+				64E26A0C2A895B7E00F6BC3A /* ColorSelect */,
+				64E26A0D2A895B8600F6BC3A /* OptionSelect */,
+			);
+			path = CarSettingSelect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
