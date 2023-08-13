@@ -7,16 +7,26 @@
 
 import UIKit
 
+protocol TrimSubOptionContentStackViewDelegate: AnyObject {
+    func transferOptionText(type: TrimSubOptionContentStackView.OptionType)
+}
+
 class TrimSubOptionContentStackView: UIStackView {
     enum Constants {
         enum StackView {
             static let spacing = CGFloat(12).scaledHeight
         }
     }
+    enum OptionType: String {
+        case engine = "엔진"
+        case body = "바디"
+        case system = "구동방식"
+    }
     
     // MARK: - UI properties
     
     // MARK: - Properties
+    weak var delegate: TrimSubOptionContentStackViewDelegate?
     private let titleTexts = ["엔진", "바디", "구동방식"]
     private let optionTypeTexts = [
         ["디젤 2.2", "가솔린 3.8"],
@@ -44,7 +54,6 @@ class TrimSubOptionContentStackView: UIStackView {
     }
     
     // MARK: - Private Functions
-    
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
         spacing = Constants.StackView.spacing
@@ -62,8 +71,20 @@ class TrimSubOptionContentStackView: UIStackView {
         titleTexts.enumerated().forEach { (idx, text) in
             let newView = TrimSubOptionView(
                 titleText: text,
-                optionTypeTexts: optionTypeTexts[idx])
+                optionTypeTexts: optionTypeTexts[idx]
+            ).set {
+                $0.delegate = self
+            }
             addArrangedSubview(newView)
+        }
+    }
+}
+
+// MARK: - TrimSubOptionViewDelegate
+extension TrimSubOptionContentStackView: TrimSubOptionViewDelegate {
+    func touchUpOptionButton(text: String) {
+        if let type = OptionType(rawValue: text) {
+            delegate?.transferOptionText(type: type)
         }
     }
 }
