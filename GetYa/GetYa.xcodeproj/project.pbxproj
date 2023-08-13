@@ -106,6 +106,8 @@
 		64E26A072A88203F00F6BC3A /* OptionNamAndPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A062A88203F00F6BC3A /* OptionNamAndPriceView.swift */; };
 		64E26A092A894C0500F6BC3A /* CarSettingSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A082A894C0500F6BC3A /* CarSettingSelectViewController.swift */; };
 		64E26A0B2A894CE200F6BC3A /* SettingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A0A2A894CE200F6BC3A /* SettingProgressView.swift */; };
+		64E26A102A895C0F00F6BC3A /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A0F2A895C0F00F6BC3A /* ColorSelectViewController.swift */; };
+		64E26A122A895C1700F6BC3A /* OptionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A112A895C1700F6BC3A /* OptionSelectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,6 +231,8 @@
 		64E26A062A88203F00F6BC3A /* OptionNamAndPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionNamAndPriceView.swift; sourceTree = "<group>"; };
 		64E26A082A894C0500F6BC3A /* CarSettingSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarSettingSelectViewController.swift; sourceTree = "<group>"; };
 		64E26A0A2A894CE200F6BC3A /* SettingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProgressView.swift; sourceTree = "<group>"; };
+		64E26A0F2A895C0F00F6BC3A /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
+		64E26A112A895C1700F6BC3A /* OptionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -658,6 +662,7 @@
 		64E26A0C2A895B7E00F6BC3A /* ColorSelect */ = {
 			isa = PBXGroup;
 			children = (
+				64E26A0F2A895C0F00F6BC3A /* ColorSelectViewController.swift */,
 			);
 			path = ColorSelect;
 			sourceTree = "<group>";
@@ -665,6 +670,7 @@
 		64E26A0D2A895B8600F6BC3A /* OptionSelect */ = {
 			isa = PBXGroup;
 			children = (
+				64E26A112A895C1700F6BC3A /* OptionSelectViewController.swift */,
 			);
 			path = OptionSelect;
 			sourceTree = "<group>";
@@ -879,6 +885,7 @@
 				6412D08E2A81F1FB001E4005 /* DetailLifeStyleSelectViewController.swift in Sources */,
 				641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */,
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
+				64E26A102A895C0F00F6BC3A /* ColorSelectViewController.swift in Sources */,
 				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
 				6412D0882A80C385001E4005 /* AgeViewController.swift in Sources */,
 				6412D09A2A8332E5001E4005 /* PeekQuestionView.swift in Sources */,
@@ -892,6 +899,7 @@
 				155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */,
+				64E26A122A895C1700F6BC3A /* OptionSelectViewController.swift in Sources */,
 				64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */,
 				64E26A052A881FA000F6BC3A /* OptionSummaryContentView.swift in Sources */,
 				15DF95992A7C8A110093EAC7 /* UIView+.swift in Sources */,
