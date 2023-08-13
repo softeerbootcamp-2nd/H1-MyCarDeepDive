@@ -16,45 +16,22 @@ final class CharacterSelectSuccessViewController: UIViewController {
     }
     
     // MARK: - UI Properties
-    private let tableView: UITableView = UITableView(frame: .zero, style: .grouped).set {
-        $0.backgroundColor = .white
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.register(
-            CharacterSelectSuccessMainHeader.self,
-            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessMainHeader.identifier)
-        $0.register(
-            CommonRecommendResultTableViewCell.self,
-            forCellReuseIdentifier: CommonRecommendResultTableViewCell.identifier)
-        $0.register(
-            CharacterSelectSuccesSecondSectionHeader.self,
-            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccesSecondSectionHeader.identifier)
-        $0.register(
-            CharacterSelectSuccessFooter.self,
-            forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessFooter.identifier)
-        $0.separatorStyle = .none
-        
-        let maximumReviewdTextViewHeightAndTopMargin = {
-            typealias Const = CommonRecommendResultTableViewCell.Constants.ReviewdTextView
-            return Const.maximumHeight + Const.topMargin
-        }()
-        let commonOptionViewHeightAndTopMargin = {
-            typealias Const = CommonRecommendResultTableViewCell.Constants.RecommendCarOptionView
-            return Const.height + Const.topMargin
-        }()
-        
-        $0.estimatedSectionHeaderHeight = UITableView.automaticDimension
-        $0.estimatedRowHeight = maximumReviewdTextViewHeightAndTopMargin + commonOptionViewHeightAndTopMargin
-        $0.estimatedSectionFooterHeight = UITableView.automaticDimension
-    }
-    
+    private let tableView = CharacterSelectSuccessTableView(frame: .zero, style: .grouped)
     private let bottomCustomOrQuoteView = CustomOrQuoteSelectView()
     
     // MARK: - Properties
     private var adapter: CharacterSelectSuccessTableViewAdapter!
-    private var viewModel: (any CharacterSelectSuccessViewModelable & CharacterSSTableViewAdapterDataSource)!
+    private var viewModel: (
+        any CharacterSelectSuccessViewModelable
+        & CharacterSSTableViewAdapterDataSource
+        & CommonRecommendResultTableViewAdapterDataSource)!
     
     // MARK: - Lifecycles
-    init(viewModel: some CharacterSelectSuccessViewModelable & CharacterSSTableViewAdapterDataSource) {
+    init(
+        viewModel: some CharacterSelectSuccessViewModelable
+        & CharacterSSTableViewAdapterDataSource
+        & CommonRecommendResultTableViewAdapterDataSource
+    ) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
