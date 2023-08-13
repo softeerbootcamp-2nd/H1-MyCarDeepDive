@@ -8,14 +8,7 @@
 import UIKit
 
 final class CommonRecommendResultTableViewCell: UITableViewCell {
-    enum Constant {
-        static var intrinsicContentHeight: CGFloat {
-            let carOptionConst = RecommendCarOptionView.self
-            let reviewdConst = ReviewdTextView.self
-            return carOptionConst.topMargin + carOptionConst.height + reviewdConst
-                .height + reviewdConst.topMargin + reviewdConst.bottomMargin
-        }
-        
+    enum Constants {
         enum RecommendCarOptionView {
             static let height: CGFloat = .init(60).scaledHeight
             static let leadingMargin: CGFloat = .init(16).scaledWidth
@@ -23,25 +16,57 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
         }
 
         enum ReviewdTextView {
-            static let height: CGFloat = .init(46).scaledHeight
             static let leadingMargin: CGFloat = .init(16).scaledWidth
             static let topMargin: CGFloat = .init(12).scaledHeight
             static let bottomMargin: CGFloat = .init(10).scaledHeight
             static let trailingMargin: CGFloat = .init(16).scaledWidth
             static let radius: CGFloat = .init(8).scaledWidth
+            static let innerEdgeInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+            static let fontType = GetYaFont.regularBody4
+            
+            /// 리뷰는 최대 3줄까지 받아올 수 있도록 설정했습니다.
+            static var maximumHeight: CGFloat {
+                let numberOfThreeLineText = "테스트테스트\n테스트중간\n마지막글"
+                return calculateHeight(from: numberOfThreeLineText)
+            }
+            
+            static func calculateHeight(from reviewText: String) -> CGFloat {
+                let tempPaddingLabel = CommonPaddingLabel(
+                    padding: innerEdgeInset,
+                    fontType: fontType,
+                    color: .GetYaPalette.acriveBlue,
+                    text: reviewText
+                ).set { $0.translatesAutoresizingMaskIntoConstraints = true }
+                
+                let screenWidth = UIScreen.main.bounds.width
+                let tempPaddingLabelWidth = screenWidth - (leadingMargin + trailingMargin)
+                
+                /// 원하는 paddingLabel의 width를 위한 frame지정
+                tempPaddingLabel.frame = CGRect(
+                    x: leadingMargin,
+                    y: 0,
+                    width: tempPaddingLabelWidth,
+                    height: 0)
+
+                // tempPaddingLabel.text = reviewText
+                return tempPaddingLabel.intrinsicContentSize.height
+            }
         }
     }
-    static let id = String(describing: CommonRecommendResultTableViewCell.self)
+    static let identifier = String(describing: CommonRecommendResultTableViewCell.self)
     
     // MARK: - UI properties
     private let recommendCarOptionView = CommonOptionView()
-    private let reviewdTextView = CommonTextView(
-        backgroundColor: .GetYaPalette.lightAcriveBlue,
-        textColor: .GetYaPalette.acriveBlue,
-        fontType: .regularBody4,
-        textAlignment: .left
+    
+    private let reviewdTextView: CommonPaddingLabel = CommonPaddingLabel(
+        padding: .init(top: 12, left: 12, bottom: 12, right: 12),
+        fontType: Constants.ReviewdTextView.fontType,
+        color: .GetYaPalette.acriveBlue,
+        text: "리뷰를 불러오고 있습니다 ..."
     ).set {
-        $0.configureCornerRadius(with: Constant.ReviewdTextView.radius)
+        $0.layer.cornerRadius = Constants.ReviewdTextView.radius
+        $0.clipsToBounds = true
+        $0.backgroundColor = .GetYaPalette.lightAcriveBlue
     }
     
     // MARK: - Lifecycles
@@ -57,13 +82,23 @@ final class CommonRecommendResultTableViewCell: UITableViewCell {
         super.init(coder: coder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        let reset = RecommendCarProductOptionModel(
+            optionImage: nil,
+            optionName: "",
+            optionPrice: 0,
+            optionReview: "")
+        configure(with: reset)
+    }
+    
     // MARK: - Functions
     func configure(with productOptionModel: RecommendCarProductOptionModel) {
         recommendCarOptionView.configureDetail(
-            image: UIImage(named: productOptionModel.optionImage) ?? .init(),
+            image: UIImage(named: productOptionModel.optionImage ?? ""),
             title: productOptionModel.optionName,
             price: productOptionModel.optionPrice)
-        reviewdTextView.configureText(text: productOptionModel.optionReview)
+        reviewdTextView.text = productOptionModel.optionReview
     }
     // MARK: - Objc Functions
 }
@@ -81,30 +116,30 @@ extension CommonRecommendResultTableViewCell: LayoutSupportable {
     }
     
     private var recommendCarOptionViewConstraints: [NSLayoutConstraint] {
-        let const = Constant.RecommendCarOptionView.self
+        typealias Const = Constants.RecommendCarOptionView
         return [
             recommendCarOptionView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: const.leadingMargin),
+                constant: Const.leadingMargin),
             recommendCarOptionView.topAnchor.constraint(
                 equalTo: contentView.topAnchor,
-                constant: const.topMargin),
+                constant: Const.topMargin),
             recommendCarOptionView.heightAnchor.constraint(
-                equalToConstant: const.height)]
+                equalToConstant: Const.height)]
     }
     private var reviewdTextViewConstraints: [NSLayoutConstraint] {
-        let const = Constant.ReviewdTextView.self
+        typealias Const = Constants.ReviewdTextView
         return [
             reviewdTextView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: const.leadingMargin),
+                constant: Const.leadingMargin),
             reviewdTextView.topAnchor.constraint(
                 equalTo: recommendCarOptionView.bottomAnchor,
-                constant: const.topMargin),
+                constant: Const.topMargin),
             reviewdTextView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: -const.trailingMargin),
-            reviewdTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: const.height),
-            reviewdTextView.bottomAnchor.constraint(equalTo: bottomAnchor)]
+                constant: -Const.trailingMargin),
+            reviewdTextView.bottomAnchor.constraint(
+                lessThanOrEqualTo: contentView.bottomAnchor)]
     }
 }
