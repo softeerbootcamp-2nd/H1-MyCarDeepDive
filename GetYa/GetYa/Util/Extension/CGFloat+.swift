@@ -23,4 +23,25 @@ extension CGFloat {
         let scale = screenSize.height / height
         return floor(self * scale)
     }
+    
+    static func toScaledWidth<Value: Numeric>(value: Value) -> CGFloat {
+        return convertNumericToCGFloat(value).scaledWidth
+    }
+    
+    static func toScaledHeight<Value: Numeric>(value: Value) -> CGFloat {
+        return convertNumericToCGFloat(value).scaledHeight
+    }
+    
+    private static func convertNumericToCGFloat(_ value: any Numeric) -> CGFloat {
+        if let doubleValue = value as? Double {
+            return CGFloat(doubleValue)
+        } else if let floatValue = value as? Float {
+            return CGFloat(floatValue)
+        } else if let cgfloatValue = value as? CGFloat {
+            return cgfloatValue
+        } else if let intValue = value as? Int {
+            return CGFloat(intValue)
+        }
+        return CGFloat(0)
+    }
 }

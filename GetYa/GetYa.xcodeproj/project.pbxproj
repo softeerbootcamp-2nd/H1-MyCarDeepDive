@@ -67,6 +67,7 @@
 		6412D0A32A84D41A001E4005 /* TrimSubOptionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0A22A84D41A001E4005 /* TrimSubOptionContentView.swift */; };
 		6412D0A52A84E7E1001E4005 /* TrimTooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0A42A84E7E1001E4005 /* TrimTooltipView.swift */; };
 		6412D0A72A8511AE001E4005 /* LearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0A62A8511AE001E4005 /* LearnMoreView.swift */; };
+		6412D0BF2A87C248001E4005 /* CommonPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0BE2A87C248001E4005 /* CommonPaddingLabel.swift */; };
 		641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */; };
 		641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */; };
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
@@ -185,6 +186,7 @@
 		6412D0A22A84D41A001E4005 /* TrimSubOptionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionContentView.swift; sourceTree = "<group>"; };
 		6412D0A42A84E7E1001E4005 /* TrimTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimTooltipView.swift; sourceTree = "<group>"; };
 		6412D0A62A8511AE001E4005 /* LearnMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreView.swift; sourceTree = "<group>"; };
+		6412D0BE2A87C248001E4005 /* CommonPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPaddingLabel.swift; sourceTree = "<group>"; };
 		641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectViewController.swift; sourceTree = "<group>"; };
 		641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectViewController.swift; sourceTree = "<group>"; };
 		641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 				6412D0972A8323CD001E4005 /* CommonTextView.swift */,
 				64ADA4AC2A78A7090003E2C1 /* CommonButton.swift */,
 				64ADA4BB2A7A22780003E2C1 /* CommonLabel.swift */,
+				6412D0BE2A87C248001E4005 /* CommonPaddingLabel.swift */,
 				64ADA4B72A7A1BF20003E2C1 /* CommonOptionImageView.swift */,
 				64ADA4B92A7A21520003E2C1 /* CommonOptionView.swift */,
 				64ADA4C12A7A2DAC0003E2C1 /* CommonPageControl.swift */,
@@ -919,6 +922,7 @@
 				159B2CF92A825D07003F47D6 /* CharacterSSTableViewAdapterDataSource.swift in Sources */,
 				159B2CFE2A825F5F003F47D6 /* CommonRecommendResultTableViewCell.swift in Sources */,
 				641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */,
+				6412D0BF2A87C248001E4005 /* CommonPaddingLabel.swift in Sources */,
 				15DF958E2A7C89630093EAC7 /* UILayout.swift in Sources */,
 				6412D0942A823A89001E4005 /* PeekTagView.swift in Sources */,
 				155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */,
