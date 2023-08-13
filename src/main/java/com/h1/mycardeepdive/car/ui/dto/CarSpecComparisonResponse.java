@@ -21,4 +21,5 @@ public class CarSpecComparisonResponse {
     private double navigation_size;
     private double cluster_size;
     private List<String> basic_option_names;
+    private List<Long> basic_option_ids;
 }
