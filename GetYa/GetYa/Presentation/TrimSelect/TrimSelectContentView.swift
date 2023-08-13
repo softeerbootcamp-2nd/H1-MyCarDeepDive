@@ -7,6 +7,8 @@
 
 import UIKit
 
+// TODO: 옵션에 따른 가격변동 로직 짜야함.
+
 class TrimSelectContentView: UIScrollView {
     enum Constants {
         enum HeaderView {
@@ -52,13 +54,15 @@ class TrimSelectContentView: UIScrollView {
         $0.setAttributedTitle(attributedString, for: .normal)
     }
     private let trimSubOptionContentStackView = TrimSubOptionContentStackView()
-    private let trimOptionContentCollectionView = TrimOptionContentCollectionView().set {
+    private lazy var trimOptionContentCollectionView = TrimOptionContentCollectionView().set {
         $0.contentInset = UIEdgeInsets(
             top: Constants.TrimOptionContentCollectionView.topInset,
             left: 0,
             bottom: 0,
             right: 0)
+        $0.learnMoreViewDelegate = self
     }
+    private var collectionViewHeightConstarint: NSLayoutConstraint!
     
     // MARK: - Properties
     private let titleTexts = ["Exclusive", "Le Blanc (르블랑)", "Prestige", "Caligraphy"]
@@ -167,9 +171,11 @@ class TrimSelectContentView: UIScrollView {
     
     private func configureTrimOptionContentCollectionView() {
         let const = Constants.TrimOptionContentCollectionView.self
-        let height = TrimOptionContentCollectionView.Constants.HeaderView.height +
-        TrimOptionContentCollectionView.Constants.Cell.height *
-        CGFloat(titleTexts.count)
+        let height = createTrimOptionContentCollectionViewHeight()
+        
+        collectionViewHeightConstarint = trimOptionContentCollectionView
+            .heightAnchor
+            .constraint(equalToConstant: height)
         
         NSLayoutConstraint.activate([
             trimOptionContentCollectionView.topAnchor.constraint(
@@ -179,11 +185,21 @@ class TrimSelectContentView: UIScrollView {
                 equalTo: contentView.leadingAnchor),
             trimOptionContentCollectionView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor),
-            trimOptionContentCollectionView.heightAnchor.constraint(
-                equalToConstant: height),
             trimOptionContentCollectionView.bottomAnchor.constraint(
-                equalTo: contentView.bottomAnchor, constant: const.bottomMargin)
+                equalTo: contentView.bottomAnchor, constant: const.bottomMargin),
+            collectionViewHeightConstarint
         ])
+    }
+    
+    private func createTrimOptionContentCollectionViewHeight() -> CGFloat {
+        let expandedCount = trimOptionContentCollectionView.expandedIndexPath.count
+        let height = TrimOptionContentCollectionView.Constants.HeaderView.height +
+        TrimOptionContentCollectionView.Constants.Cell.height *
+        CGFloat(titleTexts.count - expandedCount) +
+        TrimOptionContentCollectionView.Constants.Cell.expandedHeight *
+        CGFloat(expandedCount)
+        
+        return height
     }
     
     private func setOptionContentData() {
@@ -197,4 +213,18 @@ class TrimSelectContentView: UIScrollView {
     
     // MARK: - Objc Functions
 
+}
+
+// MARK: - TrimOptionContentCollectionViewDelegate
+extension TrimSelectContentView: TrimOptionContentCollectionViewDelegate {
+    func touchUpLearnMoreViewButton() {
+        collectionViewHeightConstarint.isActive = false
+        let height = createTrimOptionContentCollectionViewHeight()
+        collectionViewHeightConstarint = trimOptionContentCollectionView
+            .heightAnchor
+            .constraint(equalToConstant: height)
+        collectionViewHeightConstarint.isActive = true
+        
+        self.layoutIfNeeded()
+    }
 }

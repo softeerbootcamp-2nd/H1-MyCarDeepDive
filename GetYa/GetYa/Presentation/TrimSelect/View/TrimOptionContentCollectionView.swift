@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TrimOptionContentCollectionViewDelegate: AnyObject {
+    func touchUpLearnMoreViewButton()
+}
+
 class TrimOptionContentCollectionView: UICollectionView {
     enum Constants {
         enum Cell {
@@ -20,6 +24,7 @@ class TrimOptionContentCollectionView: UICollectionView {
     }
     
     // MARK: - Properties
+    weak var learnMoreViewDelegate: TrimOptionContentCollectionViewDelegate?
     private(set) var selectedIndexPath: IndexPath?
     private(set) var expandedIndexPath: [IndexPath] = []
     
@@ -217,6 +222,7 @@ extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
             }
             UIView.performWithoutAnimation({
                 self.reloadItems(at: [indexPath])
+                self.learnMoreViewDelegate?.touchUpLearnMoreViewButton()
             })
         }
     }
