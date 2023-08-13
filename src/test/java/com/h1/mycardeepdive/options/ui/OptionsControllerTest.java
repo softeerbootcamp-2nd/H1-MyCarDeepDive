@@ -9,6 +9,7 @@ import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import com.h1.mycardeepdive.ControllerTestConfig;
 import com.h1.mycardeepdive.options.service.OptionsService;
 import com.h1.mycardeepdive.options.ui.dto.*;
+import com.h1.mycardeepdive.tags.ui.TagResponse;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,6 +25,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 class OptionsControllerTest extends ControllerTestConfig {
     private static final String DEFAULT_URL = "/api/v1";
 
+    private TagResponse mainTag = new TagResponse(1L, "대표");
+    private TagResponse safeTag = new TagResponse(2L, "주행안전");
     @MockBean private OptionsService optionsService;
 
     @BeforeEach
@@ -44,7 +47,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                                 10.12,
                                                 "컴포트 II",
                                                 "편의성을 위해 구성된 세트 옵션",
-                                                List.of("대표", "주행안전"),
+                                                List.of(mainTag, safeTag),
                                                 "None",
                                                 10090000)),
                                 List.of(
@@ -54,7 +57,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                                 5.5,
                                                 "빌트인 캠(보조배터리 포함)",
                                                 "차량 내부에 카메라를 설치하여 녹화가 가능한 블랙박스",
-                                                List.of("대표", "주행안전"),
+                                                List.of(mainTag, safeTag),
                                                 "H Genuine Accessories",
                                                 109000))));
 
@@ -94,7 +97,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                         1L,
                                         "https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg",
                                         "다중 충돌방지 자동 제동 시스템",
-                                        List.of("대표", "주행안전"))));
+                                        List.of(mainTag, safeTag))));
 
         // then
         ResultActions resultActions =
@@ -193,7 +196,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                         1L,
                                         "빌트인 캠(보조배터리 포함)",
                                         "빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.",
-                                        List.of("대표", "주행안전"),
+                                        List.of(mainTag, safeTag),
                                         109000)));
 
         // then
@@ -232,7 +235,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                 1L,
                                 "빌트인 캠(보조배터리 포함)",
                                 "빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.",
-                                List.of("대표", "주행안전"),
+                                List.of(mainTag, safeTag),
                                 109000));
 
         // then

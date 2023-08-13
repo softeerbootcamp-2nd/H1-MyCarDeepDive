@@ -7,6 +7,7 @@ import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionDetailResponse;
 import com.h1.mycardeepdive.options.ui.dto.PackageOptionResponse;
 import com.h1.mycardeepdive.tags.domain.Tags;
+import com.h1.mycardeepdive.tags.mapper.TagsMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,9 @@ public class OptionMapper {
                 option.getChooseRate(),
                 option.getName(),
                 option.getSummary(),
-                tagsList.stream().map(Tags::getName).collect(Collectors.toList()),
+                tagsList.stream()
+                        .map(TagsMapper.INSTANCE::tagsToTagResponse)
+                        .collect(Collectors.toList()),
                 option.getBadgeName().getViewName(),
                 option.getPrice());
     }
@@ -33,7 +36,9 @@ public class OptionMapper {
                 _packages.getChooseRate(),
                 _packages.getName(),
                 _packages.getSummary(),
-                tagsList.stream().map(Tags::getName).collect(Collectors.toList()),
+                tagsList.stream()
+                        .map(TagsMapper.INSTANCE::tagsToTagResponse)
+                        .collect(Collectors.toList()),
                 _packages.getBadgeName().getViewName(),
                 _packages.getPrice());
     }
@@ -44,7 +49,9 @@ public class OptionMapper {
                 options.getId(),
                 options.getImgUrl(),
                 options.getName(),
-                tagsList.stream().map(Tags::getName).collect(Collectors.toList()));
+                tagsList.stream()
+                        .map(TagsMapper.INSTANCE::tagsToTagResponse)
+                        .collect(Collectors.toList()));
     }
 
     public static OptionDetailResponse optionToOptionDetailResponse(
@@ -53,7 +60,9 @@ public class OptionMapper {
                 options.getId(),
                 options.getName(),
                 options.getDescription(),
-                tagsList.stream().map(Tags::getName).collect(Collectors.toList()),
+                tagsList.stream()
+                        .map(TagsMapper.INSTANCE::tagsToTagResponse)
+                        .collect(Collectors.toList()),
                 options.getPrice());
     }
 }
