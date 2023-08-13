@@ -8,7 +8,6 @@
 import UIKit
 
 final class CharacterSelectSuccessSectionDividerView: UIView {
-    // MARK: - Constants
     enum Constant {
         static let intrinsicContentHeight: CGFloat = {
             let onePixelDividerHeight = OnePixelDivider.intrinsicContentHeight
@@ -17,22 +16,21 @@ final class CharacterSelectSuccessSectionDividerView: UIView {
            return onePixelDividerHeight + sectionTitleHeight
         }()
         enum OnePixelDivider {
-            static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 16, trailingMargin: 16, height: 1)
+            static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let topMargin: CGFloat = CGFloat(16).scaledHeight
+            static let trailingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let height: CGFloat = CGFloat(1).scaledWidth
             static let bgColor: UIColor = .GetYaPalette.gray700
-            static let intrinsicContentHeight: CGFloat = {
-                return uiConstant.height + uiConstant.topMargin
-            }()
+            static var intrinsicContentHeight: CGFloat {
+                height + topMargin
+            }
         }
-        
         enum SectionTitle {
-            static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 20)
+            static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let topMargin = CGFloat(20).scaledHeight
             static let fontColor: UIColor = .GetYaPalette.gray300
-            static let font: GetYaFont = .regularCaption1
-            static let intrinsicContentHeight: CGFloat = {
-                uiConstant.topMargin + font.lineHeight
-            }()
+            static let font: GetYaFont = .regularBody4
+            static let intrinsicContentHeight: CGFloat = topMargin + font.lineHeight
         }
     }
     
@@ -42,8 +40,12 @@ final class CharacterSelectSuccessSectionDividerView: UIView {
         $0.backgroundColor = Constant.OnePixelDivider.bgColor
     }
     
-    private let sectionTitle = CommonLabel(frame: .zero)
+    private let sectionTitle = CommonLabel(
+        fontType: .regularBody4,
+        color: .GetYaPalette.gray300,
+        text: "준비중...")
     
+    // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureSubviewUI(
@@ -78,7 +80,7 @@ extension CharacterSelectSuccessSectionDividerView: LayoutSupportable {
     
     // MARK: - Private layout supportable helper
     private var onePixelDividerConstraints: [NSLayoutConstraint] {
-        let const = Constant.OnePixelDivider.uiConstant
+        let const = Constant.OnePixelDivider.self
         return [
             onePixelDivider.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
@@ -91,10 +93,10 @@ extension CharacterSelectSuccessSectionDividerView: LayoutSupportable {
                 constant: -const.trailingMargin),
             onePixelDivider.heightAnchor.constraint(equalToConstant: const.height)]
     }
-    
-    // 추후에 풀리퀘 받고 새로 개선된 common label 써야함..
+
     private var sectionTitleConstraints: [NSLayoutConstraint] {
-        let const = Constant.SectionTitle.uiConstant
+        let const = Constant.SectionTitle.self
+        
         return [
             sectionTitle.topAnchor.constraint(
                 equalTo: onePixelDivider.bottomAnchor,
