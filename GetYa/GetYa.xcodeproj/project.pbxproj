@@ -609,11 +609,11 @@
 		64ADA4702A77878B0003E2C1 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				155729FD2A8954E200D136C6 /* CarOptionResult */,
-				64ADA4742A7787C60003E2C1 /* Coordinator */,
 				64ADA4752A7787CC0003E2C1 /* Common */,
-				64ADA4A12A789BF40003E2C1 /* Home */,
+				155729FD2A8954E200D136C6 /* CarOptionResult */,
 				641AB51B2A7B7C7300CF88C0 /* CharacterSelect */,
+				64ADA4742A7787C60003E2C1 /* Coordinator */,
+				64ADA4A12A789BF40003E2C1 /* Home */,
 				641AB51C2A7B7C8B00CF88C0 /* TrimSelect */,
 			);
 			path = Presentation;
