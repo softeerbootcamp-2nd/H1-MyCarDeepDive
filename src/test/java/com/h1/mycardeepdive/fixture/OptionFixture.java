@@ -28,8 +28,29 @@ public class OptionFixture {
                 .build();
     }
 
-    public static Options createOptionStopSystem() {
+    public static Options createOptionDarkWheel() {
         Long id = 1L;
+        String name = "20인치 다크 스퍼터링 휠";
+        String imgUrl = "https://img.etnews.com/photonews/2011/1352481_20201113164311_199_0001.jpg";
+        double chooseRate = 2;
+        String description = "20인치의 올블랙으로 도색된 휠";
+        long price = 1090000;
+        String summary = "20인치의 올블랙으로 도색된 휠";
+
+        return Options.builder()
+                .id(id)
+                .name(name)
+                .imgUrl(imgUrl)
+                .chooseRate(chooseRate)
+                .badgeName(Badge.N_PERFORMANCE)
+                .description(description)
+                .price(price)
+                .summary(summary)
+                .build();
+    }
+
+    public static Options createOptionStopSystem() {
+        Long id = 2L;
         String name = "다중 충돌방지 자동 제동 시스템";
         String imgUrl =
                 "https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg";
