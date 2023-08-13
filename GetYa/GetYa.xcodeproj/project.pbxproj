@@ -58,6 +58,7 @@
 		6412D0B92A878A86001E4005 /* TrimOptionContentCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0B82A878A86001E4005 /* TrimOptionContentCollectionView.swift */; };
 		6412D0BB2A8792E7001E4005 /* TrimOptionDetailOptionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0BA2A8792E7001E4005 /* TrimOptionDetailOptionCollectionView.swift */; };
 		6412D0BD2A8792F4001E4005 /* TrimOptionDetailOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0BC2A8792F4001E4005 /* TrimOptionDetailOptionCell.swift */; };
+		6412D0BF2A87C248001E4005 /* CommonPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0BE2A87C248001E4005 /* CommonPaddingLabel.swift */; };
 		641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */; };
 		641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */; };
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
@@ -167,6 +168,7 @@
 		6412D0B82A878A86001E4005 /* TrimOptionContentCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimOptionContentCollectionView.swift; sourceTree = "<group>"; };
 		6412D0BA2A8792E7001E4005 /* TrimOptionDetailOptionCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimOptionDetailOptionCollectionView.swift; sourceTree = "<group>"; };
 		6412D0BC2A8792F4001E4005 /* TrimOptionDetailOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimOptionDetailOptionCell.swift; sourceTree = "<group>"; };
+		6412D0BE2A87C248001E4005 /* CommonPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPaddingLabel.swift; sourceTree = "<group>"; };
 		641AB51D2A7B7CDF00CF88C0 /* TrimSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectViewController.swift; sourceTree = "<group>"; };
 		641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectViewController.swift; sourceTree = "<group>"; };
 		641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				6412D0972A8323CD001E4005 /* CommonTextView.swift */,
 				64ADA4AC2A78A7090003E2C1 /* CommonButton.swift */,
 				64ADA4BB2A7A22780003E2C1 /* CommonLabel.swift */,
+				6412D0BE2A87C248001E4005 /* CommonPaddingLabel.swift */,
 				64ADA4B72A7A1BF20003E2C1 /* CommonOptionImageView.swift */,
 				64ADA4B92A7A21520003E2C1 /* CommonOptionView.swift */,
 				64ADA4C12A7A2DAC0003E2C1 /* CommonPageControl.swift */,
@@ -797,6 +800,7 @@
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
 				64ADA4BC2A7A22780003E2C1 /* CommonLabel.swift in Sources */,
 				641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */,
+				6412D0BF2A87C248001E4005 /* CommonPaddingLabel.swift in Sources */,
 				15DF958E2A7C89630093EAC7 /* UILayout.swift in Sources */,
 				6412D0942A823A89001E4005 /* PeekTagView.swift in Sources */,
 				155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */,
