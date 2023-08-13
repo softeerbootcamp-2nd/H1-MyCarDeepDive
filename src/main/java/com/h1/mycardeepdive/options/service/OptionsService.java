@@ -69,4 +69,13 @@ public class OptionsService {
     public boolean userClickedPackageLog(Long optionId) {
         return true;
     }
+
+    public List<OptionDetailResponse> findPackageOptionDetail(Long optionId) {
+        return optionsRepository.findOptionsByPackageId(optionId).stream()
+                .map(
+                        options ->
+                                OptionMapper.optionToOptionDetailResponse(
+                                        options, tagRepository.findTagsByOptionId(options.getId())))
+                .collect(Collectors.toList());
+    }
 }

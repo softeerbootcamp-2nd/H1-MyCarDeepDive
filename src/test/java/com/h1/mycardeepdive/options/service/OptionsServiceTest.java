@@ -12,6 +12,7 @@ import com.h1.mycardeepdive.options.domain.*;
 import com.h1.mycardeepdive.options.domain.Packages;
 import com.h1.mycardeepdive.options.domain.repository.*;
 import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.OptionDetailResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionResponse;
 import com.h1.mycardeepdive.tags.domain.Tags;
 import com.h1.mycardeepdive.tags.domain.repository.TagRepository;
@@ -153,5 +154,17 @@ class OptionsServiceTest {
 
         // when&then
         assertTrue(result);
+    }
+
+    @DisplayName("패키지옵션에 포함된 옵션들 조회에 성공한다.")
+    @Test
+    void findPackageOptionDetailTest() {
+        // given
+        List<OptionDetailResponse> packageOptionDetail =
+                optionsService.findPackageOptionDetail(optionPackageComfortII.getId());
+
+        // when&then
+        assertEquals(packageOptionDetail.size(), 1);
+        assertEquals(packageOptionDetail.get(0).getOption_name(), optionBuiltInCam.getName());
     }
 }

@@ -3,6 +3,7 @@ package com.h1.mycardeepdive.options.ui;
 import com.h1.mycardeepdive.global.response.ApiResponse;
 import com.h1.mycardeepdive.options.service.OptionsService;
 import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.OptionDetailResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,11 @@ public class OptionsController {
     @PostMapping("/package-options/activity-log/{option-id}")
     public ApiResponse<Boolean> userClickedPackageLog(@PathVariable("option-id") Long optionId) {
         return new ApiResponse<>(optionsService.userClickedPackageLog(optionId));
+    }
+
+    @GetMapping("/options/package/{option-id}/details")
+    public ApiResponse<List<OptionDetailResponse>> getPackageOptionDetail(
+            @PathVariable("option-id") Long optionId) {
+        return new ApiResponse<>(optionsService.findPackageOptionDetail(optionId));
     }
 }

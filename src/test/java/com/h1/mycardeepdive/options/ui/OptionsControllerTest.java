@@ -8,10 +8,7 @@ import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import com.h1.mycardeepdive.ControllerTestConfig;
 import com.h1.mycardeepdive.options.service.OptionsService;
-import com.h1.mycardeepdive.options.ui.dto.AdditionalOptionResponse;
-import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
-import com.h1.mycardeepdive.options.ui.dto.OptionResponse;
-import com.h1.mycardeepdive.options.ui.dto.PackageOptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.*;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -178,6 +175,46 @@ class OptionsControllerTest extends ControllerTestConfig {
                                                 ResourceSnippetParameters.builder()
                                                         .tag("옵션")
                                                         .description("패키지 옵션 클릭 시, 로그 전송")
+                                                        .requestFields()
+                                                        .responseFields()
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @DisplayName("패키지 옵션에 포함된 옵션들의 상세 정보를 제공한다.")
+    @Test
+    void getPackageOptionDetailTest() throws Exception {
+        // given
+        Long optionId = 1L;
+        when(optionsService.findPackageOptionDetail(optionId))
+                .thenReturn(
+                        List.of(
+                                new OptionDetailResponse(
+                                        1L,
+                                        "빌트인 캠(보조배터리 포함)",
+                                        "빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.",
+                                        List.of("대표", "주행안전"),
+                                        109000)));
+
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.get(
+                                                DEFAULT_URL
+                                                        + "/options/package/{option-id}/details",
+                                                optionId)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "options-docs5",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("옵션")
+                                                        .description(
+                                                                "패키지 옵션에 포함된 옵션들의 상세 정보를 제공합니다.")
                                                         .requestFields()
                                                         .responseFields()
                                                         .build())));

@@ -10,4 +10,6 @@ public interface OptionsRepositoryCustom {
     String findPackageImgUrlFromOption(Long packageId);
 
     List<Options> findBasicOptions(Long carSpecId);
+
+    List<Options> findOptionsByPackageId(Long packageId);
 }
