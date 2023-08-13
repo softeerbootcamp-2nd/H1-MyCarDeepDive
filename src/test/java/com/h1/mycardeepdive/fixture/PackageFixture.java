@@ -1,19 +1,19 @@
 package com.h1.mycardeepdive.fixture;
 
 import com.h1.mycardeepdive.options.domain.Badge;
-import com.h1.mycardeepdive.options.domain.Package;
+import com.h1.mycardeepdive.options.domain.Packages;
 
 public class PackageFixture {
     private PackageFixture() {}
 
-    public static Package createPackageComfortII() {
+    public static Packages createPackageComfortII() {
         Long id = 0L;
         String name = "컴포트 II";
         double chooseRate = 5.5;
         String summary = "편의성을 위해 구성된 세트 옵션";
         long price = 10090000;
 
-        return Package.builder()
+        return Packages.builder()
                 .id(id)
                 .name(name)
                 .chooseRate(chooseRate)

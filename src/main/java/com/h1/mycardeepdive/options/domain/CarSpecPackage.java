@@ -22,13 +22,13 @@ public class CarSpecPackage {
 
     @ManyToOne
     @JoinColumn(name = "package_id")
-    private Package _package;
+    private Packages packages;
 
     @Builder
-    public CarSpecPackage(Long id, CarSpec carSpec, Package _package) {
+    public CarSpecPackage(Long id, CarSpec carSpec, Packages packages) {
         this.id = id;
         this.carSpec = carSpec;
-        this._package = _package;
+        this.packages = packages;
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.h1.mycardeepdive.options.domain.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.h1.mycardeepdive.options.domain.Package;
+import com.h1.mycardeepdive.options.domain.Packages;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
-class PackageRepositoryTest {
+class PackagesRepositoryTest {
     @Autowired PackageRepository packageRepository;
 
     @BeforeEach
@@ -23,32 +23,32 @@ class PackageRepositoryTest {
     @Test
     void saveSameId() {
         // given
-        Package aPackage1 = Package.builder().name("패키지옵션1").build();
-        packageRepository.save(aPackage1);
+        Packages aPackages1 = Packages.builder().name("패키지옵션1").build();
+        packageRepository.save(aPackages1);
 
         // when
-        Package aPackage2 = Package.builder().id(aPackage1.getId()).name("패키지옵션2").build();
-        packageRepository.save(aPackage2);
+        Packages aPackages2 = Packages.builder().id(aPackages1.getId()).name("패키지옵션2").build();
+        packageRepository.save(aPackages2);
 
         // then
-        List<Package> savedPackageOptions = packageRepository.findAll();
-        assertEquals(savedPackageOptions.size(), 1);
-        assertEquals(savedPackageOptions.get(0).getName(), aPackage2.getName());
+        List<Packages> savedPackagesOptions = packageRepository.findAll();
+        assertEquals(savedPackagesOptions.size(), 1);
+        assertEquals(savedPackagesOptions.get(0).getName(), aPackages2.getName());
     }
 
     @DisplayName("id가 없는 패키지옵션 엔티티를 저장하면 순차적으로 ID를 부여하여 저장한다.")
     @Test
     void saveNoIdPackage() {
         // given
-        Package packageOption1 = Package.builder().build();
-        Package packageOption2 = Package.builder().build();
+        Packages packagesOption1 = Packages.builder().build();
+        Packages packagesOption2 = Packages.builder().build();
 
         // when
-        packageRepository.save(packageOption1);
-        packageRepository.save(packageOption2);
+        packageRepository.save(packagesOption1);
+        packageRepository.save(packagesOption2);
 
         // then
-        long idDiff = packageOption2.getId() - packageOption1.getId();
+        long idDiff = packagesOption2.getId() - packagesOption1.getId();
         assertEquals(idDiff, 1L);
     }
 }

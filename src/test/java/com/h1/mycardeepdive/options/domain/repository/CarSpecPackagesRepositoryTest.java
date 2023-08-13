@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
 import com.h1.mycardeepdive.options.domain.CarSpecPackage;
-import com.h1.mycardeepdive.options.domain.Package;
+import com.h1.mycardeepdive.options.domain.Packages;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,14 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
-class CarSpecPackageRepositoryTest {
+class CarSpecPackagesRepositoryTest {
     @Autowired CarSpecPackageRepository carSpecPackageRepository;
 
     @Autowired CarSpecRepository carSpecRepository;
 
     @Autowired PackageRepository packageRepository;
 
-    private Package aPackage;
+    private Packages aPackages;
     private CarSpec carSpec;
 
     @BeforeEach
@@ -31,8 +31,8 @@ class CarSpecPackageRepositoryTest {
         carSpecRepository.deleteAll();
         packageRepository.deleteAll();
 
-        aPackage = createPackageComfortII();
-        aPackage = packageRepository.save(aPackage);
+        aPackages = createPackageComfortII();
+        aPackages = packageRepository.save(aPackages);
 
         carSpec = CarSpec.builder().build();
         carSpec = carSpecRepository.save(carSpec);
@@ -44,7 +44,7 @@ class CarSpecPackageRepositoryTest {
     void saveSameId() {
         // given
         CarSpecPackage carSpecPackage1 =
-                CarSpecPackage.builder().carSpec(carSpec)._package(aPackage).build();
+                CarSpecPackage.builder().carSpec(carSpec).packages(aPackages).build();
         carSpecPackageRepository.save(carSpecPackage1);
 
         // when

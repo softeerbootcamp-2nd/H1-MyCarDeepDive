@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.h1.mycardeepdive.options.domain.OptionPackage;
 import com.h1.mycardeepdive.options.domain.Options;
-import com.h1.mycardeepdive.options.domain.Package;
+import com.h1.mycardeepdive.options.domain.Packages;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
-class OptionPackageRepositoryTest {
+class OptionPackagesRepositoryTest {
     @Autowired OptionPackageRepository optionPackageRepository;
 
     @Autowired OptionsRepository optionsRepository;
@@ -25,7 +25,7 @@ class OptionPackageRepositoryTest {
 
     private Options option1;
     private Options option2;
-    private Package _package1;
+    private Packages _packages1;
 
     @BeforeEach
     void setUp() {
@@ -38,8 +38,8 @@ class OptionPackageRepositoryTest {
         option1 = optionsRepository.save(option1);
         option2 = optionsRepository.save(option2);
 
-        _package1 = createPackageComfortII();
-        _package1 = packageRepository.save(_package1);
+        _packages1 = createPackageComfortII();
+        _packages1 = packageRepository.save(_packages1);
     }
 
     @DisplayName("이미 DB에 저장되어 있는 ID를 가진 옵션패키지을 저장하면, 해당 ID의 옵션패키지는 후에 작성된 옵션패키지 정보로 업데이트 된다.")
@@ -47,14 +47,14 @@ class OptionPackageRepositoryTest {
     void saveSameId() {
         // given
         OptionPackage optionPackage1 =
-                OptionPackage.builder()._package(_package1).option(option1).build();
+                OptionPackage.builder().packages(_packages1).option(option1).build();
         optionPackageRepository.save(optionPackage1);
 
         // when
         OptionPackage optionPackage2 =
                 OptionPackage.builder()
                         .id(optionPackage1.getId())
-                        ._package(_package1)
+                        .packages(_packages1)
                         .option(option2)
                         .build();
         optionPackageRepository.save(optionPackage2);
@@ -69,9 +69,9 @@ class OptionPackageRepositoryTest {
     void saveNoIdOptionPackage() {
         // given
         OptionPackage optionPackage1 =
-                OptionPackage.builder()._package(_package1).option(option1).build();
+                OptionPackage.builder().packages(_packages1).option(option1).build();
         OptionPackage optionPackage2 =
-                OptionPackage.builder()._package(_package1).option(option2).build();
+                OptionPackage.builder().packages(_packages1).option(option2).build();
 
         // when
         optionPackageRepository.save(optionPackage1);

@@ -11,20 +11,20 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CarSpecPackageTest {
+class CarSpecPackagesTest {
     @DisplayName("CarSpecPackage 관계를 빌더 패턴을 활용하여 생성할 수 있다")
     @Test
     public void createCarSpecPackage() throws Exception {
         // given
-        Package _package = createPackageComfortII();
+        Packages _packages = createPackageComfortII();
         CarSpec carSpec = CarSpec.builder().build();
 
         // when
         CarSpecPackage carSpecPackage =
-                CarSpecPackage.builder()._package(_package).carSpec(carSpec).build();
+                CarSpecPackage.builder().packages(_packages).carSpec(carSpec).build();
 
         // then
-        assertEquals(_package, carSpecPackage.get_package());
+        assertEquals(_packages, carSpecPackage.getPackages());
         assertEquals(carSpec, carSpecPackage.getCarSpec());
     }
 
