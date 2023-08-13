@@ -24,7 +24,7 @@ final class CharacterSelectSuccessViewController: UIViewController {
             forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessMainHeader.id)
         $0.register(
             CommonRecommendResultTableViewCell.self,
-            forCellReuseIdentifier: CommonRecommendResultTableViewCell.id)
+            forCellReuseIdentifier: CommonRecommendResultTableViewCell.identifier)
         $0.register(
             CharacterSelectSuccesSecondSectionHeader.self,
             forHeaderFooterViewReuseIdentifier: CharacterSelectSuccesSecondSectionHeader.id)
@@ -32,8 +32,18 @@ final class CharacterSelectSuccessViewController: UIViewController {
             CharacterSelectSuccessFooter.self,
             forHeaderFooterViewReuseIdentifier: CharacterSelectSuccessFooter.id)
         $0.separatorStyle = .none
+        
+        let maximumReviewdTextViewHeightAndTopMargin = {
+            typealias Const = CommonRecommendResultTableViewCell.Constant.ReviewdTextView
+            return Const.maximumHeight + Const.topMargin
+        }()
+        let commonOptionViewHeightAndTopMargin = {
+            typealias Const = CommonRecommendResultTableViewCell.Constant.RecommendCarOptionView
+            return Const.height + Const.topMargin
+        }()
+        
         $0.estimatedSectionHeaderHeight = UITableView.automaticDimension
-        $0.estimatedRowHeight = UITableView.automaticDimension
+        $0.estimatedRowHeight = maximumReviewdTextViewHeightAndTopMargin + commonOptionViewHeightAndTopMargin
         $0.estimatedSectionFooterHeight = UITableView.automaticDimension
     }
     
