@@ -10,7 +10,9 @@ import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
 import com.h1.mycardeepdive.options.domain.*;
 import com.h1.mycardeepdive.options.domain.Packages;
 import com.h1.mycardeepdive.options.domain.repository.*;
+import com.h1.mycardeepdive.options.ui.dto.AdditionalOptionResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.PackageOptionResponse;
 import com.h1.mycardeepdive.tags.domain.Tags;
 import com.h1.mycardeepdive.tags.domain.repository.TagRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,6 +45,7 @@ class OptionsServiceTest {
     private CarSpec carSpec;
     private CarSpecOptions carSpecOptions1;
     private CarSpecOptions carSpecOptions2;
+    private CarSpecOptions carSpecOptions3;
     private CarSpecPackage carSpecPackage;
 
     @BeforeEach
@@ -79,11 +82,14 @@ class OptionsServiceTest {
         optionPackageComfortII = optionPackageRepository.save(optionPackageComfortII);
 
         carSpecOptions1 =
-                CarSpecOptions.builder().carSpec(carSpec).options(optionBuiltInCam).build();
+                CarSpecOptions.builder().carSpec(carSpec).options(optionBuiltInCam).isBasicOption(false).build();
         carSpecOptions1 = carSpecOptionsRepository.save(carSpecOptions1);
         carSpecOptions2 =
-                CarSpecOptions.builder().carSpec(carSpec).options(optionStopSystem).build();
+                CarSpecOptions.builder().carSpec(carSpec).options(optionDarkWheel).isBasicOption(false).build();
         carSpecOptions2 = carSpecOptionsRepository.save(carSpecOptions2);
+        carSpecOptions3 =
+                CarSpecOptions.builder().carSpec(carSpec).options(optionStopSystem).isBasicOption(true).build();
+        carSpecOptions3 = carSpecOptionsRepository.save(carSpecOptions3);
 
         carSpecPackage =
                 CarSpecPackage.builder().carSpec(carSpec).packages(comfortIIPackages).build();
@@ -98,6 +104,11 @@ class OptionsServiceTest {
         // when
         OptionResponse options = optionsService.findAllAdditionalOptions(carSpec.getId());
 
+        // then
+        assertEquals(options.getOptionPackageList().size(), 1);
+        assertEquals(options.getAdditionalOptionList().size(), 1);
+
+    }
         // then
         assertEquals(options.getOptionPackageList().size(), 1);
         assertEquals(options.getAdditionalOptionList().size(), 1);
