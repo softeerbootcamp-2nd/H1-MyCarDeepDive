@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessSectionHeaders.swift
+//  AdditionalRecommendResultCarSectionHeaders.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/10.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CharacterSelectSuccessSectionHeaders: String, CaseIterable {
+enum DetailRecommendCarResultSectionHeaders: String, CaseIterable {
     case first = "색상"
     case second = "옵션"
     

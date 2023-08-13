@@ -31,7 +31,7 @@ final class CharacterSelectSuccessViewModel: CommonRecommendResultTableViewModel
     
     override init() {
         mainSectionHeader = .mock
-        sectionHeaders = CharacterSelectSuccessSectionHeaders.lists
+        sectionHeaders = DetailRecommendCarResultSectionHeaders.lists
         secondSectionFooter = "48,120,000원"
         super.init(dataSource: RecommendCarProductOptionModel.mocks)
     }

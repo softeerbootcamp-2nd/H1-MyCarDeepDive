@@ -11,7 +11,7 @@
 		155DDD052A82D040009AE2BC /* CharacterSelectSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD042A82D040009AE2BC /* CharacterSelectSuccessViewModel.swift */; };
 		155DDD072A82D3B2009AE2BC /* CharacterSelectSuccessViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* CharacterSelectSuccessViewModelable.swift */; };
 		155DDD0A2A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD092A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift */; };
-		155DDD0E2A840F7D009AE2BC /* CharacterSelectSuccessSectionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* CharacterSelectSuccessSectionHeaders.swift */; };
+		155DDD0E2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift */; };
 		155DDD102A846077009AE2BC /* RecommendCarInfoModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */; };
 		155DDD122A84610A009AE2BC /* RecommendCarProductOptionModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD112A84610A009AE2BC /* RecommendCarProductOptionModel+Mock.swift */; };
 		155DDD142A846354009AE2BC /* MainSectionHeaderModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD132A846354009AE2BC /* MainSectionHeaderModel+Mock.swift */; };
@@ -143,7 +143,7 @@
 		155DDD042A82D040009AE2BC /* CharacterSelectSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewModel.swift; sourceTree = "<group>"; };
 		155DDD062A82D3B2009AE2BC /* CharacterSelectSuccessViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessViewModelable.swift; sourceTree = "<group>"; };
 		155DDD092A835FEF009AE2BC /* CharacterSelectSuccesSecondSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccesSecondSectionHeader.swift; sourceTree = "<group>"; };
-		155DDD0D2A840F7D009AE2BC /* CharacterSelectSuccessSectionHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectSuccessSectionHeaders.swift; sourceTree = "<group>"; };
+		155DDD0D2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecommendCarResultSectionHeaders.swift; sourceTree = "<group>"; };
 		155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecommendCarInfoModel+Mock.swift"; sourceTree = "<group>"; };
 		155DDD112A84610A009AE2BC /* RecommendCarProductOptionModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecommendCarProductOptionModel+Mock.swift"; sourceTree = "<group>"; };
 		155DDD132A846354009AE2BC /* MainSectionHeaderModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainSectionHeaderModel+Mock.swift"; sourceTree = "<group>"; };
@@ -332,7 +332,7 @@
 		155DDD0C2A840F41009AE2BC /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				155DDD0D2A840F7D009AE2BC /* CharacterSelectSuccessSectionHeaders.swift */,
+				155DDD0D2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift */,
 				155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */,
 				155DDD112A84610A009AE2BC /* RecommendCarProductOptionModel+Mock.swift */,
 				155DDD132A846354009AE2BC /* MainSectionHeaderModel+Mock.swift */,
@@ -369,7 +369,7 @@
 			path = Adapter;
 			sourceTree = "<group>";
 		};
-		159B2CF52A825CC5003F47D6 /* AdditionalRecommendCarResult */ = {
+		159B2CF52A825CC5003F47D6 /* DetailRecommendCarResult */ = {
 			isa = PBXGroup;
 			children = (
 				155DDD0C2A840F41009AE2BC /* Mock */,
@@ -379,7 +379,7 @@
 				159B2CF72A825CE0003F47D6 /* Protocol */,
 				159B2CF62A825CD7003F47D6 /* View */,
 			);
-			path = AdditionalRecommendCarResult;
+			path = DetailRecommendCarResult;
 			sourceTree = "<group>";
 		};
 		159B2CF62A825CD7003F47D6 /* View */ = {
@@ -497,7 +497,7 @@
 		641AB51B2A7B7C7300CF88C0 /* CharacterSelect */ = {
 			isa = PBXGroup;
 			children = (
-				159B2CF52A825CC5003F47D6 /* AdditionalRecommendCarResult */,
+				159B2CF52A825CC5003F47D6 /* DetailRecommendCarResult */,
 				647FBF132A7CB5C900507AE9 /* View */,
 				641AB51F2A7B7CF400CF88C0 /* CharacterSelectViewController.swift */,
 				6412D08D2A81F1FB001E4005 /* DetailLifeStyleSelectViewController.swift */,
@@ -1009,7 +1009,7 @@
 				64ADA4892A77888C0003E2C1 /* RepositoyProtocol.swift in Sources */,
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
 				15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */,
-				155DDD0E2A840F7D009AE2BC /* CharacterSelectSuccessSectionHeaders.swift in Sources */,
+				155DDD0E2A840F7D009AE2BC /* DetailRecommendCarResultSectionHeaders.swift in Sources */,
 				641AB51E2A7B7CDF00CF88C0 /* TrimSelectViewController.swift in Sources */,
 				64ADA4BE2A7A26090003E2C1 /* Int+.swift in Sources */,
 				64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */,
