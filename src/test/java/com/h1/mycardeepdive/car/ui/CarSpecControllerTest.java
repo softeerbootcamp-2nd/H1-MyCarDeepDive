@@ -40,9 +40,9 @@ class CarSpecControllerTest extends ControllerTestConfig {
 
         MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
 
-        info.add("engine", "diesel22");
-        info.add("body", "7seats");
-        info.add("drivingSystem", "2wd");
+        info.add("engine", engine);
+        info.add("body", body);
+        info.add("drivingSystem", drivingSystem);
 
         when(carSpecService.findCarSpecsBySpec(engine, body, drivingSystem))
                 .thenReturn(
