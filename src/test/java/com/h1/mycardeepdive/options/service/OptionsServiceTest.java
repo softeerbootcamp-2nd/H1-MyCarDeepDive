@@ -167,4 +167,16 @@ class OptionsServiceTest {
         assertEquals(packageOptionDetail.size(), 1);
         assertEquals(packageOptionDetail.get(0).getOption_name(), optionBuiltInCam.getName());
     }
+
+    @DisplayName("단일 옵션 상세 조회에 성공한다.")
+    @Test
+    void findOptionDetailTest() {
+        // given
+        OptionDetailResponse optionDetail =
+                optionsService.findOptionDetail(optionBuiltInCam.getId());
+
+        // when&then
+        assertEquals(optionDetail.getOption_name(), optionBuiltInCam.getName());
+        assertEquals(optionDetail.getOption_description(), optionBuiltInCam.getDescription());
+    }
 }

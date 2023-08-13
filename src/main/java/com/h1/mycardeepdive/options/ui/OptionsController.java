@@ -44,4 +44,10 @@ public class OptionsController {
             @PathVariable("option-id") Long optionId) {
         return new ApiResponse<>(optionsService.findPackageOptionDetail(optionId));
     }
+
+    @GetMapping("/options/{option-id}/details")
+    public ApiResponse<OptionDetailResponse> getOptionDetail(
+            @PathVariable("option-id") Long optionId) {
+        return new ApiResponse<>(optionsService.findOptionDetail(optionId));
+    }
 }

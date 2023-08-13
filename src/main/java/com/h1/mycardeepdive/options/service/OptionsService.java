@@ -78,4 +78,10 @@ public class OptionsService {
                                         options, tagRepository.findTagsByOptionId(options.getId())))
                 .collect(Collectors.toList());
     }
+
+    public OptionDetailResponse findOptionDetail(Long optionId) {
+        Options options = optionsRepository.findById(optionId).orElseThrow();
+        return OptionMapper.optionToOptionDetailResponse(
+                options, tagRepository.findTagsByOptionId(options.getId()));
+    }
 }
