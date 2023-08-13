@@ -81,10 +81,6 @@ class TrimOptionContentCollectionView: UICollectionView {
         register(
             TrimOptionContentCell.self,
             forCellWithReuseIdentifier: TrimOptionContentCell.identifier)
-        register(
-            TrimOptionContentHeaderView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: TrimOptionContentHeaderView.identifier)
         isScrollEnabled = false
     }
     
@@ -113,22 +109,6 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegate {
 
 // MARK: - UICollectionView Datasource
 extension TrimOptionContentCollectionView: UICollectionViewDataSource {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        viewForSupplementaryElementOfKind kind: String,
-        at indexPath: IndexPath
-    ) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: TrimOptionContentHeaderView.identifier,
-                for: indexPath)
-            return headerView
-        default:
-            return UICollectionReusableView()
-        }
-    }
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -172,7 +152,6 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegateFlowLayout {
         return Constants.Cell.spacing
     }
     
-    // TODO: 기본 옵션의 개수가 4개 이상 넘어가면 크기 로직 짜야함
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -187,14 +166,6 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegateFlowLayout {
                 width: frame.width,
                 height: Constants.Cell.height)
         }
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        referenceSizeForHeaderInSection section: Int
-    ) -> CGSize {
-        return CGSize(width: frame.width, height: Constants.HeaderView.height)
     }
 }
 
