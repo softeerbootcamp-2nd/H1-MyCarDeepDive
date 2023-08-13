@@ -90,7 +90,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
         if section == 0 {
             return CharacterSelectSuccessMainHeader.Constant.intrinsicContentHeight
         } else if section == 1 {
-            return CharacterSelectSuccessSectionDividerView
+            return CommonResommendResultSectionDividerView
                 .Constant.intrinsicContentHeight
         }
         return 0

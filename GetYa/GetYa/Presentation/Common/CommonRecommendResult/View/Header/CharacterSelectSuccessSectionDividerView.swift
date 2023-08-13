@@ -1,5 +1,5 @@
 //
-//  CharacterSelectSuccessSectionDividerView.swift
+//  CommonResommendResultSectionDividerView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/07.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterSelectSuccessSectionDividerView: UIView {
+final class CommonResommendResultSectionDividerView: UIView {
     enum Constant {
         static let intrinsicContentHeight: CGFloat = {
             let onePixelDividerHeight = OnePixelDivider.intrinsicContentHeight
@@ -70,7 +70,7 @@ final class CharacterSelectSuccessSectionDividerView: UIView {
 }
 
 // MARK: - LayoutSupportable
-extension CharacterSelectSuccessSectionDividerView: LayoutSupportable {
+extension CommonResommendResultSectionDividerView: LayoutSupportable {
     func configureConstraints() {
         _=[onePixelDividerConstraints,
            sectionTitleConstraints].map {

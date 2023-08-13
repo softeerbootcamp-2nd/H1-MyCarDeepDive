@@ -18,7 +18,7 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
             let recommendCarInfoHeight = CharacterSSRecommendCarInfoView
                 .Constant
                 .intrinsicContentHeight
-            let sectionDividerHeight = CharacterSelectSuccessSectionDividerView
+            let sectionDividerHeight = CommonResommendResultSectionDividerView
                 .Constant
                 .intrinsicContentHeight
             return thumbnailViewHeight + recommendCarInfoHeight + sectionDividerHeight
@@ -28,7 +28,7 @@ final class CharacterSelectSuccessMainHeader: UITableViewHeaderFooterView {
     // MARK: - UI properties
     private let thumbnailView = CharacterSelectSuccessThumbnailView()
     private let recommendCarInfoView = CharacterSSRecommendCarInfoView()
-    private let sectionDivider = CharacterSelectSuccessSectionDividerView()
+    private let sectionDivider = CommonResommendResultSectionDividerView()
     
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {

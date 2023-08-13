@@ -10,7 +10,7 @@ import UIKit
 final class CharacterSelectSuccesSecondSectionHeader: UITableViewHeaderFooterView {
     static let id = String(describing: CharacterSelectSuccesSecondSectionHeader.self)
     // MARK: - UI properties
-    private let sectionTitleAndLineDividerView = CharacterSelectSuccessSectionDividerView()
+    private let sectionTitleAndLineDividerView = CommonResommendResultSectionDividerView()
     
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {
