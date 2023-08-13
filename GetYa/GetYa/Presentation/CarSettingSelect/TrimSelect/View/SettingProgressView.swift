@@ -26,7 +26,7 @@ class SettingProgressView: UIView {
             static let width: CGFloat = CGFloat(20).scaledHeight
         }
     }
-    enum ProgressType {
+    enum ProgressType: CaseIterable {
         case trim
         case color
         case option
@@ -167,7 +167,9 @@ class SettingProgressView: UIView {
     }
     
     // MARK: - Functions
-    func setCurrentSettingProgress(type: ProgressType) {
+    func setCurrentSettingProgress(index: Int) {
+        let type = ProgressType.allCases[index]
+        
         colorLabel.configureFontType(fontType: .custom(
             size: 16,
             kern: -0.3,
