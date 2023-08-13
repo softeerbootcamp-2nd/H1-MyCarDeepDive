@@ -16,7 +16,7 @@ struct RecommendCarProductOptionModel {
 // MARK: - ViewModel
 class CommonRecommendResultTableViewModel {
     // MARK: - Properties
-    private(set) var dataSource: [[RecommendCarProductOptionModel]]
+    private var dataSource: [[RecommendCarProductOptionModel]]
     
     // MARK: - Lifecycles
     init(dataSource: [[RecommendCarProductOptionModel]]) {
@@ -25,6 +25,11 @@ class CommonRecommendResultTableViewModel {
     
     init() {
         dataSource = RecommendCarProductOptionModel.mocks
+    }
+    
+    // MARK: - Functions
+    func setDataSource(with dataSource: [[RecommendCarProductOptionModel]]) {
+        self.dataSource = dataSource
     }
 }
 
