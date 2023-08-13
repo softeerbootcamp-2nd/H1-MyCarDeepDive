@@ -44,9 +44,11 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDataSource {
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: CharacterSelectSuccessTableViewCell.id,
-            for: indexPath) as? CharacterSelectSuccessTableViewCell
-        else {
-            return .init(style: .default, reuseIdentifier: CharacterSelectSuccessTableViewCell.id)
+            for: indexPath
+        ) as? CharacterSelectSuccessTableViewCell else {
+            return .init(
+                style: .default,
+                reuseIdentifier: CharacterSelectSuccessTableViewCell.id)
         }
         var item: RecommendCarProductOptionModel
         item = dataSource.cellItem(in: indexPath.section, indexPath.row)
@@ -66,9 +68,7 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
             !isWorkedMainHeaderInitialAnimation,
             section == 0,
             let header = view as? CharacterSelectSuccessMainHeader
-        else {
-            return
-        }
+        else { return }
         isWorkedMainHeaderInitialAnimation.toggle()
         header.showAnimation()
     }
@@ -92,6 +92,13 @@ extension CharacterSelectSuccessTableViewAdapter: UITableViewDelegate {
         } else if section == 1 {
             return CharacterSelectSuccessSectionDividerView
                 .Constant.intrinsicContentHeight
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return CharacterSelectSuccessFooter.Constants.intrinsicContentHeight
         }
         return 0
     }

@@ -10,6 +10,8 @@ import UIKit
 final class CharacterSelectSuccessFooter: UITableViewHeaderFooterView {
     static let id = String(describing: CharacterSelectSuccessFooter.self)
     enum Constants {
+        static let intrinsicContentHeight: CGFloat = OnePixelDivider.uiConstant
+            .topMargin + TotalMoneyDescriptionLabel.topMargin + GetYaFont.mediumBody3.lineHeight
         enum OnePixelDivider {
             static let uiConstant: UILayout = .init(
                 leadingMargin: 16, topMargin: 20, trailingMargin: 16, height: 1)
@@ -27,10 +29,6 @@ final class CharacterSelectSuccessFooter: UITableViewHeaderFooterView {
         
         enum PaymentAmountLabel {
             static let trailingMargin: CGFloat = .init(16).scaledWidth
-        }
-        
-        enum EmptySpacingView {
-            static let height: CGFloat = .init(94).scaledHeight
         }
     }
     
