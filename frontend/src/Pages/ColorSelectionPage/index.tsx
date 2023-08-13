@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Background from '../TrimSelectionPage/Car/Background';
 import CarImage from '../TrimSelectionPage/Car/CarImage';
 import ReRecommendCardLink from '../TrimSelectionPage/Car/ReRecommendCarLink';
@@ -70,7 +70,7 @@ const interiorColor = [
 
 const otherExteriorColor = [
   {
-    name: '인조가죽(블랙)',
+    name: '로버스트 에메랄드 펄',
     trim: 'Caligraphy',
     chooseRate: 70,
     url: Robust,
@@ -160,10 +160,6 @@ function ColorSelectionPage() {
   }: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedInteriorColor(target.value);
   };
-
-  useEffect(() => {
-    console.log(selectedExteriorColor);
-  }, [selectedExteriorColor]);
 
   return (
     <>

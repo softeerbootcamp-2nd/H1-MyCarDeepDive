@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import usePrevious from '@/hooks/usePrevious';
-import ResultPage from './ResultPage';
-import QuestionPage from './QuestionPage';
 
 function RecommendPage() {
-  const { status, step } = useParams();
+  const { step } = useParams();
   const prevStep = usePrevious(step);
   const [age, setAge] = useState('20대');
   const [lifeStyle, setLifeStyle] = useState('');
@@ -33,17 +31,18 @@ function RecommendPage() {
   };
 
   if (step === undefined) return null;
-  if (status === 'result') return <ResultPage step={step} />;
   return (
-    <QuestionPage
-      step={step}
-      prevStep={prevStep}
-      age={age}
-      lifeStyle={lifeStyle}
-      myLifeStyle={myLifeStyle}
-      ageHandler={ageHandler}
-      lifeStyleHandler={lifeStyleHandler}
-      myLifeStyleHandler={myLifeStyleHandler}
+    <Outlet
+      context={{
+        step: step,
+        prevStep: prevStep,
+        age: age,
+        lifeStyle: lifeStyle,
+        myLifeStyle: myLifeStyle,
+        ageHandler: ageHandler,
+        lifeStyleHandler: lifeStyleHandler,
+        myLifeStyleHandler: myLifeStyleHandler,
+      }}
     />
   );
 }

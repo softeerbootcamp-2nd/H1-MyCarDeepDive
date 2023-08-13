@@ -7,17 +7,19 @@ import ProgressBar from './ProgressBar';
 import Body from './Body';
 import SubTitle from './SubTitle';
 import LifeStyleLink from './LifeStyleLink';
+import { useOutletContext } from 'react-router-dom';
 
-function QuestionPage({
-  step,
-  prevStep,
-  lifeStyle,
-  age,
-  myLifeStyle,
-  ageHandler,
-  lifeStyleHandler,
-  myLifeStyleHandler,
-}: RecommendQuestionPageProps) {
+function QuestionPage() {
+  const {
+    step,
+    prevStep,
+    age,
+    lifeStyle,
+    myLifeStyle,
+    ageHandler,
+    lifeStyleHandler,
+    myLifeStyleHandler,
+  } = useOutletContext<RecommendQuestionPageProps>();
   return (
     <RecommendQuestionPageWrapper>
       <ProgressBar step={step} prevStep={prevStep} />

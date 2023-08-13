@@ -16,6 +16,7 @@ import palisade from '@/assets/image/Palisade.png';
 import exteriorCrimi from '@/assets/image/exterior-crimi.png';
 import exteriorArtificialLeather from '@/assets/image/exterior-artificial-leather.png';
 import exteriorSmartsense from '@/assets/image/exterior-smartsense.png';
+import { useOutletContext } from 'react-router-dom';
 
 const cardData = {
   title: '펠리세이드 - Le Blanc(르블랑)',
@@ -79,7 +80,8 @@ interface RecommendResultPageProps {
   step: string;
 }
 
-function ResultPage({ step }: RecommendResultPageProps) {
+function ResultPage() {
+  const { step } = useOutletContext<RecommendResultPageProps>();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
