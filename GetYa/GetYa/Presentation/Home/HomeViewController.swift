@@ -57,9 +57,8 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: HomeContentDelegate {
     func touchUpRecomandButton() {
-        let viewModel = DetailQuotationPreviewViewModel()
         self.navigationController?.pushViewController(
-            DetailQuotationPreviewViewController(viewModel: viewModel),
+            CharacterSelectViewController(),
             animated: true)
     }
     
