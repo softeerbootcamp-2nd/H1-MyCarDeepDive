@@ -14,12 +14,10 @@ import Combine
  - associatedtype State: UI component를 (render)업데이트 해야 할 상태 지정
  - associatedtype Output: ViewController에게 UI component관련 상태 변경을 전달
  */
-protocol BaseViewModel {
+protocol ViewModelable {
     associatedtype Input
     associatedtype State
     associatedtype Output
-    
-    var subscription: Set<AnyCancellable> { get set }
     
     /// ViewController로부터 발생된 event를 transform(input:)의 Input 매개변수로 전달합니다.
     /// ViewModel에서 Input에 대한 로직 처리 후 뷰에게 화면을 업데이트 하도록 Output을 통해 전달합니다.
