@@ -15,6 +15,7 @@ interface OptionCardProps {
   index: number;
   length: number;
   jumpPage: (page: number) => void;
+  isSet: boolean;
 }
 
 function OptionCard({
@@ -28,6 +29,7 @@ function OptionCard({
   index,
   length,
   jumpPage,
+  isSet,
 }: OptionCardProps) {
   return (
     <div
@@ -48,8 +50,8 @@ function OptionCard({
         <div className='mt-[50px] mx-7 '>
           <div className='w-full flex justify-between'>
             <div className='flex flex-col gap-1'>
-              <div className='font-caption1-medium text-grey-400'>
-                {optionName}
+              <div className='h-[18px] font-caption1-medium text-grey-400'>
+                {isSet && optionName}
               </div>
               <div className='font-h2-medium text-grey-0'>
                 {detailOptionName}
@@ -66,20 +68,22 @@ function OptionCard({
             {description}
           </div>
         </div>
-        <div className='w-[344px] h-[190px] absolute bottom-0 left=0 bg-grey-900 rounded-br-xl p-7'>
-          <div className='grid grid-cols-2 gap-3.5'>
-            {detailOptions.map((item, idx) => (
-              <DetailOption
-                detailOption={item}
-                key={item}
-                detailOptionName={detailOptionName}
-                order={idx}
-                jumpPage={jumpPage}
-              />
-            ))}
+        {isSet && (
+          <div className='w-[344px] h-[190px] absolute bottom-0 left-0 bg-grey-900 rounded-br-xl p-7'>
+            <div className='grid grid-cols-2 gap-3.5'>
+              {detailOptions.map((item, idx) => (
+                <DetailOption
+                  detailOption={item}
+                  key={item}
+                  detailOptionName={detailOptionName}
+                  order={idx}
+                  jumpPage={jumpPage}
+                />
+              ))}
+            </div>
+            <DotButtons index={index} length={length} jumpPage={jumpPage} />
           </div>
-          <DotButtons index={index} length={length} jumpPage={jumpPage} />
-        </div>
+        )}
       </div>
     </div>
   );
