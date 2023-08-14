@@ -37,7 +37,7 @@ class OptionsRepositoryTest {
 
     @DisplayName("id가 없는 옵션 엔티티를 저장하면 순차적으로 ID를 부여하여 저장한다.")
     @Test
-    void saveNoIdArtist() {
+    void saveNoIdOption() {
         // given
         Options option1 = Options.builder().build();
         Options option2 = Options.builder().build();

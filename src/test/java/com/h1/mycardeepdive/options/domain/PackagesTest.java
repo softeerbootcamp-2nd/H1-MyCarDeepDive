@@ -8,7 +8,7 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class PackageTest {
+class PackagesTest {
     @DisplayName("패키지 빌더 패턴을 활용하여 생성할 수 있다")
     @Test
     public void createPackage() throws Exception {
@@ -20,8 +20,8 @@ class PackageTest {
         String summary = "summary";
 
         // when
-        Package _package =
-                Package.builder()
+        Packages _packages =
+                Packages.builder()
                         .id(id)
                         .name(name)
                         .chooseRate(chooseRate)
@@ -31,12 +31,12 @@ class PackageTest {
                         .build();
 
         // then
-        assertThat(_package.getId()).isEqualTo(id);
-        assertThat(_package.getName()).isEqualTo(name);
-        assertThat(_package.getChooseRate()).isEqualTo(chooseRate);
-        assertThat(_package.getBadgeName()).isEqualTo(Badge.H_GENUINE);
-        assertThat(_package.getPrice()).isEqualTo(price);
-        assertThat(_package.getSummary()).isEqualTo(summary);
+        assertThat(_packages.getId()).isEqualTo(id);
+        assertThat(_packages.getName()).isEqualTo(name);
+        assertThat(_packages.getChooseRate()).isEqualTo(chooseRate);
+        assertThat(_packages.getBadgeName()).isEqualTo(Badge.H_GENUINE);
+        assertThat(_packages.getPrice()).isEqualTo(price);
+        assertThat(_packages.getSummary()).isEqualTo(summary);
     }
 
     @DisplayName("패키지 도메인의 hashCode/equals는 id 값이 같다면 같은 것으로 처리된다.")
@@ -46,13 +46,13 @@ class PackageTest {
         Long id = 1L;
 
         // when
-        Package aPackage1 = Package.builder().id(id).name("package1").build();
-        Package aPackage2 = Package.builder().id(id).name("package2").build();
-        Set<Package> optionSet = new HashSet<>(Arrays.asList(aPackage1, aPackage2));
+        Packages aPackages1 = Packages.builder().id(id).name("package1").build();
+        Packages aPackages2 = Packages.builder().id(id).name("package2").build();
+        Set<Packages> optionSet = new HashSet<>(Arrays.asList(aPackages1, aPackages2));
 
         // then
-        assertThat(aPackage1).isEqualTo(aPackage2);
-        assertThat(aPackage1.hashCode()).isEqualTo(aPackage2.hashCode());
+        assertThat(aPackages1).isEqualTo(aPackages2);
+        assertThat(aPackages1.hashCode()).isEqualTo(aPackages2.hashCode());
         assertThat(optionSet.size()).isEqualTo(1);
     }
 }

@@ -10,31 +10,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Options extends OptionBaseEntity {
+public class Packages extends OptionBaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "option_id")
+    @Column(name = "package_id")
     private Long id;
 
-    private String imgUrl;
-
-    private String description;
-
     @Builder
-    public Options(
-            Long id,
-            String name,
-            String imgUrl,
-            String summary,
-            String description,
-            long price,
-            double chooseRate,
-            Badge badgeName) {
+    public Packages(
+            Long id, String name, String summary, long price, double chooseRate, Badge badgeName) {
         this.id = id;
         this.name = name;
-        this.imgUrl = imgUrl;
         this.summary = summary;
-        this.description = description;
         this.price = price;
         this.chooseRate = chooseRate;
         this.badgeName = badgeName;
@@ -44,8 +31,8 @@ public class Options extends OptionBaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Options option = (Options) o;
-        return Objects.equals(id, option.id);
+        Packages _packages = (Packages) o;
+        return Objects.equals(id, _packages.id);
     }
 
     @Override
