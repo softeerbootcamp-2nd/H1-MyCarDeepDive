@@ -16,7 +16,7 @@ struct DetailRecommendCarInfoModel {
     var carOptions: String
 }
 
-struct DetailRecommendCarResultMainHeaderModel {
+struct QuotationPreviewMainHeaderModel {
     var thumbnailKeywords: [String]
     var recommendCarProductOption: DetailRecommendCarInfoModel
     var firstSectionTitle: String
@@ -25,15 +25,15 @@ struct DetailRecommendCarResultMainHeaderModel {
 final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewModel {
     // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
-    private var mainSectionHeader: DetailRecommendCarResultMainHeaderModel
+    private var mainSectionHeader: QuotationPreviewMainHeaderModel
     private var sectionHeaders: [String]
     private var secondSectionFooter: String
     
     override init() {
         mainSectionHeader = .mock
-        sectionHeaders = DetailRecommendCarResultSectionHeaders.lists
+        sectionHeaders = QuotationPreviewHeaderTitleList.lists
         secondSectionFooter = "48,120,000원"
-        super.init(dataSource: DetailRecommendCarProductOptionModel.mocks)
+        super.init(dataSource: QuotationPreviewCarProductOptionModel.mocks)
     }
 }
 
@@ -76,7 +76,7 @@ extension DetailQuotationPreviewViewModel: DetailQuotationPreviewTableViewAdapte
         secondSectionFooter
     }
     
-    var mainSectionHeaderItem: DetailRecommendCarResultMainHeaderModel {
+    var mainSectionHeaderItem: QuotationPreviewMainHeaderModel {
         mainSectionHeader
     }
     

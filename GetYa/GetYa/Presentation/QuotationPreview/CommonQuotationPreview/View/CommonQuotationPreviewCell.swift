@@ -81,7 +81,7 @@ final class CommonQuotationPreviewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        let reset = DetailRecommendCarProductOptionModel(
+        let reset = QuotationPreviewCarProductOptionModel(
             optionImage: nil,
             optionName: nil,
             optionPrice: nil,
@@ -90,7 +90,7 @@ final class CommonQuotationPreviewCell: UITableViewCell {
     }
     
     // MARK: - Functions
-    func configure(with productOptionModel: DetailRecommendCarProductOptionModel) {
+    func configure(with productOptionModel: QuotationPreviewCarProductOptionModel) {
         var image: UIImage?
         if let imageName = productOptionModel.optionImage {
             image = UIImage(named: imageName)

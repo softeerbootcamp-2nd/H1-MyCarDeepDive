@@ -6,7 +6,7 @@
 //
 
 // MARK: - View model
-struct DetailRecommendCarProductOptionModel {
+struct QuotationPreviewCarProductOptionModel {
     let optionImage: String?
     let optionName: String?
     let optionPrice: Int?
@@ -16,26 +16,26 @@ struct DetailRecommendCarProductOptionModel {
 // MARK: - ViewModel
 class CommonQuotationPreviewTableViewModel {
     // MARK: - Properties
-    private var dataSource: [[DetailRecommendCarProductOptionModel]]
+    private var dataSource: [[QuotationPreviewCarProductOptionModel]]
     
     // MARK: - Lifecycles
-    init(dataSource: [[DetailRecommendCarProductOptionModel]]) {
+    init(dataSource: [[QuotationPreviewCarProductOptionModel]]) {
         self.dataSource = dataSource
     }
     
     init() {
-        dataSource = DetailRecommendCarProductOptionModel.mocks
+        dataSource = QuotationPreviewCarProductOptionModel.mocks
     }
     
     // MARK: - Functions
-    func setDataSource(with dataSource: [[DetailRecommendCarProductOptionModel]]) {
+    func setDataSource(with dataSource: [[QuotationPreviewCarProductOptionModel]]) {
         self.dataSource = dataSource
     }
 }
 
 // MARK: - CommonRecommendResultTableViewDataSource
 extension CommonQuotationPreviewTableViewModel: CommonQuotationPreviewTableViewAdapterDataSource {
-    func cellItem(in section: Int, _ row: Int) -> DetailRecommendCarProductOptionModel {
+    func cellItem(in section: Int, _ row: Int) -> QuotationPreviewCarProductOptionModel {
         return dataSource[section][row]
     }
     

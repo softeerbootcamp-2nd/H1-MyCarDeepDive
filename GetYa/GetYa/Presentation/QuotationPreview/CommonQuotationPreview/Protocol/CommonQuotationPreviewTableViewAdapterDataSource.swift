@@ -6,7 +6,7 @@
 //
 
 protocol CommonQuotationPreviewTableViewAdapterDataSource {
-    func cellItem(in section: Int, _ row: Int) -> DetailRecommendCarProductOptionModel
+    func cellItem(in section: Int, _ row: Int) -> QuotationPreviewCarProductOptionModel
     func numberOfRows(in section: Int) -> Int
     var numberOfSections: Int { get }
 }

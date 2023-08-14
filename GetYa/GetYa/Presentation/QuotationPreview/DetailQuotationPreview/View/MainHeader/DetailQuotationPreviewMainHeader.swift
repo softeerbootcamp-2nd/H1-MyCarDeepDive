@@ -56,7 +56,7 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
     }
     
     // MARK: - Functions
-    func configure(with: DetailRecommendCarResultMainHeaderModel) {
+    func configure(with: QuotationPreviewMainHeaderModel) {
         setThumbnailView(with.thumbnailKeywords)
         setRecommendCarInfoView(with.recommendCarProductOption)
         setSectionDivider(with.firstSectionTitle)
