@@ -317,7 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				15059ABB2A88A15400303C01 /* CommonQuotationPreview */,
-				159B2CF52A825CC5003F47D6 /* DetailRecommendCarResult */,
+				159B2CF52A825CC5003F47D6 /* DetailQuotationPreview */,
 			);
 			path = QuotationPreview;
 			sourceTree = "<group>";
@@ -378,7 +378,7 @@
 			path = Adapter;
 			sourceTree = "<group>";
 		};
-		159B2CF52A825CC5003F47D6 /* DetailRecommendCarResult */ = {
+		159B2CF52A825CC5003F47D6 /* DetailQuotationPreview */ = {
 			isa = PBXGroup;
 			children = (
 				155DDD0C2A840F41009AE2BC /* Mock */,
@@ -388,7 +388,7 @@
 				159B2CF72A825CE0003F47D6 /* Protocol */,
 				159B2CF62A825CD7003F47D6 /* View */,
 			);
-			path = DetailRecommendCarResult;
+			path = DetailQuotationPreview;
 			sourceTree = "<group>";
 		};
 		159B2CF62A825CD7003F47D6 /* View */ = {
