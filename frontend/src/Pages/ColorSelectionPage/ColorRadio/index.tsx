@@ -2,20 +2,30 @@ import CheckCircle from '@/assets/icon/check-circle-white.svg';
 
 function ColorRadio({
   data,
-  radioHandler,
+  colorType,
   radioTarget,
-  type,
+  setShowModal,
+  radioHandler,
+  clickHandler,
 }: {
   data: {
     name: string;
     chooseRate: number;
     url: string;
-    trim?: string;
+    trim: string;
   }[];
-  radioHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  radioTarget: string;
-  type: string;
+  colorType: 'interior' | 'exterior' | 'other';
+  radioTarget?: string;
+  setShowModal?: (value: boolean) => void;
+  radioHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  clickHandler?: (e: React.MouseEvent<HTMLInputElement>) => void;
 }) {
+  const showOtherColorChangePopup = (e: React.MouseEvent<HTMLInputElement>) => {
+    if (setShowModal && clickHandler) {
+      clickHandler(e);
+      setShowModal(true);
+    }
+  };
   return (
     <div className='flex flex-wrap gap-x-4'>
       {data.map((color, index) => {
@@ -23,20 +33,21 @@ function ColorRadio({
           <div
             key={index}
             className={`flex flex-col w-[68px] ${
-              type === 'other' ? 'mb-3' : 'mb-6'
+              colorType === 'other' ? 'mb-3' : 'mb-6'
             }`}
           >
             <input
               type='radio'
               id={color.name}
-              name={type}
+              name={colorType}
               value={color.name}
               className='hidden'
+              onClick={showOtherColorChangePopup}
               onChange={radioHandler}
             />
             <label htmlFor={color.name} className='cursor-pointer'>
-              {type === 'other' && (
-                <p className='font-body2-bold'>
+              {colorType === 'other' && (
+                <p className='font-body2-bold flex items-start mb-1'>
                   <span className='text-[11px] leading-normal text-secondary'>
                     {color.trim}
                   </span>
@@ -61,13 +72,13 @@ function ColorRadio({
                   </>
                 )}
 
-                {type === 'exterior' && index < 3 && (
+                {colorType === 'exterior' && index < 3 && (
                   <p className='font-caption1-medium bg-grey-300 text-grey-1000 w-10 h-5 flex justify-center items-center rounded-tl rounded-br absolute top-0 left-0'>
                     Top {index + 1}
                   </p>
                 )}
 
-                {type === 'interior' && index === 0 && (
+                {colorType === 'interior' && index === 0 && (
                   <p className='font-caption1-medium bg-grey-300 text-grey-1000 w-10 h-5 flex justify-center items-center rounded-tl rounded-br absolute top-0 left-0'>
                     Best
                   </p>

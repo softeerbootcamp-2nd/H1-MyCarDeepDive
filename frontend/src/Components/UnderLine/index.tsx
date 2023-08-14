@@ -1,9 +1,14 @@
 interface UnderLineProps {
   margin: string;
+  color?: string;
 }
 
-function UnderLine({ margin }: UnderLineProps) {
-  return <hr className={`${margin} h-px bg-grey-700 border-0`} />;
+function UnderLine({ margin, color }: UnderLineProps) {
+  return (
+    <hr
+      className={`${color ? color : 'bg-grey-700'} ${margin} h-px border-0`}
+    />
+  );
 }
 
 export default UnderLine;

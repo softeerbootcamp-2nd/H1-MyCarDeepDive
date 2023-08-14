@@ -13,6 +13,24 @@ import sheet from '@/assets/icon/Sheet.svg';
 import navigation from '@/assets/icon/Navigation.svg';
 import cluster from '@/assets/icon/Cluster.svg';
 
+import Abyss from '@/assets/image/exterior-abyss.png';
+import Shimmering from '@/assets/image/exterior-shimmering.png';
+import Moonlight from '@/assets/image/exterior-moonlight.png';
+import Gaia from '@/assets/image/exterior-gaia.png';
+import Graphite from '@/assets/image/exterior-graphite.png';
+import Creamy from '@/assets/image/exterior-creamy.png';
+import Quilted from '@/assets/image/interior-quilted.png';
+import Robust from '@/assets/image/exterior-robust.png';
+import CoolGray from '@/assets/image/interior-coolgray.png';
+import Black from '@/assets/image/interior-black.png';
+import Navy from '@/assets/image/interior-navy.png';
+import SyntheticBlack from '@/assets/image/interior-synthetic_black.png';
+import Burgundy from '@/assets/image/interior-burgundy.png';
+import NavyWarmGray from '@/assets/image/interior-navy_warmgray.png';
+import PremiumBlack from '@/assets/image/interior-premium_black.png';
+import OneToneBlack from '@/assets/image/interior-onetone_balck.png';
+import Brown from '@/assets/image/interior-brown.png';
+
 export const ageQuestionList = ['20대', '30대', '40대', '50대 이상'];
 export const lifeStyleQuestionList = [
   {
@@ -264,5 +282,119 @@ export const trimCompareData = [
       'KRELL 프리미엄 사운드',
       '블랙 에디션',
     ],
+  },
+];
+
+export const exteriorColor = [
+  {
+    name: '어비스 블랙펄',
+    trim: 'Le Blanc(르블랑)',
+    chooseRate: 70,
+    url: Abyss,
+  },
+  {
+    name: '쉬머링 실버 메탈릭',
+    trim: 'Le Blanc(르블랑)',
+    chooseRate: 60,
+    url: Shimmering,
+  },
+  {
+    name: '문라이트 블루 펄',
+    trim: 'Le Blanc(르블랑)',
+    chooseRate: 50,
+    url: Moonlight,
+  },
+  {
+    name: '가이아 브라운 펄',
+    trim: 'Le Blanc(르블랑)',
+    chooseRate: 40,
+    url: Gaia,
+  },
+  {
+    name: '그라파이트 그레이 메탈릭',
+    trim: 'Le Blanc(르블랑)',
+    chooseRate: 30,
+    url: Graphite,
+  },
+  {
+    name: '크리미 화이트 펄',
+    trim: 'Le Blanc(르블랑)',
+    chooseRate: 20,
+    url: Creamy,
+  },
+];
+
+export const interiorColor = [
+  {
+    name: '퀄팅 천연(블랙)',
+    trim: 'Le Blanc(르블랑)',
+    chooseRate: 70,
+    url: Quilted,
+  },
+  {
+    name: '쿨 그레이',
+    trim: 'Le Blanc(르블랑)',
+    chooseRate: 60,
+    url: CoolGray,
+  },
+];
+
+export const otherExteriorColor = [
+  {
+    name: '로버스트 에메랄드 펄',
+    trim: 'Caligraphy',
+    chooseRate: 70,
+    url: Robust,
+  },
+];
+
+export const otherInteriorColor = [
+  {
+    name: '인조가죽(블랙)',
+    trim: 'Exclusive',
+    chooseRate: 70,
+    url: SyntheticBlack,
+  },
+  {
+    name: '네이비',
+    trim: 'Prestige',
+    chooseRate: 60,
+    url: Navy,
+  },
+  {
+    name: '블랙',
+    trim: 'Prestige',
+    chooseRate: 50,
+    url: Black,
+  },
+  {
+    name: '버건디',
+    trim: 'Prestige',
+    chooseRate: 40,
+    url: Burgundy,
+  },
+  {
+    name: '네이비/웜그레이 투톤',
+    trim: 'Caligraphy',
+    chooseRate: 30,
+    url: NavyWarmGray,
+  },
+  {
+    name: '블랙(고급)',
+    trim: 'Caligraphy',
+    chooseRate: 20,
+    url: PremiumBlack,
+  },
+  {
+    name: '블랙원톤(블랙에디션전용)',
+    trim: 'Caligraphy',
+    chooseRate: 10,
+    url: OneToneBlack,
+  },
+  {
+    name: '브라운',
+    trim: 'Caligraphy',
+    chooseRate: 5,
+    url: Brown,
   },
 ];

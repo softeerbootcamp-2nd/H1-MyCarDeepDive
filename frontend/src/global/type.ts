@@ -81,8 +81,7 @@ export interface NavigationRadioProps {
   name: string;
   index: number;
   value: string;
-  address?: string;
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  address: string;
 }
 
 export interface FeatureSelectRadioGroupProps {

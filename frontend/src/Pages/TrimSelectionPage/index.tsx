@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@/Components/Button';
 import FeatureSelectRadioGroupWrapper from './FeatureSelectRadioGroupWrapper';
 import SelectionCarWrapper from './SelectionCarWrapper';
@@ -79,6 +79,13 @@ function TrimSelectionPage() {
     });
     setShowOptionToolTip(true);
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
 
   const navigation = useNavigate();
 
