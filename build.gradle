@@ -47,7 +47,6 @@ allprojects {
 
 test {
 	useJUnitPlatform()
-	finalizedBy 'openapi3'
 	finalizedBy 'jacocoTestReport'
 }
 
