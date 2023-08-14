@@ -80,8 +80,8 @@ enum GetYaFont {
             return 12
         case .regularCaption1:
             return 12
-    case .custom(let size, _, _, _):
-        return size
+        case .custom(let size, _, _, _):
+            return size
         }
     }
     
@@ -121,8 +121,8 @@ enum GetYaFont {
             return 0.0
         case .regularCaption1:
             return 0.0
-    case .custom(_, let kern, _, _):
-        return kern
+        case .custom(_, let kern, _, _):
+            return kern
         }
     }
     
@@ -162,8 +162,8 @@ enum GetYaFont {
             return 18
         case .regularCaption1:
             return 18
-    case .custom(_, _, let lineHeight, _):
-        return lineHeight
+        case .custom(_, _, let lineHeight, _):
+            return lineHeight
         }
     }
   
@@ -212,8 +212,8 @@ enum GetYaFont {
             return "HyundaiSansTextKRMedium"
         case .regularCaption1:
             return "HyundaiSansTextKRRegular"
-    case .custom(_, _, _, let nameType):
-        return nameType.rawValue
+        case .custom(_, _, _, let nameType):
+            return nameType.rawValue
         }
     }
     
