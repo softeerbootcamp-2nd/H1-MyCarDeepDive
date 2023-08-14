@@ -15,7 +15,7 @@ import Foundation
 ///   enum Constant {
 ///     enum ImageView {
 ///       static let margin = UIMargin(
-///         top: 0, leading: 20, trailing: -10, bottom: -10)
+///         top: 0, leading: 20, trailing: -10, bottom: -10, width: 30)
 ///     }
 ///
 ///     enum Title {
@@ -26,10 +26,10 @@ import Foundation
 /// }
 /// ```
 struct UILayout {
-  let topMargin: CGFloat
-  let leadingMargin: CGFloat
-  let trailingMargin: CGFloat
-  let bottomMargin: CGFloat
+    let topMargin: CGFloat
+    let leadingMargin: CGFloat
+    let trailingMargin: CGFloat
+    let bottomMargin: CGFloat
     let height: CGFloat
     let width: CGFloat
   
