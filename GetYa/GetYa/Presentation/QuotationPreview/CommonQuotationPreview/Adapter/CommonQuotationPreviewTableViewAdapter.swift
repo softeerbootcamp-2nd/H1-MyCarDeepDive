@@ -1,5 +1,5 @@
 //
-//  CommonRecommendCarResultTableViewAdapter.swift
+//  CommonQuotationPreviewTableViewAdapter.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/14.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-class CommonRecommendCarResultTableViewAdapter: NSObject {
+class CommonQuotationPreviewTableViewAdapter: NSObject {
     // MARK: - Properties
-    private var dataSource: CommonRecommendCarResultTableViewAdapterDataSource
+    private var dataSource: CommonQuotationPreviewTableViewAdapterDataSource
     
     // MARK: - Lifecycles
     init(
         tableView: UITableView,
-        dataSource: CommonRecommendCarResultTableViewAdapterDataSource
+        dataSource: CommonQuotationPreviewTableViewAdapterDataSource
     ) {
         self.dataSource = dataSource
         super.init()
@@ -23,7 +23,7 @@ class CommonRecommendCarResultTableViewAdapter: NSObject {
 }
 
 // MARK: - UITableViewDataSource
-extension CommonRecommendCarResultTableViewAdapter: UITableViewDataSource {
+extension CommonQuotationPreviewTableViewAdapter: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataSource.numberOfSections
     }
@@ -40,12 +40,12 @@ extension CommonRecommendCarResultTableViewAdapter: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CommonRecommendCarResultTableViewCell.identifier,
+            withIdentifier: CommonQuotationPreviewCell.identifier,
             for: indexPath
-        ) as? CommonRecommendCarResultTableViewCell else {
+        ) as? CommonQuotationPreviewCell else {
             return .init(
                 style: .default,
-                reuseIdentifier: CommonRecommendCarResultTableViewCell.identifier)
+                reuseIdentifier: CommonQuotationPreviewCell.identifier)
         }
         let item = dataSource.cellItem(in: indexPath.section, indexPath.row)
         cell.configure(with: item)

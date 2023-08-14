@@ -10,7 +10,7 @@ import UIKit
 final class DetailRecommendCarResultSecondSectionHeader: UITableViewHeaderFooterView {
     static let identifier = "DetailRecommendCarResultSecondSectionHeader"
     // MARK: - UI properties
-    private let sectionTitleAndLineDividerView = CommonRecommendCarResultSectionDividerTitleView()
+    private let sectionTitleAndLineDividerView = CommonQuotationPreviewTitleView()
     
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {

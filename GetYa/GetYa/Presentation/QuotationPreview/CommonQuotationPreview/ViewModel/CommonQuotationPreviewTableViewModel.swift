@@ -1,5 +1,5 @@
 //
-//  CommonRecommendCarResultTableViewModel.swift
+//  CommonQuotationPreviewTableViewModel.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/14.
@@ -14,7 +14,7 @@ struct DetailRecommendCarProductOptionModel {
 }
 
 // MARK: - ViewModel
-class CommonRecommendCarResultTableViewModel {
+class CommonQuotationPreviewTableViewModel {
     // MARK: - Properties
     private var dataSource: [[DetailRecommendCarProductOptionModel]]
     
@@ -34,7 +34,7 @@ class CommonRecommendCarResultTableViewModel {
 }
 
 // MARK: - CommonRecommendResultTableViewDataSource
-extension CommonRecommendCarResultTableViewModel: CommonRecommendCarResultTableViewAdapterDataSource {
+extension CommonQuotationPreviewTableViewModel: CommonQuotationPreviewTableViewAdapterDataSource {
     func cellItem(in section: Int, _ row: Int) -> DetailRecommendCarProductOptionModel {
         return dataSource[section][row]
     }

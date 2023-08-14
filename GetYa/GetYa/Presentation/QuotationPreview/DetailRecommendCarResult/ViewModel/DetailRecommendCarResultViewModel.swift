@@ -22,7 +22,7 @@ struct DetailRecommendCarResultMainHeaderModel {
     var firstSectionTitle: String
 }
 
-final class DetailRecommendCarResultViewModel: CommonRecommendCarResultTableViewModel {
+final class DetailRecommendCarResultViewModel: CommonQuotationPreviewTableViewModel {
     // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
     private var mainSectionHeader: DetailRecommendCarResultMainHeaderModel

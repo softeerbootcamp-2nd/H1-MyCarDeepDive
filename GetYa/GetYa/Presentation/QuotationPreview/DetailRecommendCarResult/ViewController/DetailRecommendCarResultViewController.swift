@@ -24,13 +24,13 @@ final class DetailRecommendCarResultViewController: UIViewController {
     private var viewModel: (
         any CharacterSelectSuccessViewModelable
         & DetailRecommendCarResultTableViewAdapterDataSource
-        & CommonRecommendCarResultTableViewAdapterDataSource)!
+        & CommonQuotationPreviewTableViewAdapterDataSource)!
     
     // MARK: - Lifecycles
     init(
         viewModel: some CharacterSelectSuccessViewModelable
         & DetailRecommendCarResultTableViewAdapterDataSource
-        & CommonRecommendCarResultTableViewAdapterDataSource
+        & CommonQuotationPreviewTableViewAdapterDataSource
     ) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel

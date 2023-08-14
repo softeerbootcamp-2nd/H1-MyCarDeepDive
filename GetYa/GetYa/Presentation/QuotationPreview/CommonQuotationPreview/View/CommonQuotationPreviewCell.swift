@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommonRecommendCarResultTableViewCell: UITableViewCell {
+final class CommonQuotationPreviewCell: UITableViewCell {
     enum Constants {
         enum RecommendCarOptionView {
             static let height: CGFloat = .init(60).scaledHeight
@@ -50,7 +50,7 @@ final class CommonRecommendCarResultTableViewCell: UITableViewCell {
             }
         }
     }
-    static let identifier = String(describing: CommonRecommendCarResultTableViewCell.self)
+    static let identifier = String(describing: CommonQuotationPreviewCell.self)
     
     // MARK: - UI properties
     private let recommendCarOptionView = CommonOptionView()
@@ -105,7 +105,7 @@ final class CommonRecommendCarResultTableViewCell: UITableViewCell {
 }
 
 // MARK: - LayoutSupportable
-extension CommonRecommendCarResultTableViewCell: LayoutSupportable {
+extension CommonQuotationPreviewCell: LayoutSupportable {
     func configureConstraints() {
         _=[recommendCarOptionViewConstraints,
            reviewdTextViewConstraints

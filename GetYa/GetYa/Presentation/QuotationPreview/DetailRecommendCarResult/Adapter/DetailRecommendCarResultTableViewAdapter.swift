@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailRecommendCarResultTableViewAdapter: CommonRecommendCarResultTableViewAdapter {
+final class DetailRecommendCarResultTableViewAdapter: CommonQuotationPreviewTableViewAdapter {
     // MARK: - Properties
     private var dataSource: DetailRecommendCarResultTableViewAdapterDataSource
     private var isWorkedMainHeaderInitialAnimation = false
@@ -16,7 +16,7 @@ final class DetailRecommendCarResultTableViewAdapter: CommonRecommendCarResultTa
     init(
         tableView: UITableView,
         dataSource: DetailRecommendCarResultTableViewAdapterDataSource
-        & CommonRecommendCarResultTableViewAdapterDataSource
+        & CommonQuotationPreviewTableViewAdapterDataSource
     ) {
         self.dataSource = dataSource
         super.init(tableView: tableView, dataSource: dataSource)
@@ -58,7 +58,7 @@ extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
         if section == 0 {
             return DetailRecommendCarResultMainHeader.Constants.intrinsicContentHeight
         } else if section == 1 {
-            return CommonRecommendCarResultSectionDividerTitleView
+            return CommonQuotationPreviewTitleView
                 .Constants.intrinsicContentHeight
         }
         return 0

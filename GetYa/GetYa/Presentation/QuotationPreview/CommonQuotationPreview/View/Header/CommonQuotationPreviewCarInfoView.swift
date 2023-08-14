@@ -1,5 +1,5 @@
 //
-//  CommonRecommendCarResultCarInfoView.swift
+//  CommonQuotationPreviewCarInfoView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/13.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommonRecommendCarResultCarInfoView: UIView {
+class CommonQuotationPreviewCarInfoView: UIView {
     enum Constants {
         static var intrinsicContentHeight: CGFloat {
             let carKrNameHeight = CarKrNameLabel.intrinsicContentHeight
@@ -96,7 +96,7 @@ class CommonRecommendCarResultCarInfoView: UIView {
 }
 
 // MARK: - LayoutSupportable
-extension CommonRecommendCarResultCarInfoView: LayoutSupportable {
+extension CommonQuotationPreviewCarInfoView: LayoutSupportable {
     func configureConstraints() {
         _=[carKrNameLabelConstraints,
            carEnNameLabelConstraints,
@@ -107,7 +107,7 @@ extension CommonRecommendCarResultCarInfoView: LayoutSupportable {
 }
 
 // MARK: - Private layout supportable
-private extension CommonRecommendCarResultCarInfoView {
+private extension CommonQuotationPreviewCarInfoView {
     var carKrNameLabelConstraints: [NSLayoutConstraint] {
         typealias Const = Constants.CarKrNameLabel
         return [

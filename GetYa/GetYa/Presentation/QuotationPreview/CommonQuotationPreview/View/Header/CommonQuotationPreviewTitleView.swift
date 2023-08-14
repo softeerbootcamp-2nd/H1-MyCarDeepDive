@@ -1,5 +1,5 @@
 //
-//  CommonRecommendCarResultSectionDividerTitleView.swift
+//  CommonQuotationPreviewTitleView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/07.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommonRecommendCarResultSectionDividerTitleView: UIView {
+class CommonQuotationPreviewTitleView: UIView {
     enum Constants {
         static var intrinsicContentHeight: CGFloat {
             let onePixelDividerHeight = OnePixelDivider.intrinsicContentHeight
@@ -70,7 +70,7 @@ class CommonRecommendCarResultSectionDividerTitleView: UIView {
 }
 
 // MARK: - LayoutSupportable
-extension CommonRecommendCarResultSectionDividerTitleView: LayoutSupportable {
+extension CommonQuotationPreviewTitleView: LayoutSupportable {
     func configureConstraints() {
         _=[onePixelDividerConstraints,
            sectionTitleConstraints].map {
