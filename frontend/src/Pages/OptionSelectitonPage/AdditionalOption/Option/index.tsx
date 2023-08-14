@@ -9,6 +9,7 @@ interface SelectedProps {
   price: string;
   adoptionRate?: number;
   tag?: string;
+  setShowOptionModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Option({
@@ -18,6 +19,7 @@ function Option({
   price,
   adoptionRate,
   tag,
+  setShowOptionModal,
 }: SelectedProps) {
   return (
     <div className='w-[244px] mb-11'>
@@ -47,7 +49,10 @@ function Option({
       </div>
       <div className='mt-3 flex justify-between'>
         <span className='font-h4-medium text-grey-0'>{name}</span>
-        <span className='font-body4-regular text-secondary flex'>
+        <span
+          className='font-body4-regular text-secondary flex cursor-pointer'
+          onClick={() => setShowOptionModal(true)}
+        >
           더 알아보기
           <img src={moreInfo} alt='더 알아보기' />
         </span>

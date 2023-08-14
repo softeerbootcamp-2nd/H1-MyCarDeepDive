@@ -124,13 +124,20 @@ const additionalOptionData = [
 
 interface AdditionalOptionProps {
   page: number;
+  setShowOptionModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function AdditionalOption({ page }: AdditionalOptionProps) {
+function AdditionalOption({ page, setShowOptionModal }: AdditionalOptionProps) {
   return (
     <div className='grid grid-cols-4 gap-4 max-w-5xl mx-auto'>
       {additionalOptionData.slice((page - 1) * 8, page * 8).map(item => {
-        return <Option {...item} key={item.name} />;
+        return (
+          <Option
+            {...item}
+            key={item.name}
+            setShowOptionModal={setShowOptionModal}
+          />
+        );
       })}
     </div>
   );

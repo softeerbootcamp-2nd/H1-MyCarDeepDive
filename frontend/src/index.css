@@ -241,3 +241,7 @@
   width: calc(100vw - 416px);
   height: calc(100vh - 120px);
 }
+
+.noScrollBar::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
