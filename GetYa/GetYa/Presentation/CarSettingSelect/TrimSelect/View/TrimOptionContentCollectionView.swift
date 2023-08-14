@@ -191,8 +191,9 @@ extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
             } else {
                 expandedIndexPath.append(indexPath)
             }
+            
             UIView.performWithoutAnimation({
-                self.reloadItems(at: [indexPath])
+                self.collectionViewLayout.invalidateLayout()
                 self.learnMoreViewDelegate?.touchUpLearnMoreViewButton()
             })
         }
