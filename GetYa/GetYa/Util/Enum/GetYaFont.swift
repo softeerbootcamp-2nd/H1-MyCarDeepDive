@@ -7,19 +7,19 @@
 
 import UIKit
 
-enum GetYaFont: CaseIterable {
+enum GetYaFont {
     /// 22 pt | 28 lineheight
     case boldHead1
     /// 22 pt | 28 lineheight
     case mediumHead1
     ///  20 pt | 26 lineheight
     case mediumHead2
+    ///  20 pt | 26 lineheight
+    case regularHead2
     ///  18 pt | 24 lineheight
     case mediumHead3
     ///  16 pt | 22 lineheight
     case mediumHead4
-    ///  20 pt | ? lineheight
-    case regularHead2
     ///  20 pt | 28 lineheight
     case boldBody1
     ///  20 pt | 28 lineheight
@@ -42,6 +42,7 @@ enum GetYaFont: CaseIterable {
     case mediumCaption1
     ///  12 pt | 18 lineheight
     case regularCaption1
+    case custom(size: CGFloat, kern: CGFloat, lineHeight: CGFloat, nameType: HyundaiSansNameType)
   
     var size: CGFloat {
         switch self {
@@ -79,6 +80,8 @@ enum GetYaFont: CaseIterable {
             return 12
         case .regularCaption1:
             return 12
+    case .custom(let size, _, _, _):
+        return size
         }
     }
     
@@ -118,6 +121,8 @@ enum GetYaFont: CaseIterable {
             return 0.0
         case .regularCaption1:
             return 0.0
+    case .custom(_, let kern, _, _):
+        return kern
         }
     }
     
@@ -157,9 +162,20 @@ enum GetYaFont: CaseIterable {
             return 18
         case .regularCaption1:
             return 18
+    case .custom(_, _, let lineHeight, _):
+        return lineHeight
         }
     }
-    
+  
+    enum HyundaiSansNameType: String {
+        case boldHead = "HyundaiSansHeadKRBold"
+        case mediumHead = "HyundaiSansHeadKRMedium"
+        case regularHead = "HyundaiSansHeadKRRegular"
+        case boldText = "HyundaiSansTextKRBold"
+        case mediumText = "HyundaiSansTextKRMedium"
+        case regularText = "HyundaiSansTextKRRegular"
+    }
+      
     var name: String {
         switch self {
         case .boldHead1:
@@ -196,6 +212,8 @@ enum GetYaFont: CaseIterable {
             return "HyundaiSansTextKRMedium"
         case .regularCaption1:
             return "HyundaiSansTextKRRegular"
+    case .custom(_, _, _, let nameType):
+        return nameType.rawValue
         }
     }
     

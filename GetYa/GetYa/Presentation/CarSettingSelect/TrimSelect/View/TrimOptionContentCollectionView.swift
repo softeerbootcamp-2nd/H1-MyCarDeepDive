@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TrimOptionContentCollectionViewDelegate: AnyObject {
+    func touchUpLearnMoreViewButton()
+}
+
 class TrimOptionContentCollectionView: UICollectionView {
     enum Constants {
         enum Cell {
@@ -14,9 +18,13 @@ class TrimOptionContentCollectionView: UICollectionView {
             static let height: CGFloat = CGFloat(168).scaledHeight
             static let expandedHeight: CGFloat = CGFloat(459).scaledHeight
         }
+        enum HeaderView {
+            static let height: CGFloat = CGFloat(52).scaledHeight
+        }
     }
     
     // MARK: - Properties
+    weak var learnMoreViewDelegate: TrimOptionContentCollectionViewDelegate?
     private(set) var selectedIndexPath: IndexPath?
     private(set) var expandedIndexPath: [IndexPath] = []
     
@@ -33,6 +41,10 @@ class TrimOptionContentCollectionView: UICollectionView {
     private(set) var priceValues: [Int] = []
     
     // MARK: - Lifecycles
+    convenience init() {
+        self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
     init(
         titleTexts: [String],
         tagTexts: [[String]],
@@ -62,13 +74,14 @@ class TrimOptionContentCollectionView: UICollectionView {
     
     // MARK: - Private Functions
     private func configureUI() {
-        self.delegate = self
-        self.dataSource = self
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .GetYaPalette.gray700
-        self.register(
+        delegate = self
+        dataSource = self
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .GetYaPalette.gray700
+        register(
             TrimOptionContentCell.self,
             forCellWithReuseIdentifier: TrimOptionContentCell.identifier)
+        isScrollEnabled = false
     }
     
     // MARK: - Functions    
@@ -96,7 +109,10 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegate {
 
 // MARK: - UICollectionView Datasource
 extension TrimOptionContentCollectionView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         return titleTexts.count
     }
     
@@ -136,7 +152,6 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegateFlowLayout {
         return Constants.Cell.spacing
     }
     
-    // TODO: 기본 옵션의 개수가 4개 이상 넘어가면 크기 로직 짜야함
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -176,8 +191,10 @@ extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
             } else {
                 expandedIndexPath.append(indexPath)
             }
+            
             UIView.performWithoutAnimation({
-                self.reloadItems(at: [indexPath])
+                self.collectionViewLayout.invalidateLayout()
+                self.learnMoreViewDelegate?.touchUpLearnMoreViewButton()
             })
         }
     }

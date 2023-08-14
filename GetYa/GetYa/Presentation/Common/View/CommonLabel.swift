@@ -11,7 +11,11 @@ class CommonLabel: UILabel {
     // MARK: - UI Properties
     
     // MARK: - Properties
-    private var fontType: GetYaFont?
+    private var fontType: GetYaFont? {
+        didSet {
+            configureFont()
+        }
+    }
     override var text: String? {
         didSet {
             configureFont()

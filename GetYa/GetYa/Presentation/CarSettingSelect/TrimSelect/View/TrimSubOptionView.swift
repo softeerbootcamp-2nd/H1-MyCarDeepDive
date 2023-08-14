@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TrimSubOptionViewDelegate: AnyObject {
+    func touchUpOptionButton(text: String)
+}
+
 class TrimSubOptionView: UIView {
     enum Constants {
         enum Label {
@@ -32,6 +36,17 @@ class TrimSubOptionView: UIView {
     }
     
     // MARK: - Properties
+    weak var delegate: TrimSubOptionViewDelegate?
+    private(set) var selectedButtonIndex: Int = 0 {
+        didSet {
+            optionStackView.arrangedSubviews
+                .map { $0 as? TrimSubOptionButton }
+                .enumerated()
+                .forEach {
+                    $0.element?.isSelected = $0.offset == selectedButtonIndex
+                }
+        }
+    }
     
     // MARK: - Lifecycles
     init(titleText: String, optionTypeTexts: [String]) {
@@ -89,15 +104,20 @@ class TrimSubOptionView: UIView {
     }
     
     // MARK: - Functions
+    func setSelectedButtonIndex(index: Int) {
+        self.selectedButtonIndex = index
+    }
+    
     func setOptionTitle(text: String) {
         self.label.text = text
     }
     
     func setOptionTypes(texts: [String]) {
-        texts.forEach {
-            let button = TrimSubOptionButton(text: $0).set {
+        texts.enumerated().forEach { (idx, text) in
+            let button = TrimSubOptionButton(text: text).set {
                 $0.delegate = self
             }
+            if idx == selectedButtonIndex { button.isSelected = true }
             optionStackView.addArrangedSubview(button)
         }
     }
@@ -111,6 +131,9 @@ extension TrimSubOptionView: TrimSubOptionButtonDelegate {
         _=optionStackView.arrangedSubviews.map {
             let button = $0 as? UIButton
             button?.isSelected = button == sender
+        }
+        if let text = label.text {
+            delegate?.touchUpOptionButton(text: text)
         }
     }
 }
