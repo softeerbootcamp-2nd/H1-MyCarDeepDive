@@ -22,7 +22,6 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
                     famousSayingHeightAndTopMargin +
                     carImageHeight +
                      tooltipAndBottomMargin)
-                
         }()
         static let cornerRadius: CGFloat = .toScaledWidth(value: 16)
         enum LogoImageView {
@@ -76,14 +75,13 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
         typealias Const = Constants.CarNameDescriptionRoundLabel
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.configureCornerRadius(with: Const.cornerRadius)
-        $0.configureLabelFont(with: UIFont.systemFont(ofSize: 12, weight: .semibold))
+        $0.configureLabelFont(with: UIFont.systemFont(ofSize: 13, weight: .semibold))
         $0.configureTextColor(with: .white)
         $0.configureBackgroundColor(color: .GetYaPalette.primary)
         $0.configureTextLabelLeadingMargin(with: Const.innerTextLeadingMargin)
         $0.configureTextLabeltrailingMargin(with: Const.innerTextTrailingMargin)
         $0.sizeToFit()
     }
-    
     private let famouseSayingWithCarNameLabel = CommonLabel(
         fontType: .regularHead2,
         color: .black,
@@ -98,7 +96,6 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
     private let recommendCarImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
-        $0.layer.masksToBounds = true
     }
     private let reviewdTooltipView: TooltipView = .init(
         backgroundColor: .white,
@@ -155,6 +152,7 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
         layer.cornerRadius = Constants.cornerRadius
         layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 1
+        clipsToBounds = true
         configureSubviewUI(
             with: visualEffectView,
             logoImageView,
@@ -163,13 +161,32 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
             recommendCarImageView,
             reviewdTooltipView)
     }
-    // MARK: - Functions
     
+    // MARK: - Functions
     func configure(carName: String, carImageUrl: String) {
-        // carNameDescriptionRoundLabel.configureLabelText(text: carName)
+        carNameDescriptionRoundLabel.configureLabelText(text: carName)
         recommendCarImageView.image = UIImage(named: carImageUrl)
     }
-    // MARK: - Objc Functions
+    
+    func setInitialCarImageForAnimation() {
+        _=recommendCarImageView.set {
+            $0.alpha = 0.777
+            $0.transform = .init(translationX: 27, y: 0.777)
+        }
+    }
+    
+    func showCarImageAnimation() {
+        UIView.animate(
+            withDuration: 0.7,
+            delay: 0,
+            options: [.curveEaseOut]
+        ) {
+            _=self.recommendCarImageView.set {
+                $0.alpha = 1
+                $0.transform = .identity
+            }
+        }
+    }
 }
 
 // MARK: - LayoutSupportable
@@ -247,7 +264,8 @@ extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
             reviewdTooltipView.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
                 constant: -const.trailingMargin),
-            reviewdTooltipView.heightAnchor.constraint(greaterThanOrEqualToConstant: const.height),
+            reviewdTooltipView.heightAnchor.constraint(
+                greaterThanOrEqualToConstant: const.height),
             reviewdTooltipView.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
                 constant: -const.bottomMargin)]
