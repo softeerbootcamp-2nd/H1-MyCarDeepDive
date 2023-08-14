@@ -3,6 +3,8 @@ package com.h1.mycardeepdive.car.ui;
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 
 import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
@@ -62,7 +64,9 @@ class CarSpecControllerTest extends ControllerTestConfig {
         // then
         ResultActions resultActions =
                 mockMvc.perform(
-                                RestDocumentationRequestBuilders.get(DEFAULT_URL)
+                                RestDocumentationRequestBuilders.get(
+                                                DEFAULT_URL
+                                                        + "?engine=diesel22&body=7seats&drivingSystem=2wd")
                                         .params(info)
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .accept(MediaType.APPLICATION_JSON))
@@ -76,7 +80,12 @@ class CarSpecControllerTest extends ControllerTestConfig {
                                                         .tag("트림")
                                                         .description("트림 조회")
                                                         .requestFields()
-                                                        .build())));
+                                                        .build()),
+                                        requestParameters(
+                                                parameterWithName("engine").description("엔진이름"),
+                                                parameterWithName("body").description("바디이름"),
+                                                parameterWithName("drivingSystem")
+                                                        .description("구동방식이름"))));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
 
