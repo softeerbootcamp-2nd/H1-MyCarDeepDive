@@ -9,11 +9,26 @@ import UIKit
 
 final class DefaultQuotationPreviewThumbnailCardView: UIView {
     enum Constants {
+        static let intrinsicContentHegiht: CGFloat = {
+            typealias CarNameConst = Constants.CarNameDescriptionRoundLabel
+            typealias FamousSayingConst = Constants.FamouseSayingWithCarNameLabel
+            typealias CarImageViewConst = Constants.RecommendCarImageView
+            typealias TooltipConst = Constants.ReviewdTooltipView
+            let carNameHeightAndTopMargin = CarNameConst.height + CarNameConst.topMargin
+            let famousSayingHeightAndTopMargin = FamousSayingConst.topMargin + FamousSayingConst.height
+            let carImageHeight: CGFloat = CarImageViewConst.height
+            let tooltipAndBottomMargin = TooltipConst.height + TooltipConst.bottomMargin
+            return (carNameHeightAndTopMargin +
+                    famousSayingHeightAndTopMargin +
+                    carImageHeight +
+                     tooltipAndBottomMargin)
+                
+        }()
         static let cornerRadius: CGFloat = .toScaledWidth(value: 16)
         enum LogoImageView {
             static let leadingMargin: CGFloat = .init(19).scaledWidth
             static let topMargin: CGFloat = .init(17).scaledHeight
-            static let minimumHeight: CGFloat = .toScaledHeight(value: 214)
+            
             static let size: CGSize = .init(
                 width: CGFloat(25).scaledWidth,
                 height: CGFloat(14).scaledHeight)
@@ -31,17 +46,18 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
             static let topMargin: CGFloat = .toScaledHeight(value: 8)
             static let leadingMargin: CGFloat = .toScaledWidth(value: 42)
             static let trailingMargin: CGFloat = .toScaledWidth(value: 42)
-            static let bottomMargin: CGFloat = .toScaledHeight(value: 298)
+            static let height: CGFloat = .toScaledHeight(value: 56)
         }
         enum RecommendCarImageView {
-            static let topMargin: CGFloat = .toScaledHeight(value: 20)
             static let leadingMargin: CGFloat = .toScaledWidth(value: 30)
+            static let height: CGFloat = .toScaledHeight(value: 200)
         }
         enum ReviewdTooltipView {
             static let bottomMargin: CGFloat = .toScaledHeight(value: 20)
             static let leadingMargin: CGFloat = .toScaledWidth(value: 21)
             static let trailingMargin: CGFloat = .toScaledWidth(value: 21)
             static let reviewdText: String = "우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요"
+            static let height: CGFloat = .toScaledHeight(value: 55 + 8)
             enum ReviewdLabel {
                 static let leadingMargin: CGFloat = .toScaledWidth(value: 12)
                 static let trailingMargin = leadingMargin
@@ -133,7 +149,12 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
         if frame == .zero {
             translatesAutoresizingMaskIntoConstraints = false
         }
-        backgroundColor = .systemPink.withAlphaComponent(0.4)
+        
+        let blurEffect = UIBlurEffect(style: .light)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        visualEffectView.frame = frame
+        backgroundColor = UIColor(red: 0.38, green: 0.506, blue: 0.696, alpha: 0.2)
+        addSubview(visualEffectView)
         layer.cornerRadius = Constants.cornerRadius
         layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 1
@@ -147,7 +168,7 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
     // MARK: - Functions
     
     func configure(carName: String, carImageUrl: String) {
-        carNameDescriptionRoundLabel.configureLabelText(text: carName)
+        // carNameDescriptionRoundLabel.configureLabelText(text: carName)
         recommendCarImageView.image = UIImage(named: carImageUrl)
     }
     // MARK: - Objc Functions
@@ -198,7 +219,9 @@ extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
                 constant: const.leadingMargin),
             famouseSayingWithCarNameLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: -const.trailingMargin)]
+                constant: -const.trailingMargin),
+            famouseSayingWithCarNameLabel.heightAnchor.constraint(
+                equalToConstant: const.height)]
     }
     
     private var recommendCarImageViewConstraints: [NSLayoutConstraint] {
@@ -208,21 +231,25 @@ extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
                 equalTo: leadingAnchor,
                 constant: const.leadingMargin),
             recommendCarImageView.topAnchor.constraint(
-                equalTo: famouseSayingWithCarNameLabel.bottomAnchor,
-                constant: const.topMargin),
+                equalTo: famouseSayingWithCarNameLabel.bottomAnchor),
             recommendCarImageView.trailingAnchor.constraint(
-                equalTo: trailingAnchor)]
+                equalTo: trailingAnchor),
+            recommendCarImageView.heightAnchor.constraint(
+                equalToConstant: const.height)]
     }
     
     private var reviewdTooltipViewConstraints: [NSLayoutConstraint] {
         let const = Constants.ReviewdTooltipView.self
         return [
+            reviewdTooltipView.topAnchor.constraint(
+                equalTo: recommendCarImageView.bottomAnchor),
             reviewdTooltipView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: const.leadingMargin),
             reviewdTooltipView.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
                 constant: -const.trailingMargin),
+            reviewdTooltipView.heightAnchor.constraint(greaterThanOrEqualToConstant: const.height),
             reviewdTooltipView.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
                 constant: -const.bottomMargin)]
