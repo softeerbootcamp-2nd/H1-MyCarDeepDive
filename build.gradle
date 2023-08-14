@@ -59,6 +59,7 @@ jacoco {
 jacocoTestReport {
 	reports {
 		html.required.set(true)
+		xml.required.set(true)
 	}
 	def Qdomains = []
 	for(qPattern in "**/QA" .. "**/QZ"){
