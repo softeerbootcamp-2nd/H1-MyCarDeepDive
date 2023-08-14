@@ -92,7 +92,9 @@ class TrimSelectViewController: UIViewController {
             action: #selector(touchUpDifficultSelectButton),
             for: .touchUpInside)
     }
-    private let subOptionAreaTooltipView = TrimTooltipView().set {
+    private let subOptionAreaTooltipView = TrimTooltipView(
+        text: "디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요."
+    ).set {
         $0.isHidden = true
     }
     private let trimAreaTooltipView = TrimTooltipView(
@@ -127,6 +129,7 @@ class TrimSelectViewController: UIViewController {
         setupViews()
         configureUI()
         setOptionContentData()
+        setTrimAreaToolTipViewIsHidden(isHidden: false)
     }
     
     // MARK: - Private Functions
