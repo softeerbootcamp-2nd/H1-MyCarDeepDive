@@ -42,6 +42,8 @@ class ColorServiceTest {
                         .interiorImgUrl("/interior/car/001.jpg")
                         .chooseRate(25.0)
                         .price(10000)
+                        .comment("")
+                        .colorCombinationList(null)
                         .build();
 
         InteriorColor interiorColor2 =
@@ -61,6 +63,8 @@ class ColorServiceTest {
                         .exteriorImgUrl("/exterior/car/001.jpg")
                         .chooseRate(25.0)
                         .price(10000)
+                        .comment("")
+                        .colorCombinationList(null)
                         .build();
 
         ExteriorColor exteriorColor2 =
@@ -77,6 +81,7 @@ class ColorServiceTest {
                         .id(1L)
                         .exteriorColor(exteriorColor1)
                         .interiorColor(interiorColor1)
+                        .trimsColorCombinations(null)
                         .build();
 
         ColorCombination colorCombination2 =

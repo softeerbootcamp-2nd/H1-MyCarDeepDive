@@ -3,10 +3,7 @@ package com.h1.mycardeepdive.car.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import com.h1.mycardeepdive.car.domain.Body;
-import com.h1.mycardeepdive.car.domain.CarSpec;
-import com.h1.mycardeepdive.car.domain.DrivingSystem;
-import com.h1.mycardeepdive.car.domain.Engine;
+import com.h1.mycardeepdive.car.domain.*;
 import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
@@ -87,7 +84,20 @@ class CarSpecServiceTest {
         DrivingSystem drivingSystem =
                 DrivingSystem.builder().id(1L).name(drivingSystemName).build();
 
-        Trims trims = Trims.builder().id(1L).name("Le Blanc").summary("요약").build();
+        Trims trims =
+                Trims.builder()
+                        .id(1L)
+                        .name("Le Blanc")
+                        .summary("요약")
+                        .car(Car.builder().build())
+                        .clusterSize(12.3)
+                        .description("설명")
+                        .imgUrl("/trims/001.jpg")
+                        .navigationSize(12.3)
+                        .seatName("나파가죽 시트")
+                        .trimsColorCombinations(null)
+                        .wheelName("알로이 휠")
+                        .build();
 
         CarSpec carSpec =
                 CarSpec.builder()
