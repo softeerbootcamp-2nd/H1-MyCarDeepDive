@@ -11,22 +11,22 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class OptionPackageTest {
+class OptionPackagesTest {
 
     @DisplayName("옵션패키지 관계를 빌더 패턴을 활용하여 생성할 수 있다")
     @Test
     public void createOptionsPackage() throws Exception {
         // given
         Options options = createOptionBuiltInCam();
-        Package _package = createPackageComfortII();
+        Packages _packages = createPackageComfortII();
 
         // when
         OptionPackage optionPackage =
-                OptionPackage.builder().option(options)._package(_package).build();
+                OptionPackage.builder().option(options).packages(_packages).build();
 
         // then
         assertEquals(options, optionPackage.getOption());
-        assertEquals(_package, optionPackage.get_package());
+        assertEquals(_packages, optionPackage.getPackages());
     }
 
     @DisplayName("옵션패키지 도메인의 hashCode/equals는 id 값이 같다면 같은 것으로 처리된다.")

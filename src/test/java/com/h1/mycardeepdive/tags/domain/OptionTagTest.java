@@ -21,7 +21,13 @@ class OptionTagTest {
         Tags tag = createSafetyTag();
 
         // when
-        OptionTag optionTag = OptionTag.builder().option(options).tag(tag).build();
+        OptionTag optionTag =
+                OptionTag.builder()
+                        .option(options)
+                        .tag(tag)
+                        .position_x(12.1)
+                        .position_y(11.1)
+                        .build();
 
         // then
         assertEquals(options, optionTag.getOption());

@@ -5,26 +5,26 @@ import static com.h1.mycardeepdive.fixture.TagsFixture.createSafetyTag;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.h1.mycardeepdive.options.domain.Package;
+import com.h1.mycardeepdive.options.domain.Packages;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class PackageTagTest {
+class PackagesTagTest {
     @DisplayName("패키지태그 관계를 빌더 패턴을 활용하여 생성할 수 있다")
     @Test
     public void createPackageTag() throws Exception {
         // given
-        Package aPackage = createPackageComfortII();
+        Packages aPackages = createPackageComfortII();
         Tags tags = createSafetyTag();
 
         // when
-        PackageTag packageTag = PackageTag.builder()._package(aPackage).tag(tags).build();
+        PackageTag packageTag = PackageTag.builder().packages(aPackages).tag(tags).build();
 
         // then
-        assertEquals(aPackage, packageTag.get_package());
+        assertEquals(aPackages, packageTag.getPackages());
         assertEquals(tags, packageTag.getTag());
     }
 

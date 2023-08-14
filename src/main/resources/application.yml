@@ -68,12 +68,12 @@ spring:
     master:
       username: ${master.username}
       password: ${master.password}
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: ${master.jdbc-url}
     slave:
       username: ${slave.username}
       password: ${slave.password}
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: ${slave.jdbc-url}
 aws:
   paramstore:
@@ -112,12 +112,12 @@ spring:
     master:
       username: ${master.username}
       password: ${master.password}
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: ${master.jdbc-url}
     slave:
       username: ${slave.username}
       password: ${slave.password}
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: ${slave.jdbc-url}
 aws:
   paramstore:

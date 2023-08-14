@@ -21,13 +21,13 @@ public class OptionPackage {
 
     @ManyToOne
     @JoinColumn(name = "package_id")
-    private Package _package;
+    private Packages packages;
 
     @Builder
-    public OptionPackage(Long id, Options option, Package _package) {
+    public OptionPackage(Long id, Options option, Packages packages) {
         this.id = id;
         this.option = option;
-        this._package = _package;
+        this.packages = packages;
     }
 
     @Override

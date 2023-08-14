@@ -1,6 +1,6 @@
 package com.h1.mycardeepdive.options.domain;
 
-import com.h1.mycardeepdive.global.entity.OptionBaseEntity;
+import com.h1.mycardeepdive.car.domain.CarSpec;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Builder;
@@ -10,29 +10,33 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Package extends OptionBaseEntity {
+public class CarSpecPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "package_id")
+    @Column(name = "carspec_package_id")
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "car_spec_id")
+    private CarSpec carSpec;
+
+    @ManyToOne
+    @JoinColumn(name = "package_id")
+    private Packages packages;
+
     @Builder
-    public Package(
-            Long id, String name, String summary, long price, double chooseRate, Badge badgeName) {
+    public CarSpecPackage(Long id, CarSpec carSpec, Packages packages) {
         this.id = id;
-        this.name = name;
-        this.summary = summary;
-        this.price = price;
-        this.chooseRate = chooseRate;
-        this.badgeName = badgeName;
+        this.carSpec = carSpec;
+        this.packages = packages;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Package _package = (Package) o;
-        return Objects.equals(id, _package.id);
+        CarSpecPackage carSpecPackage = (CarSpecPackage) o;
+        return Objects.equals(id, carSpecPackage.id);
     }
 
     @Override

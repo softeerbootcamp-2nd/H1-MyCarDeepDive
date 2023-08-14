@@ -1,6 +1,6 @@
 package com.h1.mycardeepdive.tags.domain;
 
-import com.h1.mycardeepdive.options.domain.Package;
+import com.h1.mycardeepdive.options.domain.Packages;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Builder;
@@ -18,16 +18,16 @@ public class PackageTag {
 
     @ManyToOne
     @JoinColumn(name = "package_id")
-    private Package _package;
+    private Packages packages;
 
     @ManyToOne
     @JoinColumn(name = "tag_id")
     private Tags tag;
 
     @Builder
-    public PackageTag(Long id, Package _package, Tags tag) {
+    public PackageTag(Long id, Packages packages, Tags tag) {
         this.id = id;
-        this._package = _package;
+        this.packages = packages;
         this.tag = tag;
     }
 
