@@ -313,13 +313,13 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
-		155729FD2A8954E200D136C6 /* CarOptionResult */ = {
+		155729FD2A8954E200D136C6 /* QuotationPreview */ = {
 			isa = PBXGroup;
 			children = (
 				15059ABB2A88A15400303C01 /* CommonRecommendCarResult */,
 				159B2CF52A825CC5003F47D6 /* DetailRecommendCarResult */,
 			);
-			path = CarOptionResult;
+			path = QuotationPreview;
 			sourceTree = "<group>";
 		};
 		155DDD032A82D028009AE2BC /* ViewModel */ = {
@@ -611,7 +611,7 @@
 			isa = PBXGroup;
 			children = (
 				64ADA4752A7787CC0003E2C1 /* Common */,
-				155729FD2A8954E200D136C6 /* CarOptionResult */,
+				155729FD2A8954E200D136C6 /* QuotationPreview */,
 				641AB51B2A7B7C7300CF88C0 /* CharacterSelect */,
 				64ADA4742A7787C60003E2C1 /* Coordinator */,
 				64ADA4A12A789BF40003E2C1 /* Home */,
