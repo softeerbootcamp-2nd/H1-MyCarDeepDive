@@ -1,5 +1,5 @@
 //
-//  RecommendCarInfoModel+Mock.swift
+//  QuotationPreviewCarInfoModel+Mock.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/10.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DetailRecommendCarInfoModel {
+extension QuotationPreviewCarInfoModel {
     static let palisadeMock: Self = .init(
         carKrName: "팰리세이드",
         carEnTrimName: "Prestige",

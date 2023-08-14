@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 // MARK: - View Model
-struct DetailRecommendCarInfoModel {
+struct QuotationPreviewCarInfoModel {
     var carKrName: String
     var carEnTrimName: String
     var carPrice: String
@@ -18,7 +18,7 @@ struct DetailRecommendCarInfoModel {
 
 struct QuotationPreviewMainHeaderModel {
     var thumbnailKeywords: [String]
-    var recommendCarProductOption: DetailRecommendCarInfoModel
+    var recommendCarProductOption: QuotationPreviewCarInfoModel
     var firstSectionTitle: String
 }
 

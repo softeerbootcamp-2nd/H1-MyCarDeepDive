@@ -72,7 +72,7 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
         thumbnailView.configureRecommendKeywordStackView(thumbnailKeywords)
     }
     
-    private func setRecommendCarInfoView(_ carInfo: DetailRecommendCarInfoModel) {
+    private func setRecommendCarInfoView(_ carInfo: QuotationPreviewCarInfoModel) {
         recommendCarInfoView.configure(with: carInfo)
     }
     

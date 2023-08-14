@@ -13,7 +13,7 @@
 		155DDD072A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		155DDD0A2A835FEF009AE2BC /* DetailQuotationPreviewSecionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD092A835FEF009AE2BC /* DetailQuotationPreviewSecionHeaderView.swift */; };
 		155DDD0E2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
-		155DDD102A846077009AE2BC /* RecommendCarInfoModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */; };
+		155DDD102A846077009AE2BC /* QuotationPreviewCarInfoModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0F2A846077009AE2BC /* QuotationPreviewCarInfoModel+Mock.swift */; };
 		155DDD122A84610A009AE2BC /* QuotationPreviewCarProductOptionModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD112A84610A009AE2BC /* QuotationPreviewCarProductOptionModel+Mock.swift */; };
 		155DDD162A84A808009AE2BC /* DetailQuotationPreviewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD152A84A808009AE2BC /* DetailQuotationPreviewFooterView.swift */; };
 		155DDD182A855182009AE2BC /* LeftAndRightButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD172A855182009AE2BC /* LeftAndRightButtonsView.swift */; };
@@ -145,7 +145,7 @@
 		155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewViewModelable.swift; sourceTree = "<group>"; };
 		155DDD092A835FEF009AE2BC /* DetailQuotationPreviewSecionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewSecionHeaderView.swift; sourceTree = "<group>"; };
 		155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationPreviewHeaderTitleList.swift; sourceTree = "<group>"; };
-		155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecommendCarInfoModel+Mock.swift"; sourceTree = "<group>"; };
+		155DDD0F2A846077009AE2BC /* QuotationPreviewCarInfoModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuotationPreviewCarInfoModel+Mock.swift"; sourceTree = "<group>"; };
 		155DDD112A84610A009AE2BC /* QuotationPreviewCarProductOptionModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuotationPreviewCarProductOptionModel+Mock.swift"; sourceTree = "<group>"; };
 		155DDD152A84A808009AE2BC /* DetailQuotationPreviewFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewFooterView.swift; sourceTree = "<group>"; };
 		155DDD172A855182009AE2BC /* LeftAndRightButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAndRightButtonsView.swift; sourceTree = "<group>"; };
@@ -342,7 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */,
-				155DDD0F2A846077009AE2BC /* RecommendCarInfoModel+Mock.swift */,
+				155DDD0F2A846077009AE2BC /* QuotationPreviewCarInfoModel+Mock.swift */,
 				155729FE2A89563200D136C6 /* QuotationPreviewMainHeaderModel+Mock.swift */,
 				155DDD112A84610A009AE2BC /* QuotationPreviewCarProductOptionModel+Mock.swift */,
 			);
@@ -1021,7 +1021,7 @@
 				64ADA4BE2A7A26090003E2C1 /* Int+.swift in Sources */,
 				64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */,
 				15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+.swift in Sources */,
-				155DDD102A846077009AE2BC /* RecommendCarInfoModel+Mock.swift in Sources */,
+				155DDD102A846077009AE2BC /* QuotationPreviewCarInfoModel+Mock.swift in Sources */,
 				6412D08E2A81F1FB001E4005 /* DetailLifeStyleSelectViewController.swift in Sources */,
 				641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */,
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,

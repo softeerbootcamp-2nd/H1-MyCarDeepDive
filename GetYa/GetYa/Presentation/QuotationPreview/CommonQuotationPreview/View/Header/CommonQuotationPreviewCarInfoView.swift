@@ -75,7 +75,7 @@ class CommonQuotationPreviewCarInfoView: UIView {
     }
     
     // MARK: - Helper
-    func configure(with recommendCarInfo: DetailRecommendCarInfoModel) {
+    func configure(with recommendCarInfo: QuotationPreviewCarInfoModel) {
         _=carKrNameLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carKrName
