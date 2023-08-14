@@ -1,75 +1,79 @@
-import All from './TagIcon/All';
-import Driving from './TagIcon/Driving';
-import Using from './TagIcon/Using';
-import ColdHot from './TagIcon/ColdHot';
-import Parking from './TagIcon/Parking';
-import Performance from './TagIcon/Performance';
-import Style from './TagIcon/Style';
+import mainBlack from '@/assets/icon/category-main-black.svg';
+import mainPrimary from '@/assets/icon/category-main-primary.svg';
+import allBlack from '@/assets/icon/category-all-black.svg';
+import allPrimary from '@/assets/icon/category-all-primary.svg';
+import drivingBlack from '@/assets/icon/category-driving-black.svg';
+import drivingPrimary from '@/assets/icon/category-driving-primary.svg';
+import usingBlack from '@/assets/icon/category-using-black.svg';
+import usingPrimary from '@/assets/icon/category-using-primary.svg';
+import coldHotBlack from '@/assets/icon/category-cold-hot-black.svg';
+import coldHotPrimary from '@/assets/icon/category-cold-hot-primary.svg';
+import parkingBlack from '@/assets/icon/category-parking-black.svg';
+import parkingPrimary from '@/assets/icon/category-parking-primary.svg';
+import performanceBlack from '@/assets/icon/category-performance-black.svg';
+import performancePrimary from '@/assets/icon/category-performance-primary.svg';
+import styleBlack from '@/assets/icon/category-style-black.svg';
+import stylePrimary from '@/assets/icon/category-style-primary.svg';
+import TagButton from './TagButton';
+
+const TagData = [
+  {
+    tagName: '대표',
+    blackIcon: mainBlack,
+    primaryIcon: mainPrimary,
+  },
+  {
+    tagName: '전체',
+    blackIcon: allBlack,
+    primaryIcon: allPrimary,
+  },
+  {
+    tagName: '주행안전',
+    blackIcon: drivingBlack,
+    primaryIcon: drivingPrimary,
+  },
+  {
+    tagName: '사용편의',
+    blackIcon: usingBlack,
+    primaryIcon: usingPrimary,
+  },
+  {
+    tagName: '추위/더위',
+    blackIcon: coldHotBlack,
+    primaryIcon: coldHotPrimary,
+  },
+  {
+    tagName: '주차/출차',
+    blackIcon: parkingBlack,
+    primaryIcon: parkingPrimary,
+  },
+  {
+    tagName: '퍼포먼스',
+    blackIcon: performanceBlack,
+    primaryIcon: performancePrimary,
+  },
+  {
+    tagName: '스타일',
+    blackIcon: styleBlack,
+    primaryIcon: stylePrimary,
+  },
+];
 
 interface TagProps {
   tag: string;
   setTag: React.Dispatch<React.SetStateAction<string>>;
+  category: string;
 }
 
-function Tag({ tag, setTag }: TagProps) {
-  const getStyle = (ischecked: boolean) => {
-    if (ischecked)
-      return 'px-2.5 py-1.5 rounded border-[1.5px] border-primary font-body4-medium text-primary bg-grey-1000 flex gap-2';
-    else
-      return 'px-2.5 py-1.5 rounded border-[1.5px] border-grey-1000 font-body4-regular text-grey-400 bg-grey-800 flex gap-2';
-  };
-
+function Tag({ tag, setTag, category }: TagProps) {
   return (
     <div className='h-16 max-w-5xl mx-auto flex gap-2 items-center border-b border-grey-700'>
-      <button
-        className={getStyle(tag === '전체')}
-        onClick={() => setTag('전체')}
-      >
-        <All fillColor={tag === '전체'} />
-        <span>전체</span>
-      </button>
-      <button
-        className={getStyle(tag === '주행안전')}
-        onClick={() => setTag('주행안전')}
-      >
-        <Driving fillColor={tag === '주행안전'} />
-        <span>주행안전</span>
-      </button>
-      <button
-        className={getStyle(tag === '사용편의')}
-        onClick={() => setTag('사용편의')}
-      >
-        <Using fillColor={tag === '사용편의'} />
-        <span>사용편의</span>
-      </button>
-      <button
-        className={getStyle(tag === '추위/더위')}
-        onClick={() => setTag('추위/더위')}
-      >
-        <ColdHot fillColor={tag === '추위/더위'} />
-        <span>추위/더위</span>
-      </button>
-      <button
-        className={getStyle(tag === '주차/출차')}
-        onClick={() => setTag('주차/출차')}
-      >
-        <Parking fillColor={tag === '주차/출차'} />
-        <span>주차/출차</span>
-      </button>
-      <button
-        className={getStyle(tag === '퍼포먼스')}
-        onClick={() => setTag('퍼포먼스')}
-      >
-        <Performance fillColor={tag === '퍼포먼스'} />
-        <span>퍼포먼스</span>
-      </button>
-      <button
-        className={getStyle(tag === '스타일')}
-        onClick={() => setTag('스타일')}
-      >
-        <Style fillColor={tag === '스타일'} />
-        <span>스타일</span>
-      </button>
+      {TagData.map(item => {
+        if (category === '추가 옵션' && item.tagName === '대표') return;
+        return (
+          <TagButton {...item} tag={tag} setTag={setTag} key={item.tagName} />
+        );
+      })}
     </div>
   );
 }

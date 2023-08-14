@@ -2,9 +2,17 @@ import { NavBarCategoryProps } from '@/global/type';
 
 interface TabProps extends NavBarCategoryProps {
   offsetX: number;
+  setTag: React.Dispatch<React.SetStateAction<string>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function Tab({ offsetX, category, categoryClickHandler }: TabProps) {
+function Tab({
+  offsetX,
+  category,
+  categoryClickHandler,
+  setTag,
+  setPage,
+}: TabProps) {
   return (
     <div className='w-full border-b border-grey-700 pt-5'>
       <div className='flex flex-wrap max-w-5xl -mb-px mx-auto font-h2-medium text-grey-600 text-center relative'>
@@ -20,7 +28,11 @@ function Tab({ offsetX, category, categoryClickHandler }: TabProps) {
           className={`inline-block w-24 leading-[24px] py-2 mr-10 ${
             category === '추가 옵션' ? 'text-grey-200' : 'hover:text-grey-400'
           }`}
-          onClick={e => categoryClickHandler(e)}
+          onClick={e => {
+            setTag('전체');
+            setPage(1);
+            categoryClickHandler(e);
+          }}
         >
           추가 옵션
         </button>
@@ -30,7 +42,11 @@ function Tab({ offsetX, category, categoryClickHandler }: TabProps) {
               ? 'text-grey-200'
               : 'hover:text-grey-400'
           }`}
-          onClick={e => categoryClickHandler(e)}
+          onClick={e => {
+            setTag('대표');
+            setPage(1);
+            categoryClickHandler(e);
+          }}
         >
           기본 포함 옵션
         </button>

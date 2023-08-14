@@ -25,26 +25,26 @@ function OptionModal({
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const movePage = (direction: number) => {
-    if (scrollRef.current !== null && scrollRef.current !== undefined) {
-      const scrollLeft = scrollRef.current.scrollLeft;
-      const newPosition = scrollLeft + 980 * direction;
+    if (!scrollRef.current) return;
 
-      scrollRef.current.scrollTo({
-        left: newPosition,
-        behavior: 'smooth',
-      });
-    }
+    const scrollLeft = scrollRef.current.scrollLeft;
+    const newPosition = scrollLeft + 980 * direction;
+
+    scrollRef.current.scrollTo({
+      left: newPosition,
+      behavior: 'smooth',
+    });
   };
 
   const jumpPage = (step: number) => {
-    if (scrollRef.current !== null && scrollRef.current !== undefined) {
-      const newPosition = 980 * step;
+    if (!scrollRef.current) return;
 
-      scrollRef.current.scrollTo({
-        left: newPosition,
-        behavior: 'smooth',
-      });
-    }
+    const newPosition = 980 * step;
+
+    scrollRef.current.scrollTo({
+      left: newPosition,
+      behavior: 'smooth',
+    });
   };
 
   return (

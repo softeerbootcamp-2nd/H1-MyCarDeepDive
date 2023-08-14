@@ -13,6 +13,7 @@ import metalDoor from '@/assets/image/option-modal-metalDoor.png';
 import powerFolding from '@/assets/image/option-modal-powerFolding.png';
 import hotSheet from '@/assets/image/option-modal-hotSheet.png';
 import headUp from '@/assets/image/option-modal-headUp.png';
+import BasicOption from './BasicOption';
 
 const OptionCardData = [
   {
@@ -125,6 +126,8 @@ function OptionSelectitonPage() {
   const [category, setCategory] = useState('추가 옵션');
   const [tag, setTag] = useState('전체');
   const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
   const [showOptionModal, setShowOptionModal] = useState(false);
 
   const categoryClickHandler = (
@@ -140,11 +143,27 @@ function OptionSelectitonPage() {
         category={category}
         offsetX={offsetX}
         categoryClickHandler={categoryClickHandler}
+        setTag={setTag}
+        setPage={setPage}
       />
-      <Tag tag={tag} setTag={setTag} />
-      <AllCount />
-      <AdditionalOption page={page} setShowOptionModal={setShowOptionModal} />
-      <Pagination page={page} setPage={setPage} />
+      <Tag tag={tag} setTag={setTag} category={category} />
+      <AllCount totalCount={totalCount} />
+      {category === '추가 옵션' ? (
+        <AdditionalOption
+          page={page}
+          setShowOptionModal={setShowOptionModal}
+          setMaxPage={setMaxPage}
+          setTotalCount={setTotalCount}
+        />
+      ) : (
+        <BasicOption
+          page={page}
+          setShowOptionModal={setShowOptionModal}
+          setMaxPage={setMaxPage}
+          setTotalCount={setTotalCount}
+        />
+      )}
+      <Pagination page={page} setPage={setPage} maxPage={maxPage} />
       <BottomButtons />
 
       <OptionModal

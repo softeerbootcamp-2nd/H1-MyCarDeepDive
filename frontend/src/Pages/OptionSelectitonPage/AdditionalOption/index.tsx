@@ -14,6 +14,7 @@ import production from '@/assets/image/option-production.png';
 import dark20 from '@/assets/image/option-20dark.png';
 import black20 from '@/assets/image/option-20black.png';
 import alcon from '@/assets/image/option-alcon.png';
+import { useEffect } from 'react';
 
 const additionalOptionData = [
   {
@@ -125,9 +126,21 @@ const additionalOptionData = [
 interface AdditionalOptionProps {
   page: number;
   setShowOptionModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setMaxPage: React.Dispatch<React.SetStateAction<number>>;
+  setTotalCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function AdditionalOption({ page, setShowOptionModal }: AdditionalOptionProps) {
+function AdditionalOption({
+  page,
+  setShowOptionModal,
+  setMaxPage,
+  setTotalCount,
+}: AdditionalOptionProps) {
+  useEffect(() => {
+    setMaxPage(Math.ceil(additionalOptionData.length / 8));
+    setTotalCount(additionalOptionData.length);
+  }, []);
+
   return (
     <div className='grid grid-cols-4 gap-4 max-w-5xl mx-auto'>
       {additionalOptionData.slice((page - 1) * 8, page * 8).map(item => {
