@@ -1,6 +1,6 @@
 package com.h1.mycardeepdive.car.domain;
 
-import com.h1.mycardeepdive.options.domain.CarSpecOption;
+import com.h1.mycardeepdive.options.domain.CarSpecOptions;
 import com.h1.mycardeepdive.trims.domain.Trims;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class CarSpec {
     private DrivingSystem drivingSystem;
 
     @OneToMany(mappedBy = "carSpec")
-    private List<CarSpecOption> carSpecOptions = new ArrayList<>();
+    private List<CarSpecOptions> carSpecOptions = new ArrayList<>();
 
     private long price;
 

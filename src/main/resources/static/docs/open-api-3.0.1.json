@@ -10,12 +10,196 @@
   } ],
   "tags" : [ ],
   "paths" : {
+    "/api/v1/car-spec" : {
+      "get" : {
+        "tags" : [ "트림" ],
+        "summary" : "트림 조회",
+        "description" : "트림 조회",
+        "operationId" : "trim-docs",
+        "parameters" : [ {
+          "name" : "engine",
+          "in" : "query",
+          "description" : "엔진이름",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "body",
+          "in" : "query",
+          "description" : "바디이름",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "drivingSystem",
+          "in" : "query",
+          "description" : "구동방식이름",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "trim-docs" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : [ ]\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/car-spec/comparison" : {
+      "get" : {
+        "tags" : [ "트림" ],
+        "summary" : "트림 비교",
+        "description" : "트림 비교",
+        "operationId" : "trim-comparison",
+        "parameters" : [ {
+          "name" : "engine",
+          "in" : "query",
+          "description" : "엔진이름",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "body",
+          "in" : "query",
+          "description" : "바디이름",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "drivingSystem",
+          "in" : "query",
+          "description" : "구동방식이름",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "trim-comparison" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : [ {\n    \"trims_img_url\" : \"https://www.hyundai.com/contents/vr360/LX06/trim/DS.png\",\n    \"summary\" : \"필수적인 옵션만 모은\",\n    \"trims_name\" : \"Le Blanc\",\n    \"price\" : 43460000,\n    \"exterior_color_img_urls\" : [ ],\n    \"interior_color_names\" : [ ],\n    \"wheel_size\" : 20.0,\n    \"wheel_name\" : \"알로이 휠\",\n    \"seat_name\" : \"퀄팅 천연가죽 시트\",\n    \"navigation_size\" : 12.3,\n    \"cluster_size\" : 4.2,\n    \"basic_option_names\" : [ \"전방 충돌 방지 보조\", \"내비 기반 크루즈 컨트롤\", \"세이프티 파워 윈도우\" ],\n    \"basic_option_ids\" : [ 1, 2, 3 ]\n  } ]\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/color/exterior-colors" : {
+      "get" : {
+        "tags" : [ "컬러" ],
+        "summary" : "외장 컬러 조회",
+        "description" : "외장 컬러 조회",
+        "operationId" : "외장",
+        "parameters" : [ {
+          "name" : "trimId",
+          "in" : "query",
+          "description" : "트림id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "interiorColorId",
+          "in" : "query",
+          "description" : "내장색상id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "외장" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : {\n    \"available_colors\" : [ {\n      \"name\" : \"그라파이트 그레이 메탈릭\",\n      \"img_url\" : \"/exterior-color/icon/22.jpg\",\n      \"car_img_url\" : \"/exterior-color/\",\n      \"choose_rate\" : 0.0\n    } ],\n    \"unavailable_colors\" : [ {\n      \"name\" : \"그라파이트 그레이 메탈릭\",\n      \"img_url\" : \"/exterior-color/icon/22.jpg\",\n      \"car_img_url\" : \"/exterior-color/\",\n      \"choose_rate\" : 0.0\n    } ]\n  }\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/color/interior-colors" : {
+      "get" : {
+        "tags" : [ "컬러" ],
+        "summary" : "내장 컬러 조회",
+        "description" : "내장 컬러 조회",
+        "operationId" : "내장",
+        "parameters" : [ {
+          "name" : "trimId",
+          "in" : "query",
+          "description" : "트림id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "exteriorColorId",
+          "in" : "query",
+          "description" : "외장색상id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "내장" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : {\n    \"available_colors\" : [ {\n      \"name\" : \"퀼팅천연 (블랙)\",\n      \"img_url\" : \"/interior-color/icon/22.jpg\",\n      \"car_img_url\" : \"/interior-color/22.jpg\",\n      \"choose_rate\" : 0.0\n    } ],\n    \"unavailable_colors\" : [ {\n      \"name\" : \"퀼팅천연 (블랙)\",\n      \"img_url\" : \"/interior-color/icon/22.jpg\",\n      \"car_img_url\" : \"/interior-color/22.jpg\",\n      \"choose_rate\" : 0.0\n    } ]\n  }\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/car-spec/{car-spec-id}/additional-options" : {
       "get" : {
         "tags" : [ "옵션" ],
         "summary" : "차량 사양에 따른 추가 옵션 목록 리스트 조회",
         "description" : "차량 사양에 따른 추가 옵션 목록 리스트 조회",
-        "operationId" : "options-docs",
+        "operationId" : "options-docs1",
         "parameters" : [ {
           "name" : "car-spec-id",
           "in" : "path",
@@ -36,9 +220,6 @@
                 "examples" : {
                   "options-docs1" : {
                     "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : {\n    \"optionPackageList\" : [ {\n      \"id\" : 1,\n      \"option_img_url\" : \"https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg\",\n      \"option_select_rate\" : 10.12,\n      \"option_name\" : \"컴포트 II\",\n      \"option_summary\" : \"편의성을 위해 구성된 세트 옵션\",\n      \"tag_list\" : [ {\n        \"tag_id\" : 1,\n        \"tag_name\" : \"사용편의\"\n      }, {\n        \"tag_id\" : 2,\n        \"tag_name\" : \"주행안전\"\n      } ],\n      \"badge_name\" : \"None\",\n      \"price\" : 10090000\n    } ],\n    \"additionalOptionList\" : [ {\n      \"id\" : 1,\n      \"option_img_url\" : \"https://img.etnews.com/photonews/2011/1352481_20201113164311_199_0001.jpg\",\n      \"select_rate\" : 5.5,\n      \"option_name\" : \"빌트인 캠(보조배터리 포함)\",\n      \"option_summary\" : \"차량 내부에 카메라를 설치하여 녹화가 가능한 블랙박스\",\n      \"tag_list\" : [ {\n        \"tag_id\" : 1,\n        \"tag_name\" : \"사용편의\"\n      }, {\n        \"tag_id\" : 2,\n        \"tag_name\" : \"주행안전\"\n      } ],\n      \"badge_name\" : \"H Genuine Accessories\",\n      \"price\" : 109000\n    } ]\n  }\n}"
-                  },
-                  "options-docs" : {
-                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : {\n    \"optionPackageList\" : [ {\n      \"id\" : 1,\n      \"option_img_url\" : \"https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg\",\n      \"option_select_rate\" : 10.12,\n      \"option_name\" : \"컴포트 II\",\n      \"option_summary\" : \"편의성을 위해 구성된 세트 옵션\",\n      \"tag_list\" : [ \"대표\", \"주행안전\" ],\n      \"badge_name\" : \"None\",\n      \"price\" : 10090000\n    } ],\n    \"additionalOptionList\" : [ {\n      \"id\" : 1,\n      \"option_img_url\" : \"https://img.etnews.com/photonews/2011/1352481_20201113164311_199_0001.jpg\",\n      \"select_rate\" : 5.5,\n      \"option_name\" : \"빌트인 캠(보조배터리 포함)\",\n      \"option_summary\" : \"차량 내부에 카메라를 설치하여 녹화가 가능한 블랙박스\",\n      \"tag_list\" : [ \"대표\", \"주행안전\" ],\n      \"badge_name\" : \"H Genuine Accessories\",\n      \"price\" : 109000\n    } ]\n  }\n}"
                   }
                 }
               }
