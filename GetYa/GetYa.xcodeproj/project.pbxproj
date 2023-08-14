@@ -316,6 +316,7 @@
 		155729FD2A8954E200D136C6 /* CarOptionResult */ = {
 			isa = PBXGroup;
 			children = (
+				15059ABB2A88A15400303C01 /* CommonRecommendCarResult */,
 				159B2CF52A825CC5003F47D6 /* DetailRecommendCarResult */,
 			);
 			path = CarOptionResult;
@@ -661,7 +662,6 @@
 		64ADA4752A7787CC0003E2C1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				15059ABB2A88A15400303C01 /* CommonRecommendCarResult */,
 				64ADA47C2A7788410003E2C1 /* Protocol */,
 				64ADA4772A7787F20003E2C1 /* View */,
 				64ADA4762A7787DB0003E2C1 /* ViewModel */,
