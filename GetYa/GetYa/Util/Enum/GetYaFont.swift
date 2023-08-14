@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum GetYaFont: CaseIterable {
+enum GetYaFont {
     /// 22 pt | 28 lineheight
     case boldHead1
     /// 22 pt | 28 lineheight
@@ -42,6 +42,7 @@ enum GetYaFont: CaseIterable {
     case mediumCaption1
     ///  12 pt | 18 lineheight
     case regularCaption1
+    case custom(CGFloat, CGFloat, CGFloat, String)
   
     var size: CGFloat {
         switch self {
@@ -79,6 +80,8 @@ enum GetYaFont: CaseIterable {
             return 12
         case .regularCaption1:
             return 12
+    case .custom(let size, _, _, _):
+        return size
         }
     }
     
@@ -118,6 +121,8 @@ enum GetYaFont: CaseIterable {
             return 0.0
         case .regularCaption1:
             return 0.0
+    case .custom(_, let kern, _, _):
+        return kern
         }
     }
     
@@ -157,6 +162,8 @@ enum GetYaFont: CaseIterable {
             return 18
         case .regularCaption1:
             return 18
+    case .custom(_, _, let lineHeight, _):
+        return lineHeight
         }
     }
     
@@ -196,6 +203,8 @@ enum GetYaFont: CaseIterable {
             return "HyundaiSansTextKRMedium"
         case .regularCaption1:
             return "HyundaiSansTextKRRegular"
+    case .custom(_, _, _, let name):
+        return name
         }
     }
     

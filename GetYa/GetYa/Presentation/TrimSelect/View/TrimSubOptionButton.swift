@@ -57,6 +57,7 @@ class TrimSubOptionButton: UIButton {
         layer.cornerRadius = CGFloat(8).scaledWidth
         layer.borderColor = Palette.primary.cgColor
         layer.backgroundColor = Palette.gray800.cgColor
+        titleLabel?.font = GetYaFont.mediumBody4.uiFont
         setTitleColor(Palette.gray500, for: .normal)
         setTitleColor(Palette.primary, for: .selected)
     }

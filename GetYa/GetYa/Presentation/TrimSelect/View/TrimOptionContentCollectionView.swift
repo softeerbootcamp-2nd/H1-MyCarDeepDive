@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TrimOptionContentCollectionViewDelegate: AnyObject {
+    func touchUpLearnMoreViewButton()
+}
+
 class TrimOptionContentCollectionView: UICollectionView {
     enum Constants {
         enum Cell {
@@ -14,9 +18,13 @@ class TrimOptionContentCollectionView: UICollectionView {
             static let height: CGFloat = CGFloat(168).scaledHeight
             static let expandedHeight: CGFloat = CGFloat(459).scaledHeight
         }
+        enum HeaderView {
+            static let height: CGFloat = CGFloat(52).scaledHeight
+        }
     }
     
     // MARK: - Properties
+    weak var learnMoreViewDelegate: TrimOptionContentCollectionViewDelegate?
     private(set) var selectedIndexPath: IndexPath?
     private(set) var expandedIndexPath: [IndexPath] = []
     
@@ -33,6 +41,10 @@ class TrimOptionContentCollectionView: UICollectionView {
     private(set) var priceValues: [Int] = []
     
     // MARK: - Lifecycles
+    convenience init() {
+        self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
     init(
         titleTexts: [String],
         tagTexts: [[String]],
@@ -62,13 +74,18 @@ class TrimOptionContentCollectionView: UICollectionView {
     
     // MARK: - Private Functions
     private func configureUI() {
-        self.delegate = self
-        self.dataSource = self
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .GetYaPalette.gray700
-        self.register(
+        delegate = self
+        dataSource = self
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .GetYaPalette.gray700
+        register(
             TrimOptionContentCell.self,
             forCellWithReuseIdentifier: TrimOptionContentCell.identifier)
+        register(
+            TrimOptionContentHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: TrimOptionContentHeaderView.identifier)
+        isScrollEnabled = false
     }
     
     // MARK: - Functions    
@@ -96,7 +113,26 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegate {
 
 // MARK: - UICollectionView Datasource
 extension TrimOptionContentCollectionView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: TrimOptionContentHeaderView.identifier,
+                for: indexPath)
+            return headerView
+        default:
+            return UICollectionReusableView()
+        }
+    }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         return titleTexts.count
     }
     
@@ -152,6 +188,14 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegateFlowLayout {
                 height: Constants.Cell.height)
         }
     }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int
+    ) -> CGSize {
+        return CGSize(width: frame.width, height: Constants.HeaderView.height)
+    }
 }
 
 // MARK: - TrimOptionContentCell Delegate
@@ -178,6 +222,7 @@ extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
             }
             UIView.performWithoutAnimation({
                 self.reloadItems(at: [indexPath])
+                self.learnMoreViewDelegate?.touchUpLearnMoreViewButton()
             })
         }
     }
