@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LearnMoreViewDelegate: AnyObject {
-    func touchUpExpandButtonByIsSelected(isSelected: Bool)
+    func touchUpExpandButtonByIsSelected(sender: LearnMoreView, isSelected: Bool)
 }
 
 class LearnMoreView: UIView {
@@ -59,28 +59,29 @@ class LearnMoreView: UIView {
         layer.borderColor = UIColor.GetYaPalette.primary.cgColor
         layer.borderWidth = 1
         layer.cornerRadius = CGFloat(8).scaledHeight
-        
-        configureButton()
     }
     
-    private func configureButton() {
+    func configureButton(view: UIView) {
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: Constants.Button.topMargin),
             button.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
                 constant: Constants.Button.trailingMargin),
             button.widthAnchor.constraint(equalToConstant: Constants.Button.width),
-            button.heightAnchor.constraint(equalToConstant: Constants.Button.height)
+            button.heightAnchor.constraint(equalToConstant: Constants.Button.height),
+            button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
     // MARK: - Functions
+    func setButtonColor(color: UIColor) {
+        button.imageView?.tintColor = color
+    }
     
     // MARK: - Objc Functions
     @objc private func touchUpButton(sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        delegate?.touchUpExpandButtonByIsSelected(isSelected: sender.isSelected)
+        delegate?.touchUpExpandButtonByIsSelected(
+            sender: self,
+            isSelected: sender.isSelected)
     }
 }
