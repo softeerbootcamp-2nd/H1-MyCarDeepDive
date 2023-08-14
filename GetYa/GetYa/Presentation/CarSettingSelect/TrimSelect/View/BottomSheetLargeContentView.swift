@@ -167,13 +167,17 @@ class BottomSheetLargeContentView: UIView {
     private func configureTrimNameLabel() {
         NSLayoutConstraint.activate([
             trimNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            trimNameLabel.bottomAnchor.constraint(equalTo: quoteButton.topAnchor, constant: Constants.TrimNamelabel.bottomMargin)
+            trimNameLabel.bottomAnchor.constraint(
+                equalTo: quoteButton.topAnchor,
+                constant: Constants.TrimNamelabel.bottomMargin)
         ])
     }
     private func configureTotalPriceLabel() {
         NSLayoutConstraint.activate([
             totalPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            totalPriceLabel.bottomAnchor.constraint(equalTo: quoteButton.topAnchor, constant: Constants.TotalPriceLabel.bottomMargin)
+            totalPriceLabel.bottomAnchor.constraint(
+                equalTo: quoteButton.topAnchor,
+                constant: Constants.TotalPriceLabel.bottomMargin)
         ])
     }
     private func configureQuoteButton() {

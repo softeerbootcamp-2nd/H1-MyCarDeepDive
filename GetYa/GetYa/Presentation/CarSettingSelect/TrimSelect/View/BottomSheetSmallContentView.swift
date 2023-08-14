@@ -48,7 +48,7 @@ class BottomSheetSmallContentView: UIView {
     private let priceLabel = CommonLabel(
         fontType: .custom(size: 18, kern: -0.3, lineHeight: 18, nameType: .mediumHead),
         color: .GetYaPalette.gray0)
-    private let nextButton = CommonButton(
+    private lazy var nextButton = CommonButton(
         font: GetYaFont.mediumBody3.uiFont,
         buttonBackgroundColorType: .primary
     ).set {
