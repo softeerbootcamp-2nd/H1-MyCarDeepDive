@@ -60,10 +60,10 @@ class CommonOptionView: UIView {
         self.backgroundColor = .white
     }
     
-    func configureDetail(image: UIImage, title: String, price: Int) {
+    func configureDetail(image: UIImage?, title: String?, price: Int?) {
         self.imageView.image = image
         self.titleLabel.text = title
-        self.priceLabel.text = price.toPriceFormat
+        self.priceLabel.text = (price ?? 0).toPriceFormat
     }
     
     private func configureLayout() {
