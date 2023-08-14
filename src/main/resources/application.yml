@@ -25,12 +25,12 @@ spring:
       username: sa
       password:
       driver-class-name: org.h2.Driver
-      jdbc-url: jdbc:h2:tcp://localhost/~/Downloads/mycardeepdive;MODE=MYSQL
+      jdbc-url: jdbc:h2:mem:mycardeepdive;MODE=MYSQL
     slave:
       username: sa
       password:
       driver-class-name: org.h2.Driver
-      jdbc-url: jdbc:h2:tcp://localhost/~/Downloads/mycardeepdive;MODE=MYSQL
+      jdbc-url: jdbc:h2:mem:mycardeepdive;MODE=MYSQL
 aws:
   paramstore:
     enabled: true
