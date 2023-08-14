@@ -10,22 +10,43 @@ import UIKit
 class TrimSelectViewController: UIViewController {
     enum Constants {
         enum HeaderView {
-            static let height = CGFloat(185).scaledHeight
+            static let height: CGFloat = CGFloat(185).scaledHeight
         }
         enum DifficultSelectButton {
-            static let topMargin = CGFloat(20).scaledHeight
-            static let trailingMargin = CGFloat(-16).scaledWidth
-            static let width = CGFloat(112).scaledWidth
+            static let topMargin: CGFloat = CGFloat(20).scaledHeight
+            static let trailingMargin: CGFloat = CGFloat(-16).scaledWidth
+            static let width: CGFloat = CGFloat(112).scaledWidth
         }
         enum TrimSubOptionContentView {
-            static let topMarign = CGFloat(12).scaledHeight
-            static let leadingMargin = CGFloat(16).scaledWidth
-            static let trailingMargin = CGFloat(-16).scaledWidth
+            static let topMarign: CGFloat = CGFloat(12).scaledHeight
+            static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let trailingMargin: CGFloat = CGFloat(-16).scaledWidth
         }
         enum TrimOptionContentCollectionView {
-            static let topInset = CGFloat(8).scaledHeight
-            static let topMarign = CGFloat(25).scaledHeight
-            static let bottomMargin = CGFloat(-145).scaledHeight
+            static let tooltipTopMargin: CGFloat = CGFloat(16).scaledHeight
+            static let topMarign: CGFloat = CGFloat(12).scaledHeight
+            static let bottomMargin: CGFloat = CGFloat(-145).scaledHeight
+        }
+        enum SubOptionAreaTooltipView {
+            static let topMargin: CGFloat = CGFloat(16).scaledHeight
+            static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let trailingMargin: CGFloat = CGFloat(-16).scaledWidth
+            static let height: CGFloat = CGFloat(74).scaledHeight
+        }
+        enum TrimAreaTooltipView {
+            static let topMargin: CGFloat = CGFloat(8).scaledHeight
+            static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let trailingMargin: CGFloat = CGFloat(-16).scaledWidth
+            static let height: CGFloat = CGFloat(74).scaledHeight
+        }
+        enum LineView {
+            static let tooltipTopMargin: CGFloat = CGFloat(16).scaledHeight
+            static let topMargin: CGFloat = CGFloat(25).scaledHeight
+            static let height: CGFloat = 8
+        }
+        enum TrimLabel {
+            static let topMargin: CGFloat = CGFloat(16).scaledHeight
+            static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
         }
     }
     
@@ -38,7 +59,19 @@ class TrimSelectViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let headerView = TrimHeaderView()
-    private let difficultSelectButton: UIButton = UIButton().set {
+    private lazy var trimSubOptionContentStackView = TrimSubOptionContentStackView().set {
+        $0.delegate = self
+    }
+    private lazy var trimOptionContentCollectionView = TrimOptionContentCollectionView().set {
+        $0.learnMoreViewDelegate = self
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(didTappedCollectionView))
+        $0.addGestureRecognizer(tapGesture)
+    }
+    private var collectionViewHeightConstarint: NSLayoutConstraint!
+    private var collectionViewTopConstarint: NSLayoutConstraint!
+    private lazy var difficultSelectButton: UIButton = UIButton().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(
             UIImage(systemName: "questionmark.circle")?.withTintColor(
@@ -54,17 +87,28 @@ class TrimSelectViewController: UIViewController {
                                       range: NSRange(location: 0, length: text.count)
         )
         $0.setAttributedTitle(attributedString, for: .normal)
+        $0.addTarget(
+            self,
+            action: #selector(touchUpDifficultSelectButton),
+            for: .touchUpInside)
     }
-    private let trimSubOptionContentStackView = TrimSubOptionContentStackView()
-    private lazy var trimOptionContentCollectionView = TrimOptionContentCollectionView().set {
-        $0.contentInset = UIEdgeInsets(
-            top: Constants.TrimOptionContentCollectionView.topInset,
-            left: 0,
-            bottom: 0,
-            right: 0)
-        $0.learnMoreViewDelegate = self
+    private let subOptionAreaTooltipView = TrimTooltipView().set {
+        $0.isHidden = true
     }
-    private var collectionViewHeightConstarint: NSLayoutConstraint!
+    private let trimAreaTooltipView = TrimTooltipView(
+        text: "트림은 등급이에요. 등급이 올라갈수록 기본 포함 옵션들이 점점 추가되고 내부 시트의 퀄리티가 높아져요.."
+    ).set {
+        $0.isHidden = true
+    }
+    private let lineView: UIView = UIView().set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .GetYaPalette.gray900
+    }
+    private var lineViewTopConstarint: NSLayoutConstraint!
+    private let trimLabel = CommonLabel(
+        fontType: .mediumHead3,
+        color: .GetYaPalette.gray200,
+        text: "트림")
     
     // MARK: - Properties
     private let titleTexts = ["Exclusive", "Le Blanc (르블랑)", "Prestige", "Caligraphy"]
@@ -93,19 +137,34 @@ class TrimSelectViewController: UIViewController {
             headerView,
             difficultSelectButton,
             trimSubOptionContentStackView,
-            trimOptionContentCollectionView
+            trimOptionContentCollectionView,
+            subOptionAreaTooltipView,
+            trimAreaTooltipView,
+            lineView,
+            trimLabel
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .white
         
+        configureViewTapGesture()
         configureScrollView()
         configureContentView()
         configureHeaderView()
         configureDifficultSelectButton()
         configureTrimSubOptionContentView()
         configureTrimOptionContentCollectionView()
+        configureSubOptionAreaTooltipView()
+        configureTrimAreaTooltipView()
+        configureLineView()
+        configureTrimLabel()
+    }
+    
+    private func configureViewTapGesture() {
+        view.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(didTappedView)))
     }
     
     private func configureScrollView() {
@@ -170,15 +229,11 @@ class TrimSelectViewController: UIViewController {
     private func configureTrimOptionContentCollectionView() {
         let const = Constants.TrimOptionContentCollectionView.self
         let height = createTrimOptionContentCollectionViewHeight()
-        
         collectionViewHeightConstarint = trimOptionContentCollectionView
             .heightAnchor
             .constraint(equalToConstant: height)
-        
+        configureCollectionViewTopConstraint()
         NSLayoutConstraint.activate([
-            trimOptionContentCollectionView.topAnchor.constraint(
-                equalTo: trimSubOptionContentStackView.bottomAnchor,
-                constant: const.topMarign),
             trimOptionContentCollectionView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor),
             trimOptionContentCollectionView.trailingAnchor.constraint(
@@ -189,10 +244,61 @@ class TrimSelectViewController: UIViewController {
         ])
     }
     
+    private func configureSubOptionAreaTooltipView() {
+        NSLayoutConstraint.activate([
+            subOptionAreaTooltipView.topAnchor.constraint(
+                equalTo: trimSubOptionContentStackView.bottomAnchor,
+                constant: Constants.SubOptionAreaTooltipView.topMargin),
+            subOptionAreaTooltipView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constants.SubOptionAreaTooltipView.leadingMargin),
+            subOptionAreaTooltipView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: Constants.SubOptionAreaTooltipView.trailingMargin),
+            subOptionAreaTooltipView.heightAnchor.constraint(
+                equalToConstant: Constants.SubOptionAreaTooltipView.height)
+        ])
+    }
+    
+    private func configureTrimAreaTooltipView() {
+        NSLayoutConstraint.activate([
+            trimAreaTooltipView.topAnchor.constraint(
+                equalTo: trimLabel.bottomAnchor,
+                constant: Constants.TrimAreaTooltipView.topMargin),
+            trimAreaTooltipView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constants.TrimAreaTooltipView.leadingMargin),
+            trimAreaTooltipView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: Constants.TrimAreaTooltipView.trailingMargin),
+            trimAreaTooltipView.heightAnchor.constraint(
+                equalToConstant: Constants.TrimAreaTooltipView.height)
+        ])
+    }
+    
+    private func configureLineView() {
+        configureLineViewTopConstraint()
+        NSLayoutConstraint.activate([
+            lineView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            lineView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            lineView.heightAnchor.constraint(equalToConstant: Constants.LineView.height)
+        ])
+    }
+    
+    private func configureTrimLabel() {
+        NSLayoutConstraint.activate([
+            trimLabel.topAnchor.constraint(
+                equalTo: lineView.bottomAnchor,
+                constant: Constants.TrimLabel.topMargin),
+            trimLabel.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constants.TrimLabel.leadingMargin)
+        ])
+    }
+    
     private func createTrimOptionContentCollectionViewHeight() -> CGFloat {
         let expandedCount = trimOptionContentCollectionView.expandedIndexPath.count
-        let height = TrimOptionContentCollectionView.Constants.HeaderView.height +
-        TrimOptionContentCollectionView.Constants.Cell.height *
+        let height = TrimOptionContentCollectionView.Constants.Cell.height *
         CGFloat(titleTexts.count - expandedCount) +
         TrimOptionContentCollectionView.Constants.Cell.expandedHeight *
         CGFloat(expandedCount)
@@ -210,7 +316,88 @@ class TrimSelectViewController: UIViewController {
     // MARK: - Functions
     
     // MARK: - Objc Functions
+    @objc private func touchUpDifficultSelectButton() {
+        navigationController?.pushViewController(TrimDetailViewController(), animated: true)
+    }
+    
+    @objc private func didTappedView() {
+        setSubOptionAreaToolTipViewIsHidden(isHidden: true)
+        setTrimAreaToolTipViewIsHidden(isHidden: true)
+    }
+    
+    @objc private func didTappedCollectionView() {
+        setSubOptionAreaToolTipViewIsHidden(isHidden: true)
+        setTrimAreaToolTipViewIsHidden(isHidden: false)
+    }
+}
 
+// MARK: - configure Constraints By Tooltip isHidden
+extension TrimSelectViewController {
+    private func setSubOptionAreaToolTipViewIsHidden(isHidden: Bool) {
+        subOptionAreaTooltipView.isHidden = isHidden
+        configureLineViewTopConstraint()
+        self.view.updateConstraints()
+    }
+    
+    private func setTrimAreaToolTipViewIsHidden(isHidden: Bool) {
+        trimAreaTooltipView.isHidden = isHidden
+        configureCollectionViewTopConstraint()
+        self.view.updateConstraints()
+    }
+    
+    private func configureCollectionViewTopConstraint() {
+        if let collectionViewTopConstarint {
+            collectionViewTopConstarint.isActive = false
+        }
+        if trimAreaTooltipView.isHidden {
+            collectionViewTopConstarint = trimOptionContentCollectionView
+                .topAnchor
+                .constraint(
+                    equalTo: trimLabel.bottomAnchor,
+                    constant: Constants.TrimOptionContentCollectionView.topMarign)
+        } else {
+            collectionViewTopConstarint = trimOptionContentCollectionView
+                .topAnchor
+                .constraint(
+                    equalTo: trimAreaTooltipView.bottomAnchor,
+                    constant: Constants.TrimOptionContentCollectionView.tooltipTopMargin)
+        }
+        collectionViewTopConstarint.isActive = true
+    }
+    
+    private func configureLineViewTopConstraint() {
+        if let lineViewTopConstarint {
+            lineViewTopConstarint.isActive = false
+        }
+        if subOptionAreaTooltipView.isHidden {
+            lineViewTopConstarint = lineView.topAnchor.constraint(
+                equalTo: trimSubOptionContentStackView.bottomAnchor,
+                constant: Constants.LineView.topMargin)
+        } else {
+            lineViewTopConstarint = lineView.topAnchor.constraint(
+                equalTo: subOptionAreaTooltipView.bottomAnchor,
+                constant: Constants.LineView.tooltipTopMargin)
+        }
+        lineViewTopConstarint.isActive = true
+    }
+}
+
+// MARK: - TrimSubOptionContentStackViewDelegate {
+extension TrimSelectViewController: TrimSubOptionContentStackViewDelegate {
+    func transferOptionText(type: TrimSubOptionContentStackView.OptionType) {
+        var text = ""
+        switch type {
+        case .engine:
+            text = "디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요."
+        case .body:
+            text = "7인승의 경우 2열의 가운데에 시트가 없어 통행이 편하고 8인승의 경우 2열 가운데에 시트가 존재해요."
+        case .system:
+            text = "2WD는 두개의 모터로 구성되어 가볍고 효율이 좋고 4WD는 네개의 모터로 구성되어 주행 안정성이 높아요."
+        }
+        subOptionAreaTooltipView.configureText(text: text)
+        setSubOptionAreaToolTipViewIsHidden(isHidden: false)
+        setTrimAreaToolTipViewIsHidden(isHidden: true)
+    }
 }
 
 // MARK: - TrimOptionContentCollectionViewDelegate
