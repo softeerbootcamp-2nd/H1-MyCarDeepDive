@@ -1,5 +1,5 @@
 //
-//  DetailRecommendCarResultFooter.swift
+//  DetailQuotationPreviewFooterView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/10.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailRecommendCarResultFooter: UITableViewHeaderFooterView {
+final class DetailQuotationPreviewFooterView: UITableViewHeaderFooterView {
     static let identifier = "DetailRecommendCarResultFooter"
     enum Constants {
         static let intrinsicContentHeight: CGFloat = OnePixelDivider.uiConstant
@@ -65,7 +65,7 @@ final class DetailRecommendCarResultFooter: UITableViewHeaderFooterView {
 }
 
 // MARK: - LayoutSupportable
-extension DetailRecommendCarResultFooter: LayoutSupportable {
+extension DetailQuotationPreviewFooterView: LayoutSupportable {
     func configureConstraints() {
         _=[onePixelDividerConstraints,
            totalMoneyDescriptionLabelConstraints,

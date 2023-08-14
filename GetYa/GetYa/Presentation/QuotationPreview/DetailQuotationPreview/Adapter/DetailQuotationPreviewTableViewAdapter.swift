@@ -1,5 +1,5 @@
 //
-//  DetailRecommendCarResultTableViewAdapter.swift
+//  DetailQuotationPreviewTableViewAdapter.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/08.
@@ -7,15 +7,15 @@
 
 import UIKit
 
-final class DetailRecommendCarResultTableViewAdapter: CommonQuotationPreviewTableViewAdapter {
+final class DetailQuotationPreviewTableViewAdapter: CommonQuotationPreviewTableViewAdapter {
     // MARK: - Properties
-    private var dataSource: DetailRecommendCarResultTableViewAdapterDataSource
+    private var dataSource: DetailQuotationPreviewTableViewAdapterDataSource
     private var isWorkedMainHeaderInitialAnimation = false
     
     // MARK: - Lifecycles
     init(
         tableView: UITableView,
-        dataSource: DetailRecommendCarResultTableViewAdapterDataSource
+        dataSource: DetailQuotationPreviewTableViewAdapterDataSource
         & CommonQuotationPreviewTableViewAdapterDataSource
     ) {
         self.dataSource = dataSource
@@ -26,7 +26,7 @@ final class DetailRecommendCarResultTableViewAdapter: CommonQuotationPreviewTabl
 }
 
 // MARK: - UITableViewDelegate
-extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
+extension DetailQuotationPreviewTableViewAdapter: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
         willDisplayHeaderView view: UIView,
@@ -35,7 +35,7 @@ extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
         guard
             !isWorkedMainHeaderInitialAnimation,
             section == 0,
-            let header = view as? DetailRecommendCarResultMainHeader
+            let header = view as? DetailQuotationPreviewMainHeader
         else { return }
         isWorkedMainHeaderInitialAnimation.toggle()
         header.showAnimation()
@@ -43,12 +43,12 @@ extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0, let header = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: DetailRecommendCarResultMainHeader.identifier
-        ) as? DetailRecommendCarResultMainHeader {
+            withIdentifier: DetailQuotationPreviewMainHeader.identifier
+        ) as? DetailQuotationPreviewMainHeader {
             return header.set { $0.configure(with: dataSource.mainSectionHeaderItem) }
         } else if section == 1, let header = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: DetailRecommendCarResultSecondSectionHeader.identifier
-        ) as? DetailRecommendCarResultSecondSectionHeader {
+            withIdentifier: DetailQuotationPreviewSecionHeaderView.identifier
+        ) as? DetailQuotationPreviewSecionHeaderView {
             return header.set { $0.configure(with: dataSource.secondSectionHeaderItem) }
         }
         return .init(frame: .zero)
@@ -56,7 +56,7 @@ extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return DetailRecommendCarResultMainHeader.Constants.intrinsicContentHeight
+            return DetailQuotationPreviewMainHeader.Constants.intrinsicContentHeight
         } else if section == 1 {
             return CommonQuotationPreviewTitleView
                 .Constants.intrinsicContentHeight
@@ -66,15 +66,15 @@ extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 1 {
-            return DetailRecommendCarResultFooter.Constants.intrinsicContentHeight
+            return DetailQuotationPreviewFooterView.Constants.intrinsicContentHeight
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 1, let footer = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: DetailRecommendCarResultFooter.identifier
-        ) as? DetailRecommendCarResultFooter {
+            withIdentifier: DetailQuotationPreviewFooterView.identifier
+        ) as? DetailQuotationPreviewFooterView {
             return footer.set {
                 $0.configure(with: dataSource.secondSectionFooterItem)
             }
@@ -84,7 +84,7 @@ extension DetailRecommendCarResultTableViewAdapter: UITableViewDelegate {
 }
 
 // MARK: - UIScrollViewDelegate
-extension DetailRecommendCarResultTableViewAdapter {
+extension DetailQuotationPreviewTableViewAdapter {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard isWorkedMainHeaderInitialAnimation else { return }
         let offSetY = scrollView.contentOffset.y

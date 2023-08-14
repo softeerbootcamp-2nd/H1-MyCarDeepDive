@@ -1,5 +1,5 @@
 //
-//  DetailRecommendCarResultViewController.swift
+//  DetailQuotationPreviewViewController.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/07.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailRecommendCarResultViewController: UIViewController {
+final class DetailQuotationPreviewViewController: UIViewController {
     private enum Constants {
         enum BottomCustomOrQuoteView {
             static let height: CGFloat = CustomOrQuoteSelectView
@@ -16,20 +16,20 @@ final class DetailRecommendCarResultViewController: UIViewController {
     }
     
     // MARK: - UI Properties
-    private let tableView = DetailRecommendCarResultTableView(frame: .zero, style: .grouped)
+    private let tableView = DetailQuotationPreviewTableView(frame: .zero, style: .grouped)
     private let bottomCustomOrQuoteView = CustomOrQuoteSelectView()
     
     // MARK: - Properties
-    private var adapter: DetailRecommendCarResultTableViewAdapter!
+    private var adapter: DetailQuotationPreviewTableViewAdapter!
     private var viewModel: (
-        any CharacterSelectSuccessViewModelable
-        & DetailRecommendCarResultTableViewAdapterDataSource
+        any DetailQuotationPreviewViewModelable
+        & DetailQuotationPreviewTableViewAdapterDataSource
         & CommonQuotationPreviewTableViewAdapterDataSource)!
     
     // MARK: - Lifecycles
     init(
-        viewModel: some CharacterSelectSuccessViewModelable
-        & DetailRecommendCarResultTableViewAdapterDataSource
+        viewModel: some DetailQuotationPreviewViewModelable
+        & DetailQuotationPreviewTableViewAdapterDataSource
         & CommonQuotationPreviewTableViewAdapterDataSource
     ) {
         super.init(nibName: nil, bundle: nil)
@@ -38,7 +38,7 @@ final class DetailRecommendCarResultViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        viewModel = DetailRecommendCarResultViewModel()
+        viewModel = DetailQuotationPreviewViewModel()
     }
     
     override func viewDidLoad() {
@@ -80,7 +80,7 @@ final class DetailRecommendCarResultViewController: UIViewController {
 }
 
 // MARK: - LayoutSupportable
-extension DetailRecommendCarResultViewController: LayoutSupportable {
+extension DetailQuotationPreviewViewController: LayoutSupportable {
     func configureConstraints() {
         configureTableViewConstriants()
         configureBottomCustomOrQuoteView()

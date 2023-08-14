@@ -1,5 +1,5 @@
 //
-//  DetailRecommendCarResultTableView.swift
+//  DetailQuotationPreviewTableView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/14.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailRecommendCarResultTableView: CommonQuotationPreviewTableView {
+final class DetailQuotationPreviewTableView: CommonQuotationPreviewTableView {
     // MARK: - Lifecycles
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -22,14 +22,14 @@ final class DetailRecommendCarResultTableView: CommonQuotationPreviewTableView {
     // MARK: - Private functions
     private func configureUI() {
         register(
-            DetailRecommendCarResultMainHeader.self,
-            forHeaderFooterViewReuseIdentifier: DetailRecommendCarResultMainHeader.identifier)
+            DetailQuotationPreviewMainHeader.self,
+            forHeaderFooterViewReuseIdentifier: DetailQuotationPreviewMainHeader.identifier)
         register(
-            DetailRecommendCarResultSecondSectionHeader.self,
-            forHeaderFooterViewReuseIdentifier: DetailRecommendCarResultSecondSectionHeader.identifier)
+            DetailQuotationPreviewSecionHeaderView.self,
+            forHeaderFooterViewReuseIdentifier: DetailQuotationPreviewSecionHeaderView.identifier)
         register(
-            DetailRecommendCarResultFooter.self,
-            forHeaderFooterViewReuseIdentifier: DetailRecommendCarResultFooter.identifier)
+            DetailQuotationPreviewFooterView.self,
+            forHeaderFooterViewReuseIdentifier: DetailQuotationPreviewFooterView.identifier)
         estimatedSectionHeaderHeight = UITableView.automaticDimension
         estimatedSectionFooterHeight = UITableView.automaticDimension
     }

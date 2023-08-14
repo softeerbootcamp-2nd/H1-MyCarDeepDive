@@ -1,5 +1,5 @@
 //
-//  DetailRecommendCarResultViewModel.swift
+//  DetailQuotationPreviewViewModel.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/09.
@@ -22,7 +22,7 @@ struct DetailRecommendCarResultMainHeaderModel {
     var firstSectionTitle: String
 }
 
-final class DetailRecommendCarResultViewModel: CommonQuotationPreviewTableViewModel {
+final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewModel {
     // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
     private var mainSectionHeader: DetailRecommendCarResultMainHeaderModel
@@ -38,7 +38,7 @@ final class DetailRecommendCarResultViewModel: CommonQuotationPreviewTableViewMo
 }
 
 // MARK: - CharacterSelectSuccessViewModelable
-extension DetailRecommendCarResultViewModel: CharacterSelectSuccessViewModelable {
+extension DetailQuotationPreviewViewModel: DetailQuotationPreviewViewModelable {
     func transform(input: Input) -> Output {
         return Publishers.MergeMany(
             customButtonEventChains(input),
@@ -49,7 +49,7 @@ extension DetailRecommendCarResultViewModel: CharacterSelectSuccessViewModelable
 }
 
 // MARK: - CharacterSelectSuccessViewModelable private function
-private extension DetailRecommendCarResultViewModel {
+private extension DetailQuotationPreviewViewModel {
     func customButtonEventChains(_ input: Input) -> Output {
         return input.customButtonEvent
             .map { _ -> State in return .gotoCustomPage }
@@ -71,7 +71,7 @@ private extension DetailRecommendCarResultViewModel {
 }
 
 // MARK: - CharacterSSTableViewAdapterDataSource
-extension DetailRecommendCarResultViewModel: DetailRecommendCarResultTableViewAdapterDataSource {
+extension DetailQuotationPreviewViewModel: DetailQuotationPreviewTableViewAdapterDataSource {
     var secondSectionFooterItem: String {
         secondSectionFooter
     }

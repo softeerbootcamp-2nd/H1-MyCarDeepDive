@@ -1,5 +1,5 @@
 //
-//  DetailRecommendCarResultSecondSectionHeader.swift
+//  DetailQuotationPreviewSecionHeaderView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/09.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class DetailRecommendCarResultSecondSectionHeader: UITableViewHeaderFooterView {
-    static let identifier = "DetailRecommendCarResultSecondSectionHeader"
+final class DetailQuotationPreviewSecionHeaderView: UITableViewHeaderFooterView {
+    static let identifier = "DetailQuotationPreviewSecionHeaderView"
     // MARK: - UI properties
     private let sectionTitleAndLineDividerView = CommonQuotationPreviewTitleView()
     
@@ -29,7 +29,7 @@ final class DetailRecommendCarResultSecondSectionHeader: UITableViewHeaderFooter
 }
 
 // MARK: - LayoutSupportable
-extension DetailRecommendCarResultSecondSectionHeader: LayoutSupportable {
+extension DetailQuotationPreviewSecionHeaderView: LayoutSupportable {
     func configureConstraints() {
         NSLayoutConstraint.activate([
             sectionTitleAndLineDividerView.leadingAnchor.constraint(

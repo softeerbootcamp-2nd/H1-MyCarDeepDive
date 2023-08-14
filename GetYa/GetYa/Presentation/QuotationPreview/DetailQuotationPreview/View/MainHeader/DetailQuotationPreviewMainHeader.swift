@@ -1,5 +1,5 @@
 //
-//  DetailRecommendCarResultMainHeader.swift
+//  DetailQuotationPreviewMainHeader.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/08.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class DetailRecommendCarResultMainHeader: UITableViewHeaderFooterView {
-    static let identifier = "DetailRecommendCarResultMainHeader"
+final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
+    static let identifier = "DetailQuotationPreviewMainHeader"
     enum Constants {
         static let intrinsicContentHeight: CGFloat = {
-            let thumbnailViewHeight = DetailRecommendCarResultThumbnailView
+            let thumbnailViewHeight = DetailQuotationPreviewThumbnailView
             .Constants
             .intrinsicContentHeight
             let recommendCarInfoHeight = CommonQuotationPreviewCarInfoView
@@ -25,7 +25,7 @@ final class DetailRecommendCarResultMainHeader: UITableViewHeaderFooterView {
     }
     
     // MARK: - UI properties
-    private let thumbnailView = DetailRecommendCarResultThumbnailView()
+    private let thumbnailView = DetailQuotationPreviewThumbnailView()
     private let recommendCarInfoView = CommonQuotationPreviewCarInfoView()
     private let sectionDivider = CommonQuotationPreviewTitleView()
     
@@ -82,7 +82,7 @@ final class DetailRecommendCarResultMainHeader: UITableViewHeaderFooterView {
 }
 
 // MARK: - LayoutSupportable
-extension DetailRecommendCarResultMainHeader: LayoutSupportable {
+extension DetailQuotationPreviewMainHeader: LayoutSupportable {
     func configureConstraints() {
         _=[thumbnailViewConstraints,
            recommendCarInfoConstraints,
@@ -92,7 +92,7 @@ extension DetailRecommendCarResultMainHeader: LayoutSupportable {
 }
 
 // MARK: - LayoutSupportable private functions
-private extension DetailRecommendCarResultMainHeader {
+private extension DetailQuotationPreviewMainHeader {
     var thumbnailViewConstraints: [NSLayoutConstraint] {
         [thumbnailView.leadingAnchor.constraint(
             equalTo: leadingAnchor),
