@@ -65,7 +65,7 @@ extension HomeViewController: HomeContentDelegate {
     
     func touchUpCustomButton() {
         self.navigationController?.pushViewController(
-            TrimSelectViewController(),
+            CarSettingSelectViewController(),
             animated: true)
     }
 }

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TrimSubOptionViewDelegate: AnyObject {
+    func touchUpOptionButton(text: String)
+}
+
 class TrimSubOptionView: UIView {
     enum Constants {
         enum Label {
@@ -32,6 +36,7 @@ class TrimSubOptionView: UIView {
     }
     
     // MARK: - Properties
+    weak var delegate: TrimSubOptionViewDelegate?
     private(set) var selectedButtonIndex: Int = 0 {
         didSet {
             optionStackView.arrangedSubviews
@@ -126,6 +131,9 @@ extension TrimSubOptionView: TrimSubOptionButtonDelegate {
         _=optionStackView.arrangedSubviews.map {
             let button = $0 as? UIButton
             button?.isSelected = button == sender
+        }
+        if let text = label.text {
+            delegate?.touchUpOptionButton(text: text)
         }
     }
 }

@@ -14,12 +14,12 @@ enum GetYaFont {
     case mediumHead1
     ///  20 pt | 26 lineheight
     case mediumHead2
+    ///  20 pt | 26 lineheight
+    case regularHead2
     ///  18 pt | 24 lineheight
     case mediumHead3
     ///  16 pt | 22 lineheight
     case mediumHead4
-    ///  20 pt | ? lineheight
-    case regularHead2
     ///  20 pt | 28 lineheight
     case boldBody1
     ///  20 pt | 28 lineheight
@@ -42,7 +42,7 @@ enum GetYaFont {
     case mediumCaption1
     ///  12 pt | 18 lineheight
     case regularCaption1
-    case custom(CGFloat, CGFloat, CGFloat, String)
+    case custom(size: CGFloat, kern: CGFloat, lineHeight: CGFloat, nameType: HyundaiSansNameType)
   
     var size: CGFloat {
         switch self {
@@ -166,7 +166,16 @@ enum GetYaFont {
         return lineHeight
         }
     }
-    
+  
+    enum HyundaiSansNameType: String {
+        case boldHead = "HyundaiSansHeadKRBold"
+        case mediumHead = "HyundaiSansHeadKRMedium"
+        case regularHead = "HyundaiSansHeadKRRegular"
+        case boldText = "HyundaiSansTextKRBold"
+        case mediumText = "HyundaiSansTextKRMedium"
+        case regularText = "HyundaiSansTextKRRegular"
+    }
+      
     var name: String {
         switch self {
         case .boldHead1:
@@ -203,8 +212,8 @@ enum GetYaFont {
             return "HyundaiSansTextKRMedium"
         case .regularCaption1:
             return "HyundaiSansTextKRRegular"
-    case .custom(_, _, _, let name):
-        return name
+    case .custom(_, _, _, let nameType):
+        return nameType.rawValue
         }
     }
     

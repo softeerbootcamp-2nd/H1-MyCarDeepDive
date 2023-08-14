@@ -25,7 +25,9 @@ class TrimSubOptionButton: UIButton {
     }
     override var isHighlighted: Bool {
         didSet {
-            delegate?.toucuUpButton(sender: self)
+            if isHighlighted {
+                delegate?.toucuUpButton(sender: self)
+            }
         }
     }
     

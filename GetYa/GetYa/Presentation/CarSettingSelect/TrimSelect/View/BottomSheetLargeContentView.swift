@@ -58,10 +58,10 @@ class BottomSheetLargeContentView: UIView {
         $0.isLayoutMarginsRelativeArrangement = true
     }
     private let trimNameLabel = CommonLabel(
-        fontType: .custom(14, -0.2, 14, "HyundaiSansHeadKRRegular"),
+        fontType: .custom(size: 14, kern: -0.2, lineHeight: 14, nameType: .regularHead),
         color: .GetYaPalette.gray500)
     private let totalPriceLabel = CommonLabel(
-        fontType: .custom(18, -0.3, 18, "HyundaiSansHeadKRMedium"),
+        fontType: .custom(size: 18, kern: -0.3, lineHeight: 18, nameType: .mediumHead),
         color: .GetYaPalette.gray0)
     private let quoteButton = CommonButton(
         font: GetYaFont.mediumBody3.uiFont,
@@ -167,13 +167,17 @@ class BottomSheetLargeContentView: UIView {
     private func configureTrimNameLabel() {
         NSLayoutConstraint.activate([
             trimNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            trimNameLabel.bottomAnchor.constraint(equalTo: quoteButton.topAnchor, constant: Constants.TrimNamelabel.bottomMargin)
+            trimNameLabel.bottomAnchor.constraint(
+                equalTo: quoteButton.topAnchor,
+                constant: Constants.TrimNamelabel.bottomMargin)
         ])
     }
     private func configureTotalPriceLabel() {
         NSLayoutConstraint.activate([
             totalPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            totalPriceLabel.bottomAnchor.constraint(equalTo: quoteButton.topAnchor, constant: Constants.TotalPriceLabel.bottomMargin)
+            totalPriceLabel.bottomAnchor.constraint(
+                equalTo: quoteButton.topAnchor,
+                constant: Constants.TotalPriceLabel.bottomMargin)
         ])
     }
     private func configureQuoteButton() {
