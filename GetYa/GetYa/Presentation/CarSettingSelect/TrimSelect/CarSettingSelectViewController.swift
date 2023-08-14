@@ -27,6 +27,7 @@ class CarSettingSelectViewController: UIViewController {
     
     // MARK: - Properties
     private var viewControllers: [UIViewController] = []
+    private var currentPageIndex: Int = 0
     
     // MARK: - LifeCycles
     override func viewDidLoad() {
@@ -48,7 +49,10 @@ class CarSettingSelectViewController: UIViewController {
         
         let trimSelectViewController = TrimSelectViewController()
         
-        viewControllers = [trimSelectViewController]
+        viewControllers = [
+            trimSelectViewController,
+            ColorSelectViewController(),
+            OptionSelectViewController()]
     }
     
     private func configureUI() {
@@ -74,7 +78,7 @@ class CarSettingSelectViewController: UIViewController {
     }
     
     private func configureSettingProgressView() {
-        settingProgressView.setCurrentSettingProgress(type: .trim)
+        settingProgressView.setCurrentSettingProgress(index: currentPageIndex)
         NSLayoutConstraint.activate([
             settingProgressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             settingProgressView.leadingAnchor.constraint(
@@ -115,10 +119,17 @@ class CarSettingSelectViewController: UIViewController {
     // MARK: - Functions
     
     // MARK: - Objc Functions
-    
-    // TODO: - 페이지 뷰컨 상태에 따라 Pop 로직이 바뀌도록 해야함.
     @objc private func touchUpNavigationBackButton() {
-        self.navigationController?.popViewController(animated: true)
+        if currentPageIndex != 0 {
+            currentPageIndex -= 1
+            settingProgressView.setCurrentSettingProgress(index: currentPageIndex)
+            pageViewController.setViewControllers(
+                [viewControllers[currentPageIndex]],
+                direction: .reverse,
+                animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 
@@ -148,5 +159,16 @@ extension CarSettingSelectViewController: BottomSheetDelegate {
         }, completion: { _ in
             completion()
         })
+    }
+    
+    func transitionNextSettingSelect() {
+        if currentPageIndex + 1 < viewControllers.count {
+            currentPageIndex += 1
+            settingProgressView.setCurrentSettingProgress(index: currentPageIndex)
+            pageViewController.setViewControllers(
+                [viewControllers[currentPageIndex]],
+                direction: .forward,
+                animated: true)
+        }
     }
 }
