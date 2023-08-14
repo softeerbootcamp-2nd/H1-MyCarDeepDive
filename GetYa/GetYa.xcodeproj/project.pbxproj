@@ -282,7 +282,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		15059ABB2A88A15400303C01 /* CommonRecommendCarResult */ = {
+		15059ABB2A88A15400303C01 /* CommonQuotationPreview */ = {
 			isa = PBXGroup;
 			children = (
 				15D8CC932A892F06009B19B9 /* Adapter */,
@@ -290,7 +290,7 @@
 				15D8CC8D2A892A2C009B19B9 /* ViewModel */,
 				15059ABC2A88A18D00303C01 /* View */,
 			);
-			path = CommonRecommendCarResult;
+			path = CommonQuotationPreview;
 			sourceTree = "<group>";
 		};
 		15059ABC2A88A18D00303C01 /* View */ = {
@@ -316,7 +316,7 @@
 		155729FD2A8954E200D136C6 /* QuotationPreview */ = {
 			isa = PBXGroup;
 			children = (
-				15059ABB2A88A15400303C01 /* CommonRecommendCarResult */,
+				15059ABB2A88A15400303C01 /* CommonQuotationPreview */,
 				159B2CF52A825CC5003F47D6 /* DetailRecommendCarResult */,
 			);
 			path = QuotationPreview;
