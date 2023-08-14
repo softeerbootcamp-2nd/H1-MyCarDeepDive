@@ -1,12 +1,17 @@
 package com.h1.mycardeepdive.color.domain;
 
+import java.util.List;
 import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class ColorCombination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +22,10 @@ public class ColorCombination {
     @JoinColumn(name = "exterior_color_id")
     private ExteriorColor exteriorColor;
 
-    public void setExteriorColor(ExteriorColor exteriorColor) {
-        this.exteriorColor = exteriorColor;
-        exteriorColor.getColorCombinationList().add(this);
-    }
+    @ManyToOne
+    @JoinColumn(name = "interior_color_id")
+    private InteriorColor interiorColor;
+
+    @OneToMany(mappedBy = "colorCombination", fetch = FetchType.LAZY)
+    private List<TrimsColorCombination> trimsColorCombinations;
 }
