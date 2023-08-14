@@ -10,23 +10,247 @@
   } ],
   "tags" : [ ],
   "paths" : {
-    "/api/v1/wheel-options" : {
+    "/api/v1/car-spec/{car-spec-id}/additional-options" : {
       "get" : {
-        "tags" : [ "휠 옵션" ],
-        "summary" : "휠 옵션 목록 리스트 조회",
-        "description" : "휠 옵션 목록 리스트 조회",
+        "tags" : [ "옵션" ],
+        "summary" : "차량 사양에 따른 추가 옵션 목록 리스트 조회",
+        "description" : "차량 사양에 따른 추가 옵션 목록 리스트 조회",
         "operationId" : "options-docs",
+        "parameters" : [ {
+          "name" : "car-spec-id",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "200",
             "content" : {
               "application/json;charset=UTF-8" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/api-v1-wheel-options486549215"
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
                 },
                 "examples" : {
+                  "options-docs1" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : {\n    \"optionPackageList\" : [ {\n      \"id\" : 1,\n      \"option_img_url\" : \"https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg\",\n      \"option_select_rate\" : 10.12,\n      \"option_name\" : \"컴포트 II\",\n      \"option_summary\" : \"편의성을 위해 구성된 세트 옵션\",\n      \"tag_list\" : [ {\n        \"tag_id\" : 1,\n        \"tag_name\" : \"사용편의\"\n      }, {\n        \"tag_id\" : 2,\n        \"tag_name\" : \"주행안전\"\n      } ],\n      \"badge_name\" : \"None\",\n      \"price\" : 10090000\n    } ],\n    \"additionalOptionList\" : [ {\n      \"id\" : 1,\n      \"option_img_url\" : \"https://img.etnews.com/photonews/2011/1352481_20201113164311_199_0001.jpg\",\n      \"select_rate\" : 5.5,\n      \"option_name\" : \"빌트인 캠(보조배터리 포함)\",\n      \"option_summary\" : \"차량 내부에 카메라를 설치하여 녹화가 가능한 블랙박스\",\n      \"tag_list\" : [ {\n        \"tag_id\" : 1,\n        \"tag_name\" : \"사용편의\"\n      }, {\n        \"tag_id\" : 2,\n        \"tag_name\" : \"주행안전\"\n      } ],\n      \"badge_name\" : \"H Genuine Accessories\",\n      \"price\" : 109000\n    } ]\n  }\n}"
+                  },
                   "options-docs" : {
-                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : [ {\n    \"wheel_id\" : 1,\n    \"wheel_size\" : 12,\n    \"wheel_image_url\" : \"image.url\",\n    \"wheel_name\" : \"엄청난 현대차의 휠\",\n    \"wheel_description\" : \"현대차의 휠은 최강이다.\",\n    \"wheel_price\" : 120000,\n    \"wheel_summary\" : \"히힣\"\n  } ]\n}"
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : {\n    \"optionPackageList\" : [ {\n      \"id\" : 1,\n      \"option_img_url\" : \"https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg\",\n      \"option_select_rate\" : 10.12,\n      \"option_name\" : \"컴포트 II\",\n      \"option_summary\" : \"편의성을 위해 구성된 세트 옵션\",\n      \"tag_list\" : [ \"대표\", \"주행안전\" ],\n      \"badge_name\" : \"None\",\n      \"price\" : 10090000\n    } ],\n    \"additionalOptionList\" : [ {\n      \"id\" : 1,\n      \"option_img_url\" : \"https://img.etnews.com/photonews/2011/1352481_20201113164311_199_0001.jpg\",\n      \"select_rate\" : 5.5,\n      \"option_name\" : \"빌트인 캠(보조배터리 포함)\",\n      \"option_summary\" : \"차량 내부에 카메라를 설치하여 녹화가 가능한 블랙박스\",\n      \"tag_list\" : [ \"대표\", \"주행안전\" ],\n      \"badge_name\" : \"H Genuine Accessories\",\n      \"price\" : 109000\n    } ]\n  }\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/car-spec/{car-spec-id}/basic-options" : {
+      "get" : {
+        "tags" : [ "옵션" ],
+        "summary" : "차량 사양에 따른 기본 옵션 목록 리스트 조회",
+        "description" : "차량 사양에 따른 기본 옵션 목록 리스트 조회",
+        "operationId" : "options-docs2",
+        "parameters" : [ {
+          "name" : "car-spec-id",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "options-docs2" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : [ {\n    \"id\" : 1,\n    \"option_img_url\" : \"https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg\",\n    \"option_name\" : \"다중 충돌방지 자동 제동 시스템\",\n    \"tag_list\" : [ {\n      \"tag_id\" : 1,\n      \"tag_name\" : \"사용편의\"\n    }, {\n      \"tag_id\" : 2,\n      \"tag_name\" : \"주행안전\"\n    } ]\n  } ]\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/options/activity-log/{option-id}" : {
+      "post" : {
+        "tags" : [ "옵션" ],
+        "summary" : "기본 또는 추가 옵션 클릭 시, 로그 전송",
+        "description" : "기본 또는 추가 옵션 클릭 시, 로그 전송",
+        "operationId" : "options-docs3",
+        "parameters" : [ {
+          "name" : "option-id",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "options-docs3" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : true\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/options/{option-id}/details" : {
+      "get" : {
+        "tags" : [ "옵션" ],
+        "summary" : "기본 또는 추가 옵션의 상세 옵션 정보를 제공한다.",
+        "description" : "기본 또는 추가 옵션의 상세 옵션 정보를 제공한다.",
+        "operationId" : "options-docs6",
+        "parameters" : [ {
+          "name" : "option-id",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "options-docs6" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : {\n    \"option_id\" : 1,\n    \"option_name\" : \"빌트인 캠(보조배터리 포함)\",\n    \"option_description\" : \"빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.\",\n    \"tag_list\" : [ {\n      \"tag_id\" : 1,\n      \"tag_name\" : \"사용편의\"\n    }, {\n      \"tag_id\" : 2,\n      \"tag_name\" : \"주행안전\"\n    } ],\n    \"price\" : 109000\n  }\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/package-options/activity-log/{option-id}" : {
+      "post" : {
+        "tags" : [ "옵션" ],
+        "summary" : "패키지 옵션 클릭 시, 로그 전송",
+        "description" : "패키지 옵션 클릭 시, 로그 전송",
+        "operationId" : "options-docs4",
+        "parameters" : [ {
+          "name" : "option-id",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "options-docs4" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : true\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/options/package/{option-id}/details" : {
+      "get" : {
+        "tags" : [ "옵션" ],
+        "summary" : "패키지 옵션에 포함된 옵션들의 상세 정보를 제공합니다.",
+        "description" : "패키지 옵션에 포함된 옵션들의 상세 정보를 제공합니다.",
+        "operationId" : "options-docs5",
+        "parameters" : [ {
+          "name" : "option-id",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "options-docs5" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : [ {\n    \"option_id\" : 1,\n    \"option_name\" : \"빌트인 캠(보조배터리 포함)\",\n    \"option_description\" : \"빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.\",\n    \"tag_list\" : [ {\n      \"tag_id\" : 1,\n      \"tag_name\" : \"사용편의\"\n    }, {\n      \"tag_id\" : 2,\n      \"tag_name\" : \"주행안전\"\n    } ],\n    \"price\" : 109000\n  } ]\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/options/{car-spec-id}/tags/{tag-id}" : {
+      "get" : {
+        "tags" : [ "옵션" ],
+        "summary" : "태그의 옵션 상세 정보를 제공한다.",
+        "description" : "태그의 옵션 상세 정보를 제공한다.",
+        "operationId" : "options-docs7",
+        "parameters" : [ {
+          "name" : "car-spec-id",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "tag-id",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/api-v1-options-activity-log-option-id486549215"
+                },
+                "examples" : {
+                  "options-docs7" : {
+                    "value" : "{\n  \"status\" : {\n    \"code\" : \"SUCCESS-001\",\n    \"message\" : \"응답 성공하였습니다.\"\n  },\n  \"data\" : {\n    \"tag_img_url\" : \"https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000033027/bebeb59b7c7447f7be0a1f8238821cce.jpg\",\n    \"options\" : [ {\n      \"option_id\" : 1,\n      \"option_name\" : \"빌트인 캠(보조배터리 포함)\",\n      \"option_description\" : \"빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.\",\n      \"option_img_url\" : \"https://img.etnews.com/photonews/2011/1352481_20201113164311_199_0001.jpg\",\n      \"price\" : 109000,\n      \"position_x\" : 12.1,\n      \"position_y\" : 44.6\n    } ]\n  }\n}"
                   }
                 }
               }
@@ -38,7 +262,7 @@
   },
   "components" : {
     "schemas" : {
-      "api-v1-wheel-options486549215" : {
+      "api-v1-options-activity-log-option-id486549215" : {
         "type" : "object"
       }
     }
