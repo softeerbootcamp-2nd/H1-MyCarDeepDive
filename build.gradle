@@ -161,7 +161,7 @@ tasks.withType(GenerateSwaggerUI) {
 	}
 }
 
-bootJar {
+jar {
 	dependsOn(':openapi3')
 }
 
