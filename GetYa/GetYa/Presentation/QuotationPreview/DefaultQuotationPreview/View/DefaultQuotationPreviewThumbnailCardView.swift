@@ -145,21 +145,19 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
     
     // MARK: - Private Functions
     private func configureUI() {
-        // TODO: - 블러 넣자
         if frame == .zero {
             translatesAutoresizingMaskIntoConstraints = false
         }
-        
-        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffect = UIBlurEffect(style: .systemChromeMaterialLight)
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         visualEffectView.frame = frame
-        backgroundColor = UIColor(red: 0.38, green: 0.506, blue: 0.696, alpha: 0.2)
-        addSubview(visualEffectView)
+        backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
         layer.cornerRadius = Constants.cornerRadius
         layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 1
         configureSubviewUI(
-            with: logoImageView,
+            with: visualEffectView,
+            logoImageView,
             carNameDescriptionRoundLabel,
             famouseSayingWithCarNameLabel,
             recommendCarImageView,
