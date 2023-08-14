@@ -28,9 +28,4 @@ public class ColorCombination {
 
     @OneToMany(mappedBy = "colorCombination", fetch = FetchType.LAZY)
     private List<TrimsColorCombination> trimsColorCombinations;
-
-    public void setExteriorColor(ExteriorColor exteriorColor) {
-        this.exteriorColor = exteriorColor;
-        exteriorColor.getColorCombinationList().add(this);
-    }
 }

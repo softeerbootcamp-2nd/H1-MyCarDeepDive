@@ -3,7 +3,6 @@ package com.h1.mycardeepdive.color.ui.dto;
 import lombok.*;
 
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
