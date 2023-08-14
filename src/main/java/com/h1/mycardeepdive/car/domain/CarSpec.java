@@ -1,15 +1,21 @@
 package com.h1.mycardeepdive.car.domain;
 
+import com.h1.mycardeepdive.options.domain.CarSpecOptions;
 import com.h1.mycardeepdive.trims.domain.Trims;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class CarSpec {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,25 +42,10 @@ public class CarSpec {
     @JoinColumn(name = "driving_system_id")
     private DrivingSystem drivingSystem;
 
-    private long price;
+    @OneToMany(mappedBy = "carSpec")
+    private List<CarSpecOptions> carSpecOptions = new ArrayList<>();
 
-    @Builder
-    public CarSpec(
-            Long id,
-            Car car,
-            Trims trims,
-            Body body,
-            Engine engine,
-            DrivingSystem drivingSystem,
-            long price) {
-        this.id = id;
-        this.car = car;
-        this.trims = trims;
-        this.body = body;
-        this.engine = engine;
-        this.drivingSystem = drivingSystem;
-        this.price = price;
-    }
+    private long price;
 
     @Override
     public boolean equals(Object o) {

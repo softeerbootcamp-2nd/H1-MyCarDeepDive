@@ -30,6 +30,7 @@ class CarSpecOptionsTest {
         // then
         assertEquals(options, carSpecOptions.getOptions());
         assertEquals(carSpec, carSpecOptions.getCarSpec());
+        assertFalse(carSpecOptions.isBasicOption());
     }
 
     @DisplayName("CarSpecOption 도메인의 hashCode/equals는 id 값이 같다면 같은 것으로 처리된다.")
