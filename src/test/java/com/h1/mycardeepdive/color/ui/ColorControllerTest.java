@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 
 import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
@@ -50,14 +51,14 @@ class ColorControllerTest extends ControllerTestConfig {
                                                 ColorInfo.builder()
                                                         .name("그라파이트 그레이 메탈릭")
                                                         .img_url("/exterior-color/icon/22.jpg")
-                                                        .car_img_url("/exterior-color/22.jpg")
+                                                        .car_img_url("/exterior-color/")
                                                         .build()))
                                 .unavailable_colors(
                                         List.of(
                                                 ColorInfo.builder()
                                                         .name("그라파이트 그레이 메탈릭")
                                                         .img_url("/exterior-color/icon/22.jpg")
-                                                        .car_img_url("/exterior-color/22.jpg")
+                                                        .car_img_url("/exterior-color/")
                                                         .build()))
                                 .build());
         // then
@@ -70,7 +71,7 @@ class ColorControllerTest extends ControllerTestConfig {
                                         .accept(MediaType.APPLICATION_JSON))
                         .andDo(
                                 MockMvcRestDocumentationWrapper.document(
-                                        "color-docs",
+                                        "외장",
                                         preprocessRequest(prettyPrint()),
                                         preprocessResponse(prettyPrint()),
                                         resource(
@@ -78,6 +79,11 @@ class ColorControllerTest extends ControllerTestConfig {
                                                         .tag("컬러")
                                                         .description("외장 컬러 조회")
                                                         .requestFields()
+                                                        .requestParameters(
+                                                                parameterWithName("trimId")
+                                                                        .description("트림id"),
+                                                                parameterWithName("interiorColorId")
+                                                                        .description("내장색상id"))
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -94,7 +100,7 @@ class ColorControllerTest extends ControllerTestConfig {
         info.add("trimId", String.valueOf(trimId));
         info.add("exteriorColorId", String.valueOf(exteriorId));
 
-        when(colorService.findExteriorColors(trimId, exteriorId))
+        when(colorService.findInteriorColors(trimId, exteriorId))
                 .thenReturn(
                         ColorResponse.builder()
                                 .available_colors(
@@ -122,7 +128,7 @@ class ColorControllerTest extends ControllerTestConfig {
                                         .accept(MediaType.APPLICATION_JSON))
                         .andDo(
                                 MockMvcRestDocumentationWrapper.document(
-                                        "color-docs",
+                                        "내장",
                                         preprocessRequest(prettyPrint()),
                                         preprocessResponse(prettyPrint()),
                                         resource(
@@ -130,6 +136,11 @@ class ColorControllerTest extends ControllerTestConfig {
                                                         .tag("컬러")
                                                         .description("내장 컬러 조회")
                                                         .requestFields()
+                                                        .requestParameters(
+                                                                parameterWithName("trimId")
+                                                                        .description("트림id"),
+                                                                parameterWithName("exteriorColorId")
+                                                                        .description("외장색상id"))
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }

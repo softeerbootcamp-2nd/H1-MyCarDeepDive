@@ -4,7 +4,6 @@ import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 
 import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
@@ -80,12 +79,14 @@ class CarSpecControllerTest extends ControllerTestConfig {
                                                         .tag("트림")
                                                         .description("트림 조회")
                                                         .requestFields()
-                                                        .build()),
-                                        requestParameters(
-                                                parameterWithName("engine").description("엔진이름"),
-                                                parameterWithName("body").description("바디이름"),
-                                                parameterWithName("drivingSystem")
-                                                        .description("구동방식이름"))));
+                                                        .requestParameters(
+                                                                parameterWithName("engine")
+                                                                        .description("엔진이름"),
+                                                                parameterWithName("body")
+                                                                        .description("바디이름"),
+                                                                parameterWithName("drivingSystem")
+                                                                        .description("구동방식이름"))
+                                                        .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -144,6 +145,13 @@ class CarSpecControllerTest extends ControllerTestConfig {
                                                         .tag("트림")
                                                         .description("트림 비교")
                                                         .requestFields()
+                                                        .requestParameters(
+                                                                parameterWithName("engine")
+                                                                        .description("엔진이름"),
+                                                                parameterWithName("body")
+                                                                        .description("바디이름"),
+                                                                parameterWithName("drivingSystem")
+                                                                        .description("구동방식이름"))
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
