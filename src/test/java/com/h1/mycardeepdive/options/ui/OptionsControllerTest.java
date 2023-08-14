@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 class OptionsControllerTest extends ControllerTestConfig {
     private static final String DEFAULT_URL = "/api/v1";
 
-    private TagResponse mainTag = new TagResponse(1L, "대표");
+    private TagResponse comfortTag = new TagResponse(1L, "사용편의");
     private TagResponse safeTag = new TagResponse(2L, "주행안전");
     @MockBean private OptionsService optionsService;
 
@@ -47,7 +47,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                                 10.12,
                                                 "컴포트 II",
                                                 "편의성을 위해 구성된 세트 옵션",
-                                                List.of(mainTag, safeTag),
+                                                List.of(comfortTag, safeTag),
                                                 "None",
                                                 10090000)),
                                 List.of(
@@ -57,7 +57,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                                 5.5,
                                                 "빌트인 캠(보조배터리 포함)",
                                                 "차량 내부에 카메라를 설치하여 녹화가 가능한 블랙박스",
-                                                List.of(mainTag, safeTag),
+                                                List.of(comfortTag, safeTag),
                                                 "H Genuine Accessories",
                                                 109000))));
 
@@ -97,7 +97,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                         1L,
                                         "https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000000388/e435f2e0b5f246ccaa8ce260dac16c9b.jpg",
                                         "다중 충돌방지 자동 제동 시스템",
-                                        List.of(mainTag, safeTag))));
+                                        List.of(comfortTag, safeTag))));
 
         // then
         ResultActions resultActions =
@@ -196,7 +196,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                         1L,
                                         "빌트인 캠(보조배터리 포함)",
                                         "빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.",
-                                        List.of(mainTag, safeTag),
+                                        List.of(comfortTag, safeTag),
                                         109000)));
 
         // then
@@ -235,7 +235,7 @@ class OptionsControllerTest extends ControllerTestConfig {
                                 1L,
                                 "빌트인 캠(보조배터리 포함)",
                                 "빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.",
-                                List.of(mainTag, safeTag),
+                                List.of(comfortTag, safeTag),
                                 109000));
 
         // then
@@ -255,6 +255,51 @@ class OptionsControllerTest extends ControllerTestConfig {
                                                 ResourceSnippetParameters.builder()
                                                         .tag("옵션")
                                                         .description("기본 또는 추가 옵션의 상세 옵션 정보를 제공한다.")
+                                                        .requestFields()
+                                                        .responseFields()
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @DisplayName("옵션 태그의 상세 정보를 제공한다.")
+    @Test
+    void getOptionTagDetailTest() throws Exception {
+        // given
+        Long tagId = 1L;
+        Long carSpecId = 2L;
+        when(optionsService.findOptionTagDetail(tagId, carSpecId))
+                .thenReturn(
+                        new OptionTagResponse(
+                                "https://www.hyundai.co.kr/image/upload/asset_library/MDA00000000000033027/bebeb59b7c7447f7be0a1f8238821cce.jpg",
+                                List.of(
+                                        new OptionCoordinatesResponse(
+                                                1L,
+                                                "빌트인 캠(보조배터리 포함)",
+                                                "빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.",
+                                                "https://img.etnews.com/photonews/2011/1352481_20201113164311_199_0001.jpg",
+                                                109000,
+                                                12.1,
+                                                44.6))));
+
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.get(
+                                                DEFAULT_URL
+                                                        + "/options/{car-spec-id}/tags/{tag-id}",
+                                                carSpecId,
+                                                tagId)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "options-docs7",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("옵션")
+                                                        .description("태그의 옵션 상세 정보를 제공한다.")
                                                         .requestFields()
                                                         .responseFields()
                                                         .build())));

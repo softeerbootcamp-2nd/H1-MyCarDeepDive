@@ -4,6 +4,7 @@ import static com.h1.mycardeepdive.options.domain.QCarSpecOptions.carSpecOptions
 import static com.h1.mycardeepdive.options.domain.QOptionPackage.optionPackage;
 import static com.h1.mycardeepdive.options.domain.QOptions.options;
 import static com.h1.mycardeepdive.options.domain.QPackages.packages;
+import static com.h1.mycardeepdive.tags.domain.QOptionTag.optionTag;
 
 import com.h1.mycardeepdive.options.domain.Options;
 import com.h1.mycardeepdive.options.domain.Packages;
@@ -84,6 +85,18 @@ public class OptionsRepositoryImpl implements OptionsRepositoryCustom {
                 .innerJoin(optionPackage)
                 .on(options.id.eq(optionPackage.option.id))
                 .where(optionPackage.packages.id.eq(packageId))
+                .fetch();
+    }
+
+    @Override
+    public List<Options> findOptionsByTagIdAndCarSpecId(Long tagId, Long carSpecId) {
+        return queryFactory
+                .selectFrom(options)
+                .innerJoin(carSpecOptions)
+                .on(options.id.eq(carSpecOptions.options.id))
+                .innerJoin(optionTag)
+                .on(options.id.eq(optionTag.option.id))
+                .where(optionTag.tag.id.eq(tagId))
                 .fetch();
     }
 }

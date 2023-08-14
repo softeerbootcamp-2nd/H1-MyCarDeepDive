@@ -2,10 +2,8 @@ package com.h1.mycardeepdive.options.mapper;
 
 import com.h1.mycardeepdive.options.domain.Options;
 import com.h1.mycardeepdive.options.domain.Packages;
-import com.h1.mycardeepdive.options.ui.dto.AdditionalOptionResponse;
-import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
-import com.h1.mycardeepdive.options.ui.dto.OptionDetailResponse;
-import com.h1.mycardeepdive.options.ui.dto.PackageOptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.*;
+import com.h1.mycardeepdive.tags.domain.OptionTag;
 import com.h1.mycardeepdive.tags.domain.Tags;
 import com.h1.mycardeepdive.tags.mapper.TagsMapper;
 import java.util.List;
@@ -64,5 +62,17 @@ public class OptionMapper {
                         .map(TagsMapper.INSTANCE::tagsToTagResponse)
                         .collect(Collectors.toList()),
                 options.getPrice());
+    }
+
+    public static OptionCoordinatesResponse optionToOptionCoordinatesResponse(
+            Options options, OptionTag optionTag) {
+        return new OptionCoordinatesResponse(
+                options.getId(),
+                options.getName(),
+                options.getDescription(),
+                options.getImgUrl(),
+                options.getPrice(),
+                optionTag.getPosition_x(),
+                optionTag.getPosition_y());
     }
 }

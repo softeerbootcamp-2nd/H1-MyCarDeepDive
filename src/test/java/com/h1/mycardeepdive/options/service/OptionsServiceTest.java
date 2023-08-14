@@ -14,7 +14,10 @@ import com.h1.mycardeepdive.options.domain.repository.*;
 import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionDetailResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.OptionTagResponse;
+import com.h1.mycardeepdive.tags.domain.OptionTag;
 import com.h1.mycardeepdive.tags.domain.Tags;
+import com.h1.mycardeepdive.tags.domain.repository.OptionTagRepository;
 import com.h1.mycardeepdive.tags.domain.repository.TagRepository;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,6 +39,7 @@ class OptionsServiceTest {
     @Autowired CarSpecRepository carSpecRepository;
     @Autowired CarSpecOptionsRepository carSpecOptionsRepository;
     @Autowired CarSpecPackageRepository carSpecPackageRepository;
+    @Autowired OptionTagRepository optionTagRepository;
     @Autowired OptionsService optionsService;
 
     private Options optionBuiltInCam;
@@ -49,11 +53,13 @@ class OptionsServiceTest {
     private CarSpecOptions carSpecOptions2;
     private CarSpecOptions carSpecOptions3;
     private CarSpecPackage carSpecPackage;
+    private OptionTag optionTag;
 
     @BeforeEach
     void setUp() {
         carSpecOptionsRepository.deleteAll();
         carSpecPackageRepository.deleteAll();
+        optionTagRepository.deleteAll();
         optionPackageRepository.deleteAll();
         optionsRepository.deleteAll();
         packageRepository.deleteAll();
@@ -108,6 +114,9 @@ class OptionsServiceTest {
         carSpecPackage =
                 CarSpecPackage.builder().carSpec(carSpec).packages(comfortIIPackages).build();
         carSpecPackage = carSpecPackageRepository.save(carSpecPackage);
+
+        optionTag = OptionTag.builder().option(optionBuiltInCam).tag(tags1).build();
+        optionTag = optionTagRepository.save(optionTag);
     }
 
     @DisplayName("차사양에 해당하는 추가 옵션들을 전부 조회한다.")
@@ -178,5 +187,16 @@ class OptionsServiceTest {
         // when&then
         assertEquals(optionDetail.getOption_name(), optionBuiltInCam.getName());
         assertEquals(optionDetail.getOption_description(), optionBuiltInCam.getDescription());
+    }
+
+    @DisplayName("태그에 해당하는 상세 정보를 조회한다.")
+    @Test
+    void findOptionTagsDetailTest() {
+        // given
+        OptionTagResponse optionTagResponse =
+                optionsService.findOptionTagDetail(tags1.getId(), carSpec.getId());
+
+        // when&then
+        assertEquals(optionTagResponse.getTag_img_url(), tags1.getImg_url());
     }
 }

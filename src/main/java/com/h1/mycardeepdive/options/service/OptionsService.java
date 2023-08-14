@@ -6,6 +6,8 @@ import com.h1.mycardeepdive.options.domain.repository.OptionsRepository;
 import com.h1.mycardeepdive.options.domain.repository.PackageRepository;
 import com.h1.mycardeepdive.options.mapper.OptionMapper;
 import com.h1.mycardeepdive.options.ui.dto.*;
+import com.h1.mycardeepdive.tags.domain.Tags;
+import com.h1.mycardeepdive.tags.domain.repository.OptionTagRepository;
 import com.h1.mycardeepdive.tags.domain.repository.TagRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +27,8 @@ public class OptionsService {
     private final PackageRepository packageRepository;
 
     private final TagRepository tagRepository;
+
+    private final OptionTagRepository optionTagRepository;
 
     public OptionResponse findAllAdditionalOptions(Long carSpecId) {
         List<Packages> packagesList = packageRepository.findPackageOptions(carSpecId);
@@ -83,5 +87,21 @@ public class OptionsService {
         Options options = optionsRepository.findById(optionId).orElseThrow();
         return OptionMapper.optionToOptionDetailResponse(
                 options, tagRepository.findTagsByOptionId(options.getId()));
+    }
+
+    public OptionTagResponse findOptionTagDetail(Long tagId, Long carSpecId) {
+        Tags tags = tagRepository.findById(tagId).orElseThrow();
+        List<Options> optionsList =
+                optionsRepository.findOptionsByTagIdAndCarSpecId(tagId, carSpecId);
+        return new OptionTagResponse(
+                tags.getImg_url(),
+                optionsList.stream()
+                        .map(
+                                options ->
+                                        OptionMapper.optionToOptionCoordinatesResponse(
+                                                options,
+                                                optionTagRepository.findOptionTagByOptionIdAndTagId(
+                                                        options.getId(), tagId)))
+                        .collect(Collectors.toList()));
     }
 }

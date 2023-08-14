@@ -5,6 +5,7 @@ import com.h1.mycardeepdive.options.service.OptionsService;
 import com.h1.mycardeepdive.options.ui.dto.BasicOptionResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionDetailResponse;
 import com.h1.mycardeepdive.options.ui.dto.OptionResponse;
+import com.h1.mycardeepdive.options.ui.dto.OptionTagResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +50,11 @@ public class OptionsController {
     public ApiResponse<OptionDetailResponse> getOptionDetail(
             @PathVariable("option-id") Long optionId) {
         return new ApiResponse<>(optionsService.findOptionDetail(optionId));
+    }
+
+    @GetMapping("/options/{car-spec-id}/tags/{tag-id}")
+    public ApiResponse<OptionTagResponse> getTagDetails(
+            @PathVariable("tag-id") Long tagId, @PathVariable("car-spec-id") Long carSpecId) {
+        return new ApiResponse<>(optionsService.findOptionTagDetail(tagId, carSpecId));
     }
 }
