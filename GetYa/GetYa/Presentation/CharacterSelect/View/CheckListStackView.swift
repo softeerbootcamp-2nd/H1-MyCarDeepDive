@@ -8,6 +8,13 @@
 import UIKit
 
 class CheckListStackView: UIStackView {
+    // MARK: - Properties
+    var selectedItemIndex: Int? {
+        return arrangedSubviews
+            .compactMap { $0 as? CheckListItemView ?? nil }
+            .firstIndex(where: { $0.isTapped })
+    }
+    
     // MARK: - LifeCycles
     convenience init() {
         self.init(frame: .zero)
@@ -30,12 +37,6 @@ class CheckListStackView: UIStackView {
     }
     
     // MARK: - Functions
-    private func removeAllArrangedSubViews() {
-        self.arrangedSubviews.forEach {
-            $0.removeFromSuperview()
-        }
-    }
-    
     func setupItem(textArray: [String]) {
         removeAllArrangedSubViews()
         
@@ -47,10 +48,17 @@ class CheckListStackView: UIStackView {
         }
     }
     
+    // MARK: - Private functions
     private func configureUI() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .vertical
         self.spacing = 12
+    }
+    
+    private func removeAllArrangedSubViews() {
+        self.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
 }
 
