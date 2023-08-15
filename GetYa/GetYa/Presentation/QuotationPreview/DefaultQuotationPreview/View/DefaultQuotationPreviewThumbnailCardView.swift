@@ -37,7 +37,7 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
             static let height: CGFloat = .toScaledHeight(value: GetYaFont.mediumBody4.lineHeight + 8)
             static let innerTextLeadingMargin: CGFloat = .toScaledWidth(value: 12)
             static let innerTextTrailingMargin: CGFloat = .toScaledWidth(value: 12)
-            static let cornerRadius: CGFloat = .toScaledWidth(value: height/2)
+            static let cornerRadius: CGFloat = height/2
         }
         enum FamouseSayingWithCarNameLabel {
             static let topMargin: CGFloat = .toScaledHeight(value: 8)
