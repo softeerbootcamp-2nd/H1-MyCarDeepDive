@@ -2,7 +2,7 @@ import Button from '@/Components/Button';
 
 function BottomButtons() {
   return (
-    <div className='flex justify-center gap-2 mb-20'>
+    <div className='flex justify-center gap-2 mb-10'>
       <Button
         width='w-[300px]'
         height='h-[52px]'

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Option from './Option';
 import comport2 from '@/assets/image/option-comport.png';
 import smartsense from '@/assets/image/option-smartsense.png';
@@ -14,7 +15,6 @@ import production from '@/assets/image/option-production.png';
 import dark20 from '@/assets/image/option-20dark.png';
 import black20 from '@/assets/image/option-20black.png';
 import alcon from '@/assets/image/option-alcon.png';
-import { useEffect } from 'react';
 
 const additionalOptionData = [
   {

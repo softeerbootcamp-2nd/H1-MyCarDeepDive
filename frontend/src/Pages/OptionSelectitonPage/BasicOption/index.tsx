@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Option from './Option';
 import cluster from '@/assets/image/basic-option-cluster.png';
 import door from '@/assets/image/basic-option-door.png';
@@ -7,7 +8,6 @@ import tilt from '@/assets/image/basic-option-tilt.png';
 import smartpower from '@/assets/image/basic-option-smartpower.png';
 import balsu from '@/assets/image/basic-option-balsu.png';
 import monitor from '@/assets/image/basic-option-monitor.png';
-import { useEffect } from 'react';
 
 const BasicOptionData = [
   {
@@ -63,7 +63,7 @@ function BasicOption({
   }, []);
 
   return (
-    <div className='mb-12 grid grid-cols-4 gap-4 max-w-5xl mx-auto'>
+    <div className='grid grid-cols-4 gap-4 max-w-5xl mx-auto'>
       {BasicOptionData.slice((page - 1) * 12, page * 12).map((item, idx) => {
         return (
           <Option {...item} key={idx} setShowOptionModal={setShowOptionModal} />

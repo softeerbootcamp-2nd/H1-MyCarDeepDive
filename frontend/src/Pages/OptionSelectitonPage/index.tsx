@@ -6,14 +6,14 @@ import AdditionalOption from './AdditionalOption';
 import Pagination from './Pagination';
 import BottomButtons from './BottomButtons';
 import OptionModal from './OptionModal';
-
+import BasicOption from './BasicOption';
+import SituationOption from './SituationOption';
 import comport from '@/assets/image/option-modal-comport.png';
 import metalStep from '@/assets/image/option-modal-metalStep.png';
 import metalDoor from '@/assets/image/option-modal-metalDoor.png';
 import powerFolding from '@/assets/image/option-modal-powerFolding.png';
 import hotSheet from '@/assets/image/option-modal-hotSheet.png';
 import headUp from '@/assets/image/option-modal-headUp.png';
-import BasicOption from './BasicOption';
 
 const OptionCardData = [
   {
@@ -147,23 +147,33 @@ function OptionSelectitonPage() {
         setPage={setPage}
       />
       <Tag tag={tag} setTag={setTag} category={category} />
-      <AllCount totalCount={totalCount} />
-      {category === '추가 옵션' ? (
+
+      {(category !== '추가 옵션' || tag === '전체') && (
+        <AllCount totalCount={totalCount} />
+      )}
+
+      {category === '추가 옵션' && tag === '전체' ? (
         <AdditionalOption
           page={page}
           setShowOptionModal={setShowOptionModal}
           setMaxPage={setMaxPage}
           setTotalCount={setTotalCount}
         />
-      ) : (
+      ) : category === '기본 포함 옵션' ? (
         <BasicOption
           page={page}
           setShowOptionModal={setShowOptionModal}
           setMaxPage={setMaxPage}
           setTotalCount={setTotalCount}
         />
+      ) : (
+        <SituationOption setShowOptionModal={setShowOptionModal} />
       )}
-      <Pagination page={page} setPage={setPage} maxPage={maxPage} />
+
+      {(category !== '추가 옵션' || tag === '전체') && (
+        <Pagination page={page} setPage={setPage} maxPage={maxPage} />
+      )}
+
       <BottomButtons />
 
       <OptionModal

@@ -1,3 +1,4 @@
+import TagButton from './TagButton';
 import mainBlack from '@/assets/icon/category-main-black.svg';
 import mainPrimary from '@/assets/icon/category-main-primary.svg';
 import allBlack from '@/assets/icon/category-all-black.svg';
@@ -14,7 +15,6 @@ import performanceBlack from '@/assets/icon/category-performance-black.svg';
 import performancePrimary from '@/assets/icon/category-performance-primary.svg';
 import styleBlack from '@/assets/icon/category-style-black.svg';
 import stylePrimary from '@/assets/icon/category-style-primary.svg';
-import TagButton from './TagButton';
 
 const TagData = [
   {

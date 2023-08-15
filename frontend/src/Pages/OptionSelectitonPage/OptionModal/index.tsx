@@ -1,5 +1,5 @@
-import Modal from '@/Components/Modal';
 import React, { useRef } from 'react';
+import Modal from '@/Components/Modal';
 import PageButtons from './PageButtons';
 import OptionCard from './OptionCard';
 

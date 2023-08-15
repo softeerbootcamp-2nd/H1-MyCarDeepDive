@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import PageButton from './PageButton';
 import pageLeft from '@/assets/icon/page-left.svg';
 import pageRight from '@/assets/icon/page-right.svg';
-import PageButton from './PageButton';
 
 interface PaginationProps {
   page: number;
@@ -33,7 +33,10 @@ function Pagination({ page, setPage, maxPage }: PaginationProps) {
   };
 
   useEffect(() => {
-    if (pageRef[0].current) setOffsetX(pageRef[0].current.offsetLeft);
+    const nowPage = pageRef[page - 1].current?.offsetLeft;
+    if (!nowPage) return;
+
+    setOffsetX(nowPage);
   }, [maxPage]);
 
   if (maxPage < 2) return null;
