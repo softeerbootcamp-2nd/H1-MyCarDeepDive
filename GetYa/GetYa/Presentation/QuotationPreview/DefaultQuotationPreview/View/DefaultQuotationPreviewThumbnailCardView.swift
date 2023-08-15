@@ -17,11 +17,11 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
             let carNameHeightAndTopMargin = CarNameConst.height + CarNameConst.topMargin
             let famousSayingHeightAndTopMargin = FamousSayingConst.topMargin + FamousSayingConst.height
             let carImageHeight: CGFloat = CarImageViewConst.height
-            let tooltipAndBottomMargin = TooltipConst.height + TooltipConst.bottomMargin
+            let tooltipHeightAndBottomMargin = TooltipConst.height + TooltipConst.bottomMargin
             return (carNameHeightAndTopMargin +
                     famousSayingHeightAndTopMargin +
                     carImageHeight +
-                     tooltipAndBottomMargin)
+                    tooltipHeightAndBottomMargin)
         }()
         static let cornerRadius: CGFloat = .toScaledWidth(value: 16)
         enum LogoImageView {
@@ -34,9 +34,7 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
         }
         enum CarNameDescriptionRoundLabel {
             static let topMargin: CGFloat = .toScaledHeight(value: 29)
-            static let height: CGFloat = .toScaledHeight(value: 28)
-            static let leadingMargin: CGFloat = .toScaledWidth(value: 84)
-            static let trailingMargin: CGFloat = .toScaledWidth(value: 84)
+            static let height: CGFloat = .toScaledHeight(value: GetYaFont.mediumBody4.lineHeight + 8)
             static let innerTextLeadingMargin: CGFloat = .toScaledWidth(value: 12)
             static let innerTextTrailingMargin: CGFloat = .toScaledWidth(value: 12)
             static let cornerRadius: CGFloat = .toScaledWidth(value: height/2)
@@ -71,17 +69,17 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
     }
-    private let carNameDescriptionRoundLabel = TagView(text: "차량 준비중..").set {
+    private let carNameDescriptionRoundLabel = TagView(frame: .zero, fontType: .mediumBody4, text: "차량 준비중 ...").set {
         typealias Const = Constants.CarNameDescriptionRoundLabel
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.configureCornerRadius(with: Const.cornerRadius)
-        $0.configureLabelFont(with: UIFont.systemFont(ofSize: 13, weight: .semibold))
         $0.configureTextColor(with: .white)
+        $0.configureBaseLine(with: .alignCenters)
         $0.configureBackgroundColor(color: .GetYaPalette.primary)
         $0.configureTextLabelLeadingMargin(with: Const.innerTextLeadingMargin)
         $0.configureTextLabeltrailingMargin(with: Const.innerTextTrailingMargin)
-        $0.sizeToFit()
     }
+
     private let famouseSayingWithCarNameLabel = CommonLabel(
         fontType: .regularHead2,
         color: .black,
