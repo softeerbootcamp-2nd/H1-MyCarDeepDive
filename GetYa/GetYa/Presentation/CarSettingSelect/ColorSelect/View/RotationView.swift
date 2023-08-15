@@ -14,6 +14,14 @@ class RotationView: SettingSelectTitleBackgroundVIew {
             static let height: CGFloat = .toScaledHeight(value: 52)
             static let bottomMargin: CGFloat = .toScaledHeight(value: 12)
         }
+        enum MarkView {
+            static let height: CGFloat = .toScaledHeight(value: 56)
+            static let width: CGFloat = .toScaledHeight(value: 56)
+        }
+        enum MarkImageView {
+            static let height: CGFloat = .toScaledHeight(value: 32)
+            static let width: CGFloat = .toScaledHeight(value: 32)
+        }
     }
     
     enum ColorType: String {
@@ -26,8 +34,18 @@ class RotationView: SettingSelectTitleBackgroundVIew {
     }
     
     // MARK: - UI properties
-    private lazy var imageView: UIImageView = UIImageView().set {
+    private let imageView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private let markView: UIView = UIView().set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .black.withAlphaComponent(0.5)
+    }
+    private lazy var markImageView: UIImageView = UIImageView().set {
+        $0.contentMode = .scaleAspectFit
+        $0.image = UIImage(named: "RotationMark")
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        markView.addSubview($0)
     }
     
     // MARK: - Properties
@@ -65,7 +83,8 @@ class RotationView: SettingSelectTitleBackgroundVIew {
     // MARK: - Private Functions
     private func setupViews() {
         addSubviews([
-            imageView
+            imageView,
+            markView
         ])
         
         setPanGesture()
@@ -73,6 +92,8 @@ class RotationView: SettingSelectTitleBackgroundVIew {
     
     private func configureUI() {
         configureImageView()
+        configureMarkView()
+        configureMarkImageView()
     }
     
     private func setPanGesture() {
@@ -90,6 +111,29 @@ class RotationView: SettingSelectTitleBackgroundVIew {
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+    
+    private func configureMarkView() {
+        markView.layer.cornerRadius = Constants.MarkView.height / 2
+        NSLayoutConstraint.activate([
+            markView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            markView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            markView.heightAnchor.constraint(
+                equalToConstant: Constants.MarkView.height),
+            markView.widthAnchor.constraint(
+                equalToConstant: Constants.MarkView.width)
+        ])
+    }
+    
+    private func configureMarkImageView() {
+        NSLayoutConstraint.activate([
+            markImageView.centerYAnchor.constraint(equalTo: markView.centerYAnchor),
+            markImageView.centerXAnchor.constraint(equalTo: markView.centerXAnchor),
+            markImageView.heightAnchor.constraint(
+                equalToConstant: Constants.MarkImageView.height),
+            markImageView.widthAnchor.constraint(
+                equalToConstant: Constants.MarkImageView.width)
         ])
     }
     
@@ -112,6 +156,8 @@ class RotationView: SettingSelectTitleBackgroundVIew {
         let progress = translation.x / self.bounds.width
 
         switch sender.state {
+        case .began:
+            markView.isHidden = true
         case .changed:
             let rotationAngle = 2 * .pi * progress
             imageNumber = previousImageNumber - Int(round(rotationAngle / (2 * .pi / 60)))
@@ -124,6 +170,7 @@ class RotationView: SettingSelectTitleBackgroundVIew {
             imageView.image = UIImage(named: "\(type.rawValue)_\(imageNumber)")
         case .ended:
             previousImageNumber = imageNumber
+            markView.isHidden = false
         default:
             break
         }
