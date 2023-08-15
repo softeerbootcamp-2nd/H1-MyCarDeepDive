@@ -79,7 +79,6 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
         $0.configureTextLabelLeadingMargin(with: Const.innerTextLeadingMargin)
         $0.configureTextLabeltrailingMargin(with: Const.innerTextTrailingMargin)
     }
-
     private let famouseSayingWithCarNameLabel = CommonLabel(
         fontType: .regularHead2,
         color: .black,
