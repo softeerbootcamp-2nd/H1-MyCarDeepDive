@@ -30,6 +30,14 @@ class TagView: UIView {
         configureLabelText(text: text)
     }
     
+    init(frame: CGRect, fontType: GetYaFont, text: String) {
+        super.init(frame: frame)
+        setupViews()
+        configureUI()
+        label.configureFontType(fontType: fontType)
+        label.text = text
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -80,6 +88,14 @@ class TagView: UIView {
     
     func configureLabelFont(with font: UIFont) {
         label.font = font
+    }
+    
+    func configureTextAlignment(with alignment: NSTextAlignment) {
+        label.textAlignment = alignment
+    }
+    
+    func configureBaseLine(with baseLine: UIBaselineAdjustment) {
+        label.baselineAdjustment = baseLine
     }
     
     func configureTextLabelLeadingMargin(with margin: CGFloat) {
