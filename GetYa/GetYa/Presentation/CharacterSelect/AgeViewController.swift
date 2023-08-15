@@ -7,6 +7,8 @@
 
 import UIKit
 
+// TODO: 다음 버튼으로 이동한다는 것은 리스트가 선택됬다는 것. 이때 CheckListStackView의 selectedItemIndex를 반환해서
+// id를 넘겨주는게 좋을 것 같습니다!! (서버랑 합을 맞춰야겠습니닷)
 protocol AgeViewControllerDelegate: AnyObject {
     func touchUpNextButton(sender: UIButton)
 }
