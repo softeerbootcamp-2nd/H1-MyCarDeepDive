@@ -10,54 +10,128 @@ import ColorRadio from './ColorRadio';
 import UnderLine from '@/Components/UnderLine';
 import DropDown from './DropDown';
 import Buttons from './Buttons';
-import {
-  exteriorColor,
-  interiorColor,
-  otherExteriorColor,
-  otherInteriorColor,
-} from '@/global/data';
+import { colors } from '@/global/data';
 import ContentsWrapper from './ContentsWrapper';
 
-function getColorChooseRate({
-  colorData,
-  selectedColor,
-}: {
-  colorData: {
-    name: string;
-    chooseRate: number;
-    url: string;
-  }[];
-  selectedColor: string;
-}) {
-  return colorData.filter(color => selectedColor === color.name)[0].chooseRate;
+interface colorProps {
+  trim?: string;
+  name: string;
+  chooseRate: number;
+  url: string;
+}
+
+interface colorsProps {
+  trim: string;
+  exteriorColor: colorProps[];
+  interiorColor: colorProps[];
+  otherExteriorColor?: colorProps[];
+  otherInteriorColor?: colorProps[];
+}
+
+interface Props {
+  colorsData?: colorsProps[];
+  colorType?: 'exterior' | 'interior';
+  colorData?: colorProps[];
+  selectedColor?: colorProps;
+  trim?: string;
+}
+
+function getColorOfTrim({ colorsData, trim }: Props) {
+  return colorsData?.find(color => color.trim === trim);
+}
+
+function getBestColor({ colorsData, trim, colorType }: Props) {
+  return colorType === 'exterior'
+    ? getColorOfTrim({ colorsData, trim })?.exteriorColor[0]
+    : getColorOfTrim({ colorsData, trim })?.interiorColor[0];
 }
 
 function ColorSelectionPage() {
+  const [trim, setTrim] = useState('Le Blanc(르블랑)');
   const [selectedExteriorColor, setSelectedExteriorColor] =
-    useState('크리미 화이트 펄');
-
+    useState<colorProps>();
   const [selectedInteriorColor, setSelectedInteriorColor] =
-    useState('퀄팅 천연(블랙)');
+    useState<colorProps>();
+  const [exteriorColors, setExteriorColors] = useState<colorProps[]>([]);
+  const [interiorColors, setInteriorColors] = useState<colorProps[]>([]);
+  const [otherExteriorColors, setOtherExteriorColors] = useState<colorProps[]>(
+    [],
+  );
+  const [otherInteriorColors, setOtherInteriorColors] = useState<colorProps[]>(
+    [],
+  );
+  const exteriorBestColor = getBestColor({
+    colorsData: colors,
+    trim,
+    colorType: 'exterior',
+  });
+  const interiorBestColor = getBestColor({
+    colorsData: colors,
+    trim,
+    colorType: 'interior',
+  });
 
-  const exteriorColorHandler = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedExteriorColor(target.value);
-  };
-
-  const interiorColorHandler = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedInteriorColor(target.value);
+  const isCheckedUnlock = ({ colorData, selectedColor }: Props) => {
+    return (
+      colorData?.filter(color => color.name === selectedColor?.name).length ===
+      0
+    );
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setSelectedExteriorColor(exteriorBestColor);
+    setSelectedInteriorColor(interiorBestColor);
   }, []);
 
   useEffect(() => {
-    console.log(selectedExteriorColor, selectedInteriorColor);
-  }, [selectedExteriorColor, selectedInteriorColor]);
+    const colorData = getColorOfTrim({ colorsData: colors, trim });
+    setExteriorColors(colorData?.exteriorColor || []);
+    setInteriorColors(colorData?.interiorColor || []);
+    setOtherExteriorColors(colorData?.otherExteriorColor || []);
+    setOtherInteriorColors(colorData?.otherInteriorColor || []);
+  }, [trim]);
+
+  useEffect(() => {
+    if (
+      isCheckedUnlock({
+        colorData: exteriorColors,
+        selectedColor: selectedExteriorColor,
+      })
+    ) {
+      setSelectedExteriorColor(exteriorBestColor);
+    }
+    if (
+      isCheckedUnlock({
+        colorData: interiorColors,
+        selectedColor: selectedInteriorColor,
+      })
+    ) {
+      setSelectedInteriorColor(interiorBestColor);
+    }
+  }, [exteriorColors, interiorColors]);
+
+  useEffect(() => {
+    console.log(selectedExteriorColor?.name, selectedInteriorColor?.name);
+  });
+
+  const exteriorColorHandler = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLButtonElement>) => {
+    const dataObject = currentTarget.getAttribute('data-object');
+    if (!dataObject) return;
+    const colorInfo = JSON.parse(dataObject);
+    setSelectedExteriorColor(colorInfo);
+  };
+
+  const interiorColorHandler = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLButtonElement>) => {
+    const dataObject = currentTarget.getAttribute('data-object');
+    if (!dataObject) return;
+    const colorInfo = JSON.parse(dataObject);
+    setSelectedInteriorColor(colorInfo);
+  };
 
   return (
     <>
@@ -69,42 +143,38 @@ function ColorSelectionPage() {
       <ContentsWrapper>
         <ColorTitle title={'외장 색상'} />
         <Description
-          color={selectedExteriorColor}
-          rate={getColorChooseRate({
-            colorData: exteriorColor,
-            selectedColor: selectedExteriorColor,
-          })}
+          color={selectedExteriorColor?.name}
+          rate={selectedExteriorColor?.chooseRate}
         />
         <ColorRadio
-          data={exteriorColor}
-          radioTarget={selectedExteriorColor}
-          radioHandler={exteriorColorHandler}
+          data={exteriorColors || []}
+          selectedColor={selectedExteriorColor}
+          clickHandler={exteriorColorHandler}
           colorType='exterior'
         />
         <DropDown
           phrase={'다른 외장 색상을 찾고 있나요?'}
-          data={otherExteriorColor}
+          data={otherExteriorColors || []}
           changerClickHandler={setSelectedExteriorColor}
+          setTrim={setTrim}
         />
         <UnderLine margin='mb-6' />
         <ColorTitle title={'내장 색상'} />
         <Description
-          color={selectedInteriorColor}
-          rate={getColorChooseRate({
-            colorData: interiorColor,
-            selectedColor: selectedInteriorColor,
-          })}
+          color={selectedInteriorColor?.name}
+          rate={selectedInteriorColor?.chooseRate}
         />
         <ColorRadio
-          data={interiorColor}
-          radioTarget={selectedInteriorColor}
-          radioHandler={interiorColorHandler}
+          data={interiorColors || []}
+          selectedColor={selectedInteriorColor}
+          clickHandler={interiorColorHandler}
           colorType='interior'
         />
         <DropDown
           phrase={'다른 내장 색상을 찾고 있나요?'}
-          data={otherInteriorColor}
+          data={otherInteriorColors || []}
           changerClickHandler={setSelectedInteriorColor}
+          setTrim={setTrim}
         />
         <Buttons />
       </ContentsWrapper>

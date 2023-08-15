@@ -1,26 +1,30 @@
 import CheckCircle from '@/assets/icon/check-circle-white.svg';
 
+interface colorProps {
+  trim?: string;
+  name: string;
+  chooseRate: number;
+  url: string;
+}
+
+interface Props {
+  data: colorProps[];
+  colorType: 'interior' | 'exterior' | 'other';
+  clickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  selectedColor?: colorProps;
+  setShowModal?: (value: boolean) => void;
+}
+
 function ColorRadio({
   data,
   colorType,
-  radioTarget,
+  selectedColor,
   setShowModal,
-  radioHandler,
   clickHandler,
-}: {
-  data: {
-    name: string;
-    chooseRate: number;
-    url: string;
-    trim: string;
-  }[];
-  colorType: 'interior' | 'exterior' | 'other';
-  radioTarget?: string;
-  setShowModal?: (value: boolean) => void;
-  radioHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  clickHandler?: (e: React.MouseEvent<HTMLInputElement>) => void;
-}) {
-  const showOtherColorChangePopup = (e: React.MouseEvent<HTMLInputElement>) => {
+}: Props) {
+  const showOtherColorChangePopup = (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     if (setShowModal && clickHandler) {
       clickHandler(e);
       setShowModal(true);
@@ -36,16 +40,7 @@ function ColorRadio({
               colorType === 'other' ? 'mb-3' : 'mb-6'
             }`}
           >
-            <input
-              type='radio'
-              id={color.name}
-              name={colorType}
-              value={color.name}
-              className='hidden'
-              onClick={showOtherColorChangePopup}
-              onChange={radioHandler}
-            />
-            <label htmlFor={color.name} className='cursor-pointer'>
+            <div>
               {colorType === 'other' && (
                 <p className='font-body2-bold flex items-start mb-1'>
                   <span className='text-[11px] leading-normal text-secondary'>
@@ -53,7 +48,16 @@ function ColorRadio({
                   </span>
                 </p>
               )}
-              <div className='relative mb-2 flex justify-center items-center'>
+              <button
+                className='relative mb-2 flex justify-center items-center cursor-pointer'
+                value={color.name}
+                onClick={
+                  colorType === 'other'
+                    ? showOtherColorChangePopup
+                    : clickHandler
+                }
+                data-object={JSON.stringify(color)}
+              >
                 <img
                   src={color.url}
                   alt={`{exterior-${color.name}}`}
@@ -65,7 +69,7 @@ function ColorRadio({
             }
             `}
                 />
-                {color.name === radioTarget && (
+                {color.name === selectedColor?.name && (
                   <>
                     <div className='bg-primary absolute opacity-40 rounded top-0 left-0 w-full h-full z-10'></div>
                     <img src={CheckCircle} alt='' className='absolute z-20' />
@@ -83,8 +87,8 @@ function ColorRadio({
                     Best
                   </p>
                 )}
-              </div>
-            </label>
+              </button>
+            </div>
             <p className='font-caption1-regular text-grey-100'>{color.name}</p>
           </div>
         );

@@ -285,116 +285,426 @@ export const trimCompareData = [
   },
 ];
 
-export const exteriorColor = [
+export const colors = [
   {
-    name: '어비스 블랙펄',
     trim: 'Le Blanc(르블랑)',
-    chooseRate: 70,
-    url: Abyss,
+    exteriorColor: [
+      {
+        name: '크리미 화이트 펄',
+        chooseRate: 90,
+        url: Creamy,
+      },
+      {
+        name: '어비스 블랙펄',
+        chooseRate: 70,
+        url: Abyss,
+      },
+      {
+        name: '쉬머링 실버 메탈릭',
+        chooseRate: 60,
+        url: Shimmering,
+      },
+      {
+        name: '문라이트 블루 펄',
+        chooseRate: 50,
+        url: Moonlight,
+      },
+      {
+        name: '가이아 브라운 펄',
+        chooseRate: 40,
+        url: Gaia,
+      },
+      {
+        name: '그라파이트 그레이 메탈릭',
+        chooseRate: 30,
+        url: Graphite,
+      },
+    ],
+    interiorColor: [
+      {
+        name: '퀄팅 천연(블랙)',
+        chooseRate: 70,
+        url: Quilted,
+      },
+      {
+        name: '쿨 그레이',
+        chooseRate: 60,
+        url: CoolGray,
+      },
+    ],
+    otherExteriorColor: [
+      {
+        trim: 'Caligraphy',
+        name: '로버스트 에메랄드 펄',
+        chooseRate: 70,
+        url: Robust,
+      },
+    ],
+    otherInteriorColor: [
+      {
+        trim: 'Exclusive',
+        name: '인조가죽(블랙)',
+        chooseRate: 70,
+        url: SyntheticBlack,
+      },
+      {
+        trim: 'Prestige',
+        name: '네이비',
+        chooseRate: 60,
+        url: Navy,
+      },
+      {
+        trim: 'Prestige',
+        name: '블랙',
+        chooseRate: 50,
+        url: Black,
+      },
+      {
+        trim: 'Prestige',
+        name: '버건디',
+        chooseRate: 40,
+        url: Burgundy,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '네이비/웜그레이 투톤',
+        chooseRate: 30,
+        url: NavyWarmGray,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '블랙(고급)',
+        chooseRate: 20,
+        url: PremiumBlack,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '블랙원톤(블랙에디션전용)',
+        chooseRate: 10,
+        url: OneToneBlack,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '브라운',
+        chooseRate: 5,
+        url: Brown,
+      },
+    ],
   },
-  {
-    name: '쉬머링 실버 메탈릭',
-    trim: 'Le Blanc(르블랑)',
-    chooseRate: 60,
-    url: Shimmering,
-  },
-  {
-    name: '문라이트 블루 펄',
-    trim: 'Le Blanc(르블랑)',
-    chooseRate: 50,
-    url: Moonlight,
-  },
-  {
-    name: '가이아 브라운 펄',
-    trim: 'Le Blanc(르블랑)',
-    chooseRate: 40,
-    url: Gaia,
-  },
-  {
-    name: '그라파이트 그레이 메탈릭',
-    trim: 'Le Blanc(르블랑)',
-    chooseRate: 30,
-    url: Graphite,
-  },
-  {
-    name: '크리미 화이트 펄',
-    trim: 'Le Blanc(르블랑)',
-    chooseRate: 20,
-    url: Creamy,
-  },
-];
 
-export const interiorColor = [
   {
-    name: '퀄팅 천연(블랙)',
-    trim: 'Le Blanc(르블랑)',
-    chooseRate: 70,
-    url: Quilted,
-  },
-  {
-    name: '쿨 그레이',
-    trim: 'Le Blanc(르블랑)',
-    chooseRate: 60,
-    url: CoolGray,
-  },
-];
-
-export const otherExteriorColor = [
-  {
-    name: '로버스트 에메랄드 펄',
-    trim: 'Caligraphy',
-    chooseRate: 70,
-    url: Robust,
-  },
-];
-
-export const otherInteriorColor = [
-  {
-    name: '인조가죽(블랙)',
     trim: 'Exclusive',
-    chooseRate: 70,
-    url: SyntheticBlack,
+    exteriorColor: [
+      {
+        name: '크리미 화이트 펄',
+        chooseRate: 90,
+        url: Creamy,
+      },
+      {
+        name: '어비스 블랙펄',
+        chooseRate: 70,
+        url: Abyss,
+      },
+      {
+        name: '쉬머링 실버 메탈릭',
+        chooseRate: 60,
+        url: Shimmering,
+      },
+      {
+        name: '문라이트 블루 펄',
+        chooseRate: 50,
+        url: Moonlight,
+      },
+      {
+        name: '가이아 브라운 펄',
+        chooseRate: 40,
+        url: Gaia,
+      },
+      {
+        name: '그라파이트 그레이 메탈릭',
+        chooseRate: 30,
+        url: Graphite,
+      },
+    ],
+    interiorColor: [
+      {
+        name: '인조가죽(블랙)',
+        chooseRate: 70,
+        url: SyntheticBlack,
+      },
+    ],
+    otherExteriorColor: [
+      {
+        trim: 'Caligraphy',
+        name: '로버스트 에메랄드 펄',
+        chooseRate: 70,
+        url: Robust,
+      },
+    ],
+    otherInteriorColor: [
+      {
+        trim: 'Le Blanc(르블랑)',
+        name: '퀄팅 천연(블랙)',
+        chooseRate: 70,
+        url: Quilted,
+      },
+      {
+        trim: 'Le Blanc(르블랑)',
+        name: '쿨 그레이',
+        chooseRate: 60,
+        url: CoolGray,
+      },
+      {
+        trim: 'Prestige',
+        name: '네이비',
+        chooseRate: 60,
+        url: Navy,
+      },
+      {
+        trim: 'Prestige',
+        name: '블랙',
+        chooseRate: 50,
+        url: Black,
+      },
+      {
+        trim: 'Prestige',
+        name: '버건디',
+        chooseRate: 40,
+        url: Burgundy,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '네이비/웜그레이 투톤',
+        chooseRate: 30,
+        url: NavyWarmGray,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '블랙(고급)',
+        chooseRate: 20,
+        url: PremiumBlack,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '블랙원톤(블랙에디션전용)',
+        chooseRate: 10,
+        url: OneToneBlack,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '브라운',
+        chooseRate: 5,
+        url: Brown,
+      },
+    ],
   },
   {
-    name: '네이비',
     trim: 'Prestige',
-    chooseRate: 60,
-    url: Navy,
+    exteriorColor: [
+      {
+        name: '크리미 화이트 펄',
+        chooseRate: 90,
+        url: Creamy,
+      },
+      {
+        name: '어비스 블랙펄',
+        chooseRate: 70,
+        url: Abyss,
+      },
+      {
+        name: '쉬머링 실버 메탈릭',
+        chooseRate: 60,
+        url: Shimmering,
+      },
+      {
+        name: '문라이트 블루 펄',
+        chooseRate: 50,
+        url: Moonlight,
+      },
+      {
+        name: '가이아 브라운 펄',
+        chooseRate: 40,
+        url: Gaia,
+      },
+      {
+        name: '그라파이트 그레이 메탈릭',
+        chooseRate: 30,
+        url: Graphite,
+      },
+    ],
+    interiorColor: [
+      {
+        name: '네이비',
+        chooseRate: 60,
+        url: Navy,
+      },
+      {
+        name: '블랙',
+        chooseRate: 50,
+        url: Black,
+      },
+      {
+        name: '버건디',
+        chooseRate: 40,
+        url: Burgundy,
+      },
+    ],
+    otherExteriorColor: [
+      {
+        trim: 'Caligraphy',
+        name: '로버스트 에메랄드 펄',
+        chooseRate: 70,
+        url: Robust,
+      },
+    ],
+    otherInteriorColor: [
+      {
+        trim: 'Le Blanc(르블랑)',
+        name: '퀄팅 천연(블랙)',
+        chooseRate: 70,
+        url: Quilted,
+      },
+      {
+        trim: 'Le Blanc(르블랑)',
+        name: '쿨 그레이',
+        chooseRate: 60,
+        url: CoolGray,
+      },
+      {
+        trim: 'Exclusive',
+        name: '인조가죽(블랙)',
+        chooseRate: 70,
+        url: SyntheticBlack,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '네이비/웜그레이 투톤',
+        chooseRate: 30,
+        url: NavyWarmGray,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '블랙(고급)',
+        chooseRate: 20,
+        url: PremiumBlack,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '블랙원톤(블랙에디션전용)',
+        chooseRate: 10,
+        url: OneToneBlack,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '브라운',
+        chooseRate: 5,
+        url: Brown,
+      },
+    ],
   },
   {
-    name: '블랙',
-    trim: 'Prestige',
-    chooseRate: 50,
-    url: Black,
-  },
-  {
-    name: '버건디',
-    trim: 'Prestige',
-    chooseRate: 40,
-    url: Burgundy,
-  },
-  {
-    name: '네이비/웜그레이 투톤',
     trim: 'Caligraphy',
-    chooseRate: 30,
-    url: NavyWarmGray,
-  },
-  {
-    name: '블랙(고급)',
-    trim: 'Caligraphy',
-    chooseRate: 20,
-    url: PremiumBlack,
-  },
-  {
-    name: '블랙원톤(블랙에디션전용)',
-    trim: 'Caligraphy',
-    chooseRate: 10,
-    url: OneToneBlack,
-  },
-  {
-    name: '브라운',
-    trim: 'Caligraphy',
-    chooseRate: 5,
-    url: Brown,
+    exteriorColor: [
+      {
+        name: '크리미 화이트 펄',
+        chooseRate: 90,
+        url: Creamy,
+      },
+      {
+        name: '어비스 블랙펄',
+        chooseRate: 70,
+        url: Abyss,
+      },
+      {
+        name: '쉬머링 실버 메탈릭',
+        chooseRate: 60,
+        url: Shimmering,
+      },
+      {
+        name: '문라이트 블루 펄',
+        chooseRate: 50,
+        url: Moonlight,
+      },
+      {
+        name: '로버스트 에메랄드 펄',
+        chooseRate: 70,
+        url: Robust,
+      },
+      {
+        name: '가이아 브라운 펄',
+        chooseRate: 40,
+        url: Gaia,
+      },
+      {
+        name: '그라파이트 그레이 메탈릭',
+        chooseRate: 30,
+        url: Graphite,
+      },
+    ],
+    interiorColor: [
+      {
+        trim: 'Caligraphy',
+        name: '네이비/웜그레이 투톤',
+        chooseRate: 30,
+        url: NavyWarmGray,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '블랙(고급)',
+        chooseRate: 20,
+        url: PremiumBlack,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '블랙원톤(블랙에디션전용)',
+        chooseRate: 10,
+        url: OneToneBlack,
+      },
+      {
+        trim: 'Caligraphy',
+        name: '브라운',
+        chooseRate: 5,
+        url: Brown,
+      },
+    ],
+    otehrExteriorColor: [{}],
+    otherInteriorColor: [
+      {
+        trim: 'Le Blanc(르블랑)',
+        name: '퀄팅 천연(블랙)',
+        chooseRate: 70,
+        url: Quilted,
+      },
+      {
+        trim: 'Le Blanc(르블랑)',
+        name: '쿨 그레이',
+        chooseRate: 60,
+        url: CoolGray,
+      },
+      {
+        trim: 'Exclusive',
+        name: '인조가죽(블랙)',
+        chooseRate: 70,
+        url: SyntheticBlack,
+      },
+      {
+        trim: 'Prestige',
+        name: '네이비',
+        chooseRate: 60,
+        url: Navy,
+      },
+      {
+        trim: 'Prestige',
+        name: '블랙',
+        chooseRate: 50,
+        url: Black,
+      },
+      {
+        trim: 'Prestige',
+        name: '버건디',
+        chooseRate: 40,
+        url: Burgundy,
+      },
+    ],
   },
 ];

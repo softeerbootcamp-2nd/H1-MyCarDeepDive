@@ -11,9 +11,19 @@ import ChangeTrim from './ChangeTrim';
 import UnderLine from '@/Components/UnderLine';
 import ChangePrice from './ChangePrice';
 
+interface colorProps {
+  trim?: string;
+  name: string;
+  chooseRate: number;
+  url: string;
+}
+
 interface Props extends ModalProps {
-  wantedOtherColor: string;
-  changerClickHandler: React.Dispatch<React.SetStateAction<string>>;
+  wantedOtherColor: colorProps;
+  changerClickHandler: React.Dispatch<
+    React.SetStateAction<colorProps | undefined>
+  >;
+  setTrim: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function ChangerModal({
@@ -21,6 +31,7 @@ function ChangerModal({
   setShowModal,
   wantedOtherColor,
   changerClickHandler,
+  setTrim,
 }: Props) {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
@@ -36,6 +47,7 @@ function ChangerModal({
           <Buttons
             wantedOtherColor={wantedOtherColor}
             changerClickHandler={changerClickHandler}
+            setTrim={setTrim}
           />
         </div>
       </ModalContentsWrapper>

@@ -3,30 +3,39 @@ import { useState } from 'react';
 import ColorRadio from '../ColorRadio';
 import ChangerModal from '../ChangerModal';
 
-function DropDown({
-  phrase,
-  data,
-  changerClickHandler,
-}: {
+interface colorProps {
+  name: string;
+  chooseRate: number;
+  url: string;
+}
+
+interface Props {
   phrase: string;
-  data: {
-    name: string;
-    trim: string;
-    chooseRate: number;
-    url: string;
-  }[];
-  changerClickHandler: React.Dispatch<React.SetStateAction<string>>;
-}) {
+  data: colorProps[];
+  changerClickHandler: React.Dispatch<
+    React.SetStateAction<colorProps | undefined>
+  >;
+  setTrim: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function DropDown({ phrase, data, changerClickHandler, setTrim }: Props) {
   const [showOtherColor, setShowOtherColor] = useState(false);
-  const [wantedOtherColor, setWantedOtherColor] = useState('');
+  const [wantedOtherColor, setWantedOtherColor] = useState({
+    name: '',
+    chooseRate: 0,
+    url: '',
+  });
   const [showModal, setShowModal] = useState(false);
 
   const otherColorHandler = ({
     currentTarget,
-  }: React.MouseEvent<HTMLInputElement>) => {
-    setWantedOtherColor(currentTarget.value);
+  }: React.MouseEvent<HTMLButtonElement>) => {
+    const dataObject = currentTarget.getAttribute('data-object');
+    if (dataObject) {
+      const colorInfo = JSON.parse(dataObject);
+      setWantedOtherColor(colorInfo);
+    }
   };
-
   return (
     <>
       <div className='border border-primary rounded pl-4 pr-3 mb-8'>
@@ -52,6 +61,11 @@ function DropDown({
               colorType='other'
             />
           )}
+          {showOtherColor && !data.length && (
+            <p className='flex justify-center items-center py-10 font-body4-medium text-grey-500 '>
+              다른 색상이 없습니다.
+            </p>
+          )}
         </div>
       </div>
       <ChangerModal
@@ -59,9 +73,9 @@ function DropDown({
         changerClickHandler={changerClickHandler}
         showModal={showModal}
         setShowModal={setShowModal}
+        setTrim={setTrim}
       />
     </>
   );
 }
-
 export default DropDown;

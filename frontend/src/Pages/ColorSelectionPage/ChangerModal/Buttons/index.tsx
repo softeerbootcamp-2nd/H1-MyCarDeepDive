@@ -1,14 +1,22 @@
 import Button from '@/Components/Button';
 import { closeModalHandler } from '@/utils';
-import { useNavigate } from 'react-router-dom';
 
-interface Props {
-  wantedOtherColor: string;
-  changerClickHandler: React.Dispatch<React.SetStateAction<string>>;
+interface colorProps {
+  trim?: string;
+  name: string;
+  chooseRate: number;
+  url: string;
 }
 
-function Buttons({ wantedOtherColor, changerClickHandler }: Props) {
-  const navigation = useNavigate();
+interface Props {
+  wantedOtherColor: colorProps;
+  changerClickHandler: React.Dispatch<
+    React.SetStateAction<colorProps | undefined>
+  >;
+  setTrim: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function Buttons({ wantedOtherColor, changerClickHandler, setTrim }: Props) {
   return (
     <div className='flex justify-end gap-2.5 mt-[33px] mb-6'>
       <Button
@@ -24,11 +32,9 @@ function Buttons({ wantedOtherColor, changerClickHandler }: Props) {
         variant='primary'
         text='변경하기'
         onClick={() => {
+          changerClickHandler(wantedOtherColor);
+          if (wantedOtherColor.trim) setTrim(wantedOtherColor.trim);
           closeModalHandler();
-          // changerClickHandler(wantedOtherColor);
-          setTimeout(() => {
-            navigation('/select/trim');
-          }, 700);
         }}
       />
     </div>
