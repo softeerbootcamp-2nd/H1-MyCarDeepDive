@@ -12,22 +12,28 @@ protocol CheckListItemViewDelegate: AnyObject {
 }
 
 class CheckListItemView: UIView {
+    enum Constants {
+        enum ImageView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -16)
+        }
+        enum Label {
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 12)
+            static let topMargin: CGFloat = .toScaledHeight(value: 16)
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -16)
+        }
+    }
     // MARK: - UI Properties
     private let imageView = UIImageView(image: UIImage(named: "Blue-Check-Circle"))
     private let label = CommonLabel()
     
     // MARK: - Properties
     weak var delegate: CheckListItemViewDelegate?
-    private let labelLayoutConstant = UILayout(leadingMargin: 12, topMargin: 16, bottomMargin: -16)
-    private let imageViewLayoutConstant = UILayout(topMargin: 16, trailingMargin: -16, bottomMargin: -16)
+    
     var isTapped: Bool = false {
         didSet {
-            self.layer.borderWidth = isTapped ? 2 : 0
-            self.layer.backgroundColor = isTapped ? UIColor.white.cgColor : UIColor.GetYaPalette.gray800.cgColor
-            imageView.isHidden = isTapped ? false : true
-            label.font = isTapped ? UIFont(hyundaiSans: .regularBody3) : UIFont(hyundaiSans: .mediumBody3)
-            label.textColor = isTapped ? .GetYaPalette.primary : .GetYaPalette.gray400
-            label.isHighlighted = isTapped
+            showAnimation()
         }
     }
     
@@ -82,34 +88,55 @@ class CheckListItemView: UIView {
         label.text = text
     }
     
+    // MARK: - Private functions
+    private func updateUIState() {
+        layer.borderWidth = isTapped ? 2 : 0
+        layer.backgroundColor = isTapped ? UIColor.white.cgColor : UIColor.GetYaPalette.gray800.cgColor
+        imageView.isHidden = isTapped ? false : true
+        label.font = isTapped ? UIFont(hyundaiSans: .regularBody3) : UIFont(hyundaiSans: .mediumBody3)
+        label.textColor = isTapped ? .GetYaPalette.primary : .GetYaPalette.gray400
+        label.isHighlighted = isTapped
+    }
+    
+    private func showAnimation() {
+        UIView.animate(
+            withDuration: 0.25,
+            delay: 0,
+            options: .curveEaseInOut,
+            animations: {
+                self.updateUIState()
+            })
+    }
+    
     private func configureLabel() {
+        typealias Const = Constants.Label
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(
                 equalTo: self.topAnchor,
-                constant: labelLayoutConstant.topMargin),
+                constant: Const.topMargin),
             label.bottomAnchor.constraint(
                 equalTo: self.bottomAnchor,
-                constant: labelLayoutConstant.bottomMargin),
+                constant: Const.bottomMargin),
             label.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: labelLayoutConstant.leadingMargin)
+                constant: Const.leadingMargin)
         ])
     }
     
     private func configureImageView() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
-        
+        typealias Const = Constants.ImageView
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(
                 equalTo: self.topAnchor,
-                constant: imageViewLayoutConstant.topMargin),
+                constant: Const.topMargin),
             imageView.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: imageViewLayoutConstant.trailingMargin),
+                constant: Const.trailingMargin),
             imageView.bottomAnchor.constraint(
                 equalTo: self.bottomAnchor,
-                constant: imageViewLayoutConstant.bottomMargin)
+                constant: Const.bottomMargin)
         ])
     }
     
