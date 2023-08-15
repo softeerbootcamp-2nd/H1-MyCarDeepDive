@@ -30,6 +30,8 @@
 		155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED7232A7E6D5A0052896A /* ViewModelable.swift */; };
 		155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155ED7252A7E6DB30052896A /* ViewBindable.swift */; };
 		156A969F2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A969E2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift */; };
+		156A96A22A8BD5A100AE1477 /* BaseCharacterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96A12A8BD5A100AE1477 /* BaseCharacterSelectViewController.swift */; };
+		156A96A52A8BD66D00AE1477 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96A42A8BD66D00AE1477 /* BaseViewController.swift */; };
 		15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */; };
 		159B2CF42A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CF32A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift */; };
 		159B2CF92A825D07003F47D6 /* DetailQuotationPreviewTableViewAdapterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CF82A825D07003F47D6 /* DetailQuotationPreviewTableViewAdapterDataSource.swift */; };
@@ -173,6 +175,8 @@
 		155ED7232A7E6D5A0052896A /* ViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelable.swift; sourceTree = "<group>"; };
 		155ED7252A7E6DB30052896A /* ViewBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBindable.swift; sourceTree = "<group>"; };
 		156A969E2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailSelectViewController.swift; sourceTree = "<group>"; };
+		156A96A12A8BD5A100AE1477 /* BaseCharacterSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCharacterSelectViewController.swift; sourceTree = "<group>"; };
+		156A96A42A8BD66D00AE1477 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionPublisher.swift"; sourceTree = "<group>"; };
 		159B2CF32A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewTableViewAdapter.swift; sourceTree = "<group>"; };
 		159B2CF82A825D07003F47D6 /* DetailQuotationPreviewTableViewAdapterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewTableViewAdapterDataSource.swift; sourceTree = "<group>"; };
@@ -383,6 +387,7 @@
 		156A969C2A8BD19400AE1477 /* CharacterDetailSelect */ = {
 			isa = PBXGroup;
 			children = (
+				156A96A02A8BD59300AE1477 /* Common */,
 				156A969D2A8BD1A400AE1477 /* ViewController */,
 			);
 			path = CharacterDetailSelect;
@@ -392,6 +397,22 @@
 			isa = PBXGroup;
 			children = (
 				156A969E2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		156A96A02A8BD59300AE1477 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				156A96A12A8BD5A100AE1477 /* BaseCharacterSelectViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		156A96A32A8BD66500AE1477 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				156A96A42A8BD66D00AE1477 /* BaseViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -670,6 +691,7 @@
 		64ADA4752A7787CC0003E2C1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				156A96A32A8BD66500AE1477 /* ViewController */,
 				64ADA47C2A7788410003E2C1 /* Protocol */,
 				64ADA4772A7787F20003E2C1 /* View */,
 				64ADA4762A7787DB0003E2C1 /* ViewModel */,
@@ -1052,6 +1074,7 @@
 				6412D0802A7F75DB001E4005 /* LifeStyleViewController.swift in Sources */,
 				159B2CF42A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift in Sources */,
 				15059AC02A88A54200303C01 /* CommonQuotationPreviewCarInfoView.swift in Sources */,
+				156A96A52A8BD66D00AE1477 /* BaseViewController.swift in Sources */,
 				64E26A4C2A8A3E2800F6BC3A /* TrimSubOptionContentStackView.swift in Sources */,
 				159B2CF42A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift in Sources */,
 				15059AC02A88A54200303C01 /* CommonQuotationPreviewCarInfoView.swift in Sources */,
@@ -1172,6 +1195,7 @@
 				155ED7202A7E5B890052896A /* UIButton+Combine.swift in Sources */,
 				64ADA4B82A7A1BF20003E2C1 /* CommonOptionImageView.swift in Sources */,
 				64ADA4872A7788840003E2C1 /* DTO.swift in Sources */,
+				156A96A22A8BD5A100AE1477 /* BaseCharacterSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
