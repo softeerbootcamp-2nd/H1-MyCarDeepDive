@@ -1,7 +1,7 @@
 package com.h1.mycardeepdive.car.domain;
 
 import com.h1.mycardeepdive.options.domain.CarSpecOptions;
-import com.h1.mycardeepdive.trims.domain.Trims;
+import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,8 +27,8 @@ public class CarSpec {
     private Car car;
 
     @ManyToOne
-    @JoinColumn(name = "trims_id")
-    private Trims trims;
+    @JoinColumn(name = "trim_id")
+    private Trim trim;
 
     @ManyToOne
     @JoinColumn(name = "body_id")

@@ -10,7 +10,7 @@ import lombok.*;
 public class CarSpecComparisonResponse {
     private String trims_img_url;
     private String summary;
-    private String trims_name;
+    private String trim_name;
     private long price;
     private List<String> exterior_color_img_urls;
     private List<String> interior_color_names;

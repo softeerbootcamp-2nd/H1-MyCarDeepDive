@@ -47,11 +47,11 @@ class CarSpecControllerTest extends ControllerTestConfig {
                 .thenReturn(
                         List.of(
                                 CarSpecResponse.builder()
-                                        .trims_name("Le Blanc")
+                                        .trim_name("Le Blanc")
                                         .price(43460000)
                                         .summary("필수적인 옵션만 모은")
                                         .car_spec_id(10L)
-                                        .trims_id(2L)
+                                        .trim_id(2L)
                                         .basic_option_names(
                                                 List.of(
                                                         "전방 충돌 방지 보조",
@@ -111,7 +111,7 @@ class CarSpecControllerTest extends ControllerTestConfig {
                                         .trims_img_url(
                                                 "https://www.hyundai.com/contents/vr360/LX06/trim/DS.png")
                                         .summary("필수적인 옵션만 모은")
-                                        .trims_name("Le Blanc")
+                                        .trim_name("Le Blanc")
                                         .price(43460000)
                                         .exterior_color_img_urls(List.of())
                                         .interior_color_names(List.of())

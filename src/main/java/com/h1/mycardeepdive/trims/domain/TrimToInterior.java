@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class TrimsToInterior {
+public class TrimToInterior {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "trims_to_interior_color_id")
+    @Column(name = "trim_to_interior_color_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "trims_id")
-    private Trims trims;
+    @JoinColumn(name = "trim_id")
+    private Trim trim;
 
     @ManyToOne
     @JoinColumn(name = "interior_color_id")
