@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LayoutSupportable {
-    typealias NSConstriant = NSLayoutConstraint
+    typealias NSConstraint = NSLayoutConstraint
     /// Set subviews constraints in root view
     func configureConstraints()
 }
