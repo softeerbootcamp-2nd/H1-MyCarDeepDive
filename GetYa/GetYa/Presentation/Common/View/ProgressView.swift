@@ -29,6 +29,7 @@ final class ProgressView: UIProgressView {
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureUI()
         progressViewStyle = .bar
         configureUIColor(
             progressTintColor: .GetYaPalette.acriveBlue,
@@ -38,6 +39,7 @@ final class ProgressView: UIProgressView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureUI()
         progressViewStyle = .bar
         configureUIColor(
             progressTintColor: .GetYaPalette.acriveBlue,
@@ -56,6 +58,7 @@ final class ProgressView: UIProgressView {
         self.progressTotalStep = progressTotalStep
         self.animationDuration = animationDuration
         super.init(frame: frame)
+        configureUI()
         progressViewStyle = style
         configureUIColor(
             progressTintColor: progressTintColor ?? .GetYaPalette.acriveBlue,
@@ -80,13 +83,11 @@ final class ProgressView: UIProgressView {
             progressTintColor: progressTintColor,
             backgroundTintColor: backgroundTintColor,
             animationDuration: animationDuration)
-        translatesAutoresizingMaskIntoConstraints = false
     }
     
     convenience init(progressTotalStep: Int) {
         self.init(frame: .zero)
         self.progressTotalStep = progressTotalStep
-        translatesAutoresizingMaskIntoConstraints = false
     }
     
     deinit {
@@ -137,6 +138,11 @@ extension ProgressView {
 
 // MARK: - Private helper
 extension ProgressView {
+    private func configureUI() {
+        if frame == .zero {
+            translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
     private func isOutOfGauge(_ gauge: Float) -> Bool {
         !(minGauge...maxGauge).contains(gauge)
     }
