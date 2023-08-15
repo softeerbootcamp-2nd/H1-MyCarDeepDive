@@ -32,6 +32,8 @@
 		156A969F2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A969E2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift */; };
 		156A96A22A8BD5A100AE1477 /* BaseCharacterSelectPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96A12A8BD5A100AE1477 /* BaseCharacterSelectPageViewController.swift */; };
 		156A96A52A8BD66D00AE1477 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96A42A8BD66D00AE1477 /* BaseViewController.swift */; };
+		156A96A82A8C03A300AE1477 /* CharacterQuestionDetailListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96A72A8C03A300AE1477 /* CharacterQuestionDetailListView.swift */; };
+		156A96AB2A8C03D400AE1477 /* QuestionViewSendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96AA2A8C03D400AE1477 /* QuestionViewSendable.swift */; };
 		15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */; };
 		159B2CF42A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CF32A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift */; };
 		159B2CF92A825D07003F47D6 /* DetailQuotationPreviewTableViewAdapterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CF82A825D07003F47D6 /* DetailQuotationPreviewTableViewAdapterDataSource.swift */; };
@@ -177,6 +179,8 @@
 		156A969E2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailSelectViewController.swift; sourceTree = "<group>"; };
 		156A96A12A8BD5A100AE1477 /* BaseCharacterSelectPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCharacterSelectPageViewController.swift; sourceTree = "<group>"; };
 		156A96A42A8BD66D00AE1477 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		156A96A72A8C03A300AE1477 /* CharacterQuestionDetailListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterQuestionDetailListView.swift; sourceTree = "<group>"; };
+		156A96AA2A8C03D400AE1477 /* QuestionViewSendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewSendable.swift; sourceTree = "<group>"; };
 		15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionPublisher.swift"; sourceTree = "<group>"; };
 		159B2CF32A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewTableViewAdapter.swift; sourceTree = "<group>"; };
 		159B2CF82A825D07003F47D6 /* DetailQuotationPreviewTableViewAdapterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewTableViewAdapterDataSource.swift; sourceTree = "<group>"; };
@@ -387,6 +391,8 @@
 		156A969C2A8BD19400AE1477 /* CharacterDetailSelect */ = {
 			isa = PBXGroup;
 			children = (
+				156A96A92A8C03BD00AE1477 /* Protocol */,
+				156A96A62A8C037F00AE1477 /* View */,
 				156A96A02A8BD59300AE1477 /* Common */,
 				156A969D2A8BD1A400AE1477 /* ViewController */,
 			);
@@ -415,6 +421,22 @@
 				156A96A42A8BD66D00AE1477 /* BaseViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		156A96A62A8C037F00AE1477 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				156A96A72A8C03A300AE1477 /* CharacterQuestionDetailListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		156A96A92A8C03BD00AE1477 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				156A96AA2A8C03D400AE1477 /* QuestionViewSendable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		15837B992A7E5900000FE728 /* CombineCocoa */ = {
@@ -1148,6 +1170,7 @@
 				155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */,
+				156A96A82A8C03A300AE1477 /* CharacterQuestionDetailListView.swift in Sources */,
 				156A969F2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift in Sources */,
 				155DDD072A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift in Sources */,
 				64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */,
@@ -1163,6 +1186,7 @@
 				155EAB432A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift in Sources */,
 				64ADA4C02A7A28AA0003E2C1 /* UIColor+.swift in Sources */,
 				6412D08A2A80C419001E4005 /* QuestionContentView.swift in Sources */,
+				156A96AB2A8C03D400AE1477 /* QuestionViewSendable.swift in Sources */,
 				155DDD182A855182009AE2BC /* LeftAndRightButtonsView.swift in Sources */,
 				155EAB372A7F5FCD00833B0E /* ProgressView.swift in Sources */,
 				64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */,
