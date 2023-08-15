@@ -130,6 +130,8 @@
 		64E26A582A8A3E2800F6BC3A /* OptionSummaryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A422A8A3E2800F6BC3A /* OptionSummaryContentView.swift */; };
 		64E26A592A8A3E2800F6BC3A /* TrimSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A432A8A3E2800F6BC3A /* TrimSelectViewController.swift */; };
 		64E26A5A2A8A3E2800F6BC3A /* TrimDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A442A8A3E2800F6BC3A /* TrimDetailViewController.swift */; };
+		64E26A5E2A8A58E700F6BC3A /* RotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A5D2A8A58E700F6BC3A /* RotationView.swift */; };
+		64E26A622A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A612A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,6 +279,8 @@
 		64E26A422A8A3E2800F6BC3A /* OptionSummaryContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSummaryContentView.swift; sourceTree = "<group>"; };
 		64E26A432A8A3E2800F6BC3A /* TrimSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrimSelectViewController.swift; sourceTree = "<group>"; };
 		64E26A442A8A3E2800F6BC3A /* TrimDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrimDetailViewController.swift; sourceTree = "<group>"; };
+		64E26A5D2A8A58E700F6BC3A /* RotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationView.swift; sourceTree = "<group>"; };
+		64E26A612A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSelectTitleBackgroundVIew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -811,7 +815,8 @@
 		64E26A0C2A895B7E00F6BC3A /* ColorSelect */ = {
 			isa = PBXGroup;
 			children = (
-				64E26A0F2A895C0F00F6BC3A /* ColorSelectViewController.swift */,
+				64E26A5C2A8A3FC500F6BC3A /* View */,
+				64E26A5B2A8A3FBE00F6BC3A /* ViewController */,
 			);
 			path = ColorSelect;
 			sourceTree = "<group>";
@@ -827,6 +832,7 @@
 		64E26A0E2A895B9C00F6BC3A /* CarSettingSelect */ = {
 			isa = PBXGroup;
 			children = (
+				64E26A5F2A8B3DED00F6BC3A /* Common */,
 				64E26A2D2A8A3E2800F6BC3A /* TrimSelect */,
 				64E26A0C2A895B7E00F6BC3A /* ColorSelect */,
 				64E26A0D2A895B8600F6BC3A /* OptionSelect */,
@@ -867,6 +873,38 @@
 				64E26A402A8A3E2800F6BC3A /* SettingProgressView.swift */,
 				64E26A412A8A3E2800F6BC3A /* TrimLearnMoreView.swift */,
 				64E26A422A8A3E2800F6BC3A /* OptionSummaryContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		64E26A5B2A8A3FBE00F6BC3A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				64E26A0F2A895C0F00F6BC3A /* ColorSelectViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		64E26A5C2A8A3FC500F6BC3A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				64E26A5D2A8A58E700F6BC3A /* RotationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		64E26A5F2A8B3DED00F6BC3A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				64E26A602A8B3DF100F6BC3A /* View */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		64E26A602A8B3DF100F6BC3A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				64E26A612A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1039,6 +1077,8 @@
 				15059AC02A88A54200303C01 /* CommonRecommendCarResultCarInfoView.swift in Sources */,
 				15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
+				64E26A622A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift in Sources */,
+				64E26A5E2A8A58E700F6BC3A /* RotationView.swift in Sources */,
 				641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
 				64E26A472A8A3E2800F6BC3A /* TrimOptionDetailOptionCollectionView.swift in Sources */,
