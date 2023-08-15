@@ -15,7 +15,7 @@ class CheckListItemView: UIView {
     enum Constants {
         enum ImageView {
             static let topMargin: CGFloat = .toScaledHeight(value: 16)
-            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: 0)
             static let bottomMargin: CGFloat = .toScaledHeight(value: -16)
         }
         enum Label {
@@ -24,8 +24,12 @@ class CheckListItemView: UIView {
             static let bottomMargin: CGFloat = .toScaledHeight(value: -16)
         }
     }
+    
     // MARK: - UI Properties
-    private let imageView = UIImageView(image: UIImage(named: "Blue-Check-Circle"))
+    private let imageView = UIImageView(image: UIImage(named: "Blue-Check-Circle")).set {
+        $0.contentMode = .scaleAspectFit
+    }
+    
     private let label = CommonLabel()
     
     // MARK: - Properties
@@ -36,6 +40,8 @@ class CheckListItemView: UIView {
             showAnimation()
         }
     }
+    
+    private var heightConstraints: NSLayoutConstraint!
     
     // MARK: - LifeCycles
     convenience init(text: String) {
@@ -79,13 +85,21 @@ class CheckListItemView: UIView {
         
         self.layer.borderColor = UIColor.GetYaPalette.primary.cgColor
         self.isTapped = false
-        
+        heightConstraints = heightAnchor.constraint(equalToConstant: 56)
+        heightConstraints.isActive = true
         configureLabel()
         configureImageView()
     }
     
     func setLabelText(text: String) {
         label.text = text
+    }
+    
+    func setHeight(with height: CGFloat) {
+        heightConstraints.isActive = false
+        heightConstraints = heightAnchor.constraint(equalToConstant: height)
+        heightConstraints.isActive = true
+        layoutIfNeeded()
     }
     
     // MARK: - Private functions
