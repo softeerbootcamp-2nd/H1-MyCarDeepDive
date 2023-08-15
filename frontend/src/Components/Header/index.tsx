@@ -32,6 +32,7 @@ function Header() {
     setTimer(newTimer);
   }, [showPriceInfo]);
 
+  if (location.pathname === '/mycar/result') return null;
   return (
     <header
       className={`fixed w-full ${

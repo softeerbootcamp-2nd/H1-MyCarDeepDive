@@ -5,6 +5,7 @@ import ColorSelectionPage from './Pages/ColorSelectionPage';
 import OptionSelectitonPage from './Pages/OptionSelectitonPage';
 import RecommendationPage from '@/Pages/RecommendationPage';
 import TrimSelectionPage from './Pages/TrimSelectionPage';
+import MyCarResultPage from './Pages/MyCarResultPage';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path='color' element={<ColorSelectionPage />} />
           <Route path='option' element={<OptionSelectitonPage />} />
         </Route>
+
+        <Route path='/mycar/result' element={<MyCarResultPage />} />
       </Routes>
     </div>
   );

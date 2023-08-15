@@ -245,3 +245,28 @@
 .noScrollBar::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+
+.triangle {
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 0px solid transparent;
+  border-top: 50px solid #e6eaef;
+  border-left: 50px solid transparent;
+  border-right: 0px solid transparent;
+  transform: rotate(-90deg);
+}
+
+.triangle-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 0px solid transparent;
+  border-top: 35px solid #e6eaef;
+  border-left: 35px solid transparent;
+  border-right: 0px solid transparent;
+  transform: rotate(90deg);
+}
