@@ -8,10 +8,16 @@ import com.h1.mycardeepdive.color.domain.ExteriorColor;
 import com.h1.mycardeepdive.color.domain.InteriorColor;
 import com.h1.mycardeepdive.color.domain.TrimColorCombination;
 import com.h1.mycardeepdive.color.domain.repository.TrimColorCombinationRepository;
-import com.h1.mycardeepdive.color.ui.dto.ColorInfo;
-import com.h1.mycardeepdive.color.ui.dto.ColorResponse;
+import com.h1.mycardeepdive.color.domain.repository.TrimExteriorColorRepository;
+import com.h1.mycardeepdive.color.domain.repository.TrimInteriorColorRepository;
+import com.h1.mycardeepdive.color.ui.dto.ExteriorColorInfo;
+import com.h1.mycardeepdive.color.ui.dto.ExteriorColorResponse;
+import com.h1.mycardeepdive.color.ui.dto.InteriorColorInfo;
+import com.h1.mycardeepdive.color.ui.dto.InteriorColorResponse;
 import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +28,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class ColorServiceTest {
     @Mock private TrimColorCombinationRepository trimColorCombinationRepository;
+
+    @Mock TrimExteriorColorRepository trimExteriorColorRepository;
+
+    @Mock TrimInteriorColorRepository trimInteriorColorRepository;
 
     @InjectMocks private ColorService colorService;
 
@@ -107,20 +117,36 @@ class ColorServiceTest {
 
         when(trimColorCombinationRepository.findByTrim_Id(trimId))
                 .thenReturn(List.of(trimsColorCombination1, trimsColorCombination2));
+        when(trimExteriorColorRepository.findByTrim_IdNot(trimId)).thenReturn(List.of());
         // when
-        ColorResponse colorResponse = colorService.findExteriorColors(trimId, interiorColorId);
-        ColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
-        ColorInfo unavailableColor = colorResponse.getUnavailable_colors().get(0);
+        ExteriorColorResponse colorResponse =
+                colorService.findExteriorColors(trimId, interiorColorId);
+        ExteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
+        ExteriorColorInfo unavailableColor = colorResponse.getUnavailable_colors().get(0);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(exteriorColor1.getName());
         assertThat(availableColor.getImg_url()).isEqualTo(exteriorColor1.getImgUrl());
-        assertThat(availableColor.getCar_img_url()).isEqualTo(exteriorColor1.getExteriorImgUrl());
+        assertThat(availableColor.getCar_img_urls())
+                .isEqualTo(
+                        IntStream.rangeClosed(1, 60)
+                                .mapToObj(
+                                        number ->
+                                                exteriorColor1.getExteriorImgUrl()
+                                                        + String.format("/%03d.jpg", number))
+                                .collect(Collectors.toList()));
         assertThat(availableColor.getChoose_rate()).isEqualTo(exteriorColor1.getChooseRate());
 
         assertThat(unavailableColor.getName()).isEqualTo(exteriorColor2.getName());
         assertThat(unavailableColor.getImg_url()).isEqualTo(exteriorColor2.getImgUrl());
-        assertThat(unavailableColor.getCar_img_url()).isEqualTo(exteriorColor2.getExteriorImgUrl());
+        assertThat(unavailableColor.getCar_img_urls())
+                .isEqualTo(
+                        IntStream.rangeClosed(1, 60)
+                                .mapToObj(
+                                        number ->
+                                                exteriorColor2.getExteriorImgUrl()
+                                                        + String.format("/%03d.jpg", number))
+                                .collect(Collectors.toList()));
         assertThat(unavailableColor.getChoose_rate()).isEqualTo(exteriorColor2.getChooseRate());
     }
 
@@ -199,10 +225,12 @@ class ColorServiceTest {
 
         when(trimColorCombinationRepository.findByTrim_Id(trimId))
                 .thenReturn(List.of(trimsColorCombination1, trimsColorCombination2));
+        when(trimInteriorColorRepository.findByTrim_IdNot(trimId)).thenReturn(List.of());
         // when
-        ColorResponse colorResponse = colorService.findInteriorColors(trimId, exteriorColorId);
-        ColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
-        ColorInfo unavailableColor = colorResponse.getUnavailable_colors().get(0);
+        InteriorColorResponse colorResponse =
+                colorService.findInteriorColors(trimId, exteriorColorId);
+        InteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
+        InteriorColorInfo unavailableColor = colorResponse.getUnavailable_colors().get(0);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(interiorColor1.getName());
