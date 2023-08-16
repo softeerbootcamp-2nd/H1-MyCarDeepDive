@@ -135,6 +135,10 @@
 		64E26A642A8BBE6A00F6BC3A /* ColorContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A632A8BBE6A00F6BC3A /* ColorContentView.swift */; };
 		64E26A662A8BC04F00F6BC3A /* ColorSelectColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A652A8BC04F00F6BC3A /* ColorSelectColorCollectionView.swift */; };
 		64E26A682A8BC05C00F6BC3A /* ColorSelectColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A672A8BC05C00F6BC3A /* ColorSelectColorCell.swift */; };
+		64E26A6A2A8BE5E200F6BC3A /* ColorSelectContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A692A8BE5E200F6BC3A /* ColorSelectContentView.swift */; };
+		64E26A6C2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A6B2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift */; };
+		64E26A6E2A8BF41400F6BC3A /* ColorSelectMoreColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A6D2A8BF41400F6BC3A /* ColorSelectMoreColorCell.swift */; };
+		64E26A702A8C076500F6BC3A /* ColorLearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A6F2A8C076500F6BC3A /* ColorLearnMoreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -287,6 +291,10 @@
 		64E26A632A8BBE6A00F6BC3A /* ColorContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorContentView.swift; sourceTree = "<group>"; };
 		64E26A652A8BC04F00F6BC3A /* ColorSelectColorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectColorCollectionView.swift; sourceTree = "<group>"; };
 		64E26A672A8BC05C00F6BC3A /* ColorSelectColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectColorCell.swift; sourceTree = "<group>"; };
+		64E26A692A8BE5E200F6BC3A /* ColorSelectContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectContentView.swift; sourceTree = "<group>"; };
+		64E26A6B2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectMoreColorCollectionView.swift; sourceTree = "<group>"; };
+		64E26A6D2A8BF41400F6BC3A /* ColorSelectMoreColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectMoreColorCell.swift; sourceTree = "<group>"; };
+		64E26A6F2A8C076500F6BC3A /* ColorLearnMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLearnMoreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -876,7 +884,6 @@
 				64E26A3D2A8A3E2800F6BC3A /* TrimOptionContentCollectionView.swift */,
 				64E26A3E2A8A3E2800F6BC3A /* TrimSubOptionView.swift */,
 				64E26A3F2A8A3E2800F6BC3A /* TrimHeaderView.swift */,
-				64E26A402A8A3E2800F6BC3A /* SettingProgressView.swift */,
 				64E26A412A8A3E2800F6BC3A /* TrimLearnMoreView.swift */,
 				64E26A422A8A3E2800F6BC3A /* OptionSummaryContentView.swift */,
 			);
@@ -895,9 +902,13 @@
 			isa = PBXGroup;
 			children = (
 				64E26A5D2A8A58E700F6BC3A /* RotationView.swift */,
+				64E26A6F2A8C076500F6BC3A /* ColorLearnMoreView.swift */,
 				64E26A632A8BBE6A00F6BC3A /* ColorContentView.swift */,
 				64E26A652A8BC04F00F6BC3A /* ColorSelectColorCollectionView.swift */,
 				64E26A672A8BC05C00F6BC3A /* ColorSelectColorCell.swift */,
+				64E26A6B2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift */,
+				64E26A6D2A8BF41400F6BC3A /* ColorSelectMoreColorCell.swift */,
+				64E26A692A8BE5E200F6BC3A /* ColorSelectContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -914,6 +925,7 @@
 			isa = PBXGroup;
 			children = (
 				64E26A612A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift */,
+				64E26A402A8A3E2800F6BC3A /* SettingProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1087,6 +1099,7 @@
 				15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
 				64E26A622A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift in Sources */,
+				64E26A6A2A8BE5E200F6BC3A /* ColorSelectContentView.swift in Sources */,
 				64E26A5E2A8A58E700F6BC3A /* RotationView.swift in Sources */,
 				641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
@@ -1112,12 +1125,14 @@
 				6412D0922A822D5A001E4005 /* LifeStylePeekContentView.swift in Sources */,
 				64E26A562A8A3E2800F6BC3A /* SettingProgressView.swift in Sources */,
 				15DF958E2A7C89630093EAC7 /* UILayout.swift in Sources */,
+				64E26A6E2A8BF41400F6BC3A /* ColorSelectMoreColorCell.swift in Sources */,
 				64E26A592A8A3E2800F6BC3A /* TrimSelectViewController.swift in Sources */,
 				64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */,
 				64E26A552A8A3E2800F6BC3A /* TrimHeaderView.swift in Sources */,
 				64E26A582A8A3E2800F6BC3A /* OptionSummaryContentView.swift in Sources */,
 				64ADA4932A7788B60003E2C1 /* CommonView.swift in Sources */,
 				6412D0A72A8511AE001E4005 /* LearnMoreView.swift in Sources */,
+				64E26A702A8C076500F6BC3A /* ColorLearnMoreView.swift in Sources */,
 				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
 				15D8CC952A892F63009B19B9 /* CommonRecommendCarResultTableViewAdapter.swift in Sources */,
 				64ADA4992A7788C70003E2C1 /* Enum.swift in Sources */,
@@ -1182,6 +1197,7 @@
 				15DF95952A7C89DF0093EAC7 /* GetYaFont.swift in Sources */,
 				155EAB3F2A80F14900833B0E /* CommonRecommendCarResultSectionDividerTitleView.swift in Sources */,
 				64E26A452A8A3E2800F6BC3A /* CarSettingSelectViewController.swift in Sources */,
+				64E26A6C2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift in Sources */,
 				155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */,
 				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
 				64E26A482A8A3E2800F6BC3A /* TrimOptionDetailColorCollectionView.swift in Sources */,
