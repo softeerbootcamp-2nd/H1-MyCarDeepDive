@@ -1,10 +1,8 @@
 import { Outlet, Route, Routes } from 'react-router-dom';
 import Header from '@/Components/Header';
 import LandingPage from '@/Pages/LandingPage';
-import RecommendPage from './Pages/RecommendationPage';
 import QuestionPage from './Pages/RecommendationPage/QuestionPage';
 import ResultPage from './Pages/RecommendationPage/ResultPage';
-import TrimSelectionPage from './Pages/TrimSelectionPage';
 import ColorSelectionPage from './Pages/ColorSelectionPage';
 import OptionSelectitonPage from './Pages/OptionSelectitonPage';
 import RecommendationPage from '@/Pages/RecommendationPage';
@@ -17,7 +15,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/recommend' element={<RecommendPage />}>
+        <Route path='/recommend' element={<RecommendationPage />}>
           <Route path='question/:step' element={<QuestionPage />} />
           <Route path='result/:step' element={<ResultPage />} />
         </Route>

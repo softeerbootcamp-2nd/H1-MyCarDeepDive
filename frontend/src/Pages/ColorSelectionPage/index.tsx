@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Background from '../TrimSelectionPage/Car/Background';
-import CarImage from '../TrimSelectionPage/Car/CarImage';
+
 import ReRecommendCardLink from '../TrimSelectionPage/Car/ReRecommendCarLink';
 import SelectionCarWrapper from '../TrimSelectionPage/SelectionCarWrapper';
 import ColorTitle from './ColorTitle';
@@ -12,6 +12,8 @@ import DropDown from './DropDown';
 import Buttons from './Buttons';
 import { colors } from '@/global/data';
 import ContentsWrapper from './ContentsWrapper';
+import CarRotation from '@/Components/CarRotation';
+import ControlButtons from '../TrimSelectionPage/Car/ControlButtons';
 
 interface colorProps {
   trim?: string;
@@ -48,6 +50,7 @@ function getBestColor({ colorsData, trim, colorType }: Props) {
 
 function ColorSelectionPage() {
   const [trim, setTrim] = useState('Le Blanc');
+  const [rotation, setRotation] = useState(false);
   const [selectedExteriorColor, setSelectedExteriorColor] =
     useState<colorProps>();
   const [selectedInteriorColor, setSelectedInteriorColor] =
@@ -123,7 +126,8 @@ function ColorSelectionPage() {
       <SelectionCarWrapper>
         <ReRecommendCardLink />
         <Background />
-        <CarImage />
+        <CarRotation rotation={rotation} />
+        <ControlButtons rotation={rotation} setRotation={setRotation} />
       </SelectionCarWrapper>
       <ContentsWrapper>
         <ColorTitle title={'외장 색상'} />
