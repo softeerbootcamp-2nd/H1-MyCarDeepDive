@@ -36,31 +36,28 @@ function DropDown({ phrase, data, changerClickHandler, setTrim }: Props) {
       setWantedOtherColor(colorInfo);
     }
   };
+
   return (
     <>
       <div className='border border-primary rounded pl-4 pr-3 mb-8'>
-        <div className='flex items-center justify-between h-11'>
+        <button
+          className='w-full flex items-center justify-between h-11'
+          onClick={() => setShowOtherColor(!showOtherColor)}
+        >
           <p className='font-body4-medium text-primary'>{phrase}</p>
-          <img
-            src={DownArrow}
-            alt='down-arrow'
-            className=' cursor-pointer'
-            onClick={() => setShowOtherColor(!showOtherColor)}
-          />
-        </div>
+          <img src={DownArrow} alt='down-arrow' className=' cursor-pointer' />
+        </button>
         <div
-          className={`max-h-0 overflow-hidden transition-all duration-1000 ${
-            showOtherColor ? 'max-h-[1000px]' : ''
+          className={`overflow-hidden transition-all duration-1000 ${
+            showOtherColor ? 'max-h-[1000px]' : 'max-h-0'
           }`}
         >
-          {showOtherColor && (
-            <ColorItems
-              data={data}
-              clickHandler={otherColorHandler}
-              setShowModal={setShowModal}
-              colorType='other'
-            />
-          )}
+          <ColorItems
+            data={data}
+            clickHandler={otherColorHandler}
+            setShowModal={setShowModal}
+            colorType='other'
+          />
           {showOtherColor && !data.length && (
             <p className='flex justify-center items-center py-10 font-body4-medium text-grey-500 '>
               다른 색상이 없습니다.

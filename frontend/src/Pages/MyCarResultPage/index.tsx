@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from './Head';
 import MyCarInfoWrapper from './MyCarInfoWrapper';
 import SummaryInfo from './SummaryInfo';
@@ -17,6 +17,12 @@ function MyCarResultPage() {
   const [showShareModal, setShowShareModal] = useState(false);
   const [showMailModal, setShowMailModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <>

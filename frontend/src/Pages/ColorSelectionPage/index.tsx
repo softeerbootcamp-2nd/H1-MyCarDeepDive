@@ -121,6 +121,12 @@ function ColorSelectionPage() {
     setSelectedInteriorColor(colorInfo);
   };
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   return (
     <>
       <SelectionCarWrapper>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Tab from './Tab';
 import Tag from './Tag';
 import AllCount from './AllCount';
@@ -136,6 +136,12 @@ function OptionSelectitonPage() {
     setCategory(e.currentTarget.innerText);
     setOffsetX(e.currentTarget.offsetLeft);
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <div className='mt-[120px]'>
