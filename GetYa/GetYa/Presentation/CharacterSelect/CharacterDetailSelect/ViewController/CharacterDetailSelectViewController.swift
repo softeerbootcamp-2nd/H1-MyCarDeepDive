@@ -11,58 +11,154 @@ final class CharacterDetailSelectViewController: BaseViewController {
     enum Constants {
         enum ProgressView {
             static let height = CGFloat(4).scaledHeight
-            static let totalStep = 5
         }
     }
     
     // MARK: - UI properties
-    private let progressView = ProgressView().set {
+    private let progressView = ProgressView.init(
+        frame: .zero,
+        progressTotalStep: 0,
+        style: .bar,
+        animationDuration: 0.37
+    ).set {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.configureProgressTotalStep(with: Constants.ProgressView.totalStep)
     }
-    let temp = BaseCharacterSelectPageViewController().set {
+    private let pageViewController = UIPageViewController(
+        transitionStyle: .scroll,
+        navigationOrientation: .horizontal
+    ).set {
         $0.view.translatesAutoresizingMaskIntoConstraints = false
     }
+    private var viewControllers: [BaseCharacterSelectPageViewController] = []
     
     // MARK: - Properties
-    private var viewControllers: [BaseCharacterSelectPageViewController] = []
+    private var viewModel: CharacterDetailSelectDataSource!
+    private var currentPageViewIndex = 0
+    private lazy var totalStep: Int = 1 {
+        didSet {
+            configurePageView()
+            configurePageViewControllers()
+            progressView.configureProgressTotalStep(with: totalStep)
+            updatePageViewController()
+        }
+    }
     
     // MARK: - Lifecycles
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        viewModel = CharacterDetailSelectViewModel()
         configureUI()
+        totalStep = viewModel.numberOfSteps
     }
     
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
+    init(
+        nibName nibNameOrNil: String?,
+        bundle nibBundleOrNil: Bundle?,
+        viewModel: CharacterDetailSelectDataSource
+    ) {
+        self.viewModel = viewModel
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        configureUI()
+        totalStep = viewModel.numberOfSteps
+    }
+    
+    convenience init(viewModel: CharacterDetailSelectDataSource) {
+        self.init(nibName: nil, bundle: nil, viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        viewModel = CharacterDetailSelectViewModel()
         configureUI()
+        totalStep = viewModel.numberOfSteps
     }
     
     // MARK: - Private Functions
     private func configureUI() {
         view.backgroundColor = .white
-        configureSubviewUI(with: progressView, temp.view)
+        // TODO: Layout supportable 적용해야함
+        configureSubviewUI(with: progressView)
     }
     
-    private func makePageViewControllers() -> [BaseCharacterSelectPageViewController] {
-        return []
+    private func updatePageViewController() {
+        pageViewController.setViewControllers(
+            [viewControllers[currentPageViewIndex]],
+            direction: .forward,
+            animated: false)
+    }
+    
+    private func configurePageViewControllers() {
+        let totalStep = viewModel.numberOfSteps
+        let questionListViewControllers = (0..<totalStep-1).map {
+            let checkListQuestionView = CharacterQuestionDetailListView(
+                textArray: viewModel.questionList(at: $0).questionTexts)
+            let questionInfo = viewModel.questionDiscription(at: $0)
+            let curPageIndex = $0+1
+            
+            return BaseCharacterSelectPageViewController(
+                curPageIndex: curPageIndex,
+                totalPageIndex: totalStep,
+                questionView: checkListQuestionView
+            ).set {
+                $0.setQuestionIndexView(
+                    currentIndex: curPageIndex,
+                    totalIndex: totalStep)
+                $0.setQuestionDescriptionLabel(
+                    defaultText: questionInfo.defaultText,
+                    highlightText: questionInfo.highlightText)
+                $0.delegate = self
+            }
+        }
+        viewControllers.append(contentsOf: questionListViewControllers)
     }
     // MARK: - Functions
+    
+    override func didTapNavigationBackButton() {
+        if currentPageViewIndex > 0 {
+            currentPageViewIndex -= 1
+            let viewController = viewControllers[currentPageViewIndex]
+            pageViewController.setViewControllers(
+                [viewController],
+                direction: .reverse,
+                animated: true)
+            progressView.decreaseOneStep()
+        } else {
+            super.didTapNavigationBackButton()
+        }
+    }
     // MARK: - Objc Functions
 }
 
+// MARK: - BaseCharacterSelectpageViewDelegate
+extension CharacterDetailSelectViewController: BaseCharacterSelectpageViewDelegate {
+    func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController) {
+        if currentPageViewIndex == totalStep - 1 {
+            // TODO: 서버에 string4개, min, max price보낸 후 1.5 결과 화면으로 가기
+            return
+        }
+        let itemIndex = viewController.selectedItemIndex
+        let questions = viewModel.questionList(at: currentPageViewIndex).questionTexts
+        // TODO: 서버에 보내줄 item string
+        let selectedTitle = questions[itemIndex ?? 0]
+        print(selectedTitle)
+        currentPageViewIndex += 1
+        let viewController = viewControllers[currentPageViewIndex]
+        progressView.increaseOneStep()
+        pageViewController.setViewControllers(
+            [viewController], direction: .forward,
+            animated: true)
+    }
+}
+
+// MARK: - LayoutSupportable
 extension CharacterDetailSelectViewController: LayoutSupportable {
     func configureConstraints() {
-        _=[progressViewConstraints, tempC].map { NSLayoutConstraint.activate($0) }
+        configureProgressView()
     }
     
-    private var progressViewConstraints: [NSConstraint] {
+    private func configureProgressView() {
         typealias Const = Constants.ProgressView
-        return [
+        NSLayoutConstraint.activate([
             progressView.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor),
             progressView.leadingAnchor.constraint(
@@ -70,16 +166,19 @@ extension CharacterDetailSelectViewController: LayoutSupportable {
             progressView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor),
             progressView.heightAnchor.constraint(
-                equalToConstant: Const.height)]
+                equalToConstant: Const.height)])
     }
     
-    private var tempC: [NSConstraint] {
-        let tempView = temp.view!
-        tempView.translatesAutoresizingMaskIntoConstraints = false
-        return [
-            tempView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tempView.topAnchor.constraint(equalTo: progressView.bottomAnchor),
-            tempView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tempView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)]
+    private func configurePageView() {
+        guard let pageView = pageViewController.view else {
+            return
+        }
+        view.addSubview(pageView)
+        NSLayoutConstraint.activate([
+            pageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pageView.topAnchor.constraint(equalTo: progressView.bottomAnchor),
+            pageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
+        updateViewConstraints()
     }
 }
