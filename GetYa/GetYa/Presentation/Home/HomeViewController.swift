@@ -57,15 +57,14 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: HomeContentDelegate {
     func touchUpRecomandButton() {
-        let viewModel = DetailRecommendCarResultViewModel()
         self.navigationController?.pushViewController(
-            DetailRecommendCarResultViewController(viewModel: viewModel),
+            CharacterSelectViewController(),
             animated: true)
     }
     
     func touchUpCustomButton() {
         self.navigationController?.pushViewController(
-            TrimSelectViewController(),
+            CarSettingSelectViewController(),
             animated: true)
     }
 }
