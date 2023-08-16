@@ -15,7 +15,6 @@ plugins {
 	id "com.diffplug.spotless" version '6.10.0'
 	id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
 	id 'org.hidetake.swagger.generator' version '2.18.2'
-	id "org.sonarqube" version "4.2.1.3168"
 }
 
 group = 'com.h1'
@@ -53,15 +52,6 @@ test {
 
 jacoco {
 	toolVersion = '0.8.8'
-}
-
-sonar {
-	properties {
-		property "sonar.projectKey", "softeerbootcamp-2nd_H1-MyCarDeepDive"
-		property "sonar.organization", "softeer"
-		property "sonar.host.url", "https://sonarcloud.io"
-		property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
-	}
 }
 
 jacocoTestReport {
