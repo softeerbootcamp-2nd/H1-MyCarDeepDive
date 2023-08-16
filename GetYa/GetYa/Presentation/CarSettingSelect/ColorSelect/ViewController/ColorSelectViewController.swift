@@ -8,14 +8,8 @@
 import UIKit
 
 class ColorSelectViewController: UIViewController {
-    enum Constants {
-        enum RotationView {
-            static let height: CGFloat = .toScaledHeight(value: 185)
-        }
-    }
-    
     // MARK: - UI properties
-    private let rotationView = RotationView(type: .abyss)
+    private let contentView = ColorSelectContentView()
     
     // MARK: - Properties
     
@@ -29,24 +23,21 @@ class ColorSelectViewController: UIViewController {
     
     // MARK: - Private Functions
     private func setupViews() {
-        view.addSubviews([
-            rotationView
-        ])
+        view.addSubview(contentView)
     }
     
     private func configureUI() {
         view.backgroundColor = .white
         
-        configureRotationView()
+        configureContentView()
     }
     
-    private func configureRotationView() {
+    private func configureContentView() {
         NSLayoutConstraint.activate([
-            rotationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            rotationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            rotationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            rotationView.heightAnchor.constraint(
-                equalToConstant: Constants.RotationView.height)
+            contentView.topAnchor.constraint(equalTo: view.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
