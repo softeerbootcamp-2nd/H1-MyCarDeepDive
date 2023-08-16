@@ -12,6 +12,10 @@ final class CharacterDetailSelectViewController: BaseViewController {
         enum ProgressView {
             static let height = CGFloat(4).scaledHeight
         }
+        enum CarPriceSelect {
+            static let height: CGFloat = .toScaledHeight(value: 105)
+            static let topMargin: CGFloat = .toScaledHeight(value: 156)
+        }
     }
     
     // MARK: - UI properties
@@ -87,12 +91,13 @@ final class CharacterDetailSelectViewController: BaseViewController {
     }
     
     private func configurePageViewControllers() {
-        
         let questionListViewControllers = makeQuestionListViewControllers()
-        viewControllers.append(contentsOf: questionListViewControllers)
+        let questionSliderViewController = makeQuestionCarPriceSlideViewController()
+        viewControllers = questionListViewControllers
+        viewControllers.append(questionSliderViewController)
     }
     
-    private func makeQuestionListViewControllers() -> [UIViewController] {
+    private func makeQuestionListViewControllers() -> [BaseCharacterSelectPageViewController] {
         let totalStep = viewModel.numberOfSteps
         return (0..<totalStep-1).map {
             let checkListQuestionView = CharacterDetailQuestionListView(
@@ -116,7 +121,32 @@ final class CharacterDetailSelectViewController: BaseViewController {
         }
     }
     
-    private func makeQuestion
+    private func makeQuestionCarPriceSlideViewController() -> BaseCharacterSelectPageViewController {
+        let priceRangeModel = viewModel.questionCarRangeOfPrice
+        let curPageIndex = viewModel.numberOfSteps
+        let questionInfo = viewModel.questionDiscription(at: curPageIndex-1)
+        let carPriceSliderAreaView = CharacterDetailQuestionCarPriceSelectView(frame: .zero).set {
+            $0.configurePrice(
+                minPrice: priceRangeModel.minimumCarPrice,
+                maxPrice: priceRangeModel.maximumCarPrice,
+                priceUnit: 300)
+        }
+        
+        return BaseCharacterSelectPageViewController(
+            curPageIndex: curPageIndex,
+            totalPageIndex: totalStep,
+            questionView: carPriceSliderAreaView
+        ).set {
+            $0.setQuestionIndexView(currentIndex: curPageIndex, totalIndex: totalStep)
+            $0.setQuestionDescriptionLabel(
+                defaultText: questionInfo.defaultText,
+                highlightText: questionInfo.highlightText)
+            $0.configureHeightMargin(with: Constants.CarPriceSelect.height)
+            $0.configureHeightMargin(with: Constants.CarPriceSelect.topMargin)
+            $0.setupNextButtonToCompletion()
+            $0.delegate = self
+        }
+    }
     
     // MARK: - Functions
     
@@ -141,6 +171,7 @@ extension CharacterDetailSelectViewController: BaseCharacterSelectpageViewDelega
     func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController) {
         if currentPageViewIndex == totalStep - 1 {
             // TODO: 서버에 string4개, min, max price보낸 후 1.5 결과 화면으로 가기
+            print("hihi")
             return
         }
         let itemIndex = viewController.selectedItemIndex
