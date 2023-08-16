@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@/Components/Button';
+import CarRotation from '@/Components/CarRotation';
 import FeatureSelectRadioGroupWrapper from './FeatureSelectRadioGroupWrapper';
 import SelectionCarWrapper from './SelectionCarWrapper';
 import TrimSelectionHeader from './TrimSelectionHeader';
@@ -10,15 +11,16 @@ import TrimWrapper from './TrimWrapper';
 import OptionToolTip from './OptionToolTip';
 import Background from './Car/Background';
 import ReRecommendCardLink from './Car/ReRecommendCarLink';
-import CarImage from './Car/CarImage';
 import Guide from './Feature/Guide';
 import FeatureRadio from './Feature/FeatureRadio';
 import Title from './Trim/Title';
 import CompareButton from './Trim/CompareButton';
 import TrimRadio from './Trim/TrimRadio';
 import ChangeModal from './Trim/ChangeModal';
+import ControlButtons from './Car/ControlButtons';
 
 function TrimSelectionPage() {
+  const [rotation, setRotation] = useState(false);
   const [carFeature, setCarFeature] = useState({
     engine: '디젤 2.2',
     body: '7인승',
@@ -79,12 +81,17 @@ function TrimSelectionPage() {
     setShowOptionToolTip(true);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <SelectionCarWrapper>
         <ReRecommendCardLink />
         <Background />
-        <CarImage />
+        <CarRotation rotation={rotation} />
+        <ControlButtons rotation={rotation} setRotation={setRotation} />
       </SelectionCarWrapper>
 
       <FeatureAndTrimSelectionWrapper>
