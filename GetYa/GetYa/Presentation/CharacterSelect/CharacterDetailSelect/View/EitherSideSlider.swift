@@ -39,7 +39,7 @@ final class EitherSideSlider: UISlider {
     }
 
     // MARK: - Properties
-    private let priceUnit: Float = 300
+    private var priceUnit: Float = 300
     var valueChanged: AnyPublisher<Int, Never> {
         publisher(for: .valueChanged)
             .receive(on: DispatchQueue.main)
@@ -75,27 +75,29 @@ final class EitherSideSlider: UISlider {
         configureUI()
     }
     
+    override func trackRect(forBounds bounds: CGRect) -> CGRect {
+        var rect = super.trackRect(forBounds: bounds)
+        rect.size.height = Constants.trackHeight
+        return rect
+    }
+    
     // MARK: - Private Functions
+    private func configureUI() {
+        translatesAutoresizingMaskIntoConstraints = false
+        setThumbImage(thumbImage, for: .normal)
+        minimumTrackTintColor = .GetYaPalette.acriveBlue
+        setupUI()
+    }
+
+    // MARK: - Functions
     func configure(minValue: Float, maxValue: Float) {
         minimumValue = minValue
         maximumValue = maxValue
         setValue(minValue + priceUnit, animated: false)
     }
     
-    func configureUI() {
-        translatesAutoresizingMaskIntoConstraints = false
-        setThumbImage(thumbImage, for: .normal)
-        minimumTrackTintColor = .GetYaPalette.acriveBlue
-        
-        setupUI()
-        
-    }
-
-    // MARK: - Functions
-    override func trackRect(forBounds bounds: CGRect) -> CGRect {
-        var rect = super.trackRect(forBounds: bounds)
-        rect.size.height = Constants.trackHeight
-        return rect
+    func configure(priceUnit: Float) {
+        self.priceUnit = priceUnit
     }
 }
 
