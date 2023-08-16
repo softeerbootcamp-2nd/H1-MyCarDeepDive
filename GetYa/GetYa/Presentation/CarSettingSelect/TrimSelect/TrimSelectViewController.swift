@@ -320,7 +320,7 @@ class TrimSelectViewController: UIViewController {
     
     // MARK: - Objc Functions
     @objc private func touchUpDifficultSelectButton() {
-        navigationController?.pushViewController(TrimDetailViewController(), animated: true)
+        navigationController?.pushViewController(SubOptionDetailViewController(), animated: true)
     }
     
     @objc private func didTappedView() {
