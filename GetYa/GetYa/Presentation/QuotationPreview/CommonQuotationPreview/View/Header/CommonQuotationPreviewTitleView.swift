@@ -48,8 +48,7 @@ class CommonQuotationPreviewTitleView: UIView {
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureSubviewUI(
-            with: onePixelDivider, sectionTitle)
+        setupUI()
     }
     
     convenience init() {
@@ -59,8 +58,7 @@ class CommonQuotationPreviewTitleView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureSubviewUI(
-            with: onePixelDivider, sectionTitle)
+        setupUI()
     }
     
     // MARK: - Helper
@@ -71,17 +69,20 @@ class CommonQuotationPreviewTitleView: UIView {
 
 // MARK: - LayoutSupportable
 extension CommonQuotationPreviewTitleView: LayoutSupportable {
-    func configureConstraints() {
-        _=[onePixelDividerConstraints,
-           sectionTitleConstraints].map {
-            NSLayoutConstraint.activate($0)
-        }
+    func setupViews() {
+        addSubviews(onePixelDivider, sectionTitle)
+    }
+    
+    func setupConstriants() {
+        onePixelDividerConstraints()
+        sectionTitleConstraints()
+        
     }
     
     // MARK: - Private layout supportable helper
-    private var onePixelDividerConstraints: [NSLayoutConstraint] {
+    private func onePixelDividerConstraints() {
         typealias Const = Constants.OnePixelDivider
-        return [
+        NSLayoutConstraint.activate(
             onePixelDivider.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -91,19 +92,18 @@ extension CommonQuotationPreviewTitleView: LayoutSupportable {
             onePixelDivider.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
                 constant: -Const.trailingMargin),
-            onePixelDivider.heightAnchor.constraint(equalToConstant: Const.height)]
+            onePixelDivider.heightAnchor.constraint(equalToConstant: Const.height))
     }
 
-    private var sectionTitleConstraints: [NSLayoutConstraint] {
+    private func sectionTitleConstraints() {
         typealias Const = Constants.SectionTitle
-        return [
+        NSLayoutConstraint.activate(
             sectionTitle.topAnchor.constraint(
                 equalTo: onePixelDivider.bottomAnchor,
                 constant: Const.topMargin),
             sectionTitle.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
-            sectionTitle.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ]
+            sectionTitle.bottomAnchor.constraint(equalTo: bottomAnchor))
     }
 }

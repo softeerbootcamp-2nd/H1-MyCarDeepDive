@@ -15,11 +15,12 @@ final class DetailQuotationPreviewSecionHeaderView: UITableViewHeaderFooterView 
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        configureSubviewUI(with: sectionTitleAndLineDividerView)
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupUI()
     }
     
     // MARK: - Functions
@@ -30,7 +31,15 @@ final class DetailQuotationPreviewSecionHeaderView: UITableViewHeaderFooterView 
 
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewSecionHeaderView: LayoutSupportable {
-    func configureConstraints() {
+    func setupViews() {
+        addSubviews(sectionTitleAndLineDividerView)
+    }
+    
+    func setupConstriants() {
+        sectionTitleAndLineDividerViewConstraints()
+    }
+    
+    private func sectionTitleAndLineDividerViewConstraints() {
         NSLayoutConstraint.activate([
             sectionTitleAndLineDividerView.leadingAnchor.constraint(
                 equalTo: leadingAnchor),

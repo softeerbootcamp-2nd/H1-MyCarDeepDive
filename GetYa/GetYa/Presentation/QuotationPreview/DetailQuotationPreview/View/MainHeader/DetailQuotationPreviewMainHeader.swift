@@ -32,10 +32,7 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        configureSubviewUI(
-            with: thumbnailView,
-            recommendCarInfoView,
-            sectionDivider)
+        setupUI()
     }
     
     convenience init() {
@@ -44,10 +41,7 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureSubviewUI(
-            with: thumbnailView,
-            recommendCarInfoView,
-            sectionDivider)
+        setupUI()
     }
     
     override func prepareForReuse() {
@@ -83,7 +77,14 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
 
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewMainHeader: LayoutSupportable {
-    func configureConstraints() {
+    func setupViews() {
+        addSubviews(thumbnailView,
+            recommendCarInfoView,
+            sectionDivider)
+        
+    }
+    
+    func setupConstriants() {
         _=[thumbnailViewConstraints,
            recommendCarInfoConstraints,
            sectionDividerConstraints

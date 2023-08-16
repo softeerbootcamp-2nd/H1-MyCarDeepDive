@@ -58,11 +58,7 @@ class CommonQuotationPreviewCarInfoView: UIView {
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureSubviewUI(
-            with: carKrNameLabel,
-            carEnTrimLabel,
-            carPriceLabel,
-            carOptionsLabel)
+        setupUI()
     }
     
     convenience init() {
@@ -71,7 +67,8 @@ class CommonQuotationPreviewCarInfoView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        return nil
+        super.init(coder: coder)
+        setupUI()
     }
     
     // MARK: - Helper
@@ -97,52 +94,58 @@ class CommonQuotationPreviewCarInfoView: UIView {
 
 // MARK: - LayoutSupportable
 extension CommonQuotationPreviewCarInfoView: LayoutSupportable {
-    func configureConstraints() {
-        _=[carKrNameLabelConstraints,
-           carEnNameLabelConstraints,
-           carPriceLabelConstraints,
-           carOptionsLabelConstraints
-        ].map { NSLayoutConstraint.activate($0) }
+    func setupViews() {
+        addSubviews(
+            carKrNameLabel,
+            carEnTrimLabel,
+            carPriceLabel,
+            carOptionsLabel)
+    }
+    
+    func setupConstriants() {
+        carKrNameLabelConstraints()
+        carEnNameLabelConstraints()
+        carPriceLabelConstraints()
+        carOptionsLabelConstraints()
     }
 }
 
 // MARK: - Private layout supportable
 private extension CommonQuotationPreviewCarInfoView {
-    var carKrNameLabelConstraints: [NSLayoutConstraint] {
+    func carKrNameLabelConstraints() {
         typealias Const = Constants.CarKrNameLabel
-        return [
+        NSLayoutConstraint.activate(
             carKrNameLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
             carKrNameLabel.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: Const.topMargin)]
+                constant: Const.topMargin))
     }
     
-    var carEnNameLabelConstraints: [NSLayoutConstraint] {
+    func carEnNameLabelConstraints() {
         typealias Const = Constants.CarEnTrimLabel
-        return [
+        NSLayoutConstraint.activate(
             carEnTrimLabel.leadingAnchor.constraint(
                 equalTo: carKrNameLabel.trailingAnchor,
                 constant: Const.leadingMargin),
             carEnTrimLabel.centerYAnchor.constraint(
-                equalTo: carKrNameLabel.centerYAnchor)
-        ]
+                equalTo: carKrNameLabel.centerYAnchor))
     }
     
-    var carPriceLabelConstraints: [NSLayoutConstraint] {
+    func carPriceLabelConstraints() {
         typealias Const = Constants.CarPriceLabel
-        return [
+        NSLayoutConstraint.activate(
             carPriceLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
                 constant: -Const.trailingMargin),
             carPriceLabel.centerYAnchor.constraint(
-                equalTo: carKrNameLabel.centerYAnchor)]
+                equalTo: carKrNameLabel.centerYAnchor))
     }
     
-    var carOptionsLabelConstraints: [NSLayoutConstraint] {
+    func carOptionsLabelConstraints() {
         typealias Const = Constants.CarOptionsLabel
-        return [
+        NSLayoutConstraint.activate(
             carOptionsLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -150,6 +153,6 @@ private extension CommonQuotationPreviewCarInfoView {
                 equalTo: carKrNameLabel.bottomAnchor,
                 constant: Const.topMargin),
             carOptionsLabel.bottomAnchor.constraint(
-                equalTo: bottomAnchor)]
+                equalTo: bottomAnchor))
     }
 }

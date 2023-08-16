@@ -41,21 +41,16 @@ final class DetailQuotationPreviewFooterView: UITableViewHeaderFooterView {
         fontType: GetYaFont.mediumBody3, color: .GetYaPalette.gray400, text: "총 금액")
     private let paymentAmountLabel = CommonLabel(
         fontType: GetYaFont.mediumHead3, color: .black, text: "0원")
-    private let emptySpacingView = UIView(frame: .zero).set {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
     
     // MARK: - Constant
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        configureSubviewUI(
-            with: onePixelDivider, totalMoneyDescriptionLabel, paymentAmountLabel, emptySpacingView)
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureSubviewUI(
-            with: onePixelDivider, totalMoneyDescriptionLabel, paymentAmountLabel, emptySpacingView)
+        setupUI()
     }
     
     // MARK: - Functions
@@ -66,17 +61,23 @@ final class DetailQuotationPreviewFooterView: UITableViewHeaderFooterView {
 
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewFooterView: LayoutSupportable {
-    func configureConstraints() {
-        _=[onePixelDividerConstraints,
-           totalMoneyDescriptionLabelConstraints,
-           paymentAmountLabelConstriants
-        ].map { NSLayoutConstraint.activate($0) }
+    func setupViews() {
+        addSubviews(
+            onePixelDivider,
+            totalMoneyDescriptionLabel,
+            paymentAmountLabel)
+    }
+    
+    func setupConstriants() {
+        onePixelDividerConstraints()
+        totalMoneyDescriptionLabelConstraints()
+        paymentAmountLabelConstriants()
     }
     
     // MARK: - LayoutSupportable private functions
-    private var onePixelDividerConstraints: [NSLayoutConstraint] {
+    private func onePixelDividerConstraints() {
         let const = Constants.OnePixelDivider.self
-        return [
+        NSLayoutConstraint.activate(
             onePixelDivider.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: const.uiConstant.leadingMargin),
@@ -87,12 +88,12 @@ extension DetailQuotationPreviewFooterView: LayoutSupportable {
                 equalTo: topAnchor,
                 constant: const.uiConstant.topMargin),
             onePixelDivider.heightAnchor.constraint(
-                equalToConstant: const.uiConstant.height)]
+                equalToConstant: const.uiConstant.height))
     }
     
-    private var totalMoneyDescriptionLabelConstraints: [NSLayoutConstraint] {
+    private func totalMoneyDescriptionLabelConstraints() {
         let const = Constants.TotalMoneyDescriptionLabel.self
-        return [
+        NSLayoutConstraint.activate(
             totalMoneyDescriptionLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: const.leadingMargin),
@@ -103,16 +104,16 @@ extension DetailQuotationPreviewFooterView: LayoutSupportable {
                 equalTo: trailingAnchor,
                 constant: -const.trailingMargin),
             totalMoneyDescriptionLabel.bottomAnchor.constraint(
-                equalTo: bottomAnchor)]
+                equalTo: bottomAnchor))
     }
     
-    private var paymentAmountLabelConstriants: [NSLayoutConstraint] {
+    private func paymentAmountLabelConstriants() {
         let const = Constants.PaymentAmountLabel.self
-        return [
+        NSLayoutConstraint.activate(
             paymentAmountLabel.centerYAnchor.constraint(
                 equalTo: totalMoneyDescriptionLabel.centerYAnchor),
             paymentAmountLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: -const.trailingMargin)]
+                constant: -const.trailingMargin))
     }
 }
