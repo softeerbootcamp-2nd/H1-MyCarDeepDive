@@ -34,7 +34,7 @@ jobs:
         shell: bash
 
       - name: Gradle Build
-        run: ./gradlew build -x test
+        run: ./gradlew build
         shell: bash
         
       - name: Jacoco Report

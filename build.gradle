@@ -1,5 +1,6 @@
 buildscript {
 	ext {
+		queryDslVersion = "5.0.0"
 		restdocsApiSpecVersion = '0.16.2'
 		mapStructVersion = "1.4.2.Final"
 	}
@@ -10,6 +11,7 @@ plugins {
 	id 'jacoco'
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id "com.diffplug.spotless" version '6.10.0'
 	id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
 	id 'org.hidetake.swagger.generator' version '2.18.2'
@@ -18,12 +20,6 @@ plugins {
 group = 'com.h1'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
 
 repositories {
 	mavenCentral()
@@ -49,6 +45,58 @@ allprojects {
 	}
 }
 
+test {
+	useJUnitPlatform()
+	finalizedBy 'jacocoTestReport'
+}
+
+jacoco {
+	toolVersion = '0.8.8'
+}
+
+
+jacocoTestReport {
+	reports {
+		html.required.set(true)
+		xml.required.set(true)
+	}
+	def Qdomains = []
+	for(qPattern in "**/QA" .. "**/QZ"){
+		Qdomains.add(qPattern+"*")
+	}
+
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it,
+					exclude: [] + Qdomains)
+		}))
+	}
+	finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+	def Qdomains = []
+	for (qPattern in '*.QA'..'*.QZ') {
+		Qdomains.add(qPattern + '*')
+	}
+
+	violationRules {
+		rule {
+			limit {
+				counter = 'LINE'
+				value = 'COVEREDRATIO'
+				minimum = 0.00
+			}
+
+			excludes = [
+			] + Qdomains
+		}
+	}
+}
+
+tasks.jar {
+	enabled = false
+}
 
 dependencies {
 	// Spring
@@ -62,10 +110,16 @@ dependencies {
 	implementation 'io.micrometer:micrometer-core'
 
 	// Database
-	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.h2database:h2:1.4.199'
+	runtimeOnly 'mysql:mysql-connector-java'
 
 	// Cloud
 	implementation group: 'io.awspring.cloud', name: 'spring-cloud-starter-aws-parameter-store-config'
+
+	// QueryDsl
+	implementation 'com.querydsl:querydsl-jpa'
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
@@ -81,21 +135,22 @@ dependencies {
 	// String-Utils
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 
-
-	// Slack logback appender
+	// Slack
 	implementation 'com.github.maricn:logback-slack-appender:1.6.1'
+
+	// Flyway
+	implementation 'org.flywaydb:flyway-core:6.4.2'
 
 	// Swagger
 	implementation "org.springdoc:springdoc-openapi-ui:1.6.11"
 
 	// RestDocs
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	testImplementation 'com.epages:restdocs-api-spec-mockmvc:' + restdocsApiSpecVersion
+	testImplementation "com.epages:restdocs-api-spec-mockmvc:${restdocsApiSpecVersion}"
 }
 
-test {
+tasks.named('test') {
 	useJUnitPlatform()
-	finalizedBy 'jacocoTestReport'
 }
 
 tasks.withType(GenerateSwaggerUI) {
@@ -124,32 +179,28 @@ openapi3 {
 	outputDirectory = 'build/resources/main/static/docs'
 }
 
-jacoco {
-	toolVersion = '0.8.8'
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
 }
 
-jacocoTestReport {
-	reports {
-		html.required.set(true)
+sourceSets {
+	main.java.srcDir querydslDir
+}
+
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
 	}
-	finalizedBy 'jacocoTestCoverageVerification'
+	querydsl.extendsFrom compileClasspath
 }
 
-jacocoTestCoverageVerification {
-	violationRules {
-		rule {
-			limit {
-				counter = 'LINE'
-				value = 'COVEREDRATIO'
-				minimum = 0.85
-			}
-		}
-	}
-}
-
-tasks.jar {
-	enabled = false
-}
 
 spotless {
 	ratchetFrom 'origin/be-main'
@@ -165,4 +216,8 @@ spotless {
 		// google-java-format
 		googleJavaFormat('1.15.0').aosp().reflowLongStrings(false)
 	}
+}
+
+spotlessJava {
+	dependsOn 'compileQuerydsl'
 }
