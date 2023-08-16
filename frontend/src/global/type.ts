@@ -137,3 +137,7 @@ export interface setShowPriceInfoProps {
 export interface TrimChangeButtonProps {
   mycarTrimHandler: React.Dispatch<React.SetStateAction<void>>;
 }
+
+export interface TagIconProps {
+  fillColor: boolean;
+}

@@ -9,7 +9,8 @@ interface ButtonProps {
     | 'white'
     | 'transparent'
     | 'grey400'
-    | 'primaryBody4';
+    | 'primaryBody4'
+    | 'myCar';
   text: string;
   disabled?: boolean;
   onClick?: () => void;
@@ -24,6 +25,8 @@ const buttonStyle = {
   transparent:
     'bg-transparent border border-grey-1000 font-body3-medium text-grey-900',
   grey400: 'border border-[#D9D9D9] font-body4-medium text-grey-400',
+  myCar:
+    'bg-transparent border border-[#D1D7DF] font-body3-medium text-grey-200',
 };
 
 function Button({

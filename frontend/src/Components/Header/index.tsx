@@ -13,18 +13,26 @@ function Header() {
   const location = useLocation();
   const isHome: boolean = location.pathname === '/';
   const isSelectionPage: boolean = location.pathname.startsWith('/select/');
-
   const [showPriceInfo, setShowPriceInfo] = useState(false);
   const [displayPriceInfo, setDisplayPriceInfo] = useState(false);
+  const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
-    if (!showPriceInfo) return setDisplayPriceInfo(false);
+    if (!showPriceInfo) {
+      if (timer) clearTimeout(timer);
+      setTimer(undefined);
+      setDisplayPriceInfo(false);
+      return;
+    }
 
-    setTimeout(() => {
+    const newTimer = setTimeout(() => {
       setDisplayPriceInfo(true);
     }, 550);
+
+    setTimer(newTimer);
   }, [showPriceInfo]);
 
+  if (location.pathname === '/mycar/result') return null;
   return (
     <header
       className={`fixed w-full ${
