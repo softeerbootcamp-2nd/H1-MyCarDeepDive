@@ -84,4 +84,20 @@ class CommonLabel: UILabel {
             }
         }
     }
+    
+    func configurePartTextFont(
+        color: UIColor,
+        otherFontType: GetYaFont,
+        partText: String
+    ) {
+        if let text, let fontType {
+            attributedText = NSMutableAttributedString(string: text).set {
+                $0.configureHyundaiSans(
+                    type: fontType,
+                    otherType: otherFontType,
+                    text: partText)
+                $0.addAttributes([.foregroundColor: color], range: (text as NSString).range(of: partText))
+            }
+        }
+    }
 }

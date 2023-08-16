@@ -224,7 +224,7 @@ class TrimOptionContentCell: UICollectionViewCell {
 
 // MARK: - LearnMoreView Delegate
 extension TrimOptionContentCell: LearnMoreViewDelegate {
-    func touchUpExpandButtonByIsSelected(isSelected: Bool) {
+    func touchUpExpandButtonByIsSelected(sender: LearnMoreView, isSelected: Bool) {
         delegate?.touchUpLearnMoreViewButton(sender: self)
     }
 }

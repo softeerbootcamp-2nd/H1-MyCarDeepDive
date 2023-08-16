@@ -60,6 +60,7 @@ class TrimLearnMoreView: LearnMoreView {
         clipsToBounds = true
         
         configureLabel()
+        configureButton(view: label)
     }
     
     private func configureContentView(contentView: UIView) {

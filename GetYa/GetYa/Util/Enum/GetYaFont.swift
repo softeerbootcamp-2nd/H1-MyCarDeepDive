@@ -38,6 +38,8 @@ enum GetYaFont {
     case mediumBody4
     ///  14 pt | 22 lineheight
     case regularBody4
+    /// 12 pt | 20 lineheight
+    case boldBody5
     ///  12 pt | 18 lineheight
     case mediumCaption1
     ///  12 pt | 18 lineheight
@@ -76,6 +78,8 @@ enum GetYaFont {
             return 14
         case .regularBody4:
             return 14
+        case .boldBody5:
+            return 12
         case .mediumCaption1:
             return 12
         case .regularCaption1:
@@ -116,6 +120,8 @@ enum GetYaFont {
         case .mediumBody4:
             return -0.2
         case .regularBody4:
+            return -0.2
+        case .boldBody5:
             return -0.2
         case .mediumCaption1:
             return 0.0
@@ -158,6 +164,8 @@ enum GetYaFont {
             return 22
         case .regularBody4:
             return 22
+        case .boldBody5:
+            return 20
         case .mediumCaption1:
             return 18
         case .regularCaption1:
@@ -208,6 +216,8 @@ enum GetYaFont {
             return "HyundaiSansTextKRRegular"
         case .regularBody4:
             return "HyundaiSansTextKRRegular"
+        case .boldBody5:
+            return "HyundaiSansTextKRBold"
         case .mediumCaption1:
             return "HyundaiSansTextKRMedium"
         case .regularCaption1:
