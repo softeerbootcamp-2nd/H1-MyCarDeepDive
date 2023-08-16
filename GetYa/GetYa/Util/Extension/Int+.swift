@@ -14,4 +14,10 @@ extension Int {
         
         return "\(numberFormatter.string(for: self)!)원"
     }
+    
+    var insertCommas: String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value: self)) ?? ""
+    }
 }
