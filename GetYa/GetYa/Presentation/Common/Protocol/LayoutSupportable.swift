@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 protocol LayoutSupportable {
     func setupViews()
     func setupConstriants()
