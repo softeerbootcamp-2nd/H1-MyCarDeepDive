@@ -31,6 +31,8 @@ spring:
       password:
       driver-class-name: org.h2.Driver
       jdbc-url: jdbc:h2:mem:mycardeepdive;MODE=MYSQL
+  flyway:
+    enabled: false
 aws:
   paramstore:
     enabled: true
@@ -75,6 +77,9 @@ spring:
       password: ${slave.password}
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: ${slave.jdbc-url}
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 aws:
   paramstore:
     enabled: true
@@ -119,6 +124,9 @@ spring:
       password: ${slave.password}
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: ${slave.jdbc-url}
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 aws:
   paramstore:
     enabled: true

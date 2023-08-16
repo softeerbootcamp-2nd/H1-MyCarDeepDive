@@ -138,6 +138,9 @@ dependencies {
 	// Slack
 	implementation 'com.github.maricn:logback-slack-appender:1.6.1'
 
+	// Flyway
+	implementation 'org.flywaydb:flyway-core:6.4.2'
+
 	// Swagger
 	implementation "org.springdoc:springdoc-openapi-ui:1.6.11"
 
