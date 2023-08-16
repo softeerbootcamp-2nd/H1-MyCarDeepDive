@@ -47,7 +47,7 @@ function getBestColor({ colorsData, trim, colorType }: Props) {
 }
 
 function ColorSelectionPage() {
-  const [trim, setTrim] = useState('Le Blanc(르블랑)');
+  const [trim, setTrim] = useState('Le Blanc');
   const [selectedExteriorColor, setSelectedExteriorColor] =
     useState<colorProps>();
   const [selectedInteriorColor, setSelectedInteriorColor] =
@@ -71,11 +71,15 @@ function ColorSelectionPage() {
     colorType: 'interior',
   });
 
-  const isCheckedUnlock = ({ colorData, selectedColor }: Props) => {
-    return (
-      colorData?.filter(color => color.name === selectedColor?.name).length ===
-      0
-    );
+  const unlockSelectColor = () => {
+    exteriorColors.find(color => color.name === selectedExteriorColor?.name) ===
+    undefined
+      ? setSelectedExteriorColor(exteriorBestColor)
+      : null;
+    interiorColors.find(color => color.name === selectedInteriorColor?.name) ===
+    undefined
+      ? setSelectedInteriorColor(interiorBestColor)
+      : null;
   };
 
   useEffect(() => {
@@ -93,27 +97,8 @@ function ColorSelectionPage() {
   }, [trim]);
 
   useEffect(() => {
-    if (
-      isCheckedUnlock({
-        colorData: exteriorColors,
-        selectedColor: selectedExteriorColor,
-      })
-    ) {
-      setSelectedExteriorColor(exteriorBestColor);
-    }
-    if (
-      isCheckedUnlock({
-        colorData: interiorColors,
-        selectedColor: selectedInteriorColor,
-      })
-    ) {
-      setSelectedInteriorColor(interiorBestColor);
-    }
+    unlockSelectColor();
   }, [exteriorColors, interiorColors]);
-
-  useEffect(() => {
-    console.log(selectedExteriorColor?.name, selectedInteriorColor?.name);
-  });
 
   const exteriorColorHandler = ({
     currentTarget,

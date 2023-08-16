@@ -92,7 +92,7 @@ export const price = {
 export const detailSelectionList = [
   {
     name: '트림',
-    value: 'Le Blanc(르블랑)',
+    value: 'Le Blanc',
     address: 'trim',
   },
   {
@@ -195,7 +195,7 @@ export const trimCompareData = [
   {
     carImage: LeBlanc,
     forYou: '필수적인 옵션만 모은',
-    trimName: 'Le Blanc(르블랑)',
+    trimName: 'Le Blanc',
     price: '₩43,460,000',
     exteriorColor: [
       '#121212',
@@ -287,7 +287,7 @@ export const trimCompareData = [
 
 export const colors = [
   {
-    trim: 'Le Blanc(르블랑)',
+    trim: 'Le Blanc',
     exteriorColor: [
       {
         name: '크리미 화이트 펄',
@@ -443,13 +443,13 @@ export const colors = [
     ],
     otherInteriorColor: [
       {
-        trim: 'Le Blanc(르블랑)',
+        trim: 'Le Blanc',
         name: '퀄팅 천연(블랙)',
         chooseRate: 70,
         url: Quilted,
       },
       {
-        trim: 'Le Blanc(르블랑)',
+        trim: 'Le Blanc',
         name: '쿨 그레이',
         chooseRate: 60,
         url: CoolGray,
@@ -559,13 +559,13 @@ export const colors = [
     ],
     otherInteriorColor: [
       {
-        trim: 'Le Blanc(르블랑)',
+        trim: 'Le Blanc',
         name: '퀄팅 천연(블랙)',
         chooseRate: 70,
         url: Quilted,
       },
       {
-        trim: 'Le Blanc(르블랑)',
+        trim: 'Le Blanc',
         name: '쿨 그레이',
         chooseRate: 60,
         url: CoolGray,
@@ -670,13 +670,13 @@ export const colors = [
     otehrExteriorColor: [{}],
     otherInteriorColor: [
       {
-        trim: 'Le Blanc(르블랑)',
+        trim: 'Le Blanc',
         name: '퀄팅 천연(블랙)',
         chooseRate: 70,
         url: Quilted,
       },
       {
-        trim: 'Le Blanc(르블랑)',
+        trim: 'Le Blanc',
         name: '쿨 그레이',
         chooseRate: 60,
         url: CoolGray,
