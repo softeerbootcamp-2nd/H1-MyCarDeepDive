@@ -1,6 +1,7 @@
 package com.h1.mycardeepdive.car.ui;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
+import static com.h1.mycardeepdive.fixture.CarSpecFixture.createCarSpecD72E;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -8,6 +9,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import com.h1.mycardeepdive.ControllerTestConfig;
+import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.car.service.CarSpecService;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
@@ -38,40 +40,43 @@ class CarSpecControllerTest extends ControllerTestConfig {
         String drivingSystemName = "2wd";
 
         MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
-
         info.add("engine", engineName);
         info.add("body", bodyName);
         info.add("drivingSystem", drivingSystemName);
 
+        CarSpec carSpec = createCarSpecD72E();
+        List<String> basicOptionNames = List.of("전방 충돌 방지 보조", "내비 기반 크루즈 컨트롤", "세이프티 파워 윈도우");
+        List<Long> basicOptionIds = List.of(1L, 2L, 3L);
+
+        CarSpecResponse carSpecResponse =
+                CarSpecResponse.builder()
+                        .trim_name(carSpec.getTrim().getName())
+                        .price(carSpec.getPrice())
+                        .summary(carSpec.getTrim().getSummary())
+                        .car_spec_id(carSpec.getId())
+                        .trim_id(carSpec.getTrim().getId())
+                        .basic_option_names(basicOptionNames)
+                        .basic_option_ids(basicOptionIds)
+                        .build();
+
         when(carSpecService.findCarSpecsBySpec(engineName, bodyName, drivingSystemName))
                 .thenReturn(
                         List.of(
-                                CarSpecResponse.builder()
-                                        .trim_name("Le Blanc")
-                                        .price(43460000)
-                                        .summary("필수적인 옵션만 모은")
-                                        .car_spec_id(10L)
-                                        .trim_id(2L)
-                                        .basic_option_names(
-                                                List.of(
-                                                        "전방 충돌 방지 보조",
-                                                        "내비 기반 크루즈 컨트롤",
-                                                        "세이프티 파워 윈도우"))
-                                        .basic_option_ids(List.of(1L, 2L, 3L))
-                                        .build()));
+                                carSpecResponse,
+                                carSpecResponse,
+                                carSpecResponse,
+                                carSpecResponse));
 
         // then
         ResultActions resultActions =
                 mockMvc.perform(
-                                RestDocumentationRequestBuilders.get(
-                                                DEFAULT_URL
-                                                        + "?engine=diesel22&body=7seats&drivingSystem=2wd")
+                                RestDocumentationRequestBuilders.get(DEFAULT_URL)
                                         .params(info)
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .accept(MediaType.APPLICATION_JSON))
                         .andDo(
                                 MockMvcRestDocumentationWrapper.document(
-                                        "trim-docs",
+                                        "all-trims",
                                         preprocessRequest(prettyPrint()),
                                         preprocessResponse(prettyPrint()),
                                         resource(
@@ -99,34 +104,37 @@ class CarSpecControllerTest extends ControllerTestConfig {
         String drivingSystem = "2wd";
 
         MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
-
         info.add("engine", engine);
         info.add("body", body);
         info.add("drivingSystem", drivingSystem);
 
+        CarSpec carSpec = createCarSpecD72E();
+        List<String> basicOptionNames = List.of("전방 충돌 방지 보조", "내비 기반 크루즈 컨트롤", "세이프티 파워 윈도우");
+        List<Long> basicOptionIds = List.of(1L, 2L, 3L);
+
+        CarSpecComparisonResponse carSpecComparisonResponse =
+                CarSpecComparisonResponse.builder()
+                        .trims_img_url(carSpec.getTrim().getImgUrl())
+                        .summary(carSpec.getTrim().getSummary())
+                        .trim_name(carSpec.getTrim().getName())
+                        .price(carSpec.getPrice())
+                        .exterior_color_img_urls(List.of())
+                        .interior_color_names(List.of())
+                        .wheel_size(carSpec.getTrim().getWheelSize())
+                        .wheel_name(carSpec.getTrim().getWheelName())
+                        .seat_name(carSpec.getTrim().getSeatName())
+                        .navigation_size(carSpec.getTrim().getNavigationSize())
+                        .cluster_size(carSpec.getTrim().getClusterSize())
+                        .basic_option_names(basicOptionNames)
+                        .basic_option_ids(basicOptionIds)
+                        .build();
         when(carSpecService.findCarSpecComparisonsBySpec(engine, body, drivingSystem))
                 .thenReturn(
                         List.of(
-                                CarSpecComparisonResponse.builder()
-                                        .trims_img_url(
-                                                "https://www.hyundai.com/contents/vr360/LX06/trim/DS.png")
-                                        .summary("필수적인 옵션만 모은")
-                                        .trim_name("Le Blanc")
-                                        .price(43460000)
-                                        .exterior_color_img_urls(List.of())
-                                        .interior_color_names(List.of())
-                                        .wheel_size(20)
-                                        .wheel_name("알로이 휠")
-                                        .seat_name("퀄팅 천연가죽 시트")
-                                        .navigation_size(12.3)
-                                        .cluster_size(4.2)
-                                        .basic_option_names(
-                                                List.of(
-                                                        "전방 충돌 방지 보조",
-                                                        "내비 기반 크루즈 컨트롤",
-                                                        "세이프티 파워 윈도우"))
-                                        .basic_option_ids(List.of(1L, 2L, 3L))
-                                        .build()));
+                                carSpecComparisonResponse,
+                                carSpecComparisonResponse,
+                                carSpecComparisonResponse,
+                                carSpecComparisonResponse));
 
         // then
         ResultActions resultActions =
