@@ -7,6 +7,7 @@
 
 protocol CharacterDetailSelectDataSource {
     var questionCarRangeOfPrice: QuestionSliderViewModel { get }
+    var numberOfSteps: Int { get }
     func questionDiscription(at index: Int) -> QuestionDescriptionLabelModel
     func questionList(at index: Int) -> QuestionListTextModel
     func numberOfQuestionListItems(_ index: Int) -> Int
