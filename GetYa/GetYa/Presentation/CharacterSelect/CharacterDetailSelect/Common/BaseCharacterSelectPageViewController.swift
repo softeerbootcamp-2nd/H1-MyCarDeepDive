@@ -141,11 +141,11 @@ class BaseCharacterSelectPageViewController: UIViewController {
     
     func setQuestionDescriptionLabel(
         defaultText: String,
-        otherFontType: GetYaFont,
-        partText: String
+        otherFontType: GetYaFont = .mediumHead2,
+        highlightText: String
     ) {
         questionDescriptionLabel.text = defaultText
-        questionDescriptionLabel.configurePartTextFont(otherFontType: otherFontType, partText: partText)
+        questionDescriptionLabel.configurePartTextFont(otherFontType: otherFontType, partText: highlightText)
     }
 }
 
