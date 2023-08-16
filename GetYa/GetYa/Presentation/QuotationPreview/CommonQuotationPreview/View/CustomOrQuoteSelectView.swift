@@ -76,7 +76,7 @@ final class CustomOrQuoteSelectView: UIView {
     
     // MARK: - Private Functions
     func configureUI() {
-        configureSubviewUI(with: gradientView, customOrQuoteButtonsView)
+        setupUI()
     }
     
     func setGradient() {
@@ -95,7 +95,16 @@ final class CustomOrQuoteSelectView: UIView {
 
 // MARK: - LayoutSupportable
 extension CustomOrQuoteSelectView: LayoutSupportable {
-    func configureConstraints() {
+    func setupViews() {
+        addSubviews([gradientView, customOrQuoteButtonsView])
+    }
+    
+    func setupConstriants() {
+        configureCustomOrQuoteButtonsView()
+        configureGradientView()
+    }
+    
+    private func configureCustomOrQuoteButtonsView() {
         NSLayoutConstraint.activate([
             customOrQuoteButtonsView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
@@ -107,7 +116,9 @@ extension CustomOrQuoteSelectView: LayoutSupportable {
                 equalTo: bottomAnchor),
             customOrQuoteButtonsView.heightAnchor.constraint(
                 equalToConstant: Constants.height)])
-        
+    }
+    
+    private func configureGradientView() {
         NSLayoutConstraint.activate([
             gradientView.leadingAnchor.constraint(equalTo: leadingAnchor),
             gradientView.trailingAnchor.constraint(equalTo: trailingAnchor),

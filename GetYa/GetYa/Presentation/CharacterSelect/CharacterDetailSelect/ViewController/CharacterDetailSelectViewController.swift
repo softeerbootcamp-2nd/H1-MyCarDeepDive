@@ -77,7 +77,7 @@ final class CharacterDetailSelectViewController: BaseViewController {
     private func configureUI() {
         view.backgroundColor = .white
         // TODO: Layout supportable 적용해야함
-        configureSubviewUI(with: progressView)
+        setupUI()
     }
     
     private func updatePageViewController() {
@@ -152,7 +152,11 @@ extension CharacterDetailSelectViewController: BaseCharacterSelectpageViewDelega
 
 // MARK: - LayoutSupportable
 extension CharacterDetailSelectViewController: LayoutSupportable {
-    func configureConstraints() {
+    func setupViews() {
+        view.addSubview(progressView)
+    }
+    
+    func setupConstriants() {
         configureProgressView()
     }
     

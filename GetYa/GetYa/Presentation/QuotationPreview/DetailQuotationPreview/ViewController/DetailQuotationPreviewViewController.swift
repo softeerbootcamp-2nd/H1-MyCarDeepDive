@@ -53,9 +53,7 @@ final class DetailQuotationPreviewViewController: UIViewController {
     // MARK: - Functions
     func configureUI() {
         view.backgroundColor = .white
-        configureSubviewUI(
-            with: tableView,
-            bottomCustomOrQuoteView)
+        setupUI()
         configureNavigationBar()
     }
     
@@ -81,7 +79,13 @@ final class DetailQuotationPreviewViewController: UIViewController {
 
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewViewController: LayoutSupportable {
-    func configureConstraints() {
+    func setupViews() {
+        view.addSubviews([
+            tableView,
+            bottomCustomOrQuoteView])
+    }
+    
+    func setupConstriants() {
         configureTableView()
         configureBottomCustomOrQuoteView()
     }
@@ -106,6 +110,7 @@ extension DetailQuotationPreviewViewController: LayoutSupportable {
                 $0.topAnchor.constraint(
                     equalTo: tableView.bottomAnchor,
                     constant: -CustomOrQuoteSelectView.Constants.gradientLayerHeight)])
+        
         }
     }
 }

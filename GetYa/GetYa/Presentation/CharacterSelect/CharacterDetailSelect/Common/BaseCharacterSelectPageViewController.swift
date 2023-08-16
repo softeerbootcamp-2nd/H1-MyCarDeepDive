@@ -126,11 +126,7 @@ class BaseCharacterSelectPageViewController: UIViewController {
     
     // MARK: - Private Functions
     private func configureUI() {
-        configureSubviewUI(
-            with: questionPageIndexView,
-            questionDescriptionLabel,
-            questionView,
-            nextButton)
+        setupUI()
         nextButton.setTitle("다음", for: .normal)
     }
     
@@ -159,18 +155,26 @@ class BaseCharacterSelectPageViewController: UIViewController {
     }
 }
 
+// MARK: - LayoutSupportable
 extension BaseCharacterSelectPageViewController: LayoutSupportable {
-    func configureConstraints() {
-        _=[questionIndexViewConstraints,
-           questionDescriptionLabelConstraints,
-           questionViewConstraints,
-           nextButtonConstraints
-        ].map { NSLayoutConstraint.activate($0) }
+    func setupViews() {
+        view.addSubviews([
+            questionPageIndexView,
+            questionDescriptionLabel,
+            questionView,
+            nextButton])
     }
     
-    private var questionIndexViewConstraints: [NSConstraint] {
+    func setupConstriants() {
+        configureQuestionIndexView()
+        configureQuestionDescriptionLabel()
+        configureQuestionView()
+        configureNextButton()
+    }
+    
+    private func configureQuestionIndexView() {
         typealias Const = Constraints.QuestionPageIndexView
-        return [
+        NSLayoutConstraint.activate([
             questionPageIndexView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: Const.trailingMargin),
@@ -180,12 +184,12 @@ extension BaseCharacterSelectPageViewController: LayoutSupportable {
             questionPageIndexView.widthAnchor.constraint(
                 equalToConstant: Const.width),
             questionPageIndexView.heightAnchor.constraint(
-                equalToConstant: Const.height)]
+                equalToConstant: Const.height)])
     }
     
-    private var questionDescriptionLabelConstraints: [NSConstraint] {
+    private func configureQuestionDescriptionLabel() {
         typealias Const = Constraints.QuestionDescriptionLabel
-        return [
+        NSLayoutConstraint.activate([
             questionDescriptionLabel.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: Const.leadingMargin),
@@ -197,12 +201,12 @@ extension BaseCharacterSelectPageViewController: LayoutSupportable {
                 constant: Const.trailingMargin),
             questionDescriptionLabel.bottomAnchor.constraint(
                 lessThanOrEqualTo: questionView.topAnchor,
-                constant: Const.maximumBottomMargin)]
+                constant: Const.maximumBottomMargin)])
     }
     
-    private var questionViewConstraints: [NSConstraint] {
+    private func configureQuestionView() {
         typealias Const = Constraints.QuestionView
-        return [
+        NSLayoutConstraint.activate([
             questionView.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: Const.leadingMargin),
@@ -214,12 +218,12 @@ extension BaseCharacterSelectPageViewController: LayoutSupportable {
                 constant: Const.trailingMargin),
             questionView.bottomAnchor.constraint(
                 lessThanOrEqualTo: nextButton.topAnchor,
-                constant: Const.maximumBottomMargin)]
+                constant: Const.maximumBottomMargin)])
     }
     
-    private var nextButtonConstraints: [NSConstraint] {
+    private func configureNextButton() {
         typealias Const = Constraints.NextButton
-        return [
+        NSLayoutConstraint.activate([
             nextButton.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: Const.leadingMargin),
@@ -227,6 +231,6 @@ extension BaseCharacterSelectPageViewController: LayoutSupportable {
                 equalTo: view.trailingAnchor,
                 constant: Const.trailingMargin),
             nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            nextButton.heightAnchor.constraint(equalToConstant: Const.height)]
+            nextButton.heightAnchor.constraint(equalToConstant: Const.height)])
     }
 }

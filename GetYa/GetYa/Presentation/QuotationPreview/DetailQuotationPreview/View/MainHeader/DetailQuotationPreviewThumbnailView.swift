@@ -120,12 +120,7 @@ final class DetailQuotationPreviewThumbnailView: UIView {
 // MARK: - Helper
 extension DetailQuotationPreviewThumbnailView {
     func configureUI() {
-        configureSubviewUI(
-            with: recommendKeywordStackView,
-            recommendDiscriptionView,
-            recommendSubDiscriptionView,
-            recommendCarImageView,
-            recommendCarBackgroundView)
+        setupUI()
         bringSubviewToFront(recommendCarImageView)
     }
     
@@ -173,22 +168,28 @@ extension DetailQuotationPreviewThumbnailView {
 
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewThumbnailView: LayoutSupportable {
-    func configureConstraints() {
-        _=[recommendKeywordStackViewConstraints,
-           recommendDiscriptionViewConstraints,
-           recommendSubDiscriptionViewConstraints,
-           recommendCarImageViewConstraints,
-           recommendCarBackgroundViewConstraints].map {
-            NSLayoutConstraint.activate($0)
-        }
+    func setupViews() {
+        addSubviews([
+            recommendKeywordStackView,
+            recommendDiscriptionView,
+            recommendSubDiscriptionView,
+            recommendCarImageView,
+            recommendCarBackgroundView])
+    }
+    
+    func setupConstriants() {
+        configureRecommendKeywordStackView()
+        configureRecommendDiscriptionView()
+        configureRecommendSubDiscriptionView()
+        configurerecommendCarImageView()
+        configureRecommendCarBackgroundView()
     }
 }
-
 // MARK: - Layout supportable private helper
 private extension DetailQuotationPreviewThumbnailView {
-    var recommendKeywordStackViewConstraints: [NSLayoutConstraint] {
+    func configureRecommendKeywordStackView() {
         typealias Const = Constants.RecommendKeywordStackView
-        return [
+        NSLayoutConstraint.activate([
             recommendKeywordStackView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -199,12 +200,12 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: topAnchor,
                 constant: Const.topMargin),
             recommendKeywordStackView.heightAnchor.constraint(
-                equalToConstant: Const.height)]
+                equalToConstant: Const.height)])
     }
     
-    var recommendDiscriptionViewConstraints: [NSLayoutConstraint] {
+    func configureRecommendDiscriptionView() {
         typealias Const = Constants.RecommendDiscriptionView
-        return [
+        NSLayoutConstraint.activate([
             recommendDiscriptionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -212,12 +213,12 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: topAnchor,
                 constant: Const.topMargin),
             recommendDiscriptionView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: Const.font.lineHeight)]
+                lessThanOrEqualToConstant: Const.font.lineHeight)])
     }
     
-    var recommendSubDiscriptionViewConstraints: [NSLayoutConstraint] {
+    func configureRecommendSubDiscriptionView() {
         typealias Const = Constants.RecommendSubDiscriptionView
-        return [
+        NSLayoutConstraint.activate([
             recommendSubDiscriptionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -228,12 +229,12 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: recommendCarBackgroundView.topAnchor,
                 constant: -Const.bottomMargin),
             recommendSubDiscriptionView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: Const.font.lineHeight)]
+                lessThanOrEqualToConstant: Const.font.lineHeight)])
     }
     
-    var recommendCarImageViewConstraints: [NSLayoutConstraint] {
+    func configurerecommendCarImageView() {
         typealias Const = Constants.RecommendCarImageView
-        return [
+        NSLayoutConstraint.activate([
             recommendCarImageView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -244,12 +245,12 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: trailingAnchor),
             recommendCarImageView.topAnchor.constraint(
                 greaterThanOrEqualTo: topAnchor,
-                constant: Const.topMargin)]
+                constant: Const.topMargin)])
     }
     
-    var recommendCarBackgroundViewConstraints: [NSLayoutConstraint] {
+    func configureRecommendCarBackgroundView() {
         typealias Const = Constants.RecommendCarBackgroundView
-        return [
+        NSLayoutConstraint.activate([
             recommendCarBackgroundView.leadingAnchor.constraint(
                 equalTo: leadingAnchor),
             recommendCarBackgroundView.trailingAnchor.constraint(
@@ -257,6 +258,6 @@ private extension DetailQuotationPreviewThumbnailView {
             recommendCarBackgroundView.bottomAnchor.constraint(
                 equalTo: bottomAnchor),
             recommendCarBackgroundView.heightAnchor.constraint(
-                equalToConstant: Const.height)]
+                equalToConstant: Const.height)])
     }
 }
