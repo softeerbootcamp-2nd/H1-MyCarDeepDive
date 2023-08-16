@@ -174,6 +174,10 @@ class BaseCharacterSelectPageViewController: UIViewController {
         quetsionViewheightConstriants.isActive = true
         view.layoutIfNeeded()
     }
+    
+    func setupNextButtonToCompletion() {
+        nextButton.setTitle("완료", for: .normal)
+    }
 }
 
 // MARK: - LayoutSupportable
