@@ -79,6 +79,7 @@ class ColorLearnMoreView: LearnMoreView {
         configureLabel()
         configureEmptyLabel()
         configureCollectionView()
+        configureButton(view: label)
     }
     
     private func configureLabel() {
