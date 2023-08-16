@@ -54,6 +54,8 @@ class BaseCharacterSelectPageViewController: UIViewController {
         buttonBackgroundColorType: .primary)
     
     // MARK: - Properties
+    private var questionViewTopConstriants: NSLayoutConstraint!
+    private var quetsionViewheightConstriants: NSLayoutConstraint!
     private var buttonSubscription: AnyCancellable?
     var carPriceRange: (minimumValue: Int?, maximumValue: Int?) {
         questionView.sendCarMinimumAndMaximumPrice()
@@ -153,6 +155,25 @@ class BaseCharacterSelectPageViewController: UIViewController {
         questionDescriptionLabel.text = defaultText
         questionDescriptionLabel.configurePartTextFont(otherFontType: otherFontType, partText: highlightText)
     }
+    
+    func configureTopMargin(with margin: CGFloat) {
+        questionViewTopConstriants.isActive = false
+        questionViewTopConstriants = questionView.topAnchor.constraint(
+            equalTo: questionPageIndexView.bottomAnchor,
+            constant: margin)
+        questionViewTopConstriants.isActive = true
+        view.layoutIfNeeded()
+    }
+    
+    func configureHeightMargin(with height: CGFloat) {
+        if quetsionViewheightConstriants != nil {
+            quetsionViewheightConstriants.isActive = false
+        }
+        quetsionViewheightConstriants = questionView.heightAnchor.constraint(
+            equalToConstant: height)
+        quetsionViewheightConstriants.isActive = true
+        view.layoutIfNeeded()
+    }
 }
 
 // MARK: - LayoutSupportable
@@ -203,19 +224,21 @@ extension BaseCharacterSelectPageViewController: LayoutSupportable {
                 lessThanOrEqualTo: questionView.topAnchor,
                 constant: Const.maximumBottomMargin)])
     }
-    
+
     private func configureQuestionView() {
         typealias Const = Constraints.QuestionView
+        questionViewTopConstriants = questionView.topAnchor.constraint(
+            equalTo: questionPageIndexView.bottomAnchor,
+            constant: Const.topMargin)
+        
         NSLayoutConstraint.activate([
             questionView.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: Const.leadingMargin),
-            questionView.topAnchor.constraint(
-                equalTo: questionPageIndexView.bottomAnchor,
-                constant: Const.topMargin),
             questionView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: Const.trailingMargin),
+            questionViewTopConstriants,
             questionView.bottomAnchor.constraint(
                 lessThanOrEqualTo: nextButton.topAnchor,
                 constant: Const.maximumBottomMargin)])
