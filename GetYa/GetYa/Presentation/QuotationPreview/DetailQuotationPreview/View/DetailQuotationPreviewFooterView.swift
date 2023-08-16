@@ -69,13 +69,13 @@ extension DetailQuotationPreviewFooterView: LayoutSupportable {
     }
     
     func setupConstriants() {
-        onePixelDividerConstraints()
-        totalMoneyDescriptionLabelConstraints()
-        paymentAmountLabelConstriants()
+        configureOnePixelDivider()
+        configureTotalMoneyDescriptionLabel()
+        configurePaymentAmountLabel()
     }
     
     // MARK: - LayoutSupportable private functions
-    private func onePixelDividerConstraints() {
+    private func configureOnePixelDivider() {
         let const = Constants.OnePixelDivider.self
         NSLayoutConstraint.activate([
             onePixelDivider.leadingAnchor.constraint(
@@ -91,7 +91,7 @@ extension DetailQuotationPreviewFooterView: LayoutSupportable {
                 equalToConstant: const.uiConstant.height)])
     }
     
-    private func totalMoneyDescriptionLabelConstraints() {
+    private func configureTotalMoneyDescriptionLabel() {
         let const = Constants.TotalMoneyDescriptionLabel.self
         NSLayoutConstraint.activate([
             totalMoneyDescriptionLabel.leadingAnchor.constraint(
@@ -107,7 +107,7 @@ extension DetailQuotationPreviewFooterView: LayoutSupportable {
                 equalTo: bottomAnchor)])
     }
     
-    private func paymentAmountLabelConstriants() {
+    private func configurePaymentAmountLabel() {
         let const = Constants.PaymentAmountLabel.self
         NSLayoutConstraint.activate([
             paymentAmountLabel.centerYAnchor.constraint(

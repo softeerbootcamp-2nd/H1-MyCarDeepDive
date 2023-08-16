@@ -85,16 +85,16 @@ extension DetailQuotationPreviewMainHeader: LayoutSupportable {
     }
     
     func setupConstriants() {
-        _=[thumbnailViewConstraints,
-           recommendCarInfoConstraints,
-           sectionDividerConstraints
+        _=[configureThumbnailView,
+           configureRecommendCarInfo,
+           configureSectionDivider
         ].map { NSLayoutConstraint.activate($0) }
     }
 }
 
 // MARK: - LayoutSupportable private functions
 private extension DetailQuotationPreviewMainHeader {
-    var thumbnailViewConstraints: [NSLayoutConstraint] {
+    var configureThumbnailView: [NSLayoutConstraint] {
         [thumbnailView.leadingAnchor.constraint(
             equalTo: leadingAnchor),
          thumbnailView.trailingAnchor.constraint(
@@ -102,13 +102,13 @@ private extension DetailQuotationPreviewMainHeader {
          thumbnailView.topAnchor.constraint(equalTo: topAnchor)]
     }
     
-    var recommendCarInfoConstraints: [NSLayoutConstraint] {
+    var configureRecommendCarInfo: [NSLayoutConstraint] {
         [recommendCarInfoView.leadingAnchor.constraint(equalTo: leadingAnchor),
          recommendCarInfoView.trailingAnchor.constraint(equalTo: trailingAnchor),
          recommendCarInfoView.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor)]
     }
     
-    var sectionDividerConstraints: [NSLayoutConstraint] {
+    var configureSectionDivider: [NSLayoutConstraint] {
         [sectionDivider.leadingAnchor.constraint(equalTo: leadingAnchor),
          sectionDivider.trailingAnchor.constraint(equalTo: trailingAnchor),
          sectionDivider.topAnchor.constraint(equalTo: recommendCarInfoView.bottomAnchor),

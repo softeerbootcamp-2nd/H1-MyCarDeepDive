@@ -36,10 +36,10 @@ extension DetailQuotationPreviewSecionHeaderView: LayoutSupportable {
     }
     
     func setupConstriants() {
-        sectionTitleAndLineDividerViewConstraints()
+        configureSectionTitleAndLineDividerView()
     }
     
-    private func sectionTitleAndLineDividerViewConstraints() {
+    private func configureSectionTitleAndLineDividerView() {
         NSLayoutConstraint.activate([
             sectionTitleAndLineDividerView.leadingAnchor.constraint(
                 equalTo: leadingAnchor),

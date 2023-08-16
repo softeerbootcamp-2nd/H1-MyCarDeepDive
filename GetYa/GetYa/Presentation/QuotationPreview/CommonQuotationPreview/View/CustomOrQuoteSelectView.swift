@@ -100,11 +100,11 @@ extension CustomOrQuoteSelectView: LayoutSupportable {
     }
     
     func setupConstriants() {
-        customOrQuoteButtonsViewConstraints()
-        gradientViewConstraints()
+        configureCustomOrQuoteButtonsView()
+        configureGradientView()
     }
     
-    private func customOrQuoteButtonsViewConstraints() {
+    private func configureCustomOrQuoteButtonsView() {
         NSLayoutConstraint.activate([
             customOrQuoteButtonsView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
@@ -118,7 +118,7 @@ extension CustomOrQuoteSelectView: LayoutSupportable {
                 equalToConstant: Constants.height)])
     }
     
-    private func gradientViewConstraints() {
+    private func configureGradientView() {
         NSLayoutConstraint.activate([
             gradientView.leadingAnchor.constraint(equalTo: leadingAnchor),
             gradientView.trailingAnchor.constraint(equalTo: trailingAnchor),

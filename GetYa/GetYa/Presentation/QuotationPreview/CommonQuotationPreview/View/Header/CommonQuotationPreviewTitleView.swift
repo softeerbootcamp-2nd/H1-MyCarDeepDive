@@ -74,13 +74,13 @@ extension CommonQuotationPreviewTitleView: LayoutSupportable {
     }
     
     func setupConstriants() {
-        onePixelDividerConstraints()
-        sectionTitleConstraints()
+        configureOnePixelDivider()
+        configureSectionTitle()
         
     }
     
     // MARK: - Private layout supportable helper
-    private func onePixelDividerConstraints() {
+    private func configureOnePixelDivider() {
         typealias Const = Constants.OnePixelDivider
         NSLayoutConstraint.activate([
             onePixelDivider.leadingAnchor.constraint(
@@ -95,7 +95,7 @@ extension CommonQuotationPreviewTitleView: LayoutSupportable {
             onePixelDivider.heightAnchor.constraint(equalToConstant: Const.height)])
     }
 
-    private func sectionTitleConstraints() {
+    private func configureSectionTitle() {
         typealias Const = Constants.SectionTitle
         NSLayoutConstraint.activate([
             sectionTitle.topAnchor.constraint(

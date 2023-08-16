@@ -111,15 +111,15 @@ extension CommonQuotationPreviewCell: LayoutSupportable {
     }
     
     func setupConstriants() {
-        recommendCarOptionViewConstraints()
-        reviewdTextViewConstraints()
+        configureRecommendCarOptionView()
+        configureReviewdTextView()
         
         recommendCarOptionView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         recommendCarOptionView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         reviewdTextView.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
     
-    private func recommendCarOptionViewConstraints() {
+    private func configureRecommendCarOptionView() {
         typealias Const = Constants.RecommendCarOptionView
         NSLayoutConstraint.activate([
             recommendCarOptionView.leadingAnchor.constraint(
@@ -133,7 +133,7 @@ extension CommonQuotationPreviewCell: LayoutSupportable {
         
     }
     
-    private func reviewdTextViewConstraints() {
+    private func configureReviewdTextView() {
         typealias Const = Constants.ReviewdTextView
         NSLayoutConstraint.activate([
             reviewdTextView.leadingAnchor.constraint(
