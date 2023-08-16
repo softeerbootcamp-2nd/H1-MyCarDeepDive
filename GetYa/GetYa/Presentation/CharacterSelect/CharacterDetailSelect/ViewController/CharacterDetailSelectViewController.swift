@@ -76,7 +76,6 @@ final class CharacterDetailSelectViewController: BaseViewController {
     // MARK: - Private Functions
     private func configureUI() {
         view.backgroundColor = .white
-        // TODO: Layout supportable 적용해야함
         setupUI()
     }
     
@@ -88,9 +87,15 @@ final class CharacterDetailSelectViewController: BaseViewController {
     }
     
     private func configurePageViewControllers() {
+        
+        let questionListViewControllers = makeQuestionListViewControllers()
+        viewControllers.append(contentsOf: questionListViewControllers)
+    }
+    
+    private func makeQuestionListViewControllers() -> [UIViewController] {
         let totalStep = viewModel.numberOfSteps
-        let questionListViewControllers = (0..<totalStep-1).map {
-            let checkListQuestionView = CharacterQuestionDetailListView(
+        return (0..<totalStep-1).map {
+            let checkListQuestionView = CharacterDetailQuestionListView(
                 textArray: viewModel.questionList(at: $0).questionTexts)
             let questionInfo = viewModel.questionDiscription(at: $0)
             let curPageIndex = $0+1
@@ -109,8 +114,10 @@ final class CharacterDetailSelectViewController: BaseViewController {
                 $0.delegate = self
             }
         }
-        viewControllers.append(contentsOf: questionListViewControllers)
     }
+    
+    private func makeQuestion
+    
     // MARK: - Functions
     
     override func didTapNavigationBackButton() {

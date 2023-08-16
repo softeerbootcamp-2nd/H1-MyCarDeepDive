@@ -69,7 +69,7 @@ class BaseCharacterSelectPageViewController: UIViewController {
     
     // MARK: - Lifecycles
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        questionView = CharacterQuestionDetailListView(textArray: [
+        questionView = CharacterDetailQuestionListView(textArray: [
             "문항이 준비중입니다..",
             "당신의 차를 위한 최적의 질문지가 준비중입니다.."])
         curPageIndex = 1
@@ -115,7 +115,7 @@ class BaseCharacterSelectPageViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        questionView = CharacterQuestionDetailListView(textArray: [
+        questionView = CharacterDetailQuestionListView(textArray: [
             "문항이 준비중입니다..",
             "당신의 차를 위한 최적의 질문지가 준비중입니다.."])
         curPageIndex = 1
