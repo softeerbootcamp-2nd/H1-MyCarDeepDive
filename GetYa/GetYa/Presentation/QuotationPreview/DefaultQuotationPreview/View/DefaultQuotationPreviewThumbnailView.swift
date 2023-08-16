@@ -13,8 +13,8 @@ final class DefaultQuotationPreviewThumbnailView: UIView {
             typealias ConstThumbnailCardView = DefaultQuotationPreviewThumbnailCardView.Constants
             let thumbnailCardViewHeight = ConstThumbnailCardView.intrinsicContentHegiht
             return (thumbnailCardViewHeight +
-                    ThumbnailCardView.topMargin +
-                    (-ThumbnailCardView.bottomMargin))
+                    ThumbnailCardView.topMargin -
+                    ThumbnailCardView.bottomMargin)
         }()
         enum ThumbnailCardView {
             static let leadingMargin: CGFloat = .toScaledWidth(value: 38)
@@ -26,27 +26,30 @@ final class DefaultQuotationPreviewThumbnailView: UIView {
     
     // MARK: - UI properties
     private let thumbnailView = DefaultQuotationPreviewThumbnailCardView(frame: .zero)
+    private var isAddedGradient = false
     
     // MARK: - Properties
     override var bounds: CGRect {
         didSet {
-            layer.addSublayer(CAGradientLayer().set {
-                $0.frame = bounds
-                $0.colors = [
-                    UIColor(red: 0.447, green: 0.512, blue: 0.667, alpha: 1).cgColor,
-                    UIColor(red: 0.791, green: 0.818, blue: 0.883, alpha: 1).cgColor]
-                $0.locations = [0, 1]
-                $0.startPoint = CGPoint(x: 0.5, y: 0.35)
-                $0.endPoint = CGPoint(x: 0.5, y: 1)
-            })
-            bringSubviewToFront(thumbnailView)
+            if !isAddedGradient {
+                isAddedGradient.toggle()
+                layer.addSublayer(CAGradientLayer().set {
+                    $0.frame = bounds
+                    $0.colors = [
+                        UIColor(red: 0.447, green: 0.512, blue: 0.667, alpha: 1).cgColor,
+                        UIColor(red: 0.791, green: 0.818, blue: 0.883, alpha: 1).cgColor]
+                    $0.locations = [0, 1]
+                    $0.startPoint = CGPoint(x: 0.5, y: 0.35)
+                    $0.endPoint = CGPoint(x: 0.5, y: 1)
+                })
+                bringSubviewToFront(thumbnailView)
+            }
         }
     }
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemPink.withAlphaComponent(0.2)
         configureUI()
     }
     
@@ -57,10 +60,8 @@ final class DefaultQuotationPreviewThumbnailView: UIView {
     
     // MARK: - Private Functions
     private func configureUI() {
-        if frame == .zero {
-            translatesAutoresizingMaskIntoConstraints = false
-        }
-        configureSubviewUI(with: thumbnailView)
+        translatesAutoresizingMaskIntoConstraints = false
+        setupUI()
     }
     
     // MARK: - Functions
@@ -75,7 +76,15 @@ final class DefaultQuotationPreviewThumbnailView: UIView {
 }
 
 extension DefaultQuotationPreviewThumbnailView: LayoutSupportable {
-    func configureConstraints() {
+    func setupViews() {
+        addSubviews([thumbnailView])
+    }
+    
+    func setupConstriants() {
+        thumbnailViewContraints()
+    }
+    
+    private func thumbnailViewContraints() {
         typealias Const = Constants.ThumbnailCardView
         NSLayoutConstraint.activate([
             thumbnailView.leadingAnchor.constraint(
@@ -90,5 +99,6 @@ extension DefaultQuotationPreviewThumbnailView: LayoutSupportable {
             thumbnailView.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
                 constant: Const.bottomMargin)])
+
     }
 }
