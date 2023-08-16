@@ -3,8 +3,8 @@ package com.h1.mycardeepdive.color.service;
 import com.h1.mycardeepdive.color.domain.ColorCombination;
 import com.h1.mycardeepdive.color.domain.ExteriorColor;
 import com.h1.mycardeepdive.color.domain.InteriorColor;
-import com.h1.mycardeepdive.color.domain.TrimsColorCombination;
-import com.h1.mycardeepdive.color.domain.repository.TrimsColorCombinationRepository;
+import com.h1.mycardeepdive.color.domain.TrimColorCombination;
+import com.h1.mycardeepdive.color.domain.repository.TrimColorCombinationRepository;
 import com.h1.mycardeepdive.color.ui.dto.ColorInfo;
 import com.h1.mycardeepdive.color.ui.dto.ColorResponse;
 import java.util.ArrayList;
@@ -20,15 +20,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class ColorService {
 
-    private final TrimsColorCombinationRepository trimsColorCombinationRepository;
+    private final TrimColorCombinationRepository trimColorCombinationRepository;
 
     public ColorResponse findExteriorColors(Long trimId, Long interiorColorId) {
-        List<TrimsColorCombination> trimsColorCombinations =
-                trimsColorCombinationRepository.findByTrims_Id(trimId);
+        List<TrimColorCombination> trimColorCombinations =
+                trimColorCombinationRepository.findByTrim_Id(trimId);
         List<ColorInfo> exteriorColors = new ArrayList<>();
         List<ColorInfo> unavailableExteriorColors = new ArrayList<>();
-        for (TrimsColorCombination trimsColorCombination : trimsColorCombinations) {
-            ColorCombination colorCombination = trimsColorCombination.getColorCombination();
+        for (TrimColorCombination trimColorCombination : trimColorCombinations) {
+            ColorCombination colorCombination = trimColorCombination.getColorCombination();
             ExteriorColor exteriorColor = colorCombination.getExteriorColor();
             ColorInfo colorInfo =
                     ColorInfo.builder()
@@ -50,12 +50,12 @@ public class ColorService {
     }
 
     public ColorResponse findInteriorColors(Long trimId, Long exteriorColorId) {
-        List<TrimsColorCombination> trimsColorCombinations =
-                trimsColorCombinationRepository.findByTrims_Id(trimId);
+        List<TrimColorCombination> trimColorCombinations =
+                trimColorCombinationRepository.findByTrim_Id(trimId);
         List<ColorInfo> interiorColors = new ArrayList<>();
         List<ColorInfo> unavailableInteriorColors = new ArrayList<>();
-        for (TrimsColorCombination trimsColorCombination : trimsColorCombinations) {
-            ColorCombination colorCombination = trimsColorCombination.getColorCombination();
+        for (TrimColorCombination trimColorCombination : trimColorCombinations) {
+            ColorCombination colorCombination = trimColorCombination.getColorCombination();
             InteriorColor interiorColor = colorCombination.getInteriorColor();
             ColorInfo colorInfo =
                     ColorInfo.builder()

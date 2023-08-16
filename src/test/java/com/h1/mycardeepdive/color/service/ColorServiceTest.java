@@ -6,11 +6,11 @@ import static org.mockito.Mockito.when;
 import com.h1.mycardeepdive.color.domain.ColorCombination;
 import com.h1.mycardeepdive.color.domain.ExteriorColor;
 import com.h1.mycardeepdive.color.domain.InteriorColor;
-import com.h1.mycardeepdive.color.domain.TrimsColorCombination;
-import com.h1.mycardeepdive.color.domain.repository.TrimsColorCombinationRepository;
+import com.h1.mycardeepdive.color.domain.TrimColorCombination;
+import com.h1.mycardeepdive.color.domain.repository.TrimColorCombinationRepository;
 import com.h1.mycardeepdive.color.ui.dto.ColorInfo;
 import com.h1.mycardeepdive.color.ui.dto.ColorResponse;
-import com.h1.mycardeepdive.trims.domain.Trims;
+import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class ColorServiceTest {
-    @Mock private TrimsColorCombinationRepository trimsColorCombinationRepository;
+    @Mock private TrimColorCombinationRepository trimColorCombinationRepository;
 
     @InjectMocks private ColorService colorService;
 
@@ -32,7 +32,7 @@ class ColorServiceTest {
         Long trimId = 1L;
         Long interiorColorId = 1L;
 
-        Trims trims = Trims.builder().id(1L).name("Le Blanc").summary("요약").build();
+        Trim trim = Trim.builder().id(1L).name("Le Blanc").summary("요약").build();
 
         InteriorColor interiorColor1 =
                 InteriorColor.builder()
@@ -91,21 +91,21 @@ class ColorServiceTest {
                         .interiorColor(interiorColor2)
                         .build();
 
-        TrimsColorCombination trimsColorCombination1 =
-                TrimsColorCombination.builder()
+        TrimColorCombination trimsColorCombination1 =
+                TrimColorCombination.builder()
                         .id(1L)
-                        .trims(trims)
+                        .trim(trim)
                         .colorCombination(colorCombination1)
                         .build();
 
-        TrimsColorCombination trimsColorCombination2 =
-                TrimsColorCombination.builder()
+        TrimColorCombination trimsColorCombination2 =
+                TrimColorCombination.builder()
                         .id(2L)
-                        .trims(trims)
+                        .trim(trim)
                         .colorCombination(colorCombination2)
                         .build();
 
-        when(trimsColorCombinationRepository.findByTrims_Id(trimId))
+        when(trimColorCombinationRepository.findByTrim_Id(trimId))
                 .thenReturn(List.of(trimsColorCombination1, trimsColorCombination2));
         // when
         ColorResponse colorResponse = colorService.findExteriorColors(trimId, interiorColorId);
@@ -131,7 +131,7 @@ class ColorServiceTest {
         Long trimId = 1L;
         Long exteriorColorId = 1L;
 
-        Trims trims = Trims.builder().id(1L).name("Le Blanc").summary("요약").build();
+        Trim trim = Trim.builder().id(1L).name("Le Blanc").summary("요약").build();
 
         InteriorColor interiorColor1 =
                 InteriorColor.builder()
@@ -183,21 +183,21 @@ class ColorServiceTest {
                         .interiorColor(interiorColor2)
                         .build();
 
-        TrimsColorCombination trimsColorCombination1 =
-                TrimsColorCombination.builder()
+        TrimColorCombination trimsColorCombination1 =
+                TrimColorCombination.builder()
                         .id(1L)
-                        .trims(trims)
+                        .trim(trim)
                         .colorCombination(colorCombination1)
                         .build();
 
-        TrimsColorCombination trimsColorCombination2 =
-                TrimsColorCombination.builder()
+        TrimColorCombination trimsColorCombination2 =
+                TrimColorCombination.builder()
                         .id(2L)
-                        .trims(trims)
+                        .trim(trim)
                         .colorCombination(colorCombination2)
                         .build();
 
-        when(trimsColorCombinationRepository.findByTrims_Id(trimId))
+        when(trimColorCombinationRepository.findByTrim_Id(trimId))
                 .thenReturn(List.of(trimsColorCombination1, trimsColorCombination2));
         // when
         ColorResponse colorResponse = colorService.findInteriorColors(trimId, exteriorColorId);

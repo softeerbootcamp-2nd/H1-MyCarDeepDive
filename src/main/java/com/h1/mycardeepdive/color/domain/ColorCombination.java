@@ -27,5 +27,5 @@ public class ColorCombination {
     private InteriorColor interiorColor;
 
     @OneToMany(mappedBy = "colorCombination", fetch = FetchType.LAZY)
-    private List<TrimsColorCombination> trimsColorCombinations;
+    private List<TrimColorCombination> trimsColorCombinations;
 }

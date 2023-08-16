@@ -1,7 +1,7 @@
 package com.h1.mycardeepdive.trims.domain;
 
 import com.h1.mycardeepdive.car.domain.Car;
-import com.h1.mycardeepdive.color.domain.TrimsColorCombination;
+import com.h1.mycardeepdive.color.domain.TrimColorCombination;
 import java.util.List;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,10 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class Trims {
+@Table(name = "trims")
+public class Trim {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "trims_id")
+    @Column(name = "trim_id")
     private Long id;
 
     private String name;
@@ -42,6 +43,6 @@ public class Trims {
     @JoinColumn(name = "car_id")
     private Car car;
 
-    @OneToMany(mappedBy = "trims", fetch = FetchType.LAZY)
-    private List<TrimsColorCombination> trimsColorCombinations;
+    @OneToMany(mappedBy = "trim", fetch = FetchType.LAZY)
+    private List<TrimColorCombination> trimColorCombinations;
 }
