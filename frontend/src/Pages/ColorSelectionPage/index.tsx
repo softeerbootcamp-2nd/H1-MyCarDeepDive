@@ -5,7 +5,7 @@ import ReRecommendCardLink from '../TrimSelectionPage/Car/ReRecommendCarLink';
 import SelectionCarWrapper from '../TrimSelectionPage/SelectionCarWrapper';
 import ColorTitle from './ColorTitle';
 import Description from './Description';
-import ColorRadio from './ColorRadio';
+import ColorItems from './ColorItems';
 
 import UnderLine from '@/Components/UnderLine';
 import DropDown from './DropDown';
@@ -131,7 +131,7 @@ function ColorSelectionPage() {
           color={selectedExteriorColor?.name}
           rate={selectedExteriorColor?.chooseRate}
         />
-        <ColorRadio
+        <ColorItems
           data={exteriorColors || []}
           selectedColor={selectedExteriorColor}
           clickHandler={exteriorColorHandler}
@@ -149,7 +149,7 @@ function ColorSelectionPage() {
           color={selectedInteriorColor?.name}
           rate={selectedInteriorColor?.chooseRate}
         />
-        <ColorRadio
+        <ColorItems
           data={interiorColors || []}
           selectedColor={selectedInteriorColor}
           clickHandler={interiorColorHandler}

@@ -15,7 +15,7 @@ interface Props {
   setShowModal?: (value: boolean) => void;
 }
 
-function ColorRadio({
+function ColorItems({
   data,
   colorType,
   selectedColor,
@@ -97,4 +97,4 @@ function ColorRadio({
   );
 }
 
-export default ColorRadio;
+export default ColorItems;

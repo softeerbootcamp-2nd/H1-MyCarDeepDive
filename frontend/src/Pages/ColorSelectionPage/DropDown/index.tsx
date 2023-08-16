@@ -1,6 +1,6 @@
 import DownArrow from '@/assets/icon/down-arrow.svg';
 import { useState } from 'react';
-import ColorRadio from '../ColorRadio';
+import ColorItems from '../ColorItems';
 import ChangerModal from '../ChangerModal';
 
 interface colorProps {
@@ -54,7 +54,7 @@ function DropDown({ phrase, data, changerClickHandler, setTrim }: Props) {
           }`}
         >
           {showOtherColor && (
-            <ColorRadio
+            <ColorItems
               data={data}
               clickHandler={otherColorHandler}
               setShowModal={setShowModal}
