@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import NavigationRadioGroup from './NavigationRadioGroup';
+import Navigation from './Navigation';
 import PriceDetailButton from './priceDetailButton';
 import ShowQuotationButton from './showQuotation';
 import HeaderLogo from './HeaderLogo';
@@ -54,7 +54,7 @@ function Header() {
 
         {isSelectionPage && (
           <div className='flex justify-between'>
-            <NavigationRadioGroup />
+            <Navigation />
             <div className='mt-[10px] flex'>
               <PriceDetailButton
                 showPriceInfo={showPriceInfo}

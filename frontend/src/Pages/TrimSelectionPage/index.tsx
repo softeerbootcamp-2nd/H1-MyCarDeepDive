@@ -17,9 +17,11 @@ import Title from './Trim/Title';
 import CompareButton from './Trim/CompareButton';
 import TrimRadio from './Trim/TrimRadio';
 import ChangeModal from './Trim/ChangeModal';
+import { useNavigate } from 'react-router-dom';
 import ControlButtons from './Car/ControlButtons';
 
 function TrimSelectionPage() {
+  const navigation = useNavigate();
   const [rotation, setRotation] = useState(false);
   const [carFeature, setCarFeature] = useState({
     engine: '디젤 2.2',
@@ -82,7 +84,10 @@ function TrimSelectionPage() {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }, []);
 
   return (
@@ -128,7 +133,7 @@ function TrimSelectionPage() {
             height='h-[52px]'
             variant='primary'
             text='색상 선택'
-            onClick={() => console.log('primary')}
+            onClick={() => navigation('/select/color')}
           />
         </ColorChoiceButtonWrapper>
       </FeatureAndTrimSelectionWrapper>
