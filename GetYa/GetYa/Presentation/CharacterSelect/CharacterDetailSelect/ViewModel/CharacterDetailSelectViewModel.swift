@@ -37,3 +37,22 @@ final class CharacterDetailSelectViewModel {
     private var questionListTexts: [QuestionListTextModel] = QuestionListTextModel.mock
     private var questionSliderViewModel: QuestionSliderViewModel = .mock
 }
+
+// MARK: - CharacterDetailSelectDataSource
+extension CharacterDetailSelectViewModel: CharacterDetailSelectDataSource {
+    var questionCarRangeOfPrice: QuestionSliderViewModel {
+        questionSliderViewModel
+    }
+    
+    func questionDiscription(at index: Int) -> QuestionDescriptionLabelModel {
+        return questionDescriptionTexts[index]
+    }
+    
+    func questionList(at index: Int) -> QuestionListTextModel {
+        return questionListTexts[index]
+    }
+    
+    func numberOfQuestionListItems(_ index: Int) -> Int {
+        return questionListTexts[index].count
+    }
+}
