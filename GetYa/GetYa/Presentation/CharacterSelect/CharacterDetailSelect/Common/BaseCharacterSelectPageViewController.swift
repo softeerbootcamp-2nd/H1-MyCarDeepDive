@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol BaseCharacterSelectpageViewDelegate: AnyObject {
     func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController)
@@ -53,6 +54,7 @@ class BaseCharacterSelectPageViewController: UIViewController {
         buttonBackgroundColorType: .primary)
     
     // MARK: - Properties
+    private var buttonSubscription: AnyCancellable?
     var carPriceRange: (minimumValue: Int?, maximumValue: Int?) {
         questionView.sendCarMinimumAndMaximumPrice()
     }
@@ -63,6 +65,7 @@ class BaseCharacterSelectPageViewController: UIViewController {
     // MARK: - Properties
     private var curPageIndex: Int
     private var totalPageIndex: Int
+    var delegate: BaseCharacterSelectpageViewDelegate?
     
     // MARK: - Lifecycles
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -108,6 +111,7 @@ class BaseCharacterSelectPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -130,12 +134,18 @@ class BaseCharacterSelectPageViewController: UIViewController {
         nextButton.setTitle("다음", for: .normal)
     }
     
+    private func bind() {
+        buttonSubscription = nextButton.tap.sink {
+            self.delegate?.touchUpBaseCharacterSelectPageView(self)
+        }
+    }
+    
     // MARK: - Functions
     func setQuestionIndexView(currentIndex: Int, totalIndex: Int) {
         questionPageIndexView.setText(text: "\(currentIndex)/\(totalIndex)")
     }
     
-    func setNextButtontitle(with title: String) {
+    func setNextButtonTitle(with title: String) {
         nextButton.setTitle(title, for: .normal)
     }
     
