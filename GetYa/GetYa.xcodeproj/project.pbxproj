@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		155B729E2A8C87160091A7F4 /* BottomSheetLargeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3B2A8A3E2800F6BC3A /* BottomSheetLargeContentView.swift */; };
+		155B729F2A8C873E0091A7F4 /* TrimOptionDetailOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A342A8A3E2800F6BC3A /* TrimOptionDetailOptionCell.swift */; };
 		155DDD052A82D040009AE2BC /* DetailQuotationPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD042A82D040009AE2BC /* DetailQuotationPreviewViewModel.swift */; };
 		155DDD0A2A835FEF009AE2BC /* DetailQuotationPreviewSecionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD092A835FEF009AE2BC /* DetailQuotationPreviewSecionHeaderView.swift */; };
 		155DDD102A846077009AE2BC /* QuotationPreviewCarInfoModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0F2A846077009AE2BC /* QuotationPreviewCarInfoModel+Mock.swift */; };
@@ -26,6 +28,9 @@
 		15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */; };
 		159B2CF92A825D07003F47D6 /* DetailQuotationPreviewTableViewAdapterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CF82A825D07003F47D6 /* DetailQuotationPreviewTableViewAdapterDataSource.swift */; };
 		159B2CFE2A825F5F003F47D6 /* CommonQuotationPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CFD2A825F5F003F47D6 /* CommonQuotationPreviewCell.swift */; };
+		15B099792A8C864A005D1FF1 /* TrimSubOptionContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A362A8A3E2800F6BC3A /* TrimSubOptionContentStackView.swift */; };
+		15B0997A2A8C864A005D1FF1 /* TrimSubOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3E2A8A3E2800F6BC3A /* TrimSubOptionView.swift */; };
+		15B0997B2A8C86D4005D1FF1 /* OptionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A112A895C1700F6BC3A /* OptionSelectViewController.swift */; };
 		15D8CC8C2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC8B2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift */; };
 		15D8CC8F2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC8E2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift */; };
 		15DF95862A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF957F2A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf */; };
@@ -111,23 +116,18 @@
 		64C57BFE2A8C787D00113E56 /* QuotationPreviewCarProductOptionModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD112A84610A009AE2BC /* QuotationPreviewCarProductOptionModel+Mock.swift */; };
 		64C57BFF2A8C788900113E56 /* DetailQuotationPreviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC962A894C66009B19B9 /* DetailQuotationPreviewTableView.swift */; };
 		64E26A102A895C0F00F6BC3A /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A0F2A895C0F00F6BC3A /* ColorSelectViewController.swift */; };
-		64E26A122A895C1700F6BC3A /* OptionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A112A895C1700F6BC3A /* OptionSelectViewController.swift */; };
 		64E26A452A8A3E2800F6BC3A /* CarSettingSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A2E2A8A3E2800F6BC3A /* CarSettingSelectViewController.swift */; };
 		64E26A462A8A3E2800F6BC3A /* TrimOptionContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A302A8A3E2800F6BC3A /* TrimOptionContentCell.swift */; };
 		64E26A472A8A3E2800F6BC3A /* TrimOptionDetailOptionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A312A8A3E2800F6BC3A /* TrimOptionDetailOptionCollectionView.swift */; };
 		64E26A482A8A3E2800F6BC3A /* TrimOptionDetailColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A322A8A3E2800F6BC3A /* TrimOptionDetailColorCollectionView.swift */; };
 		64E26A492A8A3E2800F6BC3A /* BottomSheetSmallContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A332A8A3E2800F6BC3A /* BottomSheetSmallContentView.swift */; };
-		64E26A4A2A8A3E2800F6BC3A /* TrimOptionDetailOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A342A8A3E2800F6BC3A /* TrimOptionDetailOptionCell.swift */; };
 		64E26A4B2A8A3E2800F6BC3A /* OptionNamAndPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A352A8A3E2800F6BC3A /* OptionNamAndPriceView.swift */; };
-		64E26A4C2A8A3E2800F6BC3A /* TrimSubOptionContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A362A8A3E2800F6BC3A /* TrimSubOptionContentStackView.swift */; };
 		64E26A4D2A8A3E2800F6BC3A /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A372A8A3E2800F6BC3A /* BottomSheetView.swift */; };
 		64E26A4E2A8A3E2800F6BC3A /* TrimOptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A382A8A3E2800F6BC3A /* TrimOptionDetailView.swift */; };
 		64E26A4F2A8A3E2800F6BC3A /* TrimTooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A392A8A3E2800F6BC3A /* TrimTooltipView.swift */; };
 		64E26A502A8A3E2800F6BC3A /* TrimSubOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3A2A8A3E2800F6BC3A /* TrimSubOptionButton.swift */; };
-		64E26A512A8A3E2800F6BC3A /* BottomSheetLargeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3B2A8A3E2800F6BC3A /* BottomSheetLargeContentView.swift */; };
 		64E26A522A8A3E2800F6BC3A /* TrimOptionDetailColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3C2A8A3E2800F6BC3A /* TrimOptionDetailColorCell.swift */; };
 		64E26A532A8A3E2800F6BC3A /* TrimOptionContentCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3D2A8A3E2800F6BC3A /* TrimOptionContentCollectionView.swift */; };
-		64E26A542A8A3E2800F6BC3A /* TrimSubOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3E2A8A3E2800F6BC3A /* TrimSubOptionView.swift */; };
 		64E26A552A8A3E2800F6BC3A /* TrimHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3F2A8A3E2800F6BC3A /* TrimHeaderView.swift */; };
 		64E26A562A8A3E2800F6BC3A /* SettingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A402A8A3E2800F6BC3A /* SettingProgressView.swift */; };
 		64E26A572A8A3E2800F6BC3A /* TrimLearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A412A8A3E2800F6BC3A /* TrimLearnMoreView.swift */; };
@@ -1088,6 +1088,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B099792A8C864A005D1FF1 /* TrimSubOptionContentStackView.swift in Sources */,
+				15B0997A2A8C864A005D1FF1 /* TrimSubOptionView.swift in Sources */,
 				6484A7562A8C837E00434136 /* LearnMoreView.swift in Sources */,
 				6484A7542A8C835D00434136 /* CommonView.swift in Sources */,
 				6484A7552A8C835D00434136 /* CommonQuotationPreviewTableViewAdapterDataSource.swift in Sources */,
@@ -1095,6 +1097,7 @@
 				6484A73D2A8C791500434136 /* UIView+.swift in Sources */,
 				6484A73C2A8C790A00434136 /* ConvenienceInit.swift in Sources */,
 				6484A73B2A8C790200434136 /* ViewController.swift in Sources */,
+				15B0997B2A8C86D4005D1FF1 /* OptionSelectViewController.swift in Sources */,
 				6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */,
 				6484A73A2A8C78F400434136 /* QuotationPreviewMainHeaderModel+Mock.swift in Sources */,
 				6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */,
@@ -1110,12 +1113,6 @@
 				155DDD052A82D040009AE2BC /* DetailQuotationPreviewViewModel.swift in Sources */,
 				64ADA4B12A78F82A0003E2C1 /* CGFloat+.swift in Sources */,
 				6412D0802A7F75DB001E4005 /* LifeStyleViewController.swift in Sources */,
-				159B2CF42A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift in Sources */,
-				15059AC02A88A54200303C01 /* CommonQuotationPreviewCarInfoView.swift in Sources */,
-				64E26A4C2A8A3E2800F6BC3A /* TrimSubOptionContentStackView.swift in Sources */,
-				159B2CF42A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift in Sources */,
-				15059AC02A88A54200303C01 /* CommonQuotationPreviewCarInfoView.swift in Sources */,
-				64E26A4C2A8A3E2800F6BC3A /* TrimSubOptionContentStackView.swift in Sources */,
 				15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */,
 				6484A74F2A8C82FE00434136 /* EngineDetailViewController.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
@@ -1124,11 +1121,11 @@
 				64E26A472A8A3E2800F6BC3A /* TrimOptionDetailOptionCollectionView.swift in Sources */,
 				64E26A4E2A8A3E2800F6BC3A /* TrimOptionDetailView.swift in Sources */,
 				64E26A4D2A8A3E2800F6BC3A /* BottomSheetView.swift in Sources */,
-				155DDD122A84610A009AE2BC /* QuotationPreviewCarProductOptionModel+Mock.swift in Sources */,
 				64E26A572A8A3E2800F6BC3A /* TrimLearnMoreView.swift in Sources */,
 				6412D0842A80ABCA001E4005 /* QuestionNumberView.swift in Sources */,
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
 				155EAB3A2A80824B00833B0E /* DetailQuotationPreviewViewController.swift in Sources */,
+				155B729E2A8C87160091A7F4 /* BottomSheetLargeContentView.swift in Sources */,
 				155DDD0A2A835FEF009AE2BC /* DetailQuotationPreviewSecionHeaderView.swift in Sources */,
 				15D8CC8F2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift in Sources */,
 				64ADA4BC2A7A22780003E2C1 /* CommonLabel.swift in Sources */,
@@ -1147,8 +1144,6 @@
 				64E26A552A8A3E2800F6BC3A /* TrimHeaderView.swift in Sources */,
 				64E26A582A8A3E2800F6BC3A /* OptionSummaryContentView.swift in Sources */,
 				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
-				15D8CC952A892F63009B19B9 /* CommonQuotationPreviewTableViewAdapter.swift in Sources */,
-				15D8CC952A892F63009B19B9 /* CommonQuotationPreviewTableViewAdapter.swift in Sources */,
 				64ADA4992A7788C70003E2C1 /* Enum.swift in Sources */,
 				15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */,
 				64E26A502A8A3E2800F6BC3A /* TrimSubOptionButton.swift in Sources */,
@@ -1158,9 +1153,7 @@
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
 				6484A7512A8C82FE00434136 /* EnginePerformanceDescriptionView.swift in Sources */,
 				15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */,
-				155DDD0E2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift in Sources */,
 				156A96AF2A8C6B1500AE1477 /* NSLayoutConstraint+.swift in Sources */,
-				155DDD0E2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift in Sources */,
 				64E26A4F2A8A3E2800F6BC3A /* TrimTooltipView.swift in Sources */,
 				64ADA4BE2A7A26090003E2C1 /* Int+.swift in Sources */,
 				64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */,
@@ -1175,31 +1168,16 @@
 				64E26A492A8A3E2800F6BC3A /* BottomSheetSmallContentView.swift in Sources */,
 				64E26A5A2A8A3E2800F6BC3A /* TrimDetailViewController.swift in Sources */,
 				6412D09A2A8332E5001E4005 /* PeekQuestionView.swift in Sources */,
-				15D8CC972A894C66009B19B9 /* DetailQuotationPreviewTableView.swift in Sources */,
-				15D8CC972A894C66009B19B9 /* DetailQuotationPreviewTableView.swift in Sources */,
 				64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */,
 				155EAB462A81F0AF00833B0E /* DetailQuotationPreviewMainHeader.swift in Sources */,
 				6412D0862A80AC92001E4005 /* LifeStyleDetailCell.swift in Sources */,
+				155B729F2A8C873E0091A7F4 /* TrimOptionDetailOptionCell.swift in Sources */,
 				6484A7532A8C82FE00434136 /* SubOptionDetailSegmentedControl.swift in Sources */,
 				6412D08C2A81E5C1001E4005 /* LifeStylePeekViewController.swift in Sources */,
 				155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */,
 				155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */,
-				155DDD072A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift in Sources */,
-				64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */,
-				15DF95992A7C8A110093EAC7 /* UIView+.swift in Sources */,
-				15DF95932A7C89BC0093EAC7 /* ConvenienceInit.swift in Sources */,
-				155EAB432A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift in Sources */,
-				64E26A122A895C1700F6BC3A /* OptionSelectViewController.swift in Sources */,
-				155DDD072A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift in Sources */,
-				64ADA4442A7787770003E2C1 /* ViewController.swift in Sources */,
-				15DF95992A7C8A110093EAC7 /* UIView+.swift in Sources */,
-				15DF95932A7C89BC0093EAC7 /* ConvenienceInit.swift in Sources */,
-				64E26A512A8A3E2800F6BC3A /* BottomSheetLargeContentView.swift in Sources */,
-				155EAB432A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift in Sources */,
-				64E26A122A895C1700F6BC3A /* OptionSelectViewController.swift in Sources */,
-				64E26A512A8A3E2800F6BC3A /* BottomSheetLargeContentView.swift in Sources */,
 				6484A7502A8C82FE00434136 /* EngineDetailContentView.swift in Sources */,
 				64ADA4C02A7A28AA0003E2C1 /* UIColor+.swift in Sources */,
 				6412D08A2A80C419001E4005 /* QuestionContentView.swift in Sources */,
@@ -1215,16 +1193,6 @@
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
-				155729FF2A89563200D136C6 /* QuotationPreviewMainHeaderModel+Mock.swift in Sources */,
-				15DF95952A7C89DF0093EAC7 /* GetYaFont.swift in Sources */,
-				155EAB3F2A80F14900833B0E /* CommonQuotationPreviewTitleView.swift in Sources */,
-				155729FF2A89563200D136C6 /* QuotationPreviewMainHeaderModel+Mock.swift in Sources */,
-				64E26A542A8A3E2800F6BC3A /* TrimSubOptionView.swift in Sources */,
-				64E26A4A2A8A3E2800F6BC3A /* TrimOptionDetailOptionCell.swift in Sources */,
-				15DF95952A7C89DF0093EAC7 /* GetYaFont.swift in Sources */,
-				155EAB3F2A80F14900833B0E /* CommonQuotationPreviewTitleView.swift in Sources */,
-				64E26A542A8A3E2800F6BC3A /* TrimSubOptionView.swift in Sources */,
-				64E26A4A2A8A3E2800F6BC3A /* TrimOptionDetailOptionCell.swift in Sources */,
 				64E26A452A8A3E2800F6BC3A /* CarSettingSelectViewController.swift in Sources */,
 				155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */,
 				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
