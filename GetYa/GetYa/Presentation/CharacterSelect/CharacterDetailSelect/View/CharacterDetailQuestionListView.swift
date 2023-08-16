@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterQuestionDetailListView: CheckListStackView, QuestionViewSendable {
+final class CharacterDetailQuestionListView: CheckListStackView, QuestionViewSendable {
     // MARK: - Properties
     override var selectedItemIndex: Int? {
         super.selectedItemIndex

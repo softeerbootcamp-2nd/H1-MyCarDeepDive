@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class CharacterQuestionDetailSliderView: UIView {
+final class CharacterDetailQuestionCarPriceSelectView: UIView {
     enum Constants {
         enum PriceRangeDescriptionLabel {
             static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
@@ -91,14 +91,14 @@ final class CharacterQuestionDetailSliderView: UIView {
 }
 
 // MARK: - QuestionViewSendable
-extension CharacterQuestionDetailSliderView: QuestionViewSendable {
+extension CharacterDetailQuestionCarPriceSelectView: QuestionViewSendable {
     func sendCarMinimumAndMaximumPrice() -> (minimumValue: Int?, maximumValue: Int?) {
         return (Int(priceSlider.minimumValue), curPrice)
     }
 }
 
 // MARK: - LayoutSupportable
-extension CharacterQuestionDetailSliderView: LayoutSupportable {
+extension CharacterDetailQuestionCarPriceSelectView: LayoutSupportable {
     func setupViews() {
         addSubviews([
             priceRangeDescriptionLabel,

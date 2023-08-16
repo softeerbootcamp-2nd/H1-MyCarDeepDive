@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15040FC22A8D3CAB00DDC411 /* CharacterQuestionDetailSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15040FC12A8D3CAB00DDC411 /* CharacterQuestionDetailSliderView.swift */; };
+		15040FC22A8D3CAB00DDC411 /* CharacterDetailQuestionCarPriceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15040FC12A8D3CAB00DDC411 /* CharacterDetailQuestionCarPriceSelectView.swift */; };
 		155B72A12A8C882C0091A7F4 /* TrimOptionDetailOptionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A312A8A3E2800F6BC3A /* TrimOptionDetailOptionCollectionView.swift */; };
 		155B72A22A8C88420091A7F4 /* TrimOptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A382A8A3E2800F6BC3A /* TrimOptionDetailView.swift */; };
 		155B72A32A8C88570091A7F4 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A372A8A3E2800F6BC3A /* BottomSheetView.swift */; };
@@ -41,7 +41,7 @@
 		156A969F2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A969E2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift */; };
 		156A96A22A8BD5A100AE1477 /* BaseCharacterSelectPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96A12A8BD5A100AE1477 /* BaseCharacterSelectPageViewController.swift */; };
 		156A96A52A8BD66D00AE1477 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96A42A8BD66D00AE1477 /* BaseViewController.swift */; };
-		156A96A82A8C03A300AE1477 /* CharacterQuestionDetailListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96A72A8C03A300AE1477 /* CharacterQuestionDetailListView.swift */; };
+		156A96A82A8C03A300AE1477 /* CharacterDetailQuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96A72A8C03A300AE1477 /* CharacterDetailQuestionListView.swift */; };
 		156A96AB2A8C03D400AE1477 /* QuestionViewSendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96AA2A8C03D400AE1477 /* QuestionViewSendable.swift */; };
 		156A96AD2A8C57B600AE1477 /* EitherSideSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96AC2A8C57B600AE1477 /* EitherSideSlider.swift */; };
 		15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */; };
@@ -169,7 +169,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		15040FC12A8D3CAB00DDC411 /* CharacterQuestionDetailSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterQuestionDetailSliderView.swift; sourceTree = "<group>"; };
+		15040FC12A8D3CAB00DDC411 /* CharacterDetailQuestionCarPriceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailQuestionCarPriceSelectView.swift; sourceTree = "<group>"; };
 		15059ABF2A88A54200303C01 /* CommonQuotationPreviewCarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewCarInfoView.swift; sourceTree = "<group>"; };
 		155729FE2A89563200D136C6 /* QuotationPreviewMainHeaderModel+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuotationPreviewMainHeaderModel+Mock.swift"; sourceTree = "<group>"; };
 		155B72AE2A8CA0020091A7F4 /* QuestionDescriptionLabelModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionDescriptionLabelModel+Mock.swift"; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 		156A969E2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailSelectViewController.swift; sourceTree = "<group>"; };
 		156A96A12A8BD5A100AE1477 /* BaseCharacterSelectPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCharacterSelectPageViewController.swift; sourceTree = "<group>"; };
 		156A96A42A8BD66D00AE1477 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		156A96A72A8C03A300AE1477 /* CharacterQuestionDetailListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterQuestionDetailListView.swift; sourceTree = "<group>"; };
+		156A96A72A8C03A300AE1477 /* CharacterDetailQuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailQuestionListView.swift; sourceTree = "<group>"; };
 		156A96AA2A8C03D400AE1477 /* QuestionViewSendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewSendable.swift; sourceTree = "<group>"; };
 		156A96AC2A8C57B600AE1477 /* EitherSideSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherSideSlider.swift; sourceTree = "<group>"; };
 		15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionPublisher.swift"; sourceTree = "<group>"; };
@@ -483,9 +483,9 @@
 		156A96A62A8C037F00AE1477 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				156A96A72A8C03A300AE1477 /* CharacterQuestionDetailListView.swift */,
+				156A96A72A8C03A300AE1477 /* CharacterDetailQuestionListView.swift */,
 				156A96AC2A8C57B600AE1477 /* EitherSideSlider.swift */,
-				15040FC12A8D3CAB00DDC411 /* CharacterQuestionDetailSliderView.swift */,
+				15040FC12A8D3CAB00DDC411 /* CharacterDetailQuestionCarPriceSelectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1297,7 +1297,7 @@
 				155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */,
-				156A96A82A8C03A300AE1477 /* CharacterQuestionDetailListView.swift in Sources */,
+				156A96A82A8C03A300AE1477 /* CharacterDetailQuestionListView.swift in Sources */,
 				156A969F2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift in Sources */,
 				156A96AB2A8C03D400AE1477 /* QuestionViewSendable.swift in Sources */,
 				156A96AD2A8C57B600AE1477 /* EitherSideSlider.swift in Sources */,
@@ -1313,7 +1313,7 @@
 				155B72A32A8C88570091A7F4 /* BottomSheetView.swift in Sources */,
 				6412D07E2A7E6A6A001E4005 /* TagView.swift in Sources */,
 				155B72AB2A8C9A2E0091A7F4 /* UIColor+.swift in Sources */,
-				15040FC22A8D3CAB00DDC411 /* CharacterQuestionDetailSliderView.swift in Sources */,
+				15040FC22A8D3CAB00DDC411 /* CharacterDetailQuestionCarPriceSelectView.swift in Sources */,
 				6412D0982A8323CD001E4005 /* CommonTextView.swift in Sources */,
 				64E26A4B2A8A3E2800F6BC3A /* OptionNamAndPriceView.swift in Sources */,
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
