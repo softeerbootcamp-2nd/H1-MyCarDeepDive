@@ -75,6 +75,10 @@ class BaseCharacterSelectPageViewController: UIViewController {
         setQuestionIndexView(currentIndex: curPageIndex, totalIndex: totalPageIndex)
     }
     
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+    }
+    
     init(
         nibName nibNameOrNil: String?,
         bundle nibBundleOrNil: Bundle?,
