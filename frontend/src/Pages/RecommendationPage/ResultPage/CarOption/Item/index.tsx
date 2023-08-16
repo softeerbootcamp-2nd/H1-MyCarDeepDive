@@ -10,7 +10,7 @@ function Item({ image, name, price, description }: OptionItemProps) {
     <div className='w-full'>
       <div className='flex gap-4'>
         <img src={image} alt={name} />
-        <div className='flex flex-col gap-px'>
+        <div className='flex flex-col gap-1'>
           <div className='font-body4-regular text-grey-200'>{name}</div>
           <div className='font-h4-medium text-grey-100'>{price}원</div>
         </div>
