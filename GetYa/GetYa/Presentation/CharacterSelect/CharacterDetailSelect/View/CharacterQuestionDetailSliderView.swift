@@ -12,6 +12,7 @@ final class CharacterQuestionDetailSliderView: UISlider, QuestionViewSendable {
     enum Constants {
         static let trackHeight: CGFloat = .toScaledHeight(value: 8)
         static let thumbHeight: CGFloat = .toScaledHeight(value: 24)
+        static let halfThumbHeight: CGFloat = thumbHeight/2
     }
     
     // MARK: - UI properties
@@ -19,13 +20,17 @@ final class CharacterQuestionDetailSliderView: UISlider, QuestionViewSendable {
         $0.backgroundColor = .white
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.GetYaPalette.gray500.cgColor
-        $0.layer.cornerRadius = Constants.thumbHeight/2
+        $0.layer.cornerRadius = Constants.halfThumbHeight
+    }
+    
+    private lazy var thumbImageView = UIImageView(image: thumbImage).set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private var thumbImage: UIImage {
         thumbView.frame = CGRect(
             x: 0,
-            y: Constants.thumbHeight/2,
+            y: Constants.halfThumbHeight,
             width: Constants.thumbHeight,
             height: Constants.thumbHeight)
         return UIGraphicsImageRenderer(bounds: thumbView.bounds).image { graphicsRenderContext in
@@ -81,6 +86,7 @@ final class CharacterQuestionDetailSliderView: UISlider, QuestionViewSendable {
         translatesAutoresizingMaskIntoConstraints = false
         setThumbImage(thumbImage, for: .normal)
         minimumTrackTintColor = .GetYaPalette.acriveBlue
+        setupUI()
     }
     
     // MARK: - Functions
@@ -88,5 +94,28 @@ final class CharacterQuestionDetailSliderView: UISlider, QuestionViewSendable {
         var rect = super.trackRect(forBounds: bounds)
         rect.size.height = Constants.trackHeight
         return rect
+    }
+}
+
+// MARK: - LayoutSupportable
+extension CharacterQuestionDetailSliderView: LayoutSupportable {
+    func setupViews() {
+        addSubview(thumbImageView)
+        layer.addSublayer(thumbImageView.layer)
+    }
+    
+    func setupConstriants() {
+        configureThumbImageView()
+    }
+    
+    private func configureThumbImageView() {
+        print(trackRect(forBounds: bounds).midY)
+        NSLayoutConstraint.activate([
+            thumbImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            thumbImageView.bottomAnchor.constraint(
+                equalTo: bottomAnchor,
+                constant: trackRect(forBounds: bounds).midY),
+            thumbImageView.widthAnchor.constraint(equalToConstant: Constants.thumbHeight)
+        ])
     }
 }
