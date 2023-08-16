@@ -29,21 +29,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
-        shell: bash
-
-      - name: Gradle Build
-        run: ./gradlew build
-        shell: bash
-
-      - name: Jacoco Report
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: jacoco-report # 결과물의 이름
-          path: build/reports/jacoco/test/html
-
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
@@ -57,12 +42,23 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
-          
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        shell: bash
+
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonar --info
+
+      - name: Jacoco Report
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-report # 결과물의 이름
+          path: build/reports/jacoco/test/html
 
       - name: DockerHub Login
         uses: docker/login-action@v2
