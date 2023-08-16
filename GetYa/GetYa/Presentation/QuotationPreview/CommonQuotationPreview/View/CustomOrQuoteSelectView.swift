@@ -96,7 +96,7 @@ final class CustomOrQuoteSelectView: UIView {
 // MARK: - LayoutSupportable
 extension CustomOrQuoteSelectView: LayoutSupportable {
     func setupViews() {
-        addSubviews(gradientView, customOrQuoteButtonsView)
+        addSubviews([gradientView, customOrQuoteButtonsView])
     }
     
     func setupConstriants() {

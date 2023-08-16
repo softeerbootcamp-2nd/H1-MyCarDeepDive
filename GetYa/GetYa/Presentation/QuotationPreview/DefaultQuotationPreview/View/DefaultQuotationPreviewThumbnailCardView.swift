@@ -185,12 +185,12 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
 // MARK: - LayoutSupportable
 extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
     func setupViews() {
-        addSubviews(
+        addSubviews([
             logoImageView,
             carNameDescriptionRoundLabel,
             famouseSayingWithCarNameLabel,
             recommendCarImageView,
-            reviewdTooltipView)
+            reviewdTooltipView])
     }
 
     func setupConstriants() {
@@ -204,29 +204,29 @@ extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
     // MARK: - LayoutSupportable private helper
     private func logoImageViewConstraints() {
         let const = Constants.LogoImageView.self
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             logoImageView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: const.leadingMargin),
             logoImageView.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: const.topMargin))
+                constant: const.topMargin)])
     }
     
     private func carNameDescriptionRoundLabelConstraints() {
         let const = Constants.CarNameDescriptionRoundLabel.self
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             carNameDescriptionRoundLabel.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: const.topMargin),
             carNameDescriptionRoundLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             carNameDescriptionRoundLabel.heightAnchor.constraint(
-                equalToConstant: const.height))
+                equalToConstant: const.height)])
     }
     
     private func famouseSayingWithCarNameLabelConstraints() {
         let const = Constants.FamouseSayingWithCarNameLabel.self
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             famouseSayingWithCarNameLabel.topAnchor.constraint(
                 equalTo: carNameDescriptionRoundLabel.bottomAnchor,
                 constant: const.topMargin),
@@ -237,12 +237,12 @@ extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
                 equalTo: trailingAnchor,
                 constant: -const.trailingMargin),
             famouseSayingWithCarNameLabel.heightAnchor.constraint(
-                equalToConstant: const.height))
+                equalToConstant: const.height)])
     }
     
     private func recommendCarImageViewConstraints()  {
         let const = Constants.RecommendCarImageView.self
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             recommendCarImageView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: const.leadingMargin),
@@ -251,12 +251,12 @@ extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
             recommendCarImageView.trailingAnchor.constraint(
                 equalTo: trailingAnchor),
             recommendCarImageView.heightAnchor.constraint(
-                equalToConstant: const.height))
+                equalToConstant: const.height)])
     }
     
     private func reviewdTooltipViewConstraints() {
         let const = Constants.ReviewdTooltipView.self
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             reviewdTooltipView.topAnchor.constraint(
                 equalTo: recommendCarImageView.bottomAnchor),
             reviewdTooltipView.leadingAnchor.constraint(
@@ -269,6 +269,6 @@ extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
                 greaterThanOrEqualToConstant: const.height),
             reviewdTooltipView.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: -const.bottomMargin))
+                constant: -const.bottomMargin)])
     }
 }

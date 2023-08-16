@@ -78,9 +78,9 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewMainHeader: LayoutSupportable {
     func setupViews() {
-        addSubviews(thumbnailView,
+        addSubviews([thumbnailView,
             recommendCarInfoView,
-            sectionDivider)
+            sectionDivider])
         
     }
     

@@ -11,8 +11,4 @@ extension UIView {
     func addSubviews(_ views: [UIView]) {
         _=views.map { addSubview($0) }
     }
-    
-    func addSubviews(_ views: UIView...) {
-        _=views.map { addSubview($0) }
-    }
 }

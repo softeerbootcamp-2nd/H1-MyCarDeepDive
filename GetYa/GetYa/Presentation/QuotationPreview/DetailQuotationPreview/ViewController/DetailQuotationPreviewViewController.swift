@@ -80,9 +80,9 @@ final class DetailQuotationPreviewViewController: UIViewController {
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewViewController: LayoutSupportable {
     func setupViews() {
-        view.addSubviews(
+        view.addSubviews([
             tableView,
-            bottomCustomOrQuoteView)
+            bottomCustomOrQuoteView])
     }
     
     func setupConstriants() {

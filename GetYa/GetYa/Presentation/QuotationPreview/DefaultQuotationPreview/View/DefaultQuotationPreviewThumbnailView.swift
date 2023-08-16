@@ -77,7 +77,7 @@ final class DefaultQuotationPreviewThumbnailView: UIView {
 
 extension DefaultQuotationPreviewThumbnailView: LayoutSupportable {
     func setupViews() {
-        addSubviews(thumbnailView)
+        addSubviews([thumbnailView])
     }
     
     func setupConstriants() {

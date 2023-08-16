@@ -105,9 +105,9 @@ final class CommonQuotationPreviewCell: UITableViewCell {
 // MARK: - LayoutSupportable
 extension CommonQuotationPreviewCell: LayoutSupportable {
     func setupViews() {
-        contentView.addSubviews(
+        contentView.addSubviews([
             recommendCarOptionView,
-            reviewdTextView)
+            reviewdTextView])
     }
     
     func setupConstriants() {
@@ -121,7 +121,7 @@ extension CommonQuotationPreviewCell: LayoutSupportable {
     
     private func recommendCarOptionViewConstraints() {
         typealias Const = Constants.RecommendCarOptionView
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             recommendCarOptionView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
                 constant: Const.leadingMargin),
@@ -129,13 +129,13 @@ extension CommonQuotationPreviewCell: LayoutSupportable {
                 equalTo: contentView.topAnchor,
                 constant: Const.topMargin),
             recommendCarOptionView.heightAnchor.constraint(
-                equalToConstant: Const.height))
+                equalToConstant: Const.height)])
         
     }
     
     private func reviewdTextViewConstraints() {
         typealias Const = Constants.ReviewdTextView
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             reviewdTextView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
                 constant: Const.leadingMargin),
@@ -146,6 +146,6 @@ extension CommonQuotationPreviewCell: LayoutSupportable {
                 equalTo: contentView.trailingAnchor,
                 constant: -Const.trailingMargin),
             reviewdTextView.bottomAnchor.constraint(
-                lessThanOrEqualTo: contentView.bottomAnchor))
+                lessThanOrEqualTo: contentView.bottomAnchor)])
     }
 }

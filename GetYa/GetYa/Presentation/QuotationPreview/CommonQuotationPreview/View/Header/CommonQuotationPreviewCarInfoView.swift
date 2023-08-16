@@ -95,11 +95,11 @@ class CommonQuotationPreviewCarInfoView: UIView {
 // MARK: - LayoutSupportable
 extension CommonQuotationPreviewCarInfoView: LayoutSupportable {
     func setupViews() {
-        addSubviews(
+        addSubviews([
             carKrNameLabel,
             carEnTrimLabel,
             carPriceLabel,
-            carOptionsLabel)
+            carOptionsLabel])
     }
     
     func setupConstriants() {
@@ -114,38 +114,38 @@ extension CommonQuotationPreviewCarInfoView: LayoutSupportable {
 private extension CommonQuotationPreviewCarInfoView {
     func carKrNameLabelConstraints() {
         typealias Const = Constants.CarKrNameLabel
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             carKrNameLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
             carKrNameLabel.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: Const.topMargin))
+                constant: Const.topMargin)])
     }
     
     func carEnNameLabelConstraints() {
         typealias Const = Constants.CarEnTrimLabel
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             carEnTrimLabel.leadingAnchor.constraint(
                 equalTo: carKrNameLabel.trailingAnchor,
                 constant: Const.leadingMargin),
             carEnTrimLabel.centerYAnchor.constraint(
-                equalTo: carKrNameLabel.centerYAnchor))
+                equalTo: carKrNameLabel.centerYAnchor)])
     }
     
     func carPriceLabelConstraints() {
         typealias Const = Constants.CarPriceLabel
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             carPriceLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
                 constant: -Const.trailingMargin),
             carPriceLabel.centerYAnchor.constraint(
-                equalTo: carKrNameLabel.centerYAnchor))
+                equalTo: carKrNameLabel.centerYAnchor)])
     }
     
     func carOptionsLabelConstraints() {
         typealias Const = Constants.CarOptionsLabel
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             carOptionsLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -153,6 +153,6 @@ private extension CommonQuotationPreviewCarInfoView {
                 equalTo: carKrNameLabel.bottomAnchor,
                 constant: Const.topMargin),
             carOptionsLabel.bottomAnchor.constraint(
-                equalTo: bottomAnchor))
+                equalTo: bottomAnchor)])
     }
 }

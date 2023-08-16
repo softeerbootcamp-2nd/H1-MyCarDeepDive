@@ -169,12 +169,12 @@ extension DetailQuotationPreviewThumbnailView {
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewThumbnailView: LayoutSupportable {
     func setupViews() {
-        addSubviews(
+        addSubviews([
             recommendKeywordStackView,
             recommendDiscriptionView,
             recommendSubDiscriptionView,
             recommendCarImageView,
-            recommendCarBackgroundView)
+            recommendCarBackgroundView])
     }
     
     func setupConstriants() {
@@ -189,7 +189,7 @@ extension DetailQuotationPreviewThumbnailView: LayoutSupportable {
 private extension DetailQuotationPreviewThumbnailView {
     func recommendKeywordStackViewConstraints() {
         typealias Const = Constants.RecommendKeywordStackView
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             recommendKeywordStackView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -200,12 +200,12 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: topAnchor,
                 constant: Const.topMargin),
             recommendKeywordStackView.heightAnchor.constraint(
-                equalToConstant: Const.height))
+                equalToConstant: Const.height)])
     }
     
     func recommendDiscriptionViewConstraints() {
         typealias Const = Constants.RecommendDiscriptionView
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             recommendDiscriptionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -213,12 +213,12 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: topAnchor,
                 constant: Const.topMargin),
             recommendDiscriptionView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: Const.font.lineHeight))
+                lessThanOrEqualToConstant: Const.font.lineHeight)])
     }
     
     func recommendSubDiscriptionViewConstraints() {
         typealias Const = Constants.RecommendSubDiscriptionView
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             recommendSubDiscriptionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -229,12 +229,12 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: recommendCarBackgroundView.topAnchor,
                 constant: -Const.bottomMargin),
             recommendSubDiscriptionView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: Const.font.lineHeight))
+                lessThanOrEqualToConstant: Const.font.lineHeight)])
     }
     
     func recommendCarImageViewConstraints() {
         typealias Const = Constants.RecommendCarImageView
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             recommendCarImageView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -245,12 +245,12 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: trailingAnchor),
             recommendCarImageView.topAnchor.constraint(
                 greaterThanOrEqualTo: topAnchor,
-                constant: Const.topMargin))
+                constant: Const.topMargin)])
     }
     
     func recommendCarBackgroundViewConstraints() {
         typealias Const = Constants.RecommendCarBackgroundView
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             recommendCarBackgroundView.leadingAnchor.constraint(
                 equalTo: leadingAnchor),
             recommendCarBackgroundView.trailingAnchor.constraint(
@@ -258,6 +258,6 @@ private extension DetailQuotationPreviewThumbnailView {
             recommendCarBackgroundView.bottomAnchor.constraint(
                 equalTo: bottomAnchor),
             recommendCarBackgroundView.heightAnchor.constraint(
-                equalToConstant: Const.height))
+                equalToConstant: Const.height)])
     }
 }

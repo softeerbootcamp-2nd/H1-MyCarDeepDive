@@ -70,7 +70,7 @@ class CommonQuotationPreviewTitleView: UIView {
 // MARK: - LayoutSupportable
 extension CommonQuotationPreviewTitleView: LayoutSupportable {
     func setupViews() {
-        addSubviews(onePixelDivider, sectionTitle)
+        addSubviews([onePixelDivider, sectionTitle])
     }
     
     func setupConstriants() {
@@ -82,7 +82,7 @@ extension CommonQuotationPreviewTitleView: LayoutSupportable {
     // MARK: - Private layout supportable helper
     private func onePixelDividerConstraints() {
         typealias Const = Constants.OnePixelDivider
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             onePixelDivider.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
@@ -92,18 +92,18 @@ extension CommonQuotationPreviewTitleView: LayoutSupportable {
             onePixelDivider.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
                 constant: -Const.trailingMargin),
-            onePixelDivider.heightAnchor.constraint(equalToConstant: Const.height))
+            onePixelDivider.heightAnchor.constraint(equalToConstant: Const.height)])
     }
 
     private func sectionTitleConstraints() {
         typealias Const = Constants.SectionTitle
-        NSLayoutConstraint.activate(
+        NSLayoutConstraint.activate([
             sectionTitle.topAnchor.constraint(
                 equalTo: onePixelDivider.bottomAnchor,
                 constant: Const.topMargin),
             sectionTitle.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
-            sectionTitle.bottomAnchor.constraint(equalTo: bottomAnchor))
+            sectionTitle.bottomAnchor.constraint(equalTo: bottomAnchor)])
     }
 }

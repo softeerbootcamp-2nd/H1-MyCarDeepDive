@@ -32,7 +32,7 @@ final class DetailQuotationPreviewSecionHeaderView: UITableViewHeaderFooterView 
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewSecionHeaderView: LayoutSupportable {
     func setupViews() {
-        addSubviews(sectionTitleAndLineDividerView)
+        addSubviews([sectionTitleAndLineDividerView])
     }
     
     func setupConstriants() {
