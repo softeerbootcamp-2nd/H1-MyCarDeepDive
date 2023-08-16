@@ -82,12 +82,12 @@ final class DetailQuotationPreviewViewController: UIViewController {
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewViewController: LayoutSupportable {
     func configureConstraints() {
-        configureTableViewConstriants()
+        configureTableView()
         configureBottomCustomOrQuoteView()
     }
     
     // MARK: - LayoutSupportable private helper
-    private func configureTableViewConstriants() {
+    private func configureTableView() {
         _=tableView.set {
             NSLayoutConstraint.activate([
                 $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
