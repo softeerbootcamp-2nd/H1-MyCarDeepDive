@@ -293,7 +293,7 @@ class ColorContentView: UIView {
 
 // MARK: - LearnMoreViewDelegate
 extension ColorContentView: LearnMoreViewDelegate {
-    func touchUpExpandButtonByIsSelected(isSelected: Bool) {
+    func touchUpExpandButtonByIsSelected(sender: LearnMoreView, isSelected: Bool) {
         delegate?.touchUpLearnMoreViewButton(type: colorType, isExpanded: isSelected)
     }
 }
@@ -302,6 +302,9 @@ extension ColorContentView: LearnMoreViewDelegate {
 extension ColorContentView: ColorSelectColorDelegate {
     func touchUpColorCell(index: Int) {
         colorNameLabel.text = dataArray[index].name
-        adoptionRateLabel.text = "\(dataArray[index].adoptionRate)"
+        adoptionRateLabel.text = "\(dataArray[index].adoptionRate)%의 구매자가 선택한"
+        adoptionRateLabel.configurePartTextColor(
+            partText: "\(dataArray[index].adoptionRate)%",
+            partTextColor: .GetYaPalette.acriveBlue)
     }
 }
