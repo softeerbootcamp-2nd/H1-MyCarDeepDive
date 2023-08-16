@@ -41,8 +41,6 @@ class SubOptionDetailSegmentedControl: UISegmentedControl {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        configureBottomBorder()
-        
         let xPostion = caculateXposition()
         UIView.animate(
             withDuration: 0.1,
@@ -54,18 +52,9 @@ class SubOptionDetailSegmentedControl: UISegmentedControl {
     
     // MARK: - Private Functions
     private func configureUI() {
-        translatesAutoresizingMaskIntoConstraints = false
         selectedSegmentIndex = 0
         
         configureTitle()
-    }
-    
-    private func configureBottomBorder() {
-        let border = CALayer()
-        let height = CGFloat(1).scaledHeight
-        border.frame = CGRect.init(x: 0, y: frame.height - height, width: frame.width, height: height)
-        border.backgroundColor = UIColor.GetYaPalette.gray700.cgColor
-        layer.insertSublayer(border, at: 0)
     }
     
     private func configureTitle() {
@@ -103,5 +92,14 @@ class SubOptionDetailSegmentedControl: UISegmentedControl {
         * CGFloat(self.selectedSegmentIndex + 1)
         let xPosition = xSpace - equalDivideWidth / 2 - underlineView.frame.width / 2
         return xPosition
+    }
+    
+    // MARK: - Functions
+    func configureBottomBorder() {
+        let border = CALayer()
+        let height = CGFloat(1).scaledHeight
+        border.frame = CGRect.init(x: 0, y: frame.height - height, width: frame.width, height: height)
+        border.backgroundColor = UIColor.GetYaPalette.gray700.cgColor
+        layer.insertSublayer(border, at: 0)
     }
 }

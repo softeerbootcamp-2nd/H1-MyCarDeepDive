@@ -15,9 +15,14 @@ class SubOptionDetailViewController: UIViewController {
     }
     
     // MARK: - UI properties
-    private let segmentedControl = SubOptionDetailSegmentedControl(
+    private lazy var segmentedControl = SubOptionDetailSegmentedControl(
         items: ["엔진", "바디", "구동방식"]
-    )
+    ).set {
+        $0.addTarget(
+            self,
+            action: #selector(changeSegmentedValue),
+            for: .valueChanged)
+    }
     private lazy var pageViewController: UIPageViewController = UIPageViewController(
         transitionStyle: .scroll,
         navigationOrientation: .horizontal
@@ -53,6 +58,11 @@ class SubOptionDetailViewController: UIViewController {
         configureUI()
     }
     
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        configureSegmentedControl()
+    }
+    
     // MARK: - Private Functions
     private func setupViews() {
         view.addSubviews([
@@ -65,7 +75,7 @@ class SubOptionDetailViewController: UIViewController {
         view.backgroundColor = .white
         
         configureNavigationBar()
-        configureSegmentedControl()
+//        configureSegmentedControl()
         configurePageViewContoller()
     }
     
@@ -84,25 +94,21 @@ class SubOptionDetailViewController: UIViewController {
     }
     
     private func configureSegmentedControl() {
-        segmentedControl.addTarget(
-            self,
-            action: #selector(changeSegmentedValue),
-            for: .valueChanged)
-        
-        NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor),
-            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            segmentedControl.heightAnchor.constraint(
-                equalToConstant: Constants.SegmentedControl.height)
-        ])
+        let safeLayoutFrame = view.safeAreaLayoutGuide.layoutFrame
+        segmentedControl.frame = CGRect(
+            x: safeLayoutFrame.minX,
+            y: safeLayoutFrame.minY,
+            width: safeLayoutFrame.width,
+            height: Constants.SegmentedControl.height)
+        segmentedControl.configureBottomBorder()
     }
     
     private func configurePageViewContoller() {
         currentPageIndex = 0
         NSLayoutConstraint.activate([
-            pageViewController.view.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
+            pageViewController.view.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: Constants.SegmentedControl.height),
             pageViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pageViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pageViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
