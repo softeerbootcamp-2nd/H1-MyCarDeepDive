@@ -44,6 +44,10 @@ extension CharacterDetailSelectViewModel: CharacterDetailSelectDataSource {
         questionSliderViewModel
     }
     
+    var numberOfSteps: Int {
+        questionListTexts.count + 1
+    }
+    
     func questionDiscription(at index: Int) -> QuestionDescriptionLabelModel {
         return questionDescriptionTexts[index]
     }
