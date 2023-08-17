@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OptionNamAndPriceView: UIView {
+class OptionNameAndPriceView: UIView {
     enum Constants {
         enum NameLabel {
             static let width: CGFloat = CGFloat(199).scaledWidth
@@ -23,6 +23,12 @@ class OptionNamAndPriceView: UIView {
         color: .GetYaPalette.gray100)
     
     // MARK: - Lifecycles
+    convenience init(nameText: String) {
+        self.init(frame: .zero)
+        
+        setName(text: nameText)
+    }
+    
     convenience init(nameText: String, priceValue: Int) {
         self.init(frame: .zero)
         
@@ -84,6 +90,22 @@ class OptionNamAndPriceView: UIView {
     
     func setPrice(value: Int) {
         priceLabel.text = value == 0 ? "-원" : value.toPriceFormat
+    }
+    
+    func setNameLabelColor(color: UIColor) {
+        nameLabel.textColor = color
+    }
+    
+    func setPriceLabelColor(color: UIColor) {
+        priceLabel.textColor = color
+    }
+    
+    func setNameLabelFont(fontType: GetYaFont) {
+        nameLabel.configureFontType(fontType: fontType)
+    }
+    
+    func setPriceLabelFont(fontType: GetYaFont) {
+        priceLabel.configureFontType(fontType: fontType)
     }
     
     // MARK: - Objc Functions 
