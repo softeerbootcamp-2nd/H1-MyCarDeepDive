@@ -1,19 +1,21 @@
 package com.h1.mycardeepdive.color.ui;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 
 import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import com.h1.mycardeepdive.ControllerTestConfig;
 import com.h1.mycardeepdive.color.service.ColorService;
-import com.h1.mycardeepdive.color.ui.dto.ColorInfo;
-import com.h1.mycardeepdive.color.ui.dto.ColorResponse;
+import com.h1.mycardeepdive.color.ui.dto.ExteriorColorInfo;
+import com.h1.mycardeepdive.color.ui.dto.ExteriorColorResponse;
+import com.h1.mycardeepdive.color.ui.dto.InteriorColorInfo;
+import com.h1.mycardeepdive.color.ui.dto.InteriorColorResponse;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -43,23 +45,27 @@ class ColorControllerTest extends ControllerTestConfig {
         info.add("trimId", String.valueOf(trimId));
         info.add("interiorColorId", String.valueOf(interiorId));
 
+        ExteriorColorInfo exteriorColorInfo =
+                ExteriorColorInfo.builder()
+                        .name("그라파이트 그레이 메탈릭")
+                        .price(100000)
+                        .img_url("/exterior-color/icon/22.jpg")
+                        .car_img_urls(
+                                IntStream.rangeClosed(1, 60)
+                                        .mapToObj(
+                                                number ->
+                                                        "/exterior-color"
+                                                                + String.format(
+                                                                        "/%03d.jpg", number))
+                                        .collect(Collectors.toList()))
+                        .trim_name("Calligraphy")
+                        .build();
         when(colorService.findExteriorColors(trimId, interiorId))
                 .thenReturn(
-                        ColorResponse.builder()
-                                .available_colors(
-                                        List.of(
-                                                ColorInfo.builder()
-                                                        .name("그라파이트 그레이 메탈릭")
-                                                        .img_url("/exterior-color/icon/22.jpg")
-                                                        .car_img_url("/exterior-color/")
-                                                        .build()))
-                                .unavailable_colors(
-                                        List.of(
-                                                ColorInfo.builder()
-                                                        .name("그라파이트 그레이 메탈릭")
-                                                        .img_url("/exterior-color/icon/22.jpg")
-                                                        .car_img_url("/exterior-color/")
-                                                        .build()))
+                        ExteriorColorResponse.builder()
+                                .available_colors(List.of(exteriorColorInfo, exteriorColorInfo))
+                                .unavailable_colors(List.of(exteriorColorInfo, exteriorColorInfo))
+                                .other_trim_colors(List.of(exteriorColorInfo, exteriorColorInfo))
                                 .build());
         // then
         ResultActions resultActions =
@@ -100,23 +106,20 @@ class ColorControllerTest extends ControllerTestConfig {
         info.add("trimId", String.valueOf(trimId));
         info.add("exteriorColorId", String.valueOf(exteriorId));
 
+        InteriorColorInfo interiorColorInfo =
+                InteriorColorInfo.builder()
+                        .name("퀼팅천연 (블랙)")
+                        .price(100000)
+                        .img_url("/interior-color/icon/22.jpg")
+                        .car_img_url("/interior-color/22.jpg")
+                        .trim_name("Calligraphy")
+                        .build();
         when(colorService.findInteriorColors(trimId, exteriorId))
                 .thenReturn(
-                        ColorResponse.builder()
-                                .available_colors(
-                                        List.of(
-                                                ColorInfo.builder()
-                                                        .name("퀼팅천연 (블랙)")
-                                                        .img_url("/interior-color/icon/22.jpg")
-                                                        .car_img_url("/interior-color/22.jpg")
-                                                        .build()))
-                                .unavailable_colors(
-                                        List.of(
-                                                ColorInfo.builder()
-                                                        .name("퀼팅천연 (블랙)")
-                                                        .img_url("/interior-color/icon/22.jpg")
-                                                        .car_img_url("/interior-color/22.jpg")
-                                                        .build()))
+                        InteriorColorResponse.builder()
+                                .available_colors(List.of(interiorColorInfo, interiorColorInfo))
+                                .unavailable_colors(List.of(interiorColorInfo, interiorColorInfo))
+                                .other_trim_colors(List.of(interiorColorInfo, interiorColorInfo))
                                 .build());
         // then
         ResultActions resultActions =

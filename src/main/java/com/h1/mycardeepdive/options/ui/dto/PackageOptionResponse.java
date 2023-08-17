@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class PackageOptionResponse {
-    private Long id;
+    private Long package_option_id;
 
     private String option_img_url;
 

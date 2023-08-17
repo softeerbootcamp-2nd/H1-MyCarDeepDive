@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class BasicOptionResponse {
-    private Long id;
+    private Long basic_option_id;
 
     private String option_img_url;
 
