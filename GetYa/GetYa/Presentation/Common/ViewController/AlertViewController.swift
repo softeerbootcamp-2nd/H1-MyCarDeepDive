@@ -188,7 +188,6 @@ class AlertViewController: UIViewController {
     
     private func configureTextField() {
         typealias Const = Constatns.TextField
-        containerView.addSubview(textField)
         
         buttonStackViewTopConstraint.isActive = false
         NSLayoutConstraint.activate([
@@ -221,6 +220,8 @@ class AlertViewController: UIViewController {
     func setTextField(placeHolder: String, isEnaled: Bool) {
         textField.placeholder = placeHolder
         textField.isEnabled = isEnaled
+        
+        containerView.addSubview(textField)
     }
     
     func setLeftButtonAction(title: String, handler: (() -> Void)? = nil) {
