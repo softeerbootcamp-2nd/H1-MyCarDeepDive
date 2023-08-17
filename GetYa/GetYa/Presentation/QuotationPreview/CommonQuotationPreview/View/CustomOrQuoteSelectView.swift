@@ -25,21 +25,13 @@ final class CustomOrQuoteSelectView: UIView {
     }
     
     // MARK: - UI properties
-    private let customOrQuoteButtonsView = LeftAndRightButtonsView(frame: .zero).set {
-        $0.configureLeftButton(with: .init(
-            text: "커스텀하기",
-            fontType: .mediumBody3,
-            backgroundColor: .white,
-            borderColor: .GetYaPalette.gray600,
-            textColor: .black))
-        
-        $0.configureRightButton(with: .init(
-            text: "빠른 견적내기",
-            fontType: .mediumBody3,
-            backgroundColor: .GetYaPalette.acriveBlue,
-            borderColor: .clear,
-            textColor: .white))
-        $0.backgroundColor = .white
+    private lazy var customOrQuoteButtonsView = LeftAndRightButtonStackView().set {
+        $0.setLeftButton(title: "커스텀하기", handler: {
+            self.delegate?.gotoCustomPage()
+        })
+        $0.setRightButton(title: "빠른 견적내기", handler: {
+            self.delegate?.gotoQuotePage()
+        })
     }
     
     private var gradientView: UIView = UIView(frame: .init(
@@ -58,7 +50,6 @@ final class CustomOrQuoteSelectView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        customOrQuoteButtonsView.delegate = self
         setGradient()
     }
     
@@ -70,7 +61,6 @@ final class CustomOrQuoteSelectView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureUI()
-        customOrQuoteButtonsView.delegate = self
         setGradient()
     }
     
@@ -115,16 +105,5 @@ extension CustomOrQuoteSelectView: LayoutSupportable {
                 equalToConstant: Constants.gradientLayerHeight),
             gradientView.bottomAnchor.constraint(
                 equalTo: customOrQuoteButtonsView.topAnchor)])
-    }
-}
-
-// MARK: - LeftAndRightButtonsViewDelegate
-extension CustomOrQuoteSelectView: LeftAndRightButtonsViewDelegate {
-    func didTapLeftButton() {
-        delegate?.gotoCustomPage()
-    }
-    
-    func didTapRightButton() {
-        delegate?.gotoQuotePage()
     }
 }
