@@ -88,6 +88,7 @@
 		6484A7562A8C837E00434136 /* LearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D0A62A8511AE001E4005 /* LearnMoreView.swift */; };
 		6484A7742A8E4CD100434136 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484A7732A8E4CD100434136 /* LoadingViewController.swift */; };
 		6484A7772A8E4D4700434136 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6484A7762A8E4D4700434136 /* Lottie */; };
+		6484A7792A8E4DBA00434136 /* LoadingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 6484A7782A8E4DBA00434136 /* LoadingLottie.json */; };
 		64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA43F2A7787770003E2C1 /* AppDelegate.swift */; };
 		64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4412A7787770003E2C1 /* SceneDelegate.swift */; };
 		64ADA4492A7787780003E2C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64ADA4482A7787780003E2C1 /* Assets.xcassets */; };
@@ -236,6 +237,7 @@
 		6484A74C2A8C82FE00434136 /* EngineLearnMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineLearnMoreView.swift; sourceTree = "<group>"; };
 		6484A74D2A8C82FE00434136 /* SubOptionDetailSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailSegmentedControl.swift; sourceTree = "<group>"; };
 		6484A7732A8E4CD100434136 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		6484A7782A8E4DBA00434136 /* LoadingLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoadingLottie.json; sourceTree = "<group>"; };
 		64ADA43C2A7787770003E2C1 /* GetYa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetYa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64ADA43F2A7787770003E2C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64ADA4412A7787770003E2C1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 			children = (
 				15DF957D2A7B94E00093EAC7 /* HyundaiSans */,
 				15DF95852A7B94E00093EAC7 /* Home_mp4.mp4 */,
+				6484A7782A8E4DBA00434136 /* LoadingLottie.json */,
 				64ADA4482A7787780003E2C1 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -1067,6 +1070,7 @@
 				15DF958B2A7B94E00093EAC7 /* Home_mp4.mp4 in Resources */,
 				64ADA49F2A77890B0003E2C1 /* .swiftLint.yml in Resources */,
 				64ADA44C2A7787780003E2C1 /* LaunchScreen.storyboard in Resources */,
+				6484A7792A8E4DBA00434136 /* LoadingLottie.json in Resources */,
 				6412D07A2A7E57B0001E4005 /* HyundaiSansHeadKRRegular.ttf in Resources */,
 				15DF958A2A7B94E00093EAC7 /* HyundaiSansTextKRRegular.ttf in Resources */,
 				15DF95862A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf in Resources */,
