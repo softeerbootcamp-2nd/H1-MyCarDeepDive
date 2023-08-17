@@ -13,33 +13,29 @@ final class DetailQuotationPreviewThumbnailView: UIView {
             UIColor(red: 0.9, green: 0.92, blue: 0.94, alpha: 1),
             UIColor(red: 0.95, green: 0.96, blue: 0.97, alpha: 1)]
         static let intrinsicContentHeight: CGFloat = {
+            let keywordCollectionViewHeight = KeywordCollectionView.maximumGroupHeight + KeywordCollectionView.topMargin
             let discriptionViewHeight = RecommendDiscriptionView.intrinsicContentHeight
             let subDiscriptionViewHeight =  RecommendSubDiscriptionView.intrinsicContentHeight
-            return discriptionViewHeight + subDiscriptionViewHeight + RecommendCarBackgroundView.height
+            return (discriptionViewHeight +
+                    subDiscriptionViewHeight +
+                    keywordCollectionViewHeight +
+                    RecommendCarBackgroundView.height)
         }()
-        enum RecommendKeywordStackView {
-            static let leadingMargin = CGFloat(16).scaledWidth
-            static let topMargin = CGFloat(41).scaledHeight
-            static let trailingMargin = CGFloat(16).scaledWidth
-            static let height = CGFloat(28).scaledHeight
-            static let interItemSpacing: CGFloat = 6
-        }
-        enum TagView {
-            static let textColor: UIColor = .GetYaPalette.gray300
-            static let height: CGFloat = UILayout.init(height: 28).height
-            static let cornerRadius: CGFloat = height/2
-            static let font: UIFont = UIFont.systemFont(ofSize: 12, weight: .semibold)
-            static let leadingMargin = CGFloat(10).scaledWidth
-            static let trailingMargin = CGFloat(10).scaledWidth
-            static let borderWidth: CGFloat = 1
-            static let borderColor: UIColor = .GetYaPalette.gray600
-        }
         enum RecommendDiscriptionView {
             static let leadingMargin = CGFloat(16).scaledWidth
-            static let topMargin = CGFloat(85).scaledHeight
+            static let topMargin = CGFloat(16).scaledHeight
             static let font: GetYaFont = .mediumHead1
             static let fontColor: UIColor = .GetYaPalette.gray0
             static let intrinsicContentHeight: CGFloat = topMargin + font.lineHeight
+        }
+        enum KeywordCollectionView {
+            static let itemHeight: CGFloat = .toScaledHeight(value: 28)
+            static let itemInterSpacing: CGFloat = .toScaledHeight(value: 6)
+            static let maximumGroupHeight: CGFloat = .toScaledHeight(
+                value: itemHeight*2 + itemInterSpacing)
+            static let leadingMargin = CGFloat(16).scaledWidth
+            static let topMargin = CGFloat(41).scaledHeight
+            static let trailingMargin = CGFloat(-16).scaledWidth
         }
         enum RecommendSubDiscriptionView {
             static let leadingMargin = CGFloat(16).scaledWidth
@@ -52,7 +48,7 @@ final class DetailQuotationPreviewThumbnailView: UIView {
         }
         enum RecommendCarImageView {
             static let leadingMargin = CGFloat(62).scaledWidth
-            static let topMargin = CGFloat(145).scaledHeight
+            static let topMargin = CGFloat(25).scaledHeight
             static let bottomMargin = CGFloat(11).scaledHeight
             static let imageName: String = "characterSelectSuccessCar"
         }
@@ -63,12 +59,6 @@ final class DetailQuotationPreviewThumbnailView: UIView {
     }
     
     // MARK: - UI properties
-    private let recommendKeywordStackView: UIStackView = .init(arrangedSubviews: []).set {
-        let const = Constants.RecommendKeywordStackView.self
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.axis = .horizontal
-        $0.spacing = const.interItemSpacing
-    }
     private let recommendDiscriptionView: CommonLabel = .init(
         fontType: Constants.RecommendDiscriptionView.font,
         color: Constants.RecommendDiscriptionView.fontColor,
@@ -90,6 +80,20 @@ final class DetailQuotationPreviewThumbnailView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = const.bgColor
     }
+    private lazy var keywordCollectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: tagLayout
+    ).set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .none
+        $0.register(
+            TagViewCell.self,
+            forCellWithReuseIdentifier: TagViewCell.identifier)
+        $0.dataSource = self
+    }
+    
+    // MARK: - Properties
+    var dataSource: [String] = []
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -115,30 +119,35 @@ final class DetailQuotationPreviewThumbnailView: UIView {
         super.init(coder: coder)
         configureUI()
     }
-}
+    
+    // MARK: - Private
+    private var tagLayout: UICollectionViewCompositionalLayout {
+        typealias Const = Constants.KeywordCollectionView
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(130),
+            heightDimension: .absolute(Const.itemHeight))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(Const.maximumGroupHeight))
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item])
+        group.interItemSpacing = .fixed(Const.itemInterSpacing)
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = Const.itemInterSpacing
+        return .init(section: section)
+    }
 
-// MARK: - Helper
-extension DetailQuotationPreviewThumbnailView {
+    // MARK: - Helper
     func configureUI() {
         setupUI()
         bringSubviewToFront(recommendCarImageView)
     }
     
     func configureRecommendKeywordStackView(_ texts: [String]) {
-        let const = Constants.TagView.self
-        _=texts.map { text in
-            recommendKeywordStackView.addArrangedSubview(TagView(text: text).set {
-                $0.configureCornerRadius(with: const.cornerRadius)
-                $0.configureBorderWidth(with: const.borderWidth)
-                $0.configureBorderColor(with: const.borderColor)
-                $0.configureLabelFont(with: const.font)
-                $0.configureTextColor(with: const.textColor)
-                $0.configureBackgroundColor(color: .none)
-                $0.configureTextLabelLeadingMargin(with: const.leadingMargin)
-                $0.configureTextLabeltrailingMargin(with: const.trailingMargin)
-                $0.sizeToFit()
-            })
-        }
+        dataSource = texts
+        keywordCollectionView.reloadData()
     }
     
     func setInitialCarImageForAnimation() {
@@ -160,17 +169,13 @@ extension DetailQuotationPreviewThumbnailView {
             }
         }
     }
-    
-    func prepareForReuse() {
-        _=recommendKeywordStackView.arrangedSubviews.map { $0.removeFromSuperview() }
-    }
 }
 
 // MARK: - LayoutSupportable
 extension DetailQuotationPreviewThumbnailView: LayoutSupportable {
     func setupViews() {
         addSubviews([
-            recommendKeywordStackView,
+            keywordCollectionView,
             recommendDiscriptionView,
             recommendSubDiscriptionView,
             recommendCarImageView,
@@ -178,29 +183,47 @@ extension DetailQuotationPreviewThumbnailView: LayoutSupportable {
     }
     
     func setupConstriants() {
-        configureRecommendKeywordStackView()
+        configureKeywordCollectionView()
         configureRecommendDiscriptionView()
         configureRecommendSubDiscriptionView()
         configurerecommendCarImageView()
         configureRecommendCarBackgroundView()
     }
 }
+
+// MARK: - UICollectionViewDataSource
+extension DetailQuotationPreviewThumbnailView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        dataSource.count
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: TagViewCell.identifier,
+            for: indexPath
+        ) as? TagViewCell else { return .init() }
+        cell.configure(with: dataSource[indexPath.row])
+        return cell
+    }
+}
+
 // MARK: - Layout supportable private helper
 private extension DetailQuotationPreviewThumbnailView {
-    func configureRecommendKeywordStackView() {
-        typealias Const = Constants.RecommendKeywordStackView
+    func configureKeywordCollectionView() {
+        typealias Const = Constants.KeywordCollectionView
         NSLayoutConstraint.activate([
-            recommendKeywordStackView.leadingAnchor.constraint(
+            keywordCollectionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
-            recommendKeywordStackView.trailingAnchor.constraint(
-                lessThanOrEqualTo: trailingAnchor,
-                constant: -Const.trailingMargin),
-            recommendKeywordStackView.topAnchor.constraint(
+            keywordCollectionView.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: Const.trailingMargin),
+            keywordCollectionView.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: Const.topMargin),
-            recommendKeywordStackView.heightAnchor.constraint(
-                equalToConstant: Const.height)])
+            keywordCollectionView.heightAnchor.constraint(
+                lessThanOrEqualToConstant: Const.maximumGroupHeight)])
     }
     
     func configureRecommendDiscriptionView() {
@@ -210,7 +233,7 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
             recommendDiscriptionView.topAnchor.constraint(
-                equalTo: topAnchor,
+                equalTo: keywordCollectionView.bottomAnchor,
                 constant: Const.topMargin),
             recommendDiscriptionView.heightAnchor.constraint(
                 lessThanOrEqualToConstant: Const.font.lineHeight)])
@@ -244,7 +267,7 @@ private extension DetailQuotationPreviewThumbnailView {
             recommendCarImageView.trailingAnchor.constraint(
                 equalTo: trailingAnchor),
             recommendCarImageView.topAnchor.constraint(
-                greaterThanOrEqualTo: topAnchor,
+                greaterThanOrEqualTo: recommendSubDiscriptionView.bottomAnchor,
                 constant: Const.topMargin)])
     }
     

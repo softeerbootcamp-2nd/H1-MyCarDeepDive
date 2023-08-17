@@ -14,6 +14,6 @@ extension QuotationPreviewMainHeaderModel {
     
     static let mock: Self = .init(
         thumbnailKeywords: recommendThumbnailKeywords,
-        recommendCarProductOption: .palisadeMock,
+        recommendCarProductOption: QuotationPreviewCarInfoModel.palisadeMock,
         firstSectionTitle: sectionHeader)
 }

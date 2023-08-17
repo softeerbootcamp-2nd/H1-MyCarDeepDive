@@ -44,11 +44,6 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
         setupUI()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        thumbnailView.prepareForReuse()
-    }
-    
     // MARK: - Functions
     func configure(with: QuotationPreviewMainHeaderModel) {
         setThumbnailView(with.thumbnailKeywords)
