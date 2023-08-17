@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class CharacterDetailSelectViewController: BaseViewController {
     enum Constants {
@@ -17,6 +18,7 @@ final class CharacterDetailSelectViewController: BaseViewController {
             static let topMargin: CGFloat = .toScaledHeight(value: 156)
         }
     }
+    typealias PageData = (index: Int, itemData: String)
     
     // MARK: - UI properties
     private let progressView = ProgressView.init(
@@ -36,8 +38,11 @@ final class CharacterDetailSelectViewController: BaseViewController {
     private var viewControllers: [BaseCharacterSelectPageViewController] = []
     
     // MARK: - Properties
-    private var viewModel: CharacterDetailSelectDataSource!
+    private var viewModel: (any CharacterDetailSelectViewModelabe &
+                            CharacterDetailSelectDataSource)!
+    private let touchUpButton = PassthroughSubject<PageData, Never>()
     private var currentPageViewIndex = 0
+    private var subscription: AnyCancellable?
     private lazy var userSelection = Array(
         repeating: "",
         count: viewModel.numberOfSteps)
@@ -56,20 +61,26 @@ final class CharacterDetailSelectViewController: BaseViewController {
         viewModel = CharacterDetailSelectViewModel()
         configureUI()
         totalStep = viewModel.numberOfSteps
+        bind()
     }
     
     init(
         nibName nibNameOrNil: String?,
         bundle nibBundleOrNil: Bundle?,
-        viewModel: CharacterDetailSelectDataSource
+        viewModel: (any CharacterDetailSelectViewModelabe &
+                    CharacterDetailSelectDataSource)
     ) {
         self.viewModel = viewModel
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         configureUI()
         totalStep = viewModel.numberOfSteps
+        bind()
     }
     
-    convenience init(viewModel: CharacterDetailSelectDataSource) {
+    convenience init(
+        viewModel: (any CharacterDetailSelectViewModelabe &
+                    CharacterDetailSelectDataSource)
+    ) {
         self.init(nibName: nil, bundle: nil, viewModel: viewModel)
     }
     
@@ -78,6 +89,7 @@ final class CharacterDetailSelectViewController: BaseViewController {
         viewModel = CharacterDetailSelectViewModel()
         configureUI()
         totalStep = viewModel.numberOfSteps
+        bind()
     }
     
     // MARK: - Private Functions
@@ -145,7 +157,7 @@ final class CharacterDetailSelectViewController: BaseViewController {
                 defaultText: questionInfo.defaultText,
                 highlightText: questionInfo.highlightText)
             $0.configureHeightMargin(with: Constants.CarPriceSelect.height)
-            $0.configureHeightMargin(with: Constants.CarPriceSelect.topMargin)
+            $0.configureTopMargin(with: Constants.CarPriceSelect.topMargin)
             $0.setupNextButtonToCompletion()
             $0.delegate = self
         }
@@ -169,28 +181,54 @@ final class CharacterDetailSelectViewController: BaseViewController {
     // MARK: - Objc Functions
 }
 
+// MARK: - ViewBindable
+extension CharacterDetailSelectViewController: ViewBindable {
+    func bind() {
+        let input = Input(
+            touchUpButton: touchUpButton.eraseToAnyPublisher())
+        let output = viewModel.transform(input: input)
+        subscription = output.sink { [weak self] in
+            self?.render($0)
+        }
+    }
+    
+    func render(_ state: CharacterDetailSelectVCState) {
+        switch state {
+        case .none:
+            break
+        case .gotoNextQuestionPage:
+            currentPageViewIndex += 1
+            let viewController = viewControllers[currentPageViewIndex]
+            progressView.increaseOneStep()
+            pageViewController.setViewControllers(
+                [viewController], direction: .forward,
+                animated: true)
+
+        case .gotoDetailQuotationPreviewPage:
+            let quotationViewModel = DetailQuotationPreviewViewModel()
+            let presentedVC = DetailQuotationPreviewViewController(viewModel: quotationViewModel)
+            navigationController?.pushViewController(presentedVC, animated: true)
+        }
+    }
+    
+    typealias Input = CharacterDetailSelectVCInput
+    typealias State = CharacterDetailSelectVCState
+    typealias ErrorType = Error
+}
+
 // MARK: - BaseCharacterSelectpageViewDelegate
 extension CharacterDetailSelectViewController: BaseCharacterSelectpageViewDelegate {
     func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController) {
         if currentPageViewIndex == totalStep - 1 {
             let userSelectedPrice = viewController.carPriceRange
-            let viewModel = DetailQuotationPreviewViewModel()
-            userSelection[currentPageViewIndex] = "\(userSelectedPrice.maximumValue ?? 0).insertCommas"+" 만원"
-            // TODO: 서버에 string4개, min, max price 저장된 userSelection 데이터 보내기
-            let presentedVC = DetailQuotationPreviewViewController(viewModel: viewModel)
-            navigationController?.pushViewController(presentedVC, animated: true)
+            touchUpButton.send((currentPageViewIndex, "\(userSelectedPrice.maximumValue ?? 0).insertCommas"+" 만원"))
             return
         }
         let itemIndex = viewController.selectedItemIndex
         let questions = viewModel.questionList(at: currentPageViewIndex).questionTexts
         let selectedTitle = questions[itemIndex ?? 0]
         userSelection[currentPageViewIndex] = selectedTitle
-        currentPageViewIndex += 1
-        let viewController = viewControllers[currentPageViewIndex]
-        progressView.increaseOneStep()
-        pageViewController.setViewControllers(
-            [viewController], direction: .forward,
-            animated: true)
+        touchUpButton.send((currentPageViewIndex, selectedTitle))
     }
 }
 
