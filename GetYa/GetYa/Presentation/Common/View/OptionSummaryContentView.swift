@@ -40,6 +40,15 @@ class OptionSummaryContentView: UIView {
         setOptionData(texts: optionNames, prices: optionPrices)
     }
     
+    init(titleText: String, optionName: String, optionPrice: Int) {
+        super.init(frame: .zero)
+        
+        setupViews()
+        configureUI()
+        setTitle(text: titleText)
+        setOptionDatum(text: optionName, price: optionPrice)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -95,19 +104,35 @@ class OptionSummaryContentView: UIView {
     }
     
     // MARK: - Functions
+    func setTitleFont(fontType: GetYaFont) {
+        titleLabel.configureFontType(fontType: fontType)
+    }
+    
+    func setTitleTextColor(color: UIColor) {
+        titleLabel.textColor = color
+    }
+    
     func setTitle(text: String) {
         titleLabel.text = text
     }
     
     func setOptionData(texts: [String], prices: [Int]) {
         texts.enumerated().forEach { (idx, text) in
-            let view = OptionNamAndPriceView(
+            let view = OptionNameAndPriceView(
                 nameText: text,
                 priceValue: prices[idx])
             nameAndPriceStackView.addArrangedSubview(view)
         }
     }
     
-    // MARK: - Objc Functions
-
+    func setOptionDatum(text: String, price: Int) {
+        let view = OptionNameAndPriceView(
+            nameText: text,
+            priceValue: price)
+        nameAndPriceStackView.addArrangedSubview(view)
+    }
+    
+    func setSpacing(value: CGFloat) {
+        self.nameAndPriceStackView.spacing = .toScaledHeight(value: value)
+    }
 }
