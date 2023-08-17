@@ -85,7 +85,8 @@ final class DetailQuestionCarPriceSelectView: UIView {
         priceSlider.configure(priceUnit: Float(priceUnit))
         priceMinimumLabel.text = "\(minPrice) 만원"
         priceMaximumLabel.text = "\(maxPrice) 만원"
-        curPrice = minPrice + priceUnit
+        curPrice = maxPrice
+        priceSlider.setValue(Float(curPrice), animated: false)
         priceRangeDescriptionLabel.text = "\(minPrice.insertCommas)만원 ~ \(curPrice.insertCommas)만원"
     }
 }
