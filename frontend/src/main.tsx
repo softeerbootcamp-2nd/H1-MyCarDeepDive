@@ -4,7 +4,7 @@ import App from './App.tsx';
 import './index.css';
 
 import { BrowserRouter } from 'react-router-dom';
-import CarProvider from './context/CarProvider.tsx';
+import CarProvider from './context/CarProvider';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
