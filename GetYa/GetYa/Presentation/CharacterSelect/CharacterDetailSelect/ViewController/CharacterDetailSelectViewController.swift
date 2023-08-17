@@ -38,6 +38,9 @@ final class CharacterDetailSelectViewController: BaseViewController {
     // MARK: - Properties
     private var viewModel: CharacterDetailSelectDataSource!
     private var currentPageViewIndex = 0
+    private lazy var userSelection = Array(
+        repeating: "",
+        count: viewModel.numberOfSteps)
     private lazy var totalStep: Int = 1 {
         didSet {
             configurePageView()
@@ -170,15 +173,18 @@ final class CharacterDetailSelectViewController: BaseViewController {
 extension CharacterDetailSelectViewController: BaseCharacterSelectpageViewDelegate {
     func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController) {
         if currentPageViewIndex == totalStep - 1 {
-            // TODO: 서버에 string4개, min, max price보낸 후 1.5 결과 화면으로 가기
-            print("hihi")
+            let userSelectedPrice = viewController.carPriceRange
+            let viewModel = DetailQuotationPreviewViewModel()
+            userSelection[currentPageViewIndex] = "\(userSelectedPrice.maximumValue ?? 0).insertCommas"+" 만원"
+            // TODO: 서버에 string4개, min, max price 저장된 userSelection 데이터 보내기
+            let presentedVC = DetailQuotationPreviewViewController(viewModel: viewModel)
+            navigationController?.pushViewController(presentedVC, animated: true)
             return
         }
         let itemIndex = viewController.selectedItemIndex
         let questions = viewModel.questionList(at: currentPageViewIndex).questionTexts
-        // TODO: 서버에 보내줄 item string
         let selectedTitle = questions[itemIndex ?? 0]
-        print(selectedTitle)
+        userSelection[currentPageViewIndex] = selectedTitle
         currentPageViewIndex += 1
         let viewController = viewControllers[currentPageViewIndex]
         progressView.increaseOneStep()
