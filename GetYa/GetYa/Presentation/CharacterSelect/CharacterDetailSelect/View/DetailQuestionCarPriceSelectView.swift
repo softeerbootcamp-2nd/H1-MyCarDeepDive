@@ -28,6 +28,7 @@ final class DetailQuestionCarPriceSelectView: UIView {
             static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
         }
     }
+    
     // MARK: - UI properties
     private let priceRangeDescriptionLabel = CommonLabel(
         fontType: .custom(size: 24, kern: -0.2, lineHeight: 26, nameType: .mediumHead),
