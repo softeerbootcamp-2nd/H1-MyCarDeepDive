@@ -27,7 +27,7 @@ public class OptionMapper {
     }
 
     public static PackageOptionResponse optionToPackageOptionResponse(
-            Packages _packages, List<Tags> tagsList, String imgUrl) {
+            Packages _packages, List<Tags> tagsList, List<Options> optionsList, String imgUrl) {
         return new PackageOptionResponse(
                 _packages.getId(),
                 imgUrl,
@@ -38,7 +38,8 @@ public class OptionMapper {
                         .map(TagsMapper.INSTANCE::tagsToTagResponse)
                         .collect(Collectors.toList()),
                 _packages.getBadgeName().getViewName(),
-                _packages.getPrice());
+                _packages.getPrice(),
+                optionsList.stream().map(Options::getId).collect(Collectors.toList()));
     }
 
     public static BasicOptionResponse optionToBasicOptionResponse(
