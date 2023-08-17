@@ -31,7 +31,7 @@ struct QuestionSliderViewModel {
     }
 }
 
-// TODO: 선택 정보를 저장해야하는데 골라야 할 목차가 5개가 아니라 여러개가된다면?..
+// 고민TODO: - 선택 정보를 저장해야하는데 골라야 할 목차가 5개가 아니라 여러개가된다면?..
 final class CharacterDetailSelectViewModel {
     // MARK: - Properties
     private var questionDescriptionTexts: [QuestionDescriptionLabelModel] = QuestionDescriptionLabelModel.mock

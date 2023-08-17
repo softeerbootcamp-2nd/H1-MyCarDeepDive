@@ -240,7 +240,7 @@ extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
                 equalToConstant: const.height)])
     }
     
-    private func configureRecommendCarImageView()  {
+    private func configureRecommendCarImageView() {
         let const = Constants.RecommendCarImageView.self
         NSLayoutConstraint.activate([
             recommendCarImageView.leadingAnchor.constraint(

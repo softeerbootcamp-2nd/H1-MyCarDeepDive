@@ -23,14 +23,14 @@ final class DetailQuotationPreviewViewController: BaseViewController {
     private var adapter: DetailQuotationPreviewTableViewAdapter!
     private var viewModel: (
         any DetailQuotationPreviewViewModelable
-        & DetailQuotationPreviewTableViewAdapterDataSource
-        & CommonQuotationPreviewTableViewAdapterDataSource)!
+        & DetailQuotationPreviewAdapterDataSource
+        & CommonQuotationPreviewAdapterDataSource)!
     
     // MARK: - Lifecycles
     init(
         viewModel: some DetailQuotationPreviewViewModelable
-        & DetailQuotationPreviewTableViewAdapterDataSource
-        & CommonQuotationPreviewTableViewAdapterDataSource
+        & DetailQuotationPreviewAdapterDataSource
+        & CommonQuotationPreviewAdapterDataSource
     ) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel

@@ -71,7 +71,7 @@ private extension DetailQuotationPreviewViewModel {
 }
 
 // MARK: - CharacterSSTableViewAdapterDataSource
-extension DetailQuotationPreviewViewModel: DetailQuotationPreviewTableViewAdapterDataSource {
+extension DetailQuotationPreviewViewModel: DetailQuotationPreviewAdapterDataSource {
     var secondSectionFooterItem: String {
         secondSectionFooter
     }
