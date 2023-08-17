@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 // MARK: - View model
 struct QuestionDescriptionLabelModel {
@@ -36,10 +37,33 @@ final class CharacterDetailSelectViewModel {
     private var questionDescriptionTexts: [QuestionDescriptionLabelModel] = QuestionDescriptionLabelModel.mock
     private var questionListTexts: [QuestionListTextModel] = QuestionListTextModel.mock
     private var questionSliderViewModel: QuestionSliderViewModel = .mock
+    private lazy var userSelectionItems = Array(
+        repeating: "",
+        count: questionDescriptionTexts.count)
+}
+
+extension CharacterDetailSelectViewModel: CharacterDetailSelectViewModelabe {
+    func transform(input: Input) -> Output {
+        return touchUpButtonChains(input: input)
+    }
+    
+    private func touchUpButtonChains(input: Input) -> Output {
+        return input.touchUpButton
+            .map { [weak self] item -> State in
+                guard let self else { return .none }
+                userSelectionItems[item.index] = item.itemData
+                if item.index == userSelectionItems.count - 1 {
+                    // TODO: 서버에 userSelectionItems 데이터 전송
+                    return .gotoDetailQuotationPreviewPage
+                }
+                return .gotoNextQuestionPage
+            }.eraseToAnyPublisher()
+    }
 }
 
 // MARK: - CharacterDetailSelectDataSource
 extension CharacterDetailSelectViewModel: CharacterDetailSelectDataSource {
+    
     var questionCarRangeOfPrice: QuestionSliderViewModel {
         questionSliderViewModel
     }
