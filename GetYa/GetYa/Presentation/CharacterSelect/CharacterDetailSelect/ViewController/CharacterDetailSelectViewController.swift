@@ -125,7 +125,7 @@ final class CharacterDetailSelectViewController: BaseViewController {
         let priceRangeModel = viewModel.questionCarRangeOfPrice
         let curPageIndex = viewModel.numberOfSteps
         let questionInfo = viewModel.questionDiscription(at: curPageIndex-1)
-        let carPriceSliderAreaView = CharacterDetailQuestionCarPriceSelectView(frame: .zero).set {
+        let carPriceSliderAreaView = DetailQuestionCarPriceSelectView(frame: .zero).set {
             $0.configurePrice(
                 minPrice: priceRangeModel.minimumCarPrice,
                 maxPrice: priceRangeModel.maximumCarPrice,

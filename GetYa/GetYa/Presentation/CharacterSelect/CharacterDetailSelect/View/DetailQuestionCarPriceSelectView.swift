@@ -1,5 +1,5 @@
 //
-//  CharacterDetailQuestionCarPriceSelectView.swift
+//  DetailQuestionCarPriceSelectView.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/17.
@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class CharacterDetailQuestionCarPriceSelectView: UIView {
+final class DetailQuestionCarPriceSelectView: UIView {
     enum Constants {
         enum PriceRangeDescriptionLabel {
             static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
@@ -91,14 +91,14 @@ final class CharacterDetailQuestionCarPriceSelectView: UIView {
 }
 
 // MARK: - QuestionViewSendable
-extension CharacterDetailQuestionCarPriceSelectView: QuestionViewSendable {
+extension DetailQuestionCarPriceSelectView: QuestionViewSendable {
     func sendCarMinimumAndMaximumPrice() -> (minimumValue: Int?, maximumValue: Int?) {
         return (Int(priceSlider.minimumValue), curPrice)
     }
 }
 
 // MARK: - LayoutSupportable
-extension CharacterDetailQuestionCarPriceSelectView: LayoutSupportable {
+extension DetailQuestionCarPriceSelectView: LayoutSupportable {
     func setupViews() {
         addSubviews([
             priceRangeDescriptionLabel,
