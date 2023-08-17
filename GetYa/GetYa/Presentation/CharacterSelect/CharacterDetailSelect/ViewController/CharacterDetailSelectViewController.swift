@@ -43,9 +43,6 @@ final class CharacterDetailSelectViewController: BaseViewController {
     private let touchUpButton = PassthroughSubject<PageData, Never>()
     private var currentPageViewIndex = 0
     private var subscription: AnyCancellable?
-    private lazy var userSelection = Array(
-        repeating: "",
-        count: viewModel.numberOfSteps)
     private lazy var totalStep: Int = 1 {
         didSet {
             configurePageView()
@@ -205,7 +202,10 @@ extension CharacterDetailSelectViewController: ViewBindable {
                 animated: true)
 
         case .gotoDetailQuotationPreviewPage:
-            let quotationViewModel = DetailQuotationPreviewViewModel()
+            var userSelectItems = viewModel.userSelection
+            /// 최소가로 고정
+            userSelectItems[viewModel.numberOfSteps-1] = "4200만원"
+            let quotationViewModel = DetailQuotationPreviewViewModel.init(keywords: userSelectItems)
             let presentedVC = DetailQuotationPreviewViewController(viewModel: quotationViewModel)
             navigationController?.pushViewController(presentedVC, animated: true)
         }
@@ -221,13 +221,14 @@ extension CharacterDetailSelectViewController: BaseCharacterSelectpageViewDelega
     func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController) {
         if currentPageViewIndex == totalStep - 1 {
             let userSelectedPrice = viewController.carPriceRange
-            touchUpButton.send((currentPageViewIndex, "\(userSelectedPrice.maximumValue ?? 0).insertCommas"+" 만원"))
+            touchUpButton.send(
+                (currentPageViewIndex,
+                 "\((userSelectedPrice.maximumValue ?? 0).insertCommas)"+"만원"))
             return
         }
         let itemIndex = viewController.selectedItemIndex
         let questions = viewModel.questionList(at: currentPageViewIndex).questionTexts
         let selectedTitle = questions[itemIndex ?? 0]
-        userSelection[currentPageViewIndex] = selectedTitle
         touchUpButton.send((currentPageViewIndex, selectedTitle))
     }
 }

@@ -54,7 +54,7 @@ extension CharacterDetailSelectViewModel: CharacterDetailSelectViewModelabe {
                 userSelectionItems[item.index] = item.itemData
                 if item.index == userSelectionItems.count - 1 {
                     // TODO: 서버에 userSelectionItems 데이터 전송
-                    return .gotoDetailQuotationPreviewPage
+                    return .gotoDetailQuotationPreviewPage(userSelection: userSelectionItems)
                 }
                 return .gotoNextQuestionPage
             }.eraseToAnyPublisher()
@@ -63,6 +63,9 @@ extension CharacterDetailSelectViewModel: CharacterDetailSelectViewModelabe {
 
 // MARK: - CharacterDetailSelectDataSource
 extension CharacterDetailSelectViewModel: CharacterDetailSelectDataSource {
+    var userSelection: [String] {
+        userSelectionItems
+    }
     
     var questionCarRangeOfPrice: QuestionSliderViewModel {
         questionSliderViewModel

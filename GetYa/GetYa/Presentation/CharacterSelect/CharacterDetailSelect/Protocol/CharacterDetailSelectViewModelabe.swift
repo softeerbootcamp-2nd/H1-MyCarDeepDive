@@ -13,7 +13,7 @@ struct CharacterDetailSelectVCInput {
 }
 
 enum CharacterDetailSelectVCState {
-    case gotoDetailQuotationPreviewPage
+    case gotoDetailQuotationPreviewPage(userSelection: [String])
     case gotoNextQuestionPage
     case none
 }

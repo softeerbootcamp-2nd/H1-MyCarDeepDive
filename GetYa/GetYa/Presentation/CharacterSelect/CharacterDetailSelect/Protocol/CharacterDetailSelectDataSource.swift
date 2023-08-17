@@ -11,4 +11,5 @@ protocol CharacterDetailSelectDataSource {
     func questionDiscription(at index: Int) -> QuestionDescriptionLabelModel
     func questionList(at index: Int) -> QuestionListTextModel
     func numberOfQuestionListItems(_ index: Int) -> Int
+    var userSelection: [String] { get }
 }
