@@ -25,16 +25,8 @@ class LoadingViewController: UIViewController {
             kern: -0.3,
             lineHeight: 32,
             nameType: .regularHead),
-        color: .GetYaPalette.gray50,
-        text: "나만의 펠리세이드를\n만들고 있어요"
+        color: .GetYaPalette.gray50
     ).set {
-        $0.configurePartTextFont(
-            otherFontType: .custom(
-                size: 26,
-                kern: -0.3,
-                lineHeight: 32,
-                nameType: .boldHead),
-            partText: "펠리세이드")
         $0.textAlignment = .center
     }
     
@@ -103,6 +95,16 @@ class LoadingViewController: UIViewController {
     }
     
     // MARK: - Functions
+    func setTitleText(carName: String) {
+        label.text = "나만의 \(carName)를\n만들고 있어요"
+        label.configurePartTextFont(
+            otherFontType: .custom(
+                size: 26,
+                kern: -0.3,
+                lineHeight: 32,
+                nameType: .boldHead),
+            partText: carName)
+    }
     
     // MARK: - Objc Functions
 }
