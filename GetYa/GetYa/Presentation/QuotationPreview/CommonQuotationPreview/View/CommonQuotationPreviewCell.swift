@@ -70,9 +70,7 @@ final class CommonQuotationPreviewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        configureSubviewUI(
-            with: recommendCarOptionView,
-            reviewdTextView)
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -106,19 +104,24 @@ final class CommonQuotationPreviewCell: UITableViewCell {
 
 // MARK: - LayoutSupportable
 extension CommonQuotationPreviewCell: LayoutSupportable {
-    func configureConstraints() {
-        _=[recommendCarOptionViewConstraints,
-           reviewdTextViewConstraints
-        ].map { NSLayoutConstraint.activate($0) }
+    func setupViews() {
+        contentView.addSubviews([
+            recommendCarOptionView,
+            reviewdTextView])
+    }
+    
+    func setupConstriants() {
+        configureRecommendCarOptionView()
+        configureReviewdTextView()
         
         recommendCarOptionView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         recommendCarOptionView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         reviewdTextView.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
     
-    private var recommendCarOptionViewConstraints: [NSLayoutConstraint] {
+    private func configureRecommendCarOptionView() {
         typealias Const = Constants.RecommendCarOptionView
-        return [
+        NSLayoutConstraint.activate([
             recommendCarOptionView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
                 constant: Const.leadingMargin),
@@ -126,12 +129,13 @@ extension CommonQuotationPreviewCell: LayoutSupportable {
                 equalTo: contentView.topAnchor,
                 constant: Const.topMargin),
             recommendCarOptionView.heightAnchor.constraint(
-                equalToConstant: Const.height)]
+                equalToConstant: Const.height)])
+        
     }
     
-    private var reviewdTextViewConstraints: [NSLayoutConstraint] {
+    private func configureReviewdTextView() {
         typealias Const = Constants.ReviewdTextView
-        return [
+        NSLayoutConstraint.activate([
             reviewdTextView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
                 constant: Const.leadingMargin),
@@ -142,6 +146,6 @@ extension CommonQuotationPreviewCell: LayoutSupportable {
                 equalTo: contentView.trailingAnchor,
                 constant: -Const.trailingMargin),
             reviewdTextView.bottomAnchor.constraint(
-                lessThanOrEqualTo: contentView.bottomAnchor)]
+                lessThanOrEqualTo: contentView.bottomAnchor)])
     }
 }
