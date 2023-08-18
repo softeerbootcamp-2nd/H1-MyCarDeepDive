@@ -68,6 +68,7 @@ class LifeStyleViewController: UIViewController {
 
         setupViews()
         configureUI()
+        contentView.delegate = self
     }
     
     // MARK: - Functions
@@ -233,5 +234,12 @@ extension LifeStyleViewController: LifeStyleCellDelegate {
                 viewController,
                 animated: true)
         }
+    }
+}
+
+// MARK: - QuestionContentViewDelegate
+extension LifeStyleViewController: QuestionContentViewDelegate {
+    func touchUpButton(sender: UIButton) {
+        delegate?.touchUpSuccessButton(sender: sender)
     }
 }
