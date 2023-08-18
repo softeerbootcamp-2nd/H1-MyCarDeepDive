@@ -45,14 +45,14 @@ final class DefaultQuotationPreviewMainHeader: UITableViewHeaderFooterView {
     }
     
     // MARK: - Functions
-    func configure(with: QuotationPreviewMainHeaderModel) {
+    func configure(with: DefaultQuotationPreviewMainHeaderModel) {
+        setThumbnailView(with.carName, imageUrl: with.carImageUrl)
         setRecommendCarInfoView(with.recommendCarProductOption)
         setSectionDivider(with.firstSectionTitle)
     }
     
     func showAnimation() {
-        //thumbnailView.setInitialCarImageForAnimation()
-        //thumbnailView.showCarImageAnimation()
+        thumbnailView.showAnimation()
     }
     
     // MARK: - Private functions
@@ -63,6 +63,10 @@ final class DefaultQuotationPreviewMainHeader: UITableViewHeaderFooterView {
     
     private func setSectionDivider(_ title: String) {
         sectionDivider.configureSectionTitle(with: title)
+    }
+    
+    private func setThumbnailView(_ carName: String, imageUrl: String) {
+        thumbnailView.configure(carName: carName, carImageUrl: imageUrl)
     }
 }
 
