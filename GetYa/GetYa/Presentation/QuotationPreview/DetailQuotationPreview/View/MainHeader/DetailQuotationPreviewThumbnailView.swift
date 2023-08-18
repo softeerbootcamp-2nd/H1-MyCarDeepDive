@@ -12,21 +12,12 @@ final class DetailQuotationPreviewThumbnailView: UIView {
         static let layerColors: [UIColor] = [
             UIColor(red: 0.9, green: 0.92, blue: 0.94, alpha: 1),
             UIColor(red: 0.95, green: 0.96, blue: 0.97, alpha: 1)]
-        static let intrinsicContentHeight: CGFloat = {
-            let keywordCollectionViewHeight = KeywordCollectionView.maximumGroupHeight + KeywordCollectionView.topMargin
-            let discriptionViewHeight = RecommendDiscriptionView.intrinsicContentHeight
-            let subDiscriptionViewHeight =  RecommendSubDiscriptionView.intrinsicContentHeight
-            return (discriptionViewHeight +
-                    subDiscriptionViewHeight +
-                    keywordCollectionViewHeight +
-                    RecommendCarBackgroundView.height)
-        }()
+        static let intrinsicContentHeight: CGFloat = .toScaledHeight(value: 348)
         enum RecommendDiscriptionView {
             static let leadingMargin = CGFloat(16).scaledWidth
             static let topMargin = CGFloat(16).scaledHeight
             static let font: GetYaFont = .mediumHead1
             static let fontColor: UIColor = .GetYaPalette.gray0
-            static let intrinsicContentHeight: CGFloat = topMargin + font.lineHeight
         }
         enum KeywordCollectionView {
             static let itemHeight: CGFloat = .toScaledHeight(value: 28)
@@ -43,8 +34,6 @@ final class DetailQuotationPreviewThumbnailView: UIView {
             static let bottomMargin = CGFloat(79).scaledHeight
             static let font: GetYaFont = .regularBody4
             static let fontColor: UIColor = .GetYaPalette.gray200
-            static let intrinsicContentHeight: CGFloat = topMargin + font
-                .lineHeight + bottomMargin
         }
         enum RecommendCarImageView {
             static let leadingMargin = CGFloat(62).scaledWidth
@@ -124,7 +113,7 @@ final class DetailQuotationPreviewThumbnailView: UIView {
     private var tagLayout: UICollectionViewCompositionalLayout {
         typealias Const = Constants.KeywordCollectionView
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(130),
+            widthDimension: .estimated(45),
             heightDimension: .absolute(Const.itemHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(
@@ -222,8 +211,9 @@ private extension DetailQuotationPreviewThumbnailView {
             keywordCollectionView.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: Const.topMargin),
-            keywordCollectionView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: Const.maximumGroupHeight)])
+            keywordCollectionView
+                .heightAnchor
+                .constraint(greaterThanOrEqualToConstant: Const.itemHeight)])
     }
     
     func configureRecommendDiscriptionView() {

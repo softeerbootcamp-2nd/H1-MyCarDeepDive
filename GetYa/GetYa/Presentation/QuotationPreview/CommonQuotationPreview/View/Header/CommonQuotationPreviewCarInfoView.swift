@@ -9,11 +9,7 @@ import UIKit
 
 class CommonQuotationPreviewCarInfoView: UIView {
     enum Constants {
-        static var intrinsicContentHeight: CGFloat {
-            let carKrNameHeight = CarKrNameLabel.intrinsicContentHeight
-            let carOptionsLabelHeight = CarOptionsLabel.intrinsicContentHeight
-            return carKrNameHeight + carOptionsLabelHeight
-        }
+        static var intrinsicContentHeight: CGFloat = .toScaledHeight(value: 93)
         enum CarKrNameLabel {
             static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
             static let topMargin: CGFloat = CGFloat(24).scaledHeight
@@ -153,6 +149,7 @@ private extension CommonQuotationPreviewCarInfoView {
                 equalTo: carKrNameLabel.bottomAnchor,
                 constant: Const.topMargin),
             carOptionsLabel.bottomAnchor.constraint(
-                equalTo: bottomAnchor)])
+                equalTo: bottomAnchor),
+            carOptionsLabel.heightAnchor.constraint(equalToConstant: Const.font.lineHeight)])
     }
 }
