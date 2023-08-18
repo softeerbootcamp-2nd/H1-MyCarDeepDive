@@ -27,12 +27,11 @@ class TrimLearnMoreView: LearnMoreView {
     // MARK: - Properties
     
     // MARK: - Lifecycles
-    init(textColor: UIColor, text: String) {
+    init(text: String) {
         super.init(frame: .zero)
         
         setupViews()
         configureUI()
-        configureTextColor(color: textColor)
         configureText(text: text)
     }
     

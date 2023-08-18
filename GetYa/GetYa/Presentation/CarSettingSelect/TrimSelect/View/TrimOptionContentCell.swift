@@ -64,10 +64,7 @@ class TrimOptionContentCell: UICollectionViewCell {
         $0.setImage(UIImage(named: "Blue-Check-Circle"), for: .selected)
         $0.addTarget(self, action: #selector(touchUpSelectButton), for: .touchUpInside)
     }
-    private(set) lazy var learnMoreView = TrimLearnMoreView(
-        textColor: .GetYaPalette.primary,
-        text: "더 알아보기"
-    ).set {
+    private(set) lazy var learnMoreView = TrimLearnMoreView(text: "더 알아보기").set {
         $0.delegate = self
     }
     
