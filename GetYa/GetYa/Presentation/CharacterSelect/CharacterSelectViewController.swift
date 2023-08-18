@@ -7,10 +7,10 @@
 
 import UIKit
 
-class CharacterSelectViewController: UIViewController {
+class CharacterSelectViewController: BaseViewController {
     enum Constants {
         enum ProgressView {
-            static let height = CGFloat(4).scaledHeight
+            static let height: CGFloat = .toScaledHeight(value: 4)
         }
     }
     
@@ -20,11 +20,15 @@ class CharacterSelectViewController: UIViewController {
         navigationOrientation: .horizontal)
     private lazy var progressView = ProgressView().set {
             $0.translatesAutoresizingMaskIntoConstraints = true
-        }
+    }
     
     // MARK: - Properties
     private var viewControllers: [UIViewController] = []
-    
+    private let checkListTexts: [String] = [
+        "20대",
+        "30대",
+        "40대",
+        "50대 이상"]
     // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +43,20 @@ class CharacterSelectViewController: UIViewController {
         view.addSubviews([progressView, pageViewController.view])
         pageViewController.didMove(toParent: self)
         
-        let ageViewController = AgeViewController().set {
-            $0.delegate = self
-        }
+        let ageViewController = {
+            let questionView = CharacterDetailQuestionListView(textArray: checkListTexts)
+            return BaseCharacterSelectPageViewController(
+                curPageIndex: 1,
+                totalPageIndex: 2,
+                questionView: questionView
+            ).set {
+                $0.setQuestionIndexView(currentIndex: 1, totalIndex: 2)
+                $0.setQuestionDescriptionLabel(
+                    defaultText: "나이를 알려주세요",
+                    highlightText: "나이")
+                $0.delegate = self
+            }
+        }()
         let lifeStyleViewController = LifeStyleViewController().set {
             $0.delegate = self
         }
@@ -50,34 +65,20 @@ class CharacterSelectViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
-        configureNavigationBar()
         configureProgressView()
         configurePageViewController()
     }
     
-    private func configureNavigationBar() {
-        let image = UIImage(named: "Black_Logo")
-        self.navigationItem.title = ""
-        self.navigationItem.titleView = UIImageView(image: image)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "arrow.left")?.withTintColor(
-                .GetYaPalette.gray0,
-                renderingMode: .alwaysOriginal),
-            style: .plain,
-            target: self,
-            action: #selector(touchUpNavigationBackButton))
-    }
-    
     private func configureProgressView() {
+        typealias Const = Constants.ProgressView
         progressView.configureProgressTotalStep(with: viewControllers.count)
-        progressView.transform = progressView.transform.scaledBy(
-            x: 1,
-            y: Constants.ProgressView.height)
         progressView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            progressView.heightAnchor.constraint(
+                equalToConstant: Const.height)
         ])
     }
     
@@ -87,36 +88,40 @@ class CharacterSelectViewController: UIViewController {
                 [firstViewController],
                 direction: .forward,
                 animated: true)
+            view.bringSubviewToFront(progressView)
         }
         pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             pageViewController.view.topAnchor.constraint(equalTo: progressView.bottomAnchor),
             pageViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pageViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            pageViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            pageViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
-    @objc private func touchUpNavigationBackButton() {
+    override func didTapNavigationBackButton() {
         if let viewControler = pageViewController.viewControllers?.first {
-            if viewControler is AgeViewController {
-                navigationController?.popViewController(animated: true)
-            } else {
-                if let firstViewController = viewControllers.first {
-                    pageViewController.setViewControllers(
-                        [firstViewController],
-                        direction: .reverse,
-                        animated: true)
-                    progressView.decreaseOneStep()
-                }
+            guard !(viewControler is BaseCharacterSelectPageViewController) else {
+                super.didTapNavigationBackButton()
+                return
+            }
+            if let firstViewController = viewControllers.first {
+                progressView.decreaseOneStep()
+                pageViewController.setViewControllers(
+                    [firstViewController],
+                    direction: .reverse,
+                    animated: true)
             }
         }
     }
 }
 
-// MARK: - PageViewController Delegate
-extension CharacterSelectViewController: AgeViewControllerDelegate {
-    func touchUpNextButton(sender: UIButton) {
+// MARK: - BaseCharacterSelectpageViewDelegate
+extension CharacterSelectViewController: BaseCharacterSelectpageViewDelegate {
+    func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController) {
+        // TODO: 서버한테 보낼 지정된 텍스트
+        guard let selectedIdx = viewController.selectedItemIndex else { return }
+        let selectedItemString = checkListTexts[selectedIdx]
         if let viewController = viewControllers.last {
             pageViewController.setViewControllers(
                 [viewController],
