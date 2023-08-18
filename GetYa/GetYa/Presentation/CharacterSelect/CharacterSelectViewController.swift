@@ -130,6 +130,8 @@ extension CharacterSelectViewController: AgeViewControllerDelegate {
 // MARK: - LifeStyleViewController Delegate
 extension CharacterSelectViewController: LifeStyleViewControllerDelegate {
     func touchUpSuccessButton(sender: UIButton) {
-        // TODO: CharacterSelectSuccessViewController로 화면 전환
+        let quotationViewModel = DefaultQuotationPreviewViewModel()
+        let quotationViewController = DefaultQuotationPreviewViewController(viewModel: quotationViewModel)
+        navigationController?.pushViewController(quotationViewController, animated: true)
     }
 }
