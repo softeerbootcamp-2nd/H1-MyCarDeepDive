@@ -6,16 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class CarSpec {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +43,26 @@ public class CarSpec {
     private List<CarSpecOptions> carSpecOptions = new ArrayList<>();
 
     private long price;
+
+    @Builder
+    public CarSpec(
+            Long id,
+            Car car,
+            Trim trim,
+            Body body,
+            Engine engine,
+            DrivingSystem drivingSystem,
+            List<CarSpecOptions> carSpecOptions,
+            long price) {
+        this.id = id;
+        this.car = car;
+        this.trim = trim;
+        this.body = body;
+        this.engine = engine;
+        this.drivingSystem = drivingSystem;
+        this.carSpecOptions = carSpecOptions;
+        this.price = price;
+    }
 
     @Override
     public boolean equals(Object o) {
