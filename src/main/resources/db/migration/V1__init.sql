@@ -46,18 +46,18 @@ create table car_spec (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 create table car_spec_options (
-                                  carspec_option_id bigint not null auto_increment,
+                                  car_spec_option_id bigint not null auto_increment,
                                   is_basic_option bit,
                                   car_spec_id bigint,
                                   option_id bigint,
-                                  primary key (carspec_option_id)
+                                  primary key (car_spec_option_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 create table car_spec_package (
-                                  carspec_package_id bigint not null auto_increment,
+                                  car_spec_package_id bigint not null auto_increment,
                                   car_spec_id bigint,
                                   package_id bigint,
-                                  primary key (carspec_package_id)
+                                  primary key (car_spec_package_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 create table color_combination (
