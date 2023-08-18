@@ -10,8 +10,8 @@ import Combine
 
 // MARK: - View Model
 struct QuotationPreviewCarInfoModel {
-    var carKrName: String
-    var carEnTrimName: String
+    var carName: String
+    var trimName: String
     var carPrice: String
     var carOptions: String
 }

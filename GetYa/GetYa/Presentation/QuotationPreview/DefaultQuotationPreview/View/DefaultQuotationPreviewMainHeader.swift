@@ -46,7 +46,6 @@ final class DefaultQuotationPreviewMainHeader: UITableViewHeaderFooterView {
     
     // MARK: - Functions
     func configure(with: QuotationPreviewMainHeaderModel) {
-        setThumbnailView(with.thumbnailKeywords)
         setRecommendCarInfoView(with.recommendCarProductOption)
         setSectionDivider(with.firstSectionTitle)
     }

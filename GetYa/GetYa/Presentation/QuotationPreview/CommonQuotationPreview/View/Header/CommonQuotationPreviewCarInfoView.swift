@@ -75,11 +75,11 @@ class CommonQuotationPreviewCarInfoView: UIView {
     func configure(with recommendCarInfo: QuotationPreviewCarInfoModel) {
         _=carKrNameLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.text = recommendCarInfo.carKrName
+            $0.text = recommendCarInfo.carName
         }
         _=carEnTrimLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.text = recommendCarInfo.carEnTrimName
+            $0.text = recommendCarInfo.trimName
         }
         _=carPriceLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
