@@ -8,13 +8,19 @@
 import Combine
 
 struct CharacterDetailSelectInput {
-    typealias PageData = (index: Int, itemData: String)
-    let touchUpButton: AnyPublisher<PageData, Never>
+    let touchUpCompletionButton: AnyPublisher<Int?, Never>
+    let touchUpNextButton: AnyPublisher<(curPageIndex: Int, itemIndex: Int?), Never>
+    let viewLoad: AnyPublisher<Void, Never>
 }
 
 enum CharacterDetailSelectState {
     case gotoDetailQuotationPreviewPage(userSelection: [String])
     case gotoNextQuestionPage
+    case makeQuestions(
+        numberOfSteps: Int,
+        questionList: [QuestionListTextModel],
+        questionDescriptions: [QuestionDescriptionLabelModel],
+        priceRange: QuestionSliderViewModel)
     case none
 }
 
