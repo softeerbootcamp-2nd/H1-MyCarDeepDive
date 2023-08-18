@@ -1,11 +1,17 @@
 //
-//  DefaultQuotationPreviewAdapter.swift
+//  DefaultQuotationPreviewTableViewAdapter.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/19.
 //
 
 import UIKit
+
+protocol DefaultQuotationPreviewAdapterDataSource {
+    var mainSectionHeaderItem: DefaultQuotationPreviewMainHeaderModel { get }
+    var secondSectionHeaderItem: String { get }
+    var secondSectionFooterItem: String { get }
+}
 
 final class DefaultQuotationPreviewTableViewAdapter: CommonQuotationPreviewTableViewAdapter {
     // MARK: - Properties
@@ -35,7 +41,7 @@ extension DefaultQuotationPreviewTableViewAdapter: UITableViewDelegate {
         guard
             !isWorkedMainHeaderInitialAnimation,
             section == 0,
-            let header = view as? DetailQuotationPreviewMainHeader
+            let header = view as? DefaultQuotationPreviewMainHeader
         else { return }
         isWorkedMainHeaderInitialAnimation.toggle()
         header.showAnimation()
