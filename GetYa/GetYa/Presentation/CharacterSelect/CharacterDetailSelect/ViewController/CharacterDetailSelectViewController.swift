@@ -9,7 +9,6 @@ import UIKit
 import Combine
 
 final class CharacterDetailSelectViewController: BaseViewController {
-    typealias PageData = (index: Int, itemData: String)
     enum Constants {
         enum ProgressView {
             static let height: CGFloat = .toScaledHeight(value: 4)
@@ -38,55 +37,35 @@ final class CharacterDetailSelectViewController: BaseViewController {
     private var viewControllers: [BaseCharacterSelectPageViewController] = []
     
     // MARK: - Properties
-    private var viewModel: (any CharacterDetailSelectViewModelabe &
-                            CharacterDetailSelectDataSource)!
-    private let touchUpButton = PassthroughSubject<PageData, Never>()
+    private var viewModel: (any CharacterDetailSelectViewModelabe)!
+    private let touchUpCompletionButton = PassthroughSubject<Int?, Never>()
+    private let touchUpNextButton = PassthroughSubject<(curPageIndex: Int, itemIndex: Int?), Never>()
+    private let viewLoad = PassthroughSubject<Void, Never>()
+    private var totalStep = 0
     private var currentPageViewIndex = 0
     private var subscription: AnyCancellable?
-    private lazy var totalStep: Int = 1 {
-        didSet {
-            configurePageView()
-            configurePageViewControllers()
-            progressView.configureProgressTotalStep(with: totalStep)
-            updatePageViewController()
-        }
-    }
     
     // MARK: - Lifecycles
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         viewModel = CharacterDetailSelectViewModel()
-        configureUI()
-        totalStep = viewModel.numberOfSteps
-        bind()
     }
     
-    init(
-        nibName nibNameOrNil: String?,
-        bundle nibBundleOrNil: Bundle?,
-        viewModel: (any CharacterDetailSelectViewModelabe &
-                    CharacterDetailSelectDataSource)
-    ) {
+    init(viewModel: any CharacterDetailSelectViewModelabe) {
+        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        configureUI()
-        totalStep = viewModel.numberOfSteps
-        bind()
-    }
-    
-    convenience init(
-        viewModel: (any CharacterDetailSelectViewModelabe &
-                    CharacterDetailSelectDataSource)
-    ) {
-        self.init(nibName: nil, bundle: nil, viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         viewModel = CharacterDetailSelectViewModel()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         configureUI()
-        totalStep = viewModel.numberOfSteps
         bind()
+        viewLoad.send()
     }
     
     // MARK: - Private Functions
@@ -102,19 +81,33 @@ final class CharacterDetailSelectViewController: BaseViewController {
             animated: false)
     }
     
-    private func configurePageViewControllers() {
-        let questionListViewControllers = makeQuestionListViewControllers()
-        let questionSliderViewController = makeQuestionCarPriceSlideViewController()
+    private func configurePageViewControllers(
+        numberOfSteps: Int,
+        questionList: [QuestionListTextModel],
+        questionDescriptions: [QuestionDescriptionLabelModel],
+        priceRange: QuestionSliderViewModel
+    ) {
+        let questionListViewControllers = makeQuestionListViewControllers(
+            numberOfSteps: numberOfSteps,
+            questionList: questionList,
+            questionDescriptions: questionDescriptions)
+        let questionSliderViewController = makeQuestionCarPriceSlideViewController(
+            priceRange: priceRange,
+            questionInfo: questionDescriptions[totalStep-1])
         viewControllers = questionListViewControllers
         viewControllers.append(questionSliderViewController)
     }
     
-    private func makeQuestionListViewControllers() -> [BaseCharacterSelectPageViewController] {
-        let totalStep = viewModel.numberOfSteps
+    private func makeQuestionListViewControllers(
+        numberOfSteps: Int,
+        questionList: [QuestionListTextModel],
+        questionDescriptions: [QuestionDescriptionLabelModel]
+    ) -> [BaseCharacterSelectPageViewController] {
+        totalStep = numberOfSteps
         return (0..<totalStep-1).map {
             let checkListQuestionView = CharacterDetailQuestionListView(
-                textArray: viewModel.questionList(at: $0).questionTexts)
-            let questionInfo = viewModel.questionDiscription(at: $0)
+                textArray: questionList[$0].questionTexts)
+            let questionInfo = questionDescriptions[$0]
             let curPageIndex = $0+1
             
             return BaseCharacterSelectPageViewController(
@@ -132,24 +125,23 @@ final class CharacterDetailSelectViewController: BaseViewController {
             }
         }
     }
-    
-    private func makeQuestionCarPriceSlideViewController() -> BaseCharacterSelectPageViewController {
-        let priceRangeModel = viewModel.questionCarRangeOfPrice
-        let curPageIndex = viewModel.numberOfSteps
-        let questionInfo = viewModel.questionDiscription(at: curPageIndex-1)
+    private func makeQuestionCarPriceSlideViewController(
+        priceRange: QuestionSliderViewModel,
+        questionInfo: QuestionDescriptionLabelModel
+    ) -> BaseCharacterSelectPageViewController {
         let carPriceSliderAreaView = DetailQuestionCarPriceSelectView(frame: .zero).set {
             $0.configurePrice(
-                minPrice: priceRangeModel.minimumCarPrice,
-                maxPrice: priceRangeModel.maximumCarPrice,
+                minPrice: priceRange.minimumCarPrice,
+                maxPrice: priceRange.maximumCarPrice,
                 priceUnit: 300)
         }
         
         return BaseCharacterSelectPageViewController(
-            curPageIndex: curPageIndex,
+            curPageIndex: totalStep,
             totalPageIndex: totalStep,
             questionView: carPriceSliderAreaView
         ).set {
-            $0.setQuestionIndexView(currentIndex: curPageIndex, totalIndex: totalStep)
+            $0.setQuestionIndexView(currentIndex: totalStep, totalIndex: totalStep)
             $0.setQuestionDescriptionLabel(
                 defaultText: questionInfo.defaultText,
                 highlightText: questionInfo.highlightText)
@@ -161,7 +153,6 @@ final class CharacterDetailSelectViewController: BaseViewController {
     }
     
     // MARK: - Functions
-    
     override func didTapNavigationBackButton() {
         if currentPageViewIndex > 0 {
             currentPageViewIndex -= 1
@@ -180,19 +171,34 @@ final class CharacterDetailSelectViewController: BaseViewController {
 
 // MARK: - ViewBindable
 extension CharacterDetailSelectViewController: ViewBindable {
+    typealias Input = CharacterDetailSelectInput
+    typealias State = CharacterDetailSelectState
+    typealias ErrorType = Error
+    
     func bind() {
         let input = Input(
-            touchUpButton: touchUpButton.eraseToAnyPublisher())
+            touchUpCompletionButton: touchUpCompletionButton.eraseToAnyPublisher(),
+            touchUpNextButton: touchUpNextButton.eraseToAnyPublisher(),
+            viewLoad: viewLoad.eraseToAnyPublisher())
         let output = viewModel.transform(input: input)
         subscription = output.sink { [weak self] in
             self?.render($0)
         }
     }
-    
+
     func render(_ state: CharacterDetailSelectState) {
         switch state {
         case .none:
             break
+        case .makeQuestions(let numberOfSteps, let questionList, let questionDescriptions, let priceRange):
+            configurePageView()
+            configurePageViewControllers(
+                numberOfSteps: numberOfSteps,
+                questionList: questionList,
+                questionDescriptions: questionDescriptions,
+                priceRange: priceRange)
+            progressView.configureProgressTotalStep(with: totalStep)
+            updatePageViewController()
         case .gotoNextQuestionPage:
             currentPageViewIndex += 1
             let viewController = viewControllers[currentPageViewIndex]
@@ -200,36 +206,25 @@ extension CharacterDetailSelectViewController: ViewBindable {
             pageViewController.setViewControllers(
                 [viewController], direction: .forward,
                 animated: true)
-
-        case .gotoDetailQuotationPreviewPage:
-            var userSelectItems = viewModel.userSelection
-            /// 최소가로 고정
-            userSelectItems[viewModel.numberOfSteps-1] = "4200만원"
-            let quotationViewModel = DetailQuotationPreviewViewModel.init(keywords: userSelectItems)
+        case .gotoDetailQuotationPreviewPage(let userSelectionList):
+            print(userSelectionList)
+            let quotationViewModel = DetailQuotationPreviewViewModel.init(keywords: userSelectionList)
             let presentedVC = DetailQuotationPreviewViewController(viewModel: quotationViewModel)
             navigationController?.pushViewController(presentedVC, animated: true)
         }
     }
-    
-    typealias Input = CharacterDetailSelectInput
-    typealias State = CharacterDetailSelectState
-    typealias ErrorType = Error
 }
 
 // MARK: - BaseCharacterSelectpageViewDelegate
 extension CharacterDetailSelectViewController: BaseCharacterSelectpageViewDelegate {
     func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController) {
         if currentPageViewIndex == totalStep - 1 {
-            let userSelectedPrice = viewController.carPriceRange
-            touchUpButton.send(
-                (currentPageViewIndex,
-                 "\((userSelectedPrice.maximumValue ?? 0).insertCommas)"+"만원"))
+            let userSelectedMaxPrice = viewController.carPriceRange.maximumValue
+            touchUpCompletionButton.send(userSelectedMaxPrice)
             return
         }
         let itemIndex = viewController.selectedItemIndex
-        let questions = viewModel.questionList(at: currentPageViewIndex).questionTexts
-        let selectedTitle = questions[itemIndex ?? 0]
-        touchUpButton.send((currentPageViewIndex, selectedTitle))
+        touchUpNextButton.send((currentPageViewIndex, itemIndex))
     }
 }
 
