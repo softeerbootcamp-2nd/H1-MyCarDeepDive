@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TrimExteriorColorRepository extends JpaRepository<TrimExteriorColor, Long> {
     List<TrimExteriorColor> findByTrim_IdNot(Long id);
+
+    List<TrimExteriorColor> findByTrim_Id(Long trimId);
 }
