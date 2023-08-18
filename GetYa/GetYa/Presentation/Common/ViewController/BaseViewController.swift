@@ -42,13 +42,13 @@ class BaseViewController: UIViewController {
                 renderingMode: .alwaysOriginal),
             style: .plain,
             target: self,
-            action: #selector(didTapNavigationBackButton))
+            action: #selector(touchUpNavigationBackButton))
     }
     
     // MARK: - @Objc functions
     /// 만약 뒤로가기 버튼 눌렀을 경우 조건에 따라 이전 화면으로 가야하는 로직을 수행하지 않아야 할 경우
-    /// 이 메서드를 오버라이딩해서 조건에 따라 super.didtapNavigationBackButton() 호출을 하지 않으면 됩니다.
-    @objc func didTapNavigationBackButton() {
+    /// 이 메서드를 오버라이딩해서 조건에 따라 super.touchUpNavigationBackButton() 호출을 하지 않으면 됩니다.
+    @objc func touchUpNavigationBackButton() {
         navigationController?.popViewController(animated: true)
     }
 }

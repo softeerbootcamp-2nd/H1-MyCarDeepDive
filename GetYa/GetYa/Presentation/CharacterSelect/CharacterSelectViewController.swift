@@ -99,10 +99,10 @@ class CharacterSelectViewController: BaseViewController {
         ])
     }
     
-    override func didTapNavigationBackButton() {
+    override func touchUpNavigationBackButton() {
         if let viewControler = pageViewController.viewControllers?.first {
             guard !(viewControler is BaseCharacterSelectPageViewController) else {
-                super.didTapNavigationBackButton()
+                super.touchUpNavigationBackButton()
                 return
             }
             if let firstViewController = viewControllers.first {

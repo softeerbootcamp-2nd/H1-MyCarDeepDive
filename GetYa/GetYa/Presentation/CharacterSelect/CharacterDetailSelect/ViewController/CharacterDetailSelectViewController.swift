@@ -153,7 +153,7 @@ final class CharacterDetailSelectViewController: BaseViewController {
     }
     
     // MARK: - Functions
-    override func didTapNavigationBackButton() {
+    override func touchUpNavigationBackButton() {
         if currentPageViewIndex > 0 {
             currentPageViewIndex -= 1
             let viewController = viewControllers[currentPageViewIndex]
@@ -163,7 +163,7 @@ final class CharacterDetailSelectViewController: BaseViewController {
                 animated: true)
             progressView.decreaseOneStep()
         } else {
-            super.didTapNavigationBackButton()
+            super.touchUpNavigationBackButton()
         }
     }
     // MARK: - Objc Functions
