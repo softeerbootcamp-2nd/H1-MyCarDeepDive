@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class EitherSideSlider: UISlider {
+final class TwoWaySlider: UISlider {
     enum Constants {
         static let trackHeight: CGFloat = .toScaledHeight(value: 8)
         static let thumbHeight: CGFloat = .toScaledHeight(value: 24)
@@ -102,7 +102,7 @@ final class EitherSideSlider: UISlider {
 }
 
 // MARK: - LayoutSupportable
-extension EitherSideSlider: LayoutSupportable {
+extension TwoWaySlider: LayoutSupportable {
     func setupViews() {
         addSubview(thumbImageView)
     }
