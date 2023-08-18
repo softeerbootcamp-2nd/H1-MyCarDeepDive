@@ -9,16 +9,16 @@ import UIKit
 import Combine
 
 final class CharacterDetailSelectViewController: BaseViewController {
+    typealias PageData = (index: Int, itemData: String)
     enum Constants {
         enum ProgressView {
-            static let height = CGFloat(4).scaledHeight
+            static let height: CGFloat = .toScaledHeight(value: 4)
         }
         enum CarPriceSelect {
             static let height: CGFloat = .toScaledHeight(value: 105)
             static let topMargin: CGFloat = .toScaledHeight(value: 156)
         }
     }
-    typealias PageData = (index: Int, itemData: String)
     
     // MARK: - UI properties
     private let progressView = ProgressView.init(
