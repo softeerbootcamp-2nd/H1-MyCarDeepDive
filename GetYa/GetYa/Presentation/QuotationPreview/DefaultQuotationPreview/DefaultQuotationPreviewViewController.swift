@@ -16,7 +16,19 @@ final class DefaultQuotationPreviewViewController: UIViewController {
     }
     
     // MARK: - UI Properties
-    private let tableView = DefaultQuotationPreviewTableView(frame: .zero, style: .grouped)
+    private let tableView = CommonQuotationPreviewTableView(frame: .zero, style: .grouped).set {
+        $0.register(
+            DefaultQuotationPreviewMainHeader.self,
+            forHeaderFooterViewReuseIdentifier: DetailQuotationPreviewMainHeader.identifier)
+        $0.register(
+            DetailQuotationPreviewSecionHeaderView.self,
+            forHeaderFooterViewReuseIdentifier: DetailQuotationPreviewSecionHeaderView.identifier)
+        $0.register(
+            DetailQuotationPreviewFooterView.self,
+            forHeaderFooterViewReuseIdentifier: DetailQuotationPreviewFooterView.identifier)
+        $0.estimatedSectionHeaderHeight = UITableView.automaticDimension
+        $0.estimatedSectionFooterHeight = UITableView.automaticDimension
+    }
     private let bottomCustomOrQuoteView = CustomOrQuoteSelectView()
     
     // MARK: - Properties
