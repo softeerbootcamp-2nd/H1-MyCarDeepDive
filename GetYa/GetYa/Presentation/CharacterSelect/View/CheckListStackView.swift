@@ -11,7 +11,7 @@ class CheckListStackView: UIStackView {
     // MARK: - Properties
     var selectedItemIndex: Int? {
         return arrangedSubviews
-            .compactMap { $0 as? CheckListItemView ?? nil }
+            .compactMap { $0 as? CheckListItemView }
             .firstIndex(where: { $0.isTapped })
     }
     
