@@ -1,6 +1,6 @@
 create table body (
                       body_id bigint not null auto_increment,
-                      description varchar(255),
+                      description varchar(65000),
                       img_url varchar(255),
                       name varchar(255),
                       primary key (body_id)
@@ -69,7 +69,7 @@ create table color_combination (
 
 create table driving_system (
                                 driving_system_id bigint not null auto_increment,
-                                description varchar(255),
+                                description varchar(65000),
                                 img_url varchar(255),
                                 name varchar(255),
                                 primary key (driving_system_id)
@@ -77,7 +77,7 @@ create table driving_system (
 
 create table engine (
                         engine_id bigint not null auto_increment,
-                        description varchar(255),
+                        description varchar(65000),
                         img_url varchar(255),
                         max_power varchar(255),
                         max_torque varchar(255),
@@ -121,7 +121,7 @@ create table options (
                          name varchar(255),
                          price bigint not null,
                          summary varchar(255),
-                         description varchar(255),
+                         description varchar(65000),
                          img_url varchar(255),
                          primary key (option_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -183,7 +183,7 @@ create table trim_interior_color (
 create table trims (
                        trim_id bigint not null auto_increment,
                        cluster_size double precision not null,
-                       description varchar(255),
+                       description varchar(65000),
                        img_url varchar(255),
                        name varchar(255),
                        navigation_size double precision not null,

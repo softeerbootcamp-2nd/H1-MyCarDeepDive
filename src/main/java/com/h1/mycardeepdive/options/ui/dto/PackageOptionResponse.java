@@ -23,4 +23,6 @@ public class PackageOptionResponse {
     private String badge_name;
 
     private long price;
+
+    private List<Long> additional_option_id_list;
 }

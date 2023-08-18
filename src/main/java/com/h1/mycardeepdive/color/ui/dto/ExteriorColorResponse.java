@@ -1,6 +1,6 @@
 package com.h1.mycardeepdive.color.ui.dto;
 
-import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExteriorColorResponse {
-    List<ExteriorColorInfo> available_colors;
-    List<ExteriorColorInfo> unavailable_colors;
-    List<ExteriorColorInfo> other_trim_colors;
+    Map<Long, ExteriorColorInfo> available_colors;
+    Map<Long, ExteriorColorInfo> unavailable_colors;
+    Map<Long, ExteriorColorInfo> other_trim_colors;
 }

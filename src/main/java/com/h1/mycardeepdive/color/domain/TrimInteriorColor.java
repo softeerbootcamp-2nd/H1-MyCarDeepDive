@@ -2,6 +2,7 @@ package com.h1.mycardeepdive.color.domain;
 
 import com.h1.mycardeepdive.trims.domain.Trim;
 import javax.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,11 @@ public class TrimInteriorColor {
     @ManyToOne
     @JoinColumn(name = "interior_color_id")
     private InteriorColor interiorColor;
+
+    @Builder
+    public TrimInteriorColor(Long id, Trim trim, InteriorColor interiorColor) {
+        this.id = id;
+        this.trim = trim;
+        this.interiorColor = interiorColor;
+    }
 }

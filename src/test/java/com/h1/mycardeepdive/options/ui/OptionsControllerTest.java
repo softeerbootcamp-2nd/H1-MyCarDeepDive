@@ -49,7 +49,8 @@ class OptionsControllerTest extends ControllerTestConfig {
                                                 "편의성을 위해 구성된 세트 옵션",
                                                 List.of(comfortTag, safeTag),
                                                 "None",
-                                                10090000)),
+                                                10090000,
+                                                List.of(1L, 2L))),
                                 List.of(
                                         new AdditionalOptionResponse(
                                                 1L,

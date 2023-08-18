@@ -1,6 +1,7 @@
 package com.h1.mycardeepdive.color.ui;
 
 import com.h1.mycardeepdive.color.service.ColorService;
+import com.h1.mycardeepdive.color.ui.dto.AllColorResponse;
 import com.h1.mycardeepdive.color.ui.dto.ExteriorColorResponse;
 import com.h1.mycardeepdive.color.ui.dto.InteriorColorResponse;
 import com.h1.mycardeepdive.global.response.ApiResponse;
@@ -32,5 +33,11 @@ public class ColorController {
         InteriorColorResponse interiorColorResponse =
                 colorService.findInteriorColors(trimId, exteriorColorId);
         return new ApiResponse<>(interiorColorResponse);
+    }
+
+    @GetMapping("/trim-colors")
+    public ApiResponse<AllColorResponse> getAllColors(@RequestParam("trimId") Long trimId) {
+        AllColorResponse allColorResponse = colorService.findAllColors(trimId);
+        return new ApiResponse<>(allColorResponse);
     }
 }

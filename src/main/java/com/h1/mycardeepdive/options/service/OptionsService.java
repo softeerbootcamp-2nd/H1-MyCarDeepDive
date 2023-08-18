@@ -41,6 +41,8 @@ public class OptionsService {
                                         OptionMapper.optionToPackageOptionResponse(
                                                 pkg,
                                                 tagRepository.findTagsByPackageId(pkg.getId()),
+                                                optionsRepository.findOptionsByPackageId(
+                                                        pkg.getId()),
                                                 optionsRepository.findPackageImgUrlFromOption(
                                                         pkg.getId())))
                         .collect(Collectors.toList());

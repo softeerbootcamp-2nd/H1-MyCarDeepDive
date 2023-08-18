@@ -86,11 +86,14 @@ class CarSpecControllerTest extends ControllerTestConfig {
                                                         .requestFields()
                                                         .requestParameters(
                                                                 parameterWithName("engine")
-                                                                        .description("엔진이름"),
+                                                                        .description(
+                                                                                "'디젤 2.2', '가솔린 3.8'"),
                                                                 parameterWithName("body")
-                                                                        .description("바디이름"),
+                                                                        .description(
+                                                                                "'7인용', '8인용'"),
                                                                 parameterWithName("drivingSystem")
-                                                                        .description("구동방식이름"))
+                                                                        .description(
+                                                                                "'2WD', '4WD'"))
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -155,11 +158,14 @@ class CarSpecControllerTest extends ControllerTestConfig {
                                                         .requestFields()
                                                         .requestParameters(
                                                                 parameterWithName("engine")
-                                                                        .description("엔진이름"),
+                                                                        .description(
+                                                                                "'디젤 2.2', '가솔린 3.8'"),
                                                                 parameterWithName("body")
-                                                                        .description("바디이름"),
+                                                                        .description(
+                                                                                "'7인용', '8인용'"),
                                                                 parameterWithName("drivingSystem")
-                                                                        .description("구동방식이름"))
+                                                                        .description(
+                                                                                "'2WD', '4WD'"))
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }

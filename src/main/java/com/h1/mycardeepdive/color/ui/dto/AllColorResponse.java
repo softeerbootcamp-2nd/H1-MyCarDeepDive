@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class InteriorColorInfo {
-    private String name;
-    private String img_url;
-    private String car_img_url;
-    private long price;
-    private double choose_rate;
+public class AllColorResponse {
+    ExteriorColorResponse exteriorColorResponse;
+    InteriorColorResponse interiorColorResponse;
 }
