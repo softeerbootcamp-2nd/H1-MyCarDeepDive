@@ -157,7 +157,9 @@ class RotationView: SettingSelectTitleBackgroundVIew {
 
         switch sender.state {
         case .began:
-            markView.isHidden = true
+            UIView.animate(withDuration: 0.3, animations: {
+                self.markView.alpha = 0.0
+            })
         case .changed:
             let rotationAngle = 2 * .pi * progress
             imageNumber = previousImageNumber - Int(round(rotationAngle / (2 * .pi / 60)))
@@ -170,7 +172,9 @@ class RotationView: SettingSelectTitleBackgroundVIew {
             imageView.image = UIImage(named: "\(type.rawValue)_\(imageNumber)")
         case .ended:
             previousImageNumber = imageNumber
-            markView.isHidden = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.markView.alpha = 1.0
+            })
         default:
             break
         }
