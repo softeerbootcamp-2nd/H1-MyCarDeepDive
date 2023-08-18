@@ -21,12 +21,8 @@ jobs:
       - name: Build React app
         working-directory: ./frontend
         run: yarn build
-      - name: Deploy to S3
-        working-directory: ./frontend
-        uses: jakejarvis/s3-sync-action@master
+      - name: Deploy
         env:
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_FRONT_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          SOURCE_DIR: “dist”
+        run: aws s3 cp --recursive --region ${{ secrets.AWS_REGION }} ./frontend/dist s3://${{ secrets.S3_BUCKET_FRONT_NAME }}
