@@ -18,18 +18,18 @@ final class TagViewCell: UICollectionViewCell {
     }
     
     // MARK: - UI properties
-    private let tagView = TagView(text: "키워드").set {
-        typealias Const = Constants.TagView
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.configureCornerRadius(with: CGFloat.toScaledWidth(value: 14))
-        $0.configureBorderWidth(with: CGFloat.toScaledWidth(value: 1))
-        $0.configureBorderColor(with: .GetYaPalette.gray600)
-        $0.configureLabelFont(with: UIFont.systemFont(ofSize: 12, weight: .semibold))
-        $0.configureTextColor(with: .GetYaPalette.gray300)
-        $0.configureBackgroundColor(color: .none)
-        $0.configureTextLabelLeadingMargin(with: Const.innerTextLeadingMargin)
-        $0.configureTextLabeltrailingMargin(with: Const.innerTextTrailingMargin)
-        $0.sizeToFit()
+    private let tagLabel = CommonPaddingLabel(
+        padding: UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10),
+        fontType: .custom(
+            size: 12,
+            kern: -0.5,
+            lineHeight: 16,
+            nameType: .boldText),
+        color: .GetYaPalette.gray300
+    ).set {
+        $0.layer.cornerRadius = .toScaledWidth(value: 14)
+        $0.layer.borderWidth = .toScaledWidth(value: 1)
+        $0.layer.borderColor = UIColor.GetYaPalette.gray600.cgColor
     }
       
     // MARK: - Lifecycles
@@ -50,14 +50,14 @@ final class TagViewCell: UICollectionViewCell {
     
     // MARK: - Functions
     func configure(with keyword: String) {
-        tagView.configureLabelText(text: keyword)
+        tagLabel.text = keyword
     }
 }
 
 // MARK: - LayoutSupportable
 extension TagViewCell: LayoutSupportable {
     func setupViews() {
-        contentView.addSubview(tagView)
+        contentView.addSubview(tagLabel)
     }
     
     func setupConstriants() {
@@ -67,15 +67,15 @@ extension TagViewCell: LayoutSupportable {
     private func configureTagView() {
         typealias Const = Constants.TagView
         NSLayoutConstraint.activate([
-            tagView.leadingAnchor.constraint(
+            tagLabel.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor),
-            tagView.trailingAnchor.constraint(
+            tagLabel.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor),
-            tagView.topAnchor.constraint(
+            tagLabel.topAnchor.constraint(
                 equalTo: contentView.topAnchor),
-            tagView.bottomAnchor.constraint(
+            tagLabel.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor),
-            tagView.heightAnchor.constraint(
+            tagLabel.heightAnchor.constraint(
                 greaterThanOrEqualToConstant: Const.height)])
     }
 }
