@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class CarSpecOptions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "carspec_option_id")
+    @Column(name = "car_spec_option_id")
     private Long id;
 
     @ManyToOne
