@@ -37,6 +37,7 @@ final class CharacterDetailSelectViewModel {
     private var questionDescriptionTexts: [QuestionDescriptionLabelModel] = QuestionDescriptionLabelModel.mock
     private var questionListTexts: [QuestionListTextModel] = QuestionListTextModel.mock
     private var questionSliderViewModel: QuestionSliderViewModel = .mock
+    private let fetchCompleted = PassthroughSubject<Void, Never>()
     private lazy var userSelectionItems = Array(
         repeating: "",
         count: questionDescriptionTexts.count)
@@ -44,46 +45,52 @@ final class CharacterDetailSelectViewModel {
 
 extension CharacterDetailSelectViewModel: CharacterDetailSelectViewModelabe {
     func transform(input: Input) -> Output {
-        return touchUpButtonChains(input: input)
+        
+        return Publishers.MergeMany([
+            touchUpNextButtonStream(input: input),
+            touchUpCompletionButtonStream(input: input),
+            viewLoadStream(input: input),
+            fetchCompletedStream()
+        ]).eraseToAnyPublisher()
+    }
+    private func touchUpNextButtonStream(input: Input) -> Output {
+        return input.touchUpNextButton.map { [weak self] (curPageIndex: Int, itemIndex: Int?) -> State in
+            guard let itemIndex, let self else { return .none }
+            userSelectionItems[curPageIndex] = questionListTexts[curPageIndex].questionTexts[itemIndex]
+            return .gotoNextQuestionPage
+        }.eraseToAnyPublisher()
     }
     
-    private func touchUpButtonChains(input: Input) -> Output {
-        return input.touchUpButton
-            .map { [weak self] item -> State in
+    private func touchUpCompletionButtonStream(input: Input) -> Output {
+        return input.touchUpCompletionButton
+            .map { [weak self] (maxPrice: Int?) -> State in
                 guard let self else { return .none }
-                userSelectionItems[item.index] = item.itemData
-                if item.index == userSelectionItems.count - 1 {
-                    // TODO: 서버에 userSelectionItems 데이터 전송
-                    return .gotoDetailQuotationPreviewPage(userSelection: userSelectionItems)
-                }
-                return .gotoNextQuestionPage
+                // 태그 표시는 항상 최소가로
+                userSelectionItems[questionDescriptionTexts.count - 1] = "\(questionSliderViewModel.minimumCarPrice)만원"
+                print(userSelectionItems)
+                // TODO: 서버한테 maxPrice 포함 사용자의 선택 5개 전송
+                return .gotoDetailQuotationPreviewPage(userSelection: userSelectionItems)
             }.eraseToAnyPublisher()
     }
-}
-
-// MARK: - CharacterDetailSelectDataSource
-extension CharacterDetailSelectViewModel: CharacterDetailSelectDataSource {
-    var userSelection: [String] {
-        userSelectionItems
+    
+    private func viewLoadStream(input: Input) -> Output {
+        return input.viewLoad
+            .map { [weak self] in
+                // TODO: 서버에서 question title 및 dscription, question list 받아와야 합니다.
+                // fetch 로직 후 아래 함수 호출
+                self?.fetchCompleted.send()
+                return .none
+            }.eraseToAnyPublisher()
     }
     
-    var questionCarRangeOfPrice: QuestionSliderViewModel {
-        questionSliderViewModel
-    }
-    
-    var numberOfSteps: Int {
-        questionListTexts.count + 1
-    }
-    
-    func questionDiscription(at index: Int) -> QuestionDescriptionLabelModel {
-        return questionDescriptionTexts[index]
-    }
-    
-    func questionList(at index: Int) -> QuestionListTextModel {
-        return questionListTexts[index]
-    }
-    
-    func numberOfQuestionListItems(_ index: Int) -> Int {
-        return questionListTexts[index].count
+    private func fetchCompletedStream() -> Output {
+        return fetchCompleted.map { [weak self] _ -> State in
+            guard let self else { return .none }
+            return .makeQuestions(
+                numberOfSteps: questionDescriptionTexts.count,
+                questionList: questionListTexts,
+                questionDescriptions: questionDescriptionTexts,
+                priceRange: questionSliderViewModel)
+        }.eraseToAnyPublisher()
     }
 }
