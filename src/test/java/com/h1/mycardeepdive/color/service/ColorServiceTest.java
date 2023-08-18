@@ -3,10 +3,7 @@ package com.h1.mycardeepdive.color.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import com.h1.mycardeepdive.color.domain.ColorCombination;
-import com.h1.mycardeepdive.color.domain.ExteriorColor;
-import com.h1.mycardeepdive.color.domain.InteriorColor;
-import com.h1.mycardeepdive.color.domain.TrimColorCombination;
+import com.h1.mycardeepdive.color.domain.*;
 import com.h1.mycardeepdive.color.domain.repository.TrimColorCombinationRepository;
 import com.h1.mycardeepdive.color.domain.repository.TrimExteriorColorRepository;
 import com.h1.mycardeepdive.color.domain.repository.TrimInteriorColorRepository;
@@ -16,8 +13,6 @@ import com.h1.mycardeepdive.color.ui.dto.InteriorColorInfo;
 import com.h1.mycardeepdive.color.ui.dto.InteriorColorResponse;
 import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,13 +31,14 @@ class ColorServiceTest {
     @InjectMocks private ColorService colorService;
 
     @Test
-    @DisplayName("trimId, interiorColorId가 주어졌을 때 가능한 외장색상과 불가능한 외장색상을 찾을 수 있는 지 확인한다.")
+    @DisplayName("trimId, interiorColorId가 주어졌을 때 가능한 외장색상과 불가능한 외장색상과 다른 트림 색상을 찾을 수 있는 지 확인한다.")
     void findExteriorColors() {
         // given
         Long trimId = 1L;
         Long interiorColorId = 1L;
 
-        Trim trim = Trim.builder().id(1L).name("Le Blanc").summary("요약").build();
+        Trim trim1 = Trim.builder().id(1L).name("Le Blanc").summary("요약").build();
+        Trim trim2 = Trim.builder().id(2L).name("Exclusive").summary("요약").build();
 
         InteriorColor interiorColor1 =
                 InteriorColor.builder()
@@ -101,52 +97,45 @@ class ColorServiceTest {
                         .interiorColor(interiorColor2)
                         .build();
 
-        TrimColorCombination trimsColorCombination1 =
+        TrimColorCombination trimColorCombination1 =
                 TrimColorCombination.builder()
                         .id(1L)
-                        .trim(trim)
+                        .trim(trim1)
                         .colorCombination(colorCombination1)
                         .build();
 
-        TrimColorCombination trimsColorCombination2 =
+        TrimColorCombination trimColorCombination2 =
                 TrimColorCombination.builder()
                         .id(2L)
-                        .trim(trim)
+                        .trim(trim2)
                         .colorCombination(colorCombination2)
                         .build();
 
+        TrimExteriorColor trimExteriorColor2 =
+                TrimExteriorColor.builder()
+                        .id(2L)
+                        .trim(trim2)
+                        .exteriorColor(exteriorColor2)
+                        .build();
+
         when(trimColorCombinationRepository.findByTrim_Id(trimId))
-                .thenReturn(List.of(trimsColorCombination1, trimsColorCombination2));
-        when(trimExteriorColorRepository.findByTrim_IdNot(trimId)).thenReturn(List.of());
+                .thenReturn(List.of(trimColorCombination1, trimColorCombination2));
+        when(trimExteriorColorRepository.findByTrim_IdNot(trimId))
+                .thenReturn(List.of(trimExteriorColor2));
+
         // when
         ExteriorColorResponse colorResponse =
                 colorService.findExteriorColors(trimId, interiorColorId);
-        ExteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
-        ExteriorColorInfo unavailableColor = colorResponse.getUnavailable_colors().get(0);
+        ExteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(1L);
+        ExteriorColorInfo unavailableColor = colorResponse.getUnavailable_colors().get(2L);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(exteriorColor1.getName());
         assertThat(availableColor.getImg_url()).isEqualTo(exteriorColor1.getImgUrl());
-        assertThat(availableColor.getCar_img_urls())
-                .isEqualTo(
-                        IntStream.rangeClosed(1, 60)
-                                .mapToObj(
-                                        number ->
-                                                exteriorColor1.getExteriorImgUrl()
-                                                        + String.format("/%03d.jpg", number))
-                                .collect(Collectors.toList()));
         assertThat(availableColor.getChoose_rate()).isEqualTo(exteriorColor1.getChooseRate());
 
         assertThat(unavailableColor.getName()).isEqualTo(exteriorColor2.getName());
         assertThat(unavailableColor.getImg_url()).isEqualTo(exteriorColor2.getImgUrl());
-        assertThat(unavailableColor.getCar_img_urls())
-                .isEqualTo(
-                        IntStream.rangeClosed(1, 60)
-                                .mapToObj(
-                                        number ->
-                                                exteriorColor2.getExteriorImgUrl()
-                                                        + String.format("/%03d.jpg", number))
-                                .collect(Collectors.toList()));
         assertThat(unavailableColor.getChoose_rate()).isEqualTo(exteriorColor2.getChooseRate());
     }
 
@@ -157,7 +146,8 @@ class ColorServiceTest {
         Long trimId = 1L;
         Long exteriorColorId = 1L;
 
-        Trim trim = Trim.builder().id(1L).name("Le Blanc").summary("요약").build();
+        Trim trim1 = Trim.builder().id(1L).name("Le Blanc").summary("요약").build();
+        Trim trim2 = Trim.builder().id(2L).name("Exclusive").summary("요약").build();
 
         InteriorColor interiorColor1 =
                 InteriorColor.builder()
@@ -212,25 +202,34 @@ class ColorServiceTest {
         TrimColorCombination trimsColorCombination1 =
                 TrimColorCombination.builder()
                         .id(1L)
-                        .trim(trim)
+                        .trim(trim1)
                         .colorCombination(colorCombination1)
                         .build();
 
         TrimColorCombination trimsColorCombination2 =
                 TrimColorCombination.builder()
                         .id(2L)
-                        .trim(trim)
+                        .trim(trim2)
                         .colorCombination(colorCombination2)
+                        .build();
+
+        TrimInteriorColor trimInteriorColor2 =
+                TrimInteriorColor.builder()
+                        .id(2L)
+                        .trim(trim2)
+                        .interiorColor(interiorColor2)
                         .build();
 
         when(trimColorCombinationRepository.findByTrim_Id(trimId))
                 .thenReturn(List.of(trimsColorCombination1, trimsColorCombination2));
-        when(trimInteriorColorRepository.findByTrim_IdNot(trimId)).thenReturn(List.of());
+        when(trimInteriorColorRepository.findByTrim_IdNot(trimId))
+                .thenReturn(List.of(trimInteriorColor2));
+
         // when
         InteriorColorResponse colorResponse =
                 colorService.findInteriorColors(trimId, exteriorColorId);
-        InteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
-        InteriorColorInfo unavailableColor = colorResponse.getUnavailable_colors().get(0);
+        InteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(1L);
+        InteriorColorInfo unavailableColor = colorResponse.getUnavailable_colors().get(2L);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(interiorColor1.getName());

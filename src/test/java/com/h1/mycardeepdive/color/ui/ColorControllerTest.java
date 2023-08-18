@@ -1,6 +1,10 @@
 package com.h1.mycardeepdive.color.ui;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
+import static com.h1.mycardeepdive.color.mapper.ColorMapper.toExteriorColorInfo;
+import static com.h1.mycardeepdive.color.mapper.ColorMapper.toInteriorColorInfo;
+import static com.h1.mycardeepdive.fixture.ExteriorColorFixture.createExteriorColor;
+import static com.h1.mycardeepdive.fixture.InteriorColorFixture.createInteriorColor;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -8,14 +12,12 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import com.h1.mycardeepdive.ControllerTestConfig;
+import com.h1.mycardeepdive.color.domain.ExteriorColor;
+import com.h1.mycardeepdive.color.domain.InteriorColor;
 import com.h1.mycardeepdive.color.service.ColorService;
-import com.h1.mycardeepdive.color.ui.dto.ExteriorColorInfo;
-import com.h1.mycardeepdive.color.ui.dto.ExteriorColorResponse;
-import com.h1.mycardeepdive.color.ui.dto.InteriorColorInfo;
-import com.h1.mycardeepdive.color.ui.dto.InteriorColorResponse;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import com.h1.mycardeepdive.color.ui.dto.*;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -39,34 +41,24 @@ class ColorControllerTest extends ControllerTestConfig {
         // given
         Long trimId = 1L;
         Long interiorId = 1L;
+        ExteriorColor exteriorColor = createExteriorColor();
 
         MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
 
         info.add("trimId", String.valueOf(trimId));
         info.add("interiorColorId", String.valueOf(interiorId));
 
-        ExteriorColorInfo exteriorColorInfo =
-                ExteriorColorInfo.builder()
-                        .name("그라파이트 그레이 메탈릭")
-                        .price(100000)
-                        .img_url("/exterior-color/icon/22.jpg")
-                        .car_img_urls(
-                                IntStream.rangeClosed(1, 60)
-                                        .mapToObj(
-                                                number ->
-                                                        "/exterior-color"
-                                                                + String.format(
-                                                                        "/%03d.jpg", number))
-                                        .collect(Collectors.toList()))
-                        .trim_name("Calligraphy")
-                        .build();
+        ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor);
+        Map<Long, ExteriorColorInfo> availableColors = new HashMap<>();
+        Map<Long, ExteriorColorInfo> unavailableColors = new HashMap<>();
+        Map<Long, ExteriorColorInfo> otherTrimColors = new HashMap<>();
+        availableColors.put(exteriorColor.getId(), exteriorColorInfo);
+        unavailableColors.put(exteriorColor.getId(), exteriorColorInfo);
+        otherTrimColors.put(exteriorColor.getId(), exteriorColorInfo);
         when(colorService.findExteriorColors(trimId, interiorId))
                 .thenReturn(
-                        ExteriorColorResponse.builder()
-                                .available_colors(List.of(exteriorColorInfo, exteriorColorInfo))
-                                .unavailable_colors(List.of(exteriorColorInfo, exteriorColorInfo))
-                                .other_trim_colors(List.of(exteriorColorInfo, exteriorColorInfo))
-                                .build());
+                        new ExteriorColorResponse(
+                                availableColors, unavailableColors, otherTrimColors));
         // then
         ResultActions resultActions =
                 mockMvc.perform(
@@ -100,27 +92,25 @@ class ColorControllerTest extends ControllerTestConfig {
         // given
         Long trimId = 1L;
         Long exteriorId = 1L;
+        InteriorColor interiorColor = createInteriorColor();
 
         MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
 
         info.add("trimId", String.valueOf(trimId));
         info.add("exteriorColorId", String.valueOf(exteriorId));
 
-        InteriorColorInfo interiorColorInfo =
-                InteriorColorInfo.builder()
-                        .name("퀼팅천연 (블랙)")
-                        .price(100000)
-                        .img_url("/interior-color/icon/22.jpg")
-                        .car_img_url("/interior-color/22.jpg")
-                        .trim_name("Calligraphy")
-                        .build();
+        InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor);
+        Map<Long, InteriorColorInfo> availableColors = new HashMap<>();
+        Map<Long, InteriorColorInfo> unavailableColors = new HashMap<>();
+        Map<Long, InteriorColorInfo> otherTrimColors = new HashMap<>();
+        availableColors.put(interiorColor.getId(), interiorColorInfo);
+        unavailableColors.put(interiorColor.getId(), interiorColorInfo);
+        otherTrimColors.put(interiorColor.getId(), interiorColorInfo);
+
         when(colorService.findInteriorColors(trimId, exteriorId))
                 .thenReturn(
-                        InteriorColorResponse.builder()
-                                .available_colors(List.of(interiorColorInfo, interiorColorInfo))
-                                .unavailable_colors(List.of(interiorColorInfo, interiorColorInfo))
-                                .other_trim_colors(List.of(interiorColorInfo, interiorColorInfo))
-                                .build());
+                        new InteriorColorResponse(
+                                availableColors, unavailableColors, otherTrimColors));
         // then
         ResultActions resultActions =
                 mockMvc.perform(
@@ -144,6 +134,70 @@ class ColorControllerTest extends ControllerTestConfig {
                                                                         .description("트림id"),
                                                                 parameterWithName("exteriorColorId")
                                                                         .description("외장색상id"))
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    @DisplayName("trimId로 외장색상과 내장색상을 조회한다.")
+    void getAllColors() throws Exception {
+        // given
+        Long trimId = 1L;
+        ExteriorColor exteriorColor = createExteriorColor();
+        InteriorColor interiorColor = createInteriorColor();
+
+        MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
+
+        info.add("trimId", String.valueOf(trimId));
+
+        ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor);
+        Map<Long, ExteriorColorInfo> availableExteriorColors = new HashMap<>();
+        Map<Long, ExteriorColorInfo> unavailableExteriorColors = new HashMap<>();
+        Map<Long, ExteriorColorInfo> otherTrimExteriorColors = new HashMap<>();
+        availableExteriorColors.put(exteriorColor.getId(), exteriorColorInfo);
+        unavailableExteriorColors.put(exteriorColor.getId(), exteriorColorInfo);
+        otherTrimExteriorColors.put(exteriorColor.getId(), exteriorColorInfo);
+
+        InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor);
+        Map<Long, InteriorColorInfo> availableInteriorColors = new HashMap<>();
+        Map<Long, InteriorColorInfo> unavailableInteriorColors = new HashMap<>();
+        Map<Long, InteriorColorInfo> otherTrimInteriorColors = new HashMap<>();
+        availableInteriorColors.put(interiorColor.getId(), interiorColorInfo);
+        unavailableInteriorColors.put(interiorColor.getId(), interiorColorInfo);
+        otherTrimInteriorColors.put(interiorColor.getId(), interiorColorInfo);
+
+        ExteriorColorResponse exteriorColorResponse =
+                new ExteriorColorResponse(
+                        availableExteriorColors,
+                        unavailableExteriorColors,
+                        otherTrimExteriorColors);
+        InteriorColorResponse interiorColorResponse =
+                new InteriorColorResponse(
+                        availableInteriorColors,
+                        unavailableInteriorColors,
+                        otherTrimInteriorColors);
+        when(colorService.findAllColors(trimId))
+                .thenReturn(new AllColorResponse(exteriorColorResponse, interiorColorResponse));
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.get(DEFAULT_URL + "/trim-colors")
+                                        .params(info)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "트림",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("컬러")
+                                                        .description("트림의 모든 컬러 조회")
+                                                        .requestFields()
+                                                        .requestParameters(
+                                                                parameterWithName("trimId")
+                                                                        .description("트림id"))
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
