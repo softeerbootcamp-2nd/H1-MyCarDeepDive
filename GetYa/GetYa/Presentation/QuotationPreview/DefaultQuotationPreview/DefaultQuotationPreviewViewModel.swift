@@ -10,14 +10,24 @@ import Combine
 
 // MARK: - View Model
 struct DefaultQuotationPreviewMainHeaderModel {
+    var carName: String
+    var carImageUrl: String
     var recommendCarProductOption: QuotationPreviewCarInfoModel
     var firstSectionTitle: String
+}
+
+extension DefaultQuotationPreviewMainHeaderModel {
+    static let mock: Self = .init(
+        carName: "펠리세이드 - Prestige",
+        carImageUrl: "characterSelectSuccessCar",
+        recommendCarProductOption: .palisadeMock,
+        firstSectionTitle: "색상")
 }
 
 final class DefaultQuotationPreviewViewModel: CommonQuotationPreviewTableViewModel {
     // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
-    private var mainSectionHeader: QuotationPreviewMainHeaderModel
+    private var mainSectionHeader: DefaultQuotationPreviewMainHeaderModel
     private var sectionHeaders: [String]
     private var secondSectionFooter: String
     
@@ -30,7 +40,7 @@ final class DefaultQuotationPreviewViewModel: CommonQuotationPreviewTableViewMod
 }
 
 // MARK: - CharacterSelectSuccessViewModelable
-extension DefaultQuotationPreviewViewModel: DetailQuotationPreviewViewModelable {
+extension DefaultQuotationPreviewViewModel: DefaultQuotationPreviewViewModelable {
     func transform(input: Input) -> Output {
         return Publishers.MergeMany(
             customButtonEventChains(input),
@@ -51,7 +61,7 @@ private extension DefaultQuotationPreviewViewModel {
     // 서버에서 받아와서 업데이트?!
     func quickQuoteEventChains(_ input: Input) -> Output {
         return input.quickQuoteEvent
-            .map { _ -> State in return .updateRecommendThumbnailKeywords }
+            .map { _ -> State in return .updateViewWithData }
             .eraseToAnyPublisher()
     }
     
@@ -63,12 +73,12 @@ private extension DefaultQuotationPreviewViewModel {
 }
 
 // MARK: - CharacterSSTableViewAdapterDataSource
-extension DefaultQuotationPreviewViewModel: DetailQuotationPreviewTableViewAdapterDataSource {
+extension DefaultQuotationPreviewViewModel: DefaultQuotationPreviewAdapterDataSource {
     var secondSectionFooterItem: String {
         secondSectionFooter
     }
     
-    var mainSectionHeaderItem: QuotationPreviewMainHeaderModel {
+    var mainSectionHeaderItem: DefaultQuotationPreviewMainHeaderModel {
         mainSectionHeader
     }
     
