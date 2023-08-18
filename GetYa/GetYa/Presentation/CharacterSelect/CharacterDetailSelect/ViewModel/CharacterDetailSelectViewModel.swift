@@ -27,7 +27,7 @@ struct QuestionSliderViewModel {
     var maximumCarPrice: Int
     
     func description() -> String {
-        "\(minimumCarPrice.insertCommas)만원 ~ \(maximumCarPrice.insertCommas)만원"
+        "\(minimumCarPrice.toPriceFormat)만원 ~ \(maximumCarPrice.toPriceFormat)만원"
     }
 }
 
@@ -67,7 +67,6 @@ extension CharacterDetailSelectViewModel: CharacterDetailSelectViewModelabe {
                 guard let self else { return .none }
                 // 태그 표시는 항상 최소가로
                 userSelectionItems[questionDescriptionTexts.count - 1] = "\(questionSliderViewModel.minimumCarPrice)만원"
-                print(userSelectionItems)
                 // TODO: 서버한테 maxPrice 포함 사용자의 선택 5개 전송
                 return .gotoDetailQuotationPreviewPage(userSelection: userSelectionItems)
             }.eraseToAnyPublisher()

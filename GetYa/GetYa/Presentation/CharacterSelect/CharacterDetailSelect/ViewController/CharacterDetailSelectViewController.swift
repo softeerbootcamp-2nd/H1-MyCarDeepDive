@@ -207,7 +207,6 @@ extension CharacterDetailSelectViewController: ViewBindable {
                 [viewController], direction: .forward,
                 animated: true)
         case .gotoDetailQuotationPreviewPage(let userSelectionList):
-            print(userSelectionList)
             let quotationViewModel = DetailQuotationPreviewViewModel.init(keywords: userSelectionList)
             let presentedVC = DetailQuotationPreviewViewController(viewModel: quotationViewModel)
             navigationController?.pushViewController(presentedVC, animated: true)

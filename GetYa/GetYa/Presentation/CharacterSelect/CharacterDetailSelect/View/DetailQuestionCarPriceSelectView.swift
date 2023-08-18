@@ -74,7 +74,7 @@ final class DetailQuestionCarPriceSelectView: UIView {
             guard let self else { return }
             let newText = priceRangeDescriptionLabel
                 .text?
-                .replacingOccurrences(of: curPrice.insertCommas, with: $0.insertCommas)
+                .replacingOccurrences(of: curPrice.toPriceFormat, with: $0.toPriceFormat)
             priceRangeDescriptionLabel.text = newText
             curPrice = $0
         }
@@ -88,7 +88,7 @@ final class DetailQuestionCarPriceSelectView: UIView {
         priceMaximumLabel.text = "\(maxPrice) 만원"
         curPrice = maxPrice
         priceSlider.setValue(Float(curPrice), animated: false)
-        priceRangeDescriptionLabel.text = "\(minPrice.insertCommas)만원 ~ \(curPrice.insertCommas)만원"
+        priceRangeDescriptionLabel.text = "\(minPrice.toPriceFormat)만원 ~ \(curPrice.toPriceFormat)만원"
     }
 }
 
