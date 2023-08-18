@@ -189,7 +189,7 @@ extension CharacterDetailSelectViewController: ViewBindable {
         }
     }
     
-    func render(_ state: CharacterDetailSelectVCState) {
+    func render(_ state: CharacterDetailSelectState) {
         switch state {
         case .none:
             break
@@ -211,8 +211,8 @@ extension CharacterDetailSelectViewController: ViewBindable {
         }
     }
     
-    typealias Input = CharacterDetailSelectVCInput
-    typealias State = CharacterDetailSelectVCState
+    typealias Input = CharacterDetailSelectInput
+    typealias State = CharacterDetailSelectState
     typealias ErrorType = Error
 }
 

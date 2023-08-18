@@ -7,18 +7,18 @@
 
 import Combine
 
-struct CharacterDetailSelectVCInput {
+struct CharacterDetailSelectInput {
     typealias PageData = (index: Int, itemData: String)
     let touchUpButton: AnyPublisher<PageData, Never>
 }
 
-enum CharacterDetailSelectVCState {
+enum CharacterDetailSelectState {
     case gotoDetailQuotationPreviewPage(userSelection: [String])
     case gotoNextQuestionPage
     case none
 }
 
 protocol CharacterDetailSelectViewModelabe: ViewModelable
-where Input == CharacterDetailSelectVCInput,
-      State == CharacterDetailSelectVCState,
+where Input == CharacterDetailSelectInput,
+      State == CharacterDetailSelectState,
       Output == AnyPublisher<State, Never> { }
