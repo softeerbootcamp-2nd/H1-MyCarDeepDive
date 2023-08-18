@@ -1,30 +1,25 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { lifeStyleQuestionList } from '@/global/data';
 import Selected from './Selected';
 import Unselected from './Unselected';
 import LifeStyleModal from '../../LifeStyleModal';
+import { QuestionContext } from '@/context/QuestionProvider';
 
-interface LifeStyleRadioGroupProps {
-  value: string;
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-function LifeStyleRadio({ value, onChangeHandler }: LifeStyleRadioGroupProps) {
+function LifeStyleRadio() {
+  const { lifeStyle } = useContext(QuestionContext);
   const [showLifeStyleModal, setShowLifeStyleModal] = useState(false);
 
   const result = lifeStyleQuestionList.map(item => {
-    return item.value === value ? (
+    return item.value === lifeStyle ? (
       <Selected
         key={item.value}
         data={item}
-        onChangeHandler={onChangeHandler}
         setShowLifeStyleModal={setShowLifeStyleModal}
       />
     ) : (
       <Unselected
         key={item.value}
         data={item}
-        onChangeHandler={onChangeHandler}
         setShowLifeStyleModal={setShowLifeStyleModal}
       />
     );

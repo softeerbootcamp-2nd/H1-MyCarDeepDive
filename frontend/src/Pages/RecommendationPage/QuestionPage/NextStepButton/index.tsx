@@ -1,19 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@/Components/Button';
+import { useContext } from 'react';
+import { QuestionContext } from '@/context/QuestionProvider';
 
-interface NextStepButtonProps {
-  step: string;
-  lifeStyle: string;
-  myLifeStyle: {
-    drivingExperience: string;
-    numberOfFamilyMembers: string;
-    purpose: string;
-    value: string;
-    budget: string;
-  };
-}
-
-function NextStepButton({ step, lifeStyle, myLifeStyle }: NextStepButtonProps) {
+function NextStepButton() {
+  const { step } = useParams();
+  const { myLifeStyle, lifeStyle } = useContext(QuestionContext);
   const navigation = useNavigate();
 
   const clickHandler = () => {

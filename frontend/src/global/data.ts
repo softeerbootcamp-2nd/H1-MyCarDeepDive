@@ -76,7 +76,7 @@ export const lifeStyleAdditionQuestionList = [
     answerList: ['출퇴근용', '레저용', '가정용', '업무용'],
   },
   {
-    value: 'value',
+    value: 'lifeValue',
     question: '자동차를 살 때 어떤 가치가 가장 중요한가요?',
     answerList: ['디자인', '성능', '안전', '편의성'],
   },

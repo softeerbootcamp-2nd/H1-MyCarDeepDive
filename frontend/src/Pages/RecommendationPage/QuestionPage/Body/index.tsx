@@ -1,57 +1,121 @@
 import RadioGroup from '@/Components/RadioGroup';
 import LifeStyleRadio from './LifeStyleRadio';
 import { lifeStyleAdditionQuestionList, ageQuestionList } from '@/global/data';
-import { QuestionBodyProps } from '@/global/type';
 import Title from './Title';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import Budget from './Budget';
+import { QuestionContext } from '@/context/QuestionProvider';
+import {
+  SET_AGE,
+  SET_BUDGET,
+  SET_DRIVINGEXPERIENCE,
+  SET_LIFESTYLE,
+  SET_LIFEVALUE,
+  SET_NUMBEROFFAMILYMEMBERS,
+  SET_PURPOSE,
+} from '@/context/QuestionProvider/type';
+import { useParams } from 'react-router-dom';
 
-function Body({
-  step,
-  age,
-  lifeStyle,
-  myLifeStyle,
-  ageHandler,
-  lifeStyleHandler,
-  myLifeStyleHandler,
-}: QuestionBodyProps) {
-  const question =
-    step === '1' ? (
-      <RadioGroup
-        data={ageQuestionList}
-        name={'age'}
-        value={age}
-        onChangeHandler={ageHandler}
-      />
-    ) : step === '2' ? (
-      <LifeStyleRadio value={lifeStyle} onChangeHandler={lifeStyleHandler} />
-    ) : step === 'addition' ? (
-      <>
-        {lifeStyleAdditionQuestionList.map((additionQuestion, index) => {
-          const { question, answerList, value } = additionQuestion;
-          const radioValue =
-            myLifeStyle[additionQuestion.value as keyof typeof myLifeStyle];
-          return (
-            <Fragment key={index}>
-              <Title title={question} />
-              <RadioGroup
-                data={answerList}
-                name={value}
-                value={radioValue}
-                onChangeHandler={myLifeStyleHandler}
-              />
-            </Fragment>
-          );
-        })}
-        <Title title={'최대 예산을 알려주세요.'} />
-        <Budget
-          budget={myLifeStyle.budget}
-          myLifeStyleHandler={myLifeStyleHandler}
+function Body() {
+  const { step } = useParams();
+  const { age, myLifeStyle, questionDispatch } = useContext(QuestionContext);
+  const ageHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    questionDispatch({ type: SET_AGE, age: target.value });
+  };
+  const lifeStyleHandler = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    questionDispatch({ type: SET_LIFESTYLE, lifeStyle: target.value });
+  };
+  const drivingExperienceHandler = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    questionDispatch({
+      type: SET_DRIVINGEXPERIENCE,
+      drivingExperience: target.value,
+    });
+  };
+  const budgetHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    questionDispatch({ type: SET_BUDGET, budget: target.value });
+  };
+  const lifeValueHandler = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    questionDispatch({ type: SET_LIFEVALUE, lifeValue: target.value });
+  };
+  const numberOfFamilyMembersHandler = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    questionDispatch({
+      type: SET_NUMBEROFFAMILYMEMBERS,
+      numberOfFamilyMembers: target.value,
+    });
+  };
+  const purposeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    questionDispatch({
+      type: SET_PURPOSE,
+      purpose: target.value,
+    });
+  };
+  const typeToHandlerMap: Record<
+    string,
+    (e: React.ChangeEvent<HTMLInputElement>) => void
+  > = {
+    age: ageHandler,
+    lifeStyle: lifeStyleHandler,
+    lifeValue: lifeValueHandler,
+    drivingExperience: drivingExperienceHandler,
+    budget: budgetHandler,
+    numberOfFamilyMembers: numberOfFamilyMembersHandler,
+    purpose: purposeHandler,
+  };
+
+  let content = null;
+
+  switch (step) {
+    case '1':
+      content = (
+        <RadioGroup
+          data={ageQuestionList}
+          name={'age'}
+          selectedValue={age}
+          onChangeHandler={ageHandler}
         />
-      </>
-    ) : null;
+      );
+      break;
+    case '2':
+      content = <LifeStyleRadio />;
+      break;
+    case 'addition':
+      content = (
+        <>
+          {lifeStyleAdditionQuestionList.map((additionQuestion, index) => {
+            const { question, answerList, value } = additionQuestion;
+            const selectedValue =
+              myLifeStyle[value as keyof typeof myLifeStyle];
 
-  return <>{question}</>;
+            return (
+              <Fragment key={index}>
+                <Title title={question} />
+                <RadioGroup
+                  data={answerList}
+                  name={value}
+                  selectedValue={selectedValue}
+                  onChangeHandler={typeToHandlerMap[value]}
+                />
+              </Fragment>
+            );
+          })}
+          <Title title={'최대 예산을 알려주세요.'} />
+          <Budget />
+        </>
+      );
+      break;
+    default:
+      break;
+  }
+
+  return <>{content}</>;
 }
 
 export default Body;

@@ -1,7 +1,8 @@
-import { QuestionStepProps } from '@/global/type';
+import { useParams } from 'react-router-dom';
 import Step from './Step';
 
-function Title({ step }: QuestionStepProps) {
+function Title() {
+  const { step } = useParams();
   return (
     <div
       className={`mt-12 mx-auto flex justify-between ${step === '1' && 'mb-6'}`}
@@ -34,7 +35,7 @@ function Title({ step }: QuestionStepProps) {
       ) : (
         ''
       )}
-      {step !== 'addition' ? <Step step={step} /> : ''}
+      {step !== 'addition' ? <Step /> : ''}
     </div>
   );
 }

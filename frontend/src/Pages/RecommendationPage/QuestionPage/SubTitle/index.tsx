@@ -1,6 +1,7 @@
-import { QuestionStepProps } from '@/global/type';
+import { useParams } from 'react-router-dom';
 
-function SubTitle({ step }: QuestionStepProps) {
+function SubTitle() {
+  const { step } = useParams();
   if (step !== 'addition') return;
   return (
     <p className=' mb-10 font-body4-regular text-grey-300'>

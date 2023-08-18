@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+const API = 'https://api.make-my-car.shop/api/v1';
+
 const PENDING = 'pending';
 const FULFILLED = 'fulfilled';
 const ERROR = 'error';
@@ -13,12 +15,12 @@ interface useFetchParameter {
   body?: {};
 }
 
-function useFetch({ method, url, body }: useFetchParameter) {
+function useFetch<T>({ method, url, body }: useFetchParameter) {
   const [promise, setPromise] = useState<Promise<any>>();
   const [status, setStatus] = useState<'pending' | 'fulfilled' | 'error'>(
     PENDING,
   );
-  const [result, setResult] = useState();
+  const [result, setResult] = useState<T>();
   const [error, setError] = useState<Error>();
 
   const resolvePromise = (result: any) => {
@@ -41,7 +43,7 @@ function useFetch({ method, url, body }: useFetchParameter) {
         body: JSON.stringify(body),
       };
 
-      const res = await fetch(url, body && config);
+      const res = await fetch(API + url, body && config);
 
       if (!res.ok) return alert(res.status);
 
