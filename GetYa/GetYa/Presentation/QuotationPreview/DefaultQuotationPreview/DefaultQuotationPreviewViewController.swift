@@ -19,7 +19,7 @@ final class DefaultQuotationPreviewViewController: UIViewController {
     private let tableView = CommonQuotationPreviewTableView(frame: .zero, style: .grouped).set {
         $0.register(
             DefaultQuotationPreviewMainHeader.self,
-            forHeaderFooterViewReuseIdentifier: DetailQuotationPreviewMainHeader.identifier)
+            forHeaderFooterViewReuseIdentifier: DefaultQuotationPreviewMainHeader.identifier)
         $0.register(
             DetailQuotationPreviewSecionHeaderView.self,
             forHeaderFooterViewReuseIdentifier: DetailQuotationPreviewSecionHeaderView.identifier)
@@ -32,16 +32,16 @@ final class DefaultQuotationPreviewViewController: UIViewController {
     private let bottomCustomOrQuoteView = CustomOrQuoteSelectView()
     
     // MARK: - Properties
-    private var adapter: DetailQuotationPreviewTableViewAdapter!
+    private var adapter: DefaultQuotationPreviewTableViewAdapter!
     private var viewModel: (
-        any DetailQuotationPreviewViewModelable
-        & DetailQuotationPreviewTableViewAdapterDataSource
+        any DefaultQuotationPreviewViewModelable
+        & DefaultQuotationPreviewAdapterDataSource
         & CommonQuotationPreviewTableViewAdapterDataSource)!
     
     // MARK: - Lifecycles
     init(
-        viewModel: some DetailQuotationPreviewViewModelable
-        & DetailQuotationPreviewTableViewAdapterDataSource
+        viewModel: some DefaultQuotationPreviewViewModelable
+        & DefaultQuotationPreviewAdapterDataSource
         & CommonQuotationPreviewTableViewAdapterDataSource
     ) {
         super.init(nibName: nil, bundle: nil)
@@ -50,7 +50,7 @@ final class DefaultQuotationPreviewViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        viewModel = DetailQuotationPreviewViewModel()
+        viewModel = DefaultQuotationPreviewViewModel()
     }
     
     override func viewDidLoad() {
