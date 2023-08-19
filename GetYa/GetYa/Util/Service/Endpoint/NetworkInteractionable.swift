@@ -6,3 +6,5 @@
 //
 
 import Foundation
+
+protocol NetworkInteractionable: Requestable, Responsable {}
