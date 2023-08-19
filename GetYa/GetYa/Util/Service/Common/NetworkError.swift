@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum NetworkError: Swift.Error {
+    case unknown
+    case invalidBodyParams
+    case components
+}
