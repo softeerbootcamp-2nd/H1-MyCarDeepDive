@@ -15,6 +15,7 @@ class OptionSelectViewController: UIViewController {
     }
     
     // MARK: - UI properties
+    private let collectionView = OptionSelectCollectionView()
     private lazy var segmentedControl = OptionSelectSegmentedControl(items: ["추가 옵션", "기본 포함 옵션"]).set {
         $0.addTarget(self, action: #selector(changeSegmentedValue), for: .valueChanged)
     }
@@ -34,6 +35,13 @@ class OptionSelectViewController: UIViewController {
         configureUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        collectionView.selectItem(at: [0, 0], animated: false, scrollPosition: .init())
+        collectionView.collectionView(collectionView.self, didSelectItemAt: [0, 0])
+    }
+    
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
         configureSegmentedControl()
@@ -42,13 +50,15 @@ class OptionSelectViewController: UIViewController {
     // MARK: - Private Functions
     private func setupViews() {
         view.addSubviews([
-            segmentedControl
+            segmentedControl,
+            collectionView
         ])
     }
     
     private func configureUI() {
         view.backgroundColor = .white
         
+        configureCollectionView()
     }
     
     private func configureSegmentedControl() {
@@ -59,6 +69,15 @@ class OptionSelectViewController: UIViewController {
             width: safeLayoutFrame.width,
             height: Constants.SegmentedControl.height)
         segmentedControl.configureBottomBorder()
+    }
+    
+    private func configureCollectionView() {
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: CGFloat(72).scaledHeight)
+        ])
     }
     
     // MARK: - Functions
