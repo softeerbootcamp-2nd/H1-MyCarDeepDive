@@ -43,6 +43,7 @@ class QuotationFinishTableCell: UITableViewCell {
     
     // MARK: - Private Functions
     private func setupViews() {
+        selectionStyle = .none
         addSubview(optionView)
     }
     

@@ -157,7 +157,6 @@ extension QuotationTableView: UITableViewDataSource {
                 name: optionNameArray[indexPath.row],
                 price: optionPriceArray[indexPath.row])
         }
-        cell.selectionStyle = .none
         return cell
     }
 }
