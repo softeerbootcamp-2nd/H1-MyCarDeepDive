@@ -25,7 +25,7 @@ public class InteriorColorFixture {
                 .interiorImgUrl(interiorImgUrl)
                 .chooseRate(chooseRate)
                 .comment(comment)
-                .colorCombinationList(colorCombinations)
+                .colorCombinations(colorCombinations)
                 .build();
     }
 }

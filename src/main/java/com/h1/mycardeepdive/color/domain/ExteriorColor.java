@@ -28,7 +28,10 @@ public class ExteriorColor {
     private double chooseRate;
 
     @OneToMany(mappedBy = "exteriorColor", fetch = FetchType.LAZY)
-    private List<ColorCombination> colorCombinationList;
+    private List<ColorCombination> colorCombinations;
+
+    @OneToMany(mappedBy = "exteriorColor", fetch = FetchType.LAZY)
+    private List<TrimExteriorColor> trimExteriorColors;
 
     @Builder
     public ExteriorColor(
@@ -39,7 +42,8 @@ public class ExteriorColor {
             String comment,
             String exteriorImgUrl,
             double chooseRate,
-            List<ColorCombination> colorCombinationList) {
+            List<ColorCombination> colorCombinations,
+            List<TrimExteriorColor> trimExteriorColors) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -47,6 +51,7 @@ public class ExteriorColor {
         this.comment = comment;
         this.exteriorImgUrl = exteriorImgUrl;
         this.chooseRate = chooseRate;
-        this.colorCombinationList = colorCombinationList;
+        this.colorCombinations = colorCombinations;
+        this.trimExteriorColors = trimExteriorColors;
     }
 }

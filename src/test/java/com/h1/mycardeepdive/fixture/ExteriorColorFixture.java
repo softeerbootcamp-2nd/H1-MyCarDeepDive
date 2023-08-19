@@ -25,7 +25,7 @@ public class ExteriorColorFixture {
                 .exteriorImgUrl(exteriorImgUrl)
                 .chooseRate(chooseRate)
                 .comment("")
-                .colorCombinationList(colorCombinations)
+                .colorCombinations(colorCombinations)
                 .build();
     }
 }
