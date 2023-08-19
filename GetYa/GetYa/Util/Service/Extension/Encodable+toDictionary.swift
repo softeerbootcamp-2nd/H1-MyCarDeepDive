@@ -19,6 +19,7 @@ extension Encodable {
                 ) as? [String: Any]
         } catch {
             os_log("Failed to convert encodable json data as [String: Any]", type: .error)
+            return nil
         }
     }
 }
