@@ -9,13 +9,18 @@ import UIKit
 
 class CommonQuotationPreviewCarInfoView: UIView {
     enum Constants {
+<<<<<<< HEAD
+        static var intrinsicContentHeight: CGFloat {
+            return CGFloat(73).scaledHeight
+        }
+=======
         static var intrinsicContentHeight: CGFloat = .toScaledHeight(value: 93)
+>>>>>>> 6090407d3598708c128bfe891c8076a900395386
         enum CarKrNameLabel {
             static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
-            static let topMargin: CGFloat = CGFloat(24).scaledHeight
+            static let topMargin: CGFloat = CGFloat(20).scaledHeight
             static let fontColor: UIColor = .GetYaPalette.gray50
             static let font: GetYaFont = .mediumHead2
-            static var intrinsicContentHeight = topMargin + font.lineHeight
         }
         enum CarEnTrimLabel {
             static let leadingMargin: CGFloat = CGFloat(7.5).scaledWidth
@@ -23,17 +28,17 @@ class CommonQuotationPreviewCarInfoView: UIView {
             static let font: GetYaFont = .mediumBody2
         }
         enum CarPriceLabel {
-            static let trailingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let trailingMargin: CGFloat = CGFloat(-16).scaledWidth
             static let fontColor: UIColor = .GetYaPalette.gray100
             static let font: GetYaFont = .mediumHead4
         }
         enum CarOptionsLabel {
             static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
             static let topMargin: CGFloat = CGFloat(5).scaledWidth
+            static let bottomMargin: CGFloat = CGFloat(-16).scaledHeight
             static let size: CGFloat = 0
             static let fontColor: UIColor = .GetYaPalette.gray400
             static let font: GetYaFont = .regularCaption1
-            static let intrinsicContentHeight = topMargin + font.lineHeight
         }
     }
     
@@ -70,19 +75,15 @@ class CommonQuotationPreviewCarInfoView: UIView {
     // MARK: - Helper
     func configure(with recommendCarInfo: QuotationPreviewCarInfoModel) {
         _=carKrNameLabel.set {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carKrName
         }
         _=carEnTrimLabel.set {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carEnTrimName
         }
         _=carPriceLabel.set {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carPrice
         }
         _=carOptionsLabel.set {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carOptions
         }
     }
@@ -125,8 +126,7 @@ private extension CommonQuotationPreviewCarInfoView {
             carEnTrimLabel.leadingAnchor.constraint(
                 equalTo: carKrNameLabel.trailingAnchor,
                 constant: Const.leadingMargin),
-            carEnTrimLabel.centerYAnchor.constraint(
-                equalTo: carKrNameLabel.centerYAnchor)])
+            carEnTrimLabel.centerYAnchor.constraint(equalTo: carKrNameLabel.centerYAnchor)])
     }
     
     func configureCarPriceLabel() {
@@ -134,9 +134,8 @@ private extension CommonQuotationPreviewCarInfoView {
         NSLayoutConstraint.activate([
             carPriceLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: -Const.trailingMargin),
-            carPriceLabel.centerYAnchor.constraint(
-                equalTo: carKrNameLabel.centerYAnchor)])
+                constant: Const.trailingMargin),
+            carPriceLabel.centerYAnchor.constraint(equalTo: carKrNameLabel.centerYAnchor)])
     }
     
     func configureCarOptionsLabel() {
@@ -147,9 +146,13 @@ private extension CommonQuotationPreviewCarInfoView {
                 constant: Const.leadingMargin),
             carOptionsLabel.topAnchor.constraint(
                 equalTo: carKrNameLabel.bottomAnchor,
+<<<<<<< HEAD
+                constant: Const.topMargin)])
+=======
                 constant: Const.topMargin),
             carOptionsLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor),
             carOptionsLabel.heightAnchor.constraint(equalToConstant: Const.font.lineHeight)])
+>>>>>>> 6090407d3598708c128bfe891c8076a900395386
     }
 }
