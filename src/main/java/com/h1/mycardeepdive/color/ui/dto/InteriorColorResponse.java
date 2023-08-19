@@ -4,7 +4,6 @@ import java.util.Map;
 import lombok.*;
 
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class InteriorColorResponse {

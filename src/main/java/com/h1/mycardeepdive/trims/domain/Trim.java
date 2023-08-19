@@ -4,7 +4,6 @@ import com.h1.mycardeepdive.car.domain.Car;
 import com.h1.mycardeepdive.color.domain.TrimColorCombination;
 import java.util.List;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +11,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-@Builder
-@AllArgsConstructor
 @Table(name = "trims")
 public class Trim {
     @Id

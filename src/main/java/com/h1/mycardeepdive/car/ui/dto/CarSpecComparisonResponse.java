@@ -4,8 +4,6 @@ import java.util.List;
 import lombok.*;
 
 @Getter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class CarSpecComparisonResponse {
     private String trims_img_url;
