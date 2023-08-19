@@ -25,12 +25,39 @@ struct QuotationPreviewMainHeaderModel {
 final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewModel {
     // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
-    private var mainSectionHeader: QuotationPreviewMainHeaderModel
-    private var sectionHeaders: [String]
-    private var secondSectionFooter: String
+    private var mainSectionHeader: QuotationPreviewMainHeaderModel = .init(
+        thumbnailKeywords: [],
+        recommendCarProductOption: .init(
+            carName: "",
+            trimName: "",
+            carPrice: "",
+            carOptions: ""),
+        firstSectionTitle: "")
+    private var sectionHeaders: [String] = []
+    private var secondSectionFooter: String = ""
     
+    init(
+        mainSectionHeader: QuotationPreviewMainHeaderModel,
+        sectionHeaders: [String],
+        secondSectionFooter: String
+    ) {
+        self.mainSectionHeader = mainSectionHeader
+        self.sectionHeaders = sectionHeaders
+        self.secondSectionFooter = secondSectionFooter
+        super.init(
+            dataSource: QuotationPreviewCarProductOptionModel.mocks)
+    }
     override init() {
         mainSectionHeader = .mock
+        sectionHeaders = QuotationPreviewHeaderTitleList.lists
+        secondSectionFooter = "48,120,000원"
+        super.init(dataSource: QuotationPreviewCarProductOptionModel.mocks)
+    }
+
+    init(keywords: [String]) {
+        mainSectionHeader.thumbnailKeywords = keywords
+        mainSectionHeader = .mock
+        mainSectionHeader.thumbnailKeywords = keywords
         sectionHeaders = QuotationPreviewHeaderTitleList.lists
         secondSectionFooter = "48,120,000원"
         super.init(dataSource: QuotationPreviewCarProductOptionModel.mocks)
@@ -71,7 +98,7 @@ private extension DetailQuotationPreviewViewModel {
 }
 
 // MARK: - CharacterSSTableViewAdapterDataSource
-extension DetailQuotationPreviewViewModel: DetailQuotationPreviewTableViewAdapterDataSource {
+extension DetailQuotationPreviewViewModel: DetailQuotationPreviewAdapterDataSource {
     var secondSectionFooterItem: String {
         secondSectionFooter
     }

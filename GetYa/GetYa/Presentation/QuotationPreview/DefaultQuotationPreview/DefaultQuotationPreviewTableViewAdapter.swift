@@ -22,7 +22,7 @@ final class DefaultQuotationPreviewTableViewAdapter: CommonQuotationPreviewTable
     init(
         tableView: UITableView,
         dataSource: DefaultQuotationPreviewAdapterDataSource
-        & CommonQuotationPreviewTableViewAdapterDataSource
+        & CommonQuotationPreviewAdapterDataSource
     ) {
         self.dataSource = dataSource
         super.init(tableView: tableView, dataSource: dataSource)

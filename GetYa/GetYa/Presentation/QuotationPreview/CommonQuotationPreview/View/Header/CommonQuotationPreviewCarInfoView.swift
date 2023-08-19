@@ -9,19 +9,15 @@ import UIKit
 
 class CommonQuotationPreviewCarInfoView: UIView {
     enum Constants {
-        static var intrinsicContentHeight: CGFloat {
-            let carKrNameHeight = CarKrNameLabel.intrinsicContentHeight
-            let carOptionsLabelHeight = CarOptionsLabel.intrinsicContentHeight
-            return carKrNameHeight + carOptionsLabelHeight
-        }
-        enum CarKrNameLabel {
+        static var intrinsicContentHeight: CGFloat = .toScaledHeight(value: 93)
+        enum CarNameLabel {
             static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
             static let topMargin: CGFloat = CGFloat(24).scaledHeight
             static let fontColor: UIColor = .GetYaPalette.gray50
             static let font: GetYaFont = .mediumHead2
             static var intrinsicContentHeight = topMargin + font.lineHeight
         }
-        enum CarEnTrimLabel {
+        enum CarTrimLabel {
             static let leadingMargin: CGFloat = CGFloat(7.5).scaledWidth
             static let fontColor: UIColor = .GetYaPalette.gray300
             static let font: GetYaFont = .mediumBody2
@@ -42,12 +38,12 @@ class CommonQuotationPreviewCarInfoView: UIView {
     }
     
     // MARK: - UI properties
-    private let carKrNameLabel: CommonLabel = .init(
-        fontType: Constants.CarKrNameLabel.font,
-        color: Constants.CarKrNameLabel.fontColor)
-    private let carEnTrimLabel: CommonLabel = .init(
-        fontType: Constants.CarEnTrimLabel.font,
-        color: Constants.CarEnTrimLabel.fontColor)
+    private let carNameLabel: CommonLabel = .init(
+        fontType: Constants.CarNameLabel.font,
+        color: Constants.CarNameLabel.fontColor)
+    private let carTrimLabel: CommonLabel = .init(
+        fontType: Constants.CarTrimLabel.font,
+        color: Constants.CarTrimLabel.fontColor)
     private let carPriceLabel: CommonLabel = .init(
         fontType: Constants.CarPriceLabel.font,
         color: Constants.CarPriceLabel.fontColor)
@@ -73,11 +69,11 @@ class CommonQuotationPreviewCarInfoView: UIView {
     
     // MARK: - Helper
     func configure(with recommendCarInfo: QuotationPreviewCarInfoModel) {
-        _=carKrNameLabel.set {
+        _=carNameLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carName
         }
-        _=carEnTrimLabel.set {
+        _=carTrimLabel.set {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.trimName
         }
@@ -96,8 +92,8 @@ class CommonQuotationPreviewCarInfoView: UIView {
 extension CommonQuotationPreviewCarInfoView: LayoutSupportable {
     func setupViews() {
         addSubviews([
-            carKrNameLabel,
-            carEnTrimLabel,
+            carNameLabel,
+            carTrimLabel,
             carPriceLabel,
             carOptionsLabel])
     }
@@ -113,24 +109,24 @@ extension CommonQuotationPreviewCarInfoView: LayoutSupportable {
 // MARK: - Private layout supportable
 private extension CommonQuotationPreviewCarInfoView {
     func configureCarKrNameLabel() {
-        typealias Const = Constants.CarKrNameLabel
+        typealias Const = Constants.CarNameLabel
         NSLayoutConstraint.activate([
-            carKrNameLabel.leadingAnchor.constraint(
+            carNameLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
-            carKrNameLabel.topAnchor.constraint(
+            carNameLabel.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: Const.topMargin)])
     }
     
     func configureCarEnNameLabel() {
-        typealias Const = Constants.CarEnTrimLabel
+        typealias Const = Constants.CarTrimLabel
         NSLayoutConstraint.activate([
-            carEnTrimLabel.leadingAnchor.constraint(
-                equalTo: carKrNameLabel.trailingAnchor,
+            carTrimLabel.leadingAnchor.constraint(
+                equalTo: carNameLabel.trailingAnchor,
                 constant: Const.leadingMargin),
-            carEnTrimLabel.centerYAnchor.constraint(
-                equalTo: carKrNameLabel.centerYAnchor)])
+            carTrimLabel.centerYAnchor.constraint(
+                equalTo: carNameLabel.centerYAnchor)])
     }
     
     func configureCarPriceLabel() {
@@ -140,7 +136,7 @@ private extension CommonQuotationPreviewCarInfoView {
                 equalTo: trailingAnchor,
                 constant: -Const.trailingMargin),
             carPriceLabel.centerYAnchor.constraint(
-                equalTo: carKrNameLabel.centerYAnchor)])
+                equalTo: carNameLabel.centerYAnchor)])
     }
     
     func configureCarOptionsLabel() {
@@ -150,9 +146,10 @@ private extension CommonQuotationPreviewCarInfoView {
                 equalTo: leadingAnchor,
                 constant: Const.leadingMargin),
             carOptionsLabel.topAnchor.constraint(
-                equalTo: carKrNameLabel.bottomAnchor,
+                equalTo: carNameLabel.bottomAnchor,
                 constant: Const.topMargin),
             carOptionsLabel.bottomAnchor.constraint(
-                equalTo: bottomAnchor)])
+                equalTo: bottomAnchor),
+            carOptionsLabel.heightAnchor.constraint(equalToConstant: Const.font.lineHeight)])
     }
 }

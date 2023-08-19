@@ -9,12 +9,12 @@ import UIKit
 
 class CommonQuotationPreviewTableViewAdapter: NSObject {
     // MARK: - Properties
-    private var dataSource: CommonQuotationPreviewTableViewAdapterDataSource
+    private var dataSource: CommonQuotationPreviewAdapterDataSource
     
     // MARK: - Lifecycles
     init(
         tableView: UITableView,
-        dataSource: CommonQuotationPreviewTableViewAdapterDataSource
+        dataSource: CommonQuotationPreviewAdapterDataSource
     ) {
         self.dataSource = dataSource
         super.init()

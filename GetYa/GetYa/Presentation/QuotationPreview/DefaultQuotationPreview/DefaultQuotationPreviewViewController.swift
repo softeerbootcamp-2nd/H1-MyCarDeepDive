@@ -36,13 +36,13 @@ final class DefaultQuotationPreviewViewController: UIViewController {
     private var viewModel: (
         any DefaultQuotationPreviewViewModelable
         & DefaultQuotationPreviewAdapterDataSource
-        & CommonQuotationPreviewTableViewAdapterDataSource)!
+        & CommonQuotationPreviewAdapterDataSource)!
     
     // MARK: - Lifecycles
     init(
         viewModel: some DefaultQuotationPreviewViewModelable
         & DefaultQuotationPreviewAdapterDataSource
-        & CommonQuotationPreviewTableViewAdapterDataSource
+        & CommonQuotationPreviewAdapterDataSource
     ) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel

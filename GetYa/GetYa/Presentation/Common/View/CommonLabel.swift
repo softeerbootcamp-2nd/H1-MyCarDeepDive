@@ -32,8 +32,9 @@ class CommonLabel: UILabel {
         configureFontType(fontType: fontType)
     }
     
-    convenience init(fontType: GetYaFont, color: UIColor) {
-        self.init(frame: .zero)
+    init(fontType: GetYaFont, color: UIColor) {
+        super.init(frame: .zero)
+        configureUI()
         configureFontType(fontType: fontType)
         self.textColor = color
     }
