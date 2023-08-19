@@ -4,8 +4,6 @@ import java.util.List;
 import lombok.*;
 
 @Getter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class CarSpecResponse {
     private String trim_name;
