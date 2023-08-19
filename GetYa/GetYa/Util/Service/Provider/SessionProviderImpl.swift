@@ -21,7 +21,8 @@ extension SessionProviderImpl: EndpointProvider {
     ) async throws -> R where R == E.ResponseDTO, E: NetworkInteractionable {
         let urlRequest = try endpoint.makeRequest()
         do {
-            let (data, _) = try await session.data(for: urlRequest)
+            let (data, response) = try await session.data(for: urlRequest)
+            try checkResult(data: data, response)
             return try decode(data: data)
         } catch let networkError as NetworkError {
             throw networkError
@@ -31,7 +32,15 @@ extension SessionProviderImpl: EndpointProvider {
     }
     
     func request(_ url: URL) async throws -> Data {
-        return .init()
+        do {
+            let (data, response) = try await session.data(from: url)
+            try checkResult(data: data, response)
+            return try decode(data: data)
+        } catch let networkError as NetworkError {
+            throw networkError
+        } catch {
+            throw NetworkError.urlRequest(error)
+        }
     }
 }
 
