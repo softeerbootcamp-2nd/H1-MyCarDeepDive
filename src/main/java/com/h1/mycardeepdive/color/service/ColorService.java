@@ -32,7 +32,8 @@ public class ColorService {
         List<TrimExteriorColor> trimExteriorColors =
                 trimExteriorColorRepository.findByTrimId(trimId);
         for (TrimExteriorColor trimExteriorColor : trimExteriorColors) {
-            if (trimExteriorColor.isExteriorColorAvailableForInteriorColor(interiorColorId)) {
+            if (isExteriorColorAvailableForInteriorColor(
+                    trimExteriorColor.getExteriorColor(), interiorColorId)) {
                 availableColors.add(trimExteriorColor.getExteriorColor());
             } else {
                 unavailableColors.add(trimExteriorColor.getExteriorColor());
@@ -65,7 +66,8 @@ public class ColorService {
         List<TrimInteriorColor> trimInteriorColors =
                 trimInteriorColorRepository.findByTrimId(trimId);
         for (TrimInteriorColor trimInteriorColor : trimInteriorColors) {
-            if (trimInteriorColor.isInteriorColorAvailableForExteriorColor(exteriorColorId)) {
+            if (isInteriorColorAvailableForExteriorColor(
+                    trimInteriorColor.getInteriorColor(), exteriorColorId)) {
                 availableColors.add(trimInteriorColor.getInteriorColor());
             } else {
                 unavailableColors.add(trimInteriorColor.getInteriorColor());
@@ -111,5 +113,27 @@ public class ColorService {
         Long interiorId = entry.getKey();
         ExteriorColorResponse exteriorColorResponse = findExteriorColors(trimId, interiorId);
         return new AllColorResponse(exteriorColorResponse, interiorColorResponse);
+    }
+
+    private boolean isExteriorColorAvailableForInteriorColor(
+            ExteriorColor exteriorColor, Long interiorColorId) {
+        List<ColorCombination> colorCombinations = exteriorColor.getColorCombinations();
+        for (ColorCombination colorCombination : colorCombinations) {
+            if (colorCombination.getInteriorColor().getId().equals(interiorColorId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isInteriorColorAvailableForExteriorColor(
+            InteriorColor interiorColor, Long exteriorColorId) {
+        List<ColorCombination> colorCombinations = interiorColor.getColorCombinations();
+        for (ColorCombination colorCombination : colorCombinations) {
+            if (colorCombination.getInteriorColor().getId().equals(exteriorColorId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,7 +1,6 @@
 package com.h1.mycardeepdive.color.domain;
 
 import com.h1.mycardeepdive.trims.domain.Trim;
-import java.util.List;
 import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,15 +28,5 @@ public class TrimInteriorColor {
         this.id = id;
         this.trim = trim;
         this.interiorColor = interiorColor;
-    }
-
-    public boolean isInteriorColorAvailableForExteriorColor(Long exteriorColorId) {
-        List<ColorCombination> colorCombinations = interiorColor.getColorCombinations();
-        for (ColorCombination colorCombination : colorCombinations) {
-            if (colorCombination.getInteriorColor().getId().equals(exteriorColorId)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
