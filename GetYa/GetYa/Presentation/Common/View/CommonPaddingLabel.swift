@@ -21,13 +21,14 @@ class CommonPaddingLabel: CommonLabel {
         self.padding = padding
     }
     
-    init(padding: UIEdgeInsets, fontType: GetYaFont, color: UIColor, text: String) {
-        super.init(fontType: fontType, color: color, text: text)
+    init(padding: UIEdgeInsets, fontType: GetYaFont, color: UIColor) {
+        super.init(fontType: fontType, color: color)
         self.padding = padding
     }
     
-    convenience init(padding: UIEdgeInsets, fontType: GetYaFont, color: UIColor) {
-        self.init(padding: padding, fontType: fontType, color: color, text: "")
+    init(padding: UIEdgeInsets, fontType: GetYaFont, color: UIColor, text: String) {
+        super.init(fontType: fontType, color: color, text: text)
+        self.padding = padding
     }
     
     override init(frame: CGRect) {

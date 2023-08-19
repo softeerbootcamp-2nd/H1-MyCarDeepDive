@@ -9,14 +9,14 @@ import UIKit
 
 final class DetailQuotationPreviewTableViewAdapter: CommonQuotationPreviewTableViewAdapter {
     // MARK: - Properties
-    private var dataSource: DetailQuotationPreviewTableViewAdapterDataSource
+    private var dataSource: DetailQuotationPreviewAdapterDataSource
     private var isWorkedMainHeaderInitialAnimation = false
     
     // MARK: - Lifecycles
     init(
         tableView: UITableView,
-        dataSource: DetailQuotationPreviewTableViewAdapterDataSource
-        & CommonQuotationPreviewTableViewAdapterDataSource
+        dataSource: DetailQuotationPreviewAdapterDataSource
+        & CommonQuotationPreviewAdapterDataSource
     ) {
         self.dataSource = dataSource
         super.init(tableView: tableView, dataSource: dataSource)
