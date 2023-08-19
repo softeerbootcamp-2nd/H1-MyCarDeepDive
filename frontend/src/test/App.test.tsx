@@ -2,9 +2,10 @@ import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import App from '@/App';
+import Wrapper from './Wrapper';
 
 test('Render Landing, Question page correctly', async () => {
-  render(<App />);
+  render(<App />, { wrapper: Wrapper });
 
   const RecommendButton = await screen.findByRole('button', {
     name: /추천받기/i,
