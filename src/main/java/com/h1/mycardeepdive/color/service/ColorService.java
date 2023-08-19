@@ -4,9 +4,7 @@ import static com.h1.mycardeepdive.color.mapper.ColorMapper.toExteriorColorInfo;
 import static com.h1.mycardeepdive.color.mapper.ColorMapper.toInteriorColorInfo;
 
 import com.h1.mycardeepdive.color.domain.*;
-import com.h1.mycardeepdive.color.domain.repository.TrimColorCombinationRepository;
-import com.h1.mycardeepdive.color.domain.repository.TrimExteriorColorRepository;
-import com.h1.mycardeepdive.color.domain.repository.TrimInteriorColorRepository;
+import com.h1.mycardeepdive.color.domain.repository.*;
 import com.h1.mycardeepdive.color.ui.dto.*;
 import java.util.*;
 import lombok.RequiredArgsConstructor;
@@ -20,68 +18,78 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class ColorService {
 
-    private final TrimColorCombinationRepository trimColorCombinationRepository;
     private final TrimExteriorColorRepository trimExteriorColorRepository;
     private final TrimInteriorColorRepository trimInteriorColorRepository;
 
     public ExteriorColorResponse findExteriorColors(Long trimId, Long interiorColorId) {
-        List<TrimColorCombination> trimColorCombinations =
-                trimColorCombinationRepository.findByTrim_Id(trimId);
-        Map<Long, ExteriorColorInfo> availableColors = new HashMap<>();
-        Map<Long, ExteriorColorInfo> unavailableColors = new HashMap<>();
-        Map<Long, ExteriorColorInfo> otherTrimColors = new HashMap<>();
-        for (TrimColorCombination trimColorCombination : trimColorCombinations) {
-            ColorCombination colorCombination = trimColorCombination.getColorCombination();
-            ExteriorColor exteriorColor = colorCombination.getExteriorColor();
-            ExteriorColorInfo colorInfo = toExteriorColorInfo(exteriorColor);
-            if (colorCombination.getInteriorColor().getId().equals(interiorColorId)) {
-                availableColors.put(exteriorColor.getId(), colorInfo);
+        List<ExteriorColor> availableColors = new ArrayList<>();
+        List<ExteriorColor> unavailableColors = new ArrayList<>();
+        Map<Long, ExteriorColorInfo> availableColorInfoMap = new HashMap<>();
+        Map<Long, ExteriorColorInfo> unavailableColorInfoMap = new HashMap<>();
+        Map<Long, ExteriorColorInfo> otherTrimColorInfoMap = new HashMap<>();
+        List<ExteriorColor> allExteriorColors = trimExteriorColorRepository.findAllExteriorColors();
+        //
+        List<TrimExteriorColor> trimExteriorColors =
+                trimExteriorColorRepository.findByTrimId(trimId);
+        for (TrimExteriorColor trimExteriorColor : trimExteriorColors) {
+            if (trimExteriorColor.isExteriorColorAvailableForInteriorColor(interiorColorId)) {
+                availableColors.add(trimExteriorColor.getExteriorColor());
             } else {
-                unavailableColors.put(exteriorColor.getId(), colorInfo);
+                unavailableColors.add(trimExteriorColor.getExteriorColor());
             }
         }
-        List<TrimExteriorColor> trimExteriorColors =
-                trimExteriorColorRepository.findByTrim_IdNot(trimId);
-        for (TrimExteriorColor trimExteriorColor : trimExteriorColors) {
-            ExteriorColor exteriorColor = trimExteriorColor.getExteriorColor();
-            ExteriorColorInfo colorInfo = toExteriorColorInfo(exteriorColor);
-            otherTrimColors.put(exteriorColor.getId(), colorInfo);
+        //
+        for (ExteriorColor exteriorColor : availableColors) {
+            availableColorInfoMap.put(exteriorColor.getId(), toExteriorColorInfo(exteriorColor));
         }
-
-        return new ExteriorColorResponse(availableColors, unavailableColors, otherTrimColors);
+        for (ExteriorColor exteriorColor : unavailableColors) {
+            unavailableColorInfoMap.put(exteriorColor.getId(), toExteriorColorInfo(exteriorColor));
+        }
+        allExteriorColors.removeAll(availableColors);
+        allExteriorColors.removeAll(unavailableColors);
+        for (ExteriorColor exteriorColor : allExteriorColors) {
+            otherTrimColorInfoMap.put(exteriorColor.getId(), toExteriorColorInfo(exteriorColor));
+        }
+        return new ExteriorColorResponse(
+                availableColorInfoMap, unavailableColorInfoMap, otherTrimColorInfoMap);
     }
 
     public InteriorColorResponse findInteriorColors(Long trimId, Long exteriorColorId) {
-        List<TrimColorCombination> trimColorCombinations =
-                trimColorCombinationRepository.findByTrim_Id(trimId);
-        Map<Long, InteriorColorInfo> availableColors = new HashMap<>();
-        Map<Long, InteriorColorInfo> unavailableColors = new HashMap<>();
-        Map<Long, InteriorColorInfo> otherTrimColors = new HashMap<>();
-        for (TrimColorCombination trimColorCombination : trimColorCombinations) {
-            ColorCombination colorCombination = trimColorCombination.getColorCombination();
-            InteriorColor interiorColor = colorCombination.getInteriorColor();
-            InteriorColorInfo colorInfo = toInteriorColorInfo(interiorColor);
-            if (colorCombination.getInteriorColor().getId().equals(exteriorColorId)) {
-                availableColors.put(interiorColor.getId(), colorInfo);
+        List<InteriorColor> availableColors = new ArrayList<>();
+        List<InteriorColor> unavailableColors = new ArrayList<>();
+        Map<Long, InteriorColorInfo> availableColorInfoMap = new HashMap<>();
+        Map<Long, InteriorColorInfo> unavailableColorInfoMap = new HashMap<>();
+        Map<Long, InteriorColorInfo> otherTrimColorInfoMap = new HashMap<>();
+        List<InteriorColor> allInteriorColors = trimInteriorColorRepository.findAllInteriorColors();
+        //
+        List<TrimInteriorColor> trimInteriorColors =
+                trimInteriorColorRepository.findByTrimId(trimId);
+        for (TrimInteriorColor trimInteriorColor : trimInteriorColors) {
+            if (trimInteriorColor.isInteriorColorAvailableForExteriorColor(exteriorColorId)) {
+                availableColors.add(trimInteriorColor.getInteriorColor());
             } else {
-                unavailableColors.put(interiorColor.getId(), colorInfo);
+                unavailableColors.add(trimInteriorColor.getInteriorColor());
             }
         }
-
-        List<TrimInteriorColor> trimInteriorColors =
-                trimInteriorColorRepository.findByTrim_IdNot(trimId);
-        for (TrimInteriorColor trimInteriorColor : trimInteriorColors) {
-            InteriorColor interiorColor = trimInteriorColor.getInteriorColor();
-            InteriorColorInfo colorInfo = toInteriorColorInfo(interiorColor);
-            otherTrimColors.put(interiorColor.getId(), colorInfo);
+        //
+        for (InteriorColor exteriorColor : availableColors) {
+            availableColorInfoMap.put(exteriorColor.getId(), toInteriorColorInfo(exteriorColor));
         }
-
-        return new InteriorColorResponse(availableColors, unavailableColors, otherTrimColors);
+        for (InteriorColor exteriorColor : unavailableColors) {
+            unavailableColorInfoMap.put(exteriorColor.getId(), toInteriorColorInfo(exteriorColor));
+        }
+        allInteriorColors.removeAll(availableColors);
+        allInteriorColors.removeAll(unavailableColors);
+        for (InteriorColor interiorColor : allInteriorColors) {
+            otherTrimColorInfoMap.put(interiorColor.getId(), toInteriorColorInfo(interiorColor));
+        }
+        return new InteriorColorResponse(
+                availableColorInfoMap, unavailableColorInfoMap, otherTrimColorInfoMap);
     }
 
     public AllColorResponse findAllColors(Long trimId) {
         List<TrimExteriorColor> trimExteriorColors =
-                trimExteriorColorRepository.findByTrim_Id(trimId);
+                trimExteriorColorRepository.findByTrimId(trimId);
         Set<ExteriorColor> exteriorColorSet = new HashSet<>();
         for (TrimExteriorColor trimExteriorColor : trimExteriorColors) {
             exteriorColorSet.add(trimExteriorColor.getExteriorColor());
