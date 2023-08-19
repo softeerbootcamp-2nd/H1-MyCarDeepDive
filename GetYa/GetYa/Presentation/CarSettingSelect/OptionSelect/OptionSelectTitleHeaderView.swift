@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: CollectionView에서 공통적으로 쓰이는 Title만 있는 Custom HeaderView입니다.
 class OptionSelectTitleHeaderView: UICollectionReusableView {
     // MARK: - UI properties
     private let label = CommonLabel(fontType: .mediumBody3, color: .GetYaPalette.gray300)
