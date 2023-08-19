@@ -136,7 +136,7 @@ class OptionSelectCategoryCell: UICollectionViewCell {
             imageView.centerYAnchor.constraint(equalTo: imageBackgroundView.centerYAnchor),
             imageView.centerXAnchor.constraint(equalTo: imageBackgroundView.centerXAnchor),
             imageView.heightAnchor.constraint(equalToConstant: Const.height),
-            imageView.widthAnchor.constraint(equalToConstant: Const.width),
+            imageView.widthAnchor.constraint(equalToConstant: Const.width)
         ])
     }
     
@@ -155,6 +155,10 @@ class OptionSelectCategoryCell: UICollectionViewCell {
     func setByIndex(index: Int) {
         let cellTypeAllCases = CellType.allCases
         label.text = cellTypeAllCases[index].title
-        imageView.image = cellTypeAllCases[index].image
+        imageView.image = isSelected
+        ? cellTypeAllCases[index].image?.withTintColor(
+            .GetYaPalette.primary,
+            renderingMode: .alwaysOriginal)
+        : cellTypeAllCases[index].image
     }
 }

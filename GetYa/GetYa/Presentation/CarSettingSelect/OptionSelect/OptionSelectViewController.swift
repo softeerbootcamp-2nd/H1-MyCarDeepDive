@@ -12,6 +12,9 @@ class OptionSelectViewController: UIViewController {
         enum SegmentedControl {
             static let height: CGFloat = .toScaledHeight(value: 52)
         }
+        enum CollectionView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 20)
+        }
     }
     
     // MARK: - UI properties
@@ -33,13 +36,6 @@ class OptionSelectViewController: UIViewController {
 
         setupViews()
         configureUI()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        collectionView.selectItem(at: [0, 0], animated: false, scrollPosition: .init())
-        collectionView.collectionView(collectionView.self, didSelectItemAt: [0, 0])
     }
     
     override func viewSafeAreaInsetsDidChange() {
@@ -72,8 +68,12 @@ class OptionSelectViewController: UIViewController {
     }
     
     private func configureCollectionView() {
+        typealias Const = Constants.CollectionView
+        
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
+            collectionView.topAnchor.constraint(
+                equalTo: segmentedControl.bottomAnchor,
+                constant: Const.topMargin),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: CGFloat(72).scaledHeight)

@@ -1066,9 +1066,9 @@
 		64E26A0D2A895B8600F6BC3A /* OptionSelect */ = {
 			isa = PBXGroup;
 			children = (
-				6484A79A2A90F3E800434136 /* OptionSelectCollectionView.swift */,
 				64E26A112A895C1700F6BC3A /* OptionSelectViewController.swift */,
 				6484A7942A90F2EE00434136 /* OptionSelectCategoryCell.swift */,
+				6484A79A2A90F3E800434136 /* OptionSelectCollectionView.swift */,
 				6484A7962A90F33500434136 /* OptionSelectItemCell.swift */,
 				6484A7982A90F39300434136 /* OptionSelectImageCell.swift */,
 				6484A79C2A90F43800434136 /* OptionSelectSegmentedControl.swift */,

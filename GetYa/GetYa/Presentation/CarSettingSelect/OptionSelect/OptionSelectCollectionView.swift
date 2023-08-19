@@ -27,6 +27,7 @@ class OptionSelectCollectionView: UICollectionView {
     // MARK: - Properties
     typealias DataSource = UICollectionViewDiffableDataSource<Sections, Items>
     private var diffableDatasource: DataSource!
+    private var currentSelectedCategoryIndex: Int = 0
     
     // MARK: - Lifecycles
     convenience init() {
@@ -98,6 +99,7 @@ class OptionSelectCollectionView: UICollectionView {
                         withReuseIdentifier: OptionSelectCategoryCell.identifier,
                         for: indexPath) as? OptionSelectCategoryCell {
                         cell.setByIndex(index: index)
+                        
                         return cell
                     }
                 }
@@ -119,7 +121,11 @@ class OptionSelectCollectionView: UICollectionView {
         for idx in 0..<Constants.categoryItemCount {
             snapshot.appendItems([.category(index: idx)])
         }
-        diffableDatasource.apply(snapshot)
+        diffableDatasource.apply(snapshot, completion: { [weak self] in
+            guard let self else { return }
+            selectItem(at: [0, 0], animated: false, scrollPosition: .init())
+            collectionView(self, didSelectItemAt: [0, 0])
+        })
     }
     
     // MARK: - Functions
@@ -130,6 +136,6 @@ class OptionSelectCollectionView: UICollectionView {
 // MARK: - UICollectionViewDelegate
 extension OptionSelectCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        currentSelectedCategoryIndex = indexPath.row
     }
 }
