@@ -13,5 +13,5 @@ protocol EndpointProvider: AnyObject {
     ) async throws -> R where E.ResponseDTO == R
     
     /// 사진의 경우
-    func request(_ url: URL) async throws -> Data
+    func request(with url: URL) async throws -> Data
 }

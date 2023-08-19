@@ -31,7 +31,7 @@ extension SessionProviderImpl: EndpointProvider {
         }
     }
     
-    func request(_ url: URL) async throws -> Data {
+    func request(with url: URL) async throws -> Data {
         do {
             let (data, response) = try await session.data(from: url)
             try checkResult(data: data, response)
