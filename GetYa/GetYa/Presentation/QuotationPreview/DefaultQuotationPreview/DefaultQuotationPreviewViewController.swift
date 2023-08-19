@@ -65,7 +65,29 @@ final class DefaultQuotationPreviewViewController: BaseViewController {
     // MARK: - Functions
     func configureUI() {
         view.backgroundColor = .white
+        bottomCustomOrQuoteView.delegate = self
         setupUI()
+    }
+}
+
+// MARK: - CustomOrQuoteSelectViewDelegate
+extension DefaultQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate {
+    func gotoCustomPage() {
+        // TODO: 3-1화면으로 이동해야합니다. (추천 트림, 색상, 옵션 선택된 상태로)
+    }
+    
+    func gotoQuotePage() {
+        // TODO: 로딩 페이지 후 서버에서 완료되면 5.1화면으로 이동
+        let finishViewController = QuotationFinishViewController(nibName: nil, bundle: nil)
+        if let navigationController = navigationController,
+           let firstViewController = navigationController.viewControllers.first {
+            navigationController.pushViewController(finishViewController, animated: true)
+            
+            navigationController.viewControllers.removeAll(where: { targetViewController in
+                return (targetViewController != firstViewController &&
+                        targetViewController != finishViewController)
+            })
+        }
     }
 }
 
