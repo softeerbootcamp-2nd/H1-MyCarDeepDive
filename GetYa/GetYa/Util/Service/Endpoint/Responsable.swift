@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol Responsable {
+    associatedtype ResponseDTO: Decodable
+}
