@@ -3,13 +3,16 @@ import { CarContext } from '@/context/CarProvider';
 import { useCallback, useContext, useRef } from 'react';
 
 export interface Props {
-  carTrim: {
-    name: string;
-    description: string;
-    basicOption: string[];
+  carSpecData: {
+    car_spec_id: number;
+    trim_id: number;
+    trim_name: string;
     price: number;
+    summary: string;
+    basic_option_ids: number[];
+    basic_option_names: string[];
   };
-  setWantedTrim: React.Dispatch<React.SetStateAction<string>>;
+  wantedTrimHandler: (e: React.MouseEvent<HTMLInputElement>) => void;
   setShowModal: (value: boolean) => void;
   optionToolTipHandler: (
     x: number | undefined,
@@ -19,17 +22,10 @@ export interface Props {
 }
 
 function Unselected({
-  carTrim,
-  setShowModal,
-  setWantedTrim,
+  carSpecData,
+  wantedTrimHandler,
   optionToolTipHandler,
 }: Props) {
-  const showTrimChangePopup = ({
-    currentTarget,
-  }: React.MouseEvent<HTMLInputElement>) => {
-    setWantedTrim(currentTarget.value);
-    setShowModal(true);
-  };
   const optionRefs = [
     useRef<HTMLButtonElement | null>(null),
     useRef<HTMLButtonElement | null>(null),
@@ -46,36 +42,45 @@ function Unselected({
     [],
   );
 
-  const { feature } = useContext(CarContext);
+  const { carSpec } = useContext(CarContext);
+  const myCarSpecData = {
+    carSpecId: carSpecData.car_spec_id,
+    trimId: carSpecData.trim_id,
+    trimName: carSpecData.trim_name,
+    price: carSpecData.price,
+  };
 
   return (
     <>
       <input
         type='radio'
-        name='selectedTrim'
-        id={carTrim.name}
-        value={carTrim.name}
+        id={carSpecData.trim_name}
+        name='carSpec'
+        value={carSpecData.trim_name}
         className='hidden'
-        onClick={showTrimChangePopup}
+        onClick={wantedTrimHandler}
+        data-object={JSON.stringify(myCarSpecData)}
       />
-      <label htmlFor={carTrim.name}>
+      <label htmlFor={carSpecData.trim_name}>
         <div className='relative cursor-pointer'>
           <div className='flex justify-between gap-2 pt-6 mb-1'>
             <div className='flex justify-between items-center gap-2 '>
-              <p className='font-body4-medium text-grey-300'>{carTrim.name}</p>
+              <p className='font-body4-medium text-grey-300'>
+                {carSpecData.trim_name}
+              </p>
               <p className='font-caption1-regular text-grey-500'>
-                {feature.engine} &middot; {feature.body} &middot;{' '}
-                {feature.drivingSystem}
+                {carSpec.feature.engine} &middot; {carSpec.feature.body}{' '}
+                &middot; {carSpec.feature.drivingSystem}
               </p>
             </div>
 
             <img src={checkCircleGrey}></img>
           </div>
           <p className='font-body3-regular text-grey-100 mb-2'>
-            {carTrim.description}
+            {carSpecData.summary}
           </p>
           <p className='font-h2-medium text-grey-0 mb-[14px]'>
-            {carTrim.price.toLocaleString('en-US')}원
+            {carSpecData.price.toLocaleString('en-US')}원
           </p>
 
           <div className='flex gap-3'>
@@ -84,7 +89,7 @@ function Unselected({
             </div>
 
             <div className='mb-6 flex flex-wrap gap-3'>
-              {carTrim.basicOption.map((option, index) => (
+              {carSpecData.basic_option_names.map((option, index) => (
                 <button
                   ref={optionRefs[index]}
                   key={index}

@@ -22,8 +22,13 @@ import ControlButtons from './Car/ControlButtons';
 
 function TrimSelectionPage() {
   const navigation = useNavigate();
+  const [wantedTrim, setWantedTrim] = useState({
+    carSpecId: null,
+    price: null,
+    trimId: null,
+    trimName: null,
+  });
   const [rotation, setRotation] = useState(false);
-  const [wantedTrim, setWantedTrim] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
   const [toolTipInfo, setToolTipInfo] = useState({
@@ -37,6 +42,22 @@ function TrimSelectionPage() {
     y: 0,
     name: '',
   });
+
+  const wantedTrimHandler = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLInputElement>) => {
+    setShowModal(true);
+    const dataObject = currentTarget.getAttribute('data-object');
+    if (!dataObject) return;
+    const carSpecInfo = JSON.parse(dataObject);
+    setWantedTrim(prevTrim => ({
+      ...prevTrim,
+      carSpecId: carSpecInfo.carSpecId,
+      price: carSpecInfo.price,
+      trimId: carSpecInfo.trimId,
+      trimName: carSpecInfo.trimName,
+    }));
+  };
 
   const toolTipHandler = (
     x: number | undefined,
@@ -99,7 +120,7 @@ function TrimSelectionPage() {
             <CompareButton />
           </TrimSelectionHeader>
           <TrimRadio
-            setWantedTrim={setWantedTrim}
+            wantedTrimHandler={wantedTrimHandler}
             setShowModal={setShowModal}
             optionToolTipHandler={optionToolTipHandler}
           />

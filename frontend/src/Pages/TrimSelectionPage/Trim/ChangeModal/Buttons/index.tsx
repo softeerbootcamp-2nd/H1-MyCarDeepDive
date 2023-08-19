@@ -1,11 +1,21 @@
 import Button from '@/Components/Button';
 import { CarContext } from '@/context/CarProvider';
-import { SET_TRIM } from '@/context/CarProvider/type';
+import {
+  SET_CARSPECID,
+  SET_CARSPECPRICE,
+  SET_TRIMID,
+  SET_TRIMNAME,
+} from '@/context/CarProvider/type';
 import { closeModalHandler } from '@/utils';
 import { useContext } from 'react';
 
 interface Props {
-  wantedTrim: string;
+  wantedTrim: {
+    carSpecId: number | null;
+    price: number | null;
+    trimId: number | null;
+    trimName: string | null;
+  };
 }
 
 function Buttons({ wantedTrim }: Props) {
@@ -25,7 +35,20 @@ function Buttons({ wantedTrim }: Props) {
         variant='primary'
         text='변경하기'
         onClick={() => {
-          carDispatch({ type: SET_TRIM, trim: wantedTrim });
+          if (
+            wantedTrim.price === null ||
+            wantedTrim.carSpecId === null ||
+            wantedTrim.trimName === null ||
+            wantedTrim.trimId === null
+          )
+            return;
+          carDispatch({
+            type: SET_CARSPECPRICE,
+            carSpecPrice: wantedTrim.price,
+          });
+          carDispatch({ type: SET_CARSPECID, carSpecId: wantedTrim.carSpecId });
+          carDispatch({ type: SET_TRIMNAME, trimName: wantedTrim.trimName });
+          carDispatch({ type: SET_TRIMID, trimId: wantedTrim.trimId });
           closeModalHandler();
         }}
       />

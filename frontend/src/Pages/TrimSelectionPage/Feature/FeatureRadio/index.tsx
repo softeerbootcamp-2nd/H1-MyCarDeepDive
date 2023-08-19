@@ -19,7 +19,7 @@ interface Props {
 }
 
 function FeatureRadio({ toolTipHandler, setShowToolTip }: Props) {
-  const { carDispatch, feature } = useContext(CarContext);
+  const { carDispatch, carSpec } = useContext(CarContext);
 
   const engineHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     carDispatch({ type: SET_ENGINE, engine: target.value });
@@ -60,7 +60,8 @@ function FeatureRadio({ toolTipHandler, setShowToolTip }: Props) {
     <>
       {carFeatureList.map((carFeature, index) => {
         const { type, description, valueList } = carFeature;
-        const selectedValue = feature[type as keyof typeof feature];
+        const selectedValue =
+          carSpec.feature[type as keyof typeof carSpec.feature];
 
         return (
           <div

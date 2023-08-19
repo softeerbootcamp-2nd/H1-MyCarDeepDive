@@ -20,7 +20,12 @@ const UnlockOptionData = [
 ];
 
 export interface Props extends ModalProps {
-  wantedTrim: string;
+  wantedTrim: {
+    carSpecId: number | null;
+    price: number | null;
+    trimId: number | null;
+    trimName: string | null;
+  };
 }
 
 function ChangeModal({ showModal, setShowModal, wantedTrim }: Props) {

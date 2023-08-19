@@ -3,11 +3,14 @@ import { CarContext } from '@/context/CarProvider';
 import { useCallback, useContext, useRef } from 'react';
 
 export interface Props {
-  carTrim: {
-    name: string;
-    description: string;
-    basicOption: string[];
+  carSpecData: {
+    car_spec_id: number;
+    trim_id: number;
+    trim_name: string;
     price: number;
+    summary: string;
+    basic_option_ids: number[];
+    basic_option_names: string[];
   };
   optionToolTipHandler: (
     x: number | undefined,
@@ -16,48 +19,48 @@ export interface Props {
   ) => void;
 }
 
-function Selected({ carTrim, optionToolTipHandler }: Props) {
+function Selected({ carSpecData, optionToolTipHandler }: Props) {
   const optionRefs = [
     useRef<HTMLButtonElement | null>(null),
     useRef<HTMLButtonElement | null>(null),
     useRef<HTMLButtonElement | null>(null),
   ];
-
-  const { feature } = useContext(CarContext);
-
   const optionClickHandler = useCallback((index: number, option: string) => {
     const x = optionRefs[index].current?.getBoundingClientRect().x;
     const y = optionRefs[index].current?.getBoundingClientRect().y;
     optionToolTipHandler(x, y, option);
   }, []);
 
+  const { carSpec } = useContext(CarContext);
   return (
     <>
       <input
         type='radio'
-        name='selectedTrim'
-        id={carTrim.name}
-        value={carTrim.name}
+        name='carSpec'
+        id={carSpecData.trim_name}
+        value={carSpecData.trim_name}
         className='hidden'
       />
-      <label htmlFor={carTrim.name}>
+      <label htmlFor={carSpecData.trim_name}>
         <div className='relative'>
           <div className='flex justify-between pt-6 mb-1'>
             <div className='flex justify-between items-center gap-2 '>
-              <p className='font-body4-medium text-grey-300'>{carTrim.name}</p>
+              <p className='font-body4-medium text-grey-300'>
+                {carSpecData.trim_name}
+              </p>
               <p className='font-caption1-regular text-grey-500'>
-                {feature.engine} &middot; {feature.body} &middot;{' '}
-                {feature.drivingSystem}
+                {carSpec.feature.engine} &middot; {carSpec.feature.body}{' '}
+                &middot; {carSpec.feature.drivingSystem}
               </p>
             </div>
 
             <img src={checkCircleBlue}></img>
           </div>
           <p className='font-body3-regular text-grey-100 mb-2'>
-            {carTrim.description}
+            {carSpecData.summary}
           </p>
           <p className='font-h2-medium text-grey-0 mb-[14px]'>
-            {carTrim.price.toLocaleString('en-US')}원
+            {carSpecData.price.toLocaleString('en-US')}원
           </p>
 
           <div className='flex gap-3'>
@@ -66,7 +69,7 @@ function Selected({ carTrim, optionToolTipHandler }: Props) {
             </div>
 
             <div className='mb-6 flex flex-wrap gap-3'>
-              {carTrim.basicOption.map((option, index) => (
+              {carSpecData.basic_option_names.map((option, index) => (
                 <button
                   ref={optionRefs[index]}
                   key={index}
