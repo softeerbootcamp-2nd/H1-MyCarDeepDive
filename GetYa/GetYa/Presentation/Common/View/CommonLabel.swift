@@ -32,8 +32,9 @@ class CommonLabel: UILabel {
         configureFontType(fontType: fontType)
     }
     
-    convenience init(fontType: GetYaFont, color: UIColor) {
-        self.init(frame: .zero)
+    init(fontType: GetYaFont, color: UIColor) {
+        super.init(frame: .zero)
+        configureUI()
         configureFontType(fontType: fontType)
         self.textColor = color
     }
@@ -81,6 +82,15 @@ class CommonLabel: UILabel {
                 $0.configureHyundaiSans(
                     type: fontType,
                     otherType: otherFontType, text: partText)
+            }
+        }
+    }
+    
+    func configurePartTextColor(partText: String, partTextColor: UIColor) {
+        if let text, let fontType {
+            attributedText = NSMutableAttributedString(string: text).set {
+                $0.configureHyundaiSans(type: fontType)
+                $0.addAttributes([.foregroundColor: partTextColor], range: (text as NSString).range(of: partText))
             }
         }
     }

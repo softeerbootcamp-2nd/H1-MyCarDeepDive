@@ -44,11 +44,6 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
         setupUI()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        thumbnailView.prepareForReuse()
-    }
-    
     // MARK: - Functions
     func configure(with: QuotationPreviewMainHeaderModel) {
         setThumbnailView(with.thumbnailKeywords)
@@ -85,33 +80,35 @@ extension DetailQuotationPreviewMainHeader: LayoutSupportable {
     }
     
     func setupConstriants() {
-        _=[configureThumbnailView,
-           configureRecommendCarInfo,
-           configureSectionDivider
-        ].map { NSLayoutConstraint.activate($0) }
+        configureThumbnailView()
+        configureRecommendCarInfo()
+        configureSectionDivider()
     }
 }
 
 // MARK: - LayoutSupportable private functions
 private extension DetailQuotationPreviewMainHeader {
-    var configureThumbnailView: [NSLayoutConstraint] {
-        [thumbnailView.leadingAnchor.constraint(
+    func configureThumbnailView() {
+        NSLayoutConstraint.activate([thumbnailView.leadingAnchor.constraint(
             equalTo: leadingAnchor),
          thumbnailView.trailingAnchor.constraint(
             equalTo: trailingAnchor),
-         thumbnailView.topAnchor.constraint(equalTo: topAnchor)]
+         thumbnailView.topAnchor.constraint(equalTo: topAnchor)])
     }
     
-    var configureRecommendCarInfo: [NSLayoutConstraint] {
-        [recommendCarInfoView.leadingAnchor.constraint(equalTo: leadingAnchor),
-         recommendCarInfoView.trailingAnchor.constraint(equalTo: trailingAnchor),
-         recommendCarInfoView.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor)]
+    func configureRecommendCarInfo() {
+        typealias Const = CommonQuotationPreviewCarInfoView.Constants
+        NSLayoutConstraint.activate([
+            recommendCarInfoView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            recommendCarInfoView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            recommendCarInfoView.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor),
+            recommendCarInfoView.heightAnchor.constraint(equalToConstant: Const.intrinsicContentHeight)])
     }
     
-    var configureSectionDivider: [NSLayoutConstraint] {
-        [sectionDivider.leadingAnchor.constraint(equalTo: leadingAnchor),
+    func configureSectionDivider() {
+        NSLayoutConstraint.activate([sectionDivider.leadingAnchor.constraint(equalTo: leadingAnchor),
          sectionDivider.trailingAnchor.constraint(equalTo: trailingAnchor),
          sectionDivider.topAnchor.constraint(equalTo: recommendCarInfoView.bottomAnchor),
-         sectionDivider.bottomAnchor.constraint(greaterThanOrEqualTo: bottomAnchor)]
+         sectionDivider.bottomAnchor.constraint(equalTo: bottomAnchor)])
     }
 }

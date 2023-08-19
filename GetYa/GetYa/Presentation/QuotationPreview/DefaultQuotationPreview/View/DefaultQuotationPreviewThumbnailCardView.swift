@@ -37,7 +37,6 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
             static let height: CGFloat = .toScaledHeight(value: GetYaFont.mediumBody4.lineHeight + 8)
             static let innerTextLeadingMargin: CGFloat = .toScaledWidth(value: 12)
             static let innerTextTrailingMargin: CGFloat = .toScaledWidth(value: 12)
-            static let cornerRadius: CGFloat = height/2
         }
         enum FamouseSayingWithCarNameLabel {
             static let topMargin: CGFloat = .toScaledHeight(value: 8)
@@ -71,15 +70,20 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
     }
-    private let carNameDescriptionRoundLabel = TagView(frame: .zero, fontType: .mediumBody4, text: "차량 준비중 ...").set {
+    private let carNameDescriptionRoundLabel = CommonPaddingLabel(
+        padding: UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12),
+        fontType: .custom(
+            size: 12,
+            kern: -0.5,
+            lineHeight: 16,
+            nameType: .boldText),
+        color: .white
+    ).set {
         typealias Const = Constants.CarNameDescriptionRoundLabel
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.configureCornerRadius(with: Const.cornerRadius)
-        $0.configureTextColor(with: .white)
-        $0.configureBaseLine(with: .alignCenters)
-        $0.configureBackgroundColor(color: .GetYaPalette.primary)
-        $0.configureTextLabelLeadingMargin(with: Const.innerTextLeadingMargin)
-        $0.configureTextLabeltrailingMargin(with: Const.innerTextTrailingMargin)
+        $0.layer.cornerRadius = .toScaledWidth(value: Const.height/2)
+        $0.backgroundColor = .GetYaPalette.primary
+        $0.layer.masksToBounds = true
     }
     private let famouseSayingWithCarNameLabel = CommonLabel(
         fontType: .regularHead2,
@@ -157,7 +161,7 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
     
     // MARK: - Functions
     func configure(carName: String, carImageUrl: String) {
-        carNameDescriptionRoundLabel.configureLabelText(text: carName)
+        carNameDescriptionRoundLabel.text = carName
         recommendCarImageView.image = UIImage(named: carImageUrl)
     }
     
@@ -240,7 +244,7 @@ extension DefaultQuotationPreviewThumbnailCardView: LayoutSupportable {
                 equalToConstant: const.height)])
     }
     
-    private func configureRecommendCarImageView()  {
+    private func configureRecommendCarImageView() {
         let const = Constants.RecommendCarImageView.self
         NSLayoutConstraint.activate([
             recommendCarImageView.leadingAnchor.constraint(

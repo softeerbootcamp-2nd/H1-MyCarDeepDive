@@ -34,7 +34,7 @@ class CommonQuotationPreviewTableViewModel {
 }
 
 // MARK: - CommonRecommendResultTableViewDataSource
-extension CommonQuotationPreviewTableViewModel: CommonQuotationPreviewTableViewAdapterDataSource {
+extension CommonQuotationPreviewTableViewModel: CommonQuotationPreviewAdapterDataSource {
     func cellItem(in section: Int, _ row: Int) -> QuotationPreviewCarProductOptionModel {
         return dataSource[section][row]
     }

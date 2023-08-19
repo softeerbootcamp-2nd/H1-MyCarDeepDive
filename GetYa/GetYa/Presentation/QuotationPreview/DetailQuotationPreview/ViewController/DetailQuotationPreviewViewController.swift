@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailQuotationPreviewViewController: UIViewController {
+final class DetailQuotationPreviewViewController: BaseViewController {
     private enum Constants {
         enum BottomCustomOrQuoteView {
             static let height: CGFloat = CustomOrQuoteSelectView
@@ -23,14 +23,14 @@ final class DetailQuotationPreviewViewController: UIViewController {
     private var adapter: DetailQuotationPreviewTableViewAdapter!
     private var viewModel: (
         any DetailQuotationPreviewViewModelable
-        & DetailQuotationPreviewTableViewAdapterDataSource
-        & CommonQuotationPreviewTableViewAdapterDataSource)!
+        & DetailQuotationPreviewAdapterDataSource
+        & CommonQuotationPreviewAdapterDataSource)!
     
     // MARK: - Lifecycles
     init(
         viewModel: some DetailQuotationPreviewViewModelable
-        & DetailQuotationPreviewTableViewAdapterDataSource
-        & CommonQuotationPreviewTableViewAdapterDataSource
+        & DetailQuotationPreviewAdapterDataSource
+        & CommonQuotationPreviewAdapterDataSource
     ) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
@@ -53,27 +53,28 @@ final class DetailQuotationPreviewViewController: UIViewController {
     // MARK: - Functions
     func configureUI() {
         view.backgroundColor = .white
+        bottomCustomOrQuoteView.delegate = self
         setupUI()
-        configureNavigationBar()
+    }
+}
+
+// MARK: - CustomOrQuoteSelectViewDelegate
+extension DetailQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate {
+    func gotoCustomPage() {
+        // TODO: 3-1화면으로 이동해야합니다. (추천 트림, 색상, 옵션 선택된 상태로)
     }
     
-    // MARK: - Private functions
-    private func configureNavigationBar() {
-        let image = UIImage(named: "Black_Logo")
-        self.navigationItem.title = ""
-        self.navigationItem.titleView = UIImageView(image: image)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "arrow.left")?.withTintColor(
-                .GetYaPalette.gray0,
-                renderingMode: .alwaysOriginal),
-            style: .plain,
-            target: self,
-            action: #selector(didTapNavigationBackButton))
-    }
-    
-    // MARK: - @Objc functions
-    @objc func didTapNavigationBackButton() {
-        navigationController?.popViewController(animated: true)
+    func gotoQuotePage() {
+        let finishViewController = QuotationFinishViewController(nibName: nil, bundle: nil)
+        if let navigationController = navigationController,
+           let firstViewController = navigationController.viewControllers.first {
+            navigationController.pushViewController(finishViewController, animated: true)
+            
+            navigationController.viewControllers.removeAll(where: { targetViewController in
+                return (targetViewController != firstViewController &&
+                        targetViewController != finishViewController)
+            })
+        }
     }
 }
 
@@ -86,12 +87,12 @@ extension DetailQuotationPreviewViewController: LayoutSupportable {
     }
     
     func setupConstriants() {
-        configureTableViewConstriants()
+        configureTableView()
         configureBottomCustomOrQuoteView()
     }
     
     // MARK: - LayoutSupportable private helper
-    private func configureTableViewConstriants() {
+    private func configureTableView() {
         _=tableView.set {
             NSLayoutConstraint.activate([
                 $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -110,6 +111,7 @@ extension DetailQuotationPreviewViewController: LayoutSupportable {
                 $0.topAnchor.constraint(
                     equalTo: tableView.bottomAnchor,
                     constant: -CustomOrQuoteSelectView.Constants.gradientLayerHeight)])
+        
         }
     }
 }

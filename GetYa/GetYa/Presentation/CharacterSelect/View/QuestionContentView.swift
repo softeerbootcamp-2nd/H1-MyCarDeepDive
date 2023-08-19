@@ -127,8 +127,7 @@ class QuestionContentView: UIView {
                 equalTo: self.trailingAnchor,
                 constant: buttonLayoutConstant.trailingMargin),
             button.bottomAnchor.constraint(
-                equalTo: self.bottomAnchor,
-                constant: buttonLayoutConstant.bottomMargin),
+                equalTo: self.bottomAnchor),
             button.heightAnchor.constraint(equalToConstant: buttonLayoutConstant.height)
         ])
     }

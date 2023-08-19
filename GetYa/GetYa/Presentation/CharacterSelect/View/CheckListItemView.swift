@@ -12,24 +12,36 @@ protocol CheckListItemViewDelegate: AnyObject {
 }
 
 class CheckListItemView: UIView {
+    enum Constants {
+        enum ImageView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: 0)
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -16)
+        }
+        enum Label {
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 12)
+            static let topMargin: CGFloat = .toScaledHeight(value: 16)
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -16)
+        }
+    }
+    
     // MARK: - UI Properties
-    private let imageView = UIImageView(image: UIImage(named: "Blue-Check-Circle"))
+    private let imageView = UIImageView(image: UIImage(named: "Blue-Check-Circle")).set {
+        $0.contentMode = .scaleAspectFit
+    }
+    
     private let label = CommonLabel()
     
     // MARK: - Properties
     weak var delegate: CheckListItemViewDelegate?
-    private let labelLayoutConstant = UILayout(leadingMargin: 12, topMargin: 16, bottomMargin: -16)
-    private let imageViewLayoutConstant = UILayout(topMargin: 16, trailingMargin: -16, bottomMargin: -16)
+    
     var isTapped: Bool = false {
         didSet {
-            self.layer.borderWidth = isTapped ? 2 : 0
-            self.layer.backgroundColor = isTapped ? UIColor.white.cgColor : UIColor.GetYaPalette.gray800.cgColor
-            imageView.isHidden = isTapped ? false : true
-            label.font = isTapped ? UIFont(hyundaiSans: .regularBody3) : UIFont(hyundaiSans: .mediumBody3)
-            label.textColor = isTapped ? .GetYaPalette.primary : .GetYaPalette.gray400
-            label.isHighlighted = isTapped
+            showAnimation()
         }
     }
+    
+    private var heightConstraints: NSLayoutConstraint!
     
     // MARK: - LifeCycles
     convenience init(text: String) {
@@ -73,7 +85,8 @@ class CheckListItemView: UIView {
         
         self.layer.borderColor = UIColor.GetYaPalette.primary.cgColor
         self.isTapped = false
-        
+        heightConstraints = heightAnchor.constraint(equalToConstant: 56)
+        heightConstraints.isActive = true
         configureLabel()
         configureImageView()
     }
@@ -82,34 +95,62 @@ class CheckListItemView: UIView {
         label.text = text
     }
     
+    func setHeight(with height: CGFloat) {
+        heightConstraints.isActive = false
+        heightConstraints = heightAnchor.constraint(equalToConstant: height)
+        heightConstraints.isActive = true
+        layoutIfNeeded()
+    }
+    
+    // MARK: - Private functions
+    private func updateUIState() {
+        layer.borderWidth = isTapped ? 2 : 0
+        layer.backgroundColor = isTapped ? UIColor.white.cgColor : UIColor.GetYaPalette.gray800.cgColor
+        imageView.isHidden = isTapped ? false : true
+        label.font = isTapped ? UIFont(hyundaiSans: .regularBody3) : UIFont(hyundaiSans: .mediumBody3)
+        label.textColor = isTapped ? .GetYaPalette.primary : .GetYaPalette.gray400
+        label.isHighlighted = isTapped
+    }
+    
+    private func showAnimation() {
+        UIView.animate(
+            withDuration: 0.25,
+            delay: 0,
+            options: .curveEaseInOut,
+            animations: {
+                self.updateUIState()
+            })
+    }
+    
     private func configureLabel() {
+        typealias Const = Constants.Label
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(
                 equalTo: self.topAnchor,
-                constant: labelLayoutConstant.topMargin),
+                constant: Const.topMargin),
             label.bottomAnchor.constraint(
                 equalTo: self.bottomAnchor,
-                constant: labelLayoutConstant.bottomMargin),
+                constant: Const.bottomMargin),
             label.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: labelLayoutConstant.leadingMargin)
+                constant: Const.leadingMargin)
         ])
     }
     
     private func configureImageView() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
-        
+        typealias Const = Constants.ImageView
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(
                 equalTo: self.topAnchor,
-                constant: imageViewLayoutConstant.topMargin),
+                constant: Const.topMargin),
             imageView.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: imageViewLayoutConstant.trailingMargin),
+                constant: Const.trailingMargin),
             imageView.bottomAnchor.constraint(
                 equalTo: self.bottomAnchor,
-                constant: imageViewLayoutConstant.bottomMargin)
+                constant: Const.bottomMargin)
         ])
     }
     
