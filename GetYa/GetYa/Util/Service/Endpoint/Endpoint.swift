@@ -20,12 +20,12 @@ final class Endpoint<ResponseModel>: NetworkInteractionable where ResponseModel:
     init(
         scheme: String = "http://",
         host: String,
-        method: HTTPMethod,
-        prefixPath: String = "/api/v1",
+        method: HTTPMethod = .get,
+        prefixPath: String = "/api/v1/",
         path: String,
         queryParams: Encodable? = nil,
         bodyParams: Encodable? = nil,
-        headers: [String: String]? = nil
+        headers: [String: String]? = ["Content-Type": "application/json"]
     ) {
         self.scheme = scheme
         self.host = host
