@@ -119,9 +119,9 @@ class CharacterSelectViewController: BaseViewController {
 // MARK: - BaseCharacterSelectpageViewDelegate
 extension CharacterSelectViewController: BaseCharacterSelectpageViewDelegate {
     func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController) {
-        // TODO: 서버한테 보낼 지정된 텍스트
+        // TODO: 서버한테 보낼 사용자 나이
         guard let selectedIdx = viewController.selectedItemIndex else { return }
-        let selectedItemString = checkListTexts[selectedIdx]
+        
         if let viewController = viewControllers.last {
             pageViewController.setViewControllers(
                 [viewController],

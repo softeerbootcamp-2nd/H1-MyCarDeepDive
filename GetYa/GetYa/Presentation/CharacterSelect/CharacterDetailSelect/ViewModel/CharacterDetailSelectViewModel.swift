@@ -22,7 +22,7 @@ struct QuestionListTextModel {
     }
 }
 
-struct QuestionSliderViewModel {
+struct QuestionSlider {
     var minimumCarPrice: Int
     var maximumCarPrice: Int
     
@@ -36,7 +36,7 @@ final class CharacterDetailSelectViewModel {
     // MARK: - Properties
     private var questionDescriptionTexts: [QuestionDescriptionLabelModel] = QuestionDescriptionLabelModel.mock
     private var questionListTexts: [QuestionListTextModel] = QuestionListTextModel.mock
-    private var questionSliderViewModel: QuestionSliderViewModel = .mock
+    private var questionSliderViewModel: QuestionSlider = .mock
     private let fetchCompleted = PassthroughSubject<Void, Never>()
     private lazy var userSelectionItems = Array(
         repeating: "",

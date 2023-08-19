@@ -85,7 +85,7 @@ final class CharacterDetailSelectViewController: BaseViewController {
         numberOfSteps: Int,
         questionList: [QuestionListTextModel],
         questionDescriptions: [QuestionDescriptionLabelModel],
-        priceRange: QuestionSliderViewModel
+        priceRange: QuestionSlider
     ) {
         let questionListViewControllers = makeQuestionListViewControllers(
             numberOfSteps: numberOfSteps,
@@ -126,7 +126,7 @@ final class CharacterDetailSelectViewController: BaseViewController {
         }
     }
     private func makeQuestionCarPriceSlideViewController(
-        priceRange: QuestionSliderViewModel,
+        priceRange: QuestionSlider,
         questionInfo: QuestionDescriptionLabelModel
     ) -> BaseCharacterSelectPageViewController {
         let carPriceSliderAreaView = DetailQuestionCarPriceSelectView(frame: .zero).set {

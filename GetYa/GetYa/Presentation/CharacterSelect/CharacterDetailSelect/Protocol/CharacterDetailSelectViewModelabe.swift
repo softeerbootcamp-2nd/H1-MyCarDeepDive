@@ -20,7 +20,7 @@ enum CharacterDetailSelectState {
         numberOfSteps: Int,
         questionList: [QuestionListTextModel],
         questionDescriptions: [QuestionDescriptionLabelModel],
-        priceRange: QuestionSliderViewModel)
+        priceRange: QuestionSlider)
     case none
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension QuestionSliderViewModel {
+extension QuestionSlider {
     static let mock: Self = .init(
         minimumCarPrice: 4200, maximumCarPrice: 6900)
 }
