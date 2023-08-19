@@ -1,8 +1,15 @@
 import Button from '@/Components/Button';
-import { TrimChangeButtonProps } from '@/global/type';
+import { CarContext } from '@/context/CarProvider';
+import { SET_TRIM } from '@/context/CarProvider/type';
 import { closeModalHandler } from '@/utils';
+import { useContext } from 'react';
 
-function Buttons({ mycarTrimHandler }: TrimChangeButtonProps) {
+interface Props {
+  wantedTrim: string;
+}
+
+function Buttons({ wantedTrim }: Props) {
+  const { carDispatch } = useContext(CarContext);
   return (
     <div className='flex justify-end gap-2.5'>
       <Button
@@ -18,7 +25,7 @@ function Buttons({ mycarTrimHandler }: TrimChangeButtonProps) {
         variant='primary'
         text='변경하기'
         onClick={() => {
-          mycarTrimHandler();
+          carDispatch({ type: SET_TRIM, trim: wantedTrim });
           closeModalHandler();
         }}
       />

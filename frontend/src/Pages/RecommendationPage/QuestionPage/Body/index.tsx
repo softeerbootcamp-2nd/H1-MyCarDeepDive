@@ -57,7 +57,7 @@ function Body() {
       purpose: target.value,
     });
   };
-  const typeToHandlerMap: Record<
+  const handlerMap: Record<
     string,
     (e: React.ChangeEvent<HTMLInputElement>) => void
   > = {
@@ -101,7 +101,7 @@ function Body() {
                   data={answerList}
                   name={value}
                   selectedValue={selectedValue}
-                  onChangeHandler={typeToHandlerMap[value]}
+                  onChangeHandler={handlerMap[value]}
                 />
               </Fragment>
             );

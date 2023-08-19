@@ -1,10 +1,15 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { carFeatureList } from '@/global/data';
-import { FeatureSelectRadioGroupProps } from '@/global/type';
 import Selected from './Selected';
 import Unselected from './Unselected';
+import { CarContext } from '@/context/CarProvider';
+import {
+  SET_BODY,
+  SET_DRIVINGSYSTEM,
+  SET_ENGINE,
+} from '@/context/CarProvider/type';
 
-interface Props extends FeatureSelectRadioGroupProps {
+interface Props {
   toolTipHandler: (
     x: number | undefined,
     y: number | undefined,
@@ -13,12 +18,29 @@ interface Props extends FeatureSelectRadioGroupProps {
   setShowToolTip: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function FeatureRadio({
-  carFeature,
-  mycarFeatureHandler,
-  toolTipHandler,
-  setShowToolTip,
-}: Props) {
+function FeatureRadio({ toolTipHandler, setShowToolTip }: Props) {
+  const { carDispatch, feature } = useContext(CarContext);
+
+  const engineHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    carDispatch({ type: SET_ENGINE, engine: target.value });
+  };
+  const bodyHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    carDispatch({ type: SET_BODY, body: target.value });
+  };
+  const drivingSystemHandler = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    carDispatch({ type: SET_DRIVINGSYSTEM, drivingSystem: target.value });
+  };
+  const handlerMap: Record<
+    string,
+    (e: React.ChangeEvent<HTMLInputElement>) => void
+  > = {
+    engine: engineHandler,
+    body: bodyHandler,
+    drivingSystem: drivingSystemHandler,
+  };
+
   const refs = [
     useRef<HTMLParagraphElement | null>(null),
     useRef<HTMLParagraphElement | null>(null),
@@ -36,14 +58,14 @@ function FeatureRadio({
 
   return (
     <>
-      {carFeatureList.map((feature, index) => {
-        const { name, description, valueList } = feature;
-        const radioValue = carFeature[feature.name as keyof typeof carFeature];
+      {carFeatureList.map((carFeature, index) => {
+        const { type, description, valueList } = carFeature;
+        const selectedValue = feature[type as keyof typeof feature];
 
         return (
           <div
             key={index}
-            onMouseEnter={() => hoverHandler(index, name)}
+            onMouseEnter={() => hoverHandler(index, type)}
             onMouseLeave={() => setShowToolTip(false)}
           >
             <p
@@ -54,19 +76,19 @@ function FeatureRadio({
             </p>
             <div className='flex justify-center items-center'>
               {valueList.map((value, index) =>
-                radioValue === value ? (
+                selectedValue === value ? (
                   <Selected
                     key={index}
-                    name={name}
+                    name={type}
                     value={value}
-                    onChangeHandler={mycarFeatureHandler}
+                    onChangeHandler={handlerMap[type]}
                   />
                 ) : (
                   <Unselected
                     key={index}
-                    name={name}
+                    name={type}
                     value={value}
-                    onChangeHandler={mycarFeatureHandler}
+                    onChangeHandler={handlerMap[type]}
                   />
                 ),
               )}

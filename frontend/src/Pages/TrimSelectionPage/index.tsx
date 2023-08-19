@@ -23,12 +23,6 @@ import ControlButtons from './Car/ControlButtons';
 function TrimSelectionPage() {
   const navigation = useNavigate();
   const [rotation, setRotation] = useState(false);
-  const [carFeature, setCarFeature] = useState({
-    engine: '디젤 2.2',
-    body: '7인승',
-    operation: '2WD',
-  });
-  const [selectedTrim, setSelectedTrim] = useState('Le Blanc');
   const [wantedTrim, setWantedTrim] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
@@ -43,17 +37,6 @@ function TrimSelectionPage() {
     y: 0,
     name: '',
   });
-
-  const mycarFeatureHandler = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = target;
-    setCarFeature({ ...carFeature, [name]: value });
-  };
-
-  const mycarTrimHandler = () => {
-    setSelectedTrim(wantedTrim);
-  };
 
   const toolTipHandler = (
     x: number | undefined,
@@ -102,8 +85,6 @@ function TrimSelectionPage() {
         <Guide />
         <FeatureSelectRadioGroupWrapper>
           <FeatureRadio
-            carFeature={carFeature}
-            mycarFeatureHandler={mycarFeatureHandler}
             toolTipHandler={toolTipHandler}
             setShowToolTip={setShowToolTip}
           />
@@ -118,8 +99,6 @@ function TrimSelectionPage() {
             <CompareButton />
           </TrimSelectionHeader>
           <TrimRadio
-            selectedTrim={selectedTrim}
-            carFeature={carFeature}
             setWantedTrim={setWantedTrim}
             setShowModal={setShowModal}
             optionToolTipHandler={optionToolTipHandler}
@@ -146,7 +125,7 @@ function TrimSelectionPage() {
       <ChangeModal
         showModal={showModal}
         setShowModal={setShowModal}
-        mycarTrimHandler={mycarTrimHandler}
+        wantedTrim={wantedTrim}
       />
 
       <OptionToolTip

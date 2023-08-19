@@ -1,9 +1,11 @@
 import { ReactNode } from 'react';
 
 export interface InitialStateType {
-  engine: string;
-  body: string;
-  drivingSystem: string;
+  feature: {
+    engine: string;
+    body: string;
+    drivingSystem: string;
+  };
   trim: string;
   exteriorColor: string;
   interiorColor: string;

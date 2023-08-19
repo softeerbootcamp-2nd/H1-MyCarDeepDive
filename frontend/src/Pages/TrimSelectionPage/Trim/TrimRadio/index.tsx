@@ -1,33 +1,36 @@
-import { TrimSelectionRadioGroupProps } from '@/global/type';
 import { trimList } from '@/global/data';
 import Selected from './Selected';
 import Unselected from './Unselected';
+import { useContext } from 'react';
+import { CarContext } from '@/context/CarProvider';
+
+export interface Props {
+  setWantedTrim: React.Dispatch<React.SetStateAction<string>>;
+  setShowModal: (value: boolean) => void;
+  optionToolTipHandler: (
+    x: number | undefined,
+    y: number | undefined,
+    target: string,
+  ) => void;
+}
 
 function TrimRadio({
-  selectedTrim,
-  carFeature,
   setShowModal,
   setWantedTrim,
   optionToolTipHandler,
-}: TrimSelectionRadioGroupProps) {
-  return trimList.map((trim, index) => {
-    const { name } = trim;
-    return name === selectedTrim ? (
+}: Props) {
+  const { trim } = useContext(CarContext);
+  return trimList.map((carTrim, index) => {
+    return carTrim.name === trim ? (
       <Selected
         key={index}
-        trim={trim}
-        selectedTrim={selectedTrim}
-        carFeature={carFeature}
-        setWantedTrim={setWantedTrim}
-        setShowModal={setShowModal}
+        carTrim={carTrim}
         optionToolTipHandler={optionToolTipHandler}
       />
     ) : (
       <Unselected
         key={index}
-        trim={trim}
-        selectedTrim={selectedTrim}
-        carFeature={carFeature}
+        carTrim={carTrim}
         setWantedTrim={setWantedTrim}
         setShowModal={setShowModal}
         optionToolTipHandler={optionToolTipHandler}

@@ -1,6 +1,10 @@
-import { RadioProps } from '@/global/type';
+interface Props {
+  name: string;
+  value: string;
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-function Selected({ name, value, onChangeHandler }: RadioProps) {
+function Selected({ name, value, onChangeHandler }: Props) {
   return (
     <>
       <input

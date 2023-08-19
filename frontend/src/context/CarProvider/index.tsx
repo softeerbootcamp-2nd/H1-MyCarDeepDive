@@ -15,10 +15,12 @@ import {
 } from './type';
 
 const initialState: InitialStateType = {
-  engine: '',
-  body: '',
-  drivingSystem: '',
-  trim: '',
+  feature: {
+    engine: '디젤 2.2',
+    body: '7인승',
+    drivingSystem: '2WD',
+  },
+  trim: 'Le Blanc',
   exteriorColor: '',
   interiorColor: '',
   optionList: [],
@@ -32,11 +34,29 @@ export const CarContext = createContext<CarContextType>({
 const reducer = (state: InitialStateType, action: ActionType) => {
   switch (action.type) {
     case SET_ENGINE:
-      return { ...state, engine: action.engine };
+      return {
+        ...state,
+        feature: {
+          ...state.feature,
+          engine: action.engine,
+        },
+      };
     case SET_BODY:
-      return { ...state, body: action.body };
+      return {
+        ...state,
+        feature: {
+          ...state.feature,
+          body: action.body,
+        },
+      };
     case SET_DRIVINGSYSTEM:
-      return { ...state, drivingSystem: action.drivingSystem };
+      return {
+        ...state,
+        feature: {
+          ...state.feature,
+          drivingSystem: action.drivingSystem,
+        },
+      };
     case SET_TRIM:
       return { ...state, trim: action.trim };
     case SET_EXTERIORCOLOR:
