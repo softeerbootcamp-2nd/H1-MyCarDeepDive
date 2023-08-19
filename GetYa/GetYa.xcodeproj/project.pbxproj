@@ -484,6 +484,13 @@
 			path = Provider;
 			sourceTree = "<group>";
 		};
+		155776FA2A91354400E3C0E1 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		155B72AD2A8C9DA30091A7F4 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,6 +849,7 @@
 		64ADA4552A7787780003E2C1 /* GetYaTests */ = {
 			isa = PBXGroup;
 			children = (
+				155776FA2A91354400E3C0E1 /* New Group */,
 				64ADA4562A7787780003E2C1 /* GetYaTests.swift */,
 			);
 			path = GetYaTests;
