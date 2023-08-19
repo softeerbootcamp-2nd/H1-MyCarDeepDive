@@ -204,7 +204,7 @@ class TrimOptionContentCell: UICollectionViewCell {
         nameLabel.text = text
     }
     func configureTagTexts(texts: [String]) {
-        tagLabel.text = texts.joined(separator: "・")
+        tagLabel.text = texts.joined(separator: " ・ ")
     }
     
     func configureDescriptionText(text: String) {
