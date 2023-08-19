@@ -19,22 +19,21 @@ public class CarSpecController {
 
     @GetMapping
     public ApiResponse<List<CarSpecResponse>> getTrimsBySpec(
-            @RequestParam("engine") String engineName,
-            @RequestParam("body") String bodyName,
-            @RequestParam("drivingSystem") String drivingSystemName) {
+            @RequestParam("engineId") Long engineId,
+            @RequestParam("bodyId") Long bodyId,
+            @RequestParam("drivingSystemId") Long drivingSystemId) {
         List<CarSpecResponse> carSpecs =
-                carSpecService.findCarSpecsBySpec(engineName, bodyName, drivingSystemName);
+                carSpecService.findCarSpecsBySpec(engineId, bodyId, drivingSystemId);
         return new ApiResponse<>(carSpecs);
     }
 
     @GetMapping("/comparison")
     public ApiResponse<List<CarSpecComparisonResponse>> getComparison(
-            @RequestParam("engine") String engineName,
-            @RequestParam("body") String bodyName,
-            @RequestParam("drivingSystem") String drivingSystemName) {
+            @RequestParam("engineId") Long engineId,
+            @RequestParam("bodyId") Long bodyId,
+            @RequestParam("drivingSystemId") Long drivingSystemId) {
         List<CarSpecComparisonResponse> carSpecComparisons =
-                carSpecService.findCarSpecComparisonsBySpec(
-                        engineName, bodyName, drivingSystemName);
+                carSpecService.findCarSpecComparisonsBySpec(engineId, bodyId, drivingSystemId);
         return new ApiResponse<>(carSpecComparisons);
     }
 }
