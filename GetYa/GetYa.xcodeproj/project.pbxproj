@@ -17,6 +17,7 @@
 		155776E82A9107DA00E3C0E1 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E72A9107DA00E3C0E1 /* NetworkError.swift */; };
 		155776EA2A910B1A00E3C0E1 /* HttpStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E92A910B1A00E3C0E1 /* HttpStatus.swift */; };
 		155776ED2A910D6900E3C0E1 /* Encodable+toDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776EC2A910D6900E3C0E1 /* Encodable+toDictionary.swift */; };
+		155776EF2A91172A00E3C0E1 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776EE2A91172A00E3C0E1 /* Responsable.swift */; };
 		155B72A12A8C882C0091A7F4 /* TrimOptionDetailOptionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A312A8A3E2800F6BC3A /* TrimOptionDetailOptionCollectionView.swift */; };
 		155B72A22A8C88420091A7F4 /* TrimOptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A382A8A3E2800F6BC3A /* TrimOptionDetailView.swift */; };
 		155B72A32A8C88570091A7F4 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A372A8A3E2800F6BC3A /* BottomSheetView.swift */; };
@@ -203,6 +204,7 @@
 		155776E72A9107DA00E3C0E1 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		155776E92A910B1A00E3C0E1 /* HttpStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpStatus.swift; sourceTree = "<group>"; };
 		155776EC2A910D6900E3C0E1 /* Encodable+toDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+toDictionary.swift"; sourceTree = "<group>"; };
+		155776EE2A91172A00E3C0E1 /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		155B72AE2A8CA0020091A7F4 /* QuestionDescriptionLabelModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionDescriptionLabelModel+Mock.swift"; sourceTree = "<group>"; };
 		155B72B12A8CA02D0091A7F4 /* CharacterDetailSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailSelectViewModel.swift; sourceTree = "<group>"; };
 		155B72B32A8CA29E0091A7F4 /* QuestionListTextModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionListTextModel+Mock.swift"; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 			children = (
 				155776E02A90D27300E3C0E1 /* Endpoint.swift */,
 				155776E52A90DA6B00E3C0E1 /* Requestable.swift */,
+				155776EE2A91172A00E3C0E1 /* Responsable.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1336,6 +1339,7 @@
 				6484A7622A8CB8D900434136 /* AlertType.swift in Sources */,
 				6484A73C2A8C790A00434136 /* ConvenienceInit.swift in Sources */,
 				155776E62A90DA6B00E3C0E1 /* Requestable.swift in Sources */,
+				155776EF2A91172A00E3C0E1 /* Responsable.swift in Sources */,
 				6484A76A2A8DEDF100434136 /* UIViewController+.swift in Sources */,
 				6484A73B2A8C790200434136 /* ViewController.swift in Sources */,
 				155B72B42A8CA29E0091A7F4 /* QuestionListTextModel+Mock.swift in Sources */,
