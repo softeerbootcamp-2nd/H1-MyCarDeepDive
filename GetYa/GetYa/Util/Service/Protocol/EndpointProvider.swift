@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+protocol EndpointProvider: AnyObject {
+    func request<R: Decodable, E: NetworkInteractionable>(
+        with endpoint: E
+    ) async throws -> R where E.ResponseDTO == R
+    
+    /// 사진의 경우
+    func request(_ url: URL) async throws -> Data
+}
