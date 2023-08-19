@@ -26,6 +26,10 @@ class CommonPaddingLabel: CommonLabel {
         self.padding = padding
     }
     
+    convenience init(padding: UIEdgeInsets, fontType: GetYaFont, color: UIColor) {
+        self.init(padding: padding, fontType: fontType, color: color, text: "")
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

@@ -7,15 +7,12 @@
 
 import UIKit
 
-class TrimHeaderView: UIView {
+class TrimHeaderView: SettingSelectTitleBackgroundVIew {
     enum Constants {
         enum ImageView {
             static let topMargin = CGFloat(37).scaledHeight
             static let width = CGFloat(290).scaledWidth
             static let height = CGFloat(130).scaledHeight
-        }
-        enum GradientLayer {
-            static let height = CGFloat(82).scaledHeight
         }
     }
     
@@ -26,7 +23,6 @@ class TrimHeaderView: UIView {
         // TODO: 임시이므로 나중에 차 사진을 넣든, 서버에서 받든 처리해야함.
         $0.image = UIImage(named: "LifeStylePeekTitle")
     }
-    private
     
     // MARK: - Properties
     
@@ -53,12 +49,6 @@ class TrimHeaderView: UIView {
         configureUI()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        configureGradient()
-    }
-    
     // MARK: - Private Functions
     private func setupViews() {
         addSubviews([
@@ -67,9 +57,6 @@ class TrimHeaderView: UIView {
     }
     
     private func configureUI() {
-        backgroundColor = .GetYaPalette.lightPrimary
-        translatesAutoresizingMaskIntoConstraints = false
-        
         configureImageView()
     }
     
@@ -80,25 +67,6 @@ class TrimHeaderView: UIView {
             imageView.widthAnchor.constraint(equalToConstant: Constants.ImageView.width),
             imageView.heightAnchor.constraint(equalToConstant: Constants.ImageView.height)
         ])
-    }
-    
-    private func configureGradient() {
-        let colors: [CGColor] = [
-            UIColor.GetYaPalette.primary.withAlphaComponent(0.3).cgColor,
-            UIColor.clear.cgColor
-        ]
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = colors
-        gradientLayer.frame = CGRect(
-            x: 0,
-            y: bounds.height - Constants.GradientLayer.height,
-            width: frame.width,
-            height: Constants.GradientLayer.height)
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.locations = [0.0, 1.0]
-        
-        layer.insertSublayer(gradientLayer, at: 0)
     }
     
     // MARK: - Functions
