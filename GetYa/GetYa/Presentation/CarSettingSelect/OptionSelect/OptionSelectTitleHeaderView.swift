@@ -12,6 +12,9 @@ class OptionSelectTitleHeaderView: UICollectionReusableView {
     // MARK: - UI properties
     private let label = CommonLabel(fontType: .mediumBody3, color: .GetYaPalette.gray300)
     
+    // MARK: - Properties
+    static let identifier = "OptionSelectTitleHeaderView"
+    
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,7 +37,7 @@ class OptionSelectTitleHeaderView: UICollectionReusableView {
     
     private func configureUI() {
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: topAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor),
             label.leadingAnchor.constraint(equalTo: leadingAnchor)
         ])
     }

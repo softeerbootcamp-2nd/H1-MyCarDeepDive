@@ -14,6 +14,7 @@ class OptionSelectViewController: UIViewController {
         }
         enum CollectionView {
             static let topMargin: CGFloat = .toScaledHeight(value: 20)
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -136)
         }
     }
     
@@ -76,7 +77,9 @@ class OptionSelectViewController: UIViewController {
                 constant: Const.topMargin),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: CGFloat(72).scaledHeight)
+            collectionView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: Const.bottomMargin)
         ])
     }
     
@@ -86,5 +89,4 @@ class OptionSelectViewController: UIViewController {
     @objc private func changeSegmentedValue(sender: UISegmentedControl) {
         currentSegmentedIndex = sender.selectedSegmentIndex
     }
-
 }
