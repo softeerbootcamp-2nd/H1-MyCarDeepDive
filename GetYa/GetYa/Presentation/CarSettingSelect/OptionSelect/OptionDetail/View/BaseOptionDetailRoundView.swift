@@ -190,8 +190,8 @@ extension BaseOptionDetailRoundView: LayoutSupportable {
     }
     
     private func configureSubviewsPriority() {
-        thumbnailView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        contentView.setContentHuggingPriority(.defaultLow, for: .vertical)
-        backgroundView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        thumbnailView.setContentHuggingPriority(.init(251), for: .vertical)
+        contentView.setContentHuggingPriority(.init(249), for: .vertical)
+        backgroundView.setContentHuggingPriority(.init(249), for: .vertical)
     }
 }
