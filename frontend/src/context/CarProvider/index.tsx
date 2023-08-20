@@ -31,8 +31,20 @@ const initialState: InitialStateType = {
       name: 'Le Blanc',
     },
   },
-  exteriorColor: '크리미 화이트 펄',
-  interiorColor: '퀄팅 천연(블랙)',
+  color: {
+    exteriorColor: {
+      id: 1,
+      name: '크리미 화이트 펄',
+      imgUrl: '/src/assets/image/exterior-creamy.png',
+      price: 100000,
+    },
+    interiorColor: {
+      id: 1,
+      name: '퀄팅천연 (블랙)',
+      imgUrl: '/src/assets/image/interior-quilted.png',
+      price: 0,
+    },
+  },
   optionList: [],
 };
 
@@ -115,9 +127,34 @@ const reducer = (state: InitialStateType, action: ActionType) => {
         },
       };
     case SET_EXTERIORCOLOR:
-      return { ...state, exteriorColor: action.exteriorColor };
+      return {
+        ...state,
+        color: {
+          ...state.color,
+          exteriorColor: {
+            ...state.color.exteriorColor,
+            id: action.exteriorColor.id,
+            name: action.exteriorColor.name,
+            imgUrl: action.exteriorColor.imgUrl,
+            price: action.exteriorColor.price,
+          },
+        },
+      };
+
     case SET_INTERIORCOLOR:
-      return { ...state, interiorColor: action.interiorColor };
+      return {
+        ...state,
+        color: {
+          ...state.color,
+          interiorColor: {
+            ...state.color.interiorColor,
+            id: action.interiorColor.id,
+            name: action.interiorColor.name,
+            imgUrl: action.interiorColor.imgUrl,
+            price: action.interiorColor.price,
+          },
+        },
+      };
     case ADD_OPTION:
       return { ...state, optionList: [...state.optionList, action.option] };
     case DELETE_OPTION:

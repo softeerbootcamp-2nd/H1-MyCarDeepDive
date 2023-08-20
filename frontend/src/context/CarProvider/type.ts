@@ -14,8 +14,22 @@ export interface InitialStateType {
       name: string;
     };
   };
-  exteriorColor: string;
-  interiorColor: string;
+
+  color: {
+    exteriorColor: {
+      id: number;
+      name: string;
+      imgUrl: string;
+      price: number;
+    };
+    interiorColor: {
+      id: number;
+      name: string;
+      imgUrl: string;
+      price: number;
+    };
+  };
+
   optionList: number[];
 }
 
@@ -25,16 +39,6 @@ export interface CarContextType extends InitialStateType {
 
 export interface CarProviderProps {
   children: ReactNode;
-}
-
-interface CarSpecIdAction {
-  type: 'SET_CARSPECID';
-  carSpecId: number;
-}
-
-interface CarSpecPrice {
-  type: 'SET_CARSPECPRICE';
-  carSpecPrice: number;
 }
 
 interface EngineAction {
@@ -49,6 +53,17 @@ interface DrivingSystemAction {
   type: 'SET_DRIVINGSYSTEM';
   drivingSystem: string;
 }
+
+interface CarSpecIdAction {
+  type: 'SET_CARSPECID';
+  carSpecId: number;
+}
+
+interface CarSpecPrice {
+  type: 'SET_CARSPECPRICE';
+  carSpecPrice: number;
+}
+
 interface TrimIdAction {
   type: 'SET_TRIMID';
   trimId: number;
@@ -57,14 +72,27 @@ interface TrimNameAction {
   type: 'SET_TRIMNAME';
   trimName: string;
 }
+
 interface ExteriorColorAction {
   type: 'SET_EXTERIORCOLOR';
-  exteriorColor: string;
+  exteriorColor: {
+    id: number;
+    name: string;
+    imgUrl: string;
+    price: number;
+  };
 }
+
 interface InteriorColorAction {
   type: 'SET_INTERIORCOLOR';
-  interiorColor: string;
+  interiorColor: {
+    id: number;
+    name: string;
+    imgUrl: string;
+    price: number;
+  };
 }
+
 interface OptionAddAction {
   type: 'ADD_OPTION';
   option: number;
