@@ -23,4 +23,17 @@ public class RecommendationController {
                 recommendationService.findRecommendation(ageGroupId, lifeStyleId);
         return new ApiResponse<>(recommendation);
     }
+
+    @GetMapping("/custom")
+    public ApiResponse<RecommendationResponse> getCustomRecommendation(
+            @RequestParam("drivingExperienceId") Long drivingExperienceId,
+            @RequestParam("familyMembersId") Long familyMembersId,
+            @RequestParam("carPurposeId") Long carPurposeId,
+            @RequestParam("personalValueId") Long personalValueId,
+            @RequestParam("maxBudget") Long maxBudget) {
+        RecommendationResponse recommendation =
+                recommendationService.findCustomRecommendation(
+                        drivingExperienceId, familyMembersId, carPurposeId, personalValueId);
+        return new ApiResponse<>(recommendation);
+    }
 }
