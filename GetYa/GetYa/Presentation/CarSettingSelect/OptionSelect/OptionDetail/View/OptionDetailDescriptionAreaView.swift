@@ -33,6 +33,12 @@ final class OptionDetailDescriptionAreaView: UIView {
         }
         enum OptionPriceLabel {
             static let topMargin: CGFloat = .toScaledHeight(value: 4)
+            static let height: CGFloat = GetYaFont.custom(
+                size: 16,
+                kern: -0.2,
+                lineHeight: 24,
+                nameType: .mediumText
+            ).lineHeight
         }
         enum OptionDescriptionLabel {
             static let topMargin: CGFloat = .toScaledHeight(value: 20)
@@ -44,18 +50,22 @@ final class OptionDetailDescriptionAreaView: UIView {
     private let optionTitleLabel = CommonLabel(
         fontType: .mediumHead2,
         color: .GetYaPalette.gray0,
-        text: "빌트인 캠(보조배터리 포함)최대두줄까지이이이이잉이")
+        text: "빌트인 캠(보조배터리 포함)최대두줄까지이이이이잉이"
+    ).set {
+        $0.numberOfLines = 2
+    }
     private let optionPriceLabel = CommonLabel(
         fontType: .custom(size: 16, kern: -0.2, lineHeight: 24, nameType: .mediumText),
         color: .GetYaPalette.gray200,
-        text: "옵션 가격 준비중...")
+        text: "옵션 가격 준비중..."
+    ).set {
+        $0.numberOfLines = 1
+    }
     private let optionSelectButton = CommonOptionSelectView(frame: .zero)
     private let optionDescriptionLabel = CommonLabel(
         fontType: .regularBody4,
         color: .GetYaPalette.gray200,
-        text: "옵션 상세 설명이 준비중입니다...").set {
-            $0.configureTextAlignemnt(with: .justified)
-        }
+        text: "옵션 상세 설명이 준비중입니다...")
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -116,9 +126,7 @@ extension OptionDetailDescriptionAreaView: LayoutSupportable {
             optionTitleLabel.topAnchor.constraint(equalTo: topAnchor),
             optionTitleLabel.trailingAnchor.constraint(
                 equalTo: optionSelectButton.leadingAnchor,
-                constant: Const.trailingMargin),
-            optionTitleLabel.heightAnchor.constraint(
-                lessThanOrEqualToConstant: Const.maximumLineHeight)])
+                constant: Const.trailingMargin)])
     }
     
     private func configureOptionPriceLabel() {
@@ -151,9 +159,12 @@ extension OptionDetailDescriptionAreaView: LayoutSupportable {
     }
     
     private func configureSubviewsPriority() {
-        optionTitleLabel.setContentHuggingPriority(.init(251), for: .vertical)
+        optionTitleLabel.setContentHuggingPriority(.init(249), for: .vertical)
         optionPriceLabel.setContentHuggingPriority(.init(251), for: .vertical)
-        
         optionDescriptionLabel.setContentHuggingPriority(.init(250), for: .vertical)
+        
+        optionTitleLabel.setContentCompressionResistancePriority(.init(999), for: .vertical)
+        optionPriceLabel.setContentCompressionResistancePriority(.init(998), for: .vertical)
+        optionDescriptionLabel.setContentCompressionResistancePriority(.init(997), for: .vertical)
     }
 }
