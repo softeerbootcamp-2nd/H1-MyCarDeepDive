@@ -1,10 +1,15 @@
-import { NavigationRadioProps } from '@/global/type';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function Item({ name, index, value, address }: NavigationRadioProps) {
+export interface Props {
+  name: string;
+  index: number;
+  value: any;
+  address: 'trim' | 'color' | 'option';
+}
+
+function Item({ name, index, value, address }: Props) {
   const navigation = useNavigate();
   const location = useLocation();
-
   return (
     <>
       <button onClick={() => navigation(`/select/${address}`)}>
