@@ -95,7 +95,6 @@ final class OptionDetailDescriptionAreaView: UIView {
         optionTitleLabel.text = optionTitle
         optionPriceLabel.text = optionPrice
         optionDescriptionLabel.text = optionDescription
-        optionDescriptionLabel.configureTextAlignemnt(with: .natural)
     }
     // MARK: - Objc Functions
 }
