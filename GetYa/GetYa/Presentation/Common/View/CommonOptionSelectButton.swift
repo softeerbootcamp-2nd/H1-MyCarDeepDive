@@ -53,7 +53,7 @@ class CommonOptionSelectButton: UIButton {
     }
     override var isSelected: Bool {
         didSet {
-            isSelected ? configureSelectedState() : configureDeselectedState()
+            updateSelectedUIState()
         }
     }
     
@@ -82,33 +82,19 @@ class CommonOptionSelectButton: UIButton {
         setupUI()
     }
     
-    private func configureSelectedState() {
+    private func updateSelectedUIState() {
+        let selectedColor: UIColor = isSelected ? .white: .GetYaPalette.primary
+        let backgroundColor: UIColor = isSelected ? .GetYaPalette.primary : .white
         UIView.animate(
             withDuration: 0.12,
             delay: 0,
             options: [.curveEaseInOut]
         ) {
-            let color: UIColor = .white
             self.iconImageView.image = self.resizedImage?.withTintColor(
-                color,
+                selectedColor,
                 renderingMode: .alwaysOriginal)
-            self.iconTitleLabel.textColor = color
-            self.backgroundColor = .GetYaPalette.primary
-        }
-    }
-    
-    private func configureDeselectedState() {
-        UIView.animate(
-            withDuration: 0.12,
-            delay: 0,
-            options: [.curveEaseInOut]
-        ) {
-            let primary: UIColor = .GetYaPalette.primary
-            self.iconImageView.image = self.resizedImage?.withTintColor(
-                primary,
-                renderingMode: .alwaysOriginal)
-            self.iconTitleLabel.textColor = primary
-            self.backgroundColor = .white
+            self.iconTitleLabel.textColor = selectedColor
+            self.backgroundColor = backgroundColor
         }
     }
 }
