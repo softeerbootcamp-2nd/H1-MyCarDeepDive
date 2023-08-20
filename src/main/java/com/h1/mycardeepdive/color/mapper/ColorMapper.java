@@ -4,12 +4,16 @@ import com.h1.mycardeepdive.color.domain.ExteriorColor;
 import com.h1.mycardeepdive.color.domain.InteriorColor;
 import com.h1.mycardeepdive.color.ui.dto.ExteriorColorInfo;
 import com.h1.mycardeepdive.color.ui.dto.InteriorColorInfo;
+import com.h1.mycardeepdive.trims.domain.Trim;
+
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ColorMapper {
-    public static InteriorColorInfo toInteriorColorInfo(InteriorColor interiorColor) {
+    public static InteriorColorInfo toInteriorColorInfo(InteriorColor interiorColor, Trim trim) {
         return new InteriorColorInfo(
+                trim.getId(),
+                trim.getName(),
                 interiorColor.getName(),
                 interiorColor.getImgUrl(),
                 interiorColor.getInteriorImgUrl(),
@@ -17,8 +21,10 @@ public class ColorMapper {
                 interiorColor.getChooseRate());
     }
 
-    public static ExteriorColorInfo toExteriorColorInfo(ExteriorColor exteriorColor) {
+    public static ExteriorColorInfo toExteriorColorInfo(ExteriorColor exteriorColor, Trim trim) {
         return new ExteriorColorInfo(
+                trim.getId(),
+                trim.getName(),
                 exteriorColor.getName(),
                 exteriorColor.getImgUrl(),
                 IntStream.rangeClosed(1, 60)

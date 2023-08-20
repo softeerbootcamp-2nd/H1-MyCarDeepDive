@@ -5,6 +5,7 @@ import static com.h1.mycardeepdive.color.mapper.ColorMapper.toExteriorColorInfo;
 import static com.h1.mycardeepdive.color.mapper.ColorMapper.toInteriorColorInfo;
 import static com.h1.mycardeepdive.fixture.ExteriorColorFixture.createExteriorColor;
 import static com.h1.mycardeepdive.fixture.InteriorColorFixture.createInteriorColor;
+import static com.h1.mycardeepdive.fixture.TrimFixture.createExclusiveTrim;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -18,6 +19,8 @@ import com.h1.mycardeepdive.color.service.ColorService;
 import com.h1.mycardeepdive.color.ui.dto.*;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.h1.mycardeepdive.trims.domain.Trim;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -42,13 +45,14 @@ class ColorControllerTest extends ControllerTestConfig {
         Long trimId = 1L;
         Long interiorId = 1L;
         ExteriorColor exteriorColor = createExteriorColor();
+        Trim trim = createExclusiveTrim();
 
         MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
 
         info.add("trimId", String.valueOf(trimId));
         info.add("interiorColorId", String.valueOf(interiorId));
 
-        ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor);
+        ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor, trim);
         Map<Long, ExteriorColorInfo> availableColors = new HashMap<>();
         Map<Long, ExteriorColorInfo> unavailableColors = new HashMap<>();
         Map<Long, ExteriorColorInfo> otherTrimColors = new HashMap<>();
@@ -93,13 +97,14 @@ class ColorControllerTest extends ControllerTestConfig {
         Long trimId = 1L;
         Long exteriorId = 1L;
         InteriorColor interiorColor = createInteriorColor();
+        Trim trim = createExclusiveTrim();
 
         MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
 
         info.add("trimId", String.valueOf(trimId));
         info.add("exteriorColorId", String.valueOf(exteriorId));
 
-        InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor);
+        InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor, trim);
         Map<Long, InteriorColorInfo> availableColors = new HashMap<>();
         Map<Long, InteriorColorInfo> unavailableColors = new HashMap<>();
         Map<Long, InteriorColorInfo> otherTrimColors = new HashMap<>();
@@ -145,12 +150,13 @@ class ColorControllerTest extends ControllerTestConfig {
         Long trimId = 1L;
         ExteriorColor exteriorColor = createExteriorColor();
         InteriorColor interiorColor = createInteriorColor();
+        Trim trim = createExclusiveTrim();
 
         MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
 
         info.add("trimId", String.valueOf(trimId));
 
-        ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor);
+        ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor, trim);
         Map<Long, ExteriorColorInfo> availableExteriorColors = new HashMap<>();
         Map<Long, ExteriorColorInfo> unavailableExteriorColors = new HashMap<>();
         Map<Long, ExteriorColorInfo> otherTrimExteriorColors = new HashMap<>();
@@ -158,7 +164,7 @@ class ColorControllerTest extends ControllerTestConfig {
         unavailableExteriorColors.put(exteriorColor.getId(), exteriorColorInfo);
         otherTrimExteriorColors.put(exteriorColor.getId(), exteriorColorInfo);
 
-        InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor);
+        InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor, trim);
         Map<Long, InteriorColorInfo> availableInteriorColors = new HashMap<>();
         Map<Long, InteriorColorInfo> unavailableInteriorColors = new HashMap<>();
         Map<Long, InteriorColorInfo> otherTrimInteriorColors = new HashMap<>();
