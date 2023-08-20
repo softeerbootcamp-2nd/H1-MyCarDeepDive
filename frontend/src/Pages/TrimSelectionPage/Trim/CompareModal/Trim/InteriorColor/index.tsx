@@ -1,18 +1,17 @@
 interface InteriorColorProps {
-  interiorColor: string;
-  interiorColor2?: string;
+  interior_color_names: string[];
 }
 
-function InteriorColor({ interiorColor, interiorColor2 }: InteriorColorProps) {
+function InteriorColor({ interior_color_names }: InteriorColorProps) {
   return (
     <>
       <div className='mt-4 font-body4-medium text-grey-200'>내장 색상</div>
       <div className='mt-[5px] font-body4-regular text-grey-300'>
-        {interiorColor}
+        {interior_color_names[0]}
       </div>
-      {interiorColor2 && (
+      {interior_color_names[1] && (
         <div className='mt-1 font-body4-regular text-grey-300'>
-          {interiorColor2}
+          {interior_color_names[1]}
         </div>
       )}
     </>

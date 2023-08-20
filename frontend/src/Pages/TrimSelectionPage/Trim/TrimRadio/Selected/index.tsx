@@ -1,6 +1,7 @@
+import { useCallback, useContext, useRef } from 'react';
+import { priceToString } from '@/utils';
 import checkCircleBlue from '@/assets/icon/check-circle-lifecycle-blue.svg';
 import { CarContext } from '@/context/CarProvider';
-import { useCallback, useContext, useRef } from 'react';
 
 export interface Props {
   carSpecData: {
@@ -71,7 +72,7 @@ function Selected({ carSpecData, optionToolTipHandler }: Props) {
             {carSpecData.summary}
           </p>
           <p className='font-h2-medium text-grey-0 mb-[14px]'>
-            {carSpecData.price.toLocaleString('en-US')}원
+            {priceToString(carSpecData.price)}원
           </p>
 
           <div className='flex gap-3'>

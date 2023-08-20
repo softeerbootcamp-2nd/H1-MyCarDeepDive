@@ -4,9 +4,10 @@ interface ExteriorColorItemProps {
 
 function ExteriorColorItem({ color }: ExteriorColorItemProps) {
   return (
-    <div
+    <img
       className={`w-4 h-4 rounded-full`}
-      style={{ backgroundColor: color }}
+      src={'https://' + color}
+      alt='외장 색상'
     />
   );
 }
