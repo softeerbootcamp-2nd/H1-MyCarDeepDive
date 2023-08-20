@@ -20,6 +20,23 @@ interface Props {
 
 function Buttons({ wantedTrim }: Props) {
   const { carDispatch } = useContext(CarContext);
+  const changeTrim = () => {
+    if (
+      wantedTrim.price === null ||
+      wantedTrim.carSpecId === null ||
+      wantedTrim.trimName === null ||
+      wantedTrim.trimId === null
+    )
+      return;
+    carDispatch({
+      type: SET_CARSPECPRICE,
+      carSpecPrice: wantedTrim.price,
+    });
+    carDispatch({ type: SET_CARSPECID, carSpecId: wantedTrim.carSpecId });
+    carDispatch({ type: SET_TRIMNAME, trimName: wantedTrim.trimName });
+    carDispatch({ type: SET_TRIMID, trimId: wantedTrim.trimId });
+    closeModalHandler();
+  };
   return (
     <div className='flex justify-end gap-2.5'>
       <Button
@@ -34,23 +51,7 @@ function Buttons({ wantedTrim }: Props) {
         height='h-[46px]'
         variant='primary'
         text='변경하기'
-        onClick={() => {
-          if (
-            wantedTrim.price === null ||
-            wantedTrim.carSpecId === null ||
-            wantedTrim.trimName === null ||
-            wantedTrim.trimId === null
-          )
-            return;
-          carDispatch({
-            type: SET_CARSPECPRICE,
-            carSpecPrice: wantedTrim.price,
-          });
-          carDispatch({ type: SET_CARSPECID, carSpecId: wantedTrim.carSpecId });
-          carDispatch({ type: SET_TRIMNAME, trimName: wantedTrim.trimName });
-          carDispatch({ type: SET_TRIMID, trimId: wantedTrim.trimId });
-          closeModalHandler();
-        }}
+        onClick={changeTrim}
       />
     </div>
   );
