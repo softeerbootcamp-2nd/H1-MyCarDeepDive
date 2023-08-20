@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExteriorColorInfo {
+    private long trim_id;
+    private String trim_name;
     private String name;
     private String img_url;
     private List<String> car_img_urls;
