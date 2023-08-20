@@ -21,7 +21,7 @@ function Item({ name, index, value, address }: Props) {
           } font-h4-medium`}
         >
           <span className='text-[14px] flex items-center justify-center '>
-            {index + 1} {name}
+            {index} {name}
           </span>
         </p>
       </button>

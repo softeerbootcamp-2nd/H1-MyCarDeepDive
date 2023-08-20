@@ -17,16 +17,18 @@ export interface InitialStateType {
 
   color: {
     exteriorColor: {
-      id: number;
+      // id: number;
       name: string;
       imgUrl: string;
       price: number;
+      chooseRate: number;
     };
     interiorColor: {
-      id: number;
+      // id: number;
       name: string;
       imgUrl: string;
       price: number;
+      chooseRate: number;
     };
   };
 
@@ -76,20 +78,22 @@ interface TrimNameAction {
 interface ExteriorColorAction {
   type: 'SET_EXTERIORCOLOR';
   exteriorColor: {
-    id: number;
+    // id: number;
     name: string;
     imgUrl: string;
     price: number;
+    chooseRate: number;
   };
 }
 
 interface InteriorColorAction {
   type: 'SET_INTERIORCOLOR';
   interiorColor: {
-    id: number;
+    // id: number;
     name: string;
     imgUrl: string;
     price: number;
+    chooseRate: number;
   };
 }
 

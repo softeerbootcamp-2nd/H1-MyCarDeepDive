@@ -17,7 +17,7 @@ function Header() {
   const [showPriceInfo, setShowPriceInfo] = useState(false);
   const [displayPriceInfo, setDisplayPriceInfo] = useState(false);
   const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
-  const { carSpec } = useContext(CarContext);
+  const { carSpec, color } = useContext(CarContext);
 
   useEffect(() => {
     if (!showPriceInfo) {
@@ -92,12 +92,16 @@ function Header() {
 
                 <div className='w-52 flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   <div className='flex gap-4 justify-between'>
-                    <p>크리미 화이트</p>
-                    <p className='font-body4-medium text-grey-100'>0원</p>
+                    <p>{color.exteriorColor.name}</p>
+                    <p className='font-body4-medium text-grey-100'>
+                      {color.exteriorColor.price.toLocaleString('en-US')}원
+                    </p>
                   </div>
                   <div className='flex gap-4 justify-between'>
-                    <p>인조가죽(블랙)</p>
-                    <p className='font-body4-medium text-grey-100'>0원</p>
+                    <p>{color.interiorColor.name}</p>
+                    <p className='font-body4-medium text-grey-100'>
+                      {color.interiorColor.price.toLocaleString('en-US')}원
+                    </p>
                   </div>
                 </div>
 

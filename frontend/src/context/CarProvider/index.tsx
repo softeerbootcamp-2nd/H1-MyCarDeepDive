@@ -33,16 +33,18 @@ const initialState: InitialStateType = {
   },
   color: {
     exteriorColor: {
-      id: 1,
+      // id: 1,
       name: '크리미 화이트 펄',
       imgUrl: '/src/assets/image/exterior-creamy.png',
       price: 100000,
+      chooseRate: 90,
     },
     interiorColor: {
-      id: 1,
+      // id: 1,
       name: '퀄팅천연 (블랙)',
       imgUrl: '/src/assets/image/interior-quilted.png',
       price: 0,
+      chooseRate: 70,
     },
   },
   optionList: [],
@@ -133,10 +135,11 @@ const reducer = (state: InitialStateType, action: ActionType) => {
           ...state.color,
           exteriorColor: {
             ...state.color.exteriorColor,
-            id: action.exteriorColor.id,
+            // id: action.exteriorColor.id,
             name: action.exteriorColor.name,
             imgUrl: action.exteriorColor.imgUrl,
             price: action.exteriorColor.price,
+            chooseRate: action.exteriorColor.chooseRate,
           },
         },
       };
@@ -148,10 +151,11 @@ const reducer = (state: InitialStateType, action: ActionType) => {
           ...state.color,
           interiorColor: {
             ...state.color.interiorColor,
-            id: action.interiorColor.id,
+            // id: action.interiorColor.id,
             name: action.interiorColor.name,
             imgUrl: action.interiorColor.imgUrl,
             price: action.interiorColor.price,
+            chooseRate: action.interiorColor.chooseRate,
           },
         },
       };
