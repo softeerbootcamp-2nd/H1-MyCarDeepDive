@@ -84,7 +84,7 @@ class CommonOptionSelectButton: UIButton {
     
     private func configureSelectedState() {
         UIView.animate(
-            withDuration: 0.15,
+            withDuration: 0.12,
             delay: 0,
             options: [.curveEaseInOut]
         ) {
@@ -99,7 +99,7 @@ class CommonOptionSelectButton: UIButton {
     
     private func configureDeselectedState() {
         UIView.animate(
-            withDuration: 0.15,
+            withDuration: 0.12,
             delay: 0,
             options: [.curveEaseInOut]
         ) {
