@@ -46,6 +46,7 @@
 		156A96AB2A8C03D400AE1477 /* QuestionViewSendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96AA2A8C03D400AE1477 /* QuestionViewSendable.swift */; };
 		156A96AD2A8C57B600AE1477 /* TwoWaySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A96AC2A8C57B600AE1477 /* TwoWaySlider.swift */; };
 		15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */; };
+		15940E842A921A390042A5F5 /* OptionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15940E832A921A390042A5F5 /* OptionDetailViewController.swift */; };
 		159B2CF92A825D07003F47D6 /* DetailQuotationPreviewAdapterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CF82A825D07003F47D6 /* DetailQuotationPreviewAdapterDataSource.swift */; };
 		159B2CFE2A825F5F003F47D6 /* CommonQuotationPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CFD2A825F5F003F47D6 /* CommonQuotationPreviewCell.swift */; };
 		15A738822A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A738812A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift */; };
@@ -227,6 +228,7 @@
 		156A96AA2A8C03D400AE1477 /* QuestionViewSendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewSendable.swift; sourceTree = "<group>"; };
 		156A96AC2A8C57B600AE1477 /* TwoWaySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoWaySlider.swift; sourceTree = "<group>"; };
 		15837B9C2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+CombineInteractionPublisher.swift"; sourceTree = "<group>"; };
+		15940E832A921A390042A5F5 /* OptionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionDetailViewController.swift; sourceTree = "<group>"; };
 		159B2CF32A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewTableViewAdapter.swift; sourceTree = "<group>"; };
 		159B2CF82A825D07003F47D6 /* DetailQuotationPreviewAdapterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewAdapterDataSource.swift; sourceTree = "<group>"; };
 		159B2CFD2A825F5F003F47D6 /* CommonQuotationPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewCell.swift; sourceTree = "<group>"; };
@@ -547,6 +549,22 @@
 				155ED7212A7E5BE50052896A /* UITextField+Combine.swift */,
 			);
 			path = CombineCocoa;
+			sourceTree = "<group>";
+		};
+		15940E812A921A110042A5F5 /* OptionDetail */ = {
+			isa = PBXGroup;
+			children = (
+				15940E822A921A230042A5F5 /* ViewController */,
+			);
+			path = OptionDetail;
+			sourceTree = "<group>";
+		};
+		15940E822A921A230042A5F5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				15940E832A921A390042A5F5 /* OptionDetailViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		159B2CF22A823723003F47D6 /* Adapter */ = {
@@ -1054,6 +1072,7 @@
 		64E26A0D2A895B8600F6BC3A /* OptionSelect */ = {
 			isa = PBXGroup;
 			children = (
+				15940E812A921A110042A5F5 /* OptionDetail */,
 				64E26A112A895C1700F6BC3A /* OptionSelectViewController.swift */,
 			);
 			path = OptionSelect;
@@ -1420,6 +1439,7 @@
 				6412D08C2A81E5C1001E4005 /* LifeStylePeekViewController.swift in Sources */,
 				155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */,
 				155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */,
+				15940E842A921A390042A5F5 /* OptionDetailViewController.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */,
 				156A96A82A8C03A300AE1477 /* CharacterDetailQuestionListView.swift in Sources */,
