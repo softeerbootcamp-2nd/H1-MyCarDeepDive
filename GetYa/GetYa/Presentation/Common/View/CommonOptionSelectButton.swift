@@ -7,11 +7,7 @@
 
 import UIKit
 
-protocol CommonOptionSelectViewDelegate: AnyObject {
-    func handleTap(_ sender: UITapGestureRecognizer)
-}
-
-class CommonOptionSelectView: UIView {
+class CommonOptionSelectButton: UIButton {
     enum Constants {
         static let height: CGFloat = .toScaledHeight(value: 28)
         enum IconImageView {
@@ -56,9 +52,7 @@ class CommonOptionSelectView: UIView {
         return .init(width: .toScaledWidth(value: 69), height: Constants.height)
     }
     
-    var delegate: CommonOptionSelectViewDelegate?
-    
-    var isSelected: Bool = false {
+    override var isSelected: Bool {
         didSet {
             updateSelectedUIState()
         }
@@ -87,10 +81,6 @@ class CommonOptionSelectView: UIView {
         layer.borderWidth = 1
         layer.borderColor = UIColor.GetYaPalette.primary.cgColor
         backgroundColor = .white
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(handleTap))
-        addGestureRecognizer(tapGesture)
         setupUI()
     }
     
@@ -109,16 +99,10 @@ class CommonOptionSelectView: UIView {
             self.backgroundColor = backgroundColor
         }
     }
-    
-    // MARK: - @Objc function
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        isSelected.toggle()
-        delegate?.handleTap(sender)
-    }
 }
 
 // MARK: - LayoutSupportable
-extension CommonOptionSelectView: LayoutSupportable {
+extension CommonOptionSelectButton: LayoutSupportable {
     func setupViews() {
         addSubviews([
             iconImageView,
