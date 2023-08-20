@@ -52,7 +52,10 @@ final class OptionDetailDescriptionAreaView: UIView {
     private let optionSelectButton = CommonOptionSelectView(frame: .zero)
     private let optionDescriptionLabel = CommonLabel(
         fontType: .regularBody4,
-        color: .GetYaPalette.gray200, text: "옵션 상세 설명이 준비중입니다...")
+        color: .GetYaPalette.gray200,
+        text: "옵션 상세 설명이 준비중입니다...").set {
+            $0.configureTextAlignemnt(with: .justified)
+        }
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -82,6 +85,7 @@ final class OptionDetailDescriptionAreaView: UIView {
         optionTitleLabel.text = optionTitle
         optionPriceLabel.text = optionPrice
         optionDescriptionLabel.text = optionDescription
+        optionDescriptionLabel.configureTextAlignemnt(with: .natural)
     }
     // MARK: - Objc Functions
 }
@@ -101,6 +105,7 @@ extension OptionDetailDescriptionAreaView: LayoutSupportable {
         configureOptionPriceLabel()
         configureOptionSelectButton()
         configureOptionDescriptionLabel()
+        configureSubviewsPriority()
     }
     
     // MARK: - LayoutSupportable private function
@@ -142,6 +147,13 @@ extension OptionDetailDescriptionAreaView: LayoutSupportable {
             optionDescriptionLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor),
             optionDescriptionLabel.bottomAnchor.constraint(
-                lessThanOrEqualTo: bottomAnchor)])
+                equalTo: bottomAnchor)])
+    }
+    
+    private func configureSubviewsPriority() {
+        optionTitleLabel.setContentHuggingPriority(.init(251), for: .vertical)
+        optionPriceLabel.setContentHuggingPriority(.init(251), for: .vertical)
+        
+        optionDescriptionLabel.setContentHuggingPriority(.init(250), for: .vertical)
     }
 }
