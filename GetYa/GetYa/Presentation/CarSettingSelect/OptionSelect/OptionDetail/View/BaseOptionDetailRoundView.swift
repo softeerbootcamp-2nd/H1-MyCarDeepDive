@@ -10,7 +10,7 @@ import Combine
 
 class BaseOptionDetailRoundView: UIView {
     enum Constants {
-        static let minimumHeight: CGFloat = ThumbnailView.height + ContentView.minimumHeight
+        static let minimumHeight: CGFloat = ThumbnailView.height + BackgroundView.minimumHeight
         enum ThumbnailView {
             static let height: CGFloat = .toScaledHeight(value: 160)
         }
@@ -21,11 +21,15 @@ class BaseOptionDetailRoundView: UIView {
             static let trailingMargin = -topMargin
         }
         enum ContentView {
-            static let minimumHeight: CGFloat = .toScaledHeight(value: 200)
             static let leadingMargin: CGFloat = .toScaledWidth(value: 20)
             static let trailingMargin: CGFloat = .toScaledWidth(value: -20)
             static let topMargin: CGFloat = .toScaledHeight(value: 20)
             static let bottomMargin: CGFloat = .toScaledHeight(value: -16)
+            static var topAndBottomMarginHeight: CGFloat { topMargin + bottomMargin }
+        }
+        
+        enum BackgroundView {
+            static let minimumHeight: CGFloat = .toScaledHeight(value: 200)
         }
     }
     
@@ -55,11 +59,6 @@ class BaseOptionDetailRoundView: UIView {
     
     private let backgroundView: UIView = UIView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    // MARK: - Properties
-    var closeButtonTapPublihser: AnyPublisher<Void, Never> {
-        closeButton.tap
     }
     
     // MARK: - Lifecycles
