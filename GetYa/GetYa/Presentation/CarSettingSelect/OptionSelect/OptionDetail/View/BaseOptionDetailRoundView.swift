@@ -25,9 +25,10 @@ class BaseOptionDetailRoundView: UIView {
             static let leadingMargin: CGFloat = .toScaledWidth(value: 20)
             static let trailingMargin: CGFloat = .toScaledWidth(value: -20)
             static let topMargin: CGFloat = .toScaledHeight(value: 20)
-            static let bottomMargin: CGFloat = .toScaledHeight(value: -30)
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -16)
         }
     }
+    
     // MARK: - UI properties
     private let thumbnailView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -191,5 +192,6 @@ extension BaseOptionDetailRoundView: LayoutSupportable {
     private func configureSubviewsPriority() {
         thumbnailView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         contentView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        backgroundView.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
 }
