@@ -30,7 +30,11 @@ class OptionSelectCollectionView: UICollectionView {
     typealias DataSource = UICollectionViewDiffableDataSource<Sections, Items>
     private var diffableDatasource: DataSource!
     private var currentSelectedCategoryIndexPath: IndexPath = [0, 0]
-    private var selectedItemIndexPath: [IndexPath] = []
+    private var selectedItemIndexPath: [IndexPath] = [] {
+        didSet {
+            print(selectedItemIndexPath)
+        }
+    }
     
     // MARK: - Lifecycles
     convenience init() {
@@ -198,6 +202,13 @@ class OptionSelectCollectionView: UICollectionView {
                         cell.addActionLearnMoreViewButton(handler: {
                             print(indexPath.row)
                         })
+                        cell.addActionSelectButton(handler: {
+                            if self.selectedItemIndexPath.contains(indexPath) {
+                                self.selectedItemIndexPath =  self.selectedItemIndexPath.filter { $0 != indexPath }
+                            } else {
+                                self.selectedItemIndexPath.append(indexPath)
+                            }
+                        })
                         return cell
                     }
                 }
@@ -260,7 +271,6 @@ extension OptionSelectCollectionView: UICollectionViewDelegate {
             currentSelectedCategoryIndexPath = indexPath
         } else {
             selectItem(at: currentSelectedCategoryIndexPath, animated: false, scrollPosition: .init())
-            print(indexPath)
         }
     }
 }

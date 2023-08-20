@@ -203,6 +203,13 @@ class OptionSelectItemCell: UICollectionViewCell {
         learnMoreView.addButtonAction(handler: handler)
     }
     
+    func addActionSelectButton(handler: @escaping () -> Void) {
+        selectButton.addAction(UIAction(handler: { _ in
+            self.selectButton.isSelected.toggle()
+            handler()
+        }), for: .touchUpInside)
+    }
+    
     func setData(datum: OptionData) {
         imageView.image = UIImage(named: "LifeStylePeekForYou") // data.imageURL
         optionNameLabel.text = datum.optionName
