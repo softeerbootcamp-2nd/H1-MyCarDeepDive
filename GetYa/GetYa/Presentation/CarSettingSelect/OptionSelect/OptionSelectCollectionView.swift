@@ -199,12 +199,13 @@ class OptionSelectCollectionView: UICollectionView {
                         withReuseIdentifier: OptionSelectItemCell.identifier,
                         for: indexPath) as? OptionSelectItemCell {
                         cell.setData(datum: datum!)
+                        cell.setSelectButtonIsSelected(isSelected: self.selectedItemIndexPath.contains(indexPath))
                         cell.addActionLearnMoreViewButton(handler: {
                             print(indexPath.row)
                         })
                         cell.addActionSelectButton(handler: {
                             if self.selectedItemIndexPath.contains(indexPath) {
-                                self.selectedItemIndexPath =  self.selectedItemIndexPath.filter { $0 != indexPath }
+                                self.selectedItemIndexPath = self.selectedItemIndexPath.filter { $0 != indexPath }
                             } else {
                                 self.selectedItemIndexPath.append(indexPath)
                             }

@@ -93,6 +93,7 @@ class OptionSelectItemCell: UICollectionViewCell {
         
         imageView.image = nil
         badgeLabel.isHidden = true
+        selectButton.isSelected = false
     }
     
     // MARK: - Private Functions
@@ -208,6 +209,10 @@ class OptionSelectItemCell: UICollectionViewCell {
             self.selectButton.isSelected.toggle()
             handler()
         }), for: .touchUpInside)
+    }
+    
+    func setSelectButtonIsSelected(isSelected: Bool) {
+        selectButton.isSelected = isSelected
     }
     
     func setData(datum: OptionData) {
