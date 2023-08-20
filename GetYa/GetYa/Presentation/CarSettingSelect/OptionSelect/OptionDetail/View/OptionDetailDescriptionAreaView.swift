@@ -22,6 +22,19 @@ final class OptionDetailDescriptionAreaView: UIView {
             static let maximumBottomMargin: CGFloat = .toScaledHeight(value: -16)
         }
     }
+    // MARK: - UI properties
+    private let optionTitleLabel = CommonLabel(
+        fontType: .mediumHead2,
+        color: .GetYaPalette.gray0,
+        text: "옵션 준비중...")
+    private let optionPriceLabel = CommonLabel(
+        fontType: .custom(size: 16, kern: -0.2, lineHeight: 24, nameType: .mediumText),
+        color: .GetYaPalette.gray200,
+        text: "옵션 가격 준비중...")
+    private let optionSelectButton = CommonOptionSelectView(frame: .zero)
+    private let optionDescriptionLabel = CommonLabel(
+        fontType: .regularBody4,
+        color: .GetYaPalette.gray200, text: "옵션 상세 설명이 준비중입니다...")
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -31,4 +44,7 @@ final class OptionDetailDescriptionAreaView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    // MARK: - Private Functions
+    // MARK: - Functions
+    // MARK: - Objc Functions
 }
