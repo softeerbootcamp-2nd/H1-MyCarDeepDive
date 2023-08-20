@@ -51,4 +51,13 @@ class BaseViewController: UIViewController {
     @objc func touchUpNavigationBackButton() {
         navigationController?.popViewController(animated: true)
     }
+    
+    func popViewController(_ animated: Bool) {
+        navigationController?.popViewController(animated: animated)
+    }
+    
+    func pushViewController(target viewController: UIViewController, _ animated: Bool) {
+        navigationController?.pushViewController(viewController, animated: animated)
+        
+    }
 }
