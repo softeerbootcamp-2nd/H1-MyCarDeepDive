@@ -5,7 +5,6 @@ import static com.h1.mycardeepdive.recommendation.mapper.RecommendationOptionDto
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.color.domain.ExteriorColor;
 import com.h1.mycardeepdive.color.domain.InteriorColor;
-import com.h1.mycardeepdive.recommendation.domain.Recommendation;
 import com.h1.mycardeepdive.recommendation.domain.RecommendationCar;
 import com.h1.mycardeepdive.recommendation.domain.RecommendationCarOption;
 import com.h1.mycardeepdive.recommendation.domain.RecommendationCarPackage;
@@ -16,8 +15,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RecommendationMapper {
-    public static RecommendationResponse toRecommendationResponse(Recommendation recommendation) {
-        RecommendationCar recommendationCar = recommendation.getRecommendationCar();
+    public static RecommendationResponse toRecommendationResponse(
+            RecommendationCar recommendationCar) {
         CarSpec carSpec = recommendationCar.getCarSpec();
         Trim trim = carSpec.getTrim();
         ExteriorColor exteriorColor = recommendationCar.getExteriorColor();
