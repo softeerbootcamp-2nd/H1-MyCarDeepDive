@@ -1,16 +1,13 @@
 package com.h1.mycardeepdive.recommendation.domain;
 
-import com.h1.mycardeepdive.car.domain.Car;
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.color.domain.ExteriorColor;
 import com.h1.mycardeepdive.color.domain.InteriorColor;
-import com.h1.mycardeepdive.color.domain.TrimExteriorColor;
+import java.util.List;
+import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
@@ -46,7 +43,16 @@ public class RecommendationCar {
     private List<RecommendationCarPackage> recommendationCarPackages;
 
     @Builder
-    public RecommendationCar(Long id, CarSpec carSpec, InteriorColor interiorColor, ExteriorColor exteriorColor, String comment1, String comment2, String keyword, List<RecommendationCarOption> recommendationCarOptions, List<RecommendationCarPackage> recommendationCarPackages) {
+    public RecommendationCar(
+            Long id,
+            CarSpec carSpec,
+            InteriorColor interiorColor,
+            ExteriorColor exteriorColor,
+            String comment1,
+            String comment2,
+            String keyword,
+            List<RecommendationCarOption> recommendationCarOptions,
+            List<RecommendationCarPackage> recommendationCarPackages) {
         this.id = id;
         this.carSpec = carSpec;
         this.interiorColor = interiorColor;
@@ -58,4 +64,3 @@ public class RecommendationCar {
         this.recommendationCarPackages = recommendationCarPackages;
     }
 }
-

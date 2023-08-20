@@ -1,10 +1,9 @@
 package com.h1.mycardeepdive.recommendation.domain;
 
+import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Getter
@@ -26,7 +25,12 @@ public class Recommendation {
     private RecommendationCar recommendationCar;
 
     @Builder
-    public Recommendation(Long id, Long ageGroupId, Long lifeStyleId, String description, RecommendationCar recommendationCar) {
+    public Recommendation(
+            Long id,
+            Long ageGroupId,
+            Long lifeStyleId,
+            String description,
+            RecommendationCar recommendationCar) {
         this.id = id;
         this.ageGroupId = ageGroupId;
         this.lifeStyleId = lifeStyleId;

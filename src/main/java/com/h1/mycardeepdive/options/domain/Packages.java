@@ -1,7 +1,6 @@
 package com.h1.mycardeepdive.options.domain;
 
 import com.h1.mycardeepdive.global.entity.OptionBaseEntity;
-
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -23,7 +22,13 @@ public class Packages extends OptionBaseEntity {
 
     @Builder
     public Packages(
-            Long id, String name, String summary, long price, double chooseRate, Badge badgeName, List<OptionPackage> optionPackages) {
+            Long id,
+            String name,
+            String summary,
+            long price,
+            double chooseRate,
+            Badge badgeName,
+            List<OptionPackage> optionPackages) {
         this.id = id;
         this.name = name;
         this.summary = summary;

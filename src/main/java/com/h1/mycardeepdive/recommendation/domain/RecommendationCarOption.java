@@ -1,12 +1,10 @@
 package com.h1.mycardeepdive.recommendation.domain;
 
-
 import com.h1.mycardeepdive.options.domain.Options;
+import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Getter

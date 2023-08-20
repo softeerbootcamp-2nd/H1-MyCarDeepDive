@@ -1,11 +1,10 @@
 package com.h1.mycardeepdive.recommendation.domain;
 
 import com.h1.mycardeepdive.options.domain.Packages;
+import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Getter
@@ -20,13 +19,13 @@ public class RecommendationCarPackage {
     @JoinColumn(name = "package_id")
     private Packages packages;
 
-
     @ManyToOne
     @JoinColumn(name = "recommendation_car_id")
     private RecommendationCar recommendationCar;
 
     @Builder
-    public RecommendationCarPackage(Long id, Packages packages, RecommendationCar recommendationCar) {
+    public RecommendationCarPackage(
+            Long id, Packages packages, RecommendationCar recommendationCar) {
         this.id = id;
         this.packages = packages;
         this.recommendationCar = recommendationCar;

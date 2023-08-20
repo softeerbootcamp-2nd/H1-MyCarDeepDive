@@ -11,8 +11,7 @@ public class RecommendationOptionDtoMapper {
                 option.getName(),
                 option.getImgUrl(),
                 option.getPrice(),
-                option.getSummary()
-        );
+                option.getSummary());
     }
 
     public static RecommendationOptionDto toRecommendationOptionDto(Packages packages) {
@@ -21,7 +20,6 @@ public class RecommendationOptionDtoMapper {
                 packages.getName(),
                 packages.getOptionPackages().get(0).getOption().getImgUrl(),
                 packages.getPrice(),
-                packages.getSummary()
-        );
+                packages.getSummary());
     }
 }

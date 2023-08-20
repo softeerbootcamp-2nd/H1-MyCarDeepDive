@@ -17,10 +17,9 @@ import com.h1.mycardeepdive.color.domain.ExteriorColor;
 import com.h1.mycardeepdive.color.domain.InteriorColor;
 import com.h1.mycardeepdive.color.service.ColorService;
 import com.h1.mycardeepdive.color.ui.dto.*;
+import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.h1.mycardeepdive.trims.domain.Trim;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
