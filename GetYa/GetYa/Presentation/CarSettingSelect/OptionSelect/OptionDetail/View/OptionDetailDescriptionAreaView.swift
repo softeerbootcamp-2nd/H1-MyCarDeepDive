@@ -50,14 +50,14 @@ final class OptionDetailDescriptionAreaView: UIView {
     private let optionTitleLabel = CommonLabel(
         fontType: .mediumHead2,
         color: .GetYaPalette.gray0,
-        text: "빌트인 캠(보조배터리 포함)최대두줄까지이이이이잉이"
+        text: ""
     ).set {
         $0.numberOfLines = 2
     }
     private let optionPriceLabel = CommonLabel(
         fontType: .custom(size: 16, kern: -0.2, lineHeight: 24, nameType: .mediumText),
         color: .GetYaPalette.gray200,
-        text: "옵션 가격 준비중..."
+        text: ""
     ).set {
         $0.numberOfLines = 1
     }
@@ -65,7 +65,7 @@ final class OptionDetailDescriptionAreaView: UIView {
     private let optionDescriptionLabel = CommonLabel(
         fontType: .regularBody4,
         color: .GetYaPalette.gray200,
-        text: "옵션 상세 설명이 준비중입니다...")
+        text: "")
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -83,7 +83,8 @@ final class OptionDetailDescriptionAreaView: UIView {
     }
     // MARK: - Private Functions
     private func configureUI() {
-        translatesAutoresizingMaskIntoConstraints = false
+        tranislatesAutoresizingMaskIntoConstraints = false
+        optionSelectButton.isHidden = true
         setupUI()
     }
     // MARK: - Functions
@@ -95,6 +96,7 @@ final class OptionDetailDescriptionAreaView: UIView {
         optionTitleLabel.text = optionTitle
         optionPriceLabel.text = optionPrice
         optionDescriptionLabel.text = optionDescription
+        optionSelectButton.isHidden = optionTitle == nil ? true : false
     }
     // MARK: - Objc Functions
 }
