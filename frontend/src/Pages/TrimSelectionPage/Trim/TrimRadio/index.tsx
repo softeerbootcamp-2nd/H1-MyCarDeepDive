@@ -1,8 +1,9 @@
-import { carSpecData } from '@/global/data';
 import Selected from './Selected';
 import Unselected from './Unselected';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CarContext } from '@/context/CarProvider';
+import { getTrimType } from '@/api/trim/getTrim';
+import { SET_CARSPECID, SET_CARSPECPRICE } from '@/context/CarProvider/type';
 
 export interface Props {
   wantedTrimHandler: (e: React.MouseEvent<HTMLInputElement>) => void;
@@ -12,15 +13,35 @@ export interface Props {
     y: number | undefined,
     target: string,
   ) => void;
+  carSpecData: getTrimType | undefined;
 }
 
 function TrimRadio({
   setShowModal,
   wantedTrimHandler,
   optionToolTipHandler,
+  carSpecData,
 }: Props) {
   const { carSpec } = useContext(CarContext);
-  return carSpecData.map((car, index) => {
+
+  const { carDispatch } = useContext(CarContext);
+
+  useEffect(() => {
+    if (carSpecData === undefined) return;
+
+    carDispatch({
+      type: SET_CARSPECPRICE,
+      carSpecPrice: carSpecData.data[carSpec.trim.id - 1].price,
+    });
+    carDispatch({
+      type: SET_CARSPECID,
+      carSpecId: carSpecData.data[carSpec.trim.id - 1].car_spec_id,
+    });
+  }, [carSpecData]);
+
+  if (carSpecData === undefined) return null;
+
+  return carSpecData.data.map((car, index) => {
     return car.trim_name === carSpec.trim.name ? (
       <Selected
         key={index}

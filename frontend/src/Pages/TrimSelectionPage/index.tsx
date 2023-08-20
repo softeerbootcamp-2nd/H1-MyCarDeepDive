@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Loading from '@/Components/Loading';
+import getTrim from '@/api/trim/getTrim';
 import Button from '@/Components/Button';
 import CarRotation from '@/Components/CarRotation';
 import FeatureSelectRadioGroupWrapper from './FeatureSelectRadioGroupWrapper';
@@ -17,7 +20,6 @@ import Title from './Trim/Title';
 import CompareButton from './Trim/CompareButton';
 import TrimRadio from './Trim/TrimRadio';
 import ChangeModal from './Trim/ChangeModal';
-import { useNavigate } from 'react-router-dom';
 import ControlButtons from './Car/ControlButtons';
 
 function TrimSelectionPage() {
@@ -119,11 +121,14 @@ function TrimSelectionPage() {
             <Title />
             <CompareButton />
           </TrimSelectionHeader>
-          <TrimRadio
-            wantedTrimHandler={wantedTrimHandler}
-            setShowModal={setShowModal}
-            optionToolTipHandler={optionToolTipHandler}
-          />
+          <Suspense fallback={<Loading />}>
+            <TrimRadio
+              wantedTrimHandler={wantedTrimHandler}
+              setShowModal={setShowModal}
+              optionToolTipHandler={optionToolTipHandler}
+              carSpecData={getTrim()}
+            />
+          </Suspense>
         </TrimWrapper>
 
         <ColorChoiceButtonWrapper>
