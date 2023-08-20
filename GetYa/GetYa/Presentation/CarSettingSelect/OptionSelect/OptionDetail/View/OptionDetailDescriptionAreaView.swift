@@ -83,7 +83,7 @@ final class OptionDetailDescriptionAreaView: UIView {
     }
     // MARK: - Private Functions
     private func configureUI() {
-        tranislatesAutoresizingMaskIntoConstraints = false
+        translatesAutoresizingMaskIntoConstraints = false
         optionSelectButton.isHidden = true
         setupUI()
     }
