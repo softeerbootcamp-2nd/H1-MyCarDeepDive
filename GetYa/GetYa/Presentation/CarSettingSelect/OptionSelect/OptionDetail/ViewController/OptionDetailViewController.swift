@@ -91,6 +91,7 @@ final class OptionDetailViewController: BaseViewController {
             baseSingleOptionContainerView.configure(
                 image: images[0],
                 closeButtonAlpha: 1)
+            baseSingleOptionContainerView.delegate = self
             singleOptionDetailContentView?.configure(
                 optionTitle: optionTitles[0],
                 optionPrice: optionPrice[0],
@@ -102,6 +103,15 @@ final class OptionDetailViewController: BaseViewController {
     // MARK: - Objc Functions
 }
 
+extension OptionDetailViewController: BaseOptionDetailRoundViewDelegate {
+    func touchUpCloseButton(_ baseOptionDetailRoundView: UIView) {
+        /// 델리게이트 호출 시점에 옵션에 대한 identifier를 받아오는 방법 좋겠습니다.
+        popViewController(true)
+        navigationController?.navigationBar.alpha = 1
+    }
+}
+
+// MARK: - LayoutSupportable
 extension OptionDetailViewController: LayoutSupportable {
     func setupViews() {
         switch optionType {
