@@ -51,19 +51,38 @@ final class OptionDetailViewController: BaseViewController {
     init(optionType: OptionType) {
         self.optionType = optionType
         super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .overFullScreen
     }
     
     required init?(coder: NSCoder) {
         optionType = .single
         super.init(coder: coder)
+        modalPresentationStyle = .overFullScreen
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        view.frame.origin.x += self.view.bounds.width
+        UIView.animate(
+            withDuration: 0.34,
+            delay: 0,
+            options: [.curveEaseInOut],
+            animations: {
+                self.view.frame.origin.x = 0
+            })
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        view.layer.backgroundColor = UIColor(red: 0.059, green: 0.067, blue: 0.078, alpha: 0.5).cgColor
         
-        /// 서버에서 데이터 받아왔다 가정
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+        /// 서버에서 데이터 받아왔다 가정. 0.5초에 보여주는게 좋을 것 같습니다.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.configure(
                 images: [UIImage(named: "threeColumnHeatRaysOption")],
                 optionTitles: ["헤드업 디스플레이"],
@@ -74,7 +93,6 @@ final class OptionDetailViewController: BaseViewController {
     
     // MARK: - Private Functions
     private func configureUI() {
-        view.backgroundColor = .brown
         navigationController?.navigationBar.alpha = 0
         setupUI()
     }
@@ -106,7 +124,15 @@ final class OptionDetailViewController: BaseViewController {
 extension OptionDetailViewController: BaseOptionDetailRoundViewDelegate {
     func touchUpCloseButton(_ baseOptionDetailRoundView: UIView) {
         /// 델리게이트 호출 시점에 옵션에 대한 identifier를 받아오는 방법 좋겠습니다.
-        popViewController(true)
+        UIView.animate(
+            withDuration: 0.34,
+            delay: 0,
+            options: [.curveEaseInOut],
+            animations: {
+                self.view.frame.origin.x += self.view.bounds.width
+            }, completion: { _ in
+                self.dismiss(animated: false)
+            })
         navigationController?.navigationBar.alpha = 1
     }
 }
