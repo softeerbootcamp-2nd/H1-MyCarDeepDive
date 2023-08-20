@@ -129,7 +129,14 @@ function Header() {
                 />
               </button>
               <p className='font-h1-medium'>
-                <span className='text-[24px] text-grey-50'>51,460,000원</span>
+                <span className='text-[24px] text-grey-50'>
+                  {(
+                    carSpec.price +
+                    color.exteriorColor.price +
+                    color.interiorColor.price
+                  ).toLocaleString('en-US')}
+                  원
+                </span>
               </p>
             </div>
           </div>

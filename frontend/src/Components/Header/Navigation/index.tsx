@@ -6,8 +6,8 @@ function Navigation() {
   const { carSpec, color } = useContext(CarContext);
 
   return (
-    <div className='flex gap-[25px] mt-[25px]'>
-      <div className='inline-flex gap-3 items-center justify-center'>
+    <div className='mt-[25px]'>
+      <div className='inline-flex gap-[22px] items-center justify-center'>
         <Item
           name={'트림'}
           index={1}
@@ -18,7 +18,7 @@ function Navigation() {
           name={'색상'}
           index={2}
           address={'color'}
-          value={`${color.exteriorColor.name}/${color.interiorColor.name}`}
+          value={`${color.exteriorColor.name} / ${color.interiorColor.name}`}
         />
         <Item name={'옵션'} index={3} address={'option'} value={'gg'} />
       </div>
