@@ -8,6 +8,10 @@
 import UIKit
 import Combine
 
+protocol BaseOptionDetailRoundViewDelegate: AnyObject {
+    func touchUpCloseButton(_ baseOptionDetailRoundView: UIView)
+}
+
 class BaseOptionDetailRoundView: UIView {
     enum Constants {
         static let minimumHeight: CGFloat = ThumbnailView.height + BackgroundView.minimumHeight
@@ -61,6 +65,9 @@ class BaseOptionDetailRoundView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    // MARK: - Properties
+    var delegate: BaseOptionDetailRoundViewDelegate?
+    
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         contentView = UIView()
@@ -86,6 +93,7 @@ class BaseOptionDetailRoundView: UIView {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = .toScaledHeight(value: 16)
         clipsToBounds = true
+        closeButton.addTarget(self, action: #selector(touchUpCloseButton), for: .touchUpInside)
         setupUI()
     }
     
@@ -119,6 +127,11 @@ class BaseOptionDetailRoundView: UIView {
     
     func replaceContentView(with otherView: UIView) {
         contentView = otherView
+    }
+    
+    // MARK: - @objc function
+    @objc private func touchUpCloseButton() {
+        delegate?.touchUpCloseButton(self)
     }
 }
 
