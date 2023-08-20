@@ -76,7 +76,7 @@ export const lifeStyleAdditionQuestionList = [
     answerList: ['출퇴근용', '레저용', '가정용', '업무용'],
   },
   {
-    value: 'value',
+    value: 'lifeValue',
     question: '자동차를 살 때 어떤 가치가 가장 중요한가요?',
     answerList: ['디자인', '성능', '안전', '편의성'],
   },
@@ -109,54 +109,74 @@ export const detailSelectionList = [
 
 export const carFeatureList = [
   {
-    name: 'engine',
+    type: 'engine',
     description: '엔진',
     valueList: ['디젤 2.2', '가솔린 3.8'],
   },
   {
-    name: 'body',
+    type: 'body',
     description: '바디',
     valueList: ['7인승', '8인승'],
   },
   {
-    name: 'operation',
+    type: 'drivingSystem',
     description: '구동방식',
     valueList: ['2WD', '4WD'],
   },
 ];
 
-export const trimList = [
+export const carSpecData = [
   {
-    name: 'Exclusive',
-    description: '합리적인 당신을 위한',
-    basicOption: [
+    car_spec_id: 1,
+    trim_id: 1,
+    trim_name: 'Exclusive',
+    price: 43460100,
+    summary: '합리적인 당신을 위한',
+    basic_option_ids: [1, 2, 3],
+    basic_option_names: [
       '12인치 내비게이션',
       '내비 기반 크루즈 컨트롤',
       '세이프티 파워 윈도우',
     ],
-    price: 43460100,
   },
   {
-    name: 'Le Blanc',
-    description: '필수적인 옵션만 모은',
-    basicOption: ['20인치 알로이 휠', '12인치 클러스터', '서라운드 뷰 모니터'],
+    car_spec_id: 2,
+    trim_id: 2,
+    trim_name: 'Le Blanc',
     price: 43460200,
+    summary: '필수적인 옵션만 모은',
+    basic_option_ids: [4, 5, 6],
+    basic_option_names: [
+      '20인치 알로이 휠',
+      '12인치 클러스터',
+      '서라운드 뷰 모니터',
+    ],
   },
   {
-    name: 'Prestige',
-    description: '가치있는 드라이빙 경험을 주는',
-    basicOption: ['2열 통풍시트', '스마트 자세제어', '2열 수동식 도어 커튼'],
+    car_spec_id: 3,
+    trim_id: 3,
+    trim_name: 'Prestige',
     price: 43460300,
+    summary: '가치있는 드라이빙 경험을 주는',
+    basic_option_ids: [7, 8, 9],
+    basic_option_names: [
+      '2열 통풍시트',
+      '스마트 자세제어',
+      '2열 수동식 도어 커튼',
+    ],
   },
   {
-    name: 'Caligraphy',
-    description: '남들과 차별화된 경험',
-    basicOption: [
+    car_spec_id: 4,
+    trim_id: 4,
+    trim_name: 'Caligraphy',
+    price: 43460400,
+    summary: '남들과 차별화된 경험',
+    basic_option_ids: [10, 11, 12],
+    basic_option_names: [
       '20인치 캘리그라피 전용 휠',
       'KRELL 프리미엄 사운드',
       '블랙 에디션',
     ],
-    price: 43460400,
   },
 ];
 

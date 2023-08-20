@@ -1,7 +1,13 @@
-import { RadioProps } from '@/global/type';
 import checkCircle from '@/assets/icon/check-circle.svg';
 
-function RadioSelected({ name, value, isLong, onChangeHandler }: RadioProps) {
+interface Props {
+  name: string;
+  value: string;
+  isLong?: boolean;
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function RadioSelected({ name, value, isLong, onChangeHandler }: Props) {
   return (
     <>
       <input

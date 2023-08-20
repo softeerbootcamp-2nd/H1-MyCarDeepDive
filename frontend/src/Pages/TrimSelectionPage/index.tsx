@@ -22,14 +22,13 @@ import ControlButtons from './Car/ControlButtons';
 
 function TrimSelectionPage() {
   const navigation = useNavigate();
-  const [rotation, setRotation] = useState(false);
-  const [carFeature, setCarFeature] = useState({
-    engine: '디젤 2.2',
-    body: '7인승',
-    operation: '2WD',
+  const [wantedTrim, setWantedTrim] = useState({
+    carSpecId: null,
+    price: null,
+    trimId: null,
+    trimName: null,
   });
-  const [selectedTrim, setSelectedTrim] = useState('Le Blanc');
-  const [wantedTrim, setWantedTrim] = useState('');
+  const [rotation, setRotation] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
   const [toolTipInfo, setToolTipInfo] = useState({
@@ -44,15 +43,20 @@ function TrimSelectionPage() {
     name: '',
   });
 
-  const mycarFeatureHandler = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = target;
-    setCarFeature({ ...carFeature, [name]: value });
-  };
-
-  const mycarTrimHandler = () => {
-    setSelectedTrim(wantedTrim);
+  const wantedTrimHandler = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLInputElement>) => {
+    setShowModal(true);
+    const dataObject = currentTarget.getAttribute('data-object');
+    if (!dataObject) return;
+    const carSpecInfo = JSON.parse(dataObject);
+    setWantedTrim(prevTrim => ({
+      ...prevTrim,
+      carSpecId: carSpecInfo.carSpecId,
+      price: carSpecInfo.price,
+      trimId: carSpecInfo.trimId,
+      trimName: carSpecInfo.trimName,
+    }));
   };
 
   const toolTipHandler = (
@@ -102,8 +106,6 @@ function TrimSelectionPage() {
         <Guide />
         <FeatureSelectRadioGroupWrapper>
           <FeatureRadio
-            carFeature={carFeature}
-            mycarFeatureHandler={mycarFeatureHandler}
             toolTipHandler={toolTipHandler}
             setShowToolTip={setShowToolTip}
           />
@@ -118,9 +120,7 @@ function TrimSelectionPage() {
             <CompareButton />
           </TrimSelectionHeader>
           <TrimRadio
-            selectedTrim={selectedTrim}
-            carFeature={carFeature}
-            setWantedTrim={setWantedTrim}
+            wantedTrimHandler={wantedTrimHandler}
             setShowModal={setShowModal}
             optionToolTipHandler={optionToolTipHandler}
           />
@@ -146,7 +146,7 @@ function TrimSelectionPage() {
       <ChangeModal
         showModal={showModal}
         setShowModal={setShowModal}
-        mycarTrimHandler={mycarTrimHandler}
+        wantedTrim={wantedTrim}
       />
 
       <OptionToolTip

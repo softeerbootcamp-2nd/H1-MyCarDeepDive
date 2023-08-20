@@ -1,18 +1,18 @@
 import RadioSelected from './RadioSelected';
 import RadioUnselected from './RadioUnselected';
 
-interface RadioGroupProps {
+interface Props {
   data: string[];
   name: string;
-  value: string;
+  selectedValue: string;
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function RadioGroup({ data, name, value, onChangeHandler }: RadioGroupProps) {
+function RadioGroup({ data, name, selectedValue, onChangeHandler }: Props) {
   const result = data.map((item, index) => {
     const isLong = index === data.length - 1 && data.length % 2 === 1;
 
-    return item === value ? (
+    return item === selectedValue ? (
       <RadioSelected
         key={index}
         name={name}

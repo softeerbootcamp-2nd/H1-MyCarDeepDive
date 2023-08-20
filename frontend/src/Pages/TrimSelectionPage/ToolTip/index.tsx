@@ -9,7 +9,7 @@ interface toolTipDataType {
 const toolTipData: toolTipDataType = {
   engine: '디젤은 연비가 좋고 가솔린은 승차감이 더 부드럽고 조용해요.',
   body: '7인승의 경우 2열의 가운데에 시트가 없어 통행이 편하고 8인승의 경우 2열 가운데에 시트가 존재해요.',
-  operation:
+  drivingSystem:
     '2WD는 두개의 모터로 구성되어 가볍고 효율이 좋고 4WD는 네개의 모터로 구성되어 주행 안정성이 높아요.',
   trim: '트림은 등급이에요. 등급이 올라갈수록 기본 포함 옵션들이 점점 추가되고 내부 시트의 퀄리티가 높아져요.',
 };

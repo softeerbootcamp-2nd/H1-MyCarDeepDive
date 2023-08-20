@@ -1,6 +1,11 @@
-import { RadioProps } from '@/global/type';
+interface Props {
+  name: string;
+  value: string;
+  isLong?: boolean;
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-function RadioUnselected({ name, value, isLong, onChangeHandler }: RadioProps) {
+function RadioUnselected({ name, value, isLong, onChangeHandler }: Props) {
   return (
     <>
       <input
