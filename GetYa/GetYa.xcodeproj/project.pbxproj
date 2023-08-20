@@ -554,6 +554,7 @@
 		15940E812A921A110042A5F5 /* OptionDetail */ = {
 			isa = PBXGroup;
 			children = (
+				15940E852A921AE00042A5F5 /* View */,
 				15940E822A921A230042A5F5 /* ViewController */,
 			);
 			path = OptionDetail;
@@ -565,6 +566,13 @@
 				15940E832A921A390042A5F5 /* OptionDetailViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		15940E852A921AE00042A5F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		159B2CF22A823723003F47D6 /* Adapter */ = {
