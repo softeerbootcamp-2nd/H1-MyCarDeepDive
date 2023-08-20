@@ -9,6 +9,9 @@ import UIKit
 
 final class OptionPackageDescriptionView: UIView {
     enum Constants {
+        enum OptionPackageLabel {
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -79)
+        }
         enum OptionDetailDescriptionView {
             static let topMargin: CGFloat = .toScaledHeight(value: 4)
             static let maximumHeight: CGFloat = OptionDetailDescriptionAreaView
@@ -31,7 +34,8 @@ final class OptionPackageDescriptionView: UIView {
     private let optionPackageLabel = CommonLabel(
         fontType: .mediumCaption1,
         color: .GetYaPalette.gray400,
-        text: "")
+        text: ""
+    ).set { $0.numberOfLines = 1 }
     private let optionDetailDescriptionView = OptionDetailDescriptionAreaView(frame: .zero)
     private let optionTitleCollectionView = UICollectionView(
         frame: .zero,
@@ -43,13 +47,20 @@ final class OptionPackageDescriptionView: UIView {
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureUI()
     }
     
     // MARK: - Private Functions
+    private func configureUI() {
+        translatesAutoresizingMaskIntoConstraints = false
+        setupUI()
+    }
+    
     private func setPageControlSelectedPage(currentPage: Int) {
         pageControl.currentPage = currentPage
     }
@@ -71,5 +82,70 @@ final class OptionPackageDescriptionView: UIView {
     func setPageCount(with pages: Int?) {
         pageControl.numberOfPages = pages ?? 0
     }
-    // MARK: - Objc Functions
+}
+
+// MARK: - LayoutSupportable
+extension OptionPackageDescriptionView: LayoutSupportable {
+    func setupViews() {
+        addSubviews([
+            optionPackageLabel,
+            optionDetailDescriptionView,
+            optionTitleCollectionView,
+            pageControl])
+        
+    }
+    
+    func setupConstriants() {
+        configureOptionPackageLabel()
+        configureOptionDetailDescriptionView()
+        configureOptionTitleCollectionView()
+        configurePageControl()
+    }
+    
+    // MARK: - LayoutSupport private functions
+    private func configureOptionPackageLabel() {
+        NSLayoutConstraint.activate([
+            optionPackageLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            optionPackageLabel.topAnchor.constraint(equalTo: topAnchor),
+            optionPackageLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor)])
+    }
+    
+    private func configureOptionDetailDescriptionView() {
+        typealias Const = Constants.OptionDetailDescriptionView
+        NSLayoutConstraint.activate([
+            optionDetailDescriptionView.leadingAnchor.constraint(
+                equalTo: leadingAnchor),
+            optionDetailDescriptionView.topAnchor.constraint(
+                equalTo: optionPackageLabel.bottomAnchor,
+                constant: Const.topMargin),
+            optionDetailDescriptionView.trailingAnchor.constraint(
+                equalTo: trailingAnchor),
+            optionDetailDescriptionView.heightAnchor.constraint(
+                equalToConstant: Const.maximumHeight)])
+    }
+    
+    ///이게 기본적으로 상위 뷰에서 contentView에서 leading, trailing 제약이 20씩 있어서 super.leadingAnchor로 하게된다면 어떻게 될 까...
+    private func configureOptionTitleCollectionView() {
+        typealias Const = Constants.OptionTitleCollectionView
+        NSLayoutConstraint.activate([
+            optionTitleCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            optionTitleCollectionView.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: Const.topMargin),
+            optionTitleCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            optionTitleCollectionView.heightAnchor.constraint(
+                equalToConstant: Const.height)])
+    }
+    
+    private func configurePageControl() {
+        typealias Const = Constants.PageControl
+        NSLayoutConstraint.activate([
+            pageControl.leadingAnchor.constraint(equalTo: leadingAnchor),
+            pageControl.topAnchor.constraint(
+                equalTo: optionTitleCollectionView.bottomAnchor,
+                constant: Const.topMargin),
+            pageControl.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+            pageControl.bottomAnchor.constraint(
+                equalTo: bottomAnchor)])
+    }
 }
