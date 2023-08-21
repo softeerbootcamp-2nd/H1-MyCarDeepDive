@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+struct RecommendationEndpoints {
+    private init() {}
+    static let shared = RecommendationEndpoints()
+    
+    func fetchCarDetailRecommendationOption(
+        with requestDTO: CustomRecomendation
+    ) -> Endpoint<QuotationDTO> {
+        return Endpoint<QuotationDTO>(
+            method: .get,
+            responseType: .carRecommendationCustom,
+            queryParams: requestDTO)
+    }
+}
