@@ -11,7 +11,7 @@ final class TagViewCell: UICollectionViewCell {
     static let identifier: String = "TagViewCell"
     enum Constants {
         enum TagView {
-            static let height: CGFloat = UILayout.init(height: 28).height
+            static let height: CGFloat = .toScaledHeight(value: 28)
             static let innerTextLeadingMargin: CGFloat = .toScaledWidth(value: 12)
             static let innerTextTrailingMargin: CGFloat = .toScaledWidth(value: 12)
         }

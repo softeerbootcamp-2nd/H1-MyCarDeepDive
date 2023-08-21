@@ -20,7 +20,7 @@ protocol Requestable {
 // MARK: - Functions
 extension Requestable {
     func url(with responseType: ResponseType) throws -> URL {
-        var baseUrlString = "\(scheme)://\(host)" + prefixPath + responseType.path
+        let baseUrlString = "\(scheme)://\(host)" + prefixPath + responseType.path
         guard var components = URLComponents(string: baseUrlString) else {
             throw NetworkError.components
         }
@@ -28,7 +28,6 @@ extension Requestable {
         guard let url = components.url else {
             throw NetworkError.components
         }
-        print(url)
         return url
     }
     
