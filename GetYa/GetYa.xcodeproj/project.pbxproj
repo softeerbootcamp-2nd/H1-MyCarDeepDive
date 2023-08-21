@@ -73,6 +73,7 @@
 		15D2ABCC2A935AFC00F7DE8E /* OptionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABCB2A935AFC00F7DE8E /* OptionRepositoryImpl.swift */; };
 		15D2ABCF2A937EF900F7DE8E /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABCE2A937EF900F7DE8E /* Cache.swift */; };
 		15D2ABD12A93817400F7DE8E /* Cacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABD02A93817400F7DE8E /* Cacheable.swift */; };
+		15D2ABD32A9381C200F7DE8E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABD22A9381C200F7DE8E /* MemoryCache.swift */; };
 		15D8CC8C2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC8B2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift */; };
 		15D8CC8F2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC8E2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift */; };
 		15DF95862A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF957F2A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf */; };
@@ -284,6 +285,7 @@
 		15D2ABCB2A935AFC00F7DE8E /* OptionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionRepositoryImpl.swift; sourceTree = "<group>"; };
 		15D2ABCE2A937EF900F7DE8E /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		15D2ABD02A93817400F7DE8E /* Cacheable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cacheable.swift; sourceTree = "<group>"; };
+		15D2ABD22A9381C200F7DE8E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		15D8CC8B2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewTableView.swift; sourceTree = "<group>"; };
 		15D8CC8E2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewTableViewModel.swift; sourceTree = "<group>"; };
 		15D8CC912A892A62009B19B9 /* CommonQuotationPreviewAdapterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewAdapterDataSource.swift; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 			children = (
 				15D2ABCE2A937EF900F7DE8E /* Cache.swift */,
 				15D2ABD02A93817400F7DE8E /* Cacheable.swift */,
+				15D2ABD22A9381C200F7DE8E /* MemoryCache.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1480,6 +1483,7 @@
 				6484A73A2A8C78F400434136 /* QuotationPreviewMainHeaderModel+Mock.swift in Sources */,
 				155B72AA2A8C8FEB0091A7F4 /* OptionSelectViewController.swift in Sources */,
 				15D2ABCC2A935AFC00F7DE8E /* OptionRepositoryImpl.swift in Sources */,
+				15D2ABD32A9381C200F7DE8E /* MemoryCache.swift in Sources */,
 				6484A79D2A90F43800434136 /* OptionSelectSegmentedControl.swift in Sources */,
 				6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */,
 				6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */,
