@@ -9,13 +9,6 @@ export interface WrapperProps {
   children: ReactNode;
 }
 
-export interface NavigationRadioProps {
-  name: string;
-  index: number;
-  value: string;
-  address: string;
-}
-
 export interface NavBarCategoryProps {
   category: string;
   categoryClickHandler: (

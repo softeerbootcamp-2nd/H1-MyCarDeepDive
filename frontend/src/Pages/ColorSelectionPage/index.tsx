@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Background from '../TrimSelectionPage/Car/Background';
 
 import ReRecommendCardLink from '../TrimSelectionPage/Car/ReRecommendCarLink';
@@ -14,12 +14,19 @@ import { colors } from '@/global/data';
 import ContentsWrapper from './ContentsWrapper';
 import CarRotation from '@/Components/CarRotation';
 import ControlButtons from '../TrimSelectionPage/Car/ControlButtons';
+import { CarContext } from '@/context/CarProvider';
+import {
+  SET_EXTERIORCOLOR,
+  SET_INTERIORCOLOR,
+  SET_TRIMNAME,
+} from '@/context/CarProvider/type';
 
 interface colorProps {
   trim?: string;
   name: string;
+  imgUrl: string;
+  price: number;
   chooseRate: number;
-  url: string;
 }
 
 interface colorsProps {
@@ -49,12 +56,8 @@ function getBestColor({ colorsData, trim, colorType }: Props) {
 }
 
 function ColorSelectionPage() {
-  const [trim, setTrim] = useState('Le Blanc');
+  const { color, carDispatch, carSpec } = useContext(CarContext);
   const [rotation, setRotation] = useState(false);
-  const [selectedExteriorColor, setSelectedExteriorColor] =
-    useState<colorProps>();
-  const [selectedInteriorColor, setSelectedInteriorColor] =
-    useState<colorProps>();
   const [exteriorColors, setExteriorColors] = useState<colorProps[]>([]);
   const [interiorColors, setInteriorColors] = useState<colorProps[]>([]);
   const [otherExteriorColors, setOtherExteriorColors] = useState<colorProps[]>(
@@ -63,44 +66,66 @@ function ColorSelectionPage() {
   const [otherInteriorColors, setOtherInteriorColors] = useState<colorProps[]>(
     [],
   );
+
   const exteriorBestColor = getBestColor({
     colorsData: colors,
-    trim,
+    trim: carSpec.trim.name,
     colorType: 'exterior',
   });
   const interiorBestColor = getBestColor({
     colorsData: colors,
-    trim,
+    trim: carSpec.trim.name,
     colorType: 'interior',
   });
 
-  const unlockSelectColor = () => {
-    exteriorColors.find(color => color.name === selectedExteriorColor?.name) ===
-    undefined
-      ? setSelectedExteriorColor(exteriorBestColor)
-      : null;
-    interiorColors.find(color => color.name === selectedInteriorColor?.name) ===
-    undefined
-      ? setSelectedInteriorColor(interiorBestColor)
-      : null;
+  const unlockSelectExteriorColor = () => {
+    if (exteriorBestColor?.name === undefined) return;
+    if (
+      exteriorColors.find(
+        carColor => carColor.name === color.exteriorColor.name,
+      ) === undefined
+    ) {
+      const { name, imgUrl, price, chooseRate } = exteriorBestColor;
+      carDispatch({
+        type: SET_EXTERIORCOLOR,
+        exteriorColor: { name, imgUrl, price, chooseRate },
+      });
+    }
+  };
+
+  const unlockSelectInteriorColor = () => {
+    if (interiorBestColor?.name === undefined) return;
+    if (
+      interiorColors.find(
+        carColor => carColor.name === color.interiorColor.name,
+      ) === undefined
+    ) {
+      const { name, imgUrl, price, chooseRate } = interiorBestColor;
+      carDispatch({
+        type: SET_INTERIORCOLOR,
+        interiorColor: { name, imgUrl, price, chooseRate },
+      });
+    }
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setSelectedExteriorColor(exteriorBestColor);
-    setSelectedInteriorColor(interiorBestColor);
   }, []);
 
   useEffect(() => {
-    const colorData = getColorOfTrim({ colorsData: colors, trim });
+    const colorData = getColorOfTrim({
+      colorsData: colors,
+      trim: carSpec.trim.name,
+    });
     setExteriorColors(colorData?.exteriorColor || []);
     setInteriorColors(colorData?.interiorColor || []);
     setOtherExteriorColors(colorData?.otherExteriorColor || []);
     setOtherInteriorColors(colorData?.otherInteriorColor || []);
-  }, [trim]);
+  }, [carSpec.trim.name]);
 
   useEffect(() => {
-    unlockSelectColor();
+    unlockSelectExteriorColor();
+    unlockSelectInteriorColor();
   }, [exteriorColors, interiorColors]);
 
   const exteriorColorHandler = ({
@@ -109,7 +134,11 @@ function ColorSelectionPage() {
     const dataObject = currentTarget.getAttribute('data-object');
     if (!dataObject) return;
     const colorInfo = JSON.parse(dataObject);
-    setSelectedExteriorColor(colorInfo);
+    const { name, imgUrl, price, chooseRate } = colorInfo;
+    carDispatch({
+      type: SET_EXTERIORCOLOR,
+      exteriorColor: { name, imgUrl, price, chooseRate },
+    });
   };
 
   const interiorColorHandler = ({
@@ -118,7 +147,43 @@ function ColorSelectionPage() {
     const dataObject = currentTarget.getAttribute('data-object');
     if (!dataObject) return;
     const colorInfo = JSON.parse(dataObject);
-    setSelectedInteriorColor(colorInfo);
+    const { name, imgUrl, price, chooseRate } = colorInfo;
+    carDispatch({
+      type: SET_INTERIORCOLOR,
+      interiorColor: {
+        name,
+        imgUrl,
+        price,
+        chooseRate,
+      },
+    });
+  };
+  const otherExteriorColorChangeHandler = ({
+    trim,
+    name,
+    imgUrl,
+    price,
+    chooseRate,
+  }: any) => {
+    carDispatch({ type: SET_TRIMNAME, trimName: trim });
+    carDispatch({
+      type: SET_EXTERIORCOLOR,
+      exteriorColor: { name, imgUrl, price, chooseRate },
+    });
+  };
+
+  const otherInteriorColorChangeHandler = ({
+    trim,
+    name,
+    imgUrl,
+    price,
+    chooseRate,
+  }: any) => {
+    carDispatch({ type: SET_TRIMNAME, trimName: trim });
+    carDispatch({
+      type: SET_INTERIORCOLOR,
+      interiorColor: { name, imgUrl, price, chooseRate },
+    });
   };
 
   useEffect(() => {
@@ -138,38 +203,36 @@ function ColorSelectionPage() {
       <ContentsWrapper>
         <ColorTitle title={'외장 색상'} />
         <Description
-          color={selectedExteriorColor?.name}
-          rate={selectedExteriorColor?.chooseRate}
+          color={color.exteriorColor.name}
+          chooseRate={color.exteriorColor.chooseRate}
         />
         <ColorItems
           data={exteriorColors || []}
-          selectedColor={selectedExteriorColor}
+          selectedColor={color.exteriorColor}
           clickHandler={exteriorColorHandler}
           colorType='exterior'
         />
         <DropDown
           phrase={'다른 외장 색상을 찾고 있나요?'}
           data={otherExteriorColors || []}
-          changerClickHandler={setSelectedExteriorColor}
-          setTrim={setTrim}
+          otherColorChangeHandler={otherExteriorColorChangeHandler}
         />
         <UnderLine margin='mb-6' />
         <ColorTitle title={'내장 색상'} />
         <Description
-          color={selectedInteriorColor?.name}
-          rate={selectedInteriorColor?.chooseRate}
+          color={color.interiorColor.name}
+          chooseRate={color.interiorColor.chooseRate}
         />
         <ColorItems
           data={interiorColors || []}
-          selectedColor={selectedInteriorColor}
+          selectedColor={color.interiorColor}
           clickHandler={interiorColorHandler}
           colorType='interior'
         />
         <DropDown
           phrase={'다른 내장 색상을 찾고 있나요?'}
           data={otherInteriorColors || []}
-          changerClickHandler={setSelectedInteriorColor}
-          setTrim={setTrim}
+          otherColorChangeHandler={otherInteriorColorChangeHandler}
         />
         <Buttons />
       </ContentsWrapper>

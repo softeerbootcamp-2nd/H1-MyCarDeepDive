@@ -5,29 +5,23 @@ import ChangerModal from '../ChangerModal';
 
 interface colorProps {
   name: string;
-  chooseRate: number;
-  url: string;
+  imgUrl: string;
+  price: number;
+  trim?: string;
 }
 
 interface Props {
   phrase: string;
   data: colorProps[];
-  changerClickHandler: React.Dispatch<
-    React.SetStateAction<colorProps | undefined>
-  >;
-  setTrim: React.Dispatch<React.SetStateAction<string>>;
+  otherColorChangeHandler: ({}: any) => void;
 }
 
-function DropDown({ phrase, data, changerClickHandler, setTrim }: Props) {
+function DropDown({ phrase, data, otherColorChangeHandler }: Props) {
   const [showOtherColor, setShowOtherColor] = useState(false);
-  const [wantedOtherColor, setWantedOtherColor] = useState({
-    name: '',
-    chooseRate: 0,
-    url: '',
-  });
+  const [wantedOtherColor, setWantedOtherColor] = useState<any>();
   const [showModal, setShowModal] = useState(false);
 
-  const otherColorHandler = ({
+  const otherColorClickHandler = ({
     currentTarget,
   }: React.MouseEvent<HTMLButtonElement>) => {
     const dataObject = currentTarget.getAttribute('data-object');
@@ -54,7 +48,7 @@ function DropDown({ phrase, data, changerClickHandler, setTrim }: Props) {
         >
           <ColorItems
             data={data}
-            clickHandler={otherColorHandler}
+            clickHandler={otherColorClickHandler}
             setShowModal={setShowModal}
             colorType='other'
           />
@@ -67,10 +61,9 @@ function DropDown({ phrase, data, changerClickHandler, setTrim }: Props) {
       </div>
       <ChangerModal
         wantedOtherColor={wantedOtherColor}
-        changerClickHandler={changerClickHandler}
         showModal={showModal}
         setShowModal={setShowModal}
-        setTrim={setTrim}
+        otherColorChangeHandler={otherColorChangeHandler}
       />
     </>
   );
