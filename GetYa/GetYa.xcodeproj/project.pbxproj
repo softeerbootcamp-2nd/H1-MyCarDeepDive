@@ -85,6 +85,11 @@
 		6457CF9C2A92B51300B3AAAF /* OptionSelectTooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CF9B2A92B51300B3AAAF /* OptionSelectTooltipView.swift */; };
 		6457CF9E2A92B6EB00B3AAAF /* OptionSelectImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CF9D2A92B6EB00B3AAAF /* OptionSelectImageCell.swift */; };
 		6457CFA02A92B76600B3AAAF /* OptionSelectImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CF9F2A92B76600B3AAAF /* OptionSelectImageCollectionView.swift */; };
+		6457CFBE2A93A5B100B3AAAF /* AdditionalOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFBD2A93A5B100B3AAAF /* AdditionalOptionViewController.swift */; };
+		6457CFC02A93A76D00B3AAAF /* TagCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFBF2A93A76D00B3AAAF /* TagCategoryType.swift */; };
+		6457CFC22A93A9EC00B3AAAF /* BasicOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFC12A93A9EC00B3AAAF /* BasicOptionViewController.swift */; };
+		6457CFC42A93ACDC00B3AAAF /* OptionSelectBasicItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFC32A93ACDC00B3AAAF /* OptionSelectBasicItemCell.swift */; };
+		6457CFC62A93ADD800B3AAAF /* BasicCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFC52A93ADD800B3AAAF /* BasicCollectionView.swift */; };
 		6484A7362A8C78BB00434136 /* UILayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF958D2A7C89630093EAC7 /* UILayout.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
@@ -119,7 +124,7 @@
 		6484A7922A904BA200434136 /* PurchaseLearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484A7912A904BA200434136 /* PurchaseLearnMoreView.swift */; };
 		6484A7932A90F29400434136 /* CommonQuotationPreviewAdapterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC912A892A62009B19B9 /* CommonQuotationPreviewAdapterDataSource.swift */; };
 		6484A7952A90F2EE00434136 /* OptionSelectCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484A7942A90F2EE00434136 /* OptionSelectCategoryCell.swift */; };
-		6484A7972A90F33500434136 /* OptionSelectItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484A7962A90F33500434136 /* OptionSelectItemCell.swift */; };
+		6484A7972A90F33500434136 /* OptionSelectAdditionalItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484A7962A90F33500434136 /* OptionSelectAdditionalItemCell.swift */; };
 		6484A7992A90F39300434136 /* OptionSelectTagItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484A7982A90F39300434136 /* OptionSelectTagItemCell.swift */; };
 		6484A79B2A90F3E800434136 /* AdditionalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484A79A2A90F3E800434136 /* AdditionalCollectionView.swift */; };
 		6484A79D2A90F43800434136 /* OptionSelectSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484A79C2A90F43800434136 /* OptionSelectSegmentedControl.swift */; };
@@ -288,6 +293,11 @@
 		6457CF9B2A92B51300B3AAAF /* OptionSelectTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectTooltipView.swift; sourceTree = "<group>"; };
 		6457CF9D2A92B6EB00B3AAAF /* OptionSelectImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectImageCell.swift; sourceTree = "<group>"; };
 		6457CF9F2A92B76600B3AAAF /* OptionSelectImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectImageCollectionView.swift; sourceTree = "<group>"; };
+		6457CFBD2A93A5B100B3AAAF /* AdditionalOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionViewController.swift; sourceTree = "<group>"; };
+		6457CFBF2A93A76D00B3AAAF /* TagCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryType.swift; sourceTree = "<group>"; };
+		6457CFC12A93A9EC00B3AAAF /* BasicOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOptionViewController.swift; sourceTree = "<group>"; };
+		6457CFC32A93ACDC00B3AAAF /* OptionSelectBasicItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectBasicItemCell.swift; sourceTree = "<group>"; };
+		6457CFC52A93ADD800B3AAAF /* BasicCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCollectionView.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -309,7 +319,7 @@
 		6484A78F2A90444100434136 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		6484A7912A904BA200434136 /* PurchaseLearnMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLearnMoreView.swift; sourceTree = "<group>"; };
 		6484A7942A90F2EE00434136 /* OptionSelectCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectCategoryCell.swift; sourceTree = "<group>"; };
-		6484A7962A90F33500434136 /* OptionSelectItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectItemCell.swift; sourceTree = "<group>"; };
+		6484A7962A90F33500434136 /* OptionSelectAdditionalItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectAdditionalItemCell.swift; sourceTree = "<group>"; };
 		6484A7982A90F39300434136 /* OptionSelectTagItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectTagItemCell.swift; sourceTree = "<group>"; };
 		6484A79A2A90F3E800434136 /* AdditionalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalCollectionView.swift; sourceTree = "<group>"; };
 		6484A79C2A90F43800434136 /* OptionSelectSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectSegmentedControl.swift; sourceTree = "<group>"; };
@@ -721,6 +731,8 @@
 			isa = PBXGroup;
 			children = (
 				64E26A112A895C1700F6BC3A /* OptionSelectViewController.swift */,
+				6457CFBD2A93A5B100B3AAAF /* AdditionalOptionViewController.swift */,
+				6457CFC12A93A9EC00B3AAAF /* BasicOptionViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -729,11 +741,13 @@
 			isa = PBXGroup;
 			children = (
 				6484A79A2A90F3E800434136 /* AdditionalCollectionView.swift */,
+				6457CFC52A93ADD800B3AAAF /* BasicCollectionView.swift */,
 				6484A7942A90F2EE00434136 /* OptionSelectCategoryCell.swift */,
 				6484A7982A90F39300434136 /* OptionSelectTagItemCell.swift */,
 				6457CF9F2A92B76600B3AAAF /* OptionSelectImageCollectionView.swift */,
 				6457CF9D2A92B6EB00B3AAAF /* OptionSelectImageCell.swift */,
-				6484A7962A90F33500434136 /* OptionSelectItemCell.swift */,
+				6484A7962A90F33500434136 /* OptionSelectAdditionalItemCell.swift */,
+				6457CFC32A93ACDC00B3AAAF /* OptionSelectBasicItemCell.swift */,
 				6484A7A02A91F40800434136 /* OptionSelectItemLearnMoreView.swift */,
 				6484A79E2A90FBC400434136 /* OptionSelectTitleHeaderView.swift */,
 				6484A79C2A90F43800434136 /* OptionSelectSegmentedControl.swift */,
@@ -1002,6 +1016,7 @@
 			children = (
 				15DF95942A7C89DF0093EAC7 /* GetYaFont.swift */,
 				6484A7612A8CB8D900434136 /* AlertType.swift */,
+				6457CFBF2A93A76D00B3AAAF /* TagCategoryType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1398,6 +1413,7 @@
 				156A96A52A8BD66D00AE1477 /* BaseViewController.swift in Sources */,
 				15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */,
 				6484A74F2A8C82FE00434136 /* EngineDetailViewController.swift in Sources */,
+				6457CFC02A93A76D00B3AAAF /* TagCategoryType.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
 				64E26A622A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift in Sources */,
 				6484A7952A90F2EE00434136 /* OptionSelectCategoryCell.swift in Sources */,
@@ -1407,7 +1423,9 @@
 				641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
 				15A738822A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift in Sources */,
+				6457CFC22A93A9EC00B3AAAF /* BasicOptionViewController.swift in Sources */,
 				15A738842A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift in Sources */,
+				6457CFC42A93ACDC00B3AAAF /* OptionSelectBasicItemCell.swift in Sources */,
 				64E26A572A8A3E2800F6BC3A /* TrimLearnMoreView.swift in Sources */,
 				6412D0842A80ABCA001E4005 /* QuestionNumberView.swift in Sources */,
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
@@ -1436,6 +1454,7 @@
 				64E26A702A8C076500F6BC3A /* ColorLearnMoreView.swift in Sources */,
 				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
 				15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */,
+				6457CFC62A93ADD800B3AAAF /* BasicCollectionView.swift in Sources */,
 				64E26A502A8A3E2800F6BC3A /* TrimSubOptionButton.swift in Sources */,
 				15940E802A91F4EC0042A5F5 /* UIImage+.swift in Sources */,
 				64ADA4AD2A78A7090003E2C1 /* CommonButton.swift in Sources */,
@@ -1470,6 +1489,7 @@
 				6412D09A2A8332E5001E4005 /* PeekQuestionView.swift in Sources */,
 				64ADA49D2A7788D00003E2C1 /* Service.swift in Sources */,
 				155EAB462A81F0AF00833B0E /* DetailQuotationPreviewMainHeader.swift in Sources */,
+				6457CFBE2A93A5B100B3AAAF /* AdditionalOptionViewController.swift in Sources */,
 				6484A7882A902D7600434136 /* QuotationTableView.swift in Sources */,
 				6457CF9A2A92B4FD00B3AAAF /* PlusButton.swift in Sources */,
 				6484A7682A8DBA6D00434136 /* SettingAlertView.swift in Sources */,
@@ -1487,7 +1507,7 @@
 				156A96AB2A8C03D400AE1477 /* QuestionViewSendable.swift in Sources */,
 				156A96AD2A8C57B600AE1477 /* TwoWaySlider.swift in Sources */,
 				6484A7502A8C82FE00434136 /* EngineDetailContentView.swift in Sources */,
-				6484A7972A90F33500434136 /* OptionSelectItemCell.swift in Sources */,
+				6484A7972A90F33500434136 /* OptionSelectAdditionalItemCell.swift in Sources */,
 				155B72A52A8C888E0091A7F4 /* BottomSheetLargeContentView.swift in Sources */,
 				155DDD182A855182009AE2BC /* LeftAndRightButtonStackView.swift in Sources */,
 				155EAB372A7F5FCD00833B0E /* ProgressView.swift in Sources */,
