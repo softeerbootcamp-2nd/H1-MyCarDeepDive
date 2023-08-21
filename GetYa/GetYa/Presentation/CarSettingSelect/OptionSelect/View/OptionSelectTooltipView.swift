@@ -172,9 +172,6 @@ class OptionSelectTooltipView: UIView {
         typealias Const = Constants.OptionPriceLabel
         
         NSLayoutConstraint.activate([
-//            optionPriceLabel.topAnchor.constraint(
-//                equalTo: optionNameLabel.bottomAnchor,
-//                constant: Const.topMargin),
             optionPriceLabel.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor,
                 constant: Const.leadingMargin),

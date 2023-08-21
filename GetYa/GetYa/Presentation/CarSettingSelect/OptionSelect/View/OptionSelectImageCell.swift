@@ -113,6 +113,4 @@ class OptionSelectImageCell: UICollectionViewCell {
     func setImage(image: UIImage?) {
         contentImageView.image = image
     }
-    
-    // MARK: - Objc Functions
 }

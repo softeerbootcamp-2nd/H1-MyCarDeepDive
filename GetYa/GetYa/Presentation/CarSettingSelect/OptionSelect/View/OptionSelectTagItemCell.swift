@@ -220,8 +220,6 @@ class OptionSelectTagItemCell: UICollectionViewCell {
         }
         addSubviews(tooltipViews)
     }
-    
-    // MARK: - Objc Functions
 }
 
 // MARK: - OptionSelectImageCollectionViewDelegate
