@@ -38,7 +38,7 @@ create table recommendation_car_package
 
 create table custom_recommendation
 (
-    custom_recommendation_id bigint bigint not null auto_increment,
+    custom_recommendation_id bigint not null auto_increment,
     car_purpose_id           bigint,
     driving_experience_id    bigint,
     family_members_id        bigint,
