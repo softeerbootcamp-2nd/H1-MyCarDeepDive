@@ -154,8 +154,6 @@ class ColorServiceTest {
                         .trimExteriorColors(List.of(trimExteriorColor2))
                         .build();
 
-
-
         when(trimExteriorColorRepository.findAllExteriorColors())
                 .thenReturn(new ArrayList<>(List.of(exteriorColor1, exteriorColor2)));
 

@@ -5,7 +5,6 @@ import com.h1.mycardeepdive.color.domain.InteriorColor;
 import com.h1.mycardeepdive.color.ui.dto.ExteriorColorInfo;
 import com.h1.mycardeepdive.color.ui.dto.InteriorColorInfo;
 import com.h1.mycardeepdive.trims.domain.Trim;
-
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
