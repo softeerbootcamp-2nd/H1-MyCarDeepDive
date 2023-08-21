@@ -41,6 +41,9 @@ final class CharacterDetailSelectViewModel {
     private lazy var userSelectionItems = Array(
         repeating: "",
         count: questionDescriptionTexts.count)
+    private lazy var userSelectionIdxList = Array(
+        repeating: 0,
+        count: questionDescriptionTexts.count)
 }
 
 extension CharacterDetailSelectViewModel: CharacterDetailSelectViewModelabe {
@@ -56,6 +59,7 @@ extension CharacterDetailSelectViewModel: CharacterDetailSelectViewModelabe {
     private func touchUpNextButtonStream(input: Input) -> Output {
         return input.touchUpNextButton.map { [weak self] (curPageIndex: Int, itemIndex: Int?) -> State in
             guard let itemIndex, let self else { return .none }
+            userSelectionIdxList[curPageIndex] = itemIndex + 1
             userSelectionItems[curPageIndex] = questionListTexts[curPageIndex].questionTexts[itemIndex]
             return .gotoNextQuestionPage
         }.eraseToAnyPublisher()
@@ -65,9 +69,11 @@ extension CharacterDetailSelectViewModel: CharacterDetailSelectViewModelabe {
         return input.touchUpCompletionButton
             .map { [weak self] (maxPrice: Int?) -> State in
                 guard let self else { return .none }
+                userSelectionIdxList[questionDescriptionTexts.count-1] = maxPrice ?? 4200
                 // 태그 표시는 항상 최소가로
                 userSelectionItems[questionDescriptionTexts.count - 1] = "\(questionSliderViewModel.minimumCarPrice)만원"
                 // TODO: 서버한테 maxPrice 포함 사용자의 선택 5개 전송
+                userSelectionIdxList
                 return .gotoDetailQuotationPreviewPage(userSelection: userSelectionItems)
             }.eraseToAnyPublisher()
     }
