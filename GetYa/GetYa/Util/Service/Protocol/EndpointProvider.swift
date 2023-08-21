@@ -8,10 +8,7 @@
 import Foundation
 
 protocol EndpointProvider: AnyObject {
-    func request<R: Decodable, E: NetworkInteractionable>(
-        with endpoint: E
-    ) async throws -> R where E.ResponseDTO == R
+    var endPoint: Endpoint { get set }
+    func request<R>(with path: String) async throws -> R where R: Decodable
     
-    /// 사진의 경우
-    func request(with url: URL) async throws -> Data
 }
