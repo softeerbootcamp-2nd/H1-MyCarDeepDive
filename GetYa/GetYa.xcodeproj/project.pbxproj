@@ -77,7 +77,7 @@
 		15D2ABC62A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC52A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift */; };
 		15D2ABCA2A93594D00F7DE8E /* OptionEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC92A93594D00F7DE8E /* OptionEndpoints.swift */; };
 		15D2ABCC2A935AFC00F7DE8E /* OptionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABCB2A935AFC00F7DE8E /* OptionRepositoryImpl.swift */; };
-		15D2ABCF2A937EF900F7DE8E /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABCE2A937EF900F7DE8E /* Cache.swift */; };
+		15D2ABCF2A937EF900F7DE8E /* DefaultGetYaCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABCE2A937EF900F7DE8E /* DefaultGetYaCacheService.swift */; };
 		15D2ABD12A93817400F7DE8E /* Cacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABD02A93817400F7DE8E /* Cacheable.swift */; };
 		15D2ABD32A9381C200F7DE8E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABD22A9381C200F7DE8E /* MemoryCache.swift */; };
 		15D8CC8C2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC8B2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift */; };
@@ -305,7 +305,7 @@
 		15D2ABC52A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpecRequestDTO.swift; sourceTree = "<group>"; };
 		15D2ABC92A93594D00F7DE8E /* OptionEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionEndpoints.swift; sourceTree = "<group>"; };
 		15D2ABCB2A935AFC00F7DE8E /* OptionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionRepositoryImpl.swift; sourceTree = "<group>"; };
-		15D2ABCE2A937EF900F7DE8E /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		15D2ABCE2A937EF900F7DE8E /* DefaultGetYaCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetYaCacheService.swift; sourceTree = "<group>"; };
 		15D2ABD02A93817400F7DE8E /* Cacheable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cacheable.swift; sourceTree = "<group>"; };
 		15D2ABD22A9381C200F7DE8E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		15D8CC8B2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewTableView.swift; sourceTree = "<group>"; };
@@ -730,7 +730,7 @@
 		15D2ABCD2A937EE900F7DE8E /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				15D2ABCE2A937EF900F7DE8E /* Cache.swift */,
+				15D2ABCE2A937EF900F7DE8E /* DefaultGetYaCacheService.swift */,
 				15D2ABD02A93817400F7DE8E /* Cacheable.swift */,
 				15D2ABD22A9381C200F7DE8E /* MemoryCache.swift */,
 				150636382A9389270057724E /* DiskCache.swift */,
@@ -1649,7 +1649,7 @@
 				64E26A4B2A8A3E2800F6BC3A /* OptionNameAndPriceView.swift in Sources */,
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
-				15D2ABCF2A937EF900F7DE8E /* Cache.swift in Sources */,
+				15D2ABCF2A937EF900F7DE8E /* DefaultGetYaCacheService.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
 				1506363E2A9392480057724E /* CustomRecomendation.swift in Sources */,
 				64E26A452A8A3E2800F6BC3A /* CarSettingSelectViewController.swift in Sources */,
