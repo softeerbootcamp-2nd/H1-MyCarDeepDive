@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BadgeTest {
-    @DisplayName("")
+    @DisplayName("Badge Enum 테스트")
     @Test
     public void testGetViewName() {
         // given
