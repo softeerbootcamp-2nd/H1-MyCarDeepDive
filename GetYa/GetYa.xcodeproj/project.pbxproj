@@ -13,6 +13,7 @@
 		150636392A9389270057724E /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150636382A9389270057724E /* DiskCache.swift */; };
 		1506363C2A9392150057724E /* RecommendationEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1506363B2A9392150057724E /* RecommendationEndpoints.swift */; };
 		1506363E2A9392480057724E /* CustomRecomendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1506363D2A9392480057724E /* CustomRecomendation.swift */; };
+		150636402A9394710057724E /* QuotationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1506363F2A9394710057724E /* QuotationDTO.swift */; };
 		155776E12A90D27300E3C0E1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E02A90D27300E3C0E1 /* Endpoint.swift */; };
 		155776E32A90D29900E3C0E1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E22A90D29900E3C0E1 /* HTTPMethod.swift */; };
 		155776E62A90DA6B00E3C0E1 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E52A90DA6B00E3C0E1 /* Requestable.swift */; };
@@ -230,6 +231,7 @@
 		150636382A9389270057724E /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		1506363B2A9392150057724E /* RecommendationEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEndpoints.swift; sourceTree = "<group>"; };
 		1506363D2A9392480057724E /* CustomRecomendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRecomendation.swift; sourceTree = "<group>"; };
+		1506363F2A9394710057724E /* QuotationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationDTO.swift; sourceTree = "<group>"; };
 		155729FE2A89563200D136C6 /* QuotationPreviewMainHeaderModel+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuotationPreviewMainHeaderModel+Mock.swift"; sourceTree = "<group>"; };
 		155776E02A90D27300E3C0E1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		155776E22A90D29900E3C0E1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -1130,6 +1132,7 @@
 				15D2ABC52A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift */,
 				15D2ABC32A93574500F7DE8E /* TrimCarSpecResponseDTO.swift */,
 				1506363D2A9392480057724E /* CustomRecomendation.swift */,
+				1506363F2A9394710057724E /* QuotationDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1521,6 +1524,7 @@
 				155776EA2A910B1A00E3C0E1 /* HttpStatus.swift in Sources */,
 				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
 				15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */,
+				150636402A9394710057724E /* QuotationDTO.swift in Sources */,
 				64E26A502A8A3E2800F6BC3A /* TrimSubOptionButton.swift in Sources */,
 				15940E802A91F4EC0042A5F5 /* UIImage+.swift in Sources */,
 				64ADA4AD2A78A7090003E2C1 /* CommonButton.swift in Sources */,
