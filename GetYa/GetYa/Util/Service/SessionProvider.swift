@@ -51,9 +51,6 @@ extension SessionProvider {
         guard let response = response as? HTTPURLResponse else {
             throw NetworkError.unknown
         }
-        guard response.responseType == .success else {
-            throw NetworkError.invalidResponseStatus(response.responseType)
-        }
         guard !data.isEmpty else { throw NetworkError.emptyBytes }
     }
     

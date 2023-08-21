@@ -12,7 +12,6 @@ enum NetworkError: Swift.Error {
     case components
     case unknown
     case urlRequest(Error)
-    case invalidResponseStatus(HTTPURLResponse.ResponseType)
     case timeout
     case emptyBytes
     case failedDecode
