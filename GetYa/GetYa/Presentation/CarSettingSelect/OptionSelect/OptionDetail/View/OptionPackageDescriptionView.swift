@@ -23,6 +23,10 @@ final class OptionPackageDescriptionView: UIView {
             static let height: CGFloat = .toScaledHeight(value: 94)
         }
         
+        enum BottomBackgroundView {
+            static let height: CGFloat = .toScaledHeight(value: 190)
+        }
+        
         enum PageControl {
             static let topMargin: CGFloat = .toScaledHeight(value: 28)
             static let height: CGFloat = .toScaledWidth(value: 8)
@@ -34,13 +38,18 @@ final class OptionPackageDescriptionView: UIView {
     private let optionPackageLabel = CommonLabel(
         fontType: .mediumCaption1,
         color: .GetYaPalette.gray400,
-        text: ""
+        text: "패키지 준비중..."
     ).set { $0.numberOfLines = 1 }
     private let optionDetailDescriptionView = OptionDetailDescriptionAreaView(frame: .zero)
+    private let bottomBackgroundView = UIView(frame: .zero).set{
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.backgroundColor = UIColor(red: 0.983, green: 0.983, blue: 0.983, alpha: 1).cgColor
+    }
     private let optionTitleCollectionView = UICollectionView(
         frame: .zero,
-        collectionViewLayout: UICollectionViewFlowLayout())
-    private var pageControl = CommonPageControl(numberOfPages: 0)
+        collectionViewLayout: UICollectionViewFlowLayout()
+    ).set { $0.translatesAutoresizingMaskIntoConstraints = false }
+    private var pageControl = CommonPageControl(numberOfPages: 3)
     
     // MARK: - Properties
 
@@ -59,6 +68,7 @@ final class OptionPackageDescriptionView: UIView {
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
         setupUI()
+        setOptionDetailDescriptionView(title: "후석", price: "1,000원", description: "현대가고싶다.. ")
     }
     
     private func setPageControlSelectedPage(currentPage: Int) {
@@ -79,6 +89,13 @@ final class OptionPackageDescriptionView: UIView {
         optionTitleCollectionView.dataSource = delegator
     }
     
+    func setOptionDetailDescriptionView(title: String?, price: String?, description: String?) {
+        optionDetailDescriptionView.configure(
+            optionTitle: title,
+            optionPrice: price,
+            optionDescription: description)
+    }
+    
     func setPageCount(with pages: Int?) {
         pageControl.numberOfPages = pages ?? 0
     }
@@ -90,6 +107,7 @@ extension OptionPackageDescriptionView: LayoutSupportable {
         addSubviews([
             optionPackageLabel,
             optionDetailDescriptionView,
+            bottomBackgroundView,
             optionTitleCollectionView,
             pageControl])
         
@@ -98,8 +116,11 @@ extension OptionPackageDescriptionView: LayoutSupportable {
     func setupConstriants() {
         configureOptionPackageLabel()
         configureOptionDetailDescriptionView()
+        configureBottomBackgroundView()
         configureOptionTitleCollectionView()
         configurePageControl()
+        configureSubviewsContentPriority()
+        
     }
     
     // MARK: - LayoutSupport private functions
@@ -121,7 +142,19 @@ extension OptionPackageDescriptionView: LayoutSupportable {
             optionDetailDescriptionView.trailingAnchor.constraint(
                 equalTo: trailingAnchor),
             optionDetailDescriptionView.heightAnchor.constraint(
-                equalToConstant: Const.maximumHeight)])
+                lessThanOrEqualToConstant: Const.maximumHeight)])
+    }
+    
+    private func configureBottomBackgroundView() {
+        typealias Const = Constants.BottomBackgroundView
+        
+        NSLayoutConstraint.activate([
+            bottomBackgroundView.topAnchor.constraint(equalTo: optionDetailDescriptionView.bottomAnchor),
+            
+            bottomBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            bottomBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bottomBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            bottomBackgroundView.heightAnchor.constraint(equalToConstant: Const.height)])
     }
     
     ///이게 기본적으로 상위 뷰에서 contentView에서 leading, trailing 제약이 20씩 있어서 super.leadingAnchor로 하게된다면 어떻게 될 까...
@@ -130,7 +163,7 @@ extension OptionPackageDescriptionView: LayoutSupportable {
         NSLayoutConstraint.activate([
             optionTitleCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             optionTitleCollectionView.topAnchor.constraint(
-                equalTo: topAnchor,
+                equalTo: bottomBackgroundView.topAnchor,
                 constant: Const.topMargin),
             optionTitleCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             optionTitleCollectionView.heightAnchor.constraint(
