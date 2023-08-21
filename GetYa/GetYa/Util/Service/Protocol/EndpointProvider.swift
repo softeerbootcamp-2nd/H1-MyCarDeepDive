@@ -10,5 +10,5 @@ import Foundation
 protocol EndpointProvider: AnyObject {
     var endPoint: Endpoint { get set }
     func request<R>(with path: String) async throws -> R where R: Decodable
-    
+    func request(with url: URL) async throws -> Data 
 }

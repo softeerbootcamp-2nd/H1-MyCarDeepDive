@@ -16,8 +16,6 @@
 		155776E82A9107DA00E3C0E1 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E72A9107DA00E3C0E1 /* NetworkError.swift */; };
 		155776EA2A910B1A00E3C0E1 /* HttpStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E92A910B1A00E3C0E1 /* HttpStatus.swift */; };
 		155776ED2A910D6900E3C0E1 /* Encodable+toDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776EC2A910D6900E3C0E1 /* Encodable+toDictionary.swift */; };
-		155776EF2A91172A00E3C0E1 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776EE2A91172A00E3C0E1 /* Responsable.swift */; };
-		155776F12A9119D400E3C0E1 /* NetworkInteractionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776F02A9119D400E3C0E1 /* NetworkInteractionable.swift */; };
 		155776F42A911CAA00E3C0E1 /* EndpointProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776F32A911CAA00E3C0E1 /* EndpointProvider.swift */; };
 		155776F72A911D6000E3C0E1 /* SessionProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776F62A911D6000E3C0E1 /* SessionProviderImpl.swift */; };
 		155776F92A91302700E3C0E1 /* HTTPURLResponse+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776F82A91302700E3C0E1 /* HTTPURLResponse+.swift */; };
@@ -221,8 +219,6 @@
 		155776E72A9107DA00E3C0E1 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		155776E92A910B1A00E3C0E1 /* HttpStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpStatus.swift; sourceTree = "<group>"; };
 		155776EC2A910D6900E3C0E1 /* Encodable+toDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+toDictionary.swift"; sourceTree = "<group>"; };
-		155776EE2A91172A00E3C0E1 /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
-		155776F02A9119D400E3C0E1 /* NetworkInteractionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractionable.swift; sourceTree = "<group>"; };
 		155776F32A911CAA00E3C0E1 /* EndpointProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProvider.swift; sourceTree = "<group>"; };
 		155776F62A911D6000E3C0E1 /* SessionProviderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProviderImpl.swift; sourceTree = "<group>"; };
 		155776F82A91302700E3C0E1 /* HTTPURLResponse+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+.swift"; sourceTree = "<group>"; };
@@ -480,8 +476,6 @@
 			children = (
 				155776E02A90D27300E3C0E1 /* Endpoint.swift */,
 				155776E52A90DA6B00E3C0E1 /* Requestable.swift */,
-				155776EE2A91172A00E3C0E1 /* Responsable.swift */,
-				155776F02A9119D400E3C0E1 /* NetworkInteractionable.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1426,7 +1420,6 @@
 				6484A7622A8CB8D900434136 /* AlertType.swift in Sources */,
 				6484A73C2A8C790A00434136 /* ConvenienceInit.swift in Sources */,
 				155776E62A90DA6B00E3C0E1 /* Requestable.swift in Sources */,
-				155776EF2A91172A00E3C0E1 /* Responsable.swift in Sources */,
 				6484A76A2A8DEDF100434136 /* UIViewController+.swift in Sources */,
 				6484A73B2A8C790200434136 /* ViewController.swift in Sources */,
 				155B72B42A8CA29E0091A7F4 /* QuestionListTextModel+Mock.swift in Sources */,
@@ -1448,7 +1441,6 @@
 				64E26A742A8C77F900F6BC3A /* DetailQuotationPreviewTableViewAdapter.swift in Sources */,
 				6484A7992A90F39300434136 /* OptionSelectImageCell.swift in Sources */,
 				155DDD052A82D040009AE2BC /* DetailQuotationPreviewViewModel.swift in Sources */,
-				155776F12A9119D400E3C0E1 /* NetworkInteractionable.swift in Sources */,
 				64ADA4B12A78F82A0003E2C1 /* CGFloat+.swift in Sources */,
 				6412D0802A7F75DB001E4005 /* LifeStyleViewController.swift in Sources */,
 				156A96A52A8BD66D00AE1477 /* BaseViewController.swift in Sources */,

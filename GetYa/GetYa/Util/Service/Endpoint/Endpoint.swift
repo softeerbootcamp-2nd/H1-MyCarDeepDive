@@ -26,5 +26,3 @@ final class Endpoint: Requestable {
         self.headers = headers
     }
 }
-
-
