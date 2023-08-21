@@ -12,7 +12,7 @@ struct Tag: Hashable {
     let name: String
 }
 
-struct OptionData: Hashable {
+struct OptionItem: Hashable {
     let id: Int
     let imageURL: String
     let selectRate: CGFloat
@@ -215,7 +215,7 @@ class OptionSelectItemCell: UICollectionViewCell {
         selectButton.isSelected = isSelected
     }
     
-    func setData(datum: OptionData) {
+    func setData(datum: OptionItem) {
         imageView.image = UIImage(named: "LifeStylePeekForYou") // data.imageURL
         optionNameLabel.text = datum.optionName
         optionPriceLabel.text = datum.optionPrice.toPriceFormat + "원"

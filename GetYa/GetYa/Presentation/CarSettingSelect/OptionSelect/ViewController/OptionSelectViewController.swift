@@ -12,14 +12,10 @@ class OptionSelectViewController: UIViewController {
         enum SegmentedControl {
             static let height: CGFloat = .toScaledHeight(value: 52)
         }
-        enum CollectionView {
-            static let topMargin: CGFloat = .toScaledHeight(value: 20)
-            static let bottomMargin: CGFloat = .toScaledHeight(value: -136)
-        }
     }
     
     // MARK: - UI properties
-    private let collectionView = OptionSelectCollectionView()
+    private let collectionView = AdditionalCollectionView()
     private lazy var segmentedControl = OptionSelectSegmentedControl(items: ["추가 옵션", "기본 포함 옵션"]).set {
         $0.addTarget(self, action: #selector(changeSegmentedValue), for: .valueChanged)
     }
@@ -69,17 +65,13 @@ class OptionSelectViewController: UIViewController {
     }
     
     private func configureCollectionView() {
-        typealias Const = Constants.CollectionView
-        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
-                equalTo: segmentedControl.bottomAnchor,
-                constant: Const.topMargin),
+                equalTo: segmentedControl.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor,
-                constant: Const.bottomMargin)
+                equalTo: view.bottomAnchor)
         ])
     }
     
