@@ -10,6 +10,7 @@
 		15040FC22A8D3CAB00DDC411 /* DetailQuestionCarPriceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15040FC12A8D3CAB00DDC411 /* DetailQuestionCarPriceSelectView.swift */; };
 		15040FC72A8DFC0800DDC411 /* CharacterDetailSelectViewModelabe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15040FC62A8DFC0800DDC411 /* CharacterDetailSelectViewModelabe.swift */; };
 		15040FC92A8E4C5E00DDC411 /* TagViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15040FC82A8E4C5E00DDC411 /* TagViewCell.swift */; };
+		150636392A9389270057724E /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150636382A9389270057724E /* DiskCache.swift */; };
 		155776E12A90D27300E3C0E1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E02A90D27300E3C0E1 /* Endpoint.swift */; };
 		155776E32A90D29900E3C0E1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E22A90D29900E3C0E1 /* HTTPMethod.swift */; };
 		155776E62A90DA6B00E3C0E1 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E52A90DA6B00E3C0E1 /* Requestable.swift */; };
@@ -225,6 +226,7 @@
 		15040FC62A8DFC0800DDC411 /* CharacterDetailSelectViewModelabe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailSelectViewModelabe.swift; sourceTree = "<group>"; };
 		15040FC82A8E4C5E00DDC411 /* TagViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewCell.swift; sourceTree = "<group>"; };
 		15059ABF2A88A54200303C01 /* CommonQuotationPreviewCarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewCarInfoView.swift; sourceTree = "<group>"; };
+		150636382A9389270057724E /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		155729FE2A89563200D136C6 /* QuotationPreviewMainHeaderModel+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuotationPreviewMainHeaderModel+Mock.swift"; sourceTree = "<group>"; };
 		155776E02A90D27300E3C0E1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		155776E22A90D29900E3C0E1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -736,6 +738,7 @@
 				15D2ABCE2A937EF900F7DE8E /* Cache.swift */,
 				15D2ABD02A93817400F7DE8E /* Cacheable.swift */,
 				15D2ABD22A9381C200F7DE8E /* MemoryCache.swift */,
+				150636382A9389270057724E /* DiskCache.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1615,6 +1618,7 @@
 				155776F92A91302700E3C0E1 /* HTTPURLResponse+.swift in Sources */,
 				155B72AB2A8C9A2E0091A7F4 /* UIColor+.swift in Sources */,
 				15040FC22A8D3CAB00DDC411 /* DetailQuestionCarPriceSelectView.swift in Sources */,
+				150636392A9389270057724E /* DiskCache.swift in Sources */,
 				155776E12A90D27300E3C0E1 /* Endpoint.swift in Sources */,
 				64E26A662A8BC04F00F6BC3A /* ColorSelectColorCollectionView.swift in Sources */,
 				6412D0982A8323CD001E4005 /* CommonTextView.swift in Sources */,
