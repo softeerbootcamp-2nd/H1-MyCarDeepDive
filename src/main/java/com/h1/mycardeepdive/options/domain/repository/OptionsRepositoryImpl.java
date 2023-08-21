@@ -96,7 +96,7 @@ public class OptionsRepositoryImpl implements OptionsRepositoryCustom {
                 .on(options.id.eq(carSpecOptions.options.id))
                 .innerJoin(optionTag)
                 .on(options.id.eq(optionTag.option.id))
-                .where(optionTag.tag.id.eq(tagId))
+                .where(optionTag.tag.id.eq(tagId).and(optionTag.position_x.gt(0)).and(optionTag.position_y.gt(0)))
                 .fetch();
     }
 }
