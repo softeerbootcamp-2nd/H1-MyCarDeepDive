@@ -22,8 +22,10 @@ public class PdfInfo {
     private String max_power;
     private String exterior_color_name;
     private String exterior_color_img_url;
+    private long exterior_color_price;
     private String interior_color_name;
     private String interior_color_img_url;
+    private long interior_color_price;
     private List<SimpleOption> optionList;
     private long basic_price;
     private String pdf_url;
@@ -41,8 +43,10 @@ public class PdfInfo {
             String max_power,
             String exterior_color_name,
             String exterior_color_img_url,
+            long exterior_color_price,
             String interior_color_name,
             String interior_color_img_url,
+            long interior_color_price,
             long basic_price,
             List<SimpleOption> optionList,
             String pdf_url) {
@@ -57,8 +61,10 @@ public class PdfInfo {
         this.max_power = max_power;
         this.exterior_color_name = exterior_color_name;
         this.exterior_color_img_url = exterior_color_img_url;
+        this.exterior_color_price = exterior_color_price;
         this.interior_color_name = interior_color_name;
         this.interior_color_img_url = interior_color_img_url;
+        this.interior_color_price = interior_color_price;
         this.optionList = optionList;
         this.basic_price = basic_price;
         this.pdf_url = pdf_url;

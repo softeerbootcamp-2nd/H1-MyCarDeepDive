@@ -18,12 +18,24 @@ public class PdfInfoTest {
         String id = "1";
         String carImageUrl = "car.jpg";
         String carName = "My Car";
+        String engineName = "engine";
+        String trimName = "trimName";
+        String bodyName = "body";
         String drivingSystem = "4WD";
         Long basicPrice = 1000000L;
+        String maxPower = "mPower";
+        String maxTorque = "mTorque";
+        String exterior_color_name = "name";
+        String exterior_color_img_url  = "name";
+        long exterior_color_price = 10000;
+        String interior_color_name = "name";
+        String interior_color_img_url = "name";
+        long interior_color_price = 100000;
         List<SimpleOption> optionList =
                 Collections.singletonList(
                         new SimpleOption("Option name", 10000L, "option_img.url"));
         String pdfUrl = "document.pdf";
+
 
         // when
         PdfInfo pdfInfo =
@@ -31,7 +43,18 @@ public class PdfInfoTest {
                         .id(id)
                         .car_image_url(carImageUrl)
                         .car_name(carName)
+                        .engine_name(engineName)
+                        .body_name(bodyName)
                         .driving_system_name(drivingSystem)
+                        .trim_name(trimName)
+                        .max_power(maxPower)
+                        .max_torque(maxTorque)
+                        .exterior_color_name(exterior_color_name)
+                        .exterior_color_img_url(exterior_color_img_url)
+                        .exterior_color_price(exterior_color_price)
+                        .interior_color_name(interior_color_name)
+                        .interior_color_img_url(interior_color_img_url)
+                        .interior_color_price(interior_color_price)
                         .optionList(optionList)
                         .basic_price(basicPrice)
                         .pdf_url(pdfUrl)
