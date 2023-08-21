@@ -75,7 +75,6 @@ class SubOptionDetailViewController: UIViewController {
         view.backgroundColor = .white
         
         configureNavigationBar()
-//        configureSegmentedControl()
         configurePageViewContoller()
     }
     
