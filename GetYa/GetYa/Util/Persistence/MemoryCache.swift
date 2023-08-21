@@ -7,44 +7,30 @@
 
 import Foundation
 
-final class MeneoryCache: Cacheable {
-    typealias Key = String
-    typealias Value = AnyObject
+final class MemoryCache {
     
-    private let cache = NSCache<NSString, Value>()
+    static let shared = MemoryCache(name: "cache")
+    
+    private let cache = NSCache<NSString, AnyObject>()
     
     init(name: String) {
         cache.name = name
     }
     
-    subscript(key: Key) -> Value? {
-        get { return load(key) }
-        set {
-            guard let value = newValue else {
-                remove(key)
-                return
-            }
-            write(key, data: value)
-        }
+    func load(_ key: String) -> Data? {
+        cache.object(forKey: key as NSString) as? Data
     }
     
-    func load(_ key: Key) -> Value? {
-        cache.object(forKey: key as NSString)
-    }
-    
-    func write(_ key: Key, data: Value?) {
+    func write(_ key: String, data: Data?) {
         cache.setObject(data as AnyObject, forKey: key as NSString)
     }
     
-    func isExist(_ key: Key) -> Bool {
-        return load(key) == nil
-    }
-    
-    func remove(_ key: Key) {
-        cache.removeObject(forKey: key as NSString)
+    func isExist(_ key: String) -> Bool {
+        cache.object(forKey: key as NSString) != nil
     }
     
     func removeAll() {
-        cache.removeAllObjects()
+        self.cache.removeAllObjects()
     }
+    
 }
