@@ -26,7 +26,7 @@ public class PdfInfoTest {
         String maxPower = "mPower";
         String maxTorque = "mTorque";
         String exterior_color_name = "name";
-        String exterior_color_img_url  = "name";
+        String exterior_color_img_url = "name";
         long exterior_color_price = 10000;
         String interior_color_name = "name";
         String interior_color_img_url = "name";
@@ -35,7 +35,6 @@ public class PdfInfoTest {
                 Collections.singletonList(
                         new SimpleOption("Option name", 10000L, "option_img.url"));
         String pdfUrl = "document.pdf";
-
 
         // when
         PdfInfo pdfInfo =
@@ -88,7 +87,7 @@ public class PdfInfoTest {
 
     @DisplayName("pdf의 setter를 테스트한다.")
     @Test
-    void testPdfSetter(){
+    void testPdfSetter() {
         // given
         String pdfUrl = "url";
 

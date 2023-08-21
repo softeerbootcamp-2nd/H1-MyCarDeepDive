@@ -16,7 +16,8 @@ public enum ErrorType {
     SERVICE_BEING_CHECKED("SERVICE-001", "서비스가 점검중입니다."),
     UNEXPECTED_SERVER_ERROR("SERVER-001", "서버 관리자에게 문의하세요."),
     FONT_ERROR("FONT-001", "폰트 가져오기 실패했습니다."),
-    PDF_NOT_FOUND("PDF-001", "PDF ID가 존재하지 않습니다.");
+    PDF_NOT_FOUND("PDF-001", "PDF ID가 존재하지 않습니다."),
+    OPTION_NOT_FOUND("OPTION-001", "해당 옵션이 존재하지 않습니다.");
     private final String code;
     private final String message;
 

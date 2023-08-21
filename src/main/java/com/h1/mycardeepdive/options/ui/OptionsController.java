@@ -40,6 +40,7 @@ public class OptionsController {
         return new ApiResponse<>(optionsService.userClickedPackageLog(optionId));
     }
 
+    // todo 상세 보기 img url
     @GetMapping("/options/package/{option-id}/details")
     public ApiResponse<List<OptionDetailResponse>> getPackageOptionDetail(
             @PathVariable("option-id") Long optionId) {
