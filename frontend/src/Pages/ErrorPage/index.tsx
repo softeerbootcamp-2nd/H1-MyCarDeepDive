@@ -21,7 +21,7 @@ function ErrorPage() {
           height='h-12'
           variant='primary'
           text='확인'
-          onClick={() => navigation(-1)}
+          onClick={() => navigation('/', { replace: true })}
         />
       </div>
     </div>

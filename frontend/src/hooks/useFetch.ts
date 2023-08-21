@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const API = 'https://api.make-my-car.shop/api/v1';
 
@@ -16,6 +17,7 @@ interface useFetchParameter {
 }
 
 function useFetch<T>({ method, url, body }: useFetchParameter) {
+  const navigation = useNavigate();
   const [promise, setPromise] = useState<Promise<any>>();
   const [status, setStatus] = useState<'pending' | 'fulfilled' | 'error'>(
     PENDING,
@@ -29,6 +31,7 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
   };
 
   const rejectPromise = (error: Error) => {
+    navigation('/error/server');
     setStatus(ERROR);
     setError(error);
   };
@@ -45,7 +48,7 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
 
       const res = await fetch(API + url, body && config);
 
-      if (!res.ok) return alert(res.status);
+      if (!res.ok) return navigation('/error/server');
 
       const data = await res.json();
       resolvePromise(data);
