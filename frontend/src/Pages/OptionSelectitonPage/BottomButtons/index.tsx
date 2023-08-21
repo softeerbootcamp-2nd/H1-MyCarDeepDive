@@ -5,7 +5,7 @@ function BottomButtons() {
   const navigation = useNavigate();
 
   return (
-    <div className='flex justify-center gap-2 mb-10'>
+    <div className='flex justify-center gap-2 mb-20'>
       <Button
         width='w-[300px]'
         height='h-[52px]'
