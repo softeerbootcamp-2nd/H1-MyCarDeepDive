@@ -71,6 +71,8 @@
 		15D2ABC62A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC52A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift */; };
 		15D2ABCA2A93594D00F7DE8E /* OptionEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC92A93594D00F7DE8E /* OptionEndpoints.swift */; };
 		15D2ABCC2A935AFC00F7DE8E /* OptionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABCB2A935AFC00F7DE8E /* OptionRepositoryImpl.swift */; };
+		15D2ABCF2A937EF900F7DE8E /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABCE2A937EF900F7DE8E /* Cache.swift */; };
+		15D2ABD12A93817400F7DE8E /* Cacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABD02A93817400F7DE8E /* Cacheable.swift */; };
 		15D8CC8C2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC8B2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift */; };
 		15D8CC8F2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC8E2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift */; };
 		15DF95862A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF957F2A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf */; };
@@ -280,6 +282,8 @@
 		15D2ABC52A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpecRequestDTO.swift; sourceTree = "<group>"; };
 		15D2ABC92A93594D00F7DE8E /* OptionEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionEndpoints.swift; sourceTree = "<group>"; };
 		15D2ABCB2A935AFC00F7DE8E /* OptionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionRepositoryImpl.swift; sourceTree = "<group>"; };
+		15D2ABCE2A937EF900F7DE8E /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		15D2ABD02A93817400F7DE8E /* Cacheable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cacheable.swift; sourceTree = "<group>"; };
 		15D8CC8B2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewTableView.swift; sourceTree = "<group>"; };
 		15D8CC8E2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewTableViewModel.swift; sourceTree = "<group>"; };
 		15D8CC912A892A62009B19B9 /* CommonQuotationPreviewAdapterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewAdapterDataSource.swift; sourceTree = "<group>"; };
@@ -724,6 +728,15 @@
 			path = Endpoint;
 			sourceTree = "<group>";
 		};
+		15D2ABCD2A937EE900F7DE8E /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				15D2ABCE2A937EF900F7DE8E /* Cache.swift */,
+				15D2ABD02A93817400F7DE8E /* Cacheable.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		15D8CC8D2A892A2C009B19B9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,6 +946,7 @@
 		64ADA46F2A7787890003E2C1 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				15D2ABCD2A937EE900F7DE8E /* Persistence */,
 				15837B992A7E5900000FE728 /* CombineCocoa */,
 				64ADA47B2A7788150003E2C1 /* Etc */,
 				64ADA47A2A7788130003E2C1 /* Enum */,
@@ -1603,11 +1617,13 @@
 				64E26A4B2A8A3E2800F6BC3A /* OptionNameAndPriceView.swift in Sources */,
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
+				15D2ABCF2A937EF900F7DE8E /* Cache.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
 				64E26A452A8A3E2800F6BC3A /* CarSettingSelectViewController.swift in Sources */,
 				64E26A6C2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift in Sources */,
 				155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */,
 				6484A7802A8F13AF00434136 /* QuotationFinishThumbnailView.swift in Sources */,
+				15D2ABD12A93817400F7DE8E /* Cacheable.swift in Sources */,
 				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
 				64E26A482A8A3E2800F6BC3A /* TrimOptionDetailColorCollectionView.swift in Sources */,
 				155776E32A90D29900E3C0E1 /* HTTPMethod.swift in Sources */,
