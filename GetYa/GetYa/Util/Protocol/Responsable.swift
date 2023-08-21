@@ -12,6 +12,8 @@ protocol Responsable {
 }
 
 enum ResponseType {
+    case carRecommendation
+    case carRecommendationCustom
     case carSpec
     case carSpecComparison
     case exteriorColor
@@ -27,6 +29,10 @@ enum ResponseType {
     
     var path: String {
         switch self {
+        case .carRecommendation:
+            return "car-recommendation"
+        case .carRecommendationCustom:
+            return "car-recommendation/custom"
         case .carSpec:
             return "car-spec"
         case .carSpecAdditionalOption(let carSpecId):
