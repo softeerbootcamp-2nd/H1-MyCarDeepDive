@@ -5,27 +5,33 @@
 //  Created by 양승현 on 2023/08/19.
 //
 
-final class Endpoint<R: Decodable>: Requestable{
+protocol NetworkInteractionable: Requestable, Responsable {}
+
+final class Endpoint<ResponseModel>: NetworkInteractionable where ResponseModel: Decodable {
+    typealias ResponseDTO = ResponseModel
     var scheme: String
     var host: String
     var method: HTTPMethod
     var prefixPath: String
-    var midPath: String
+    var responseType: ResponseType
+    var queryParams: Encodable?
     var headers: [String: String]?
     
     init(
-        scheme: String = "http://",
+        scheme: String = "https",
         host: String = "api.make-my-car.shop",
         method: HTTPMethod = .get,
         prefixPath: String = "/api/v1/",
-        midPath: String = "",
+        responseType: ResponseType,
+        queryParams: Encodable? = nil,
         headers: [String: String]? = ["Content-Type": "application/json"]
     ) {
         self.scheme = scheme
         self.host = host
         self.method = method
         self.prefixPath = prefixPath
-        self.midPath = midPath
+        self.responseType = responseType
+        self.queryParams = queryParams
         self.headers = headers
     }
 }
