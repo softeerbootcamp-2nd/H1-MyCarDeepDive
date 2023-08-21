@@ -224,7 +224,7 @@ extension BasicCollectionView: UICollectionViewDelegate {
                     .init(
                         id: 1,
                         imageURL: "",
-                        optionName: "현대 스마트 센스 Ⅰ",
+                        optionName: "클러스터(12.3인치 컬러 LCD)",
                         tagList: [
                             Tag(id: 2, name: "사용편의")
                         ]),

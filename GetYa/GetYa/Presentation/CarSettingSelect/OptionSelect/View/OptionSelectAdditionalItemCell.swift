@@ -47,9 +47,11 @@ class OptionSelectAdditionalItemCell: UICollectionViewCell {
         $0.contentMode = .scaleAspectFill
     }
     private lazy var learnMoreView = OptionSelectItemLearnMoreView()
-    private let optionNameLabel = CommonLabel(
-        fontType: .mediumBody3,
-        color: .GetYaPalette.gray0)
+    private let optionNameLabel: UILabel = UILabel().set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = GetYaFont.mediumBody3.uiFont
+        $0.textColor = .GetYaPalette.gray0
+    }
     private let optionPriceLabel = CommonLabel(
         fontType: .mediumBody4,
         color: .GetYaPalette.gray400)
@@ -148,7 +150,8 @@ class OptionSelectAdditionalItemCell: UICollectionViewCell {
             optionNameLabel.topAnchor.constraint(
                 equalTo: learnMoreView.bottomAnchor,
                 constant: Const.topMargin),
-            optionNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
+            optionNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            optionNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     
