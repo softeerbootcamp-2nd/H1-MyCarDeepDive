@@ -84,7 +84,6 @@ class ColorServiceTest {
                         .id(1L)
                         .exteriorColor(exteriorColor1)
                         .interiorColor(interiorColor1)
-                        .trimsColorCombinations(null)
                         .build();
 
         ColorCombination colorCombination2 =
@@ -163,8 +162,8 @@ class ColorServiceTest {
         // when
         ExteriorColorResponse colorResponse =
                 colorService.findExteriorColors(trimId, interiorColorId);
-        ExteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(1L);
-        ExteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(2L);
+        ExteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
+        ExteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(0);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(exteriorColor1.getName());
@@ -301,8 +300,8 @@ class ColorServiceTest {
         // when
         InteriorColorResponse colorResponse =
                 colorService.findInteriorColors(trimId, exteriorColorId);
-        InteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(1L);
-        InteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(2L);
+        InteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
+        InteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(0);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(interiorColor1.getName());

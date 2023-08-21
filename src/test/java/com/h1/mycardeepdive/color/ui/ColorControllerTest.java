@@ -18,8 +18,8 @@ import com.h1.mycardeepdive.color.domain.InteriorColor;
 import com.h1.mycardeepdive.color.service.ColorService;
 import com.h1.mycardeepdive.color.ui.dto.*;
 import com.h1.mycardeepdive.trims.domain.Trim;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -52,12 +52,12 @@ class ColorControllerTest extends ControllerTestConfig {
         info.add("interiorColorId", String.valueOf(interiorId));
 
         ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor, trim);
-        Map<Long, ExteriorColorInfo> availableColors = new HashMap<>();
-        Map<Long, ExteriorColorInfo> unavailableColors = new HashMap<>();
-        Map<Long, ExteriorColorInfo> otherTrimColors = new HashMap<>();
-        availableColors.put(exteriorColor.getId(), exteriorColorInfo);
-        unavailableColors.put(exteriorColor.getId(), exteriorColorInfo);
-        otherTrimColors.put(exteriorColor.getId(), exteriorColorInfo);
+        List<ExteriorColorInfo> availableColors = new ArrayList<>();
+        List<ExteriorColorInfo> unavailableColors = new ArrayList<>();
+        List<ExteriorColorInfo> otherTrimColors = new ArrayList<>();
+        availableColors.add(exteriorColorInfo);
+        unavailableColors.add(exteriorColorInfo);
+        otherTrimColors.add(exteriorColorInfo);
         when(colorService.findExteriorColors(trimId, interiorId))
                 .thenReturn(
                         new ExteriorColorResponse(
@@ -104,12 +104,12 @@ class ColorControllerTest extends ControllerTestConfig {
         info.add("exteriorColorId", String.valueOf(exteriorId));
 
         InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor, trim);
-        Map<Long, InteriorColorInfo> availableColors = new HashMap<>();
-        Map<Long, InteriorColorInfo> unavailableColors = new HashMap<>();
-        Map<Long, InteriorColorInfo> otherTrimColors = new HashMap<>();
-        availableColors.put(interiorColor.getId(), interiorColorInfo);
-        unavailableColors.put(interiorColor.getId(), interiorColorInfo);
-        otherTrimColors.put(interiorColor.getId(), interiorColorInfo);
+        List<InteriorColorInfo> availableColors = new ArrayList<>();
+        List<InteriorColorInfo> unavailableColors = new ArrayList<>();
+        List<InteriorColorInfo> otherTrimColors = new ArrayList<>();
+        availableColors.add(interiorColorInfo);
+        unavailableColors.add(interiorColorInfo);
+        otherTrimColors.add(interiorColorInfo);
 
         when(colorService.findInteriorColors(trimId, exteriorId))
                 .thenReturn(
@@ -156,20 +156,20 @@ class ColorControllerTest extends ControllerTestConfig {
         info.add("trimId", String.valueOf(trimId));
 
         ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor, trim);
-        Map<Long, ExteriorColorInfo> availableExteriorColors = new HashMap<>();
-        Map<Long, ExteriorColorInfo> unavailableExteriorColors = new HashMap<>();
-        Map<Long, ExteriorColorInfo> otherTrimExteriorColors = new HashMap<>();
-        availableExteriorColors.put(exteriorColor.getId(), exteriorColorInfo);
-        unavailableExteriorColors.put(exteriorColor.getId(), exteriorColorInfo);
-        otherTrimExteriorColors.put(exteriorColor.getId(), exteriorColorInfo);
+        List<ExteriorColorInfo> availableExteriorColors = new ArrayList<>();
+        List<ExteriorColorInfo> unavailableExteriorColors = new ArrayList<>();
+        List<ExteriorColorInfo> otherTrimExteriorColors = new ArrayList<>();
+        availableExteriorColors.add(exteriorColorInfo);
+        availableExteriorColors.add(exteriorColorInfo);
+        availableExteriorColors.add(exteriorColorInfo);
 
         InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor, trim);
-        Map<Long, InteriorColorInfo> availableInteriorColors = new HashMap<>();
-        Map<Long, InteriorColorInfo> unavailableInteriorColors = new HashMap<>();
-        Map<Long, InteriorColorInfo> otherTrimInteriorColors = new HashMap<>();
-        availableInteriorColors.put(interiorColor.getId(), interiorColorInfo);
-        unavailableInteriorColors.put(interiorColor.getId(), interiorColorInfo);
-        otherTrimInteriorColors.put(interiorColor.getId(), interiorColorInfo);
+        List<InteriorColorInfo> availableInteriorColors = new ArrayList<>();
+        List<InteriorColorInfo> unavailableInteriorColors = new ArrayList<>();
+        List<InteriorColorInfo> otherTrimInteriorColors = new ArrayList<>();
+        availableInteriorColors.add(interiorColorInfo);
+        unavailableInteriorColors.add(interiorColorInfo);
+        otherTrimInteriorColors.add(interiorColorInfo);
 
         ExteriorColorResponse exteriorColorResponse =
                 new ExteriorColorResponse(

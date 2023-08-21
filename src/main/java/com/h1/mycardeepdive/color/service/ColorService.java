@@ -25,9 +25,9 @@ public class ColorService {
     public ExteriorColorResponse findExteriorColors(Long trimId, Long interiorColorId) {
         List<ExteriorColor> availableColors = new ArrayList<>();
         List<ExteriorColor> unavailableColors = new ArrayList<>();
-        Map<Long, ExteriorColorInfo> availableColorInfoMap = new HashMap<>();
-        Map<Long, ExteriorColorInfo> unavailableColorInfoMap = new HashMap<>();
-        Map<Long, ExteriorColorInfo> otherTrimColorInfoMap = new HashMap<>();
+        List<ExteriorColorInfo> availableColorInfos = new ArrayList<>();
+        List<ExteriorColorInfo> unavailableColorInfos = new ArrayList<>();
+        List<ExteriorColorInfo> otherTrimColorInfos = new ArrayList<>();
         List<ExteriorColor> allExteriorColors = trimExteriorColorRepository.findAllExteriorColors();
         //
         List<TrimExteriorColor> trimExteriorColors =
@@ -37,32 +37,29 @@ public class ColorService {
             Trim trim = trimExteriorColor.getTrim();
             if (isExteriorColorAvailableForInteriorColor(exteriorColor, interiorColorId)) {
                 availableColors.add(exteriorColor);
-                availableColorInfoMap.put(
-                        exteriorColor.getId(), toExteriorColorInfo(exteriorColor, trim));
+                availableColorInfos.add(toExteriorColorInfo(exteriorColor, trim));
 
             } else {
                 unavailableColors.add(exteriorColor);
-                unavailableColorInfoMap.put(
-                        exteriorColor.getId(), toExteriorColorInfo(exteriorColor, trim));
+                unavailableColorInfos.add(toExteriorColorInfo(exteriorColor, trim));
             }
         }
         allExteriorColors.removeAll(availableColors);
         allExteriorColors.removeAll(unavailableColors);
         for (ExteriorColor exteriorColor : allExteriorColors) {
             Trim trim = exteriorColor.getTrimExteriorColors().get(0).getTrim();
-            otherTrimColorInfoMap.put(
-                    exteriorColor.getId(), toExteriorColorInfo(exteriorColor, trim));
+            otherTrimColorInfos.add(toExteriorColorInfo(exteriorColor, trim));
         }
         return new ExteriorColorResponse(
-                availableColorInfoMap, unavailableColorInfoMap, otherTrimColorInfoMap);
+                availableColorInfos, unavailableColorInfos, otherTrimColorInfos);
     }
 
     public InteriorColorResponse findInteriorColors(Long trimId, Long exteriorColorId) {
         List<InteriorColor> availableColors = new ArrayList<>();
         List<InteriorColor> unavailableColors = new ArrayList<>();
-        Map<Long, InteriorColorInfo> availableColorInfoMap = new HashMap<>();
-        Map<Long, InteriorColorInfo> unavailableColorInfoMap = new HashMap<>();
-        Map<Long, InteriorColorInfo> otherTrimColorInfoMap = new HashMap<>();
+        List<InteriorColorInfo> availableColorInfos = new ArrayList<>();
+        List<InteriorColorInfo> unavailableColorInfos = new ArrayList<>();
+        List<InteriorColorInfo> otherTrimColorInfos = new ArrayList<>();
         List<InteriorColor> allInteriorColors = trimInteriorColorRepository.findAllInteriorColors();
         //
         List<TrimInteriorColor> trimInteriorColors =
@@ -72,23 +69,20 @@ public class ColorService {
             Trim trim = trimInteriorColor.getTrim();
             if (isInteriorColorAvailableForExteriorColor(interiorColor, exteriorColorId)) {
                 availableColors.add(interiorColor);
-                availableColorInfoMap.put(
-                        interiorColor.getId(), toInteriorColorInfo(interiorColor, trim));
+                availableColorInfos.add(toInteriorColorInfo(interiorColor, trim));
             } else {
                 unavailableColors.add(interiorColor);
-                unavailableColorInfoMap.put(
-                        interiorColor.getId(), toInteriorColorInfo(interiorColor, trim));
+                unavailableColorInfos.add(toInteriorColorInfo(interiorColor, trim));
             }
         }
         allInteriorColors.removeAll(availableColors);
         allInteriorColors.removeAll(unavailableColors);
         for (InteriorColor interiorColor : allInteriorColors) {
             Trim trim = interiorColor.getTrimInteriorColors().get(0).getTrim();
-            otherTrimColorInfoMap.put(
-                    interiorColor.getId(), toInteriorColorInfo(interiorColor, trim));
+            otherTrimColorInfos.add(toInteriorColorInfo(interiorColor, trim));
         }
         return new InteriorColorResponse(
-                availableColorInfoMap, unavailableColorInfoMap, otherTrimColorInfoMap);
+                availableColorInfos, unavailableColorInfos, otherTrimColorInfos);
     }
 
     public AllColorResponse findAllColors(Long trimId) {
@@ -104,15 +98,11 @@ public class ColorService {
                         .orElseThrow();
         InteriorColorResponse interiorColorResponse =
                 findInteriorColors(trimId, exteriorColor.getId());
-        Map.Entry<Long, InteriorColorInfo> entry =
-                interiorColorResponse.getAvailable_colors().entrySet().stream()
-                        .max(
-                                (o1, o2) ->
-                                        (int)
-                                                (o2.getValue().getChoose_rate()
-                                                        - o1.getValue().getChoose_rate()))
+        InteriorColorInfo interiorColorInfo =
+                interiorColorResponse.getAvailable_colors().stream()
+                        .max((o1, o2) -> (int) (o2.getChoose_rate() - o1.getChoose_rate()))
                         .orElseThrow();
-        Long interiorId = entry.getKey();
+        Long interiorId = interiorColorInfo.getColor_id();
         ExteriorColorResponse exteriorColorResponse = findExteriorColors(trimId, interiorId);
         return new AllColorResponse(exteriorColorResponse, interiorColorResponse);
     }

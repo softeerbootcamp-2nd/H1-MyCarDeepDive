@@ -3,12 +3,14 @@ package com.h1.mycardeepdive.color.domain;
 import java.util.List;
 import javax.persistence.*;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 public class ExteriorColor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
