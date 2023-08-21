@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol RecommendationRepository {
+    func fetchCarDetailRecommendation(with requestDTO: CustomRecomendation) -> Endpoint<QuotationDTO>
+}
