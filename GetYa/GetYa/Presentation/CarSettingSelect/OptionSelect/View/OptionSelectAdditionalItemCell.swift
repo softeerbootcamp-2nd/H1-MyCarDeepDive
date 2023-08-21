@@ -12,7 +12,7 @@ struct Tag: Hashable {
     let name: String
 }
 
-struct OptionItem: Hashable {
+struct AdditionalOptionItem: Hashable {
     let id: Int
     let imageURL: String
     let selectRate: CGFloat
@@ -22,7 +22,7 @@ struct OptionItem: Hashable {
     let tagList: [Tag]
 }
 
-class OptionSelectItemCell: UICollectionViewCell {
+class OptionSelectAdditionalItemCell: UICollectionViewCell {
     enum Constants {
         enum ImageView {
             static let height: CGFloat = .toScaledHeight(value: 112)
@@ -71,7 +71,7 @@ class OptionSelectItemCell: UICollectionViewCell {
     }
     
     // MARK: - Properties
-    static let identifier = "OptionSelectItemCell"
+    static let identifier = "OptionSelectAdditionalItemCell"
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -215,7 +215,7 @@ class OptionSelectItemCell: UICollectionViewCell {
         selectButton.isSelected = isSelected
     }
     
-    func setData(datum: OptionItem) {
+    func setData(datum: AdditionalOptionItem) {
         imageView.image = UIImage(named: "LifeStylePeekForYou") // data.imageURL
         optionNameLabel.text = datum.optionName
         optionPriceLabel.text = datum.optionPrice.toPriceFormat + "원"

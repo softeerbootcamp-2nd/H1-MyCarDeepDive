@@ -1,13 +1,13 @@
 //
-//  OptionSelectCollectionView.swift
+//  BasicCollectionView.swift
 //  GetYa
 //
-//  Created by 배남석 on 2023/08/19.
+//  Created by 배남석 on 2023/08/21.
 //
 
 import UIKit
 
-class AdditionalCollectionView: UICollectionView {
+class BasicCollectionView: UICollectionView {
     enum Constants {
         static let categoryItemCount: Int = 7
     }
@@ -15,13 +15,11 @@ class AdditionalCollectionView: UICollectionView {
     enum Sections: Hashable, CaseIterable {
         case category
         case all
-        case other
     }
 
     enum Items: Hashable {
         case category(type: TagCategoryType)
-        case all(datum: AdditionalOptionItem)
-        case other(datum: OptionTagData)
+        case all(datum: BasicOptionItem)
     }
     
     // MARK: - Properties
@@ -62,32 +60,22 @@ class AdditionalCollectionView: UICollectionView {
             OptionSelectCategoryCell.self,
             forCellWithReuseIdentifier: OptionSelectCategoryCell.identifier)
         register(
-            OptionSelectAdditionalItemCell.self,
-            forCellWithReuseIdentifier: OptionSelectAdditionalItemCell.identifier)
+            OptionSelectBasicItemCell.self,
+            forCellWithReuseIdentifier: OptionSelectBasicItemCell.identifier)
         register(
             OptionSelectTitleHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: OptionSelectTitleHeaderView.identifier)
-        register(
-            OptionSelectTagItemCell.self,
-            forCellWithReuseIdentifier: OptionSelectTagItemCell.identifier)
     }
     
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _ ) -> NSCollectionLayoutSection? in
             
-            if self.currentSelectedCategoryIndexPath.row == 0 {
-                if sectionIndex == 0 {
-                    return self.configureCategoryLayout()
-                } else {
-                    return self.configureItemLayout()
-                }
-            } else {
-                if sectionIndex == 0 {
-                    return self.configureCategoryLayout()
-                } else {
-                    return self.configureOtherLayout()
-                }
+            switch Sections.allCases[sectionIndex] {
+            case .category:
+                return self.configureCategoryLayout()
+            case .all:
+                return self.configureItemLayout()
             }
         }
         return layout
@@ -115,7 +103,7 @@ class AdditionalCollectionView: UICollectionView {
     private func configureItemLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0/2),
-            heightDimension: .absolute(CGFloat(232).scaledHeight))
+            heightDimension: .absolute(CGFloat(174).scaledHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0)
         item.edgeSpacing = .init(
@@ -148,22 +136,6 @@ class AdditionalCollectionView: UICollectionView {
         return section
     }
     
-    private func configureOtherLayout() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        
-        return section
-    }
-    
     private func configureCollectionViewDataSource() {
         diffableDatasource = DataSource(
             collectionView: self,
@@ -178,28 +150,12 @@ class AdditionalCollectionView: UICollectionView {
                     }
                 case .all(let datum):
                     if let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: OptionSelectAdditionalItemCell.identifier,
-                        for: indexPath) as? OptionSelectAdditionalItemCell {
+                        withReuseIdentifier: OptionSelectBasicItemCell.identifier,
+                        for: indexPath) as? OptionSelectBasicItemCell {
                         cell.setData(datum: datum)
-                        cell.setSelectButtonIsSelected(isSelected: self.selectedItemIndexPath.contains(indexPath))
                         cell.addActionLearnMoreViewButton(handler: {
                             print(indexPath.row)
                         })
-                        cell.addActionSelectButton(handler: {
-                            if self.selectedItemIndexPath.contains(indexPath) {
-                                self.selectedItemIndexPath = self.selectedItemIndexPath.filter { $0 != indexPath }
-                            } else {
-                                self.selectedItemIndexPath.append(indexPath)
-                            }
-                        })
-                        return cell
-                    }
-                case .other(let datum):
-                    if let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: OptionSelectTagItemCell.identifier,
-                        for: indexPath) as? OptionSelectTagItemCell {
-                        cell.setData(datum: datum)
-                        
                         return cell
                     }
                 }
@@ -239,32 +195,11 @@ class AdditionalCollectionView: UICollectionView {
         })
     }
     
-    func updateItemSnapShot(data: [AdditionalOptionItem]) {
+    func updateItemSnapShot(data: [BasicOptionItem]) {
         var snapshot = diffableDatasource.snapshot()
-        if snapshot.sectionIdentifiers.contains(.other) {
-            snapshot.deleteSections([.other])
-        }
-        
-        if !snapshot.sectionIdentifiers.contains(.all) {
-            snapshot.appendSections([.all])
-        }
-        
+        snapshot.deleteSections([.all])
+        snapshot.appendSections([.all])
         snapshot.appendItems(data.map { .all(datum: $0) }, toSection: .all)
-        diffableDatasource.apply(snapshot)
-    }
-    
-    func updateTagItemSnasphot(data: [OptionTagData]) {
-        var snapshot = diffableDatasource.snapshot()
-        
-        if snapshot.sectionIdentifiers.contains(.all) {
-            snapshot.deleteSections([.all])
-        }
-        
-        if !snapshot.sectionIdentifiers.contains(.other) {
-            snapshot.appendSections([.other])
-        }
-        
-        snapshot.appendItems(data.map { .other(datum: $0) }, toSection: .other)
         diffableDatasource.apply(snapshot)
     }
     
@@ -272,82 +207,51 @@ class AdditionalCollectionView: UICollectionView {
 }
 
 // MARK: - UICollectionViewDelegate
-extension AdditionalCollectionView: UICollectionViewDelegate {
+extension BasicCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             currentSelectedCategoryIndexPath = indexPath
             
-            if indexPath.row != 0 {
-                updateTagItemSnasphot(data: [
-                    OptionTagData(
-                        tagImageURL: "",
-                        items: [
-                            OptionTagItem(
-                                name: "빌트인 캠(보조배터리 포함)",
-                                price: 0,
-                                imageURL: "a",
-                                xPosition: 16.0,
-                                yPosition: 10.0),
-                            OptionTagItem(
-                                name: "빌트인 캠(보조배터리 포함)",
-                                price: 0,
-                                imageURL: "b",
-                                xPosition: .toScaledWidth(value: 150),
-                                yPosition: 10.0),
-                            OptionTagItem(
-                                name: "빌트인 캠(보조배터리 포함)",
-                                price: 0,
-                                imageURL: "c",
-                                xPosition: .toScaledWidth(value: 200),
-                                yPosition: 10.0),
-                            OptionTagItem(
-                                name: "현대 스마트 센스 Ⅰ",
-                                price: 0,
-                                imageURL: "d",
-                                xPosition: .toScaledWidth(value: 120),
-                                yPosition: 80.0),
-                            OptionTagItem(
-                                name: "현대 스마트 센스 Ⅰ",
-                                price: 0,
-                                imageURL: "d",
-                                xPosition: .toScaledWidth(value: 250),
-                                yPosition: 150.0)
-                            ])
-                ])
-            } else {
+            if indexPath.row == 0 {
                 updateItemSnapShot(data: [
                     .init(
                         id: 1,
                         imageURL: "",
-                        selectRate: 6.5,
                         optionName: "현대 스마트 센스 Ⅰ",
-                        optionPrice: 1090000,
-                        badgeName: "H Genuine Accessories",
-                        tagList: [Tag(id: 1, name: "사용편의")]),
+                        tagList: [
+                            Tag(id: 1, name: "사용편의")
+                        ]),
                     .init(
                         id: 1,
                         imageURL: "",
-                        selectRate: 6.5,
+                        optionName: "현대 스마트 센스 Ⅰ",
+                        tagList: [
+                            Tag(id: 2, name: "사용편의")
+                        ]),
+                    .init(
+                        id: 3,
+                        imageURL: "",
                         optionName: "빌트인 캠(보조배터리 포함)",
-                        optionPrice: 1090000,
-                        badgeName: "H Genuine Accessories",
-                        tagList: [Tag(id: 1, name: "사용편의")]),
+                        tagList: [
+                            Tag(id: 1, name: "사용편의")
+                        ])
+                ])
+            } else {
+                updateItemSnapShot(data: [
+                    .init(
+                        id: 3,
+                        imageURL: "",
+                        optionName: "빌트인 캠(보조배터리 포함)",
+                        tagList: [
+                            Tag(id: 1, name: "사용편의")
+                        ]),
                     .init(
                         id: 1,
                         imageURL: "",
-                        selectRate: 82.0,
                         optionName: "현대 스마트 센스 Ⅰ",
-                        optionPrice: 1090000,
-                        badgeName: "N Performance",
-                        tagList: [Tag(id: 1, name: "사용편의")]),
-                    .init(
-                        id: 1,
-                        imageURL: "",
-                        selectRate: 65.0,
-                        optionName: "현대 스마트 센스 Ⅰ",
-                        optionPrice: 1090000,
-                        badgeName: "None",
-                        tagList: [Tag(id: 1, name: "사용편의")])
+                        tagList: [
+                            Tag(id: 2, name: "사용편의")
+                        ])
                 ])
             }
         } else {

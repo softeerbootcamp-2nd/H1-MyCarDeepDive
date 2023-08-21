@@ -15,15 +15,23 @@ class OptionSelectViewController: UIViewController {
     }
     
     // MARK: - UI properties
-    private let collectionView = AdditionalCollectionView()
     private lazy var segmentedControl = OptionSelectSegmentedControl(items: ["추가 옵션", "기본 포함 옵션"]).set {
         $0.addTarget(self, action: #selector(changeSegmentedValue), for: .valueChanged)
     }
+    private var pageViewController: UIPageViewController = UIPageViewController(
+        transitionStyle: .scroll,
+        navigationOrientation: .horizontal)
     
     // MARK: - Properties
+    private var viewControllers: [UIViewController] = []
     private var currentSegmentedIndex: Int = 0 {
         didSet {
-            print(currentSegmentedIndex)
+            let direction: UIPageViewController.NavigationDirection = oldValue <= currentSegmentedIndex ? .forward : .reverse
+            self.pageViewController.setViewControllers(
+                [viewControllers[currentSegmentedIndex]],
+                direction: direction,
+                animated: true,
+                completion: nil)
         }
     }
     
@@ -44,14 +52,18 @@ class OptionSelectViewController: UIViewController {
     private func setupViews() {
         view.addSubviews([
             segmentedControl,
-            collectionView
+            pageViewController.view
         ])
+        addChild(pageViewController)
+        pageViewController.didMove(toParent: self)
+        
+        viewControllers = [AdditionalOptionViewController(), BasicOptionViewController()]
     }
     
     private func configureUI() {
         view.backgroundColor = .white
         
-        configureCollectionView()
+        configurePageViewController()
     }
     
     private func configureSegmentedControl() {
@@ -64,14 +76,19 @@ class OptionSelectViewController: UIViewController {
         segmentedControl.configureBottomBorder()
     }
     
-    private func configureCollectionView() {
+    private func configurePageViewController() {
+        if let firstViewController = viewControllers.first {
+            pageViewController.setViewControllers(
+                [firstViewController],
+                direction: .forward,
+                animated: true)
+        }
+        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(
-                equalTo: segmentedControl.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor)
+            pageViewController.view.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
+            pageViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pageViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pageViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
