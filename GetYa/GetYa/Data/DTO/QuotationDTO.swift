@@ -53,36 +53,36 @@ struct QuotationDTO: Decodable {
         }
     }
     
+    struct Option: Decodable {
+        let optionID: Int
+        let optionName: String
+        let optionImgURL: URL
+        let price: Int
+        let comment: String
+        
+        enum CodingKeys: String, CodingKey {
+            case optionID = "option_id"
+            case optionName = "option_name"
+            case optionImgURL = "option_img_url"
+            case price, comment
+        }
+    }
+    
+    struct Package: Decodable {
+        let optionID: Int
+        let optionName: String
+        let optionImgURL: URL
+        let price: Int
+        let comment: String
+        
+        enum CodingKeys: String, CodingKey {
+            case optionID = "option_id"
+            case optionName = "option_name"
+            case optionImgURL = "option_img_url"
+            case price, comment
+        }
+    }
+
     let status: Status
     let data: Data
-}
-
-struct Option: Decodable {
-    let optionID: Int
-    let optionName: String
-    let optionImgURL: URL
-    let price: Int
-    let comment: String
-    
-    enum CodingKeys: String, CodingKey {
-        case optionID = "option_id"
-        case optionName = "option_name"
-        case optionImgURL = "option_img_url"
-        case price, comment
-    }
-}
-
-struct Package: Decodable {
-    let optionID: Int
-    let optionName: String
-    let optionImgURL: URL
-    let price: Int
-    let comment: String
-    
-    enum CodingKeys: String, CodingKey {
-        case optionID = "option_id"
-        case optionName = "option_name"
-        case optionImgURL = "option_img_url"
-        case price, comment
-    }
 }
