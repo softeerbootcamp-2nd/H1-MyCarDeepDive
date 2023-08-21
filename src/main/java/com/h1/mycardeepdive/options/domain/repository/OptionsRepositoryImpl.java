@@ -61,7 +61,7 @@ public class OptionsRepositoryImpl implements OptionsRepositoryCustom {
                 .innerJoin(optionPackage)
                 .on(optionPackage.packages.id.eq(packages.id))
                 .where(optionPackage.packages.id.eq(packageId))
-                .fetchOne();
+                .fetchFirst();
     }
 
     @Override
