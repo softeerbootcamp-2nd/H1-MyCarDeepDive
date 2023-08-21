@@ -8,7 +8,7 @@
 import Foundation
 
 struct TrimCarSpecRequestDTO: Encodable {
-    let engineId: String
-    let bodyId: String
-    let drivingSystemId: String
+    let engineId: Int
+    let bodyId: Int
+    let drivingSystemId: Int
 }
