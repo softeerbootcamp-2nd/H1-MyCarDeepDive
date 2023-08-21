@@ -7,13 +7,8 @@
 
 import Foundation
 
-struct CarData: Codable {
-    struct Status: Codable {
-        let code: String
-        let message: String
-    }
-    
-    struct CarDetails: Codable {
+struct QuotationDTO: Decodable {
+    struct Data: Decodable {
         let trimName: String
         let carImgURL: URL
         let comment1: String
@@ -27,10 +22,13 @@ struct CarData: Codable {
         let exteriorColorID: Int
         let exteriorColorName: String
         let exteriorColorPrice: Int
+        let exteriorColorComment: String
         let exteriorColorIconURL: URL
         let interiorColorID: Int
         let interiorColorName: String
         let interiorColorPrice: Int
+        let interiorColorComment: String
+        let interiorColorIconURL: URL
         let options: [Option]
         let packages: [Package]
         let totalPrice: Int
@@ -44,19 +42,22 @@ struct CarData: Codable {
             case exteriorColorID = "exterior_color_id"
             case exteriorColorName = "exterior_color_name"
             case exteriorColorPrice = "exterior_color_price"
+            case exteriorColorComment = "exterior_color_comment"
             case exteriorColorIconURL = "exterior_color_icon_url"
             case interiorColorID = "interior_color_id"
             case interiorColorName = "interior_color_name"
             case interiorColorPrice = "interior_color_price"
+            case interiorColorComment = "interior_color_comment"
+            case interiorColorIconURL = "interior_color_icon_url"
             case options, packages, totalPrice
         }
     }
     
     let status: Status
-    let data: CarDetails
+    let data: Data
 }
 
-struct Option: Codable {
+struct Option: Decodable {
     let optionID: Int
     let optionName: String
     let optionImgURL: URL
@@ -71,7 +72,7 @@ struct Option: Codable {
     }
 }
 
-struct Package: Codable {
+struct Package: Decodable {
     let optionID: Int
     let optionName: String
     let optionImgURL: URL
