@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SessionProviderImpl {
+final class SessionProvider {
     private let session: URLSession
     init(session: URLSession = .shared) {
         self.session = session
@@ -15,9 +15,12 @@ final class SessionProviderImpl {
 }
 
 // MARK: - EndpointProvider
-extension SessionProviderImpl: EndpointProvider {
-    func request<R: Decodable, E: Endpoint<R>>(with path: String, with endpoint: E) async throws -> R {
-        let urlRequest = try endpoint.makeRequest(with: path)
+extension SessionProvider: EndpointProvider {
+    func request<R, E>(
+        endpoint: E
+    ) async throws -> R where R == E.ResponseDTO, E: NetworkInteractionable {
+        let urlRequest = try endpoint.makeRequest(with: endpoint.responseType)
+        print(urlRequest.url)
         do {
             let (data, response) = try await session.data(for: urlRequest)
             try checkResult(data: data, response)
@@ -43,7 +46,7 @@ extension SessionProviderImpl: EndpointProvider {
 }
 
 // MARK: - Private functions
-extension SessionProviderImpl {
+extension SessionProvider {
     private func checkResult(data: Data, _ response: URLResponse) throws {
         guard let response = response as? HTTPURLResponse else {
             throw NetworkError.unknown
