@@ -82,4 +82,8 @@ public class CarSpecService {
             return List.of(52L, 127L, 27L);
         }
     }
+
+    public boolean userClickedTrimLog(Long trimId) {
+        return true;
+    }
 }

@@ -128,4 +128,12 @@ public class ColorService {
         }
         return false;
     }
+
+    public boolean userClickedExteriorColorLog(Long exteriorColorId) {
+        return true;
+    }
+
+    public boolean userClickedInteriorColorLog(Long interiorColorId) {
+        return true;
+    }
 }

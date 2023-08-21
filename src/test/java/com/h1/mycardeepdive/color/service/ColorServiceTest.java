@@ -1,6 +1,9 @@
 package com.h1.mycardeepdive.color.service;
 
+import static com.h1.mycardeepdive.fixture.ExteriorColorFixture.createExteriorColor;
+import static com.h1.mycardeepdive.fixture.InteriorColorFixture.createInteriorColor;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import com.h1.mycardeepdive.color.domain.*;
@@ -313,5 +316,27 @@ class ColorServiceTest {
         assertThat(otherTrimColor.getImg_url()).isEqualTo(interiorColor2.getImgUrl());
         assertThat(otherTrimColor.getCar_img_url()).isEqualTo(interiorColor2.getInteriorImgUrl());
         assertThat(otherTrimColor.getChoose_rate()).isEqualTo(interiorColor2.getChooseRate());
+    }
+
+    @DisplayName("외장컬러 로그 전송에 성공한다.")
+    @Test
+    void sendUserExteriorColorClickLog() {
+        // given
+        ExteriorColor exteriorColor = createExteriorColor();
+        boolean result = colorService.userClickedExteriorColorLog(exteriorColor.getId());
+
+        // when&then
+        assertTrue(result);
+    }
+
+    @DisplayName("내장컬러 로그 전송에 성공한다.")
+    @Test
+    void sendUserInteriorColorClickLog() {
+        // given
+        InteriorColor interiorColor = createInteriorColor();
+        boolean result = colorService.userClickedInteriorColorLog(interiorColor.getId());
+
+        // when&then
+        assertTrue(result);
     }
 }

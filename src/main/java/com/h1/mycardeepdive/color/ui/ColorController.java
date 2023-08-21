@@ -6,10 +6,7 @@ import com.h1.mycardeepdive.color.ui.dto.ExteriorColorResponse;
 import com.h1.mycardeepdive.color.ui.dto.InteriorColorResponse;
 import com.h1.mycardeepdive.global.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,5 +36,17 @@ public class ColorController {
     public ApiResponse<AllColorResponse> getAllColors(@RequestParam("trimId") Long trimId) {
         AllColorResponse allColorResponse = colorService.findAllColors(trimId);
         return new ApiResponse<>(allColorResponse);
+    }
+
+    @PostMapping("/exterior-colors/activity-log/{exterior-color-id}")
+    public ApiResponse<Boolean> userClickedExteriorColorLog(
+            @PathVariable("exterior-color-id") Long exteriorColorId) {
+        return new ApiResponse<>(colorService.userClickedExteriorColorLog(exteriorColorId));
+    }
+
+    @PostMapping("/interior-colors/activity-log/{interior-color-id}")
+    public ApiResponse<Boolean> userClickedInteriorColorLog(
+            @PathVariable("interior-color-id") Long interiorColorId) {
+        return new ApiResponse<>(colorService.userClickedInteriorColorLog(interiorColorId));
     }
 }

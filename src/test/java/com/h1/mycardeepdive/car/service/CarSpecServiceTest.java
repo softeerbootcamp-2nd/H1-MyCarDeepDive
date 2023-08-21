@@ -6,6 +6,7 @@ import static com.h1.mycardeepdive.fixture.DrivingSystemFixture.create2WDDriving
 import static com.h1.mycardeepdive.fixture.EngineFixture.createDieselEngine;
 import static com.h1.mycardeepdive.fixture.TrimFixture.createExclusiveTrim;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import com.h1.mycardeepdive.car.domain.Body;
@@ -87,5 +88,16 @@ class CarSpecServiceTest {
         assertThat(carSpecComparisonResponse.getNavigation_size())
                 .isEqualTo(trim.getNavigationSize());
         assertThat(carSpecComparisonResponse.getCluster_size()).isEqualTo(trim.getClusterSize());
+    }
+
+    @DisplayName("트림 로그 전송에 성공한다.")
+    @Test
+    void sendUserTrimClickLog() {
+        // given
+        Trim trim = createExclusiveTrim();
+        boolean result = carSpecService.userClickedTrimLog(trim.getId());
+
+        // when&then
+        assertTrue(result);
     }
 }

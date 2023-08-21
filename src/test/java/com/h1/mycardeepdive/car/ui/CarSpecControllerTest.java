@@ -149,4 +149,33 @@ class CarSpecControllerTest extends ControllerTestConfig {
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+    @DisplayName("트림 로그 전송 기능에 성공한다.")
+    @Test
+    void clickTrimLogTest() throws Exception {
+        // given
+        Long trimId = 1L;
+        when(carSpecService.userClickedTrimLog(trimId)).thenReturn(true);
+
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.post(
+                                                DEFAULT_URL + "/activity-log/{trim-id}", trimId)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "trim-click",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("트림")
+                                                        .description("트림 클릭 시, 로그 전송")
+                                                        .requestFields()
+                                                        .responseFields()
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }
