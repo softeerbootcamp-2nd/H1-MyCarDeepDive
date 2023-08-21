@@ -15,11 +15,11 @@ public class OptionPackage {
     @Column(name = "option_package_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "option_id")
     private Options option;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "package_id")
     private Packages packages;
 
