@@ -92,6 +92,7 @@ public class OptionsRepositoryImpl implements OptionsRepositoryCustom {
     public List<Options> findOptionsByTagIdAndCarSpecId(Long tagId, Long carSpecId) {
         return queryFactory
                 .selectFrom(options)
+                .distinct()
                 .innerJoin(carSpecOptions)
                 .on(options.id.eq(carSpecOptions.options.id))
                 .innerJoin(optionTag)
