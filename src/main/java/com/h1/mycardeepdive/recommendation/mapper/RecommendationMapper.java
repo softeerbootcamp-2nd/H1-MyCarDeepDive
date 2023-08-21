@@ -1,5 +1,6 @@
 package com.h1.mycardeepdive.recommendation.mapper;
 
+import static com.h1.mycardeepdive.recommendation.mapper.RecommendationColorDtoMapper.toRecommendationColorDto;
 import static com.h1.mycardeepdive.recommendation.mapper.RecommendationOptionDtoMapper.toRecommendationOptionDto;
 
 import com.h1.mycardeepdive.car.domain.CarSpec;
@@ -61,16 +62,8 @@ public class RecommendationMapper {
                 carSpec.getBody().getName(),
                 carSpec.getId(),
                 trim.getId(),
-                exteriorColor.getId(),
-                exteriorColor.getName(),
-                exteriorColor.getPrice(),
-                exteriorColor.getComment(),
-                exteriorColor.getImgUrl(),
-                interiorColor.getId(),
-                interiorColor.getName(),
-                interiorColor.getPrice(),
-                interiorColor.getComment(),
-                interiorColor.getImgUrl(),
+                toRecommendationColorDto(exteriorColor),
+                toRecommendationColorDto(interiorColor),
                 recommendationOptionDtos,
                 recommendationPackageDtos,
                 totalPrice);
