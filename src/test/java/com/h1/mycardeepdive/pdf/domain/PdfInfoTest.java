@@ -21,7 +21,8 @@ public class PdfInfoTest {
         String drivingSystem = "4WD";
         Long basicPrice = 1000000L;
         List<SimpleOption> optionList =
-                Collections.singletonList(new SimpleOption("Option name", 10000L));
+                Collections.singletonList(
+                        new SimpleOption("Option name", 10000L, "option_img.url"));
         String pdfUrl = "document.pdf";
 
         // when
@@ -60,5 +61,19 @@ public class PdfInfoTest {
         AssertionsForClassTypes.assertThat(pdfInfo1).isEqualTo(pdfInfo2);
         AssertionsForClassTypes.assertThat(pdfInfo1.hashCode()).isEqualTo(pdfInfo2.hashCode());
         AssertionsForClassTypes.assertThat(optionSet.size()).isEqualTo(1);
+    }
+
+    @DisplayName("pdf의 setter를 테스트한다.")
+    @Test
+    void testPdfSetter(){
+        // given
+        String pdfUrl = "url";
+
+        // when
+        PdfInfo pdfInfo = PdfInfo.builder().build();
+        pdfInfo.setPdf_url(pdfUrl);
+
+        // then
+        assertThat(pdfInfo.getPdf_url()).isEqualTo(pdfUrl);
     }
 }
