@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AllColorResponse {
-    ExteriorColorResponse exteriorColorResponse;
-    InteriorColorResponse interiorColorResponse;
+    ExteriorColorResponse exterior_color_response;
+    InteriorColorResponse interior_color_response;
 }

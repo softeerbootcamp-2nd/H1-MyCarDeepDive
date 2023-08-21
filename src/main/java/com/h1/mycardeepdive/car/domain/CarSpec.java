@@ -1,8 +1,8 @@
 package com.h1.mycardeepdive.car.domain;
 
 import com.h1.mycardeepdive.options.domain.CarSpecOptions;
+import com.h1.mycardeepdive.options.domain.CarSpecPackage;
 import com.h1.mycardeepdive.trims.domain.Trim;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -39,8 +39,11 @@ public class CarSpec {
     @JoinColumn(name = "driving_system_id")
     private DrivingSystem drivingSystem;
 
-    @OneToMany(mappedBy = "carSpec")
-    private List<CarSpecOptions> carSpecOptions = new ArrayList<>();
+    @OneToMany(mappedBy = "carSpec", fetch = FetchType.LAZY)
+    private List<CarSpecOptions> carSpecOptions;
+
+    @OneToMany(mappedBy = "carSpec", fetch = FetchType.LAZY)
+    private List<CarSpecPackage> carSpecPackages;
 
     private long price;
 

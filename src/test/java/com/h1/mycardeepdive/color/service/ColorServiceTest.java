@@ -84,7 +84,6 @@ class ColorServiceTest {
                         .id(1L)
                         .exteriorColor(exteriorColor1)
                         .interiorColor(interiorColor1)
-                        .trimsColorCombinations(null)
                         .build();
 
         ColorCombination colorCombination2 =
@@ -123,6 +122,37 @@ class ColorServiceTest {
                         .exteriorColor(exteriorColor1)
                         .build();
 
+        TrimExteriorColor trimExteriorColor2 =
+                TrimExteriorColor.builder()
+                        .id(2L)
+                        .trim(trim2)
+                        .exteriorColor(exteriorColor2)
+                        .build();
+
+        exteriorColor1 =
+                ExteriorColor.builder()
+                        .id(1L)
+                        .name("그라파이트 그레이 메탈릭")
+                        .imgUrl("/exterior/icon/001.jpg")
+                        .exteriorImgUrl("/exterior/car/001.jpg")
+                        .chooseRate(25.0)
+                        .price(10000)
+                        .comment("")
+                        .colorCombinations(List.of(colorCombination1))
+                        .trimExteriorColors(List.of(trimExteriorColor1))
+                        .build();
+
+        exteriorColor2 =
+                ExteriorColor.builder()
+                        .id(2L)
+                        .name("블랙")
+                        .imgUrl("/exterior/icon/002.jpg")
+                        .exteriorImgUrl("/exterior/car/002.jpg")
+                        .chooseRate(25.0)
+                        .colorCombinations(List.of(colorCombination2))
+                        .trimExteriorColors(List.of(trimExteriorColor2))
+                        .build();
+
         when(trimExteriorColorRepository.findAllExteriorColors())
                 .thenReturn(new ArrayList<>(List.of(exteriorColor1, exteriorColor2)));
 
@@ -132,8 +162,8 @@ class ColorServiceTest {
         // when
         ExteriorColorResponse colorResponse =
                 colorService.findExteriorColors(trimId, interiorColorId);
-        ExteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(1L);
-        ExteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(2L);
+        ExteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
+        ExteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(0);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(exteriorColor1.getName());
@@ -232,6 +262,35 @@ class ColorServiceTest {
                         .interiorColor(interiorColor1)
                         .build();
 
+        TrimInteriorColor trimInteriorColor2 =
+                TrimInteriorColor.builder()
+                        .id(2L)
+                        .trim(trim2)
+                        .interiorColor(interiorColor2)
+                        .build();
+
+        interiorColor1 =
+                InteriorColor.builder()
+                        .id(1L)
+                        .name("퀼팅천연 (블랙)")
+                        .imgUrl("/interior/icon/001.jpg")
+                        .interiorImgUrl("/interior/car/001.jpg")
+                        .chooseRate(25.0)
+                        .colorCombinations(List.of(colorCombination1))
+                        .trimInteriorColors(List.of(trimInteriorColor1))
+                        .build();
+
+        interiorColor2 =
+                InteriorColor.builder()
+                        .id(2L)
+                        .name("퀼팅천연 (블랙)")
+                        .imgUrl("/interior/icon/001.jpg")
+                        .interiorImgUrl("/interior/car/001.jpg")
+                        .chooseRate(25.0)
+                        .colorCombinations(List.of(colorCombination2))
+                        .trimInteriorColors(List.of(trimInteriorColor2))
+                        .build();
+
         when(trimInteriorColorRepository.findAllInteriorColors())
                 .thenReturn(new ArrayList<>(List.of(interiorColor1, interiorColor2)));
 
@@ -241,8 +300,8 @@ class ColorServiceTest {
         // when
         InteriorColorResponse colorResponse =
                 colorService.findInteriorColors(trimId, exteriorColorId);
-        InteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(1L);
-        InteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(2L);
+        InteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
+        InteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(0);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(interiorColor1.getName());
