@@ -34,7 +34,7 @@ final class DetailQuestionCarPriceSelectView: UIView {
         fontType: .custom(size: 24, kern: -0.2, lineHeight: 26, nameType: .mediumHead),
         color: .GetYaPalette.gray50,
         text: "가격대 준비중입니다.")
-    private let priceSlider = TwoWaySlider()
+    private let priceSlider = CharacterSelectDetailSlider()
     private let priceMinimumLabel = CommonLabel(
         fontType: .regularBody4,
         color: .GetYaPalette.gray400,

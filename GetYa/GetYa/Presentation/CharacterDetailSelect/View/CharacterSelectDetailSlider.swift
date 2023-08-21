@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class TwoWaySlider: UISlider {
+final class CharacterSelectDetailSlider: UISlider {
     enum Constants {
         static let trackHeight: CGFloat = .toScaledHeight(value: 8)
         static let thumbHeight: CGFloat = .toScaledHeight(value: 24)
@@ -102,7 +102,7 @@ final class TwoWaySlider: UISlider {
 }
 
 // MARK: - LayoutSupportable
-extension TwoWaySlider: LayoutSupportable {
+extension CharacterSelectDetailSlider: LayoutSupportable {
     func setupViews() {
         addSubview(thumbImageView)
     }

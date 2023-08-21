@@ -8,6 +8,16 @@
 import UIKit
 
 class CommonOptionView: UIView {
+    enum Constants {
+        enum TitleLabel {
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+        }
+        enum PriceLabel {
+            static let topMargin: CGFloat = .toScaledHeight(value: 4)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+        }
+    }
+    
     // MARK: - UI Properties
     private let imageView = CommonOptionImageView()
     private let titleLabel = CommonLabel(
@@ -18,8 +28,6 @@ class CommonOptionView: UIView {
         color: .GetYaPalette.gray100)
     
     // MARK: - Properties
-    private let titleLabelLayoutConstant = UILayout(leadingMargin: 16)
-    private let priceLabelLayoutConstant = UILayout(leadingMargin: 16, topMargin: 4)
     
     // MARK: - LifeCycles
     init(image: UIImage, title: String, price: Int) {
@@ -82,22 +90,26 @@ class CommonOptionView: UIView {
     }
     
     private func configureTitleLabelLayout() {
+        typealias Const = Constants.TitleLabel
+        
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
             titleLabel.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor,
-                constant: titleLabelLayoutConstant.leadingMargin)
+                constant: Const.leadingMargin)
         ])
     }
     
     private func configurePriceLabelLayout() {
+        typealias Const = Constants.PriceLabel
+        
         NSLayoutConstraint.activate([
             priceLabel.topAnchor.constraint(
                 equalTo: titleLabel.bottomAnchor,
-                constant: priceLabelLayoutConstant.topMargin),
+                constant: Const.topMargin),
             priceLabel.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor,
-                constant: priceLabelLayoutConstant.leadingMargin),
+                constant: Const.leadingMargin),
             priceLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }

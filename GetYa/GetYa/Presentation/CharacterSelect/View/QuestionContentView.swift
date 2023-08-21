@@ -12,6 +12,25 @@ protocol QuestionContentViewDelegate: AnyObject {
 }
 
 class QuestionContentView: UIView {
+    enum Constants {
+        enum DescriptionLabel {
+            static let topMargin: CGFloat = .toScaledHeight(value: 29)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+        }
+        enum QuestionNumberView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 24)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 40)
+            static let width: CGFloat = .toScaledWidth(value: 65)
+        }
+        enum Button {
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 17)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -17)
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -32)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+        }
+    }
+    
     // MARK: - UI Properties
     private let button = CommonButton(
         font: GetYaFont.mediumBody3.uiFont,
@@ -25,17 +44,6 @@ class QuestionContentView: UIView {
     
     // MARK: - Properties
     weak var delegate: QuestionContentViewDelegate?
-    private let descriptionLabelLayoutConstant = UILayout(leadingMargin: 16, topMargin: 29)
-    private let questionNumberViewLayoutConstant = UILayout(
-        topMargin: 24,
-        trailingMargin: -16,
-        height: 40,
-        width: 65)
-    private let buttonLayoutConstant = UILayout(
-        leadingMargin: 17,
-        trailingMargin: -17,
-        bottomMargin: -32,
-        height: 52)
     
     // MARK: - LifeCycles
     convenience init() {
@@ -92,43 +100,49 @@ class QuestionContentView: UIView {
     }
     
     private func configureDescriptionLabel() {
+        typealias Const = Constants.DescriptionLabel
+        
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(
-                equalTo: self.topAnchor,
-                constant: descriptionLabelLayoutConstant.topMargin),
+                equalTo: topAnchor,
+                constant: Const.topMargin),
             descriptionLabel.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor,
-                constant: descriptionLabelLayoutConstant.leadingMargin)
+                equalTo: leadingAnchor,
+                constant: Const.leadingMargin)
         ])
     }
     
     private func configureQuestionNumberView() {
+        typealias Const = Constants.QuestionNumberView
+        
         NSLayoutConstraint.activate([
             questionNumberView.topAnchor.constraint(
-                equalTo: self.topAnchor,
-                constant: questionNumberViewLayoutConstant.topMargin),
+                equalTo: topAnchor,
+                constant: Const.topMargin),
             questionNumberView.trailingAnchor.constraint(
-                equalTo: self.trailingAnchor,
-                constant: questionNumberViewLayoutConstant.trailingMargin),
+                equalTo: trailingAnchor,
+                constant: Const.trailingMargin),
             questionNumberView.heightAnchor.constraint(
-                equalToConstant: questionNumberViewLayoutConstant.height),
+                equalToConstant: Const.height),
             questionNumberView.widthAnchor.constraint(
-                equalToConstant: questionNumberViewLayoutConstant.width)
+                equalToConstant: Const.width)
         ])
     }
     
     private func configureButton() {
+        typealias Const = Constants.Button
         button.addTarget(self, action: #selector(touchUpButton(_:)), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             button.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor,
-                constant: buttonLayoutConstant.leadingMargin),
+                equalTo: leadingAnchor,
+                constant: Const.leadingMargin),
             button.trailingAnchor.constraint(
-                equalTo: self.trailingAnchor,
-                constant: buttonLayoutConstant.trailingMargin),
+                equalTo: trailingAnchor,
+                constant: Const.trailingMargin),
             button.bottomAnchor.constraint(
-                equalTo: self.bottomAnchor),
-            button.heightAnchor.constraint(equalToConstant: buttonLayoutConstant.height)
+                equalTo: bottomAnchor),
+            button.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     

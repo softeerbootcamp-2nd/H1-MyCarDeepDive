@@ -12,6 +12,21 @@ protocol LifeStyleViewControllerDelegate: AnyObject {
 }
 
 class LifeStyleViewController: UIViewController {
+    enum Constants {
+        enum CollectionView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 43)
+            static let height: CGFloat = .toScaledHeight(value: 320)
+            static let cellSpacing: CGFloat = .toScaledWidth(value: 8)
+        }
+        enum Cell {
+            static let height: CGFloat = .toScaledHeight(value: 320)
+            static let width: CGFloat = .toScaledWidth(value: 278)
+        }
+        enum PageControl {
+            static let topMargin: CGFloat = .toScaledHeight(value: 32)
+        }
+    }
+    
     // MARK: - UI Properties
     private let contentView = QuestionContentView()
     private lazy var collectionView = UICollectionView(
@@ -22,10 +37,6 @@ class LifeStyleViewController: UIViewController {
     
     // MARK: - Properties
     weak var delegate: LifeStyleViewControllerDelegate?
-    private let collectionViewLayoutConstant = UILayout(topMargin: 43, height: 320)
-    private let cellLayoutConstant = UILayout(height: 320, width: 278)
-    private let cellSpacing: CGFloat = 8
-    private let pageControlLayoutConstant = UILayout(topMargin: 32)
     let descriptionTexts: [String] = [
         "가족과 함께 타서 안전을\n중시해요",
         "매일 출퇴근하여 경제적이고\n편안한 주행을 원해요",
@@ -73,9 +84,9 @@ class LifeStyleViewController: UIViewController {
     // MARK: - Functions
     private func createCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: cellLayoutConstant.width, height: cellLayoutConstant.height)
-        flowLayout.minimumLineSpacing = cellSpacing
-        flowLayout.minimumInteritemSpacing = cellSpacing
+        flowLayout.itemSize = CGSize(width: Constants.Cell.width, height: Constants.Cell.height)
+        flowLayout.minimumLineSpacing = Constants.CollectionView.cellSpacing
+        flowLayout.minimumInteritemSpacing = Constants.CollectionView.cellSpacing
         flowLayout.scrollDirection = .horizontal
         
         return flowLayout
@@ -108,15 +119,15 @@ class LifeStyleViewController: UIViewController {
         collectionView.isPagingEnabled = false
         collectionView.decelerationRate = .fast
         collectionView.showsHorizontalScrollIndicator = false
-        let insetX = (UIScreen.main.bounds.width - cellLayoutConstant.width) / 2.0
+        let insetX = (UIScreen.main.bounds.width - Constants.Cell.width) / 2.0
         collectionView.contentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
                 equalTo: contentView.descriptionLabel.bottomAnchor,
-                constant: collectionViewLayoutConstant.topMargin),
+                constant: Constants.CollectionView.topMargin),
             collectionView.heightAnchor.constraint(
-                equalToConstant: collectionViewLayoutConstant.height),
+                equalToConstant: Constants.CollectionView.height),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -124,10 +135,12 @@ class LifeStyleViewController: UIViewController {
     }
     
     private func configurePageControl() {
+        typealias Const = Constants.PageControl
+        
         NSLayoutConstraint.activate([
             pageControl.topAnchor.constraint(
                 equalTo: collectionView.bottomAnchor,
-                constant: pageControlLayoutConstant.topMargin),
+                constant: Const.topMargin),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -207,7 +220,7 @@ extension LifeStyleViewController {
         targetContentOffset: UnsafeMutablePointer<CGPoint>
     ) {
         let scrolledOffsetX = targetContentOffset.pointee.x + scrollView.contentInset.left
-        let cellWidth: CGFloat = cellLayoutConstant.width + cellSpacing
+        let cellWidth: CGFloat = Constants.Cell.width + Constants.CollectionView.cellSpacing
         let index = round(scrolledOffsetX / cellWidth)
         pageControl.currentPage = Int(index)
         targetContentOffset.pointee = CGPoint(

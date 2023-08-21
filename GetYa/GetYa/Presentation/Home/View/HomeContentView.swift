@@ -10,7 +10,34 @@ import AVKit
 
 // TODO: 백그라운드로 나갔다오면 video가 재생안됨. 멈춰있음
 
+protocol HomeContentDelegate: AnyObject {
+    func touchUpRecomandButton()
+    func touchUpCustomButton()
+}
+
 class HomeContentView: UIView {
+    enum Constants {
+        enum CustomButton {
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 17)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -17)
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -8)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+        }
+        enum RecommendButton {
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 17)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -17)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+        }
+        enum PlayerLayer {
+            static let height: CGFloat = .toScaledHeight(value: 316)
+            static let width: CGFloat = .toScaledWidth(value: 484)
+        }
+        enum GradientLayer {
+            static let height: CGFloat = .toScaledHeight(value: 85)
+            static let width: CGFloat = .toScaledWidth(value: 484)
+        }
+    }
+    
     // MARK: - UI Properties
     private let customButton = CommonButton(
         font: UIFont(hyundaiSans: .mediumBody3) ?? .systemFont(ofSize: 16),
@@ -49,21 +76,7 @@ class HomeContentView: UIView {
     var playerLayer: AVPlayerLayer!
     var player: AVQueuePlayer!
     weak var delegate: HomeContentDelegate?
-    private let customButtonLayoutCosntant = UILayout(
-        leadingMargin: 17,
-        trailingMargin: -17,
-        bottomMargin: -8,
-        height: 52)
-    private let recomandButtonLayoutCosntant = UILayout(
-        leadingMargin: 17,
-        trailingMargin: -17,
-        height: 52)
-    private let playerLayerLayoutConstant = UILayout(
-        height: 316,
-        width: 484)
-    private let gradientLayerLayoutConstant = UILayout(
-        height: 85,
-        width: 484)
+   
     
     // MARK: - LifeCycles
     convenience init() {
@@ -118,31 +131,35 @@ class HomeContentView: UIView {
     }
     
     private func configureCustomButton() {
+        typealias Const = Constants.CustomButton
+        
         NSLayoutConstraint.activate([
             customButton.bottomAnchor.constraint(
                 equalTo: recomandButton.topAnchor,
-                constant: customButtonLayoutCosntant.bottomMargin),
+                constant: Const.bottomMargin),
             customButton.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: customButtonLayoutCosntant.leadingMargin),
+                constant: Const.leadingMargin),
             customButton.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: customButtonLayoutCosntant.trailingMargin),
-            customButton.heightAnchor.constraint(equalToConstant: customButtonLayoutCosntant.height)
+                constant: Const.trailingMargin),
+            customButton.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configureRecomandWideButton() {
+        typealias Const = Constants.RecommendButton
+        
         NSLayoutConstraint.activate([
             recomandButton.bottomAnchor.constraint(
                 equalTo: self.bottomAnchor),
             recomandButton.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: recomandButtonLayoutCosntant.leadingMargin),
+                constant: Const.leadingMargin),
             recomandButton.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: recomandButtonLayoutCosntant.trailingMargin),
-            recomandButton.heightAnchor.constraint(equalToConstant: recomandButtonLayoutCosntant.height)
+                constant: Const.trailingMargin),
+            recomandButton.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
@@ -158,14 +175,17 @@ class HomeContentView: UIView {
     }
     
     private func configureAVPlayerLayer() {
+        typealias PlayerLayerConst = Constants.PlayerLayer
+        typealias GradientLayerConst = Constants.GradientLayer
+        
         let centerX = self.bounds.maxX / 2
         let centerY = self.bounds.maxY / 2
         
         playerLayer.frame = CGRect(
-            x: centerX - playerLayerLayoutConstant.width / 2,
-            y: centerY - playerLayerLayoutConstant.height / 2,
-            width: playerLayerLayoutConstant.width,
-            height: playerLayerLayoutConstant.height)
+            x: centerX - PlayerLayerConst.width / 2,
+            y: centerY - PlayerLayerConst.height / 2,
+            width: PlayerLayerConst.width,
+            height: PlayerLayerConst.height)
         
         let view = UIView(frame: playerLayer.bounds)
         
@@ -178,8 +198,8 @@ class HomeContentView: UIView {
         topGradientLayer.frame = CGRect(
             x: 0,
             y: 0,
-            width: gradientLayerLayoutConstant.width,
-            height: gradientLayerLayoutConstant.height)
+            width: GradientLayerConst.width,
+            height: GradientLayerConst.height)
         topGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         topGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
         topGradientLayer.locations = [0.0, 1.0]
@@ -188,9 +208,9 @@ class HomeContentView: UIView {
         bottomGradientLayer.colors = colors
         bottomGradientLayer.frame = CGRect(
             x: 0,
-            y: view.bounds.height - gradientLayerLayoutConstant.height,
-            width: gradientLayerLayoutConstant.width,
-            height: gradientLayerLayoutConstant.height)
+            y: view.bounds.height - GradientLayerConst.height,
+            width: GradientLayerConst.width,
+            height: GradientLayerConst.height)
         bottomGradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
         bottomGradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
         bottomGradientLayer.locations = [0.0, 1.0]
