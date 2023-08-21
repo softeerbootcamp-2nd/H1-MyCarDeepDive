@@ -12,6 +12,7 @@
 		15040FC92A8E4C5E00DDC411 /* TagViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15040FC82A8E4C5E00DDC411 /* TagViewCell.swift */; };
 		150636392A9389270057724E /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150636382A9389270057724E /* DiskCache.swift */; };
 		1506363C2A9392150057724E /* RecommendationEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1506363B2A9392150057724E /* RecommendationEndpoints.swift */; };
+		1506363E2A9392480057724E /* CustomRecomendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1506363D2A9392480057724E /* CustomRecomendation.swift */; };
 		155776E12A90D27300E3C0E1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E02A90D27300E3C0E1 /* Endpoint.swift */; };
 		155776E32A90D29900E3C0E1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E22A90D29900E3C0E1 /* HTTPMethod.swift */; };
 		155776E62A90DA6B00E3C0E1 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E52A90DA6B00E3C0E1 /* Requestable.swift */; };
@@ -228,6 +229,7 @@
 		15059ABF2A88A54200303C01 /* CommonQuotationPreviewCarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewCarInfoView.swift; sourceTree = "<group>"; };
 		150636382A9389270057724E /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		1506363B2A9392150057724E /* RecommendationEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEndpoints.swift; sourceTree = "<group>"; };
+		1506363D2A9392480057724E /* CustomRecomendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRecomendation.swift; sourceTree = "<group>"; };
 		155729FE2A89563200D136C6 /* QuotationPreviewMainHeaderModel+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuotationPreviewMainHeaderModel+Mock.swift"; sourceTree = "<group>"; };
 		155776E02A90D27300E3C0E1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		155776E22A90D29900E3C0E1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -1127,6 +1129,7 @@
 				15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */,
 				15D2ABC52A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift */,
 				15D2ABC32A93574500F7DE8E /* TrimCarSpecResponseDTO.swift */,
+				1506363D2A9392480057724E /* CustomRecomendation.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1595,6 +1598,7 @@
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
 				15D2ABCF2A937EF900F7DE8E /* Cache.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
+				1506363E2A9392480057724E /* CustomRecomendation.swift in Sources */,
 				64E26A452A8A3E2800F6BC3A /* CarSettingSelectViewController.swift in Sources */,
 				64E26A6C2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift in Sources */,
 				155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */,
