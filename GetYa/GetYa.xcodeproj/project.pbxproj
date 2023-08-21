@@ -11,6 +11,7 @@
 		15040FC72A8DFC0800DDC411 /* CharacterDetailSelectViewModelabe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15040FC62A8DFC0800DDC411 /* CharacterDetailSelectViewModelabe.swift */; };
 		15040FC92A8E4C5E00DDC411 /* TagViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15040FC82A8E4C5E00DDC411 /* TagViewCell.swift */; };
 		150636392A9389270057724E /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150636382A9389270057724E /* DiskCache.swift */; };
+		1506363C2A9392150057724E /* RecommendationEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1506363B2A9392150057724E /* RecommendationEndpoints.swift */; };
 		155776E12A90D27300E3C0E1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E02A90D27300E3C0E1 /* Endpoint.swift */; };
 		155776E32A90D29900E3C0E1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E22A90D29900E3C0E1 /* HTTPMethod.swift */; };
 		155776E62A90DA6B00E3C0E1 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E52A90DA6B00E3C0E1 /* Requestable.swift */; };
@@ -226,6 +227,7 @@
 		15040FC82A8E4C5E00DDC411 /* TagViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewCell.swift; sourceTree = "<group>"; };
 		15059ABF2A88A54200303C01 /* CommonQuotationPreviewCarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewCarInfoView.swift; sourceTree = "<group>"; };
 		150636382A9389270057724E /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
+		1506363B2A9392150057724E /* RecommendationEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEndpoints.swift; sourceTree = "<group>"; };
 		155729FE2A89563200D136C6 /* QuotationPreviewMainHeaderModel+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuotationPreviewMainHeaderModel+Mock.swift"; sourceTree = "<group>"; };
 		155776E02A90D27300E3C0E1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		155776E22A90D29900E3C0E1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -690,6 +692,7 @@
 			children = (
 				15D2ABB52A9311FE00F7DE8E /* TrimEndpoints.swift */,
 				15D2ABC92A93594D00F7DE8E /* OptionEndpoints.swift */,
+				1506363B2A9392150057724E /* RecommendationEndpoints.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1559,6 +1562,7 @@
 				6412D08C2A81E5C1001E4005 /* LifeStylePeekViewController.swift in Sources */,
 				155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */,
 				155ED7242A7E6D5A0052896A /* ViewModelable.swift in Sources */,
+				1506363C2A9392150057724E /* RecommendationEndpoints.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */,
 				156A96A82A8C03A300AE1477 /* CharacterDetailQuestionListView.swift in Sources */,
