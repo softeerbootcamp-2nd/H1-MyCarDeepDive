@@ -13,5 +13,5 @@ protocol Cacheable {
     func isExist(_ key: Key) -> Bool
     func write(_ key: Key, data: Value?)
     func remove(_ key: Key)
-    func removeAll(_ key: Key)
+    func removeAll()
 }
