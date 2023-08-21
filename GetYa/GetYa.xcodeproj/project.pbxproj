@@ -81,6 +81,17 @@
 		641AB5242A7B821D00CF88C0 /* HomeContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5232A7B821D00CF88C0 /* HomeContentDelegate.swift */; };
 		641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */; };
 		641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */; };
+		6457CFA82A938F8700B3AAAF /* TrimSubOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOption.swift */; };
+		6457CFAA2A938F8E00B3AAAF /* TrimOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA92A938F8E00B3AAAF /* TrimOption.swift */; };
+		6457CFAC2A93941D00B3AAAF /* AdditionalOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */; };
+		6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */; };
+		6457CFB02A93944800B3AAAF /* AdditionalOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAF2A93944800B3AAAF /* AdditionalOption.swift */; };
+		6457CFB22A9394DB00B3AAAF /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFB12A9394DB00B3AAAF /* Tag.swift */; };
+		6457CFB42A93959B00B3AAAF /* BasicOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFB32A93959B00B3AAAF /* BasicOption.swift */; };
+		6457CFB62A9395D100B3AAAF /* OptionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFB52A9395D100B3AAAF /* OptionDetail.swift */; };
+		6457CFB82A93960500B3AAAF /* PackageOptionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFB72A93960500B3AAAF /* PackageOptionDetail.swift */; };
+		6457CFBA2A9397A500B3AAAF /* TagDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFB92A9397A500B3AAAF /* TagDetail.swift */; };
+		6457CFBC2A9397D600B3AAAF /* TagOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFBB2A9397D600B3AAAF /* TagOption.swift */; };
 		6484A7362A8C78BB00434136 /* UILayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF958D2A7C89630093EAC7 /* UILayout.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
@@ -280,6 +291,17 @@
 		641AB5232A7B821D00CF88C0 /* HomeContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentDelegate.swift; sourceTree = "<group>"; };
 		641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListStackView.swift; sourceTree = "<group>"; };
 		641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListItemView.swift; sourceTree = "<group>"; };
+		6457CFA72A938F8700B3AAAF /* TrimSubOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOption.swift; sourceTree = "<group>"; };
+		6457CFA92A938F8E00B3AAAF /* TrimOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimOption.swift; sourceTree = "<group>"; };
+		6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionList.swift; sourceTree = "<group>"; };
+		6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionPackage.swift; sourceTree = "<group>"; };
+		6457CFAF2A93944800B3AAAF /* AdditionalOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOption.swift; sourceTree = "<group>"; };
+		6457CFB12A9394DB00B3AAAF /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		6457CFB32A93959B00B3AAAF /* BasicOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOption.swift; sourceTree = "<group>"; };
+		6457CFB52A9395D100B3AAAF /* OptionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionDetail.swift; sourceTree = "<group>"; };
+		6457CFB72A93960500B3AAAF /* PackageOptionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageOptionDetail.swift; sourceTree = "<group>"; };
+		6457CFB92A9397A500B3AAAF /* TagDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetail.swift; sourceTree = "<group>"; };
+		6457CFBB2A9397D600B3AAAF /* TagOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagOption.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -1012,6 +1034,17 @@
 			isa = PBXGroup;
 			children = (
 				64ADA48A2A7788900003E2C1 /* Entity.swift */,
+				6457CFA92A938F8E00B3AAAF /* TrimOption.swift */,
+				6457CFA72A938F8700B3AAAF /* TrimSubOption.swift */,
+				6457CFB12A9394DB00B3AAAF /* Tag.swift */,
+				6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */,
+				6457CFAF2A93944800B3AAAF /* AdditionalOption.swift */,
+				6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */,
+				6457CFB32A93959B00B3AAAF /* BasicOption.swift */,
+				6457CFB52A9395D100B3AAAF /* OptionDetail.swift */,
+				6457CFB72A93960500B3AAAF /* PackageOptionDetail.swift */,
+				6457CFB92A9397A500B3AAAF /* TagDetail.swift */,
+				6457CFBB2A9397D600B3AAAF /* TagOption.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1337,10 +1370,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6484A7932A90F29400434136 /* CommonQuotationPreviewAdapterDataSource.swift in Sources */,
+				6457CFB02A93944800B3AAAF /* AdditionalOption.swift in Sources */,
 				6484A7562A8C837E00434136 /* LearnMoreView.swift in Sources */,
 				6484A7542A8C835D00434136 /* CommonView.swift in Sources */,
 				6484A7862A902D0800434136 /* QuotationFinishViewController.swift in Sources */,
 				6484A73E2A8C791C00434136 /* GetYaFont.swift in Sources */,
+				6457CFA82A938F8700B3AAAF /* TrimSubOption.swift in Sources */,
 				6484A73D2A8C791500434136 /* UIView+.swift in Sources */,
 				6484A7622A8CB8D900434136 /* AlertType.swift in Sources */,
 				6484A73C2A8C790A00434136 /* ConvenienceInit.swift in Sources */,
@@ -1364,6 +1399,7 @@
 				64E26A762A8C783500F6BC3A /* CommonQuotationPreviewTitleView.swift in Sources */,
 				64E26A742A8C77F900F6BC3A /* DetailQuotationPreviewTableViewAdapter.swift in Sources */,
 				6484A7992A90F39300434136 /* OptionSelectImageCell.swift in Sources */,
+				6457CFB82A93960500B3AAAF /* PackageOptionDetail.swift in Sources */,
 				155DDD052A82D040009AE2BC /* DetailQuotationPreviewViewModel.swift in Sources */,
 				64ADA4B12A78F82A0003E2C1 /* CGFloat+.swift in Sources */,
 				6412D0802A7F75DB001E4005 /* LifeStyleViewController.swift in Sources */,
@@ -1383,6 +1419,7 @@
 				64E26A572A8A3E2800F6BC3A /* TrimLearnMoreView.swift in Sources */,
 				6412D0842A80ABCA001E4005 /* QuestionNumberView.swift in Sources */,
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
+				6457CFB62A9395D100B3AAAF /* OptionDetail.swift in Sources */,
 				155EAB3A2A80824B00833B0E /* DetailQuotationPreviewViewController.swift in Sources */,
 				155DDD0A2A835FEF009AE2BC /* DetailQuotationPreviewSecionHeaderView.swift in Sources */,
 				15D8CC8F2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift in Sources */,
@@ -1427,6 +1464,7 @@
 				15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+.swift in Sources */,
 				6484A7842A902B6600434136 /* OptionSummaryContentView.swift in Sources */,
 				155B72A72A8C88D30091A7F4 /* TrimOptionDetailOptionCell.swift in Sources */,
+				6457CFBA2A9397A500B3AAAF /* TagDetail.swift in Sources */,
 				155DDD102A846077009AE2BC /* QuotationPreviewCarInfoModel+Mock.swift in Sources */,
 				6484A7742A8E4CD100434136 /* LoadingViewController.swift in Sources */,
 				641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */,
@@ -1455,6 +1493,7 @@
 				156A96A82A8C03A300AE1477 /* CharacterDetailQuestionListView.swift in Sources */,
 				156A969F2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift in Sources */,
 				156A96AB2A8C03D400AE1477 /* QuestionViewSendable.swift in Sources */,
+				6457CFB22A9394DB00B3AAAF /* Tag.swift in Sources */,
 				156A96AD2A8C57B600AE1477 /* TwoWaySlider.swift in Sources */,
 				6484A7502A8C82FE00434136 /* EngineDetailContentView.swift in Sources */,
 				6484A7972A90F33500434136 /* OptionSelectItemCell.swift in Sources */,
@@ -1465,7 +1504,9 @@
 				64E26A532A8A3E2800F6BC3A /* TrimOptionContentCollectionView.swift in Sources */,
 				641AB5242A7B821D00CF88C0 /* HomeContentDelegate.swift in Sources */,
 				6412D09D2A8387E6001E4005 /* TooltipView.swift in Sources */,
+				6457CFBC2A9397D600B3AAAF /* TagOption.swift in Sources */,
 				155B72AC2A8C9A460091A7F4 /* QuestionContentView.swift in Sources */,
+				6457CFAC2A93941D00B3AAAF /* AdditionalOptionList.swift in Sources */,
 				155B72A32A8C88570091A7F4 /* BottomSheetView.swift in Sources */,
 				6412D07E2A7E6A6A001E4005 /* TagView.swift in Sources */,
 				155B72AB2A8C9A2E0091A7F4 /* UIColor+.swift in Sources */,
@@ -1477,9 +1518,12 @@
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
 				64E26A452A8A3E2800F6BC3A /* CarSettingSelectViewController.swift in Sources */,
+				6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */,
 				64E26A6C2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift in Sources */,
+				6457CFB42A93959B00B3AAAF /* BasicOption.swift in Sources */,
 				155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */,
 				6484A7802A8F13AF00434136 /* QuotationFinishThumbnailView.swift in Sources */,
+				6457CFAA2A938F8E00B3AAAF /* TrimOption.swift in Sources */,
 				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
 				64E26A482A8A3E2800F6BC3A /* TrimOptionDetailColorCollectionView.swift in Sources */,
 				15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */,
