@@ -128,4 +128,14 @@ public class ColorService {
         }
         return false;
     }
+
+    @Transactional
+    public boolean userClickedExteriorColorLog(Long exteriorColorId) {
+        return true;
+    }
+
+    @Transactional
+    public boolean userClickedInteriorColorLog(Long interiorColorId) {
+        return true;
+    }
 }

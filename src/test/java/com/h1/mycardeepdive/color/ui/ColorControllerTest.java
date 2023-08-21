@@ -206,4 +206,66 @@ class ColorControllerTest extends ControllerTestConfig {
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+    @DisplayName("외장컬러 로그 전송 기능에 성공한다.")
+    @Test
+    void clickExteriorColorLogTest() throws Exception {
+        // given
+        Long exteriorColorId = 1L;
+        when(colorService.userClickedExteriorColorLog(exteriorColorId)).thenReturn(true);
+
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.post(
+                                                DEFAULT_URL
+                                                        + "/exterior-colors/activity-log/{exterior-color-id}",
+                                                exteriorColorId)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "exterior-color-click",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("컬러")
+                                                        .description("외장컬러 클릭 시, 로그 전송")
+                                                        .requestFields()
+                                                        .responseFields()
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @DisplayName("내장컬러 로그 전송 기능에 성공한다.")
+    @Test
+    void clickInteriorColorLogTest() throws Exception {
+        // given
+        Long interiorColorId = 1L;
+        when(colorService.userClickedInteriorColorLog(interiorColorId)).thenReturn(true);
+
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.post(
+                                                DEFAULT_URL
+                                                        + "/interior-colors/activity-log/{interior-color-id}",
+                                                interiorColorId)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "exterior-color-click",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("컬러")
+                                                        .description("내장컬러 클릭 시, 로그 전송")
+                                                        .requestFields()
+                                                        .responseFields()
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }

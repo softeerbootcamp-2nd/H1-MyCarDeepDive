@@ -6,10 +6,7 @@ import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
 import com.h1.mycardeepdive.global.response.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,5 +32,10 @@ public class CarSpecController {
         List<CarSpecComparisonResponse> carSpecComparisons =
                 carSpecService.findCarSpecComparisonsBySpec(engineId, bodyId, drivingSystemId);
         return new ApiResponse<>(carSpecComparisons);
+    }
+
+    @PostMapping("/activity-log/{trim-id}")
+    public ApiResponse<Boolean> userClickedTrimLog(@PathVariable("trim-id") Long trimId) {
+        return new ApiResponse<>(carSpecService.userClickedTrimLog(trimId));
     }
 }
