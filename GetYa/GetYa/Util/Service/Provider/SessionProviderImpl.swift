@@ -9,7 +9,6 @@ import Foundation
 
 final class SessionProviderImpl {
     private let session: URLSession
-    var endPoint = Endpoint()
     init(session: URLSession = .shared) {
         self.session = session
     }
@@ -17,8 +16,8 @@ final class SessionProviderImpl {
 
 // MARK: - EndpointProvider
 extension SessionProviderImpl: EndpointProvider {
-    func request<R>(with path: String) async throws -> R where R: Decodable {
-        let urlRequest = try endPoint.makeRequest(with: path)
+    func request<R: Decodable, E: Endpoint<R>>(with path: String, with endpoint: E) async throws -> R {
+        let urlRequest = try endpoint.makeRequest(with: path)
         do {
             let (data, response) = try await session.data(for: urlRequest)
             try checkResult(data: data, response)

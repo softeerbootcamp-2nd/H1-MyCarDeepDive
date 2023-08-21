@@ -12,6 +12,7 @@ protocol Requestable {
     var host: String { get }
     var method: HTTPMethod { get }
     var prefixPath: String { get }
+    var midPath: String { get }
     var headers: [String: String]? { get }
 }
 
