@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
+import { priceToString } from '@/utils';
 import Navigation from './Navigation';
 import PriceDetailButton from './priceDetailButton';
 import ShowQuotationButton from './showQuotation';
@@ -77,7 +78,7 @@ function Header() {
                   <div className='flex gap-4 justify-between'>
                     <p>{carSpec.feature.engine}</p>
                     <p className='font-body4-medium text-grey-100'>
-                      {carSpec.price.toLocaleString('en-US')}원
+                      {priceToString(carSpec.price)}원
                     </p>
                   </div>
                   <div className='flex gap-4 justify-between'>

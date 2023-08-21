@@ -10,69 +10,62 @@ import TrimSheet from './TrimSheet';
 import TrimNavigation from './TrimNavigation';
 import TrimCluster from './TrimCluster';
 
-interface TrimProps {
-  carImage: string;
-  forYou: string;
-  trimName: string;
-  price: string;
-  exteriorColor: string[];
-  interiorColor: string;
-  interiorColor2?: string;
-  wheelImage: string;
-  wheelSize: string;
-  wheelName: string;
-  sheetImage: string;
-  sheetName: string;
-  navigationImage: string;
-  navigationSize: string;
-  navigationName: string;
-  clusterImage: string;
-  clusterSize: string;
-  clusterName: string;
-  basicOption: string[];
+interface Props {
+  trims_img_url: string;
+  summary: string;
+  trim_name: string;
+  price: number;
+  exterior_color_img_urls: string[];
+  interior_color_names: string[];
+  wheel_size: number;
+  wheel_name: string;
+  seat_name: string;
+  navigation_size: number;
+  cluster_size: number;
+  basic_option_names: string[];
+  basic_option_ids: number[];
 }
 
-function Trim(props: TrimProps) {
+function Trim({
+  trims_img_url,
+  summary,
+  trim_name,
+  price,
+  exterior_color_img_urls,
+  interior_color_names,
+  wheel_size,
+  wheel_name,
+  seat_name,
+  navigation_size,
+  cluster_size,
+  basic_option_names,
+  basic_option_ids,
+}: Props) {
   return (
     <TrimWrapper>
-      <TrimCarImage carImage={props.carImage} trimName={props.trimName} />
-      <TrimInformation
-        forYou={props.forYou}
-        trimName={props.trimName}
-        price={props.price}
-      />
+      <TrimCarImage trims_img_url={trims_img_url} trim_name={trim_name} />
+      <TrimInformation summary={summary} trim_name={trim_name} price={price} />
 
-      <ExteriorColor exteriorColor={props.exteriorColor} />
-      <InteriorColor
-        interiorColor={props.interiorColor}
-        interiorColor2={props.interiorColor2}
-      />
+      <ExteriorColor exterior_color_img_urls={exterior_color_img_urls} />
+      <InteriorColor interior_color_names={interior_color_names} />
 
       <UnderLine
-        margin={`${props.interiorColor2 ? 'mt-[7px]' : 'mt-[33px]'} mb-[23px]`}
+        margin={`${
+          interior_color_names.length > 1 ? 'mt-[7px]' : 'mt-[33px]'
+        } mb-[23px]`}
       />
 
-      <TrimWheel
-        wheelImage={props.wheelImage}
-        wheelName={props.wheelName}
-        wheelSize={props.wheelSize}
-      />
-      <TrimSheet sheetImage={props.sheetImage} sheetName={props.sheetName} />
-      <TrimNavigation
-        navigationImage={props.navigationImage}
-        navigationName={props.navigationName}
-        navigationSize={props.navigationSize}
-        sheetName={props.sheetName}
-      />
-      <TrimCluster
-        clusterImage={props.clusterImage}
-        clusterName={props.clusterName}
-        clusterSize={props.clusterSize}
-      />
+      <TrimWheel wheel_name={wheel_name} wheel_size={wheel_size} />
+      <TrimSheet seat_name={seat_name} />
+      <TrimNavigation navigation_size={navigation_size} seat_name={seat_name} />
+      <TrimCluster cluster_size={cluster_size} />
 
       <UnderLine margin='mt-[44px] mb-6' />
 
-      <BasicOption basicOption={props.basicOption} />
+      <BasicOption
+        basic_option_names={basic_option_names}
+        basic_option_ids={basic_option_ids}
+      />
     </TrimWrapper>
   );
 }

@@ -1,6 +1,7 @@
+import { useCallback, useContext, useRef } from 'react';
+import { priceToString } from '@/utils';
 import checkCircleBlue from '@/assets/icon/check-circle-lifecycle-blue.svg';
 import { CarContext } from '@/context/CarProvider';
-import { useCallback, useContext, useRef } from 'react';
 
 export interface Props {
   carSpecData: {
@@ -25,11 +26,22 @@ function Selected({ carSpecData, optionToolTipHandler }: Props) {
     useRef<HTMLButtonElement | null>(null),
     useRef<HTMLButtonElement | null>(null),
   ];
-  const optionClickHandler = useCallback((index: number, option: string) => {
-    const x = optionRefs[index].current?.getBoundingClientRect().x;
-    const y = optionRefs[index].current?.getBoundingClientRect().y;
-    optionToolTipHandler(x, y, option);
-  }, []);
+
+  const optionClickHandler = useCallback(
+    (
+      e: React.MouseEvent<HTMLButtonElement>,
+      index: number,
+      option: string,
+      optionId: number,
+    ) => {
+      const x = optionRefs[index].current?.getBoundingClientRect().x;
+      const y = optionRefs[index].current?.getBoundingClientRect().y;
+      optionToolTipHandler(x, y, option);
+      e.stopPropagation();
+      console.log(optionId);
+    },
+    [],
+  );
 
   const { carSpec } = useContext(CarContext);
   return (
@@ -60,7 +72,7 @@ function Selected({ carSpecData, optionToolTipHandler }: Props) {
             {carSpecData.summary}
           </p>
           <p className='font-h2-medium text-grey-0 mb-[14px]'>
-            {carSpecData.price.toLocaleString('en-US')}원
+            {priceToString(carSpecData.price)}원
           </p>
 
           <div className='flex gap-3'>
@@ -74,7 +86,14 @@ function Selected({ carSpecData, optionToolTipHandler }: Props) {
                   ref={optionRefs[index]}
                   key={index}
                   className='gap-y-[6px] font-body4-regular text-secondary underline underline-offset-4 cursor-pointer'
-                  onClick={() => optionClickHandler(index, option)}
+                  onClick={e =>
+                    optionClickHandler(
+                      e,
+                      index,
+                      option,
+                      carSpecData.basic_option_ids[index],
+                    )
+                  }
                 >
                   {option}
                 </button>

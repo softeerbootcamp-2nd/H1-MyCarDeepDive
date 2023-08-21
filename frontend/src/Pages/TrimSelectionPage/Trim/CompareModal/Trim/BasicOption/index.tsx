@@ -1,16 +1,24 @@
 import BasicOptionItem from './BasicOptionItem';
 
 interface BasicOptionProps {
-  basicOption: string[];
+  basic_option_names: string[];
+  basic_option_ids: number[];
 }
 
-function BasicOption({ basicOption }: BasicOptionProps) {
+function BasicOption({
+  basic_option_names,
+  basic_option_ids,
+}: BasicOptionProps) {
   return (
     <>
       <div className='mb-3 font-body4-medium text-grey-300'>기본 옵션</div>
       <div className='flex flex-col gap-2'>
-        {basicOption.map(option => (
-          <BasicOptionItem option={option} key={option} />
+        {basic_option_names.map((option, index) => (
+          <BasicOptionItem
+            option={option}
+            key={option}
+            option_id={basic_option_ids[index]}
+          />
         ))}
       </div>
     </>

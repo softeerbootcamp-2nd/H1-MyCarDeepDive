@@ -1,28 +1,25 @@
+import navigation from '@/assets/icon/Navigation.svg';
+
 interface TrimNavigationProps {
-  navigationImage: string;
-  navigationName: string;
-  navigationSize: string;
-  sheetName: string;
+  seat_name: string;
+  navigation_size: number;
 }
 
-function TrimNavigation({
-  navigationImage,
-  navigationName,
-  navigationSize,
-  sheetName,
-}: TrimNavigationProps) {
+function TrimNavigation({ seat_name, navigation_size }: TrimNavigationProps) {
   return (
     <>
       <img
-        src={navigationImage}
-        alt={navigationName}
+        src={navigation}
+        alt={'네비게이션'}
         className={`${
-          sheetName.length > 16 ? 'mt-[27px]' : 'mt-[51px]'
+          seat_name.length > 16 ? 'mt-[27px]' : 'mt-[51px]'
         } mb-2 mx-auto`}
       />
-      <div className='font-h1-bold text-secondary mb-1'>{navigationSize}</div>
+      <div className='font-h1-bold text-secondary mb-1'>
+        {navigation_size + ' inch '}
+      </div>
       <div className='font-body3-regular text-grey-300'>
-        <span className='leading-[16px]'>{navigationName}</span>
+        <span className='leading-[16px]'>{'네비게이션'}</span>
       </div>
     </>
   );
