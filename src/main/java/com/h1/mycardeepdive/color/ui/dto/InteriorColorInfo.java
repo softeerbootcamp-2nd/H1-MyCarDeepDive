@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InteriorColorInfo {
+    private long color_id;
     private long trim_id;
     private String trim_name;
     private String name;

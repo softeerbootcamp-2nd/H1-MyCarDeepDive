@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 public class ColorMapper {
     public static InteriorColorInfo toInteriorColorInfo(InteriorColor interiorColor, Trim trim) {
         return new InteriorColorInfo(
+                interiorColor.getId(),
                 trim.getId(),
                 trim.getName(),
                 interiorColor.getName(),
@@ -22,6 +23,7 @@ public class ColorMapper {
 
     public static ExteriorColorInfo toExteriorColorInfo(ExteriorColor exteriorColor, Trim trim) {
         return new ExteriorColorInfo(
+                exteriorColor.getId(),
                 trim.getId(),
                 trim.getName(),
                 exteriorColor.getName(),
