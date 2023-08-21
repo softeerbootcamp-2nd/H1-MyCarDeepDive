@@ -68,6 +68,7 @@
 		15D2ABC02A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */; };
 		15D2ABC22A93567C00F7DE8E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC12A93567C00F7DE8E /* Status.swift */; };
 		15D2ABC42A93574500F7DE8E /* TrimCarSpecResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC32A93574500F7DE8E /* TrimCarSpecResponseDTO.swift */; };
+		15D2ABC62A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC52A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift */; };
 		15D8CC8C2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC8B2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift */; };
 		15D8CC8F2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8CC8E2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift */; };
 		15DF95862A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15DF957F2A7B94E00093EAC7 /* HyundaiSansHeadKRMedium.ttf */; };
@@ -275,6 +276,7 @@
 		15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionsResponseDTO.swift; sourceTree = "<group>"; };
 		15D2ABC12A93567C00F7DE8E /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		15D2ABC32A93574500F7DE8E /* TrimCarSpecResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpecResponseDTO.swift; sourceTree = "<group>"; };
+		15D2ABC52A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpecRequestDTO.swift; sourceTree = "<group>"; };
 		15D8CC8B2A89242B009B19B9 /* CommonQuotationPreviewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewTableView.swift; sourceTree = "<group>"; };
 		15D8CC8E2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewTableViewModel.swift; sourceTree = "<group>"; };
 		15D8CC912A892A62009B19B9 /* CommonQuotationPreviewAdapterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewAdapterDataSource.swift; sourceTree = "<group>"; };
@@ -1132,6 +1134,7 @@
 			children = (
 				64ADA4862A7788840003E2C1 /* DTO.swift */,
 				15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */,
+				15D2ABC52A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift */,
 				15D2ABC32A93574500F7DE8E /* TrimCarSpecResponseDTO.swift */,
 			);
 			path = DTO;
@@ -1604,6 +1607,7 @@
 				64E26A482A8A3E2800F6BC3A /* TrimOptionDetailColorCollectionView.swift in Sources */,
 				155776E32A90D29900E3C0E1 /* HTTPMethod.swift in Sources */,
 				15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */,
+				15D2ABC62A9357C100F7DE8E /* TrimCarSpecRequestDTO.swift in Sources */,
 				64ADA4C42A7A32950003E2C1 /* CommonOptionSelectButton.swift in Sources */,
 				64E26A462A8A3E2800F6BC3A /* TrimOptionContentCell.swift in Sources */,
 				6412D07C2A7E607D001E4005 /* LifeStyleCell.swift in Sources */,
