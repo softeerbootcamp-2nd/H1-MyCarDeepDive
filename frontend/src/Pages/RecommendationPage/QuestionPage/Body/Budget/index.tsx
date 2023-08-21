@@ -1,11 +1,19 @@
-import { AdditionQuestionBudgetProps } from '@/global/type';
 import { price } from '@/global/data';
+import { QuestionContext } from '@/context/QuestionProvider';
+import { useContext } from 'react';
+import { SET_BUDGET } from '@/context/QuestionProvider/type';
 
-function Budget({ budget, myLifeStyleHandler }: AdditionQuestionBudgetProps) {
+function Budget() {
+  const { myLifeStyle, questionDispatch } = useContext(QuestionContext);
   const { lowestPrice, highestPrice, rangeUnit, priceUnit } = price;
   const currentBudget = `${
-    ((Number(budget) - lowestPrice) / (highestPrice - lowestPrice)) * 100
+    ((Number(myLifeStyle.budget) - lowestPrice) /
+      (highestPrice - lowestPrice)) *
+    100
   }%`;
+  const budgetHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    questionDispatch({ type: SET_BUDGET, budget: target.value });
+  };
 
   return (
     <>
@@ -23,7 +31,7 @@ function Budget({ budget, myLifeStyleHandler }: AdditionQuestionBudgetProps) {
         </span>{' '}
         <span className='font-h2-medium'>
           <span className='text-[24px] leading-[26px] tracking-[-0.2px]'>
-            {(+budget).toLocaleString('en-US')}
+            {(+myLifeStyle.budget).toLocaleString('en-US')}
           </span>
         </span>
         <span className='font-h5-regular'>
@@ -48,8 +56,8 @@ function Budget({ budget, myLifeStyleHandler }: AdditionQuestionBudgetProps) {
           max={highestPrice}
           step={rangeUnit}
           name={'budget'}
-          value={budget}
-          onChange={myLifeStyleHandler}
+          value={myLifeStyle.budget}
+          onChange={budgetHandler}
         />
       </div>
       <div className='flex justify-between font-body4-regular text-grey-400 mb-[52px]'>

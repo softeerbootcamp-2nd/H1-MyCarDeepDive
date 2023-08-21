@@ -1,11 +1,10 @@
+import usePrevious from '@/hooks/usePrevious';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-interface ProgressBarProps {
-  step: string;
-  prevStep: string | undefined;
-}
-
-function ProgressBar({ step, prevStep }: ProgressBarProps) {
+function ProgressBar() {
+  const { step } = useParams();
+  const prevStep = usePrevious(step);
   const [reverse, setReverse] = useState(false);
 
   useEffect(() => {

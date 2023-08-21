@@ -45,7 +45,7 @@ function Button({
       disabled={disabled}
       className={`${width} ${height} ${buttonStyle[variant]} ${
         rounded ? 'rounded' : 'rounded-md'
-      } ${disabled && 'text-opacity-40'}`}
+      } ${disabled && 'text-opacity-40'} `}
       onClick={onClick}
     >
       {text}

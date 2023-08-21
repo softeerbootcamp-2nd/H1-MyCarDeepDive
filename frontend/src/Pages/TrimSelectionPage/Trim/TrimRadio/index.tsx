@@ -1,34 +1,58 @@
-import { TrimSelectionRadioGroupProps } from '@/global/type';
-import { trimList } from '@/global/data';
 import Selected from './Selected';
 import Unselected from './Unselected';
+import { useContext, useEffect } from 'react';
+import { CarContext } from '@/context/CarProvider';
+import { getTrimType } from '@/api/trim/getTrim';
+import { SET_CARSPECID, SET_CARSPECPRICE } from '@/context/CarProvider/type';
+
+export interface Props {
+  wantedTrimHandler: (e: React.MouseEvent<HTMLInputElement>) => void;
+  setShowModal: (value: boolean) => void;
+  optionToolTipHandler: (
+    x: number | undefined,
+    y: number | undefined,
+    target: string,
+  ) => void;
+  carSpecData: getTrimType | undefined;
+}
 
 function TrimRadio({
-  selectedTrim,
-  carFeature,
   setShowModal,
-  setWantedTrim,
+  wantedTrimHandler,
   optionToolTipHandler,
-}: TrimSelectionRadioGroupProps) {
-  return trimList.map((trim, index) => {
-    const { name } = trim;
-    return name === selectedTrim ? (
+  carSpecData,
+}: Props) {
+  const { carSpec } = useContext(CarContext);
+
+  const { carDispatch } = useContext(CarContext);
+
+  useEffect(() => {
+    if (carSpecData === undefined) return;
+
+    carDispatch({
+      type: SET_CARSPECPRICE,
+      carSpecPrice: carSpecData.data[carSpec.trim.id - 1].price,
+    });
+    carDispatch({
+      type: SET_CARSPECID,
+      carSpecId: carSpecData.data[carSpec.trim.id - 1].car_spec_id,
+    });
+  }, [carSpecData]);
+
+  if (carSpecData === undefined) return null;
+
+  return carSpecData.data.map((car, index) => {
+    return car.trim_name === carSpec.trim.name ? (
       <Selected
         key={index}
-        trim={trim}
-        selectedTrim={selectedTrim}
-        carFeature={carFeature}
-        setWantedTrim={setWantedTrim}
-        setShowModal={setShowModal}
+        carSpecData={car}
         optionToolTipHandler={optionToolTipHandler}
       />
     ) : (
       <Unselected
         key={index}
-        trim={trim}
-        selectedTrim={selectedTrim}
-        carFeature={carFeature}
-        setWantedTrim={setWantedTrim}
+        carSpecData={car}
+        wantedTrimHandler={wantedTrimHandler}
         setShowModal={setShowModal}
         optionToolTipHandler={optionToolTipHandler}
       />

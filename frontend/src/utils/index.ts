@@ -30,3 +30,7 @@ export const hasChild = (
 
   return false;
 };
+
+export const priceToString = (price: number): string => {
+  return price.toLocaleString('en-US');
+};

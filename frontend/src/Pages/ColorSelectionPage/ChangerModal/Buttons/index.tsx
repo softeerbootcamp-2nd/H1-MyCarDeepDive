@@ -1,22 +1,12 @@
 import Button from '@/Components/Button';
 import { closeModalHandler } from '@/utils';
 
-interface colorProps {
-  trim?: string;
-  name: string;
-  chooseRate: number;
-  url: string;
-}
-
 interface Props {
-  wantedOtherColor: colorProps;
-  changerClickHandler: React.Dispatch<
-    React.SetStateAction<colorProps | undefined>
-  >;
-  setTrim: React.Dispatch<React.SetStateAction<string>>;
+  wantedOtherColor: any;
+  otherColorChangeHandler: ({}: any) => void;
 }
 
-function Buttons({ wantedOtherColor, changerClickHandler, setTrim }: Props) {
+function Buttons({ wantedOtherColor, otherColorChangeHandler }: Props) {
   return (
     <div className='flex justify-end gap-2.5 mt-[33px] mb-6'>
       <Button
@@ -32,8 +22,7 @@ function Buttons({ wantedOtherColor, changerClickHandler, setTrim }: Props) {
         variant='primary'
         text='변경하기'
         onClick={() => {
-          changerClickHandler(wantedOtherColor);
-          if (wantedOtherColor.trim) setTrim(wantedOtherColor.trim);
+          otherColorChangeHandler(wantedOtherColor);
           closeModalHandler();
         }}
       />

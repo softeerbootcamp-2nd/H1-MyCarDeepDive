@@ -11,27 +11,16 @@ import ChangeTrim from './ChangeTrim';
 import UnderLine from '@/Components/UnderLine';
 import ChangePrice from './ChangePrice';
 
-interface colorProps {
-  trim?: string;
-  name: string;
-  chooseRate: number;
-  url: string;
-}
-
 interface Props extends ModalProps {
-  wantedOtherColor: colorProps;
-  changerClickHandler: React.Dispatch<
-    React.SetStateAction<colorProps | undefined>
-  >;
-  setTrim: React.Dispatch<React.SetStateAction<string>>;
+  wantedOtherColor: any;
+  otherColorChangeHandler: ({}: any) => void;
 }
 
 function ChangerModal({
   showModal,
   setShowModal,
   wantedOtherColor,
-  changerClickHandler,
-  setTrim,
+  otherColorChangeHandler,
 }: Props) {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
@@ -46,8 +35,7 @@ function ChangerModal({
           <ChangePrice priceGap={12100000} />
           <Buttons
             wantedOtherColor={wantedOtherColor}
-            changerClickHandler={changerClickHandler}
-            setTrim={setTrim}
+            otherColorChangeHandler={otherColorChangeHandler}
           />
         </div>
       </ModalContentsWrapper>

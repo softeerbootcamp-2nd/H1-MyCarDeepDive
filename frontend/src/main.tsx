@@ -8,10 +8,10 @@ import CarProvider from './context/CarProvider';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <CarProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <CarProvider>
         <App />
-      </BrowserRouter>
-    </CarProvider>
+      </CarProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 );

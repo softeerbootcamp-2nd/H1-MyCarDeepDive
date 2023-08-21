@@ -1,12 +1,17 @@
-import { NavigationRadioProps } from '@/global/type';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function Item({ name, index, value, address }: NavigationRadioProps) {
+export interface Props {
+  name: string;
+  index: number;
+  value: string;
+  address: 'trim' | 'color' | 'option';
+}
+
+function Item({ name, index, value, address }: Props) {
   const navigation = useNavigate();
   const location = useLocation();
-
   return (
-    <>
+    <div className='flex gap-3'>
       <button onClick={() => navigation(`/select/${address}`)}>
         <p
           className={`${
@@ -16,7 +21,7 @@ function Item({ name, index, value, address }: NavigationRadioProps) {
           } font-h4-medium`}
         >
           <span className='text-[14px] flex items-center justify-center '>
-            {index + 1} {name}
+            {index} {name}
           </span>
         </p>
       </button>
@@ -33,7 +38,7 @@ function Item({ name, index, value, address }: NavigationRadioProps) {
       >
         {value}
       </p>
-    </>
+    </div>
   );
 }
 

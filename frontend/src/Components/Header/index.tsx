@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { priceToString } from '@/utils';
 import Navigation from './Navigation';
 import PriceDetailButton from './priceDetailButton';
 import ShowQuotationButton from './showQuotation';
@@ -8,6 +9,7 @@ import HeaderTitle from './HeaderTitle';
 import DropDownIcon from './DropDownIcon';
 import upArrowIcon from '@/assets/icon/up-arrow-icon.svg';
 import UnderLine from '../UnderLine';
+import { CarContext } from '@/context/CarProvider';
 
 function Header() {
   const location = useLocation();
@@ -16,6 +18,7 @@ function Header() {
   const [showPriceInfo, setShowPriceInfo] = useState(false);
   const [displayPriceInfo, setDisplayPriceInfo] = useState(false);
   const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
+  const { carSpec, color } = useContext(CarContext);
 
   useEffect(() => {
     if (!showPriceInfo) {
@@ -32,7 +35,6 @@ function Header() {
     setTimer(newTimer);
   }, [showPriceInfo]);
 
-  if (location.pathname === '/mycar/result') return null;
   return (
     <header
       className={`fixed w-full ${
@@ -71,18 +73,18 @@ function Header() {
           <div className='max-w-5xl mx-auto'>
             <div className='h-[135px] flex overflow-scroll'>
               <div className='flex my-auto'>
-                <div className='w-[8.3rem] flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                <div className='flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   <div className='flex gap-4 justify-between'>
-                    <p>가솔린</p>
+                    <p>{carSpec.feature.engine}</p>
                     <p className='font-body4-medium text-grey-100'>
-                      43,460,000원
+                      {priceToString(carSpec.price)}원
                     </p>
                   </div>
                   <div className='flex gap-4 justify-between'>
-                    <p>7인승</p>
+                    <p>{carSpec.feature.body}</p>
                   </div>
                   <div className='flex gap-4 justify-between'>
-                    <p>2WD</p>
+                    <p>{carSpec.feature.drivingSystem}</p>
                   </div>
                 </div>
 
@@ -90,12 +92,16 @@ function Header() {
 
                 <div className='w-52 flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   <div className='flex gap-4 justify-between'>
-                    <p>크리미 화이트</p>
-                    <p className='font-body4-medium text-grey-100'>0원</p>
+                    <p>{color.exteriorColor.name}</p>
+                    <p className='font-body4-medium text-grey-100'>
+                      {color.exteriorColor.price.toLocaleString('en-US')}원
+                    </p>
                   </div>
                   <div className='flex gap-4 justify-between'>
-                    <p>인조가죽(블랙)</p>
-                    <p className='font-body4-medium text-grey-100'>0원</p>
+                    <p>{color.interiorColor.name}</p>
+                    <p className='font-body4-medium text-grey-100'>
+                      {color.interiorColor.price.toLocaleString('en-US')}원
+                    </p>
                   </div>
                 </div>
 
@@ -123,7 +129,14 @@ function Header() {
                 />
               </button>
               <p className='font-h1-medium'>
-                <span className='text-[24px] text-grey-50'>51,460,000원</span>
+                <span className='text-[24px] text-grey-50'>
+                  {(
+                    carSpec.price +
+                    color.exteriorColor.price +
+                    color.interiorColor.price
+                  ).toLocaleString('en-US')}
+                  원
+                </span>
               </p>
             </div>
           </div>

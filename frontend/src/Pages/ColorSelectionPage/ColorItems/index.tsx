@@ -3,8 +3,8 @@ import CheckCircle from '@/assets/icon/check-circle-white.svg';
 interface colorProps {
   trim?: string;
   name: string;
-  chooseRate: number;
-  url: string;
+  imgUrl: string;
+  price: number;
 }
 
 interface Props {
@@ -59,7 +59,7 @@ function ColorItems({
                 data-object={JSON.stringify(color)}
               >
                 <img
-                  src={color.url}
+                  src={color.imgUrl}
                   alt={`{exterior-${color.name}}`}
                   className={`rounded
             ${

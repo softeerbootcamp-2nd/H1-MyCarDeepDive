@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { QuestionStepProps } from '@/global/type';
+import { Link, useParams } from 'react-router-dom';
 
-function LifeStyleLink({ step }: QuestionStepProps) {
+function LifeStyleLink() {
+  const { step } = useParams();
   if (step !== '2') return;
   return (
     <Link

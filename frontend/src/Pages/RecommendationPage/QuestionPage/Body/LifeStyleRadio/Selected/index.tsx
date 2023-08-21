@@ -1,12 +1,29 @@
-import { LifeStyleRadioProps } from '@/global/type';
 import Tag from '../Tag';
 import checkCircleBlue from '@/assets/icon/check-circle-lifecycle-blue.svg';
+import { useContext } from 'react';
+import { QuestionContext } from '@/context/QuestionProvider';
+import { SET_LIFESTYLE } from '@/context/QuestionProvider/type';
 
-function Selected({
-  onChangeHandler,
-  setShowLifeStyleModal,
-  data,
-}: LifeStyleRadioProps) {
+export interface Props {
+  setShowLifeStyleModal: React.Dispatch<React.SetStateAction<boolean>>;
+  data: {
+    value: string;
+    tags: string[];
+    description: string;
+    profileImage: string;
+  };
+}
+
+function Selected({ setShowLifeStyleModal, data }: Props) {
+  const { questionDispatch, lifeStyle } = useContext(QuestionContext);
+  const lifeStyleHandler = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    lifeStyle === target.value
+      ? questionDispatch({ type: SET_LIFESTYLE, lifeStyle: '' })
+      : questionDispatch({ type: SET_LIFESTYLE, lifeStyle: target.value });
+  };
+
   return (
     <>
       <input
@@ -15,7 +32,7 @@ function Selected({
         name='lifeStyle'
         value={data.value}
         className='hidden'
-        onChange={onChangeHandler}
+        onChange={lifeStyleHandler}
       />
       <label htmlFor={data.value}>
         <div className='h-[180px] p-5 rounded-lg ring-[1.5px] ring-primary ring-inset relative mb-11 cursor-pointer'>

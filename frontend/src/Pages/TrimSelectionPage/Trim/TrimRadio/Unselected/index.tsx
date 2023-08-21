@@ -1,20 +1,32 @@
-import { TrimSelectionRadioGroupProps } from '@/global/type';
+import { useCallback, useContext, useRef } from 'react';
+import { priceToString } from '@/utils';
 import checkCircleGrey from '@/assets/icon/trim-select-circle-grey.svg';
-import { useCallback, useRef } from 'react';
+import { CarContext } from '@/context/CarProvider';
+
+export interface Props {
+  carSpecData: {
+    car_spec_id: number;
+    trim_id: number;
+    trim_name: string;
+    price: number;
+    summary: string;
+    basic_option_ids: number[];
+    basic_option_names: string[];
+  };
+  wantedTrimHandler: (e: React.MouseEvent<HTMLInputElement>) => void;
+  setShowModal: (value: boolean) => void;
+  optionToolTipHandler: (
+    x: number | undefined,
+    y: number | undefined,
+    target: string,
+  ) => void;
+}
 
 function Unselected({
-  carFeature,
-  trim,
-  setShowModal,
-  setWantedTrim,
+  carSpecData,
+  wantedTrimHandler,
   optionToolTipHandler,
-}: TrimSelectionRadioGroupProps) {
-  const showTrimChangePopup = ({
-    currentTarget,
-  }: React.MouseEvent<HTMLInputElement>) => {
-    setWantedTrim(currentTarget.value);
-    setShowModal(true);
-  };
+}: Props) {
   const optionRefs = [
     useRef<HTMLButtonElement | null>(null),
     useRef<HTMLButtonElement | null>(null),
@@ -22,44 +34,60 @@ function Unselected({
   ];
 
   const optionClickHandler = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>, index: number, option: string) => {
+    (
+      e: React.MouseEvent<HTMLButtonElement>,
+      index: number,
+      option: string,
+      optionId: number,
+    ) => {
       const x = optionRefs[index].current?.getBoundingClientRect().x;
       const y = optionRefs[index].current?.getBoundingClientRect().y;
       optionToolTipHandler(x, y, option);
       e.stopPropagation();
+      console.log(optionId);
     },
     [],
   );
 
-  const { engine, body, operation } = carFeature;
+  const { carSpec } = useContext(CarContext);
+  const myCarSpecData = {
+    carSpecId: carSpecData.car_spec_id,
+    trimId: carSpecData.trim_id,
+    trimName: carSpecData.trim_name,
+    price: carSpecData.price,
+  };
 
   return (
     <>
       <input
         type='radio'
-        name='selectedTrim'
-        id={trim?.name}
-        value={trim?.name}
+        id={carSpecData.trim_name}
+        name='carSpec'
+        value={carSpecData.trim_name}
         className='hidden'
-        onClick={showTrimChangePopup}
+        onClick={wantedTrimHandler}
+        data-object={JSON.stringify(myCarSpecData)}
       />
-      <label htmlFor={trim?.name}>
+      <label htmlFor={carSpecData.trim_name}>
         <div className='relative cursor-pointer'>
           <div className='flex justify-between gap-2 pt-6 mb-1'>
             <div className='flex justify-between items-center gap-2 '>
-              <p className='font-body4-medium text-grey-300'>{trim?.name}</p>
+              <p className='font-body4-medium text-grey-300'>
+                {carSpecData.trim_name}
+              </p>
               <p className='font-caption1-regular text-grey-500'>
-                {engine} &middot; {body} &middot; {operation}
+                {carSpec.feature.engine} &middot; {carSpec.feature.body}{' '}
+                &middot; {carSpec.feature.drivingSystem}
               </p>
             </div>
 
             <img src={checkCircleGrey}></img>
           </div>
           <p className='font-body3-regular text-grey-100 mb-2'>
-            {trim?.description}
+            {carSpecData.summary}
           </p>
           <p className='font-h2-medium text-grey-0 mb-[14px]'>
-            {trim?.price.toLocaleString('en-US')}원
+            {priceToString(carSpecData.price)}원
           </p>
 
           <div className='flex gap-3'>
@@ -68,12 +96,19 @@ function Unselected({
             </div>
 
             <div className='mb-6 flex flex-wrap gap-3'>
-              {trim?.basicOption.map((option, index) => (
+              {carSpecData.basic_option_names.map((option, index) => (
                 <button
                   ref={optionRefs[index]}
                   key={index}
                   className='gap-y-[6px] font-body4-regular text-secondary underline underline-offset-4 cursor-pointer'
-                  onClick={e => optionClickHandler(e, index, option)}
+                  onClick={e =>
+                    optionClickHandler(
+                      e,
+                      index,
+                      option,
+                      carSpecData.basic_option_ids[index],
+                    )
+                  }
                 >
                   {option}
                 </button>
