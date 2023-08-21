@@ -14,7 +14,9 @@ public enum ErrorType {
     NETWORK_ERROR("COMMON-006", "네트워크 처리에서 문제가 발생했습니다."),
     EMAIL_FORMAT_ERROR("USER-001", "올바르지 않은 이메일 입력 양식입니다."),
     SERVICE_BEING_CHECKED("SERVICE-001", "서비스가 점검중입니다."),
-    UNEXPECTED_SERVER_ERROR("SERVER-001", "서버 관리자에게 문의하세요.");
+    UNEXPECTED_SERVER_ERROR("SERVER-001", "서버 관리자에게 문의하세요."),
+    FONT_ERROR("FONT-001", "폰트 가져오기 실패했습니다."),
+    PDF_NOT_FOUND("PDF-001", "PDF ID가 존재하지 않습니다.");
     private final String code;
     private final String message;
 
