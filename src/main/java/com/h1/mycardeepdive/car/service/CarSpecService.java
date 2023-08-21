@@ -83,7 +83,6 @@ public class CarSpecService {
         }
     }
 
-    @Transactional
     public boolean userClickedTrimLog(Long trimId) {
         return true;
     }
