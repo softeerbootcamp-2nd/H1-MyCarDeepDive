@@ -152,7 +152,7 @@ function OptionSelectitonPage() {
         setTag={setTag}
         setPage={setPage}
       />
-      <Tag tag={tag} setTag={setTag} category={category} />
+      <Tag tag={tag} setTag={setTag} category={category} setPage={setPage} />
 
       {(category !== '추가 옵션' || tag === '전체') && (
         <AllCount totalCount={totalCount} />
@@ -171,6 +171,7 @@ function OptionSelectitonPage() {
           setShowOptionModal={setShowOptionModal}
           setMaxPage={setMaxPage}
           setTotalCount={setTotalCount}
+          tag={tag}
         />
       ) : (
         <SituationOption setShowOptionModal={setShowOptionModal} />
