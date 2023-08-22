@@ -37,7 +37,7 @@ final class OptionPackageDescriptionView: UIView {
         text: "패키지 준비중..."
     ).set { $0.numberOfLines = 1 }
     private let optionDetailDescriptionView = OptionDetailDescriptionAreaView(frame: .zero)
-    private let bottomBackgroundView = UIView(frame: .zero).set{
+    private let bottomBackgroundView = UIView(frame: .zero).set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.backgroundColor = UIColor(red: 0.983, green: 0.983, blue: 0.983, alpha: 1).cgColor
     }
