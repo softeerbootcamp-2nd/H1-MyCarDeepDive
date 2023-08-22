@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO:  - OptionPackage등의 내용을 빼야 합니다.
 struct AdditionalOptionsResponseDTO: Decodable {
     struct OptionPackage: Decodable {
         let packageOptionId: Int
