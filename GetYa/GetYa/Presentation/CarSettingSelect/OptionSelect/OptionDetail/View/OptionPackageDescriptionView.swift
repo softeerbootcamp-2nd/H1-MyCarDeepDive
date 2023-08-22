@@ -20,18 +20,16 @@ final class OptionPackageDescriptionView: UIView {
             static let topMargin: CGFloat = .toScaledHeight(value: 28)
             static let height: CGFloat = .toScaledHeight(value: 94)
         }
-        
         enum BottomBackgroundView {
             static let height: CGFloat = .toScaledHeight(value: 190)
         }
-        
         enum PageControl {
             static let topMargin: CGFloat = .toScaledHeight(value: 28)
             static let height: CGFloat = .toScaledWidth(value: 8)
             static let width = height
         }
-        
     }
+    
     // MARK: - UI properties
     private let optionPackageLabel = CommonLabel(
         fontType: .mediumCaption1,
@@ -66,7 +64,7 @@ final class OptionPackageDescriptionView: UIView {
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
         setupUI()
-        setOptionDetailDescriptionView(title: "후석", price: "1,000원", description: "설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. ")
+        setOptionDetailDescriptionView(title: "후석", price: "1,000원", description: "설명..")
     }
     
     private func setPageControlSelectedPage(currentPage: Int) {
@@ -154,7 +152,6 @@ extension OptionPackageDescriptionView: LayoutSupportable {
             bottomBackgroundView.heightAnchor.constraint(equalToConstant: Const.height)])
     }
     
-    ///이게 기본적으로 상위 뷰에서 contentView에서 leading, trailing 제약이 20씩 있어서 super.leadingAnchor로 하게된다면 어떻게 될 까...
     private func configureOptionTitleCollectionView() {
         typealias Const = Constants.OptionTitleCollectionView
         NSLayoutConstraint.activate([
