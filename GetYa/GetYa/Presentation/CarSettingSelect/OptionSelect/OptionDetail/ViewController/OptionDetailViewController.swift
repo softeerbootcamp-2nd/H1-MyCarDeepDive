@@ -19,6 +19,7 @@ final class OptionDetailViewController: BaseViewController {
                 height: .toScaledHeight(value: 578))
             static let interItemSpacing: CGFloat = .toScaledWidth(value: 8)
             static let leadingInset: CGFloat = .toScaledWidth(value: 22)
+            static let trailingInset: CGFloat = .toScaledWidth(value: 8)
         }
     }
     enum OptionType {
@@ -50,6 +51,23 @@ final class OptionDetailViewController: BaseViewController {
         singleOptionDetailContentView = contentView
         let baseView = BaseOptionDetailRoundView(contentView: contentView)
         return baseView
+    }()
+    private lazy var optionPackageCollectionView: UICollectionView = {
+        typealias Const = Constants.OptionPackageCollectionView
+        let layout = UICollectionViewFlowLayout().set {
+            $0.itemSize = Const.itemSize
+            $0.scrollDirection = .horizontal
+            $0.minimumInteritemSpacing = Const.interItemSpacing
+            $0.minimumLineSpacing = 0
+            $0.sectionInset = .init(top: 0, left: Const.leadingInset, bottom: 0, right: Const.trailingInset)
+        }
+        return UICollectionView(frame: .zero, collectionViewLayout: layout).set {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.showsHorizontalScrollIndicator = false
+            $0.register(
+                OptionDetailCell.self,
+                forCellWithReuseIdentifier: OptionDetailCell.identifier)
+        }
     }()
     
     // MARK: - Properties
