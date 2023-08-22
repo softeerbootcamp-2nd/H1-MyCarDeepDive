@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecommendationRepositoryImpl: RecommendationRepository {
+struct QuotationRepositoryImpl: QuotationRepository {
     
     typealias Endpoints = RecommendationEndpoints
     let provider = SessionProvider()
