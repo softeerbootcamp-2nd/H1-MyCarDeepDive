@@ -176,4 +176,48 @@ class CarSpecControllerTest extends ControllerTestConfig {
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+    @Test
+    void findTrimsByCarSpecId() throws Exception {
+        // given
+        Long carSpecId = 1L;
+
+        MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
+        info.add("carSpecId", String.valueOf(carSpecId));
+
+        CarSpec carSpec = createCarSpecD72E();
+        List<String> basicOptionNames = List.of("전방 충돌 방지 보조", "내비 기반 크루즈 컨트롤", "세이프티 파워 윈도우");
+        List<Long> basicOptionIds = List.of(1L, 2L, 3L);
+
+        CarSpecInfo carSpecInfo = toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds);
+        CarSpecResponse carSpecResponse =
+                new CarSpecResponse(
+                        List.of(carSpecInfo, carSpecInfo, carSpecInfo, carSpecInfo), 2L);
+
+        when(carSpecService.findCarSpecsByCarSpecId(carSpecId)).thenReturn(carSpecResponse);
+
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.get(DEFAULT_URL + "/trims")
+                                        .params(info)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "trims-from-custom",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("트림")
+                                                        .description("커스텀하기에서 트림 조회")
+                                                        .requestFields()
+                                                        .requestParameters(
+                                                                parameterWithName("carSpecId")
+                                                                        .description(
+                                                                                "추천받은 사양에서 가져오기"))
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }
