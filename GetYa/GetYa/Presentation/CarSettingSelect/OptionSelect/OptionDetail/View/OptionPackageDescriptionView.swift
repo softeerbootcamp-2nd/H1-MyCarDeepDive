@@ -51,11 +51,6 @@ final class OptionPackageDescriptionView: UIView {
                 height: 22)
             $0.minimumLineSpacing = 7
             $0.minimumInteritemSpacing = 7
-            $0.sectionInset = .init(
-                top: 0,
-                left: .toScaledWidth(value: 20),
-                bottom: 0,
-                right: .toScaledWidth(value: 20))
         }
         return UICollectionView(frame: .zero, collectionViewLayout: layout).set {
             $0.translatesAutoresizingMaskIntoConstraints = false
