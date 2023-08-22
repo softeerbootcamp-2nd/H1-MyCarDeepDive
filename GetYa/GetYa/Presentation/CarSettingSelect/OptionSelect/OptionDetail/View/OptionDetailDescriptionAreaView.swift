@@ -67,6 +67,11 @@ final class OptionDetailDescriptionAreaView: UIView {
         color: .GetYaPalette.gray200,
         text: "")
     
+    // MARK: - Properties
+    var isSelectedOptinoSelectButton: Bool {
+        optionSelectButton.isSelected
+    }
+    
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -101,6 +106,10 @@ final class OptionDetailDescriptionAreaView: UIView {
     
     func setOptionSelect(_ action: UIAction) {
         optionSelectButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setOptionSelectButtonSelectState() {
+        optionSelectButton.isSelected.toggle()
     }
 }
 
