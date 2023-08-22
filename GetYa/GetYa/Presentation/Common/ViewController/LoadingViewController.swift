@@ -43,12 +43,24 @@ class LoadingViewController: UIViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupViews()
         configureUI()
         
         // TODO: 여기서 네트워크 요청이 완료되면 화면 dismiss 하도록 하기 (Lottie가 제대로 없어지는지 확인 필요)
         lottieView.play()
+        /// 임시적으로 3초뒤에 불러와진다고 가정
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            let finishViewController = QuotationFinishViewController(nibName: nil, bundle: nil)
+            if let navigationController = self.navigationController,
+               let firstViewController = navigationController.viewControllers.first {
+                navigationController.pushViewController(finishViewController, animated: true)
+                self.lottieView.stop()
+                navigationController.viewControllers.removeAll(where: { targetViewController in
+                    return (targetViewController != firstViewController &&
+                            targetViewController != finishViewController)
+                })
+            }
+        }
     }
     
     // MARK: - Private Functions

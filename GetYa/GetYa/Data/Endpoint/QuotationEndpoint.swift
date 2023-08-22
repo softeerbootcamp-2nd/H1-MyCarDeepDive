@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct QuotationEndpoints {
+struct QuotationEndpoint {
     private init() {}
-    static let shared = QuotationEndpoints()
+    static let shared = QuotationEndpoint()
     
     func fetchCarDetailRecommendationOption(
         with requestDTO: CustomRecomendation

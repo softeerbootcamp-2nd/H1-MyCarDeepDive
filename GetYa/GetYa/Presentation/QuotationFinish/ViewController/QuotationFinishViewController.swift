@@ -23,8 +23,8 @@ class QuotationFinishViewController: UIViewController {
         trimName: "Le Blanc(르블랑)")
     private let carInfoView = CommonQuotationPreviewCarInfoView().set {
         $0.configure(with: QuotationPreviewCarInfoModel(
-            carKrName: "펠리세이드",
-            carEnTrimName: "Prestige",
+            carName: "펠리세이드",
+            trimName: "Prestige",
             carPrice: "\(43460000.toPriceFormat)",
             carOptions: ["가솔린", "2WD", "8인승"].joined(separator: " ・ ")))
     }
