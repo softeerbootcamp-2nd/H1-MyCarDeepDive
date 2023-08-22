@@ -1,4 +1,5 @@
 import CheckCircle from '@/assets/icon/check-circle-white.svg';
+import { ColorType } from '@/global/type';
 
 interface colorProps {
   trim?: string;
@@ -8,7 +9,7 @@ interface colorProps {
 }
 
 interface Props {
-  data: colorProps[];
+  data: ColorType[];
   colorType: 'interior' | 'exterior' | 'other';
   clickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedColor?: colorProps;
@@ -44,7 +45,7 @@ function ColorItems({
               {colorType === 'other' && (
                 <p className='font-body2-bold flex items-start mb-1'>
                   <span className='text-[11px] leading-normal text-secondary'>
-                    {color.trim}
+                    {color.trim_name}
                   </span>
                 </p>
               )}
@@ -59,7 +60,7 @@ function ColorItems({
                 data-object={JSON.stringify(color)}
               >
                 <img
-                  src={color.imgUrl}
+                  src={`https://${color.img_url}`}
                   alt={`{exterior-${color.name}}`}
                   className={`rounded
             ${

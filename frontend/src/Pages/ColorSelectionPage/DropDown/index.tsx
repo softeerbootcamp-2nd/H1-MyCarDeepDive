@@ -2,6 +2,7 @@ import DownArrow from '@/assets/icon/down-arrow.svg';
 import { useState } from 'react';
 import ColorItems from '../ColorItems';
 import ChangerModal from '../ChangerModal';
+import { ColorType } from '@/global/type';
 
 interface colorProps {
   name: string;
@@ -12,7 +13,7 @@ interface colorProps {
 
 interface Props {
   phrase: string;
-  data: colorProps[];
+  data: ColorType[];
   otherColorChangeHandler: ({}: any) => void;
 }
 
