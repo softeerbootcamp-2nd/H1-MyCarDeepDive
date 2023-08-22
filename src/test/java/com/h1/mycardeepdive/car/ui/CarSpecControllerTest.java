@@ -53,7 +53,8 @@ class CarSpecControllerTest extends ControllerTestConfig {
 
         CarSpecInfo carSpecInfo = toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds);
         CarSpecResponse carSpecResponse =
-                new CarSpecResponse(List.of(carSpecInfo, carSpecInfo, carSpecInfo, carSpecInfo), 2L);
+                new CarSpecResponse(
+                        List.of(carSpecInfo, carSpecInfo, carSpecInfo, carSpecInfo), 2L);
 
         when(carSpecService.findCarSpecsBySpec(engineId, bodyId, drivingSystemId))
                 .thenReturn(carSpecResponse);
