@@ -98,7 +98,10 @@ final class OptionDetailDescriptionAreaView: UIView {
         optionDescriptionLabel.text = optionDescription
         optionSelectButton.isHidden = optionTitle == nil ? true : false
     }
-    // MARK: - Objc Functions
+    
+    func setOptionSelect(_ action: UIAction) {
+        optionSelectButton.addAction(action, for: .touchUpInside)
+    }
 }
 
 // MARK: - LayoutSupportable
