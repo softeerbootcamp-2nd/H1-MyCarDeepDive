@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { optionDetailType } from '@/global/type';
 import getOptionDetails from '@/api/option/getOptionDetails';
 import Modal from '@/Components/Modal';
 import PageButtons from './PageButtons';
 import OptionCard from './OptionCard';
+import { OptionContext } from '@/context/OptionProvider';
+import getPackageOptionDetails from '@/api/option/getPackageOptionDetails';
 
 interface OptionModalProps {
   showOptionModal: boolean;
@@ -14,7 +16,12 @@ function OptionModal({
   showOptionModal,
   setShowOptionModal,
 }: OptionModalProps) {
-  const optionDetailData = getOptionDetails();
+  const { packageOption } = useContext(OptionContext);
+  const optionDetailData = packageOption ? undefined : getOptionDetails();
+  const packageOptionDetailData = packageOption
+    ? getPackageOptionDetails()
+    : undefined;
+  const [detailOptions, setDetailOptions] = useState<string[]>();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [optionCardData, setOptionCardData] = useState<
     optionDetailType[] | undefined
@@ -44,10 +51,17 @@ function OptionModal({
   };
 
   useEffect(() => {
-    if (optionDetailData === undefined) return;
-
-    setOptionCardData([optionDetailData.data]);
-  }, [optionDetailData]);
+    if (packageOption) {
+      if (packageOptionDetailData === undefined) return;
+      setOptionCardData(packageOptionDetailData.data);
+      setDetailOptions(
+        packageOptionDetailData.data.map(item => item.option_name),
+      );
+    } else {
+      if (optionDetailData === undefined) return;
+      setOptionCardData([optionDetailData.data]);
+    }
+  }, [packageOptionDetailData, optionDetailData]);
 
   if (!optionCardData) return null;
   return (
@@ -60,6 +74,7 @@ function OptionModal({
         {optionCardData.map((item, idx) => (
           <OptionCard
             {...item}
+            detailOptions={detailOptions}
             index={idx}
             length={optionCardData.length}
             key={idx}

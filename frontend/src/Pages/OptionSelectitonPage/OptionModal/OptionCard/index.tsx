@@ -1,11 +1,12 @@
 import CloseModal from '@/Components/Modal/CloseModal';
 import UnSelectedButton from '@/Pages/OptionSelectitonPage/AdditionalOption/Option/UnSelectedButton';
 import CardTag from './CardTag';
-// import DetailOption from './DetailOption';
+import DetailOption from './DetailOption';
 import DotButtons from './DotButtons';
 import { optionDetailType } from '@/global/type';
 
 interface OptionCardProps extends optionDetailType {
+  detailOptions: string[] | undefined;
   index: number;
   length: number;
   jumpPage: (page: number) => void;
@@ -19,7 +20,7 @@ function OptionCard({
   tag_list,
   price,
   option_img_url,
-
+  detailOptions,
   index,
   length,
   jumpPage,
@@ -60,22 +61,23 @@ function OptionCard({
               <UnSelectedButton />
             </div>
           </div>
-          <div className='mt-5 mb-4 font-body4-regular text-grey-200'>
+          <div className='mt-5 mb-[190px] h-[90px] font-body4-regular text-grey-200 overflow-y-auto'>
             {option_description}
           </div>
         </div>
         {isSet && (
           <div className='w-[344px] h-[190px] absolute bottom-0 left-0 bg-grey-900 rounded-br-xl p-7'>
             <div className='grid grid-cols-2 gap-3.5'>
-              {/* {detailOptions.map((item, idx) => (
-                <DetailOption
-                  detailOption={item}
-                  key={item}
-                  detailOptionName={detailOptionName}
-                  order={idx}
-                  jumpPage={jumpPage}
-                />
-              ))} */}
+              {detailOptions &&
+                detailOptions.map((item, idx) => (
+                  <DetailOption
+                    detailOption={item}
+                    key={item}
+                    detailOptionName={option_name}
+                    order={idx}
+                    jumpPage={jumpPage}
+                  />
+                ))}
             </div>
             <DotButtons index={index} length={length} jumpPage={jumpPage} />
           </div>

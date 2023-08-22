@@ -1,45 +1,91 @@
 import moreInfo from '@/assets/icon/more-info.svg';
 import SelectedButton from './SelectedButton';
 import UnSelectedButton from './UnSelectedButton';
+import { useContext } from 'react';
+import { OptionContext } from '@/context/OptionProvider';
+import { SET_OPTIONID, SET_PACKAGE } from '@/context/OptionProvider/type';
+import { priceToString } from '@/utils';
 
 interface SelectedProps {
-  image: string;
-  name: string;
-  description: string;
-  price: string;
-  adoptionRate?: number;
-  tag?: string;
+  package_option_id?: number;
+  option_img_url: string;
+  option_select_rate?: number;
+  option_name: string;
+  option_summary: string;
+  tag_list: {
+    tag_id: number;
+    tag_name: string;
+  }[];
+  badge_name: string;
+  price: number;
+  additional_option_id_list?: number[];
+  additional_option_id?: number;
+  select_rate?: number;
   setShowOptionModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Option({
-  image,
-  name,
-  description,
+  package_option_id,
+  option_img_url,
+  option_select_rate,
+  option_name,
+  option_summary,
+  badge_name,
   price,
-  adoptionRate,
-  tag,
+  additional_option_id,
+  select_rate,
   setShowOptionModal,
 }: SelectedProps) {
+  const { optionDispatch } = useContext(OptionContext);
+
+  const showMoreInfo = () => {
+    if (package_option_id) {
+      optionDispatch({
+        type: SET_OPTIONID,
+        optionId: package_option_id || 0,
+      });
+      optionDispatch({
+        type: SET_PACKAGE,
+        packageOption: true,
+      });
+    } else {
+      optionDispatch({
+        type: SET_OPTIONID,
+        optionId: additional_option_id || 0,
+      });
+      optionDispatch({
+        type: SET_PACKAGE,
+        packageOption: false,
+      });
+    }
+
+    setShowOptionModal(true);
+  };
+
   return (
     <div className='w-[244px] mb-11'>
-      <div className='w-full h-[162px] relative'>
+      <div className='w-full h-[130.71px] relative'>
         <img
-          src={image}
-          alt={name}
+          src={'https://' + option_img_url}
+          alt={option_name}
           className='w-full rounded absolute top-0 left-0'
         />
-        {adoptionRate && (
+        {option_select_rate && option_select_rate >= 60 && (
           <div className='absolute left-0 bottom-0 w-full py-2 pl-3 bg-secondary bg-opacity-60 rounded-lg font-caption1-regular text-grey-1000'>
-            {`${adoptionRate}%의 사용자가 선택했습니다.`}
+            {`${option_select_rate}%의 사용자가 선택했습니다.`}
           </div>
         )}
-        {tag === 'N Performance' && (
+        {select_rate && select_rate >= 60 && (
+          <div className='absolute left-0 bottom-0 w-full py-2 pl-3 bg-secondary bg-opacity-60 rounded-lg font-caption1-regular text-grey-1000'>
+            {`${select_rate}%의 사용자가 선택했습니다.`}
+          </div>
+        )}
+        {badge_name === 'N Performance' && (
           <div className='absolute left-0 top-0 rounded-tl rounded-br bg-[#AE4747] font-caption1-medium px-1.5 py-1'>
             <span className='leading-[12px] text-grey-1000'>N Performance</span>
           </div>
         )}
-        {tag === 'H Genuine Accessories' && (
+        {badge_name === 'H Genuine Accessories' && (
           <div className='absolute left-0 top-0 rounded-tl rounded-br bg-[#558AC7] font-caption1-medium px-1.5 py-1'>
             <span className='leading-[12px] text-grey-1000'>
               H Genuine Accessories
@@ -48,24 +94,24 @@ function Option({
         )}
       </div>
       <div className='mt-3 flex justify-between'>
-        <div className='w-2/3 font-h4-medium text-grey-0'>{name}</div>
+        <div className='w-2/3 h-[44px] font-h4-medium text-grey-0'>
+          {option_name}
+        </div>
         <div
           className='w-1/3 h-[22px] font-body4-regular whitespace-nowrap text-secondary flex cursor-pointer'
-          onClick={() => setShowOptionModal(true)}
+          onClick={showMoreInfo}
         >
           더 알아보기
           <img src={moreInfo} alt='더 알아보기' className='w-4 h-full' />
         </div>
       </div>
       <div className='mt-1.5 mb-1 h-[44px] font-body4-regular text-grey-300'>
-        {description}
+        {option_summary}
       </div>
-      <div className='mb-3 font-body3-medium text-grey-100'>{`${price}원`}</div>
-      {name === '컴포트 II' || name === '사이드스텝' ? (
-        <SelectedButton />
-      ) : (
-        <UnSelectedButton />
-      )}
+      <div className='mb-3 font-body3-medium text-grey-100'>{`${priceToString(
+        price,
+      )}원`}</div>
+      {false ? <SelectedButton /> : <UnSelectedButton />}
     </div>
   );
 }
