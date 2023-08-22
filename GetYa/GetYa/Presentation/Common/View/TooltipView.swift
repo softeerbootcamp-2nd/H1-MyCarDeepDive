@@ -17,6 +17,7 @@ class TooltipView: UIView {
     init(
         backgroundColor: UIColor,
         tipStartX: CGFloat,
+        tipStartY: CGFloat,
         tipYType: TipYType,
         tipWidth: CGFloat,
         tipHeight: CGFloat
@@ -25,6 +26,7 @@ class TooltipView: UIView {
         self.layer.backgroundColor = backgroundColor.cgColor
         configureTooltip(
             tipStartX: tipStartX,
+            tipStartY: tipStartY,
             tipYType: tipYType,
             tipWidth: tipWidth,
             tipHeight: tipHeight)
@@ -33,12 +35,14 @@ class TooltipView: UIView {
     
     convenience init(
         tipStartX: CGFloat,
+        tipStartY: CGFloat,
         tipWidth: CGFloat,
         tipHeight: CGFloat
     ) {
         self.init(
             backgroundColor: .white,
             tipStartX: tipStartX,
+            tipStartY: tipStartY,
             tipYType: .top,
             tipWidth: tipWidth,
             tipHeight: tipHeight)
@@ -46,13 +50,13 @@ class TooltipView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureTooltip(tipStartX: 0, tipWidth: 8, tipHeight: 6)
+        configureTooltip(tipStartX: 0, tipStartY: 0, tipWidth: 8, tipHeight: 6)
         configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureTooltip(tipStartX: 0, tipWidth: 8, tipHeight: 6)
+        configureTooltip(tipStartX: 0, tipStartY: 0, tipWidth: 8, tipHeight: 6)
         configureUI()
     }
     
@@ -65,6 +69,7 @@ class TooltipView: UIView {
     // MARK: - Functions
     func configureTooltip(
         tipStartX: CGFloat,
+        tipStartY: CGFloat,
         tipYType: TipYType = .top,
         tipWidth: CGFloat,
         tipHeight: CGFloat
@@ -74,15 +79,28 @@ class TooltipView: UIView {
         let tipWidthCenter = tipWidth / 2.0
         let endXWidth = tipStartX + tipWidth
           
-        path.move(to: CGPoint(x: tipStartX, y: 0))
-        path.addLine(to: CGPoint(x: tipStartX + tipWidthCenter,
-                                 y: tipYType == .top ? -tipHeight : tipHeight))
-        path.addLine(to: CGPoint(x: endXWidth, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: 0))
+        if tipYType == .bottom {
+            path.move(to: CGPoint(x: tipStartX, y: tipStartY))
+            path.addLine(to: CGPoint(x: tipStartX + tipWidthCenter, y: tipStartY + tipHeight))
+            path.addLine(to: CGPoint(x: endXWidth, y: tipStartY))
+        } else {
+            path.move(to: CGPoint(x: tipStartX, y: tipStartY))
+            path.addLine(to: CGPoint(x: tipStartX + tipWidthCenter,
+                                     y: tipStartY - tipHeight))
+            path.addLine(to: CGPoint(x: endXWidth, y: tipStartY))
+        }
 
         let shape = CAShapeLayer()
         shape.path = path
         shape.fillColor = self.layer.backgroundColor
-        self.layer.insertSublayer(shape, at: 0)
+        
+        let shapeLayer = layer.sublayers?.filter({ $0 is CAShapeLayer })
+        
+        if shapeLayer == nil {
+            self.layer.insertSublayer(shape, at: 0)
+        } else {
+            shapeLayer?.first?.removeFromSuperlayer()
+            self.layer.insertSublayer(shape, at: 0)
+        }
     }
 }

@@ -14,6 +14,34 @@ protocol LifeStyleCellDelegate: AnyObject {
 class LifeStyleCell: UICollectionViewCell {
     typealias Palette = UIColor.GetYaPalette
     
+    enum Constants {
+        enum TitleImageView {
+            static let height: CGFloat = .toScaledHeight(value: 128)
+        }
+        enum TagStackView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 24)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 20)
+            static let height: CGFloat = .toScaledHeight(value: 30)
+        }
+        enum DescriptionLabel {
+            static let topMargin: CGFloat = .toScaledHeight(value: 12)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 20)
+        }
+        enum SelectImageView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 22)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -20)
+            static let height: CGFloat = .toScaledHeight(value: 28)
+        }
+        enum LineView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 29)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 20)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -20)
+        }
+        enum Button {
+            static let topMargin: CGFloat = .toScaledHeight(value: 8)
+        }
+    }
+    
     // MARK: - UI Properties
     private let titleImageView: UIImageView = {
         let imageView = UIImageView()
@@ -39,7 +67,6 @@ class LifeStyleCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = CGFloat(8).scaledWidth
-        stackView.distribution = .fillEqually
         
         return stackView
     }()
@@ -83,7 +110,21 @@ class LifeStyleCell: UICollectionViewCell {
     private(set) var tagTexts: [String] = [] {
         didSet {
             tagTexts.forEach {
-                tagStackView.addArrangedSubview(TagView(text: $0))
+                let tagView = CommonPaddingLabel(
+                    padding: UIEdgeInsets(
+                        top: 6,
+                        left: 10,
+                        bottom: 6,
+                        right: 10),
+                    fontType: .mediumCaption1,
+                    color: .GetYaPalette.acriveBlue,
+                    text: $0
+                ).set {
+                    $0.textAlignment = .center
+                    $0.layer.backgroundColor = Palette.lightAcriveBlue.cgColor
+                    $0.layer.cornerRadius = 15
+                }
+                tagStackView.addArrangedSubview(tagView)
             }
         }
     }
@@ -102,25 +143,6 @@ class LifeStyleCell: UICollectionViewCell {
             configureByIsSelected(isSelected: isSelected)
         }
     }
-    private let titleImageViewLayoutConstant = UILayout(height: 128)
-    private let tagStackViewLayoutConstant = UILayout(
-        leadingMargin: 20,
-        topMargin: 24,
-        height: 30,
-        width: 146)
-    private let descriptionLabelLayoutConstant = UILayout(
-        leadingMargin: 20,
-        topMargin: 12)
-    private let selectImageViewLayoutConstant = UILayout(
-        topMargin: 22,
-        trailingMargin: -20,
-        height: 28)
-    private let lineViewLayoutConstant = UILayout(
-        leadingMargin: 20,
-        topMargin: 29,
-        trailingMargin: -20)
-    private let buttonLayoutConstant = UILayout(
-        topMargin: 8)
     
     // MARK: - LifeCycles
     override init(frame: CGRect) {
@@ -169,91 +191,99 @@ class LifeStyleCell: UICollectionViewCell {
     }
     
     private func configureTitleImageView() {
-        titleImageView.layer.cornerRadius = titleImageViewLayoutConstant.height / 2
+        typealias Const = Constants.TitleImageView
+        titleImageView.layer.cornerRadius = Const.height / 2
         
         NSLayoutConstraint.activate([
             titleImageView.topAnchor.constraint(equalTo: self.topAnchor),
             titleImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             titleImageView.widthAnchor.constraint(
-                equalToConstant: titleImageViewLayoutConstant.height),
+                equalToConstant: Const.height),
             titleImageView.heightAnchor.constraint(
-                equalToConstant: titleImageViewLayoutConstant.height)
+                equalToConstant: Const.height)
         ])
     }
     
     private func configureBaseView() {
         NSLayoutConstraint.activate([
             baseView.topAnchor.constraint(equalTo: titleImageView.centerYAnchor),
-            baseView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            baseView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            baseView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            baseView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            baseView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            baseView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
     private func configureTagStackView() {
+        typealias Const = Constants.TagStackView
+        
         NSLayoutConstraint.activate([
             tagStackView.topAnchor.constraint(
                 equalTo: titleImageView.bottomAnchor,
-                constant: tagStackViewLayoutConstant.topMargin),
+                constant: Const.topMargin),
             tagStackView.leadingAnchor.constraint(
                 equalTo: baseView.leadingAnchor,
-                constant: tagStackViewLayoutConstant.leadingMargin),
-            tagStackView.widthAnchor.constraint(
-                equalToConstant: tagStackViewLayoutConstant.width),
+                constant: Const.leadingMargin),
             tagStackView.heightAnchor.constraint(
-                equalToConstant: tagStackViewLayoutConstant.height)
+                equalToConstant: Const.height)
         ])
     }
     
     private func configureDescriptionLabel() {
+        typealias Const = Constants.DescriptionLabel
+        
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(
                 equalTo: self.tagStackView.bottomAnchor,
-                constant: descriptionLabelLayoutConstant.topMargin),
+                constant: Const.topMargin),
             descriptionLabel.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: descriptionLabelLayoutConstant.leadingMargin)
+                constant: Const.leadingMargin)
         ])
     }
     
     private func configureSelectImageView() {
+        typealias Const = Constants.SelectImageView
+        
         NSLayoutConstraint.activate([
             selectImageView.topAnchor.constraint(
                 equalTo: self.tagStackView.bottomAnchor,
-                constant: selectImageViewLayoutConstant.topMargin),
+                constant: Const.topMargin),
             selectImageView.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: selectImageViewLayoutConstant.trailingMargin),
+                constant: Const.trailingMargin),
             selectImageView.heightAnchor.constraint(
-                equalToConstant: selectImageViewLayoutConstant.height),
+                equalToConstant: Const.height),
             selectImageView.widthAnchor.constraint(
-                equalToConstant: selectImageViewLayoutConstant.height)
+                equalToConstant: Const.height)
         ])
     }
     
     private func configureLineView() {
+        typealias Const = Constants.LineView
+        
         NSLayoutConstraint.activate([
             lineView.topAnchor.constraint(
                 equalTo: self.descriptionLabel.bottomAnchor,
-                constant: lineViewLayoutConstant.topMargin),
+                constant: Const.topMargin),
             lineView.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor,
-                constant: lineViewLayoutConstant.leadingMargin),
+                constant: Const.leadingMargin),
             lineView.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: lineViewLayoutConstant.trailingMargin),
+                constant: Const.trailingMargin),
             lineView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
     
     private func configureButton() {
+        typealias Const = Constants.Button
         button.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(
                 equalTo: lineView.bottomAnchor,
-                constant: buttonLayoutConstant.topMargin),
-            button.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+                constant: Const.topMargin),
+            button.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
     
@@ -261,8 +291,8 @@ class LifeStyleCell: UICollectionViewCell {
         lineView.backgroundColor = isSelected ? Palette.gray700 : Palette.gray900
         selectImageView.isHighlighted = isSelected
         descriptionLabel.textColor = isSelected ? Palette.primary : Palette.gray0
-        tagStackView.arrangedSubviews.map { $0 as? TagView }.forEach {
-            $0?.configureBackgroundColor(color: isSelected ? Palette.lightAcriveBlue : Palette.gray1000)
+        tagStackView.arrangedSubviews.forEach {
+            $0.layer.backgroundColor = isSelected ? Palette.lightAcriveBlue.cgColor : Palette.gray1000.cgColor
         }
         baseView.layer.backgroundColor = isSelected ?  UIColor.clear.cgColor : Palette.lightPrimary.cgColor
         baseView.layer.borderWidth = isSelected ? 1.5 : 0

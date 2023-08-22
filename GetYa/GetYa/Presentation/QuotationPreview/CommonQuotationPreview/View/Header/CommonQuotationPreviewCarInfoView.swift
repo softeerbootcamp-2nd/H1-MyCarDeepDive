@@ -12,10 +12,9 @@ class CommonQuotationPreviewCarInfoView: UIView {
         static var intrinsicContentHeight: CGFloat = .toScaledHeight(value: 93)
         enum CarNameLabel {
             static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
-            static let topMargin: CGFloat = CGFloat(24).scaledHeight
+            static let topMargin: CGFloat = CGFloat(20).scaledHeight
             static let fontColor: UIColor = .GetYaPalette.gray50
             static let font: GetYaFont = .mediumHead2
-            static var intrinsicContentHeight = topMargin + font.lineHeight
         }
         enum CarTrimLabel {
             static let leadingMargin: CGFloat = CGFloat(7.5).scaledWidth
@@ -23,17 +22,17 @@ class CommonQuotationPreviewCarInfoView: UIView {
             static let font: GetYaFont = .mediumBody2
         }
         enum CarPriceLabel {
-            static let trailingMargin: CGFloat = CGFloat(16).scaledWidth
+            static let trailingMargin: CGFloat = CGFloat(-16).scaledWidth
             static let fontColor: UIColor = .GetYaPalette.gray100
             static let font: GetYaFont = .mediumHead4
         }
         enum CarOptionsLabel {
             static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
             static let topMargin: CGFloat = CGFloat(5).scaledWidth
+            static let bottomMargin: CGFloat = CGFloat(-16).scaledHeight
             static let size: CGFloat = 0
             static let fontColor: UIColor = .GetYaPalette.gray400
             static let font: GetYaFont = .regularCaption1
-            static let intrinsicContentHeight = topMargin + font.lineHeight
         }
     }
     
@@ -78,11 +77,9 @@ class CommonQuotationPreviewCarInfoView: UIView {
             $0.text = recommendCarInfo.trimName
         }
         _=carPriceLabel.set {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carPrice
         }
         _=carOptionsLabel.set {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.text = recommendCarInfo.carOptions
         }
     }
