@@ -42,18 +42,6 @@ extension SessionProvider: EndpointProvider {
             throw SessionError.urlRequest(error)
         }
     }
-    
-    func request(with url: URL) async throws -> Data {
-        do {
-            let (data, response) = try await session.data(from: url)
-            try checkResult(data: data, response)
-            return try decode(data: data)
-        } catch let sessionError as SessionError {
-            throw sessionError
-        } catch {
-            throw SessionError.urlRequest(error)
-        }
-    }
 }
 
 // MARK: - Private functions
