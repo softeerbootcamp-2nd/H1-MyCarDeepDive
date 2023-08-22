@@ -108,7 +108,7 @@
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
 		641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */; };
 		641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */; };
-		6457CFA82A938F8700B3AAAF /* TrimSubOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOption.swift */; };
+		6457CFA82A938F8700B3AAAF /* TrimSubOptionSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOptionSelectModel.swift */; };
 		6457CFAA2A938F8E00B3AAAF /* TrimOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA92A938F8E00B3AAAF /* TrimOption.swift */; };
 		6457CFAC2A93941D00B3AAAF /* AdditionalOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */; };
 		6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */; };
@@ -133,6 +133,15 @@
 		6457D11F2A945C9500B3AAAF /* OptionSelectImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1182A945C9500B3AAAF /* OptionSelectImageCell.swift */; };
 		6457D1202A945C9500B3AAAF /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1192A945C9500B3AAAF /* PlusButton.swift */; };
 		6457D1212A945D1A00B3AAAF /* OptionSelectTagItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484A7982A90F39300434136 /* OptionSelectTagItemCell.swift */; };
+		6457D1232A9463B200B3AAAF /* CarSettingSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1222A9463B200B3AAAF /* CarSettingSelectModel.swift */; };
+		6457D1262A9465A500B3AAAF /* OptionSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1252A9465A500B3AAAF /* OptionSelectModel.swift */; };
+		6457D1282A9465AF00B3AAAF /* ColorSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1272A9465AF00B3AAAF /* ColorSelectModel.swift */; };
+		6457D12A2A9465B400B3AAAF /* TrimSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1292A9465B400B3AAAF /* TrimSelectModel.swift */; };
+		6457D12C2A94894300B3AAAF /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D12B2A94894300B3AAAF /* String+.swift */; };
+		6457D1302A948EA200B3AAAF /* TrimSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D12F2A948EA200B3AAAF /* TrimSelectUseCase.swift */; };
+		6457D1322A94988600B3AAAF /* ColorSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1312A94988600B3AAAF /* ColorSelectUseCase.swift */; };
+		6457D1342A94989100B3AAAF /* OptionSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1332A94989100B3AAAF /* OptionSelectUseCase.swift */; };
+		6457D1362A9498B200B3AAAF /* DefaultCarSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1352A9498B200B3AAAF /* DefaultCarSettingUseCase.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
 		6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
@@ -358,7 +367,7 @@
 		6457CF9B2A92B51300B3AAAF /* OptionSelectTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectTooltipView.swift; sourceTree = "<group>"; };
 		6457CF9D2A92B6EB00B3AAAF /* OptionSelectImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectImageCell.swift; sourceTree = "<group>"; };
 		6457CF9F2A92B76600B3AAAF /* OptionSelectImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectImageCollectionView.swift; sourceTree = "<group>"; };
-		6457CFA72A938F8700B3AAAF /* TrimSubOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOption.swift; sourceTree = "<group>"; };
+		6457CFA72A938F8700B3AAAF /* TrimSubOptionSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionSelectModel.swift; sourceTree = "<group>"; };
 		6457CFA92A938F8E00B3AAAF /* TrimOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimOption.swift; sourceTree = "<group>"; };
 		6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionList.swift; sourceTree = "<group>"; };
 		6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionPackage.swift; sourceTree = "<group>"; };
@@ -386,6 +395,15 @@
 		6457D1172A945C9500B3AAAF /* OptionSelectImageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSelectImageCollectionView.swift; sourceTree = "<group>"; };
 		6457D1182A945C9500B3AAAF /* OptionSelectImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSelectImageCell.swift; sourceTree = "<group>"; };
 		6457D1192A945C9500B3AAAF /* PlusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
+		6457D1222A9463B200B3AAAF /* CarSettingSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarSettingSelectModel.swift; sourceTree = "<group>"; };
+		6457D1252A9465A500B3AAAF /* OptionSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectModel.swift; sourceTree = "<group>"; };
+		6457D1272A9465AF00B3AAAF /* ColorSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectModel.swift; sourceTree = "<group>"; };
+		6457D1292A9465B400B3AAAF /* TrimSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectModel.swift; sourceTree = "<group>"; };
+		6457D12B2A94894300B3AAAF /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		6457D12F2A948EA200B3AAAF /* TrimSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectUseCase.swift; sourceTree = "<group>"; };
+		6457D1312A94988600B3AAAF /* ColorSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectUseCase.swift; sourceTree = "<group>"; };
+		6457D1332A94989100B3AAAF /* OptionSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectUseCase.swift; sourceTree = "<group>"; };
+		6457D1352A9498B200B3AAAF /* DefaultCarSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCarSettingUseCase.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -1246,6 +1264,7 @@
 				15DF95982A7C8A110093EAC7 /* UIView+.swift */,
 				6484A7692A8DEDF100434136 /* UIViewController+.swift */,
 				15940E7F2A91F4EC0042A5F5 /* UIImage+.swift */,
+				6457D12B2A94894300B3AAAF /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1284,6 +1303,7 @@
 			isa = PBXGroup;
 			children = (
 				64ADA47E2A77884D0003E2C1 /* Protocol */,
+				6457D1352A9498B200B3AAAF /* DefaultCarSettingUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -1293,6 +1313,9 @@
 			children = (
 				64ADA48C2A77889D0003E2C1 /* Protocol.swift */,
 				150636452A93B1650057724E /* CarRecommendUseCase.swift */,
+				6457D12F2A948EA200B3AAAF /* TrimSelectUseCase.swift */,
+				6457D1312A94988600B3AAAF /* ColorSelectUseCase.swift */,
+				6457D1332A94989100B3AAAF /* OptionSelectUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1311,7 +1334,11 @@
 				6457CFB92A9397A500B3AAAF /* TagDetail.swift */,
 				6457CFBB2A9397D600B3AAAF /* TagOption.swift */,
 				6457CFA92A938F8E00B3AAAF /* TrimOption.swift */,
-				6457CFA72A938F8700B3AAAF /* TrimSubOption.swift */,
+				6457CFA72A938F8700B3AAAF /* TrimSubOptionSelectModel.swift */,
+				6457D1222A9463B200B3AAAF /* CarSettingSelectModel.swift */,
+				6457D1292A9465B400B3AAAF /* TrimSelectModel.swift */,
+				6457D1272A9465AF00B3AAAF /* ColorSelectModel.swift */,
+				6457D1252A9465A500B3AAAF /* OptionSelectModel.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1648,7 +1675,7 @@
 				6484A7542A8C835D00434136 /* CommonView.swift in Sources */,
 				6484A7862A902D0800434136 /* QuotationFinishViewController.swift in Sources */,
 				6484A73E2A8C791C00434136 /* GetYaFont.swift in Sources */,
-				6457CFA82A938F8700B3AAAF /* TrimSubOption.swift in Sources */,
+				6457CFA82A938F8700B3AAAF /* TrimSubOptionSelectModel.swift in Sources */,
 				6484A73D2A8C791500434136 /* UIView+.swift in Sources */,
 				6484A7622A8CB8D900434136 /* AlertType.swift in Sources */,
 				6484A73C2A8C790A00434136 /* ConvenienceInit.swift in Sources */,
@@ -1681,6 +1708,7 @@
 				6412D0802A7F75DB001E4005 /* LifeStyleViewController.swift in Sources */,
 				156A96A52A8BD66D00AE1477 /* BaseViewController.swift in Sources */,
 				15DF95912A7C89A60093EAC7 /* LayoutSupportable.swift in Sources */,
+				6457D1232A9463B200B3AAAF /* CarSettingSelectModel.swift in Sources */,
 				6484A74F2A8C82FE00434136 /* EngineDetailViewController.swift in Sources */,
 				6457CFC02A93A76D00B3AAAF /* TagCategoryType.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
@@ -1721,6 +1749,7 @@
 				155ED71C2A7E5A510052896A /* UIControl+CombineInteractionSubscription.swift in Sources */,
 				6412D0922A822D5A001E4005 /* LifeStylePeekContentView.swift in Sources */,
 				64E26A562A8A3E2800F6BC3A /* SettingProgressView.swift in Sources */,
+				6457D12C2A94894300B3AAAF /* String+.swift in Sources */,
 				150636422A93A8F00057724E /* RecommendationRepository.swift in Sources */,
 				64E26A6E2A8BF41400F6BC3A /* ColorSelectMoreColorCell.swift in Sources */,
 				64E26A592A8A3E2800F6BC3A /* TrimSelectViewController.swift in Sources */,
@@ -1764,6 +1793,7 @@
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
 				64E26A102A895C0F00F6BC3A /* ColorSelectViewController.swift in Sources */,
 				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
+				6457D1302A948EA200B3AAAF /* TrimSelectUseCase.swift in Sources */,
 				6484A7922A904BA200434136 /* PurchaseLearnMoreView.swift in Sources */,
 				64E26A492A8A3E2800F6BC3A /* BottomSheetSmallContentView.swift in Sources */,
 				6484A79F2A90FBC400434136 /* OptionSelectTitleHeaderView.swift in Sources */,
@@ -1784,12 +1814,16 @@
 				1506363C2A9392150057724E /* RecommendationEndpoints.swift in Sources */,
 				64ADA48D2A77889D0003E2C1 /* Protocol.swift in Sources */,
 				641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */,
+				6457D1362A9498B200B3AAAF /* DefaultCarSettingUseCase.swift in Sources */,
 				156A96A82A8C03A300AE1477 /* CharacterDetailQuestionListView.swift in Sources */,
 				156A969F2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift in Sources */,
 				6457D11F2A945C9500B3AAAF /* OptionSelectImageCell.swift in Sources */,
 				156A96AB2A8C03D400AE1477 /* QuestionViewSendable.swift in Sources */,
 				6457CFB22A9394DB00B3AAAF /* Tag.swift in Sources */,
 				156A96AD2A8C57B600AE1477 /* CharacterSelectDetailSlider.swift in Sources */,
+				6457D1342A94989100B3AAAF /* OptionSelectUseCase.swift in Sources */,
+				6457D12A2A9465B400B3AAAF /* TrimSelectModel.swift in Sources */,
+				6457D1262A9465A500B3AAAF /* OptionSelectModel.swift in Sources */,
 				6484A7502A8C82FE00434136 /* EngineDetailContentView.swift in Sources */,
 				6484A7972A90F33500434136 /* OptionSelectAdditionalItemCell.swift in Sources */,
 				155B72A52A8C888E0091A7F4 /* BottomSheetLargeContentView.swift in Sources */,
@@ -1815,11 +1849,13 @@
 				64E26A4B2A8A3E2800F6BC3A /* OptionNameAndPriceView.swift in Sources */,
 				64ADA4422A7787770003E2C1 /* SceneDelegate.swift in Sources */,
 				155ED7262A7E6DB30052896A /* ViewBindable.swift in Sources */,
+				6457D1282A9465AF00B3AAAF /* ColorSelectModel.swift in Sources */,
 				15D2ABCF2A937EF900F7DE8E /* DefaultGetYaCacheService.swift in Sources */,
 				64ADA4BA2A7A21520003E2C1 /* CommonOptionView.swift in Sources */,
 				1506363E2A9392480057724E /* CustomRecomendation.swift in Sources */,
 				64E26A452A8A3E2800F6BC3A /* CarSettingSelectViewController.swift in Sources */,
 				6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */,
+				6457D1322A94988600B3AAAF /* ColorSelectUseCase.swift in Sources */,
 				64E26A6C2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift in Sources */,
 				6457CFB42A93959B00B3AAAF /* BasicOption.swift in Sources */,
 				155DDD1C2A85E2CE009AE2BC /* CustomOrQuoteSelectView.swift in Sources */,

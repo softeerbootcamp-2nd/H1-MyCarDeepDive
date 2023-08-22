@@ -26,10 +26,20 @@ class CarSettingSelectViewController: UIViewController {
     private var bottomSheetViewHeightConstaint: NSLayoutConstraint!
     
     // MARK: - Properties
+    private var carSpecID = 0
     private var viewControllers: [UIViewController] = []
     private var currentPageIndex: Int = 0
     
     // MARK: - LifeCycles
+    init(carSpecID: Int) {
+        super.init(nibName: nil, bundle: nil)
+        self.carSpecID = carSpecID
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,7 +57,11 @@ class CarSettingSelectViewController: UIViewController {
         ])
         pageViewController.didMove(toParent: self)
         
-        let trimSelectViewController = TrimSelectViewController()
+        let useCase = DefaultCarSettingUseCase()
+        let trimSelectViewController = TrimSelectViewController(
+            viewModel: TrimSelectViewModel(
+                carSpecID: 1,
+                useCase: useCase))
         
         viewControllers = [
             trimSelectViewController,
