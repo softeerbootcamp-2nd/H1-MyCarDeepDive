@@ -10,7 +10,6 @@ interface Props {
 
 function SituationOption({ setShowOptionModal, tag }: Props) {
   const situationData = getSituationOptions(tag);
-  console.log(situationData);
 
   if (!situationData) return null;
   return (
@@ -21,7 +20,14 @@ function SituationOption({ setShowOptionModal, tag }: Props) {
           alt='situationDriving'
           className='w-full absolute top-0 left-0 object-cover'
         />
-        <OptionInfo setShowOptionModal={setShowOptionModal} />
+        {situationData.data.options.map(option => (
+          <OptionInfo
+            setShowOptionModal={setShowOptionModal}
+            tag={tag}
+            {...option}
+            key={option.additional_option_id}
+          />
+        ))}
       </div>
       <OptionList
         setShowOptionModal={setShowOptionModal}
