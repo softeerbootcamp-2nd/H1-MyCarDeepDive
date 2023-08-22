@@ -59,7 +59,7 @@ class BaseOptionDetailRoundView: UIView {
         $0.alpha = 0
     }
     
-    private var  contentView: UIView
+    private var contentView: UIView
     
     private let backgroundView: UIView = UIView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
