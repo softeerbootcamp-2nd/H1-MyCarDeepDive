@@ -10,14 +10,14 @@ import UIKit
 final class DetailQuotationPreviewFooterView: UITableViewHeaderFooterView {
     static let identifier = "DetailRecommendCarResultFooter"
     enum Constants {
-        static let intrinsicContentHeight: CGFloat = OnePixelDivider.uiConstant
-            .topMargin + TotalMoneyDescriptionLabel.topMargin + GetYaFont.mediumBody3.lineHeight
+        static let intrinsicContentHeight: CGFloat = OnePixelDivider.topMargin + TotalMoneyDescriptionLabel.topMargin + GetYaFont.mediumBody3.lineHeight
         enum OnePixelDivider {
-            static let uiConstant: UILayout = .init(
-                leadingMargin: 16, topMargin: 20, trailingMargin: 16, height: 1)
+            static let topMargin: CGFloat = .toScaledHeight(value: 20)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
             static let bgColor: UIColor = .GetYaPalette.gray700
             static let intrinsicContentHeight: CGFloat = {
-                return uiConstant.height + uiConstant.topMargin
+                return topMargin + 1
             }()
         }
         
@@ -76,19 +76,21 @@ extension DetailQuotationPreviewFooterView: LayoutSupportable {
     
     // MARK: - LayoutSupportable private functions
     private func configureOnePixelDivider() {
-        let const = Constants.OnePixelDivider.self
+        typealias Const = Constants.OnePixelDivider
+        
         NSLayoutConstraint.activate([
             onePixelDivider.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: const.uiConstant.leadingMargin),
+                constant: Const.leadingMargin),
             onePixelDivider.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: -const.uiConstant.trailingMargin),
+                constant: Const.trailingMargin),
             onePixelDivider.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: const.uiConstant.topMargin),
+                constant: Const.topMargin),
             onePixelDivider.heightAnchor.constraint(
-                equalToConstant: const.uiConstant.height)])
+                equalToConstant: 1)
+        ])
     }
     
     private func configureTotalMoneyDescriptionLabel() {
