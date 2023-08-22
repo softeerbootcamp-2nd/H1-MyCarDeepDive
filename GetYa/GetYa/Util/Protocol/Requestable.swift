@@ -8,6 +8,7 @@
 import Foundation
 
 protocol Requestable {
+    typealias SessionError = SessionProvider.SessionError
     var scheme: String { get }
     var host: String { get }
     var method: HTTPMethod { get }
@@ -22,11 +23,11 @@ extension Requestable {
     func url(with responseType: ResponseType) throws -> URL {
         let baseUrlString = "\(scheme)://\(host)" + prefixPath + responseType.path
         guard var components = URLComponents(string: baseUrlString) else {
-            throw NetworkError.components
+            throw SessionError.components
         }
         components.queryItems = makeQueryItems
         guard let url = components.url else {
-            throw NetworkError.components
+            throw SessionError.components
         }
         return url
     }
