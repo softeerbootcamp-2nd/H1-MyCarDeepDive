@@ -77,17 +77,7 @@ extension DefaultQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate
     }
     
     func gotoQuotePage() {
-        // TODO: 로딩 페이지 후 서버에서 완료되면 5.1화면으로 이동
-        let finishViewController = QuotationFinishViewController(nibName: nil, bundle: nil)
-        if let navigationController = navigationController,
-           let firstViewController = navigationController.viewControllers.first {
-            navigationController.pushViewController(finishViewController, animated: true)
-            
-            navigationController.viewControllers.removeAll(where: { targetViewController in
-                return (targetViewController != firstViewController &&
-                        targetViewController != finishViewController)
-            })
-        }
+        navigationController?.pushViewController(LoadingViewController(), animated: true)
     }
 }
 
