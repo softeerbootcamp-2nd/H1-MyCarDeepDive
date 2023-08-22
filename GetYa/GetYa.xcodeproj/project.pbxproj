@@ -804,21 +804,6 @@
 			path = CharacterSelect;
 			sourceTree = "<group>";
 		};
-		6457CFC72A93C92A00B3AAAF /* NetworkService */ = {
-			isa = PBXGroup;
-			children = (
-				6457CFC82A93C93200B3AAAF /* Protocol */,
-			);
-			path = NetworkService;
-			sourceTree = "<group>";
-		};
-		6457CFC82A93C93200B3AAAF /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 		6457CFC92A93CA6C00B3AAAF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1180,7 +1165,6 @@
 		64ADA4782A77880F0003E2C1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				6457CFC72A93C92A00B3AAAF /* NetworkService */,
 				155776E72A9107DA00E3C0E1 /* NetworkError.swift */,
 				155776E02A90D27300E3C0E1 /* Endpoint.swift */,
 				155776E22A90D29900E3C0E1 /* HTTPMethod.swift */,
