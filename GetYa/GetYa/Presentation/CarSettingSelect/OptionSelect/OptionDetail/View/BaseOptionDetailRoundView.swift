@@ -42,7 +42,6 @@ class BaseOptionDetailRoundView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
     }
-    
     private let closeButton: UIButton = UIButton().set {
         typealias Const = Constants.CloseButton
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -58,11 +57,10 @@ class BaseOptionDetailRoundView: UIView {
         $0.backgroundColor = .white.withAlphaComponent(0.15)
         $0.alpha = 0
     }
-    
     private var contentView: UIView
-    
     private let backgroundView: UIView = UIView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
     }
     
     // MARK: - Properties
@@ -135,6 +133,7 @@ class BaseOptionDetailRoundView: UIView {
     }
 }
 
+// MARK: - LayoutSupportable
 extension BaseOptionDetailRoundView: LayoutSupportable {
     func setupViews() {
         addSubviews([
