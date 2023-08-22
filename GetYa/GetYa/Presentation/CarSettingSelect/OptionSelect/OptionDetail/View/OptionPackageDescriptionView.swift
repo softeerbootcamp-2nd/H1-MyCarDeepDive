@@ -14,9 +14,7 @@ final class OptionPackageDescriptionView: UIView {
         }
         enum OptionDetailDescriptionView {
             static let topMargin: CGFloat = .toScaledHeight(value: 4)
-            static let maximumHeight: CGFloat = OptionDetailDescriptionAreaView
-                .Constants
-                .maximumHeight
+            static let minimumBottomMargin: CGFloat = .toScaledHeight(value: -16)
         }
         enum OptionTitleCollectionView {
             static let topMargin: CGFloat = .toScaledHeight(value: 28)
@@ -68,7 +66,7 @@ final class OptionPackageDescriptionView: UIView {
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
         setupUI()
-        setOptionDetailDescriptionView(title: "후석", price: "1,000원", description: "현대가고싶다.. ")
+        setOptionDetailDescriptionView(title: "후석", price: "1,000원", description: "설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. 설명 .. ")
     }
     
     private func setPageControlSelectedPage(currentPage: Int) {
@@ -141,16 +139,15 @@ extension OptionPackageDescriptionView: LayoutSupportable {
                 constant: Const.topMargin),
             optionDetailDescriptionView.trailingAnchor.constraint(
                 equalTo: trailingAnchor),
-            optionDetailDescriptionView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: Const.maximumHeight)])
+            optionDetailDescriptionView.bottomAnchor.constraint(
+                lessThanOrEqualTo: bottomBackgroundView.topAnchor,
+                constant: Const.minimumBottomMargin)])
     }
     
     private func configureBottomBackgroundView() {
         typealias Const = Constants.BottomBackgroundView
         
         NSLayoutConstraint.activate([
-            bottomBackgroundView.topAnchor.constraint(equalTo: optionDetailDescriptionView.bottomAnchor),
-            
             bottomBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             bottomBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             bottomBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -180,5 +177,11 @@ extension OptionPackageDescriptionView: LayoutSupportable {
             pageControl.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             pageControl.bottomAnchor.constraint(
                 equalTo: bottomAnchor)])
+    }
+    
+    private func configureSubviewsContentPriority() {
+        optionPackageLabel.setContentHuggingPriority(.init(251), for: .vertical)
+        optionDetailDescriptionView.setContentHuggingPriority(.init(250), for: .vertical)
+        bottomBackgroundView.setContentHuggingPriority(.init(250), for: .vertical)
     }
 }
