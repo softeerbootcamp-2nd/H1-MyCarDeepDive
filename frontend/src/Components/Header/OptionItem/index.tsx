@@ -9,7 +9,7 @@ function OptionItem({ name, price }: Props) {
   return (
     <div className='flex gap-4 justify-between'>
       <p>{name}</p>
-      <p className='font-body4-medium text-grey-100'>
+      <p className='font-body4-medium text-grey-100 whitespace-nowrap'>
         {priceToString(price)}원
       </p>
     </div>

@@ -20,7 +20,7 @@ function Header() {
   const [displayPriceInfo, setDisplayPriceInfo] = useState(false);
   const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
   const { carSpec, color, optionData } = useContext(CarContext);
-  console.log(optionData);
+
   useEffect(() => {
     if (!showPriceInfo) {
       if (timer) clearTimeout(timer);

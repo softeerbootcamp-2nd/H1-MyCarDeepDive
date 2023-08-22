@@ -19,7 +19,7 @@ function SelectedButton({ optionIdList, optionData }: Props) {
 
   return (
     <button
-      className='bg-primary font-caption1-medium text-grey-1000 border border-primary flex items-center gap-2 py-1.5 px-3 rounded-full'
+      className='w-[71px] bg-primary font-caption1-medium text-grey-1000 border border-primary flex items-center gap-2 py-1.5 px-3 rounded-full'
       onClick={unSelectOption}
     >
       <img src={checkOptionIcon} alt='check' />

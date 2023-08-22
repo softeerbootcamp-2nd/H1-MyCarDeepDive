@@ -62,7 +62,7 @@ function OptionSelectitonPage() {
           tag={tag}
         />
       ) : (
-        <SituationOption setShowOptionModal={setShowOptionModal} />
+        <SituationOption tag={tag} setShowOptionModal={setShowOptionModal} />
       )}
 
       {(category !== '추가 옵션' || tag === '전체') && (
