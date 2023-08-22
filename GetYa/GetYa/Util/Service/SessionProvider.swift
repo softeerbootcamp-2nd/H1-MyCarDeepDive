@@ -27,6 +27,14 @@ final class SessionProvider {
 
 // MARK: - EndpointProvider
 extension SessionProvider: EndpointProvider {
+//    func request<R, E>(endpoint: E) async throws -> R where R == E.ResponseDTO, E : NetworkInteractionable {
+//        let urlRequest = try endpoint.makeRequest(with: endpoint.responseType)
+//        print(urlRequest.url)
+//        do {
+//            let (data, response) = try await session.data(for: urlRequest)
+//        }
+//    }
+
     func request<R, E>(
         endpoint: E
     ) async throws -> R where R == E.ResponseDTO, E: NetworkInteractionable {
@@ -35,6 +43,8 @@ extension SessionProvider: EndpointProvider {
         do {
             let (data, response) = try await session.data(for: urlRequest)
             try checkResult(data: data, response)
+            print(endpoint.self)
+            
             return try decode(data: data)
         } catch let networkError as SessionError {
             throw networkError
@@ -57,8 +67,17 @@ extension SessionProvider {
     private func decode<T: Decodable>(data: Data) throws -> T {
         do {
             let decoder = JSONDecoder()
-            let model = try decoder.decode(T.self, from: data)
-            return model
+            // 원래 이렇게 하고 싶었던 목표
+            print(CommonDTO<QuotationDTO>.self)
+            let testModel = try decoder.decode(CommonDTO<QuotationDTO>.self, from: data)
+            // T타입일 때
+            print(T.self)
+            let testModel2 = try decoder.decode(T.self, from: data)
+            print(CommonDTO<T>.self)
+
+            // T타입에 CommonDTO의 제너릭 구체타입으로 했을 때
+            let model = try decoder.decode(CommonDTO<T>.self, from: data)
+            return model.data
         } catch {
             throw SessionError.emptyBytes
         }
