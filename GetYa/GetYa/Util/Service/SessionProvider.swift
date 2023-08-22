@@ -8,6 +8,17 @@
 import Foundation
 
 final class SessionProvider {
+    enum SessionError: Swift.Error {
+        /// Base Url 만들 때
+        case components
+        case unknown
+        case urlRequest(Error)
+        case failedStatusCode(Int)
+        case timeout
+        case emptyBytes
+        case failedDecode
+    }
+    
     private let session: URLSession
     init(session: URLSession = .shared) {
         self.session = session
@@ -25,10 +36,10 @@ extension SessionProvider: EndpointProvider {
             let (data, response) = try await session.data(for: urlRequest)
             try checkResult(data: data, response)
             return try decode(data: data)
-        } catch let networkError as NetworkError {
+        } catch let networkError as SessionError {
             throw networkError
         } catch {
-            throw NetworkError.urlRequest(error)
+            throw SessionError.urlRequest(error)
         }
     }
     
@@ -37,10 +48,10 @@ extension SessionProvider: EndpointProvider {
             let (data, response) = try await session.data(from: url)
             try checkResult(data: data, response)
             return try decode(data: data)
-        } catch let networkError as NetworkError {
-            throw networkError
+        } catch let sessionError as SessionError {
+            throw sessionError
         } catch {
-            throw NetworkError.urlRequest(error)
+            throw SessionError.urlRequest(error)
         }
     }
 }
@@ -49,9 +60,10 @@ extension SessionProvider: EndpointProvider {
 extension SessionProvider {
     private func checkResult(data: Data, _ response: URLResponse) throws {
         guard let response = response as? HTTPURLResponse else {
-            throw NetworkError.unknown
+            throw SessionError.unknown
         }
-        guard !data.isEmpty else { throw NetworkError.emptyBytes }
+        try checkResponse(response.statusCode)
+        guard !data.isEmpty else { throw SessionError.emptyBytes }
     }
     
     private func decode<T: Decodable>(data: Data) throws -> T {
@@ -60,7 +72,13 @@ extension SessionProvider {
             let model = try decoder.decode(T.self, from: data)
             return model
         } catch {
-            throw NetworkError.emptyBytes
+            throw SessionError.emptyBytes
+        }
+    }
+    
+    private func checkResponse(_ statusCode: Int) throws {
+        guard (200...299).contains(statusCode) else {
+            throw SessionError.failedStatusCode(statusCode)
         }
     }
 }
