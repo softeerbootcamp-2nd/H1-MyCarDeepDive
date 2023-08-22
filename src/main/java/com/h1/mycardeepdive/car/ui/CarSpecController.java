@@ -24,6 +24,13 @@ public class CarSpecController {
         return new ApiResponse<>(carSpecResponse);
     }
 
+    @GetMapping("/trims")
+    public ApiResponse<CarSpecResponse> getTrimsByCarSpecId(
+            @RequestParam("carSpecId") Long carSpecId) {
+        CarSpecResponse carSpecResponse = carSpecService.findCarSpecsByCarSpecId(carSpecId);
+        return new ApiResponse<>(carSpecResponse);
+    }
+
     @GetMapping("/comparison")
     public ApiResponse<List<CarSpecComparisonResponse>> getComparison(
             @RequestParam("engineId") Long engineId,

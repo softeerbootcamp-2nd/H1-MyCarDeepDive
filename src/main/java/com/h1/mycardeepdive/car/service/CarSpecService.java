@@ -86,4 +86,12 @@ public class CarSpecService {
     public boolean userClickedTrimLog(Long trimId) {
         return true;
     }
+
+    public CarSpecResponse findCarSpecsByCarSpecId(Long carSpecId) {
+        CarSpec carSpec = carSpecRepository.findById(carSpecId).orElseThrow();
+        return findCarSpecsBySpec(
+                carSpec.getEngine().getId(),
+                carSpec.getBody().getId(),
+                carSpec.getDrivingSystem().getId());
+    }
 }

@@ -19,6 +19,7 @@ import com.h1.mycardeepdive.car.ui.dto.CarSpecInfo;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
 import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -91,8 +92,8 @@ class CarSpecServiceTest {
         assertThat(carSpecComparisonResponse.getCluster_size()).isEqualTo(trim.getClusterSize());
     }
 
-    @DisplayName("트림 로그 전송에 성공한다.")
     @Test
+    @DisplayName("트림 로그 전송에 성공한다.")
     void sendUserTrimClickLog() {
         // given
         Trim trim = createExclusiveTrim();
@@ -100,5 +101,32 @@ class CarSpecServiceTest {
 
         // when&then
         assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("carSpecId가 주어졌을 때 같은 엔진, 바디, 구동방식을 사용하는 트림들 정보를 반환한다.")
+    void findCarSpecsByCarSpecId() {
+        // given
+        CarSpec carSpec = createCarSpecD72E();
+        Trim trim = carSpec.getTrim();
+        Engine engine = carSpec.getEngine();
+        Body body = carSpec.getBody();
+        DrivingSystem drivingSystem = carSpec.getDrivingSystem();
+        Long carSpecId = carSpec.getId();
+        when(carSpecRepository.findByEngineIdAndBodyIdAndDrivingSystemId(
+                        engine.getId(), body.getId(), drivingSystem.getId()))
+                .thenReturn(List.of(carSpec));
+        when(carSpecRepository.findById(carSpecId)).thenReturn(Optional.of(carSpec));
+
+        // when
+        CarSpecResponse carSpecResponse = carSpecService.findCarSpecsByCarSpecId(carSpecId);
+        CarSpecInfo carSpecInfo = carSpecResponse.getCar_specs().get(0);
+
+        // then
+        assertThat(carSpecInfo.getTrim_name()).isEqualTo(trim.getName());
+        assertThat(carSpecInfo.getPrice()).isEqualTo(carSpec.getPrice());
+        assertThat(carSpecInfo.getSummary()).isEqualTo(trim.getSummary());
+        assertThat(carSpecInfo.getCar_spec_id()).isEqualTo(carSpec.getId());
+        assertThat(carSpecInfo.getTrim_id()).isEqualTo(trim.getId());
     }
 }
