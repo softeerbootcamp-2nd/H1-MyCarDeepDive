@@ -19,12 +19,12 @@ final class OptionPackageDescriptionView: UIView {
         enum OptionTitleCollectionView {
             static let topMargin: CGFloat = .toScaledHeight(value: 28)
             static let height: CGFloat = .toScaledHeight(value: 94)
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -28)
         }
         enum BottomBackgroundView {
             static let height: CGFloat = .toScaledHeight(value: 190)
         }
         enum PageControl {
-            static let topMargin: CGFloat = .toScaledHeight(value: 28)
             static let height: CGFloat = .toScaledWidth(value: 8)
             static let width = height
         }
@@ -34,12 +34,13 @@ final class OptionPackageDescriptionView: UIView {
     private let optionPackageLabel = CommonLabel(
         fontType: .mediumCaption1,
         color: .GetYaPalette.gray400,
-        text: "패키지 준비중..."
+        text: ""
     ).set { $0.numberOfLines = 1 }
     private let optionDetailDescriptionView = OptionDetailDescriptionAreaView(frame: .zero)
     private let bottomBackgroundView = UIView(frame: .zero).set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.backgroundColor = UIColor(red: 0.983, green: 0.983, blue: 0.983, alpha: 1).cgColor
+        $0.alpha = 0
     }
     private let optionKeywordCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().set {
@@ -59,12 +60,13 @@ final class OptionPackageDescriptionView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.isPagingEnabled = true
             $0.showsHorizontalScrollIndicator = false
+            $0.backgroundColor = .clear
             $0.register(
                 OptionDetailKeywordCell.self,
                 forCellWithReuseIdentifier: OptionDetailKeywordCell.identifier)
         }
     }()
-    private var pageControl = CommonPageControl(numberOfPages: 3)
+    private var pageControl = CommonPageControl(numberOfPages: 1)
     
     // MARK: - Properties
 
@@ -83,7 +85,6 @@ final class OptionPackageDescriptionView: UIView {
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
         setupUI()
-        setOptionDetailDescriptionView(title: "후석", price: "1,000원", description: "설명..")
     }
     
     private func setPageControlSelectedPage(currentPage: Int) {
@@ -108,15 +109,24 @@ final class OptionPackageDescriptionView: UIView {
         optionKeywordCollectionView.dataSource = optionKeywordDelegator
     }
     
-    func setOptionDetailDescriptionView(title: String?, price: String?, description: String?) {
+    private func setOptionDetailDescriptionView(title: String?, price: String?, description: String?) {
         optionDetailDescriptionView.configure(
             optionTitle: title,
             optionPrice: price,
             optionDescription: description)
     }
     
-    func setPageCount(with pages: Int?) {
+    private func setPageCount(with pages: Int?) {
         pageControl.numberOfPages = pages ?? 0
+    }
+    
+    func configureFirstSetting() {
+        optionKeywordCollectionView.selectItem(
+            at: IndexPath(item: 0, section: 0),
+            animated: false,
+            scrollPosition: .left)
+        setPageControlSelectedPage(currentPage: 0)
+        bottomBackgroundView.alpha = 1
     }
 }
 
@@ -181,20 +191,19 @@ extension OptionPackageDescriptionView: LayoutSupportable {
                 equalTo: bottomBackgroundView.topAnchor,
                 constant: Const.topMargin),
             optionKeywordCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            optionKeywordCollectionView.heightAnchor.constraint(
-                equalToConstant: Const.height)])
+            optionKeywordCollectionView.bottomAnchor.constraint(
+                equalTo: pageControl.topAnchor,
+                constant: Const.bottomMargin)])
     }
     
     private func configurePageControl() {
         typealias Const = Constants.PageControl
         NSLayoutConstraint.activate([
             pageControl.leadingAnchor.constraint(equalTo: leadingAnchor),
-            pageControl.topAnchor.constraint(
-                equalTo: optionKeywordCollectionView.bottomAnchor,
-                constant: Const.topMargin),
             pageControl.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             pageControl.bottomAnchor.constraint(
-                equalTo: bottomAnchor)])
+                equalTo: bottomAnchor),
+            pageControl.heightAnchor.constraint(equalToConstant: Const.height)])
     }
     
     private func configureSubviewsContentPriority() {
