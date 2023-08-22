@@ -114,6 +114,9 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+    url: ${master.jdbc-url}
+    user: ${master.username}
+    password: ${master.password}
   mail:
     host: smtp.naver.com
     port: 465
@@ -187,6 +190,9 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+    url: ${master.jdbc-url}
+    user: ${master.username}
+    password: ${master.password}
   mail:
     host: smtp.naver.com
     port: 465

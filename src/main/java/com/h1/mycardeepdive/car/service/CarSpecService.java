@@ -1,5 +1,8 @@
 package com.h1.mycardeepdive.car.service;
 
+import static com.h1.mycardeepdive.car.mapper.CarSpecMapper.toCarSpecComparisonResponse;
+import static com.h1.mycardeepdive.car.mapper.CarSpecMapper.toCarSpecResponse;
+
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
@@ -21,52 +24,36 @@ public class CarSpecService {
     private final CarSpecRepository carSpecRepository;
 
     public List<CarSpecResponse> findCarSpecsBySpec(
-            String engineName, String bodyName, String drivingSystemName) {
+            Long engineId, Long bodyId, Long drivingSystemId) {
         List<CarSpec> carSpecs =
-                carSpecRepository.findByEngine_nameAndBody_nameAndDrivingSystem_name(
-                        engineName, bodyName, drivingSystemName);
+                carSpecRepository.findByEngineIdAndBodyIdAndDrivingSystemId(
+                        engineId, bodyId, drivingSystemId);
         List<CarSpecResponse> carSpecResponses = new ArrayList<>();
         for (CarSpec carSpec : carSpecs) {
             Trim trim = carSpec.getTrim();
             CarSpecResponse carSpecResponse =
-                    CarSpecResponse.builder()
-                            .trim_name(trim.getName())
-                            .price(carSpec.getPrice())
-                            .summary(trim.getSummary())
-                            .car_spec_id(carSpec.getId())
-                            .trim_id(trim.getId())
-                            .basic_option_names(getBasicOptionNames(trim.getId()))
-                            .basic_option_ids(getBasicOptionIds(trim.getId()))
-                            .build();
+                    toCarSpecResponse(
+                            carSpec,
+                            getBasicOptionNames(trim.getId()),
+                            getBasicOptionIds(trim.getId()));
             carSpecResponses.add(carSpecResponse);
         }
         return carSpecResponses;
     }
 
     public List<CarSpecComparisonResponse> findCarSpecComparisonsBySpec(
-            String engineName, String bodyName, String drivingSystemName) {
+            Long engineId, Long bodyId, Long drivingSystemId) {
         List<CarSpec> carSpecs =
-                carSpecRepository.findByEngine_nameAndBody_nameAndDrivingSystem_name(
-                        engineName, bodyName, drivingSystemName);
+                carSpecRepository.findByEngineIdAndBodyIdAndDrivingSystemId(
+                        engineId, bodyId, drivingSystemId);
         List<CarSpecComparisonResponse> carSpecComparisonResponses = new ArrayList<>();
         for (CarSpec carSpec : carSpecs) {
             Trim trim = carSpec.getTrim();
             CarSpecComparisonResponse carSpecComparisonResponse =
-                    CarSpecComparisonResponse.builder()
-                            .trims_img_url(trim.getImgUrl())
-                            .summary(trim.getSummary())
-                            .trim_name(trim.getName())
-                            .price(carSpec.getPrice())
-                            .exterior_color_img_urls(new ArrayList<>())
-                            .interior_color_names(new ArrayList<>())
-                            .wheel_size(trim.getWheelSize())
-                            .wheel_name(trim.getWheelName())
-                            .seat_name(trim.getSeatName())
-                            .navigation_size(trim.getNavigationSize())
-                            .cluster_size(trim.getClusterSize())
-                            .basic_option_names(getBasicOptionNames(trim.getId()))
-                            .basic_option_ids(getBasicOptionIds(trim.getId()))
-                            .build();
+                    toCarSpecComparisonResponse(
+                            carSpec,
+                            getBasicOptionNames(trim.getId()),
+                            getBasicOptionIds(trim.getId()));
             carSpecComparisonResponses.add(carSpecComparisonResponse);
         }
         return carSpecComparisonResponses;
@@ -94,5 +81,9 @@ public class CarSpecService {
         } else {
             return List.of(52L, 127L, 27L);
         }
+    }
+
+    public boolean userClickedTrimLog(Long trimId) {
+        return true;
     }
 }

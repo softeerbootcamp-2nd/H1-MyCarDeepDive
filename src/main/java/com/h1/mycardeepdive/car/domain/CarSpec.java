@@ -1,21 +1,18 @@
 package com.h1.mycardeepdive.car.domain;
 
 import com.h1.mycardeepdive.options.domain.CarSpecOptions;
+import com.h1.mycardeepdive.options.domain.CarSpecPackage;
 import com.h1.mycardeepdive.trims.domain.Trim;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class CarSpec {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,10 +39,33 @@ public class CarSpec {
     @JoinColumn(name = "driving_system_id")
     private DrivingSystem drivingSystem;
 
-    @OneToMany(mappedBy = "carSpec")
-    private List<CarSpecOptions> carSpecOptions = new ArrayList<>();
+    @OneToMany(mappedBy = "carSpec", fetch = FetchType.LAZY)
+    private List<CarSpecOptions> carSpecOptions;
+
+    @OneToMany(mappedBy = "carSpec", fetch = FetchType.LAZY)
+    private List<CarSpecPackage> carSpecPackages;
 
     private long price;
+
+    @Builder
+    public CarSpec(
+            Long id,
+            Car car,
+            Trim trim,
+            Body body,
+            Engine engine,
+            DrivingSystem drivingSystem,
+            List<CarSpecOptions> carSpecOptions,
+            long price) {
+        this.id = id;
+        this.car = car;
+        this.trim = trim;
+        this.body = body;
+        this.engine = engine;
+        this.drivingSystem = drivingSystem;
+        this.carSpecOptions = carSpecOptions;
+        this.price = price;
+    }
 
     @Override
     public boolean equals(Object o) {

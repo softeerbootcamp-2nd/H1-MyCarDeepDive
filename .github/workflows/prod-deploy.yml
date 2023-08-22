@@ -44,7 +44,6 @@ jobs:
           name: jacoco-report
           path: build/reports/jacoco/test/html
 
-
       - name: DockerHub Login
         uses: docker/login-action@v2
         with:
