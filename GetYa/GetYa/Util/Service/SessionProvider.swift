@@ -9,14 +9,13 @@ import Foundation
 
 final class SessionProvider {
     enum SessionError: Swift.Error {
-        /// Base Url 만들 때
         case components
         case unknown
         case urlRequest(Error)
         case failedStatusCode(Int)
         case timeout
         case emptyBytes
-        case failedDecode
+        case failedDecode(Error)
     }
     
     private let session: URLSession
@@ -31,7 +30,6 @@ extension SessionProvider: EndpointProvider {
         endpoint: E
     ) async throws -> R where R == E.ResponseDTO, E: NetworkInteractionable {
         let urlRequest = try endpoint.makeRequest(with: endpoint.responseType)
-        print(urlRequest.url)
         do {
             let (data, response) = try await session.data(for: urlRequest)
             try checkResult(data: data, response)
@@ -60,7 +58,7 @@ extension SessionProvider {
             let commonDTO = try decoder.decode(T.self, from: data)
             return commonDTO
         } catch {
-            throw SessionError.emptyBytes
+            throw SessionError.failedDecode(error)
         }
     }
     
