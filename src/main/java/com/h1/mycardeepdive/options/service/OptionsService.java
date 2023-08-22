@@ -66,12 +66,10 @@ public class OptionsService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
     public boolean userClickedOptionLog(Long optionId) {
         return true;
     }
 
-    @Transactional
     public boolean userClickedPackageLog(Long optionId) {
         return true;
     }

@@ -6,10 +6,7 @@ import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
 import com.h1.mycardeepdive.global.response.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,22 +16,26 @@ public class CarSpecController {
 
     @GetMapping
     public ApiResponse<List<CarSpecResponse>> getTrimsBySpec(
-            @RequestParam("engine") String engineName,
-            @RequestParam("body") String bodyName,
-            @RequestParam("drivingSystem") String drivingSystemName) {
+            @RequestParam("engineId") Long engineId,
+            @RequestParam("bodyId") Long bodyId,
+            @RequestParam("drivingSystemId") Long drivingSystemId) {
         List<CarSpecResponse> carSpecs =
-                carSpecService.findCarSpecsBySpec(engineName, bodyName, drivingSystemName);
+                carSpecService.findCarSpecsBySpec(engineId, bodyId, drivingSystemId);
         return new ApiResponse<>(carSpecs);
     }
 
     @GetMapping("/comparison")
     public ApiResponse<List<CarSpecComparisonResponse>> getComparison(
-            @RequestParam("engine") String engineName,
-            @RequestParam("body") String bodyName,
-            @RequestParam("drivingSystem") String drivingSystemName) {
+            @RequestParam("engineId") Long engineId,
+            @RequestParam("bodyId") Long bodyId,
+            @RequestParam("drivingSystemId") Long drivingSystemId) {
         List<CarSpecComparisonResponse> carSpecComparisons =
-                carSpecService.findCarSpecComparisonsBySpec(
-                        engineName, bodyName, drivingSystemName);
+                carSpecService.findCarSpecComparisonsBySpec(engineId, bodyId, drivingSystemId);
         return new ApiResponse<>(carSpecComparisons);
+    }
+
+    @PostMapping("/activity-log/{trim-id}")
+    public ApiResponse<Boolean> userClickedTrimLog(@PathVariable("trim-id") Long trimId) {
+        return new ApiResponse<>(carSpecService.userClickedTrimLog(trimId));
     }
 }

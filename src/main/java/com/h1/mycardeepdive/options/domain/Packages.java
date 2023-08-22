@@ -1,6 +1,7 @@
 package com.h1.mycardeepdive.options.domain;
 
 import com.h1.mycardeepdive.global.entity.OptionBaseEntity;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Builder;
@@ -16,15 +17,25 @@ public class Packages extends OptionBaseEntity {
     @Column(name = "package_id")
     private Long id;
 
+    @OneToMany(mappedBy = "packages", fetch = FetchType.LAZY)
+    private List<OptionPackage> optionPackages;
+
     @Builder
     public Packages(
-            Long id, String name, String summary, long price, double chooseRate, Badge badgeName) {
+            Long id,
+            String name,
+            String summary,
+            long price,
+            double chooseRate,
+            Badge badgeName,
+            List<OptionPackage> optionPackages) {
         this.id = id;
         this.name = name;
         this.summary = summary;
         this.price = price;
         this.chooseRate = chooseRate;
         this.badgeName = badgeName;
+        this.optionPackages = optionPackages;
     }
 
     @Override
