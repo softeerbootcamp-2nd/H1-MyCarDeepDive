@@ -16,11 +16,11 @@ public class OptionTag {
     @Column(name = "option_tag_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "option_id")
     private Options option;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
     private Tags tag;
 

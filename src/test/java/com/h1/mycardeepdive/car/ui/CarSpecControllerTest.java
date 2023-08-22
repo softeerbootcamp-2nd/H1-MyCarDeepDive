@@ -14,6 +14,7 @@ import com.h1.mycardeepdive.ControllerTestConfig;
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.car.service.CarSpecService;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
+import com.h1.mycardeepdive.car.ui.dto.CarSpecInfo;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -50,16 +51,13 @@ class CarSpecControllerTest extends ControllerTestConfig {
         List<String> basicOptionNames = List.of("전방 충돌 방지 보조", "내비 기반 크루즈 컨트롤", "세이프티 파워 윈도우");
         List<Long> basicOptionIds = List.of(1L, 2L, 3L);
 
+        CarSpecInfo carSpecInfo = toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds);
         CarSpecResponse carSpecResponse =
-                toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds);
+                new CarSpecResponse(
+                        List.of(carSpecInfo, carSpecInfo, carSpecInfo, carSpecInfo), 2L);
 
         when(carSpecService.findCarSpecsBySpec(engineId, bodyId, drivingSystemId))
-                .thenReturn(
-                        List.of(
-                                carSpecResponse,
-                                carSpecResponse,
-                                carSpecResponse,
-                                carSpecResponse));
+                .thenReturn(carSpecResponse);
 
         // then
         ResultActions resultActions =
@@ -146,6 +144,35 @@ class CarSpecControllerTest extends ControllerTestConfig {
                                                                 parameterWithName("drivingSystemId")
                                                                         .description(
                                                                                 "2WD: 1, 4WD: 2"))
+                                                        .build())));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @DisplayName("트림 로그 전송 기능에 성공한다.")
+    @Test
+    void clickTrimLogTest() throws Exception {
+        // given
+        Long trimId = 1L;
+        when(carSpecService.userClickedTrimLog(trimId)).thenReturn(true);
+
+        // then
+        ResultActions resultActions =
+                mockMvc.perform(
+                                RestDocumentationRequestBuilders.post(
+                                                DEFAULT_URL + "/activity-log/{trim-id}", trimId)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(
+                                MockMvcRestDocumentationWrapper.document(
+                                        "trim-click",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()),
+                                        resource(
+                                                ResourceSnippetParameters.builder()
+                                                        .tag("트림")
+                                                        .description("트림 클릭 시, 로그 전송")
+                                                        .requestFields()
+                                                        .responseFields()
                                                         .build())));
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }

@@ -6,6 +6,7 @@ import static com.h1.mycardeepdive.fixture.DrivingSystemFixture.create2WDDriving
 import static com.h1.mycardeepdive.fixture.EngineFixture.createDieselEngine;
 import static com.h1.mycardeepdive.fixture.TrimFixture.createExclusiveTrim;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import com.h1.mycardeepdive.car.domain.Body;
@@ -14,6 +15,7 @@ import com.h1.mycardeepdive.car.domain.DrivingSystem;
 import com.h1.mycardeepdive.car.domain.Engine;
 import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
+import com.h1.mycardeepdive.car.ui.dto.CarSpecInfo;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
 import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.List;
@@ -44,17 +46,17 @@ class CarSpecServiceTest {
                         engine.getId(), body.getId(), drivingSystem.getId()))
                 .thenReturn(List.of(carSpec));
         // when
-        List<CarSpecResponse> carSpecResponses =
+        CarSpecResponse carSpecResponse =
                 carSpecService.findCarSpecsBySpec(
                         engine.getId(), body.getId(), drivingSystem.getId());
-        CarSpecResponse carSpecResponse = carSpecResponses.get(0);
+        CarSpecInfo carSpecInfo = carSpecResponse.getCar_specs().get(0);
 
         // then
-        assertThat(carSpecResponse.getTrim_name()).isEqualTo(trim.getName());
-        assertThat(carSpecResponse.getPrice()).isEqualTo(carSpec.getPrice());
-        assertThat(carSpecResponse.getSummary()).isEqualTo(trim.getSummary());
-        assertThat(carSpecResponse.getCar_spec_id()).isEqualTo(carSpec.getId());
-        assertThat(carSpecResponse.getTrim_id()).isEqualTo(trim.getId());
+        assertThat(carSpecInfo.getTrim_name()).isEqualTo(trim.getName());
+        assertThat(carSpecInfo.getPrice()).isEqualTo(carSpec.getPrice());
+        assertThat(carSpecInfo.getSummary()).isEqualTo(trim.getSummary());
+        assertThat(carSpecInfo.getCar_spec_id()).isEqualTo(carSpec.getId());
+        assertThat(carSpecInfo.getTrim_id()).isEqualTo(trim.getId());
     }
 
     @Test
@@ -87,5 +89,16 @@ class CarSpecServiceTest {
         assertThat(carSpecComparisonResponse.getNavigation_size())
                 .isEqualTo(trim.getNavigationSize());
         assertThat(carSpecComparisonResponse.getCluster_size()).isEqualTo(trim.getClusterSize());
+    }
+
+    @DisplayName("트림 로그 전송에 성공한다.")
+    @Test
+    void sendUserTrimClickLog() {
+        // given
+        Trim trim = createExclusiveTrim();
+        boolean result = carSpecService.userClickedTrimLog(trim.getId());
+
+        // when&then
+        assertTrue(result);
     }
 }

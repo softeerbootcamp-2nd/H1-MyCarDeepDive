@@ -16,11 +16,11 @@ public class PackageTag {
     @Column(name = "package_tag_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "package_id")
     private Packages packages;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
     private Tags tag;
 

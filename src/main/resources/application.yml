@@ -6,6 +6,14 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+  metrics:
+    tags:
+      application: mycardeepdive
 ---
 spring:
   config:
@@ -33,6 +41,32 @@ spring:
       jdbc-url: jdbc:h2:mem:mycardeepdive;MODE=MYSQL
   flyway:
     enabled: false
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: ${naver.email}
+    password: ${naver.password}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.ssl.trust: smtp.naver.com
+      mail.smtp.starttls.enable: true
+  data:
+    mongodb:
+      uri: ${mongo.url}
+cloud:
+  aws:
+    credentials:
+      access-key: ${s3.credentials.accesskey}
+      secret-key: ${s3.credentials.secretkey}
+      instanceProfile: true
+    s3:
+      bucket: ${s3.bucket}
+    region:
+      static: ${s3.region}
+      auto: false
+    stack:
+      auto: false
 aws:
   paramstore:
     enabled: true
@@ -83,6 +117,32 @@ spring:
     url: ${master.jdbc-url}
     user: ${master.username}
     password: ${master.password}
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: ${naver.email}
+    password: ${naver.password}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.ssl.trust: smtp.naver.com
+      mail.smtp.starttls.enable: true
+  data:
+    mongodb:
+      uri: ${mongo.url}
+cloud:
+  aws:
+    credentials:
+      access-key: ${s3.credentials.accesskey}
+      secret-key: ${s3.credentials.secretkey}
+      instanceProfile: true
+    s3:
+      bucket: ${s3.bucket}
+    region:
+      static: ${s3.region}
+      auto: false
+    stack:
+      auto: false
 aws:
   paramstore:
     enabled: true
@@ -133,6 +193,32 @@ spring:
     url: ${master.jdbc-url}
     user: ${master.username}
     password: ${master.password}
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: ${naver.email}
+    password: ${naver.password}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.ssl.trust: smtp.naver.com
+      mail.smtp.starttls.enable: true
+  data:
+    mongodb:
+      uri: ${mongo.url}
+cloud:
+  aws:
+    credentials:
+      access-key: ${s3.credentials.accesskey}
+      secret-key: ${s3.credentials.secretkey}
+      instanceProfile: true
+    s3:
+      bucket: ${s3.bucket}
+    region:
+      static: ${s3.region}
+      auto: false
+    stack:
+      auto: false
 aws:
   paramstore:
     enabled: true

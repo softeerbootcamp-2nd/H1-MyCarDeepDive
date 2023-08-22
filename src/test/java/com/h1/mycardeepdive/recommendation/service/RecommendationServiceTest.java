@@ -10,6 +10,7 @@ import com.h1.mycardeepdive.recommendation.domain.CustomRecommendation;
 import com.h1.mycardeepdive.recommendation.domain.Recommendation;
 import com.h1.mycardeepdive.recommendation.domain.repository.CustomRecommendationRepository;
 import com.h1.mycardeepdive.recommendation.domain.repository.RecommendationRepository;
+import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationColorInfo;
 import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationResponse;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
@@ -36,11 +37,15 @@ class RecommendationServiceTest {
         Recommendation recommendation = createRecommendation(ageGroupId, lifeStyleId);
         RecommendationResponse recommendationResponse1 =
                 toRecommendationResponse(recommendation.getRecommendationCar());
+        RecommendationColorInfo exteriorColor1 = recommendationResponse1.getExterior_color();
+        RecommendationColorInfo interiorColor1 = recommendationResponse1.getInterior_color();
         when(recommendationRepository.findByAgeGroupIdAndLifeStyleId(ageGroupId, lifeStyleId))
                 .thenReturn(Optional.of(recommendation));
         // when
         RecommendationResponse recommendationResponse2 =
                 recommendationService.findRecommendation(ageGroupId, lifeStyleId);
+        RecommendationColorInfo exteriorColor2 = recommendationResponse2.getExterior_color();
+        RecommendationColorInfo interiorColor2 = recommendationResponse2.getInterior_color();
         // then
         assertThat(recommendationResponse2.getTrim_name())
                 .isEqualTo(recommendationResponse1.getTrim_name());
@@ -62,26 +67,18 @@ class RecommendationServiceTest {
                 .isEqualTo(recommendationResponse1.getCar_spec_id());
         assertThat(recommendationResponse2.getTrim_id())
                 .isEqualTo(recommendationResponse1.getTrim_id());
-        assertThat(recommendationResponse2.getExterior_color_id())
-                .isEqualTo(recommendationResponse1.getExterior_color_id());
-        assertThat(recommendationResponse2.getExterior_color_name())
-                .isEqualTo(recommendationResponse1.getExterior_color_name());
-        assertThat(recommendationResponse2.getExterior_color_price())
-                .isEqualTo(recommendationResponse1.getExterior_color_price());
-        assertThat(recommendationResponse2.getExterior_color_comment())
-                .isEqualTo(recommendationResponse1.getExterior_color_comment());
-        assertThat(recommendationResponse2.getExterior_color_icon_url())
-                .isEqualTo(recommendationResponse1.getExterior_color_icon_url());
-        assertThat(recommendationResponse2.getInterior_color_id())
-                .isEqualTo(recommendationResponse1.getInterior_color_id());
-        assertThat(recommendationResponse2.getInterior_color_name())
-                .isEqualTo(recommendationResponse1.getInterior_color_name());
-        assertThat(recommendationResponse2.getInterior_color_price())
-                .isEqualTo(recommendationResponse1.getInterior_color_price());
-        assertThat(recommendationResponse2.getInterior_color_comment())
-                .isEqualTo(recommendationResponse1.getInterior_color_comment());
-        assertThat(recommendationResponse2.getInterior_color_icon_url())
-                .isEqualTo(recommendationResponse1.getInterior_color_icon_url());
+        assertThat(exteriorColor2.getColor_id()).isEqualTo(exteriorColor1.getColor_id());
+        assertThat(exteriorColor2.getColor_name()).isEqualTo(exteriorColor1.getColor_name());
+        assertThat(exteriorColor2.getColor_price()).isEqualTo(exteriorColor1.getColor_price());
+        assertThat(exteriorColor2.getColor_comment()).isEqualTo(exteriorColor1.getColor_comment());
+        assertThat(exteriorColor2.getColor_icon_url())
+                .isEqualTo(exteriorColor1.getColor_icon_url());
+        assertThat(interiorColor2.getColor_id()).isEqualTo(interiorColor1.getColor_id());
+        assertThat(interiorColor2.getColor_name()).isEqualTo(interiorColor1.getColor_name());
+        assertThat(interiorColor2.getColor_price()).isEqualTo(interiorColor1.getColor_price());
+        assertThat(interiorColor2.getColor_comment()).isEqualTo(interiorColor1.getColor_comment());
+        assertThat(interiorColor2.getColor_icon_url())
+                .isEqualTo(interiorColor1.getColor_icon_url());
         assertThat(recommendationResponse2.getOptions().size())
                 .isEqualTo(recommendationResponse1.getOptions().size());
         assertThat(recommendationResponse2.getPackages().size())
@@ -104,6 +101,8 @@ class RecommendationServiceTest {
                         drivingExperienceId, familyMembersId, carPurposeId, personalValueId);
         RecommendationResponse recommendationResponse1 =
                 toRecommendationResponse(customRecommendation.getRecommendationCar());
+        RecommendationColorInfo exteriorColor1 = recommendationResponse1.getExterior_color();
+        RecommendationColorInfo interiorColor1 = recommendationResponse1.getInterior_color();
         when(customRecommendationRepository
                         .findByDrivingExperienceIdAndFamilyMembersIdAndCarPurposeIdAndPersonalValueId(
                                 drivingExperienceId,
@@ -115,6 +114,8 @@ class RecommendationServiceTest {
         RecommendationResponse recommendationResponse2 =
                 recommendationService.findCustomRecommendation(
                         drivingExperienceId, familyMembersId, carPurposeId, personalValueId);
+        RecommendationColorInfo exteriorColor2 = recommendationResponse2.getExterior_color();
+        RecommendationColorInfo interiorColor2 = recommendationResponse2.getInterior_color();
 
         // then
         assertThat(recommendationResponse2.getTrim_name())
@@ -137,26 +138,18 @@ class RecommendationServiceTest {
                 .isEqualTo(recommendationResponse1.getCar_spec_id());
         assertThat(recommendationResponse2.getTrim_id())
                 .isEqualTo(recommendationResponse1.getTrim_id());
-        assertThat(recommendationResponse2.getExterior_color_id())
-                .isEqualTo(recommendationResponse1.getExterior_color_id());
-        assertThat(recommendationResponse2.getExterior_color_name())
-                .isEqualTo(recommendationResponse1.getExterior_color_name());
-        assertThat(recommendationResponse2.getExterior_color_price())
-                .isEqualTo(recommendationResponse1.getExterior_color_price());
-        assertThat(recommendationResponse2.getExterior_color_comment())
-                .isEqualTo(recommendationResponse1.getExterior_color_comment());
-        assertThat(recommendationResponse2.getExterior_color_icon_url())
-                .isEqualTo(recommendationResponse1.getExterior_color_icon_url());
-        assertThat(recommendationResponse2.getInterior_color_id())
-                .isEqualTo(recommendationResponse1.getInterior_color_id());
-        assertThat(recommendationResponse2.getInterior_color_name())
-                .isEqualTo(recommendationResponse1.getInterior_color_name());
-        assertThat(recommendationResponse2.getInterior_color_price())
-                .isEqualTo(recommendationResponse1.getInterior_color_price());
-        assertThat(recommendationResponse2.getInterior_color_comment())
-                .isEqualTo(recommendationResponse1.getInterior_color_comment());
-        assertThat(recommendationResponse2.getInterior_color_icon_url())
-                .isEqualTo(recommendationResponse1.getInterior_color_icon_url());
+        assertThat(exteriorColor2.getColor_id()).isEqualTo(exteriorColor1.getColor_id());
+        assertThat(exteriorColor2.getColor_name()).isEqualTo(exteriorColor1.getColor_name());
+        assertThat(exteriorColor2.getColor_price()).isEqualTo(exteriorColor1.getColor_price());
+        assertThat(exteriorColor2.getColor_comment()).isEqualTo(exteriorColor1.getColor_comment());
+        assertThat(exteriorColor2.getColor_icon_url())
+                .isEqualTo(exteriorColor1.getColor_icon_url());
+        assertThat(interiorColor2.getColor_id()).isEqualTo(interiorColor1.getColor_id());
+        assertThat(interiorColor2.getColor_name()).isEqualTo(interiorColor1.getColor_name());
+        assertThat(interiorColor2.getColor_price()).isEqualTo(interiorColor1.getColor_price());
+        assertThat(interiorColor2.getColor_comment()).isEqualTo(interiorColor1.getColor_comment());
+        assertThat(interiorColor2.getColor_icon_url())
+                .isEqualTo(interiorColor1.getColor_icon_url());
         assertThat(recommendationResponse2.getOptions().size())
                 .isEqualTo(recommendationResponse1.getOptions().size());
         assertThat(recommendationResponse2.getPackages().size())

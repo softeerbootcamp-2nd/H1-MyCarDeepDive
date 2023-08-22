@@ -61,7 +61,7 @@ public class OptionsRepositoryImpl implements OptionsRepositoryCustom {
                 .innerJoin(optionPackage)
                 .on(optionPackage.packages.id.eq(packages.id))
                 .where(optionPackage.packages.id.eq(packageId))
-                .fetchOne();
+                .fetchFirst();
     }
 
     @Override
@@ -92,11 +92,18 @@ public class OptionsRepositoryImpl implements OptionsRepositoryCustom {
     public List<Options> findOptionsByTagIdAndCarSpecId(Long tagId, Long carSpecId) {
         return queryFactory
                 .selectFrom(options)
+                .distinct()
                 .innerJoin(carSpecOptions)
                 .on(options.id.eq(carSpecOptions.options.id))
                 .innerJoin(optionTag)
                 .on(options.id.eq(optionTag.option.id))
-                .where(optionTag.tag.id.eq(tagId))
+                .where(
+                        optionTag
+                                .tag
+                                .id
+                                .eq(tagId)
+                                .and(optionTag.position_x.gt(0))
+                                .and(optionTag.position_y.gt(0)))
                 .fetch();
     }
 }

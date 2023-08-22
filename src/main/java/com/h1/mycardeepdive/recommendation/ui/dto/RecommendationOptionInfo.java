@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RecommendationOptionDto {
+public class RecommendationOptionInfo {
     private long option_id;
     private String option_name;
     private String option_img_url;
