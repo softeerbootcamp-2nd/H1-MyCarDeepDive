@@ -12,9 +12,7 @@ import com.h1.mycardeepdive.global.util.B64ImgReplacedElementFactory;
 import com.h1.mycardeepdive.options.domain.repository.OptionsRepository;
 import com.h1.mycardeepdive.pdf.domain.PdfInfo;
 import com.h1.mycardeepdive.pdf.domain.repository.PdfRepository;
-import com.h1.mycardeepdive.pdf.ui.dto.CarInformation;
-import com.h1.mycardeepdive.pdf.ui.dto.PdfIdRequest;
-import com.h1.mycardeepdive.pdf.ui.dto.SimpleOption;
+import com.h1.mycardeepdive.pdf.ui.dto.*;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.BaseFont;
 import java.io.ByteArrayOutputStream;
@@ -58,7 +56,7 @@ public class PdfService {
                     "NanumSquareL.ttf",
                     "NanumSquareR.ttf");
 
-    public String registerPdfId(PdfIdRequest pdfIdRequest) throws Exception {
+    public PdfIdResponse registerPdfId(PdfIdRequest pdfIdRequest) throws Exception {
         CarSpec carSpec =
                 carSpecRepository
                         .findById(pdfIdRequest.getCar_spec_id())
@@ -128,10 +126,10 @@ public class PdfService {
 
         pdfInfo.setPdf_url(fileUrl);
         pdfRepository.save(pdfInfo);
-        return pdfInfo.getId();
+        return new PdfIdResponse(pdfInfo.getId());
     }
 
-    public String findPdf(String pdfId) throws Exception {
+    public PdfUrlResponse findPdf(String pdfId) throws Exception {
         PdfInfo pdfInfo =
                 pdfRepository
                         .findById(pdfId)
@@ -139,7 +137,7 @@ public class PdfService {
                                 () ->
                                         new MyCarDeepDiveException(
                                                 HttpStatus.BAD_REQUEST, ErrorType.PDF_NOT_FOUND));
-        return pdfInfo.getPdf_url();
+        return new PdfUrlResponse(pdfInfo.getPdf_url());
     }
 
     public byte[] generatePdf(String pdfId) throws Exception {

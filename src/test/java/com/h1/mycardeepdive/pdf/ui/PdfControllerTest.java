@@ -13,9 +13,7 @@ import com.h1.mycardeepdive.ControllerTestConfig;
 import com.h1.mycardeepdive.options.ui.dto.*;
 import com.h1.mycardeepdive.pdf.service.MailServiceImpl;
 import com.h1.mycardeepdive.pdf.service.PdfService;
-import com.h1.mycardeepdive.pdf.ui.dto.CarInformation;
-import com.h1.mycardeepdive.pdf.ui.dto.PdfIdRequest;
-import com.h1.mycardeepdive.pdf.ui.dto.SimpleOption;
+import com.h1.mycardeepdive.pdf.ui.dto.*;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -77,7 +75,8 @@ class PdfControllerTest extends ControllerTestConfig {
     void getPDFIdTest() throws Exception {
         // given
         PdfIdRequest pdfIdRequest = new PdfIdRequest(1L, 1L, 1L, 1L, List.of(1L, 3L, 4L));
-        when(pdfService.registerPdfId(pdfIdRequest)).thenReturn("64e231fe2d19c0147d010b21");
+        when(pdfService.registerPdfId(pdfIdRequest))
+                .thenReturn(new PdfIdResponse("64e231fe2d19c0147d010b21"));
 
         // then
         ResultActions resultActions =
@@ -108,7 +107,8 @@ class PdfControllerTest extends ControllerTestConfig {
         // given
         String pdfId = "64e231fe2d19c0147d010b21";
         when(pdfService.findPdf(pdfId))
-                .thenReturn("pdf.make-my-car.shop/64e231fe2d19c0147d010b21.pdf");
+                .thenReturn(
+                        new PdfUrlResponse("pdf.make-my-car.shop/64e231fe2d19c0147d010b21.pdf"));
 
         // then
         ResultActions resultActions =

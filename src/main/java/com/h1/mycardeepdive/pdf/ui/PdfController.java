@@ -5,6 +5,8 @@ import com.h1.mycardeepdive.pdf.service.MailServiceImpl;
 import com.h1.mycardeepdive.pdf.service.PdfService;
 import com.h1.mycardeepdive.pdf.ui.dto.CarInformation;
 import com.h1.mycardeepdive.pdf.ui.dto.PdfIdRequest;
+import com.h1.mycardeepdive.pdf.ui.dto.PdfIdResponse;
+import com.h1.mycardeepdive.pdf.ui.dto.PdfUrlResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +27,14 @@ public class PdfController {
     }
 
     @PostMapping("/pdfId")
-    public ApiResponse<String> getPdfId(@RequestBody PdfIdRequest pdfIdRequest) throws Exception {
+    public ApiResponse<PdfIdResponse> getPdfId(@RequestBody PdfIdRequest pdfIdRequest)
+            throws Exception {
         return new ApiResponse<>(pdfService.registerPdfId(pdfIdRequest));
     }
 
     @GetMapping("/pdf/{pdf-id}")
-    public ApiResponse<String> getPdfUrl(@PathVariable("pdf-id") String pdfId) throws Exception {
+    public ApiResponse<PdfUrlResponse> getPdfUrl(@PathVariable("pdf-id") String pdfId)
+            throws Exception {
         return new ApiResponse<>(pdfService.findPdf(pdfId));
     }
 

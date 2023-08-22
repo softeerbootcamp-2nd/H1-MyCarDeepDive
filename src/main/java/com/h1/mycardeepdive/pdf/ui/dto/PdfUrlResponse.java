@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PdfIdResponse {
-    private String pdfId;
+public class PdfUrlResponse {
+    private String pdfUrl;
 }
