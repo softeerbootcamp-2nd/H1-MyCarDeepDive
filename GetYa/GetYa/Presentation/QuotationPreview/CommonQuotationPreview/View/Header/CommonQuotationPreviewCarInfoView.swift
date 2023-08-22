@@ -131,7 +131,7 @@ private extension CommonQuotationPreviewCarInfoView {
         NSLayoutConstraint.activate([
             carPriceLabel.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: -Const.trailingMargin),
+                constant: Const.trailingMargin),
             carPriceLabel.centerYAnchor.constraint(
                 equalTo: carNameLabel.centerYAnchor)])
     }
