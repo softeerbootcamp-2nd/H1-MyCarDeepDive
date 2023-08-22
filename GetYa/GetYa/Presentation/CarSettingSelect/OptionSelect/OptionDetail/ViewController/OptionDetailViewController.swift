@@ -13,6 +13,13 @@ final class OptionDetailViewController: BaseViewController {
             static let leadingMargin: CGFloat = .toScaledWidth(value: 22)
             static let trailingMargin: CGFloat = .toScaledWidth(value: -22)
         }
+        enum OptionPackageCollectionView {
+            static let itemSize: CGSize = .init(
+                width: .toScaledWidth(value: 330),
+                height: .toScaledHeight(value: 578))
+            static let interItemSpacing: CGFloat = .toScaledWidth(value: 8)
+            static let leadingInset: CGFloat = .toScaledWidth(value: 22)
+        }
     }
     enum OptionType {
         case package
@@ -139,6 +146,28 @@ extension OptionDetailViewController: BaseOptionDetailRoundViewDelegate {
             })
         navigationController?.navigationBar.alpha = 1
     }
+}
+
+extension OptionDetailViewController: UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        <#code#>
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        <#code#>
+    }
+    
+    
+}
+
+extension OptionDetailViewController: UICollectionViewDelegate {
+    
 }
 
 // MARK: - LayoutSupportable
