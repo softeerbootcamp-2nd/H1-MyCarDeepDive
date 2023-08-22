@@ -96,24 +96,20 @@ extension DefaultQuotationPreviewViewController: LayoutSupportable {
     
     // MARK: - LayoutSupportable private helper
     private func configureTableViewConstriants() {
-        _=tableView.set {
-            NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                $0.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
-        }
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
     }
     
     private func configureBottomCustomOrQuoteView() {
-        _=bottomCustomOrQuoteView.set {
-            NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                $0.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                $0.heightAnchor.constraint(equalToConstant: Constants.BottomCustomOrQuoteView.height),
-                $0.topAnchor.constraint(
-                    equalTo: tableView.bottomAnchor,
-                    constant: -CustomOrQuoteSelectView.Constants.gradientLayerHeight)])
-        }
+        NSLayoutConstraint.activate([
+            bottomCustomOrQuoteView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomCustomOrQuoteView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomCustomOrQuoteView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomCustomOrQuoteView.heightAnchor.constraint(equalToConstant: Constants.BottomCustomOrQuoteView.height),
+            bottomCustomOrQuoteView.topAnchor.constraint(
+                equalTo: tableView.bottomAnchor,
+                constant: -CustomOrQuoteSelectView.Constants.gradientLayerHeight)])
     }
 }
