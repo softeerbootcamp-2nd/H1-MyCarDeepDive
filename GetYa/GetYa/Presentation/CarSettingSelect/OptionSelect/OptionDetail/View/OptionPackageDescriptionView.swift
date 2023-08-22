@@ -27,6 +27,7 @@ final class OptionPackageDescriptionView: UIView {
         enum PageControl {
             static let height: CGFloat = .toScaledWidth(value: 8)
             static let width = height
+            static let bottomMargin: CGFloat = .toScaledHeight(value: -10)
         }
     }
     
@@ -34,7 +35,7 @@ final class OptionPackageDescriptionView: UIView {
     private let optionPackageLabel = CommonLabel(
         fontType: .mediumCaption1,
         color: .GetYaPalette.gray400,
-        text: ""
+        text: " r"
     ).set { $0.numberOfLines = 1 }
     private let optionDetailDescriptionView = OptionDetailDescriptionAreaView(frame: .zero)
     private let bottomBackgroundView = UIView(frame: .zero).set {
@@ -48,8 +49,8 @@ final class OptionPackageDescriptionView: UIView {
             $0.itemSize = .init(
                 width: .toScaledWidth(value: 138),
                 height: 22)
-            $0.minimumLineSpacing = 14
-            $0.minimumInteritemSpacing = 14
+            $0.minimumLineSpacing = 7
+            $0.minimumInteritemSpacing = 7
             $0.sectionInset = .init(
                 top: 0,
                 left: .toScaledWidth(value: 20),
@@ -94,10 +95,12 @@ final class OptionPackageDescriptionView: UIView {
     // MARK: - Functions
     func configure(
         pages: Int?,
+        packageTitle: String?,
         title: String?,
         price: String?,
         description: String?
     ) {
+        optionPackageLabel.text = packageTitle
         setPageCount(with: pages)
         setOptionDetailDescriptionView(title: title, price: price, description: description)
     }
@@ -145,7 +148,7 @@ extension OptionPackageDescriptionView: LayoutSupportable {
         configureOptionPackageLabel()
         configureOptionDetailDescriptionView()
         configureBottomBackgroundView()
-        configureOptionTitleCollectionView()
+        configureOptionKeywordCollectionView()
         configurePageControl()
         configureSubviewsContentPriority()
     }
@@ -175,22 +178,33 @@ extension OptionPackageDescriptionView: LayoutSupportable {
     
     private func configureBottomBackgroundView() {
         typealias Const = Constants.BottomBackgroundView
-        
+        typealias BaseViewConst = BaseOptionDetailRoundView.Constants.ContentView
+        let upperViewLeadingMargin = -BaseViewConst.leadingMargin
+        let upperViewTrailingMargin = -BaseViewConst.trailingMargin
+        let upperViewBottomMargin = -BaseViewConst.bottomMargin
         NSLayoutConstraint.activate([
-            bottomBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bottomBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            bottomBackgroundView.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: upperViewLeadingMargin),
+            bottomBackgroundView.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: upperViewTrailingMargin),
+            bottomBackgroundView.bottomAnchor.constraint(
+                equalTo: bottomAnchor,
+                constant: upperViewBottomMargin),
             bottomBackgroundView.heightAnchor.constraint(equalToConstant: Const.height)])
     }
     
-    private func configureOptionTitleCollectionView() {
+    private func configureOptionKeywordCollectionView() {
         typealias Const = Constants.OptionTitleCollectionView
         NSLayoutConstraint.activate([
-            optionKeywordCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            optionKeywordCollectionView.leadingAnchor.constraint(
+                equalTo: leadingAnchor),
             optionKeywordCollectionView.topAnchor.constraint(
                 equalTo: bottomBackgroundView.topAnchor,
                 constant: Const.topMargin),
-            optionKeywordCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            optionKeywordCollectionView.trailingAnchor.constraint(
+                equalTo: trailingAnchor),
             optionKeywordCollectionView.bottomAnchor.constraint(
                 equalTo: pageControl.topAnchor,
                 constant: Const.bottomMargin)])
@@ -198,11 +212,16 @@ extension OptionPackageDescriptionView: LayoutSupportable {
     
     private func configurePageControl() {
         typealias Const = Constants.PageControl
+        typealias BaseViewConst = BaseOptionDetailRoundView.Constants.ContentView
+        let upperViewLeadingMargin = -BaseViewConst.leadingMargin
         NSLayoutConstraint.activate([
-            pageControl.leadingAnchor.constraint(equalTo: leadingAnchor),
+            pageControl.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: upperViewLeadingMargin),
             pageControl.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             pageControl.bottomAnchor.constraint(
-                equalTo: bottomAnchor),
+                equalTo: bottomAnchor,
+                constant: Const.bottomMargin),
             pageControl.heightAnchor.constraint(equalToConstant: Const.height)])
     }
     
