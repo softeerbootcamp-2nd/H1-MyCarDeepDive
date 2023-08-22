@@ -1299,13 +1299,13 @@
 			isa = PBXGroup;
 			children = (
 				15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */,
-				15D2ABC52A9357C100F7DE8E /* TrimCarSpec.swift */,
-				1506363D2A9392480057724E /* CustomRecomendation.swift */,
-				1506363F2A9394710057724E /* QuotationDTO.swift */,
-				150636492A9460610057724E /* CommonDTO.swift */,
-				15D026362A94B027001D1659 /* PackageInfoDTO.swift */,
-				15D026382A94B068001D1659 /* OptionInfoDTO.swift */,
 				15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */,
+				150636492A9460610057724E /* CommonDTO.swift */,
+				1506363D2A9392480057724E /* CustomRecomendation.swift */,
+				15D026382A94B068001D1659 /* OptionInfoDTO.swift */,
+				15D026362A94B027001D1659 /* PackageInfoDTO.swift */,
+				1506363F2A9394710057724E /* QuotationDTO.swift */,
+				15D2ABC52A9357C100F7DE8E /* TrimCarSpec.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
