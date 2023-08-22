@@ -19,12 +19,10 @@ class AdditionalCollectionView: UICollectionView {
     }
 
     enum Items: Hashable {
-        case category(index: Int)
-        case all(datum: OptionItem)
+        case category(type: TagCategoryType)
+        case all(datum: AdditionalOptionItem)
         case other(datum: OptionTagData)
     }
-    
-    // MARK: - UI properties
     
     // MARK: - Properties
     typealias DataSource = UICollectionViewDiffableDataSource<Sections, Items>
@@ -45,14 +43,12 @@ class AdditionalCollectionView: UICollectionView {
         super.init(frame: frame, collectionViewLayout: layout)
         
         configureUI()
-        updateCategorySnapShot()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
         configureUI()
-        updateCategorySnapShot()
     }
     
     // MARK: - Private Functions
@@ -66,8 +62,8 @@ class AdditionalCollectionView: UICollectionView {
             OptionSelectCategoryCell.self,
             forCellWithReuseIdentifier: OptionSelectCategoryCell.identifier)
         register(
-            OptionSelectItemCell.self,
-            forCellWithReuseIdentifier: OptionSelectItemCell.identifier)
+            OptionSelectAdditionalItemCell.self,
+            forCellWithReuseIdentifier: OptionSelectAdditionalItemCell.identifier)
         register(
             OptionSelectTitleHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -173,18 +169,17 @@ class AdditionalCollectionView: UICollectionView {
             collectionView: self,
             cellProvider: { collectionView, indexPath, itemIdentifier in
                 switch itemIdentifier {
-                case .category(let index):
+                case .category(let type):
                     if let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: OptionSelectCategoryCell.identifier,
                         for: indexPath) as? OptionSelectCategoryCell {
-                        cell.setByIndex(index: index)
-                        
+                        cell.setType(type: type)
                         return cell
                     }
                 case .all(let datum):
                     if let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: OptionSelectItemCell.identifier,
-                        for: indexPath) as? OptionSelectItemCell {
+                        withReuseIdentifier: OptionSelectAdditionalItemCell.identifier,
+                        for: indexPath) as? OptionSelectAdditionalItemCell {
                         cell.setData(datum: datum)
                         cell.setSelectButtonIsSelected(isSelected: self.selectedItemIndexPath.contains(indexPath))
                         cell.addActionLearnMoreViewButton(handler: {
@@ -229,12 +224,13 @@ class AdditionalCollectionView: UICollectionView {
         }
     }
     
-    private func updateCategorySnapShot() {
+    // MARK: - Functions
+    func updateCategorySnapShot(types: [TagCategoryType]) {
         var snapshot = diffableDatasource.snapshot()
         snapshot.appendSections([.category])
         
-        for idx in 0..<Constants.categoryItemCount {
-            snapshot.appendItems([.category(index: idx)])
+        types.forEach {
+            snapshot.appendItems([.category(type: $0)])
         }
         diffableDatasource.apply(snapshot, completion: { [weak self] in
             guard let self else { return }
@@ -243,8 +239,7 @@ class AdditionalCollectionView: UICollectionView {
         })
     }
     
-    // MARK: - Functions
-    func updateItemSnapShot(data: [OptionItem]) {
+    func updateItemSnapShot(data: [AdditionalOptionItem]) {
         var snapshot = diffableDatasource.snapshot()
         if snapshot.sectionIdentifiers.contains(.other) {
             snapshot.deleteSections([.other])

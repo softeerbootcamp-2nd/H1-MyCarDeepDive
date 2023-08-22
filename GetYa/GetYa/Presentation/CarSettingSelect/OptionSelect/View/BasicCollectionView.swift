@@ -1,30 +1,26 @@
 //
-//  OptionSelectCollectionView.swift
+//  BasicCollectionView.swift
 //  GetYa
 //
-//  Created by 배남석 on 2023/08/19.
+//  Created by 배남석 on 2023/08/21.
 //
 
 import UIKit
 
-class OptionSelectCollectionView: UICollectionView {
+class BasicCollectionView: UICollectionView {
     enum Constants {
         static let categoryItemCount: Int = 7
     }
     
-    enum Sections: Hashable {
+    enum Sections: Hashable, CaseIterable {
         case category
         case all
     }
 
-    enum Items: Hashable, CaseIterable {
-        static var allCases: [OptionSelectCollectionView.Items] = [.category(index: 0), .all(datum: nil)]
-        
-        case category(index: Int)
-        case all(datum: OptionData?)
+    enum Items: Hashable {
+        case category(type: TagCategoryType)
+        case all(datum: BasicOptionItem)
     }
-    
-    // MARK: - UI properties
     
     // MARK: - Properties
     typealias DataSource = UICollectionViewDiffableDataSource<Sections, Items>
@@ -45,48 +41,12 @@ class OptionSelectCollectionView: UICollectionView {
         super.init(frame: frame, collectionViewLayout: layout)
         
         configureUI()
-        updateCategorySnapShot()
-        updateItemSnapShot(data: [
-            .init(
-                id: 1,
-                imageURL: "",
-                selectRate: 6.5,
-                optionName: "현대 스마트 센스 Ⅰ",
-                optionPrice: 1090000,
-                badgeName: "H Genuine Accessories",
-                tagList: [Tag(id: 1, name: "사용편의")]),
-            .init(
-                id: 1,
-                imageURL: "",
-                selectRate: 6.5,
-                optionName: "빌트인 캠(보조배터리 포함)",
-                optionPrice: 1090000,
-                badgeName: "H Genuine Accessories",
-                tagList: [Tag(id: 1, name: "사용편의")]),
-            .init(
-                id: 1,
-                imageURL: "",
-                selectRate: 82.0,
-                optionName: "현대 스마트 센스 Ⅰ",
-                optionPrice: 1090000,
-                badgeName: "N Performance",
-                tagList: [Tag(id: 1, name: "사용편의")]),
-            .init(
-                id: 1,
-                imageURL: "",
-                selectRate: 65.0,
-                optionName: "현대 스마트 센스 Ⅰ",
-                optionPrice: 1090000,
-                badgeName: "None",
-                tagList: [Tag(id: 1, name: "사용편의")])
-        ])
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
         configureUI()
-        updateCategorySnapShot()
     }
     
     // MARK: - Private Functions
@@ -100,8 +60,8 @@ class OptionSelectCollectionView: UICollectionView {
             OptionSelectCategoryCell.self,
             forCellWithReuseIdentifier: OptionSelectCategoryCell.identifier)
         register(
-            OptionSelectItemCell.self,
-            forCellWithReuseIdentifier: OptionSelectItemCell.identifier)
+            OptionSelectBasicItemCell.self,
+            forCellWithReuseIdentifier: OptionSelectBasicItemCell.identifier)
         register(
             OptionSelectTitleHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -110,7 +70,8 @@ class OptionSelectCollectionView: UICollectionView {
     
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _ ) -> NSCollectionLayoutSection? in
-            switch Items.allCases[sectionIndex] {
+            
+            switch Sections.allCases[sectionIndex] {
             case .category:
                 return self.configureCategoryLayout()
             case .all:
@@ -132,7 +93,7 @@ class OptionSelectCollectionView: UICollectionView {
             heightDimension: .absolute(CGFloat(72).scaledHeight))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        let sectionInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 24, trailing: 0)
+        let sectionInsets = NSDirectionalEdgeInsets(top: 20, leading: 16, bottom: 24, trailing: 0)
         section.contentInsets = sectionInsets
         section.orthogonalScrollingBehavior = .continuous
         
@@ -140,33 +101,27 @@ class OptionSelectCollectionView: UICollectionView {
     }
     
     private func configureItemLayout() -> NSCollectionLayoutSection {
-        let allItemSize = NSCollectionLayoutSize(
+        let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0/2),
-            heightDimension: .absolute(CGFloat(232).scaledHeight))
-        let allItem = NSCollectionLayoutItem(layoutSize: allItemSize)
-        allItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0)
-        allItem.edgeSpacing = .init(
+            heightDimension: .absolute(CGFloat(174).scaledHeight))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0)
+        item.edgeSpacing = .init(
             leading: .fixed(0),
             top: .fixed(12),
             trailing: .fixed(0),
             bottom: .fixed(12))
         
-        let allItemGroupSize = NSCollectionLayoutSize(
+        let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(232))
-        let allItemGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: allItemGroupSize,
-            subitems: [allItem])
-        allItemGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 16)
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 16)
         
-        let nestedGroupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(300))
-        let nestedGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: nestedGroupSize,
-            subitems: [allItemGroup])
-        
-        let section = NSCollectionLayoutSection(group: nestedGroup)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 120, trailing: 0)
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .absolute(24))
@@ -186,29 +141,20 @@ class OptionSelectCollectionView: UICollectionView {
             collectionView: self,
             cellProvider: { collectionView, indexPath, itemIdentifier in
                 switch itemIdentifier {
-                case .category(let index):
+                case .category(let type):
                     if let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: OptionSelectCategoryCell.identifier,
                         for: indexPath) as? OptionSelectCategoryCell {
-                        cell.setByIndex(index: index)
-                        
+                        cell.setType(type: type)
                         return cell
                     }
                 case .all(let datum):
                     if let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: OptionSelectItemCell.identifier,
-                        for: indexPath) as? OptionSelectItemCell {
-                        cell.setData(datum: datum!)
-                        cell.setSelectButtonIsSelected(isSelected: self.selectedItemIndexPath.contains(indexPath))
+                        withReuseIdentifier: OptionSelectBasicItemCell.identifier,
+                        for: indexPath) as? OptionSelectBasicItemCell {
+                        cell.setData(datum: datum)
                         cell.addActionLearnMoreViewButton(handler: {
                             print(indexPath.row)
-                        })
-                        cell.addActionSelectButton(handler: {
-                            if self.selectedItemIndexPath.contains(indexPath) {
-                                self.selectedItemIndexPath = self.selectedItemIndexPath.filter { $0 != indexPath }
-                            } else {
-                                self.selectedItemIndexPath.append(indexPath)
-                            }
                         })
                         return cell
                     }
@@ -218,30 +164,29 @@ class OptionSelectCollectionView: UICollectionView {
         
         diffableDatasource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if kind == UICollectionView.elementKindSectionHeader {
-                if indexPath.section == 1 {
-                    guard let header = collectionView.dequeueReusableSupplementaryView(
-                        ofKind: kind,
-                        withReuseIdentifier: OptionSelectTitleHeaderView.identifier,
-                        for: indexPath) as? OptionSelectTitleHeaderView else {
-                        return UICollectionReusableView()
-                    }
-                    
-                    header.setText(text: "전체 \(15)")
-                    header.setPartText(text: "15", fontType: .mediumBody3, color: .GetYaPalette.primary)
-                    
-                    return header
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: OptionSelectTitleHeaderView.identifier,
+                    for: indexPath) as? OptionSelectTitleHeaderView else {
+                    return UICollectionReusableView()
                 }
+                
+                header.setText(text: "전체 \(15)")
+                header.setPartText(text: "15", fontType: .mediumBody3, color: .GetYaPalette.primary)
+                
+                return header
             }
             return UICollectionReusableView()
         }
     }
     
-    private func updateCategorySnapShot() {
+    // MARK: - Functions
+    func updateCategorySnapShot(types: [TagCategoryType]) {
         var snapshot = diffableDatasource.snapshot()
         snapshot.appendSections([.category])
         
-        for idx in 0..<Constants.categoryItemCount {
-            snapshot.appendItems([.category(index: idx)])
+        types.forEach {
+            snapshot.appendItems([.category(type: $0)])
         }
         diffableDatasource.apply(snapshot, completion: { [weak self] in
             guard let self else { return }
@@ -250,13 +195,10 @@ class OptionSelectCollectionView: UICollectionView {
         })
     }
     
-    // MARK: - Functions
-    func updateItemSnapShot(data: [OptionData]) {
+    func updateItemSnapShot(data: [BasicOptionItem]) {
         var snapshot = diffableDatasource.snapshot()
-        if !snapshot.sectionIdentifiers.contains(.all) {
-            snapshot.appendSections([.all])
-        }
-        
+        snapshot.deleteSections([.all])
+        snapshot.appendSections([.all])
         snapshot.appendItems(data.map { .all(datum: $0) }, toSection: .all)
         diffableDatasource.apply(snapshot)
     }
@@ -265,11 +207,53 @@ class OptionSelectCollectionView: UICollectionView {
 }
 
 // MARK: - UICollectionViewDelegate
-extension OptionSelectCollectionView: UICollectionViewDelegate {
+extension BasicCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if indexPath.section == 0 {
             currentSelectedCategoryIndexPath = indexPath
+            
+            if indexPath.row == 0 {
+                updateItemSnapShot(data: [
+                    .init(
+                        id: 1,
+                        imageURL: "",
+                        optionName: "현대 스마트 센스 Ⅰ",
+                        tagList: [
+                            Tag(id: 1, name: "사용편의")
+                        ]),
+                    .init(
+                        id: 1,
+                        imageURL: "",
+                        optionName: "클러스터(12.3인치 컬러 LCD)",
+                        tagList: [
+                            Tag(id: 2, name: "사용편의")
+                        ]),
+                    .init(
+                        id: 3,
+                        imageURL: "",
+                        optionName: "빌트인 캠(보조배터리 포함)",
+                        tagList: [
+                            Tag(id: 1, name: "사용편의")
+                        ])
+                ])
+            } else {
+                updateItemSnapShot(data: [
+                    .init(
+                        id: 3,
+                        imageURL: "",
+                        optionName: "빌트인 캠(보조배터리 포함)",
+                        tagList: [
+                            Tag(id: 1, name: "사용편의")
+                        ]),
+                    .init(
+                        id: 1,
+                        imageURL: "",
+                        optionName: "현대 스마트 센스 Ⅰ",
+                        tagList: [
+                            Tag(id: 2, name: "사용편의")
+                        ])
+                ])
+            }
         } else {
             selectItem(at: currentSelectedCategoryIndexPath, animated: false, scrollPosition: .init())
         }
