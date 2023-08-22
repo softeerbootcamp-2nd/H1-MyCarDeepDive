@@ -3,19 +3,19 @@ import { OptionContext } from '@/context/OptionProvider';
 import useFetch, { GET } from '@/hooks/useFetch';
 import { optionDetailType } from '@/global/type';
 
-export interface getOptionDetailsType {
+export interface getPackageOptionDetailsType {
   status: { code: string; message: string };
-  data: optionDetailType;
+  data: optionDetailType[];
 }
 
-function getOptionDetails(): getOptionDetailsType | undefined {
+function getPackageOptionDetails(): getPackageOptionDetailsType | undefined {
   const { optionId, packageOption } = useContext(OptionContext);
 
-  if (optionId === 0 || packageOption === true) return;
+  if (optionId === 0 || packageOption === false) return;
   return useFetch({
     method: GET,
-    url: `/options/${optionId}/details`,
+    url: `/options/package/${optionId}/details`,
   });
 }
 
-export default getOptionDetails;
+export default getPackageOptionDetails;

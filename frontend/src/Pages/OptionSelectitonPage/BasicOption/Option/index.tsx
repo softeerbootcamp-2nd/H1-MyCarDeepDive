@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { OptionContext } from '@/context/OptionProvider';
-import { SET_OPTIONID } from '@/context/OptionProvider/type';
+import { SET_OPTIONID, SET_PACKAGE } from '@/context/OptionProvider/type';
 import moreInfo from '@/assets/icon/more-info.svg';
 
 interface OptionProps {
@@ -26,6 +26,10 @@ function Option({
     optionDispatch({
       type: SET_OPTIONID,
       optionId: basic_option_id,
+    });
+    optionDispatch({
+      type: SET_PACKAGE,
+      packageOption: false,
     });
 
     setShowOptionModal(true);
