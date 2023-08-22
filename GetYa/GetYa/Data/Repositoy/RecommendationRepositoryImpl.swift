@@ -8,14 +8,15 @@
 import Foundation
 
 struct RecommendationRepositoryImpl: RecommendationRepository {
+    
     typealias Endpoints = RecommendationEndpoints
     let provider = SessionProvider()
     
     func fetchCarDetailRecommendation(
         with requestDTO: CustomRecomendation
-    ) async throws -> QuotationDTO.Data {
+    ) async throws -> QuotationDTO {
         let endpoint = Endpoints.shared.fetchCarDetailRecommendationOption(with: requestDTO)
-        let responseDTO = try await provider.request(endpoint: endpoint)
-        return responseDTO.data
+        let commonDTO = try await provider.request(endpoint: endpoint)
+        return commonDTO.data
     }
 }
