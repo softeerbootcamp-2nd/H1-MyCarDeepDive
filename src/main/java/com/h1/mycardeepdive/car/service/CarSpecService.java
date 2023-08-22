@@ -6,7 +6,7 @@ import static com.h1.mycardeepdive.car.mapper.CarSpecMapper.toCarSpecResponse;
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
-import com.h1.mycardeepdive.car.ui.dto.CarSpecDto;
+import com.h1.mycardeepdive.car.ui.dto.CarSpecInfo;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
 import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.ArrayList;
@@ -28,17 +28,17 @@ public class CarSpecService {
         List<CarSpec> carSpecs =
                 carSpecRepository.findByEngineIdAndBodyIdAndDrivingSystemId(
                         engineId, bodyId, drivingSystemId);
-        List<CarSpecDto> carSpecDtos = new ArrayList<>();
+        List<CarSpecInfo> carSpecInfos = new ArrayList<>();
         for (CarSpec carSpec : carSpecs) {
             Trim trim = carSpec.getTrim();
-            CarSpecDto carSpecDto =
+            CarSpecInfo carSpecInfo =
                     toCarSpecResponse(
                             carSpec,
                             getBasicOptionNames(trim.getId()),
                             getBasicOptionIds(trim.getId()));
-            carSpecDtos.add(carSpecDto);
+            carSpecInfos.add(carSpecInfo);
         }
-        return new CarSpecResponse(carSpecDtos, 2L);
+        return new CarSpecResponse(carSpecInfos, 2L);
     }
 
     public List<CarSpecComparisonResponse> findCarSpecComparisonsBySpec(

@@ -14,7 +14,7 @@ import com.h1.mycardeepdive.ControllerTestConfig;
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.car.service.CarSpecService;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
-import com.h1.mycardeepdive.car.ui.dto.CarSpecDto;
+import com.h1.mycardeepdive.car.ui.dto.CarSpecInfo;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -51,9 +51,9 @@ class CarSpecControllerTest extends ControllerTestConfig {
         List<String> basicOptionNames = List.of("전방 충돌 방지 보조", "내비 기반 크루즈 컨트롤", "세이프티 파워 윈도우");
         List<Long> basicOptionIds = List.of(1L, 2L, 3L);
 
-        CarSpecDto carSpecDto = toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds);
+        CarSpecInfo carSpecInfo = toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds);
         CarSpecResponse carSpecResponse =
-                new CarSpecResponse(List.of(carSpecDto, carSpecDto, carSpecDto, carSpecDto), 2L);
+                new CarSpecResponse(List.of(carSpecInfo, carSpecInfo, carSpecInfo, carSpecInfo), 2L);
 
         when(carSpecService.findCarSpecsBySpec(engineId, bodyId, drivingSystemId))
                 .thenReturn(carSpecResponse);

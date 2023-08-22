@@ -10,7 +10,7 @@ import com.h1.mycardeepdive.recommendation.domain.CustomRecommendation;
 import com.h1.mycardeepdive.recommendation.domain.Recommendation;
 import com.h1.mycardeepdive.recommendation.domain.repository.CustomRecommendationRepository;
 import com.h1.mycardeepdive.recommendation.domain.repository.RecommendationRepository;
-import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationColorDto;
+import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationColorInfo;
 import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationResponse;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
@@ -37,15 +37,15 @@ class RecommendationServiceTest {
         Recommendation recommendation = createRecommendation(ageGroupId, lifeStyleId);
         RecommendationResponse recommendationResponse1 =
                 toRecommendationResponse(recommendation.getRecommendationCar());
-        RecommendationColorDto exteriorColor1 = recommendationResponse1.getExterior_color();
-        RecommendationColorDto interiorColor1 = recommendationResponse1.getInterior_color();
+        RecommendationColorInfo exteriorColor1 = recommendationResponse1.getExterior_color();
+        RecommendationColorInfo interiorColor1 = recommendationResponse1.getInterior_color();
         when(recommendationRepository.findByAgeGroupIdAndLifeStyleId(ageGroupId, lifeStyleId))
                 .thenReturn(Optional.of(recommendation));
         // when
         RecommendationResponse recommendationResponse2 =
                 recommendationService.findRecommendation(ageGroupId, lifeStyleId);
-        RecommendationColorDto exteriorColor2 = recommendationResponse2.getExterior_color();
-        RecommendationColorDto interiorColor2 = recommendationResponse2.getInterior_color();
+        RecommendationColorInfo exteriorColor2 = recommendationResponse2.getExterior_color();
+        RecommendationColorInfo interiorColor2 = recommendationResponse2.getInterior_color();
         // then
         assertThat(recommendationResponse2.getTrim_name())
                 .isEqualTo(recommendationResponse1.getTrim_name());
@@ -101,8 +101,8 @@ class RecommendationServiceTest {
                         drivingExperienceId, familyMembersId, carPurposeId, personalValueId);
         RecommendationResponse recommendationResponse1 =
                 toRecommendationResponse(customRecommendation.getRecommendationCar());
-        RecommendationColorDto exteriorColor1 = recommendationResponse1.getExterior_color();
-        RecommendationColorDto interiorColor1 = recommendationResponse1.getInterior_color();
+        RecommendationColorInfo exteriorColor1 = recommendationResponse1.getExterior_color();
+        RecommendationColorInfo interiorColor1 = recommendationResponse1.getInterior_color();
         when(customRecommendationRepository
                         .findByDrivingExperienceIdAndFamilyMembersIdAndCarPurposeIdAndPersonalValueId(
                                 drivingExperienceId,
@@ -114,8 +114,8 @@ class RecommendationServiceTest {
         RecommendationResponse recommendationResponse2 =
                 recommendationService.findCustomRecommendation(
                         drivingExperienceId, familyMembersId, carPurposeId, personalValueId);
-        RecommendationColorDto exteriorColor2 = recommendationResponse2.getExterior_color();
-        RecommendationColorDto interiorColor2 = recommendationResponse2.getInterior_color();
+        RecommendationColorInfo exteriorColor2 = recommendationResponse2.getExterior_color();
+        RecommendationColorInfo interiorColor2 = recommendationResponse2.getInterior_color();
 
         // then
         assertThat(recommendationResponse2.getTrim_name())

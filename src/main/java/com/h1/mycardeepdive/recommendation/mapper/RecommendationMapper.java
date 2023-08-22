@@ -1,7 +1,7 @@
 package com.h1.mycardeepdive.recommendation.mapper;
 
-import static com.h1.mycardeepdive.recommendation.mapper.RecommendationColorDtoMapper.toRecommendationColorDto;
-import static com.h1.mycardeepdive.recommendation.mapper.RecommendationOptionDtoMapper.toRecommendationOptionDto;
+import static com.h1.mycardeepdive.recommendation.mapper.RecommendationColorInfoMapper.toRecommendationColorInfo;
+import static com.h1.mycardeepdive.recommendation.mapper.RecommendationOptionInfoMapper.toRecommendationOptionInfo;
 
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.color.domain.ExteriorColor;
@@ -9,7 +9,7 @@ import com.h1.mycardeepdive.color.domain.InteriorColor;
 import com.h1.mycardeepdive.recommendation.domain.RecommendationCar;
 import com.h1.mycardeepdive.recommendation.domain.RecommendationCarOption;
 import com.h1.mycardeepdive.recommendation.domain.RecommendationCarPackage;
-import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationOptionDto;
+import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationOptionInfo;
 import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationResponse;
 import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.List;
@@ -26,29 +26,29 @@ public class RecommendationMapper {
                 recommendationCar.getRecommendationCarOptions();
         List<RecommendationCarPackage> recommendationCarPackages =
                 recommendationCar.getRecommendationCarPackages();
-        List<RecommendationOptionDto> recommendationOptionDtos =
+        List<RecommendationOptionInfo> recommendationOptionInfos =
                 recommendationCarOptions.stream()
                         .map(
                                 recommendationCarOption ->
-                                        toRecommendationOptionDto(
+                                        RecommendationOptionInfoMapper.toRecommendationOptionInfo(
                                                 recommendationCarOption.getOption()))
                         .collect(Collectors.toList());
-        List<RecommendationOptionDto> recommendationPackageDtos =
+        List<RecommendationOptionInfo> recommendationPackageDtos =
                 recommendationCarPackages.stream()
                         .map(
                                 recommendationCarPackage ->
-                                        toRecommendationOptionDto(
+                                        toRecommendationOptionInfo(
                                                 recommendationCarPackage.getPackages()))
                         .collect(Collectors.toList());
         long totalPrice =
                 carSpec.getPrice()
                         + exteriorColor.getPrice()
                         + interiorColor.getPrice()
-                        + recommendationOptionDtos.stream()
-                                .mapToLong(RecommendationOptionDto::getPrice)
+                        + recommendationOptionInfos.stream()
+                                .mapToLong(RecommendationOptionInfo::getPrice)
                                 .sum()
                         + recommendationPackageDtos.stream()
-                                .mapToLong(RecommendationOptionDto::getPrice)
+                                .mapToLong(RecommendationOptionInfo::getPrice)
                                 .sum();
 
         return new RecommendationResponse(
@@ -62,9 +62,9 @@ public class RecommendationMapper {
                 carSpec.getBody().getName(),
                 carSpec.getId(),
                 trim.getId(),
-                toRecommendationColorDto(exteriorColor),
-                toRecommendationColorDto(interiorColor),
-                recommendationOptionDtos,
+                toRecommendationColorInfo(exteriorColor),
+                RecommendationColorInfoMapper.toRecommendationColorInfo(interiorColor),
+                recommendationOptionInfos,
                 recommendationPackageDtos,
                 totalPrice);
     }

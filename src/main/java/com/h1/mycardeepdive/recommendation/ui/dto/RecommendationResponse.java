@@ -17,9 +17,9 @@ public class RecommendationResponse {
     private String body_name;
     private long car_spec_id;
     private long trim_id;
-    RecommendationColorDto exterior_color;
-    RecommendationColorDto interior_color;
-    List<RecommendationOptionDto> options;
-    List<RecommendationOptionDto> packages;
+    RecommendationColorInfo exterior_color;
+    RecommendationColorInfo interior_color;
+    List<RecommendationOptionInfo> options;
+    List<RecommendationOptionInfo> packages;
     private long totalPrice;
 }

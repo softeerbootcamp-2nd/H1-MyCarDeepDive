@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RecommendationColorDto {
+public class RecommendationColorInfo {
     private long color_id;
     private String color_name;
     private long color_price;
