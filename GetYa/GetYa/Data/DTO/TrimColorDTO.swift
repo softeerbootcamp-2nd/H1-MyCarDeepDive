@@ -17,4 +17,11 @@ struct TrimColorDTO: Codable {
         case unAvailableColors = "unavailable_colors"
         case otherTrimColors = "other_trim_colors"
     }
+    
+    func toDomain() -> TrimColor {
+        return TrimColor(
+            availableColors: availableColors.map { $0.toDomain() },
+            unAvailableColors: unAvailableColors.map { $0.toDomain() },
+            otherTrimColors: otherTrimColors.map { $0.toDomain() })
+    }
 }

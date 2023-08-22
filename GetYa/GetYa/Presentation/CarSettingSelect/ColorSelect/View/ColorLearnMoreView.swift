@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ColorLearnMoreViewDelegate: AnyObject {
+    func touchUpMoreColorCell(color: Color)
+}
+
 class ColorLearnMoreView: LearnMoreView {
     enum Constants {
         enum Label {
@@ -40,6 +44,8 @@ class ColorLearnMoreView: LearnMoreView {
     }
     
     // MARK: - Properties
+    private var colorArray: [Color] = []
+    weak var colorLearnMoreViewDelegate: ColorLearnMoreViewDelegate?
     
     // MARK: - Lifecycles
     init(text: String) {
@@ -129,6 +135,25 @@ class ColorLearnMoreView: LearnMoreView {
         label.textColor = color
     }
     
+    func setColor(colorArray: [Color]) {
+        typealias Const = Constants.CollectionView
+        
+        if colorArray.count == 0 {
+            collectionView.isHidden = true
+            emptyLabel.isHidden = false
+        } else {
+            emptyLabel.isHidden = true
+            collectionView.setData(
+                names: colorArray.map { $0.trimName },
+                imageURLs: colorArray.map { $0.imageURL })
+            collectionView.isHidden = false
+
+            collectionViewHeightConstraint.isActive = false
+            collectionViewHeightConstraint.constant = Const.height * ceil(CGFloat(colorArray.count) / 4)
+            collectionViewHeightConstraint.isActive = true
+        }
+    }
+    
     func setColorData(trimNames: [String], colorImages: [UIImage?]) {
         typealias Const = Constants.CollectionView
         if trimNames.count == 0 {
@@ -152,5 +177,6 @@ class ColorLearnMoreView: LearnMoreView {
 extension ColorLearnMoreView: ColorSelectMoreColorDelegate {
     func touchUpMoreColorCell(index: Int) {
         print(#function)
+        colorLearnMoreViewDelegate?.touchUpMoreColorCell(color: colorArray[index])
     }
 }

@@ -8,11 +8,17 @@
 import Foundation
 
 struct TrimColorInqueryDTO: Codable {
-    let exteriorColor: [TrimColorDTO]
-    let interiorColor: [TrimColorDTO]
+    let exteriorColor: TrimColorDTO
+    let interiorColor: TrimColorDTO
     
     enum CodingKeys: String, CodingKey {
         case exteriorColor = "exterior_color_response"
         case interiorColor = "interior_color_response"
+    }
+    
+    func toDomain() -> TrimColorInquery {
+        return TrimColorInquery(
+            exteriorColor: exteriorColor.toDomain(),
+            interiorColor: interiorColor.toDomain())
     }
 }

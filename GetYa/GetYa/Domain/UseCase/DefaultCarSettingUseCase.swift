@@ -13,6 +13,7 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase {
     var trimSelect = PassthroughSubject<TrimSelectModel, Never>()
     var colorSelect = PassthroughSubject<ColorSelectModel, Never>()
     var optionSelect = PassthroughSubject<OptionSelectModel, Never>()
+    var trimColorInquery = PassthroughSubject<TrimColorInquery, Never>()
     
     // MARK: - Properties
     var colorRepository: ColorRepository
@@ -38,5 +39,14 @@ extension DefaultCarSettingUseCase {
 
 // MARK: - ColorSelectUseCase
 extension DefaultCarSettingUseCase {
-    
+    func fetchColorInquery() {
+        Task(operation: {
+            do {
+                let trimColorInquery = try await colorRepository.fetchTrimInquery(with: 1)
+                self.trimColorInquery.send(trimColorInquery)
+            } catch {
+                print("TrimColorInquery 데이터를 받아오지 못하였습니다.")
+            }
+        })
+    }
 }

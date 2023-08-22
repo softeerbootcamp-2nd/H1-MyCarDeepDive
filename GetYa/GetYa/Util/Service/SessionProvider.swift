@@ -55,6 +55,9 @@ extension SessionProvider {
     private func decode<T: Decodable>(data: Data) throws -> T {
         do {
             let decoder = JSONDecoder()
+            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
+                print(json)
+            }
             let commonDTO = try decoder.decode(T.self, from: data)
             return commonDTO
         } catch {

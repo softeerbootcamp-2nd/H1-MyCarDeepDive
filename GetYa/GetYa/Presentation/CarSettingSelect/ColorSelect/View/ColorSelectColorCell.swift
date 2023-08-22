@@ -22,6 +22,10 @@ class ColorSelectColorCell: UICollectionViewCell {
             static let height: CGFloat = .toScaledHeight(value: 24)
             static let width: CGFloat = .toScaledHeight(value: 24)
         }
+        enum ExclamationmarkImageView {
+            static let height: CGFloat = .toScaledHeight(value: 25)
+            static let width: CGFloat = .toScaledHeight(value: 25)
+        }
     }
     
     // MARK: - UI properties
@@ -48,6 +52,18 @@ class ColorSelectColorCell: UICollectionViewCell {
     ).set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         selectedView.addSubview($0)
+    }
+    private let exclamationmarkImageView: UIImageView = UIImageView().set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
+        let config = UIImage.SymbolConfiguration(paletteColors: [
+            .white,
+            .GetYaPalette.gray500
+        ])
+        $0.image = UIImage(systemName: "exclamationmark.circle.fill")?
+            .applyingSymbolConfiguration(config)
+        $0.isHidden = true
     }
     
     // MARK: - Properties
@@ -80,6 +96,7 @@ class ColorSelectColorCell: UICollectionViewCell {
         contentImageView.image = nil
         tagView.isHidden = true
         selectedView.isHidden = true
+        exclamationmarkImageView.isHidden = true
     }
     
     // MARK: - Private Functions
@@ -87,18 +104,19 @@ class ColorSelectColorCell: UICollectionViewCell {
         addSubviews([
             contentImageView,
             tagView,
-            selectedView
+            selectedView,
+            exclamationmarkImageView
         ])
     }
     
     private func configureUI() {
-        clipsToBounds = true
         layer.cornerRadius = CGFloat(4).scaledHeight
         
         configureTagView()
         configureContentImageView()
         configureSelectedView()
         configureSelectedImageView()
+        configureExclamationmarkImageView()
     }
     
     private func configureTagView() {
@@ -139,9 +157,20 @@ class ColorSelectColorCell: UICollectionViewCell {
         ])
     }
     
+    private func configureExclamationmarkImageView() {
+        typealias Const = Constatns.ExclamationmarkImageView
+        
+        NSLayoutConstraint.activate([
+            exclamationmarkImageView.centerYAnchor.constraint(equalTo: topAnchor),
+            exclamationmarkImageView.centerXAnchor.constraint(equalTo: trailingAnchor),
+            exclamationmarkImageView.heightAnchor.constraint(equalToConstant: Const.height),
+            exclamationmarkImageView.widthAnchor.constraint(equalToConstant: Const.width)
+        ])
+    }
+    
     // MARK: - Functions
-    func setImage(image: UIImage?) {
-        contentImageView.image = image
+    func setImageURL(imageURL: String, isAvailable: Bool) {
+        exclamationmarkImageView.isHidden = !isAvailable
     }
     
     func setExteriorTagViewIsHidden(number: Int, isHidden: Bool) {

@@ -24,6 +24,7 @@ class ColorSelectMoreColorCollectionView: UICollectionView {
     private var colorType: ColorContentView.ColorType = .exterior
     private var trimNames: [String] = []
     private var colorImages: [UIImage?] = []
+    private var colorImageURLs: [String] = []
     
     // MARK: - Lifecycles
     convenience init() {
@@ -84,6 +85,11 @@ class ColorSelectMoreColorCollectionView: UICollectionView {
     }
     
     // MARK: - Functions
+    func setData(names: [String], imageURLs: [String]) {
+        trimNames = names
+        colorImageURLs = imageURLs
+    }
+    
     func setData(names: [String], images: [UIImage?]) {
         trimNames = names
         colorImages = images
@@ -115,7 +121,9 @@ extension ColorSelectMoreColorCollectionView: UICollectionViewDataSource {
             withReuseIdentifier: ColorSelectMoreColorCell.identifier,
             for: indexPath
         ) as? ColorSelectMoreColorCell else { return UICollectionViewCell() }
-        cell.setImageAndName(name: trimNames[indexPath.row], image: colorImages[indexPath.row])
+        cell.setImageAndName(
+            name: trimNames[indexPath.row],
+            imageURL: colorImageURLs[indexPath.row])
         
         return cell
     }

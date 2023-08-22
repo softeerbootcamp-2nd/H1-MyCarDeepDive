@@ -11,4 +11,10 @@ struct ColorSelectEndpoint {
     private init() {}
     static let shared = ColorSelectEndpoint()
     
+    func fetchColorInquery(with trimID: Int) -> Endpoint<TrimColorInqueryDTO> {
+        return Endpoint(
+            method: .get,
+            responseType: .trimColor,
+            queryParams: TrimID(trimId: trimID))
+    }
 }

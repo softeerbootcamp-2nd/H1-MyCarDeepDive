@@ -142,6 +142,10 @@
 		6457D1582A951A2500B3AAAF /* TrimColorInqueryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1572A951A2500B3AAAF /* TrimColorInqueryDTO.swift */; };
 		6457D15A2A951BBD00B3AAAF /* TrimColorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1592A951BBD00B3AAAF /* TrimColorDTO.swift */; };
 		6457D15C2A951BC300B3AAAF /* ColorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D15B2A951BC300B3AAAF /* ColorDTO.swift */; };
+		6457D15E2A95212200B3AAAF /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D15D2A95212200B3AAAF /* Color.swift */; };
+		6457D1602A9523F000B3AAAF /* TrimColorInquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D15F2A9523F000B3AAAF /* TrimColorInquery.swift */; };
+		6457D1622A9523FF00B3AAAF /* TrimColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1612A9523FF00B3AAAF /* TrimColor.swift */; };
+		6457D1642A952E4F00B3AAAF /* TrimID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1632A952E4F00B3AAAF /* TrimID.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
 		6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
@@ -404,6 +408,10 @@
 		6457D1572A951A2500B3AAAF /* TrimColorInqueryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColorInqueryDTO.swift; sourceTree = "<group>"; };
 		6457D1592A951BBD00B3AAAF /* TrimColorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColorDTO.swift; sourceTree = "<group>"; };
 		6457D15B2A951BC300B3AAAF /* ColorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDTO.swift; sourceTree = "<group>"; };
+		6457D15D2A95212200B3AAAF /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		6457D15F2A9523F000B3AAAF /* TrimColorInquery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColorInquery.swift; sourceTree = "<group>"; };
+		6457D1612A9523FF00B3AAAF /* TrimColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColor.swift; sourceTree = "<group>"; };
+		6457D1632A952E4F00B3AAAF /* TrimID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimID.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -1320,6 +1328,9 @@
 				6457D1292A9465B400B3AAAF /* TrimSelectModel.swift */,
 				6457D1272A9465AF00B3AAAF /* ColorSelectModel.swift */,
 				6457D1252A9465A500B3AAAF /* OptionSelectModel.swift */,
+				6457D15F2A9523F000B3AAAF /* TrimColorInquery.swift */,
+				6457D1612A9523FF00B3AAAF /* TrimColor.swift */,
+				6457D15D2A95212200B3AAAF /* Color.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1347,6 +1358,7 @@
 				6457D1572A951A2500B3AAAF /* TrimColorInqueryDTO.swift */,
 				6457D1592A951BBD00B3AAAF /* TrimColorDTO.swift */,
 				6457D15B2A951BC300B3AAAF /* ColorDTO.swift */,
+				6457D1632A952E4F00B3AAAF /* TrimID.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1695,6 +1707,7 @@
 				6484A74F2A8C82FE00434136 /* EngineDetailViewController.swift in Sources */,
 				6457CFC02A93A76D00B3AAAF /* TagCategoryType.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
+				6457D1642A952E4F00B3AAAF /* TrimID.swift in Sources */,
 				64E26A622A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift in Sources */,
 				15D2ABBC2A9350FD00F7DE8E /* Responsable.swift in Sources */,
 				6457D1582A951A2500B3AAAF /* TrimColorInqueryDTO.swift in Sources */,
@@ -1764,6 +1777,7 @@
 				64E26A522A8A3E2800F6BC3A /* TrimOptionDetailColorCell.swift in Sources */,
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
 				6484A7512A8C82FE00434136 /* EnginePerformanceDescriptionView.swift in Sources */,
+				6457D15E2A95212200B3AAAF /* Color.swift in Sources */,
 				15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */,
 				64E26A4F2A8A3E2800F6BC3A /* TrimTooltipView.swift in Sources */,
 				6484A79B2A90F3E800434136 /* AdditionalCollectionView.swift in Sources */,
@@ -1793,6 +1807,7 @@
 				6484A7682A8DBA6D00434136 /* SettingAlertView.swift in Sources */,
 				6412D0862A80AC92001E4005 /* LifeStyleDetailCell.swift in Sources */,
 				155B72A82A8C8FB20091A7F4 /* TrimSubOptionContentStackView.swift in Sources */,
+				6457D1622A9523FF00B3AAAF /* TrimColor.swift in Sources */,
 				6484A7532A8C82FE00434136 /* SubOptionDetailSegmentedControl.swift in Sources */,
 				155B72B22A8CA02D0091A7F4 /* CharacterDetailSelectViewModel.swift in Sources */,
 				6412D08C2A81E5C1001E4005 /* LifeStylePeekViewController.swift in Sources */,
@@ -1827,6 +1842,7 @@
 				155B72A32A8C88570091A7F4 /* BottomSheetView.swift in Sources */,
 				155B72AB2A8C9A2E0091A7F4 /* UIColor+.swift in Sources */,
 				15040FC22A8D3CAB00DDC411 /* DetailQuestionCarPriceSelectView.swift in Sources */,
+				6457D1602A9523F000B3AAAF /* TrimColorInquery.swift in Sources */,
 				150636392A9389270057724E /* DiskCache.swift in Sources */,
 				155776E12A90D27300E3C0E1 /* Endpoint.swift in Sources */,
 				64E26A662A8BC04F00F6BC3A /* ColorSelectColorCollectionView.swift in Sources */,

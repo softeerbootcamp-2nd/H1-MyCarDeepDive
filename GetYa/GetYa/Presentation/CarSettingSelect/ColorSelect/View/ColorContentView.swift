@@ -16,6 +16,7 @@ struct ColorSelectData {
 }
 
 protocol ColorContentViewDelegate: AnyObject {
+    func touchUpCell(type: ColorContentView.ColorType, color: Color)
     func touchUpLearnMoreViewButton(type: ColorContentView.ColorType, isExpanded: Bool)
 }
 
@@ -95,47 +96,22 @@ class ColorContentView: UIView {
     // MARK: - Properties
     weak var delegate: ColorContentViewDelegate?
     private var colorType: ColorType = .exterior
-    private var dataArray: [ColorSelectData] = [] {
+    private var trimColor: TrimColor? {
         didSet {
-            let names = dataArray.map { $0.name }
-            let colorImages = dataArray.map { $0.colorImageURL }
-            collectionView.setColorNames(names: names)
-            collectionView.setColorImages(images: [
-                UIImage(systemName: "house"),
-                UIImage(systemName: "person"),
-                UIImage(systemName: "airplane"),
-                UIImage(systemName: "car"),
-                UIImage(systemName: "bus"),
-                UIImage(systemName: "ferry")
-            ])
+            guard let trimColor else { return }
+            collectionView.setAvailableColorArray(colorArray: trimColor.availableColors)
+            collectionView.setUnAvailableColorArray(colorArray: trimColor.unAvailableColors)
             collectionView.reloadData()
-                        
-            setLearnMoreContentData(
-                trimNames: [
-                    "Caligraphy",
-                    "Caligraphy",
-                    "Prestige",
-                    "Exclusive",
-                    "Prestige",
-                    "Prestige"],
-                images: [
-                    UIImage(systemName: "house"),
-                    UIImage(systemName: "person"),
-                    UIImage(systemName: "airplane"),
-                    UIImage(systemName: "car"),
-                    UIImage(systemName: "bus"),
-                    UIImage(systemName: "ferry")])
+            
+            setLearnMoreContentData(colorArray: trimColor.otherTrimColors)
         }
     }
     
     // MARK: - Lifecycles
-    
-    // TODO: ColorArray가 서버에서 받을 데이터로 대체될 것임.
-    init(type: ColorType, headerView: UIView, dataArray: [ColorSelectData]) {
+    init(type: ColorType, headerView: UIView) {
         super.init(frame: .zero)
         
         setupViews()
-        setDataArray(dataArray: dataArray)
         setupHeaderView(view: headerView)
         configureUI()
         configureByColorType(type: type)
@@ -262,12 +238,12 @@ class ColorContentView: UIView {
     }
     
     // MARK: - Functions
-    func setDataArray(dataArray: [ColorSelectData]) {
-        self.dataArray = dataArray
+    func setTrimColor(color: TrimColor) {
+        trimColor = color
     }
     
-    func setLearnMoreContentData(trimNames: [String], images: [UIImage?]) {
-        learnMoreView.setColorData(trimNames: trimNames, colorImages: images)
+    func setLearnMoreContentData(colorArray: [Color]) {
+        learnMoreView.setColor(colorArray: colorArray)
     }
     
     // MARK: - Objc Functions
@@ -282,11 +258,14 @@ extension ColorContentView: LearnMoreViewDelegate {
 
 // MARK: - ColorSelectColorCollectionViewDelegate
 extension ColorContentView: ColorSelectColorDelegate {
-    func touchUpColorCell(index: Int) {
-        colorNameLabel.text = dataArray[index].name
-        adoptionRateLabel.text = "\(dataArray[index].adoptionRate)%의 구매자가 선택한"
+    func touchUpColorCell(index: Int, isAvailable: Bool) {
+        guard let trimColor else { return }
+        let color = isAvailable ? trimColor.availableColors[index] : trimColor.unAvailableColors[index]
+        delegate?.touchUpCell(type: colorType, color: color)
+        colorNameLabel.text = color.name
+        adoptionRateLabel.text = "\(color.selectRate)%의 구매자가 선택한"
         adoptionRateLabel.configurePartTextColor(
-            partText: "\(dataArray[index].adoptionRate)%",
+            partText: "\(color.selectRate)%",
             partTextColor: .GetYaPalette.acriveBlue)
     }
 }

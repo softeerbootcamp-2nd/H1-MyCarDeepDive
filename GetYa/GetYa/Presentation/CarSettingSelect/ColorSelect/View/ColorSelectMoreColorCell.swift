@@ -90,8 +90,8 @@ class ColorSelectMoreColorCell: UICollectionViewCell {
     }
     
     // MARK: - Functions
-    func setImageAndName(name: String, image: UIImage?) {
+    func setImageAndName(name: String, imageURL: String) {
         nameLabel.text = name
-        imageView.image = image
+        
     }
 }

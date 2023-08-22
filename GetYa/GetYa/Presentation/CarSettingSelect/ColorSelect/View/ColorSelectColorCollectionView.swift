@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ColorSelectColorDelegate: AnyObject {
-    func touchUpColorCell(index: Int)
+    func touchUpColorCell(index: Int, isAvailable: Bool)
 }
 
 class ColorSelectColorCollectionView: UICollectionView {
@@ -27,12 +27,13 @@ class ColorSelectColorCollectionView: UICollectionView {
     // MARK: - Properties
     private var colorType: ColorContentView.ColorType = .exterior
     weak var colorSelectDelegate: ColorSelectColorDelegate?
-    private var colorNames: [String] = []
-    private var colorImages: [UIImage?] = []
+    private var availableColorArray: [Color] = []
+    private var unAvailableColorArray: [Color] = []
     private var selectedIndexPath: IndexPath? {
         didSet {
             if let indexPath = selectedIndexPath {
-                colorSelectDelegate?.touchUpColorCell(index: indexPath.row)
+                let index = indexPath.row
+                colorSelectDelegate?.touchUpColorCell(index: index, isAvailable: index < availableColorArray.count)
             }
         }
     }
@@ -46,19 +47,6 @@ class ColorSelectColorCollectionView: UICollectionView {
                 $0.itemSize = CGSize(width: Constatns.cellLength, height: Constatns.cellLength)
                 $0.scrollDirection = .horizontal
             })
-    }
-    
-    convenience init(colorNames: [String], colorImages: [UIImage?]) {
-        self.init(
-            frame: .zero,
-            collectionViewLayout: UICollectionViewFlowLayout().set {
-                $0.minimumLineSpacing = Constatns.spacing
-                $0.itemSize = CGSize(width: Constatns.cellLength, height: Constatns.cellLength)
-                $0.scrollDirection = .horizontal
-            })
-        
-        setColorNames(names: colorNames)
-        setColorImages(images: colorImages)
     }
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -88,16 +76,16 @@ class ColorSelectColorCollectionView: UICollectionView {
     // MARK: - Functions
     
     // TODO: 밑에 두 함수는 데이터 모델을 받을 수 있는 하나의 함수로 합쳐질것임
-    func setColorNames(names: [String]) {
-        colorNames = names
+    func setUnAvailableColorArray(colorArray: [Color]) {
+        unAvailableColorArray = colorArray
     }
     
-    func setColorImages(images: [UIImage?]) {
-        colorImages = images
+    func setAvailableColorArray(colorArray: [Color]) {
+        availableColorArray = colorArray
     }
     
     func setColorType(type: ColorContentView.ColorType) {
-        self.colorType = type
+        colorType = type
     }
     
     // MARK: - Objc Functions
@@ -116,7 +104,7 @@ extension ColorSelectColorCollectionView: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension ColorSelectColorCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return colorNames.count
+        return availableColorArray.count + unAvailableColorArray.count
     }
     
     func collectionView(
@@ -125,8 +113,17 @@ extension ColorSelectColorCollectionView: UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ColorSelectColorCell.identifier,
-            for: indexPath
-        ) as? ColorSelectColorCell else { return UICollectionViewCell() }
+            for: indexPath) as? ColorSelectColorCell
+        else { return UICollectionViewCell() }
+        
+        if indexPath.row < availableColorArray.count {
+            let color = availableColorArray[indexPath.row]
+            cell.setImageURL(imageURL: color.imageURL, isAvailable: true)
+        } else {
+            let color = unAvailableColorArray[indexPath.row]
+            cell.setImageURL(imageURL: color.imageURL, isAvailable: false)
+        }
+        
         
         switch colorType {
         case .exterior:
@@ -139,7 +136,6 @@ extension ColorSelectColorCollectionView: UICollectionViewDataSource {
             }
         }
         cell.isSelected = selectedIndexPath == indexPath ? true : false
-        cell.setImage(image: colorImages[indexPath.row])
         
         return cell
     }

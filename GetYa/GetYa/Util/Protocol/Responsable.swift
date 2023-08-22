@@ -37,6 +37,8 @@ enum ResponseType {
             return "car-spec"
         case .carSpecAdditionalOption(let carSpecId):
             return "car-spec/\(carSpecId)/additional-options"
+        case .trimColor:
+            return "color/trim-colors"
         default:
             break
         }

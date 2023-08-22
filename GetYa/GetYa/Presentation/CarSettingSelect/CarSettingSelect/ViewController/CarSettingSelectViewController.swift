@@ -57,15 +57,20 @@ class CarSettingSelectViewController: UIViewController {
         ])
         pageViewController.didMove(toParent: self)
         
-        let useCase = DefaultCarSettingUseCase()
+        let colorRepository = DefaultColorRepository(provider: SessionProvider())
+        let useCase = DefaultCarSettingUseCase(colorRepository: colorRepository)
+        let colorSelectViewController = ColorSelectViewController(
+            viewModel: ColorSelectViewModel(useCase: useCase))
+        
         let trimSelectViewController = TrimSelectViewController(
             viewModel: TrimSelectViewModel(
                 carSpecID: 1,
                 useCase: useCase))
         
+        
         viewControllers = [
             trimSelectViewController,
-            ColorSelectViewController(),
+            colorSelectViewController,
             OptionSelectViewController()]
     }
     

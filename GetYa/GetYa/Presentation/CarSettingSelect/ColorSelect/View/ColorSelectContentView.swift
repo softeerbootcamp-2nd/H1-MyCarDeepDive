@@ -22,8 +22,7 @@ class ColorSelectContentView: UIScrollView {
     }
     private lazy var exteriorContentView = ColorContentView(
         type: .exterior,
-        headerView: RotationView(type: .abyss),
-        dataArray: exteriorDataArray
+        headerView: RotationView(type: .abyss)
     ).set {
         $0.delegate = self
     }
@@ -32,30 +31,25 @@ class ColorSelectContentView: UIScrollView {
         type: .interior,
         headerView: UIImageView(image: UIImage(named: "LifeStylePeekTitle")).set {
             $0.translatesAutoresizingMaskIntoConstraints = false
-        },
-        dataArray: interiorDataArray
+        }
     ).set {
         $0.delegate = self
     }
     private var interiorContentViewHeightContraint: NSLayoutConstraint!
     
     // MARK: - Properties
-    private let exteriorDataArray: [ColorSelectData] = [
-        ColorSelectData(name: "크리미 화이트 펄", colorImageURL: "", carImageURL: "", adoptionRate: 75),
-        ColorSelectData(name: "쉬머링실버 메탈릭", colorImageURL: "", carImageURL: "", adoptionRate: 30),
-        ColorSelectData(name: "문라이트 블루 펄", colorImageURL: "", carImageURL: "", adoptionRate: 50),
-        ColorSelectData(name: "어비스 블랙펄", colorImageURL: "", carImageURL: "", adoptionRate: 15),
-        ColorSelectData(name: "로버스트 에메랄드 펄", colorImageURL: "", carImageURL: "", adoptionRate: 15),
-        ColorSelectData(name: "가이아 브라운 펄", colorImageURL: "", carImageURL: "", adoptionRate: 15)
-    ]
-    private let interiorDataArray: [ColorSelectData] = [
-        ColorSelectData(name: "크리미 화이트 펄", colorImageURL: "", carImageURL: "", adoptionRate: 75),
-        ColorSelectData(name: "쉬머링실버 메탈릭", colorImageURL: "", carImageURL: "", adoptionRate: 30),
-        ColorSelectData(name: "문라이트 블루 펄", colorImageURL: "", carImageURL: "", adoptionRate: 50),
-        ColorSelectData(name: "어비스 블랙펄", colorImageURL: "", carImageURL: "", adoptionRate: 15),
-        ColorSelectData(name: "로버스트 에메랄드 펄", colorImageURL: "", carImageURL: "", adoptionRate: 15),
-        ColorSelectData(name: "가이아 브라운 펄", colorImageURL: "", carImageURL: "", adoptionRate: 15)
-    ]
+    private var exteriorColor: TrimColor? {
+        didSet {
+            guard let exteriorColor else { return }
+            exteriorContentView.setTrimColor(color: exteriorColor)
+        }
+    }
+    private var interiorColor: TrimColor? {
+        didSet {
+            guard let interiorColor else { return }
+            interiorContentView.setTrimColor(color: interiorColor)
+        }
+    }
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -137,20 +131,28 @@ class ColorSelectContentView: UIScrollView {
     }
     
     // MARK: - Functions
+    func setData(exteriorColor: TrimColor, interiorColor: TrimColor) {
+        self.exteriorColor = exteriorColor
+        self.interiorColor = interiorColor
+    }
     
     // MARK: - Objc Functions
 }
 
 // MARK: - ColorContentViewDelegate
 extension ColorSelectContentView: ColorContentViewDelegate {
+    func touchUpCell(type: ColorContentView.ColorType, color: Color) {
+        
+    }
+    
     func touchUpLearnMoreViewButton(type: ColorContentView.ColorType, isExpanded: Bool) {
         typealias Const = ColorContentView.Constants.LearnMoreView.ContentView
         let basicHeight = Constnats.contentViewHeight
-        let exteriorMoreColorCount = 6
-        let interiorMoreColorCount = 6
-        var exteriorExpandedHeight = basicHeight + Const.collectionViewHeight * CGFloat(exteriorMoreColorCount / 4)
+        let exteriorMoreColorCount = exteriorColor?.otherTrimColors.count
+        let interiorMoreColorCount = interiorColor?.otherTrimColors.count
+        var exteriorExpandedHeight = basicHeight + Const.collectionViewHeight * CGFloat(exteriorMoreColorCount ?? 0 / 4)
         exteriorExpandedHeight += exteriorMoreColorCount == 0 ? Const.emptyLabelHeight : Const.collectionViewHeight
-        var interiorExpandedHeight = basicHeight + Const.collectionViewHeight * CGFloat(interiorMoreColorCount / 4)
+        var interiorExpandedHeight = basicHeight + Const.collectionViewHeight * CGFloat(interiorMoreColorCount ?? 0 / 4)
         interiorExpandedHeight += interiorMoreColorCount == 0 ? Const.emptyLabelHeight : Const.collectionViewHeight
         switch type {
         case .exterior:

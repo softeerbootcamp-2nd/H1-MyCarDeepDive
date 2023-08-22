@@ -6,22 +6,53 @@
 //
 
 import UIKit
+import Combine
 
 class ColorSelectViewController: UIViewController {
     // MARK: - UI properties
-    private let contentView = ColorSelectContentView()
+    private lazy var contentView = ColorSelectContentView()
     
     // MARK: - Properties
+    private var viewModel: ColorSelectViewModel!
+    private var cancellables = Set<AnyCancellable>()
+    private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
     
     // MARK: - Lifecycles
+    init(viewModel: ColorSelectViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bind()
         setupViews()
         configureUI()
+        viewDidLoadEvent.send(())
     }
     
     // MARK: - Private Functions
+    private func bind() {
+        let input = ColorSelectViewModel.Input(
+            viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher())
+        
+        let output = viewModel.transform(input: input)
+        
+        output.trimInquery
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                contentView.setData(
+                    exteriorColor: $0.exteriorColor,
+                    interiorColor: $0.interiorColor)
+            })
+            .store(in: &cancellables)
+    }
+    
     private func setupViews() {
         view.addSubview(contentView)
     }
