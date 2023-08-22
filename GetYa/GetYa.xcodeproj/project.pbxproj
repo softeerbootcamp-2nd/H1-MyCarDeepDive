@@ -69,7 +69,6 @@
 		15D026392A94B068001D1659 /* OptionInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D026382A94B068001D1659 /* OptionInfoDTO.swift */; };
 		15D0263B2A94B5CE001D1659 /* ColorInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */; };
 		15D2ABBC2A9350FD00F7DE8E /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */; };
-		15D2ABC02A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */; };
 		15D2ABC22A93567C00F7DE8E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC12A93567C00F7DE8E /* Status.swift */; };
 		15D2ABC62A9357C100F7DE8E /* TrimCarSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC52A9357C100F7DE8E /* TrimCarSpec.swift */; };
 		15D2ABCF2A937EF900F7DE8E /* DefaultGetYaCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABCE2A937EF900F7DE8E /* DefaultGetYaCacheService.swift */; };
@@ -302,7 +301,6 @@
 		15D026382A94B068001D1659 /* OptionInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionInfoDTO.swift; sourceTree = "<group>"; };
 		15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInfoDTO.swift; sourceTree = "<group>"; };
 		15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
-		15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionsResponseDTO.swift; sourceTree = "<group>"; };
 		15D2ABC12A93567C00F7DE8E /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		15D2ABC52A9357C100F7DE8E /* TrimCarSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpec.swift; sourceTree = "<group>"; };
 		15D2ABCE2A937EF900F7DE8E /* DefaultGetYaCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetYaCacheService.swift; sourceTree = "<group>"; };
@@ -1298,7 +1296,6 @@
 		64ADA4812A7788630003E2C1 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */,
 				15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */,
 				150636492A9460610057724E /* CommonDTO.swift */,
 				1506363D2A9392480057724E /* CustomRecomendation.swift */,
@@ -1802,7 +1799,6 @@
 				6412D07C2A7E607D001E4005 /* LifeStyleCell.swift in Sources */,
 				155DDD162A84A808009AE2BC /* DetailQuotationPreviewFooterView.swift in Sources */,
 				155B72AF2A8CA0020091A7F4 /* QuestionDescriptionLabelModel+Mock.swift in Sources */,
-				15D2ABC02A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift in Sources */,
 				155ED7202A7E5B890052896A /* UIButton+Combine.swift in Sources */,
 				64ADA4B82A7A1BF20003E2C1 /* CommonOptionImageView.swift in Sources */,
 				64E26A642A8BBE6A00F6BC3A /* ColorContentView.swift in Sources */,
