@@ -8,6 +8,7 @@
 import UIKit
 
 protocol TrimOptionContentCollectionViewDelegate: AnyObject {
+    func touchUpCellSelectButton(trimSelectModel: TrimSelectModel)
     func touchUpLearnMoreViewButton()
 }
 
@@ -24,7 +25,7 @@ class TrimOptionContentCollectionView: UICollectionView {
     }
     
     // MARK: - Properties
-    weak var learnMoreViewDelegate: TrimOptionContentCollectionViewDelegate?
+    weak var trimOptionDelegate: TrimOptionContentCollectionViewDelegate?
     private(set) var selectedIndexPath: IndexPath?
     private(set) var expandedIndexPath: [IndexPath] = []
     
@@ -172,14 +173,18 @@ extension TrimOptionContentCollectionView: UICollectionViewDelegateFlowLayout {
 // MARK: - TrimOptionContentCell Delegate
 extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
     func touchUpSelectButton(sender: UICollectionViewCell) {
-        visibleCells.map { $0 as? TrimOptionContentCell }.forEach {
-            $0?.setSelectButtonIsSelected(isSelected: false)
-        }
-        let indexPath = self.indexPath(for: sender)
+        let indexPath = indexPath(for: sender)
         if selectedIndexPath != indexPath {
+            visibleCells.map { $0 as? TrimOptionContentCell }.forEach {
+                $0?.setSelectButtonIsSelected(isSelected: false)
+            }
             selectedIndexPath = indexPath
             if let cell = sender as? TrimOptionContentCell {
                 cell.setSelectButtonIsSelected(isSelected: true)
+                trimOptionDelegate?.touchUpCellSelectButton(
+                    trimSelectModel: TrimSelectModel(
+                        trimName: cell.nameLabel.text ?? "",
+                        trimPrice: cell.priceLabel.text?.toInt ?? 0))
             }
         }
     }
@@ -194,7 +199,7 @@ extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
             
             UIView.performWithoutAnimation({
                 self.collectionViewLayout.invalidateLayout()
-                self.learnMoreViewDelegate?.touchUpLearnMoreViewButton()
+                self.trimOptionDelegate?.touchUpLearnMoreViewButton()
             })
         }
     }

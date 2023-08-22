@@ -9,6 +9,7 @@ import UIKit
 
 protocol TrimSubOptionContentStackViewDelegate: AnyObject {
     func transferOptionText(type: TrimSubOptionContentStackView.OptionType)
+    func sendAllSubOptionSelectedIndex(indexList: [Int])
 }
 
 class TrimSubOptionContentStackView: UIStackView {
@@ -86,5 +87,14 @@ extension TrimSubOptionContentStackView: TrimSubOptionViewDelegate {
         if let type = OptionType(rawValue: text) {
             delegate?.transferOptionText(type: type)
         }
+        var isSelectedIndex: [Int] = []
+        arrangedSubviews.map { $0 as? TrimSubOptionView }.forEach {
+            $0?.optionStackView.arrangedSubviews.map { $0 as? UIButton }.enumerated().forEach({
+                if $0.element?.isSelected == true {
+                    isSelectedIndex.append($0.offset + 1)
+                }
+            })
+        }
+        delegate?.sendAllSubOptionSelectedIndex(indexList: isSelectedIndex)
     }
 }
