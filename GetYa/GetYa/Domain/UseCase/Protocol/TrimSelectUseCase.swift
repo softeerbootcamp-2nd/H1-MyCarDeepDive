@@ -11,6 +11,6 @@ import Combine
 protocol TrimSelectUseCase {
     var trimSelect: PassthroughSubject<TrimSelectModel, Never> { get set }
     
-    func fetchTrim(trimSubOptionSelectMode: TrimSubOptionSelectModel)
+    func fetchTrim(trimSubOptionSelectModel: TrimSubOptionSelectModel)
     func fetchTrim(carSpecID: Int)
 }

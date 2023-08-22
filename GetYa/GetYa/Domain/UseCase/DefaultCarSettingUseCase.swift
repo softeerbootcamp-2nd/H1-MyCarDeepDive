@@ -34,8 +34,8 @@ class DefaultCarSettingUseCase: TrimSelectUseCase {
 
 // MARK: - TrimSelectUseCase
 extension DefaultCarSettingUseCase {
-    func fetchTrim(trimSubOptionSelectMode: TrimSubOptionSelectModel) {
-        print(trimSubOptionSelectMode)
+    func fetchTrim(trimSubOptionSelectModel: TrimSubOptionSelectModel) {
+        print(trimSubOptionSelectModel)
     }
     func fetchTrim(carSpecID: Int) {
         print(carSpecID)

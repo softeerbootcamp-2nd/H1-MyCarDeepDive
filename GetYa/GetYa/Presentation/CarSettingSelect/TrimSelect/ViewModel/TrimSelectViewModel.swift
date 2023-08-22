@@ -54,7 +54,7 @@ class TrimSelectViewModel {
         input.touchUpSubOptionSelect
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                useCase.fetchTrim(trimSubOptionSelectMode: $0)
+                useCase.fetchTrim(trimSubOptionSelectModel: $0)
             })
             .store(in: &cancellables)
         return output
