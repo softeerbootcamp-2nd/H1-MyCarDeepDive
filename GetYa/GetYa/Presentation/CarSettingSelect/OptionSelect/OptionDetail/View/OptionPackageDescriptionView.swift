@@ -41,7 +41,7 @@ final class OptionPackageDescriptionView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.backgroundColor = UIColor(red: 0.983, green: 0.983, blue: 0.983, alpha: 1).cgColor
     }
-    private let optionTitleCollectionView = UICollectionView(
+    private let optionKeywordCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     ).set { $0.translatesAutoresizingMaskIntoConstraints = false }
@@ -73,16 +73,20 @@ final class OptionPackageDescriptionView: UIView {
     
     // MARK: - Functions
     func configure(
-        delegator: (UICollectionViewDataSource & UICollectionViewDelegate)?,
-        pages: Int?
+        pages: Int?,
+        title: String?,
+        price: String?,
+        description: String?
     ) {
-        setOptionTitleCollectionView(from: delegator)
         setPageCount(with: pages)
+        setOptionDetailDescriptionView(title: title, price: price, description: description)
     }
     
-    func setOptionTitleCollectionView(from delegator: (UICollectionViewDataSource & UICollectionViewDelegate)?) {
-        optionTitleCollectionView.delegate = delegator
-        optionTitleCollectionView.dataSource = delegator
+    func configureOptionKeyordCollectionView(
+        from optionKeywordDelegator: (UICollectionViewDataSource & UICollectionViewDelegate)?
+    ) {
+        optionKeywordCollectionView.delegate = optionKeywordDelegator
+        optionKeywordCollectionView.dataSource = optionKeywordDelegator
     }
     
     func setOptionDetailDescriptionView(title: String?, price: String?, description: String?) {
@@ -104,7 +108,7 @@ extension OptionPackageDescriptionView: LayoutSupportable {
             optionPackageLabel,
             optionDetailDescriptionView,
             bottomBackgroundView,
-            optionTitleCollectionView,
+            optionKeywordCollectionView,
             pageControl])
         
     }
@@ -155,12 +159,12 @@ extension OptionPackageDescriptionView: LayoutSupportable {
     private func configureOptionTitleCollectionView() {
         typealias Const = Constants.OptionTitleCollectionView
         NSLayoutConstraint.activate([
-            optionTitleCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            optionTitleCollectionView.topAnchor.constraint(
+            optionKeywordCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            optionKeywordCollectionView.topAnchor.constraint(
                 equalTo: bottomBackgroundView.topAnchor,
                 constant: Const.topMargin),
-            optionTitleCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            optionTitleCollectionView.heightAnchor.constraint(
+            optionKeywordCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            optionKeywordCollectionView.heightAnchor.constraint(
                 equalToConstant: Const.height)])
     }
     
@@ -169,7 +173,7 @@ extension OptionPackageDescriptionView: LayoutSupportable {
         NSLayoutConstraint.activate([
             pageControl.leadingAnchor.constraint(equalTo: leadingAnchor),
             pageControl.topAnchor.constraint(
-                equalTo: optionTitleCollectionView.bottomAnchor,
+                equalTo: optionKeywordCollectionView.bottomAnchor,
                 constant: Const.topMargin),
             pageControl.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             pageControl.bottomAnchor.constraint(
