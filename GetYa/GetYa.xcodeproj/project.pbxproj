@@ -73,6 +73,7 @@
 		15D0263B2A94B5CE001D1659 /* ColorInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */; };
 		15D0263C2A94BB12001D1659 /* DefaultQuotationPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1D2172A8EF4B80048DAC7 /* DefaultQuotationPreviewViewController.swift */; };
 		15D0263E2A9515C3001D1659 /* OptionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D0263D2A9515C3001D1659 /* OptionSelectViewController.swift */; };
+		15D026402A954AEC001D1659 /* OptionDetailKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D0263F2A954AEC001D1659 /* OptionDetailKeywordCell.swift */; };
 		15D2ABB22A928C6100F7DE8E /* OptionPackageDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABB12A928C6100F7DE8E /* OptionPackageDescriptionView.swift */; };
 		15D2ABBC2A9350FD00F7DE8E /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */; };
 		15D2ABC22A93567C00F7DE8E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC12A93567C00F7DE8E /* Status.swift */; };
@@ -325,6 +326,7 @@
 		15D026382A94B068001D1659 /* OptionInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionInfoDTO.swift; sourceTree = "<group>"; };
 		15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInfoDTO.swift; sourceTree = "<group>"; };
 		15D0263D2A9515C3001D1659 /* OptionSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSelectViewController.swift; sourceTree = "<group>"; };
+		15D0263F2A954AEC001D1659 /* OptionDetailKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionDetailKeywordCell.swift; sourceTree = "<group>"; };
 		15D2ABB12A928C6100F7DE8E /* OptionPackageDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionPackageDescriptionView.swift; sourceTree = "<group>"; };
 		15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		15D2ABC12A93567C00F7DE8E /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
@@ -722,6 +724,7 @@
 				15940E8A2A922C210042A5F5 /* OptionDetailCell.swift */,
 				15940E8C2A922D810042A5F5 /* OptionDetailDescriptionAreaView.swift */,
 				15D2ABB12A928C6100F7DE8E /* OptionPackageDescriptionView.swift */,
+				15D0263F2A954AEC001D1659 /* OptionDetailKeywordCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1903,6 +1906,7 @@
 				155DDD162A84A808009AE2BC /* DetailQuotationPreviewFooterView.swift in Sources */,
 				155B72AF2A8CA0020091A7F4 /* QuestionDescriptionLabelModel+Mock.swift in Sources */,
 				155ED7202A7E5B890052896A /* UIButton+Combine.swift in Sources */,
+				15D026402A954AEC001D1659 /* OptionDetailKeywordCell.swift in Sources */,
 				15E1D2162A8EF3D10048DAC7 /* DefaultQuotationPreviewMainHeader.swift in Sources */,
 				64ADA4B82A7A1BF20003E2C1 /* CommonOptionImageView.swift in Sources */,
 				64E26A642A8BBE6A00F6BC3A /* ColorContentView.swift in Sources */,
