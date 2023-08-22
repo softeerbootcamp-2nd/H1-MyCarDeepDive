@@ -62,7 +62,8 @@ public class OptionMapper {
                 tagsList.stream()
                         .map(TagsMapper.INSTANCE::tagsToTagResponse)
                         .collect(Collectors.toList()),
-                options.getPrice());
+                options.getPrice(),
+                options.getImgUrl());
     }
 
     public static OptionCoordinatesResponse optionToOptionCoordinatesResponse(

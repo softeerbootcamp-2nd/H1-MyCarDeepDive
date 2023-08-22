@@ -1,0 +1,276 @@
+<!-- src/main/resources/templates/template.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--    <link rel="stylesheet" th:href="@{~/HyundaiSansTextKRRegular.woff2}"/>-->
+    <style>
+        * {
+            font-family: 'NanumSquare', sans-serif;
+        }
+
+        body {
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid gray;
+        }
+
+        .logo {
+            width: 180px;
+            height: 100px;
+        }
+
+        .title {
+            font-size: 28px;
+            margin-left: 20px;
+        }
+
+        .car-select-title {
+            font-size: 24px;
+            margin: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .disclaimer {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .car-details {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .model {
+            padding: 10px;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .model-title {
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .model-row {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .model-label {
+            font-weight: bold;
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 10px;
+            min-width: 100px;
+        }
+
+        .model-value {
+            flex: 1;
+        }
+
+        .color {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .color-label {
+            font-weight: bold;
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 10px;
+            min-width: 100px;
+        }
+
+        .color-image {
+            max-width: 100px;
+            height: auto;
+            margin-right: 10px;
+            padding: 10px;
+        }
+
+        .color-name {
+            font-size: 15px;
+        }
+
+        .option {
+            margin-top: 10px;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .option-title {
+            margin-right: 10px;
+            margin-left: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .option-row {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .option-name {
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 5px;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .option-price {
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 5px;
+            font-weight: normal;
+            flex: none;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .total {
+            margin-top: 20px;
+            margin-bottom: 40px;
+            text-align: right;
+            font-size: 24px;
+        }
+
+        .car-image {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .car-image img {
+            width: 400px;
+            height: auto;
+        }
+
+        .footer-all{
+            background-color: beige;
+        }
+        .footer-title {
+            font-size: 15px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .color-image img {
+            margin: 10px;
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <img class="logo" src="https://pdf.make-my-car.shop/hyundai_logo.png" alt="로고"/>
+</div>
+
+<div class="car-image">
+    <div class="title"><strong>나의 팰리세이드</strong></div>
+    <img th:src="'https://' + ${carImgUrl}" alt="차량 사진"/>
+</div>
+<div class="disclaimer">홈페이지 상에 사용된 이미지는 사양 및 구성에 따라 실제 적용된 사양과 상이할 수 있습니다.</div>
+<div class="car-select-title">차량 선택사항</div>
+<div class="car-details">
+    <div class="model">
+        <div class="model-title"><strong>모델</strong></div>
+        <div class="model-row">
+            <span class="model-label"><strong>모델명:</strong></span>
+            <span class="model-value" th:text="${modelName}"></span>
+        </div>
+        <div class="model-row">
+            <span class="model-label"><strong>가격:</strong></span>
+            <span class="model-value" th:text="${modelPrice}  + ' 원'"></span>
+        </div>
+        <div class="model-row">
+            <span class="model-label"><strong>최대 출력:</strong></span>
+            <span class="model-value" th:text="${maxPower}"></span>
+        </div>
+        <div class="model-row">
+            <span class="model-label"><strong>최대 토크:</strong></span>
+            <span class="model-value" th:text="${maxTorque}"></span>
+        </div>
+
+    </div>
+    <div class="color">
+        <div class="color-label"><strong>색상</strong></div>
+        <div>
+            <span class="color-image">
+                <span class="color-name">외장 색상: </span>
+                <span class="color-name" th:text="${exteriorColorName}"></span>
+                <a>    </a>
+                <img th:src="'https://' + ${exteriorColorUrl}" alt="외장 색상"/>
+                <span class="color-name" th:text="${exteriorColorPrice} + ' 원'"></span>
+            </span>
+            <span class="color-image">
+                <span class="color-name">내장 색상: </span>
+                <span class="color-name" th:text="${interiorColorName}"></span>
+                <a>    </a>
+                <img th:src="'https://' + ${interiorColorUrl}" alt="내장 색상"/>
+                <span class="color-name" th:text="${interiorColorPrice} + ' 원'"></span>
+            </span>
+        </div>
+    </div>
+    <div class="option">
+        <div class="option-title"><strong>옵션</strong></div>
+        <div th:each="option : ${options}">
+            <div class="option-row">
+                <span class="option-name" th:text="${option.option_name}"></span>
+                <span class="option-price" th:text="${option.option_price} + ' 원'"></span>
+            </div>
+        </div>
+    </div>
+    <div class="total">
+        <strong>총 차량 가격:</strong> <span th:text="${totalPrice} + ' 원'"></span>
+    </div>
+    <p class="footer-all">
+        <div class="footer-title">꼭 읽어주세요!</div>
+        <div class="footer">
+            · 본 견적서는 고객님의 차량 구입(청약) 의사결정에 도움을 드리고자 작성된것으로, 법적인 효력이 없으며 구매를 원하시는 경우 구매상담신청을 해주시기 바랍니다.
+        </div>
+        <div class="footer">
+            · 또한 실제 계약 내용은 고객께서 청약하실 시점의 판매조건이나 캐피탈사의 대출 조건에 따라 본 견적 내용과 달라질 수 있습니다.
+        </div>
+        <div class="footer">
+            · 차량 매매대금은 '고객전용 입금계좌'로 입금하시거나 본인명의 카드(신용, 체크)로 결제하셔야 합니다. '고객전용 입금계좌'의 계좌명은 '고객명_현대차'입니다.
+            당사는 타 계좌 입금으로 발생되는 문제에 대하여 책임을 지지 않으므로 입금 전/후 반드시 확인하시기 바랍니다.
+        </div>
+        <div class="footer">
+            · 세이브오토는 당사와 제휴사와의 별도 약정에 따라 차량대금의 일부를 선 지급해드리는 상품으로 향후 고객께서 포인트를 적립하여 상환하여야 하며, 별도 신청서 상의
+            소정 요건을 충적 시키지 못할 경우 미상환액을 현금으로 상환하셔야합니다.
+        </div>
+        <div class="footer">
+            · 표시된 예상출고일은 견적 시점에서 계산된 것이므로 계약시점에 따라 달라질 수 있으며, 당사 사정에 따라 변경될 수 있습니다.
+        </div>
+        <div class="footer">
+            · 탁송료 및 공채할인률은 출고지, 등록일에 따라서 변경될 수 있습니다. 등록대행 수수료는 당사에 등록을 의뢰하실 경우 발생되는 항목이며 의뢰지역, 의뢰방법에 따라
+            달라질 수 있습니다.
+        </div>
+    </p>
+</div>
+</body>
+</html>

@@ -198,7 +198,8 @@ class OptionsControllerTest extends ControllerTestConfig {
                                         "빌트인 캠(보조배터리 포함)",
                                         "빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.",
                                         List.of(comfortTag, safeTag),
-                                        109000)));
+                                        109000,
+                                        "option.img.url")));
 
         // then
         ResultActions resultActions =
@@ -237,7 +238,8 @@ class OptionsControllerTest extends ControllerTestConfig {
                                 "빌트인 캠(보조배터리 포함)",
                                 "빌트인 적용된 영상기록장치로, 내비게이션 화면을 통해 영상 확인 및 앱 연동을 통해 영상 확인 및 SNS 공유가 가능합니다.",
                                 List.of(comfortTag, safeTag),
-                                109000));
+                                109000,
+                                "option.img.url"));
 
         // then
         ResultActions resultActions =

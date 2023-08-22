@@ -111,6 +111,7 @@ dependencies {
 	// Database
 	runtimeOnly 'com.h2database:h2:1.4.199'
 	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
 	// Cloud
 	implementation group: 'io.awspring.cloud', name: 'spring-cloud-starter-aws-parameter-store-config'
@@ -146,6 +147,16 @@ dependencies {
 	// RestDocs
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	testImplementation "com.epages:restdocs-api-spec-mockmvc:${restdocsApiSpecVersion}"
+
+	// Mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	// PDF
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'org.xhtmlrenderer:flying-saucer-pdf-itext5:9.1.22'
+	implementation 'com.itextpdf:itextpdf:5.5.13'
+	implementation 'org.springframework:spring-test'
 }
 
 tasks.named('test') {
