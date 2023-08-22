@@ -34,11 +34,11 @@ final class OptionDetailCell: UICollectionViewCell {
 // MARK: - UICollectionViewDataSource
 extension OptionDetailCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        return .init()
     }
 }
 
