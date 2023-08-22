@@ -150,9 +150,11 @@ final class OptionDetailViewController: BaseViewController {
     // MARK: - Objc Functions
 }
 
+
+// MARK: - BaseOptionDetailRoundViewDelegate
 extension OptionDetailViewController: BaseOptionDetailRoundViewDelegate {
     func touchUpCloseButton(_ baseOptionDetailRoundView: UIView) {
-        /// 델리게이트 호출 시점에 옵션에 대한 identifier를 받아오는 방법 좋겠습니다.
+        // getIdentifierTODO: - 델리게이트 호출 시점에 옵션에 대한 identifier를 받아오는 방법 좋겠습니다.
         UIView.animate(
             withDuration: 0.34,
             delay: 0,
@@ -166,6 +168,7 @@ extension OptionDetailViewController: BaseOptionDetailRoundViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension OptionDetailViewController: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
@@ -184,6 +187,7 @@ extension OptionDetailViewController: UICollectionViewDataSource {
     
 }
 
+// MARK: - UICollectionViewDelegate
 extension OptionDetailViewController: UICollectionViewDelegate {
     
 }
@@ -192,11 +196,10 @@ extension OptionDetailViewController: UICollectionViewDelegate {
 extension OptionDetailViewController: LayoutSupportable {
     func setupViews() {
         switch optionType {
-        case .package:
-            /// 컬랙션 뷰
-            break
         case .single:
             view.addSubview(baseSingleOptionContainerView)
+        case .package:
+            view.addSubview(optionPackageCollectionView)
         }
     }
     
@@ -205,7 +208,7 @@ extension OptionDetailViewController: LayoutSupportable {
         case .single:
             configureBaseSingleOptionContainerView()
         case .package:
-            break
+            configureOptionPackageCollectionView()
         }
     }
     
@@ -222,5 +225,14 @@ extension OptionDetailViewController: LayoutSupportable {
                 equalTo: view.centerYAnchor),
             baseSingleOptionContainerView.heightAnchor.constraint(
                 lessThanOrEqualToConstant: optionType.maximumContentHeight)])
+    }
+    
+    private func configureOptionPackageCollectionView() {
+        typealias Const = Constants.OptionPackageCollectionView
+        NSLayoutConstraint.activate([
+            optionPackageCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            optionPackageCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            optionPackageCollectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            optionPackageCollectionView.heightAnchor.constraint(equalToConstant: Const.itemSize.height)])
     }
 }
