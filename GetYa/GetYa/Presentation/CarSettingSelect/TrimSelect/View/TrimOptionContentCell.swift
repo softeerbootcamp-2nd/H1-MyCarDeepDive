@@ -46,16 +46,16 @@ class TrimOptionContentCell: UICollectionViewCell {
     }
     
     // MARK: - UI properties
-    private let nameLabel = CommonLabel(
+    let nameLabel = CommonLabel(
         fontType: .mediumBody4,
         color: .GetYaPalette.gray300)
-    private let descriptionLabel = CommonLabel(
+    let descriptionLabel = CommonLabel(
         fontType: .regularBody3,
         color: .GetYaPalette.gray100)
-    private let priceLabel = CommonLabel(
+    let priceLabel = CommonLabel(
         fontType: .mediumHead3,
         color: .GetYaPalette.gray0)
-    private let tagLabel = CommonLabel(
+    let tagLabel = CommonLabel(
         fontType: .regularCaption1,
         color: .GetYaPalette.gray500)
     private(set) lazy var selectButton: UIButton = UIButton().set {
@@ -89,6 +89,7 @@ class TrimOptionContentCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        delegate = nil
         learnMoreView.subviews.forEach {
             if $0 is TrimOptionDetailView {
                 $0.removeFromSuperview()

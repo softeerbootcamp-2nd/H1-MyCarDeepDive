@@ -136,24 +136,6 @@ class ColorContentView: UIView {
         
         setupViews()
         setDataArray(dataArray: dataArray)
-//        setupLearnMoreContentView(
-//            trimNames: [
-//                "Caligraphy",
-//                "Caligraphy",
-//                "Prestige",
-//                "Exclusive",
-//                "Prestige",
-//                "Prestige"],
-//            images: [
-//                UIImage(systemName: "house"),
-//                UIImage(systemName: "person"),
-//                UIImage(systemName: "airplane"),
-//                UIImage(systemName: "car"),
-//                UIImage(systemName: "bus"),
-//                UIImage(systemName: "ferry")])
-//        setupLearnMoreContentView(
-//            trimNames: [],
-//            images: [])
         setupHeaderView(view: headerView)
         configureUI()
         configureByColorType(type: type)

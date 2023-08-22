@@ -61,7 +61,7 @@ final class OptionDetailDescriptionAreaView: UIView {
     ).set {
         $0.numberOfLines = 1
     }
-    private let optionSelectButton = CommonOptionSelectView(frame: .zero)
+    private let optionSelectButton = CommonOptionSelectButton(frame: .zero)
     private let optionDescriptionLabel = CommonLabel(
         fontType: .regularBody4,
         color: .GetYaPalette.gray200,

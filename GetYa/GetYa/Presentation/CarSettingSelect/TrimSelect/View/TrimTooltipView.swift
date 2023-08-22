@@ -11,6 +11,7 @@ class TrimTooltipView: UIView {
     enum Constants {
         enum TooltipView {
             static let startX = CGFloat(12).scaledWidth
+            static let startY: CGFloat = 0
             static let tipWidth = CGFloat(8).scaledWidth
             static let tipheight = CGFloat(6).scaledWidth
             static let radius = CGFloat(8).scaledHeight
@@ -32,6 +33,7 @@ class TrimTooltipView: UIView {
     private let tooltipView = TooltipView(
         backgroundColor: .GetYaPalette.tooltip,
         tipStartX: Constants.TooltipView.startX,
+        tipStartY: Constants.TooltipView.startY,
         tipYType: .top,
         tipWidth: Constants.TooltipView.tipWidth,
         tipHeight: Constants.TooltipView.tipheight)
