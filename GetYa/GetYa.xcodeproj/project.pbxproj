@@ -66,6 +66,7 @@
 		15A738822A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A738812A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift */; };
 		15A738842A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A738832A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift */; };
 		15D026372A94B027001D1659 /* PackageInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D026362A94B027001D1659 /* PackageInfoDTO.swift */; };
+		15D026392A94B068001D1659 /* OptionInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D026382A94B068001D1659 /* OptionInfoDTO.swift */; };
 		15D2ABBC2A9350FD00F7DE8E /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */; };
 		15D2ABC02A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */; };
 		15D2ABC22A93567C00F7DE8E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC12A93567C00F7DE8E /* Status.swift */; };
@@ -297,6 +298,7 @@
 		15A738812A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewThumbnailCardView.swift; sourceTree = "<group>"; };
 		15A738832A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewThumbnailView.swift; sourceTree = "<group>"; };
 		15D026362A94B027001D1659 /* PackageInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageInfoDTO.swift; sourceTree = "<group>"; };
+		15D026382A94B068001D1659 /* OptionInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionInfoDTO.swift; sourceTree = "<group>"; };
 		15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		15D2ABBF2A93561900F7DE8E /* AdditionalOptionsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionsResponseDTO.swift; sourceTree = "<group>"; };
 		15D2ABC12A93567C00F7DE8E /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
@@ -1300,6 +1302,7 @@
 				1506363F2A9394710057724E /* QuotationDTO.swift */,
 				150636492A9460610057724E /* CommonDTO.swift */,
 				15D026362A94B027001D1659 /* PackageInfoDTO.swift */,
+				15D026382A94B068001D1659 /* OptionInfoDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1697,6 +1700,7 @@
 				64E26A502A8A3E2800F6BC3A /* TrimSubOptionButton.swift in Sources */,
 				15940E802A91F4EC0042A5F5 /* UIImage+.swift in Sources */,
 				64ADA4AD2A78A7090003E2C1 /* CommonButton.swift in Sources */,
+				15D026392A94B068001D1659 /* OptionInfoDTO.swift in Sources */,
 				6484A78A2A903C6A00434136 /* CommonTableHeaderView.swift in Sources */,
 				6484A7A12A91F40800434136 /* OptionSelectItemLearnMoreView.swift in Sources */,
 				6484A7902A90444100434136 /* PurchaseView.swift in Sources */,
