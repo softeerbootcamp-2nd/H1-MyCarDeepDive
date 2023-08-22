@@ -149,7 +149,6 @@ public class PdfService {
                                         new MyCarDeepDiveException(
                                                 HttpStatus.BAD_REQUEST, ErrorType.PDF_NOT_FOUND));
         String htmlContent = getHtmlContentFromThymeleafTemplate(pdfInfo);
-        System.out.println(htmlContent);
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             ITextRenderer renderer = new ITextRenderer();
             SharedContext sharedContext = renderer.getSharedContext();
