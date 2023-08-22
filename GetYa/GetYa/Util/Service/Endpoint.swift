@@ -8,7 +8,8 @@
 protocol NetworkInteractionable: Requestable, Responsable {}
 
 final class Endpoint<ResponseModel>: NetworkInteractionable where ResponseModel: Decodable {
-    typealias ResponseDTO = ResponseModel
+    typealias ResponseDTO = CommonDTO<ResponseModel>
+    
     var scheme: String
     var host: String
     var method: HTTPMethod
