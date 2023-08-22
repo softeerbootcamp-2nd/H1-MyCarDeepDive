@@ -39,6 +39,7 @@ final class OptionDetailViewController: BaseViewController {
     private var singleOptionDetailContentView: OptionDetailDescriptionAreaView?
     private lazy var baseSingleOptionContainerView: BaseOptionDetailRoundView = {
         let contentView = OptionDetailDescriptionAreaView()
+        contentView.setOptionSelect(singleOptionSelectAction)
         singleOptionDetailContentView = contentView
         let baseView = BaseOptionDetailRoundView(contentView: contentView)
         return baseView
@@ -46,6 +47,9 @@ final class OptionDetailViewController: BaseViewController {
     
     // MARK: - Properties
     private let optionType: OptionType
+    private lazy var singleOptionSelectAction = UIAction { [weak self] _ in
+        self?.singleOptionDetailContentView?.setOptionSelectButtonSelectState()
+    }
     
     // MARK: - Lifecycles
     init(optionType: OptionType) {
