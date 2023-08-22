@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import UnderLine from '@/Components/UnderLine';
 import RecommendResultPageWrapper from './RecommendResultPageWrapper';
 import CardWrapper from './CardWrapper';
@@ -12,15 +13,13 @@ import CarInfo from './CarInfo';
 import CarOption from './CarOption';
 import TotalPrice from './TotalPrice';
 import Buttons from './Buttons';
-import palisade from '@/assets/image/Palisade.png';
-import { useParams } from 'react-router-dom';
 import getRecommendation from '@/api/Recommendation/getRecommendation';
-
-const tagData = ['1년 이하', '1인', '출퇴근용', '디자인', '4200만원'];
+import getCustomRecommendation from '@/api/Recommendation/getCustomRecommendation';
 
 function ResultPage() {
   const { step } = useParams();
-  const recommendResult = getRecommendation();
+  const recommendResult =
+    step === 'basic' ? getRecommendation() : getCustomRecommendation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,7 +36,7 @@ function ResultPage() {
       ) : (
         <CarWrapper>
           <CarBackground />
-          <CarSummary tag={tagData} carImage={palisade} />
+          <CarSummary carImage={recommendResult.data.car_img_url} />
         </CarWrapper>
       )}
       <Body>
