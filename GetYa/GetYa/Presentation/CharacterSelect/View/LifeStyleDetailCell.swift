@@ -10,6 +10,25 @@ import UIKit
 class LifeStyleDetailCell: UICollectionViewCell {
     typealias Palette = UIColor.GetYaPalette
     
+    enum Constants {
+        enum BaseView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 64)
+        }
+        enum DescriptionLabel {
+            static let topMargin: CGFloat = .toScaledHeight(value: 26)
+        }
+        enum ImageView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 15)
+            static let height: CGFloat = .toScaledHeight(value: 108)
+            static let width: CGFloat = .toScaledWidth(value: 156)
+        }
+        enum Button {
+            static let topMargin: CGFloat = .toScaledHeight(value: 17)
+            static let height: CGFloat = .toScaledHeight(value: 40)
+            static let width: CGFloat = .toScaledWidth(value: 192)
+        }
+    }
+    
     // MARK: - UI Properties
     private let baseView: UIView = {
         let view = UIView()
@@ -44,16 +63,6 @@ class LifeStyleDetailCell: UICollectionViewCell {
     // MARK: - Properties
     static let identifier: String = "LifeStyleDetailCell"
     weak var delegate: LifeStyleCellDelegate?
-    private let baseViewLayoutConstant = UILayout(topMargin: 64)
-    private let descriptionLabelLayoutConstant = UILayout(topMargin: 26)
-    private let imageViewLayoutConstant = UILayout(
-        topMargin: 15,
-        height: 108,
-        width: 156)
-    private let buttonLayoutConstant = UILayout(
-        topMargin: 17,
-        height: 40,
-        width: 192)
     
     // MARK: - LifeCycles
     convenience init() {
@@ -97,10 +106,12 @@ class LifeStyleDetailCell: UICollectionViewCell {
     }
     
     private func configureBaseView() {
+        typealias Const = Constants.BaseView
+        
         NSLayoutConstraint.activate([
             baseView.topAnchor.constraint(
                 equalTo: self.topAnchor,
-                constant: baseViewLayoutConstant.topMargin),
+                constant: Const.topMargin),
             baseView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             baseView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             baseView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
@@ -108,38 +119,44 @@ class LifeStyleDetailCell: UICollectionViewCell {
     }
     
     private func configureDescriptionLabel() {
+        typealias Const = Constants.DescriptionLabel
+        
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(
                 equalTo: baseView.topAnchor,
-                constant: descriptionLabelLayoutConstant.topMargin),
+                constant: Const.topMargin),
             descriptionLabel.centerXAnchor.constraint(equalTo: baseView.centerXAnchor)
         ])
     }
     
     private func configureImageView() {
+        typealias Const = Constants.ImageView
+        
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(
                 equalTo: descriptionLabel.bottomAnchor,
-                constant: imageViewLayoutConstant.topMargin),
+                constant: Const.topMargin),
             imageView.heightAnchor.constraint(
-                equalToConstant: imageViewLayoutConstant.height),
+                equalToConstant: Const.height),
             imageView.widthAnchor.constraint(
-                equalToConstant: imageViewLayoutConstant.width),
+                equalToConstant: Const.width),
             imageView.centerXAnchor.constraint(equalTo: baseView.centerXAnchor)
         ])
     }
     
     private func configureButton() {
+        typealias Const = Constants.Button
+        
         button.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(
                 equalTo: imageView.bottomAnchor,
-                constant: buttonLayoutConstant.topMargin),
+                constant: Const.topMargin),
             button.heightAnchor.constraint(
-                equalToConstant: buttonLayoutConstant.height),
+                equalToConstant: Const.height),
             button.widthAnchor.constraint(
-                equalToConstant: buttonLayoutConstant.width),
+                equalToConstant: Const.width),
             button.centerXAnchor.constraint(equalTo: baseView.centerXAnchor)
         ])
     }

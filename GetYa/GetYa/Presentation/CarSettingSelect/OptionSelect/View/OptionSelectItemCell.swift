@@ -7,11 +7,6 @@
 
 import UIKit
 
-struct Tag: Hashable {
-    let id: Int
-    let name: String
-}
-
 struct OptionItem: Hashable {
     let id: Int
     let imageURL: String
