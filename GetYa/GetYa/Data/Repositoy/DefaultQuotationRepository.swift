@@ -1,5 +1,5 @@
 //
-//  defaultQuotationRepository.swift
+//  DefaultQuotationRepository.swift
 //  GetYa
 //
 //  Created by 양승현 on 2023/08/21.
@@ -7,9 +7,8 @@
 
 import Foundation
 
-struct defaultQuotationRepository: QuotationRepository {
-    
-    typealias Endpoints = RecommendationEndpoints
+struct DefaultQuotationRepository: QuotationRepository {
+    typealias Endpoints = QuotationEndpoints
     let provider = SessionProvider()
     
     func fetchCarDetailRecommendation(
