@@ -41,10 +41,29 @@ final class OptionPackageDescriptionView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.backgroundColor = UIColor(red: 0.983, green: 0.983, blue: 0.983, alpha: 1).cgColor
     }
-    private let optionKeywordCollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: UICollectionViewFlowLayout()
-    ).set { $0.translatesAutoresizingMaskIntoConstraints = false }
+    private let optionKeywordCollectionView: UICollectionView = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().set {
+            $0.scrollDirection = .horizontal
+            $0.itemSize = .init(
+                width: .toScaledWidth(value: 138),
+                height: 22)
+            $0.minimumLineSpacing = 14
+            $0.minimumInteritemSpacing = 14
+            $0.sectionInset = .init(
+                top: 0,
+                left: .toScaledWidth(value: 20),
+                bottom: 0,
+                right: .toScaledWidth(value: 20))
+        }
+        return UICollectionView(frame: .zero, collectionViewLayout: layout).set {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.isPagingEnabled = true
+            $0.showsHorizontalScrollIndicator = false
+            $0.register(
+                OptionDetailKeywordCell.self,
+                forCellWithReuseIdentifier: OptionDetailKeywordCell.identifier)
+        }
+    }()
     private var pageControl = CommonPageControl(numberOfPages: 3)
     
     // MARK: - Properties
@@ -110,7 +129,6 @@ extension OptionPackageDescriptionView: LayoutSupportable {
             bottomBackgroundView,
             optionKeywordCollectionView,
             pageControl])
-        
     }
     
     func setupConstriants() {
@@ -120,7 +138,6 @@ extension OptionPackageDescriptionView: LayoutSupportable {
         configureOptionTitleCollectionView()
         configurePageControl()
         configureSubviewsContentPriority()
-        
     }
     
     // MARK: - LayoutSupport private functions
