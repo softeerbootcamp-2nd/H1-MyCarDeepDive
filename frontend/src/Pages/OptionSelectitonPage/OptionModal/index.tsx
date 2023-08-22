@@ -10,11 +10,13 @@ import getPackageOptionDetails from '@/api/option/getPackageOptionDetails';
 interface OptionModalProps {
   showOptionModal: boolean;
   setShowOptionModal: React.Dispatch<React.SetStateAction<boolean>>;
+  category: string;
 }
 
 function OptionModal({
   showOptionModal,
   setShowOptionModal,
+  category,
 }: OptionModalProps) {
   const { packageOption } = useContext(OptionContext);
   const optionDetailData = packageOption ? undefined : getOptionDetails();
@@ -80,6 +82,7 @@ function OptionModal({
             key={idx}
             jumpPage={jumpPage}
             isSet={optionCardData.length > 1}
+            category={category}
           />
         ))}
       </div>

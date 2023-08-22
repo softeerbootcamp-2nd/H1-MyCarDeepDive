@@ -1,9 +1,12 @@
+import { useContext } from 'react';
+import { CarContext } from '@/context/CarProvider';
 import CloseModal from '@/Components/Modal/CloseModal';
 import UnSelectedButton from '@/Pages/OptionSelectitonPage/AdditionalOption/Option/UnSelectedButton';
 import CardTag from './CardTag';
 import DetailOption from './DetailOption';
 import DotButtons from './DotButtons';
 import { optionDetailType } from '@/global/type';
+import SelectedButton from '../../AdditionalOption/Option/SelectedButton';
 
 interface OptionCardProps extends optionDetailType {
   detailOptions: string[] | undefined;
@@ -11,10 +14,11 @@ interface OptionCardProps extends optionDetailType {
   length: number;
   jumpPage: (page: number) => void;
   isSet: boolean;
+  category: string;
 }
 
 function OptionCard({
-  // option_id,
+  option_id,
   option_name,
   option_description,
   tag_list,
@@ -25,7 +29,10 @@ function OptionCard({
   length,
   jumpPage,
   isSet,
+  category,
 }: OptionCardProps) {
+  const { optionIdList } = useContext(CarContext);
+
   return (
     <div
       className='w-[900px] h-[440px] bg-grey-1000 rounded-xl flex overflow-hidden flex-shrink-0 relative'
@@ -57,16 +64,28 @@ function OptionCard({
                 {`${price} 원`}
               </div>
             </div>
-            <div className='mt-auto'>
-              <UnSelectedButton />
-            </div>
+            {category === '추가 옵션' && length < 2 && (
+              <div className='mt-auto'>
+                {optionIdList.includes(option_id) ? (
+                  <SelectedButton
+                    optionIdList={[option_id]}
+                    optionData={{ name: option_name, price: price }}
+                  />
+                ) : (
+                  <UnSelectedButton
+                    optionIdList={[option_id]}
+                    optionData={{ name: option_name, price: price }}
+                  />
+                )}
+              </div>
+            )}
           </div>
           <div className='mt-5 mb-[190px] h-[90px] font-body4-regular text-grey-200 overflow-y-auto'>
             {option_description}
           </div>
         </div>
         {isSet && (
-          <div className='w-[344px] h-[190px] absolute bottom-0 left-0 bg-grey-900 rounded-br-xl p-7'>
+          <div className='w-[344px] h-[190px] overflow-y-auto absolute bottom-0 left-0 bg-grey-900 rounded-br-xl p-7'>
             <div className='grid grid-cols-2 gap-3.5'>
               {detailOptions &&
                 detailOptions.map((item, idx) => (

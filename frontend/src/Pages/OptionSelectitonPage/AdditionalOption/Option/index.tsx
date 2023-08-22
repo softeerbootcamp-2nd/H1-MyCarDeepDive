@@ -1,10 +1,11 @@
 import moreInfo from '@/assets/icon/more-info.svg';
 import SelectedButton from './SelectedButton';
 import UnSelectedButton from './UnSelectedButton';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { OptionContext } from '@/context/OptionProvider';
 import { SET_OPTIONID, SET_PACKAGE } from '@/context/OptionProvider/type';
 import { priceToString } from '@/utils';
+import { CarContext } from '@/context/CarProvider';
 
 interface SelectedProps {
   package_option_id?: number;
@@ -32,11 +33,14 @@ function Option({
   option_summary,
   badge_name,
   price,
+  additional_option_id_list,
   additional_option_id,
   select_rate,
   setShowOptionModal,
 }: SelectedProps) {
+  const { optionIdList } = useContext(CarContext);
   const { optionDispatch } = useContext(OptionContext);
+  const [optionIdLists, setOptionIdLists] = useState<number[]>();
 
   const showMoreInfo = () => {
     if (package_option_id) {
@@ -61,6 +65,21 @@ function Option({
 
     setShowOptionModal(true);
   };
+
+  const checkSelected = () => {
+    if (additional_option_id_list)
+      return additional_option_id_list.every(value =>
+        optionIdList.includes(value),
+      );
+    if (additional_option_id)
+      return optionIdList.includes(additional_option_id);
+  };
+
+  useEffect(() => {
+    if (additional_option_id_list)
+      setOptionIdLists([...additional_option_id_list]);
+    if (additional_option_id) setOptionIdLists([additional_option_id]);
+  }, [additional_option_id_list, additional_option_id]);
 
   return (
     <div className='w-[244px] mb-11'>
@@ -111,7 +130,17 @@ function Option({
       <div className='mb-3 font-body3-medium text-grey-100'>{`${priceToString(
         price,
       )}원`}</div>
-      {false ? <SelectedButton /> : <UnSelectedButton />}
+      {checkSelected() ? (
+        <SelectedButton
+          optionIdList={optionIdLists}
+          optionData={{ name: option_name, price: price }}
+        />
+      ) : (
+        <UnSelectedButton
+          optionIdList={optionIdLists}
+          optionData={{ name: option_name, price: price }}
+        />
+      )}
     </div>
   );
 }

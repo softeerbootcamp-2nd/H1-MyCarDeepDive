@@ -74,6 +74,7 @@ function OptionSelectitonPage() {
         <OptionModal
           showOptionModal={showOptionModal}
           setShowOptionModal={setShowOptionModal}
+          category={category}
         />
       )}
     </div>

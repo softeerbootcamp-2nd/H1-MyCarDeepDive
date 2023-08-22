@@ -3,7 +3,7 @@ import Item from './Item';
 import { CarContext } from '@/context/CarProvider';
 
 function Navigation() {
-  const { carSpec, color } = useContext(CarContext);
+  const { carSpec, color, optionData } = useContext(CarContext);
 
   return (
     <div className='mt-[25px]'>
@@ -20,7 +20,12 @@ function Navigation() {
           address={'color'}
           value={`${color.exteriorColor.name} / ${color.interiorColor.name}`}
         />
-        <Item name={'옵션'} index={3} address={'option'} value={'gg'} />
+        <Item
+          name={'옵션'}
+          index={3}
+          address={'option'}
+          value={optionData.map(item => item.name).join(', ')}
+        />
       </div>
     </div>
   );
