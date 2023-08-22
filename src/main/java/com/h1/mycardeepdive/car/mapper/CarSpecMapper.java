@@ -2,7 +2,7 @@ package com.h1.mycardeepdive.car.mapper;
 
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
-import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
+import com.h1.mycardeepdive.car.ui.dto.CarSpecDto;
 import com.h1.mycardeepdive.color.domain.TrimExteriorColor;
 import com.h1.mycardeepdive.color.domain.TrimInteriorColor;
 import com.h1.mycardeepdive.trims.domain.Trim;
@@ -37,15 +37,16 @@ public class CarSpecMapper {
                 basicOptionIds);
     }
 
-    public static CarSpecResponse toCarSpecResponse(
+    public static CarSpecDto toCarSpecResponse(
             CarSpec carSpec, List<String> basicOptionNames, List<Long> basicOptionIds) {
         Trim trim = carSpec.getTrim();
-        return new CarSpecResponse(
+        return new CarSpecDto(
                 trim.getName(),
                 carSpec.getPrice(),
                 trim.getSummary(),
                 carSpec.getId(),
                 trim.getId(),
+                trim.getImgUrl(),
                 basicOptionNames,
                 basicOptionIds);
     }

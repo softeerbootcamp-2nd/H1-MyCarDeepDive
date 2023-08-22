@@ -15,13 +15,13 @@ public class CarSpecController {
     private final CarSpecService carSpecService;
 
     @GetMapping
-    public ApiResponse<List<CarSpecResponse>> getTrimsBySpec(
+    public ApiResponse<CarSpecResponse> getTrimsBySpec(
             @RequestParam("engineId") Long engineId,
             @RequestParam("bodyId") Long bodyId,
             @RequestParam("drivingSystemId") Long drivingSystemId) {
-        List<CarSpecResponse> carSpecs =
+        CarSpecResponse carSpecResponse =
                 carSpecService.findCarSpecsBySpec(engineId, bodyId, drivingSystemId);
-        return new ApiResponse<>(carSpecs);
+        return new ApiResponse<>(carSpecResponse);
     }
 
     @GetMapping("/comparison")

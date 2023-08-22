@@ -15,6 +15,7 @@ import com.h1.mycardeepdive.car.domain.DrivingSystem;
 import com.h1.mycardeepdive.car.domain.Engine;
 import com.h1.mycardeepdive.car.domain.repository.CarSpecRepository;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecComparisonResponse;
+import com.h1.mycardeepdive.car.ui.dto.CarSpecDto;
 import com.h1.mycardeepdive.car.ui.dto.CarSpecResponse;
 import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.List;
@@ -45,17 +46,17 @@ class CarSpecServiceTest {
                         engine.getId(), body.getId(), drivingSystem.getId()))
                 .thenReturn(List.of(carSpec));
         // when
-        List<CarSpecResponse> carSpecResponses =
+        CarSpecResponse carSpecResponse =
                 carSpecService.findCarSpecsBySpec(
                         engine.getId(), body.getId(), drivingSystem.getId());
-        CarSpecResponse carSpecResponse = carSpecResponses.get(0);
+        CarSpecDto carSpecDto = carSpecResponse.getCar_specs().get(0);
 
         // then
-        assertThat(carSpecResponse.getTrim_name()).isEqualTo(trim.getName());
-        assertThat(carSpecResponse.getPrice()).isEqualTo(carSpec.getPrice());
-        assertThat(carSpecResponse.getSummary()).isEqualTo(trim.getSummary());
-        assertThat(carSpecResponse.getCar_spec_id()).isEqualTo(carSpec.getId());
-        assertThat(carSpecResponse.getTrim_id()).isEqualTo(trim.getId());
+        assertThat(carSpecDto.getTrim_name()).isEqualTo(trim.getName());
+        assertThat(carSpecDto.getPrice()).isEqualTo(carSpec.getPrice());
+        assertThat(carSpecDto.getSummary()).isEqualTo(trim.getSummary());
+        assertThat(carSpecDto.getCar_spec_id()).isEqualTo(carSpec.getId());
+        assertThat(carSpecDto.getTrim_id()).isEqualTo(trim.getId());
     }
 
     @Test
