@@ -13,4 +13,5 @@ public class OptionDetailResponse {
     private String option_description;
     private List<TagResponse> tag_list;
     private long price;
+    private String option_img_url;
 }
