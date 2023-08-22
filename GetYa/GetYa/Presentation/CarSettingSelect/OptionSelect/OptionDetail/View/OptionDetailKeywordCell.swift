@@ -42,7 +42,6 @@ final class OptionDetailKeywordCell: UICollectionViewCell {
     func configure(_ text: String?) {
         keywordLabel.text = text
     }
-    // MARK: - Objc Functions
 }
 
 // MARK: - LayoutSupportable
