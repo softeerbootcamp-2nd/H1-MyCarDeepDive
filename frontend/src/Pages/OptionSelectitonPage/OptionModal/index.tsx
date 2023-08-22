@@ -1,4 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { optionDetailType } from '@/global/type';
+import getOptionDetails from '@/api/option/getOptionDetails';
 import Modal from '@/Components/Modal';
 import PageButtons from './PageButtons';
 import OptionCard from './OptionCard';
@@ -6,23 +8,17 @@ import OptionCard from './OptionCard';
 interface OptionModalProps {
   showOptionModal: boolean;
   setShowOptionModal: React.Dispatch<React.SetStateAction<boolean>>;
-  OptionCardData: {
-    tag: string[];
-    image: string;
-    optionName: string;
-    detailOptionName: string;
-    price: string;
-    description: string;
-    detailOptions: string[];
-  }[];
 }
 
 function OptionModal({
   showOptionModal,
   setShowOptionModal,
-  OptionCardData,
 }: OptionModalProps) {
+  const optionDetailData = getOptionDetails();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [optionCardData, setOptionCardData] = useState<
+    optionDetailType[] | undefined
+  >();
 
   const movePage = (direction: number) => {
     if (!scrollRef.current) return;
@@ -47,21 +43,28 @@ function OptionModal({
     });
   };
 
+  useEffect(() => {
+    if (optionDetailData === undefined) return;
+
+    setOptionCardData([optionDetailData.data]);
+  }, [optionDetailData]);
+  console.log(optionCardData);
+  if (!optionCardData) return null;
   return (
     <Modal showModal={showOptionModal} setShowModal={setShowOptionModal}>
-      {OptionCardData.length > 1 && <PageButtons movePage={movePage} />}
+      {optionCardData.length > 1 && <PageButtons movePage={movePage} />}
       <div
         className='w-full h-[440px] absolute top-1/2 left-0 transform -translate-y-1/2 flex gap-20 overflow-x-auto noScrollBar'
         ref={scrollRef}
       >
-        {OptionCardData.map((item, idx) => (
+        {optionCardData.map((item, idx) => (
           <OptionCard
             {...item}
             index={idx}
-            length={OptionCardData.length}
+            length={optionCardData.length}
             key={idx}
             jumpPage={jumpPage}
-            isSet={OptionCardData.length > 1}
+            isSet={optionCardData.length > 1}
           />
         ))}
       </div>

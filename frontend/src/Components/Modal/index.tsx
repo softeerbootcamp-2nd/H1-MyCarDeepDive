@@ -8,6 +8,7 @@ interface CommonModalProps extends ModalProps {
 function Modal({ showModal, setShowModal, children }: CommonModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [flag, setFlag] = useState(false);
 
   const modalOutSideClick = (e: React.MouseEvent<HTMLElement>) => {
     if (modalRef.current === e.target) setIsAnimating(false);
@@ -21,12 +22,15 @@ function Modal({ showModal, setShowModal, children }: CommonModalProps) {
     if (showModal) {
       document.body.classList.add('overflow-hidden');
       document.addEventListener('keydown', eventHandler);
-      setTimeout(() => setIsAnimating(true), 10);
+      setTimeout(() => {
+        setIsAnimating(true);
+        setFlag(true);
+      }, 10);
     }
   }, [showModal]);
 
   useEffect(() => {
-    if (!isAnimating) {
+    if (!isAnimating && flag) {
       document.body.classList.remove('overflow-hidden');
       document.addEventListener('keydown', eventHandler);
       setTimeout(() => setShowModal(false), 1010);

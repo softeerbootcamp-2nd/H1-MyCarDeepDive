@@ -5,12 +5,15 @@ import './index.css';
 
 import { BrowserRouter } from 'react-router-dom';
 import CarProvider from './context/CarProvider';
+import OptionProvider from './context/OptionProvider/index.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <CarProvider>
-        <App />
+        <OptionProvider>
+          <App />
+        </OptionProvider>
       </CarProvider>
     </BrowserRouter>
   </React.StrictMode>,

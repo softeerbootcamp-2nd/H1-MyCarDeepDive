@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { OptionContext } from '@/context/OptionProvider';
+import { SET_OPTIONID } from '@/context/OptionProvider/type';
 import moreInfo from '@/assets/icon/more-info.svg';
 
 interface OptionProps {
@@ -15,13 +18,16 @@ function Option({
   basic_option_id,
   option_img_url,
   option_name,
-  tag_list,
   setShowOptionModal,
 }: OptionProps) {
+  const { optionDispatch } = useContext(OptionContext);
+
   const showMoreInfo = () => {
-    console.log(basic_option_id);
-    console.log(tag_list);
-    console.log(option_img_url);
+    optionDispatch({
+      type: SET_OPTIONID,
+      optionId: basic_option_id,
+    });
+
     setShowOptionModal(true);
   };
 
