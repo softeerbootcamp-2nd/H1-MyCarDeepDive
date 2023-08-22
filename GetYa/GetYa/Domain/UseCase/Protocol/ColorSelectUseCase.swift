@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import Combine
 
 protocol ColorSelectUseCase {
-    
+    var colorSelect: PassthroughSubject<ColorSelectModel, Never> { get set }
+    var colorRepository: ColorRepository { get set }
 }
