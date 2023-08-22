@@ -103,6 +103,7 @@ final class DefaultQuotationPreviewThumbnailCardView: UIView {
     private let reviewdTooltipView: TooltipView = .init(
         backgroundColor: .white,
         tipStartX: 12,
+        tipStartY: 0,
         tipYType: .top,
         tipWidth: Constants.ReviewdTooltipView.tooltipWidth,
         tipHeight: Constants.ReviewdTooltipView.tooltipHeight
