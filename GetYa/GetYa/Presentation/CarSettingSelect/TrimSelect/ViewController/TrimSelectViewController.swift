@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class TrimSelectViewController: UIViewController {
     enum Constants {
@@ -63,7 +64,7 @@ class TrimSelectViewController: UIViewController {
         $0.delegate = self
     }
     private lazy var trimOptionContentCollectionView = TrimOptionContentCollectionView().set {
-        $0.learnMoreViewDelegate = self
+        $0.trimOptionDelegate = self
         let tapGesture = UITapGestureRecognizer(
             target: self,
             action: #selector(didTappedCollectionView))
@@ -113,6 +114,10 @@ class TrimSelectViewController: UIViewController {
         text: "트림")
     
     // MARK: - Properties
+    private var viewModel: TrimSelectViewModel!
+    private var viewDidLoadEvent = PassthroughSubject<Void, Never>()
+    private var touchUpTrimSelectButton = PassthroughSubject<TrimSelectModel, Never>()
+    private var touchUpSubOptionSelectButton = PassthroughSubject<TrimSubOptionSelectModel, Never>()
     private let titleTexts = ["Exclusive", "Le Blanc (르블랑)", "Prestige", "Caligraphy"]
     private let tagTexts = [
         ["디젤 2.2", "7인승", "2WD"],
@@ -123,16 +128,35 @@ class TrimSelectViewController: UIViewController {
     private let priceValues = [43460000, 40440000, 47720000, 52540000]
     
     // MARK: - Lifecycles
+    init(viewModel: TrimSelectViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         setupViews()
         configureUI()
         setOptionContentData()
         setTrimAreaToolTipViewIsHidden(isHidden: false)
+        viewDidLoadEvent.send(())
     }
     
     // MARK: - Private Functions
+    private func bind() {
+        let input = TrimSelectViewModel.Input(
+            viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
+            touchUpSubOptionSelect: touchUpSubOptionSelectButton.eraseToAnyPublisher(),
+            touchUpTrimSelectButton: touchUpTrimSelectButton.eraseToAnyPublisher())
+        let output = viewModel.transform(input: input)
+    }
+    
     private func setupViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -401,10 +425,22 @@ extension TrimSelectViewController: TrimSubOptionContentStackViewDelegate {
         setSubOptionAreaToolTipViewIsHidden(isHidden: false)
         setTrimAreaToolTipViewIsHidden(isHidden: true)
     }
+    
+    func sendAllSubOptionSelectedIndex(indexList: [Int]) {
+        touchUpSubOptionSelectButton.send(
+            TrimSubOptionSelectModel(
+                engineID: indexList[0],
+                bodyID: indexList[1],
+                drivingSystemID: indexList[2]))
+    }
 }
 
 // MARK: - TrimOptionContentCollectionViewDelegate
 extension TrimSelectViewController: TrimOptionContentCollectionViewDelegate {
+    func touchUpCellSelectButton(trimSelectModel: TrimSelectModel) {
+        touchUpTrimSelectButton.send(trimSelectModel)
+    }
+    
     func touchUpLearnMoreViewButton() {
         collectionViewHeightConstarint.isActive = false
         let height = createTrimOptionContentCollectionViewHeight()

@@ -25,10 +25,10 @@ class TrimSubOptionView: UIView {
     }
     
     // MARK: - UI properties
-    private let label = CommonLabel(
+    let label = CommonLabel(
         fontType: .mediumBody4,
         color: .GetYaPalette.gray200)
-    private let optionStackView: UIStackView = UIStackView().set {
+    let optionStackView: UIStackView = UIStackView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .horizontal
         $0.distribution = .fillEqually
