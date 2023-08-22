@@ -43,7 +43,7 @@ class RotationView: SettingSelectTitleBackgroundVIew {
     }
     private lazy var markImageView: UIImageView = UIImageView().set {
         $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "RotationMark")
+        $0.image = UIImage(named: "rotation_mark")
         $0.translatesAutoresizingMaskIntoConstraints = false
         markView.addSubview($0)
     }
