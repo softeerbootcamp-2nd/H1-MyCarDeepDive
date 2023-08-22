@@ -48,7 +48,7 @@ function OptionModal({
 
     setOptionCardData([optionDetailData.data]);
   }, [optionDetailData]);
-  console.log(optionCardData);
+
   if (!optionCardData) return null;
   return (
     <Modal showModal={showOptionModal} setShowModal={setShowOptionModal}>

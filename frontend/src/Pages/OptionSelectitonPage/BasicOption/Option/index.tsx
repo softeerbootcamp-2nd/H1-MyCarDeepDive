@@ -41,7 +41,7 @@ function Option({
         <img
           src={'https://' + option_img_url}
           alt={option_name}
-          className='w-full rounded absolute top-0 left-0'
+          className='w-full h-full backdrop: rounded absolute top-0 left-0'
         />
       </div>
       <div className='mt-3 flex justify-between'>

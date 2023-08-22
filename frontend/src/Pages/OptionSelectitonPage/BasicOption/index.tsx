@@ -42,7 +42,7 @@ function BasicOption({
         ? basicOptionData.data
         : basicOptionData.data.filter(item => {
             return item.tag_list.some(tagItem =>
-              tagItem.tag_name.includes(tag),
+              tagItem.tag_name.includes(tag === '대표' ? 'MAIN 대표' : tag),
             );
           });
 

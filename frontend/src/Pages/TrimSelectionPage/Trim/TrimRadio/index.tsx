@@ -28,17 +28,17 @@ function TrimRadio({
 
     carDispatch({
       type: SET_CARSPECPRICE,
-      carSpecPrice: carSpecData.data[carSpec.trim.id - 1].price,
+      carSpecPrice: carSpecData.data.car_specs[carSpec.trim.id - 1].price,
     });
     carDispatch({
       type: SET_CARSPECID,
-      carSpecId: carSpecData.data[carSpec.trim.id - 1].car_spec_id,
+      carSpecId: carSpecData.data.car_specs[carSpec.trim.id - 1].car_spec_id,
     });
   }, [carSpecData]);
 
   if (carSpecData === undefined) return null;
 
-  return carSpecData.data.map((car, index) => {
+  return carSpecData.data.car_specs.map((car, index) => {
     return car.trim_name === carSpec.trim.name ? (
       <Selected
         key={index}
