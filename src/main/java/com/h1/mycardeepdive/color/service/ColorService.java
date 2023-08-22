@@ -50,6 +50,9 @@ public class ColorService {
             Trim trim = exteriorColor.getTrimExteriorColors().get(0).getTrim();
             otherTrimColorInfos.add(toExteriorColorInfo(exteriorColor, trim));
         }
+        availableColorInfos.sort((o1, o2) -> (int) (o2.getChoose_rate() - o1.getChoose_rate()));
+        unavailableColorInfos.sort((o1, o2) -> (int) (o2.getChoose_rate() - o1.getChoose_rate()));
+        otherTrimColorInfos.sort((o1, o2) -> (int) (o2.getChoose_rate() - o1.getChoose_rate()));
         return new ExteriorColorResponse(
                 availableColorInfos, unavailableColorInfos, otherTrimColorInfos);
     }
@@ -81,6 +84,9 @@ public class ColorService {
             Trim trim = interiorColor.getTrimInteriorColors().get(0).getTrim();
             otherTrimColorInfos.add(toInteriorColorInfo(interiorColor, trim));
         }
+        availableColorInfos.sort((o1, o2) -> (int) (o2.getChoose_rate() - o1.getChoose_rate()));
+        unavailableColorInfos.sort((o1, o2) -> (int) (o2.getChoose_rate() - o1.getChoose_rate()));
+        otherTrimColorInfos.sort((o1, o2) -> (int) (o2.getChoose_rate() - o1.getChoose_rate()));
         return new InteriorColorResponse(
                 availableColorInfos, unavailableColorInfos, otherTrimColorInfos);
     }
