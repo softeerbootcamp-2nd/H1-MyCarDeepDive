@@ -9,6 +9,10 @@ import UIKit
 import SafariServices
 
 class QuotationFinishViewController: UIViewController {
+    enum Constatns {
+        
+    }
+    
     // MARK: - UI properties
     private let scrollView: UIScrollView = UIScrollView().set {
         $0.showsVerticalScrollIndicator = false
@@ -18,7 +22,7 @@ class QuotationFinishViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let thumbnailView = QuotationFinishThumbnailView(
-        image: UIImage(named: "LifeStylePeekTitle"),
+        image: UIImage(named: "quotationfinishcar"),
         carName: "펠리세이드",
         trimName: "Le Blanc(르블랑)")
     private let carInfoView = CommonQuotationPreviewCarInfoView().set {
@@ -36,6 +40,19 @@ class QuotationFinishViewController: UIViewController {
         $0.setName(text: "총 금액")
         $0.setPriceLabelColor(color: .GetYaPalette.gray0)
         $0.setPriceLabelFont(fontType: .mediumHead3)
+    }
+    private lazy var shareButton: UIButton = UIButton().set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.clipsToBounds = true
+        $0.backgroundColor = .GetYaPalette.gray1000.withAlphaComponent(0.5)
+        $0.imageView?.contentMode = .scaleAspectFit
+        $0.setImage(UIImage(named: "share")?.resize(targetSize: CGSize(width: 18, height: 18)), for: .normal)
+        $0.addAction(
+            UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                showActivityViewController(url: URL(string: "pdf")!)
+            }),
+            for: .touchUpInside)
     }
     private lazy var pdfButton = CommonButton(
         font: GetYaFont.mediumBody3.uiFont,
@@ -155,6 +172,7 @@ class QuotationFinishViewController: UIViewController {
             carInfoView,
             qoutateTableView,
             totalNameAndPriceView,
+            shareButton,
             pdfButton,
             mailButton,
             storeButton,
@@ -174,6 +192,7 @@ class QuotationFinishViewController: UIViewController {
         configureCarInfoView()
         configureQuotationTableView()
         configureTotalNameAndPriceView()
+        configureShareButton()
         configurePDFButton()
         configureMailButton()
         configureStoreButton()
@@ -254,6 +273,21 @@ class QuotationFinishViewController: UIViewController {
                 equalTo: contentView.trailingAnchor,
                 constant: CGFloat(-16).scaledWidth),
             totalNameAndPriceView.heightAnchor.constraint(equalToConstant: 24)
+        ])
+    }
+    
+    private func configureShareButton() {
+        shareButton.layer.cornerRadius = CGFloat(40).scaledHeight / 2
+        
+        NSLayoutConstraint.activate([
+            shareButton.topAnchor.constraint(
+                equalTo: thumbnailView.imageView.topAnchor,
+                constant: CGFloat(16).scaledHeight),
+            shareButton.trailingAnchor.constraint(
+                equalTo: thumbnailView.imageView.trailingAnchor,
+                constant: CGFloat(-16).scaledWidth),
+            shareButton.heightAnchor.constraint(equalToConstant: CGFloat(40).scaledHeight),
+            shareButton.widthAnchor.constraint(equalToConstant: CGFloat(40).scaledHeight)
         ])
     }
     
@@ -348,6 +382,17 @@ class QuotationFinishViewController: UIViewController {
             .withTintColor(
             .GetYaPalette.gray0,
             renderingMode: .alwaysOriginal)
+    }
+    
+    private func showActivityViewController(url: URL) {
+        let activityVC = UIActivityViewController(activityItems: [""], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = view
+        activityVC.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.midX,
+                                                                      y: view.bounds.midY,
+                                                                      width: 0,
+                                                                      height: 0)
+
+        present(activityVC, animated: true)
     }
     
     // MARK: - Functions

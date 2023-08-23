@@ -59,7 +59,7 @@ class QuotationFinishThumbnailView: UIView {
     private let trimNameLabel = CommonLabel(
         fontType: .mediumHead4,
         color: .GetYaPalette.gray0)
-    private let imageView: UIImageView = UIImageView().set {
+    let imageView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
