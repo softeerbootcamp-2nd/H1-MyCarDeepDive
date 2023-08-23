@@ -9,12 +9,20 @@ import UIKit
 
 final class OptionKeywordCollectionView: UICollectionView {
     // MARK: - Lifecycles
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    override init(
+        frame: CGRect,
+        collectionViewLayout layout: UICollectionViewLayout
+    ) {
         super.init(frame: frame, collectionViewLayout: layout)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureUI()
+    }
+    
+    private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
         isPagingEnabled = true
         showsHorizontalScrollIndicator = false
