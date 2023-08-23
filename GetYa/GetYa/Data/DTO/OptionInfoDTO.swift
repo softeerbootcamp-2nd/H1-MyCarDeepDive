@@ -19,4 +19,13 @@ struct OptionInfoDTO: Decodable {
         case price
         case comment
     }
+    
+    func toDomain() -> OptionInfo {
+        return OptionInfo(
+            optionId: optionId,
+            price: price,
+            optionName: optionName,
+            optionImgUrl: optionImgUrl,
+            comment: comment)
+    }
 }
