@@ -42,8 +42,8 @@ struct QuotationDTO: Decodable {
         case totalPrice
     }
     
-    func toDomain() -> Quotation {
-        Quotation(
+    func toDomain() -> QuotationModel {
+        QuotationModel(
             trimName: trimName,
             carImgUrl: carImgUrl,
             comment1: comment1,
