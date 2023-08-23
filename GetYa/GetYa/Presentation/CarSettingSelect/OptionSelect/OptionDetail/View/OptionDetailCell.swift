@@ -22,6 +22,8 @@ final class OptionDetailCell: UICollectionViewCell {
     var isSelectedOkButton: Bool {
         optionPackageView.isSelectedOptinoSelectButton
     }
+    private lazy var optionTitles: [String?] = []
+    private var currentIndexPath: IndexPath?
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -40,17 +42,22 @@ final class OptionDetailCell: UICollectionViewCell {
     }
     
     // MARK: - Functions
+    
     func configure(
         baseOptionContainerViewDelegate: BaseOptionDetailRoundViewDelegate?,
-        optionPackageKeywordDelegator: (
-            UICollectionViewDataSource & UICollectionViewDelegate)?,
         optionSelectedDelegate: OptionPackageDescriptionViewDelegate?
     ) {
         baseOptionContainerView.delegate = baseOptionContainerViewDelegate
-        optionPackageView.configureOptionKeyordCollectionView(from: optionPackageKeywordDelegator)
         optionPackageView.delegate = optionSelectedDelegate
     }
     
+    func configure(
+        optionPackageKeywordDelegate: UICollectionViewDelegate?
+    ) {
+        optionPackageView.optionKeywordDelegate(
+            delegate: optionPackageKeywordDelegate)
+    }
+
     func configureBaseOptionView(
         image: UIImage?,
         closeButtonAlpha: CGFloat?
@@ -65,16 +72,24 @@ final class OptionDetailCell: UICollectionViewCell {
         packageTitle: String?,
         title: String?,
         price: String?,
-        description: String?,
-        currentKeywordIndexPath: IndexPath?
+        description: String?
     ) {
         optionPackageView.configure(
             pages: pages,
             packageTitle: packageTitle,
             title: title,
             price: price,
-            description: description,
-            currentKeywordIndexPath: currentKeywordIndexPath)
+            description: description)
+    }
+    
+    func configureKeywordCollectionView(
+        _ titles: [String],
+        currentIndexPath: IndexPath?
+    ) {
+        optionTitles = titles
+        self.currentIndexPath = currentIndexPath
+        optionPackageView.optionKeywordDataSource(dataSource: self)
+        optionPackageView.reloadData()
     }
     
     func configureFirstSetting() {
@@ -87,6 +102,29 @@ final class OptionDetailCell: UICollectionViewCell {
     
     func setKeywordCellSelected(indexPath: IndexPath) {
         optionPackageView.setKeywordCollectionViewSelected(indexPath)
+    }
+}
+
+extension OptionDetailCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return optionTitles.count
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: OptionDetailKeywordCell.identifier,
+            for: indexPath
+        ) as? OptionDetailKeywordCell,
+              let currentIndexPath = currentIndexPath
+        else { return .init(frame: .zero) }
+        cell.configure(optionTitles[indexPath.row])
+        if currentIndexPath == indexPath {
+            cell.setLabelColor()
+        }
+        return cell
     }
 }
 
