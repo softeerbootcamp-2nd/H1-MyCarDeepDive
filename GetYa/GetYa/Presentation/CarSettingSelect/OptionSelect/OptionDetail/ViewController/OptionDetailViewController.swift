@@ -345,8 +345,7 @@ extension OptionDetailViewController: LayoutSupportable {
             baseSingleOptionContainerView.centerYAnchor.constraint(
                 equalTo: view.centerYAnchor),
             baseSingleOptionContainerView.heightAnchor.constraint(
-                equalToConstant: Constants.OptionPackageCollectionView.itemSize.height)])
-        //                lessThanOrEqualToConstant: optionType.maximumContentHeight)
+                equalToConstant: optionType.maximumContentHeight)])
     }
     
     private func configureOptionPackageCollectionView() {
