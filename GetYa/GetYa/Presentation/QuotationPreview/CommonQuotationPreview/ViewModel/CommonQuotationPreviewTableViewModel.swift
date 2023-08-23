@@ -7,9 +7,9 @@
 
 // MARK: - View model
 struct QuotationPreviewCarProductOptionModel {
-    let optionImage: String?
-    let optionName: String?
-    let optionPrice: Int?
+    let optionImage: String
+    let optionName: String
+    let optionPrice: Int
     let optionReview: String?
 }
 

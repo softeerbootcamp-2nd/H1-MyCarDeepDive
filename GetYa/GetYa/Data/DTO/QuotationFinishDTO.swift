@@ -10,7 +10,7 @@ import Foundation
 struct QuotationFinishDTO: Codable {
     let carName: String
     let engineName: String
-    let drvingSystemName: String
+    let drivingSystemName: String
     let trimName: String
     let bodyName: String
     let exteriorColorName: String
@@ -24,7 +24,7 @@ struct QuotationFinishDTO: Codable {
     let pdfURL: String
     let totalPrice: Int
     
-    enum CodinKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case carName = "car_name"
         case engineName = "engine_name"
         case drivingSystemName = "driving_system_name"
@@ -40,5 +40,24 @@ struct QuotationFinishDTO: Codable {
         case basicPrice = "basic_price"
         case pdfURL = "pdf_url"
         case totalPrice = "total_price"
+    }
+    
+    func toDomain() -> QuotationFinish {
+        return QuotationFinish(
+            carName: carName,
+            engineName: engineName,
+            drivingSystemName: drivingSystemName,
+            trimName: trimName,
+            bodyName: bodyName,
+            exteriorColorName: exteriorColorName,
+            exteriorColorImageURL: exteriorColorImageURL,
+            exteriorColorPrice: exteriorColorPrice,
+            interiorColorName: interiorColorName,
+            interiorColorImageURL: interiorColorImageURL,
+            interiorColorPrice: interiorColorPrice,
+            optionList: optionList.map { $0.toDomain() },
+            basicPrice: basicPrice,
+            pdfURL: pdfURL,
+            totalPrice: totalPrice)
     }
 }

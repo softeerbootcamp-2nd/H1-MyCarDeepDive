@@ -11,15 +11,10 @@ struct OptionInfo: Codable {
     let optionID: Int?
     let optionName: String
     let optionImageURL: String
-    let price: Int
-    let comment: String?
+    let optionPrice: Int
+    let optionComment: String?
     
     func toDTO() -> OptionInfoDTO {
-        return OptionInfoDTO(
-            optionID: optionID,
-            optionName: optionName,
-            optionImageURL: optionImageURL,
-            price: price,
-            comment: comment)
+        return OptionInfoDTO(optionInfo: self)
     }
 }

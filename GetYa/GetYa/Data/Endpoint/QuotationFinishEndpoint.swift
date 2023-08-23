@@ -11,12 +11,17 @@ struct QuotationFinishEndpoint {
     private init() {}
     static let shared = QuotationFinishEndpoint()
     
-//    func fetchCarDetailRecommendationOption(
-//        with requestDTO: CustomRecomendation
-//    ) -> Endpoint<QuotationDTO> {
-//        return Endpoint<QuotationDTO>(
-//            method: .get,
-//            responseType: .carRecommendationCustom,
-//            queryParams: requestDTO)
-//    }
+    func fetchCarInquery(
+        with request: String
+    ) -> Endpoint<QuotationFinishDTO> {
+        return Endpoint<QuotationFinishDTO>(
+            method: .get,
+            responseType: .pdfCarInfomation(pdfID: request))
+    }
+    
+    func fetchPdfEmail(with request: PdfEmail) -> Endpoint<Bool> {
+        return Endpoint<Bool>(
+            method: .get,
+            responseType: .pdfEmail(pdfEmail: request))
+    }
 }

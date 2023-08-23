@@ -10,7 +10,7 @@ import Foundation
 enum AlertType {
     case title(title: String)
     case message(title: String, description: String)
-    case share(pdfID: Int)
+    case share(pdfID: String)
     case mail
     case settingChange(
         trimName: String? = nil, trimPirce: Int? = nil,

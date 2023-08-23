@@ -22,17 +22,8 @@ class QuotationFinishViewController: BaseViewController {
     private let contentView: UIView = UIView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let thumbnailView = QuotationFinishThumbnailView(
-        image: UIImage(named: "quotationfinishcar"),
-        carName: "펠리세이드",
-        trimName: "Le Blanc(르블랑)")
-    private let carInfoView = CommonQuotationPreviewCarInfoView().set {
-        $0.configure(with: QuotationPreviewCarInfoModel(
-            carName: "펠리세이드",
-            trimName: "Prestige",
-            carPrice: "\(43460000.toPriceFormat)",
-            carOptions: ["가솔린", "2WD", "8인승"].joined(separator: " ・ ")))
-    }
+    private let thumbnailView = QuotationFinishThumbnailView()
+    private let carInfoView = CommonQuotationPreviewCarInfoView()
     private let qoutateTableView = QuotationTableView()
     private var quotateTableViewTopConstraint: NSLayoutConstraint!
     private let totalNameAndPriceView: OptionNameAndPriceView = OptionNameAndPriceView().set {
@@ -52,7 +43,7 @@ class QuotationFinishViewController: BaseViewController {
             UIAction(handler: { [weak self] _ in
                 guard let self else { return }
                 showAlert(
-                    type: .share(pdfID: 1),
+                    type: .share(pdfID: ""),
                     buttonType: .oneButton,
                     rightTitle: "공유하기")
             }),
@@ -82,10 +73,7 @@ class QuotationFinishViewController: BaseViewController {
             self.showAlert(
                 type: .mail,
                 buttonType: .oneButton,
-                rightTitle: "보내기",
-                rightButtonHandler: {
-                    print("Mail 보내기 액션")
-                })
+                rightTitle: "보내기")
         }), for: .touchUpInside)
     }
     private lazy var storeButton = CommonButton(
@@ -131,43 +119,52 @@ class QuotationFinishViewController: BaseViewController {
     }
     
     // MARK: - Properties
-    private let colorImageArray: [UIImage?] = [
-        UIImage(named: "recommendOptioncolorchip"),
-        UIImage(named: "recommendOptionBlackColor")
-    ]
-    private let colorNameArray: [String] = [
-        "외장 - 크리미 화이트 펄",
-        "내장 - 인조가죽 (블랙)"
-    ]
-    private let colorPriceArray: [Int] = [
-        0,
-        2000000
-    ]
-    private let optionImageArray: [UIImage?] = [
-        UIImage(named: "recommendCarOption"),
-        UIImage(named: "recommendCarOption")
-    ]
-    private let optionNameArray: [String] = [
-        "컴포트 II",
-        "현대 스마트센스 III"
-    ]
-    private let optionPriceArray: [Int] = [
-        1090000,
-        1390000
-    ]
-    private var totalPrice: Int {
-        return 43460000 + optionPriceArray.reduce(0, +) + colorPriceArray.reduce(0, +)
-    }
+    private let viewModel: QuotationFinishViewModel
+    private var cancellables = Set<AnyCancellable>()
+    private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
+    private let postEmailEvent = PassthroughSubject<String, Never>()
     
     // MARK: - Lifecycles
+    init(viewModel: QuotationFinishViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         setupViews()
         configureUI()
+        viewDidLoadEvent.send(())
     }
     
     // MARK: - Private Functions
+    private func bind() {
+        let input = QuotationFinishViewModel.Input(
+            viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
+            postEmailEvent: postEmailEvent.eraseToAnyPublisher())
+        let output = viewModel.transform(input: input)
+        
+        output.carInquery
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] carInquery in
+                guard let self else { return }
+                configureData(carInquery: carInquery)
+            })
+            .store(in: &cancellables)
+        
+        output.emailResult
+            .sink(receiveValue: {
+                print("이메일 전송 결과: \($0)")
+            })
+            .store(in: &cancellables)
+    }
+    
     private func setupViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -184,6 +181,16 @@ class QuotationFinishViewController: BaseViewController {
             purchaseView,
             leftAndButtonStackView
         ])
+        
+        setupNotificationCenter()
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getEmail),
+            name: Notification.Name("AlertEmail"),
+            object: nil)
     }
     
     private func configureUI() {
@@ -243,14 +250,8 @@ class QuotationFinishViewController: BaseViewController {
     
     private func configureQuotationTableView() {
         typealias ConstTable = QuotationTableView.Constants
-        var height: CGFloat = .toScaledHeight(value: 3)
-        if colorNameArray.count != 0 {
-            height += ConstTable.headerHeight + ConstTable.cellHeight * CGFloat(colorNameArray.count)
-        }
-        if optionNameArray.count != 0 {
-            height += ConstTable.headerHeight + ConstTable.cellHeight * CGFloat(optionNameArray.count)
-        }
-        quotateTableViewTopConstraint = qoutateTableView.heightAnchor.constraint(equalToConstant: height)
+        quotateTableViewTopConstraint = qoutateTableView.heightAnchor.constraint(
+            equalToConstant: ConstTable.headerHeight * 2 + CGFloat(3).scaledHeight)
         NSLayoutConstraint.activate([
             qoutateTableView.topAnchor.constraint(equalTo: carInfoView.bottomAnchor),
             qoutateTableView.leadingAnchor.constraint(
@@ -263,8 +264,19 @@ class QuotationFinishViewController: BaseViewController {
         ])
     }
     
+    private func calculateQuotationTablewViewHeight(optionCount: Int) {
+        typealias ConstTable = QuotationTableView.Constants
+        var height: CGFloat = .toScaledHeight(value: 3)
+        height += ConstTable.headerHeight + ConstTable.cellHeight * 2
+        if optionCount != 0 {
+            height += ConstTable.headerHeight + ConstTable.cellHeight * CGFloat(optionCount)
+        }
+        quotateTableViewTopConstraint.isActive = false
+        quotateTableViewTopConstraint.constant = height
+        quotateTableViewTopConstraint.isActive = true
+    }
+    
     private func configureTotalNameAndPriceView() {
-        totalNameAndPriceView.setPrice(value: totalPrice)
         NSLayoutConstraint.activate([
             totalNameAndPriceView.topAnchor.constraint(
                 equalTo: qoutateTableView.bottomAnchor,
@@ -345,7 +357,6 @@ class QuotationFinishViewController: BaseViewController {
     }
     
     private func configurePurchaseView() {
-        purchaseView.setTotalPrice(totalPrice: totalPrice)
         NSLayoutConstraint.activate([
             purchaseView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: CGFloat(20).scaledHeight),
             purchaseView.leadingAnchor.constraint(
@@ -373,6 +384,30 @@ class QuotationFinishViewController: BaseViewController {
         ])
     }
     
+    private func configureData(carInquery: QuotationFinish) {
+        thumbnailView.setData(carName: carInquery.carName, trimName: carInquery.trimName)
+        carInfoView.configure(
+            with: QuotationPreviewCarInfoModel(
+                carName: carInquery.carName,
+                trimName: carInquery.trimName,
+                carPrice: carInquery.basicPrice.toPriceFormat + "원",
+                carOptions: [
+                    carInquery.engineName,
+                    carInquery.drivingSystemName,
+                    carInquery.bodyName
+                ].joined(separator: " ・ ")))
+        qoutateTableView.setData(
+            colorNames: [carInquery.exteriorColorName, carInquery.interiorColorName],
+            colorImageURLArray: [carInquery.exteriorColorImageURL, carInquery.interiorColorImageURL],
+            colorPrices: [carInquery.exteriorColorPrice, carInquery.interiorColorPrice],
+            optionList: carInquery.optionList)
+        calculateQuotationTablewViewHeight(optionCount: carInquery.optionList.count)
+        totalNameAndPriceView.setPrice(value: carInquery.basicPrice)
+        purchaseView.setTotalPrice(totalPrice: carInquery.totalPrice)
+    }
+    
+    
+    // MARK: - Functions
     override func touchUpNavigationBackButton() {
         showAlert(
             type: .message(
@@ -387,7 +422,9 @@ class QuotationFinishViewController: BaseViewController {
             })
     }
     
-    // MARK: - Functions
-    
     // MARK: - Objc Functions
+    @objc private func getEmail(_ notification: Notification) {
+        guard let text = notification.userInfo?["email"] as? String else { return }
+        postEmailEvent.send(text)
+    }
 }

@@ -30,12 +30,8 @@ class CommonOptionView: UIView {
     // MARK: - Properties
     
     // MARK: - LifeCycles
-    init(image: UIImage, title: String, price: Int) {
-        super.init(frame: .zero)
-        configureSubViews()
-        configureUI()
-        configureDetail(image: image, title: title, price: price)
-        configureLayout()
+    convenience init() {
+        self.init(frame: .zero)
     }
     
     override init(frame: CGRect) {
@@ -68,10 +64,14 @@ class CommonOptionView: UIView {
         self.backgroundColor = .white
     }
     
-    func configureDetail(image: UIImage?, title: String?, price: Int?) {
-        self.imageView.image = image
+    func prepareForReuse() {
+        self.imageView.image = nil
+    }
+    
+    func configureDetail(imageURL: String, title: String, price: Int) {
+        self.imageView.setImage(urlString: imageURL)
         self.titleLabel.text = title
-        self.priceLabel.text = (price ?? 0).toPriceFormat
+        self.priceLabel.text = price.toPriceFormat + "원"
     }
     
     private func configureLayout() {

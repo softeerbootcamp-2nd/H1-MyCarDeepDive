@@ -145,8 +145,6 @@ private extension CommonQuotationPreviewCarInfoView {
             carOptionsLabel.topAnchor.constraint(
                 equalTo: carNameLabel.bottomAnchor,
                 constant: Const.topMargin),
-            carOptionsLabel.bottomAnchor.constraint(
-                equalTo: bottomAnchor),
             carOptionsLabel.heightAnchor.constraint(equalToConstant: Const.font.lineHeight)])
     }
 }

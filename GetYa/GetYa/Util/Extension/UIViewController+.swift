@@ -65,6 +65,18 @@ extension UIViewController {
             alertViewController.setTitle(text: "메일 주소를 알려주세요")
             alertViewController.setDescription(text: "해당 주소로 만들어진 내 차를 보내드립니다.")
             alertViewController.setTextField(placeHolder: "example@mail.com", isEnaled: true)
+            alertViewController.setRightButtonAction(
+                title: rightTitle,
+                handler: {
+                    self.dismiss(animated: false, completion: {
+                        let text = alertViewController.textField.text ?? ""
+                        
+                        NotificationCenter.default.post(
+                            name: Notification.Name("AlertEmail"),
+                            object: nil,
+                            userInfo: ["email": text])
+                    })
+                })
         default:
             break
         }

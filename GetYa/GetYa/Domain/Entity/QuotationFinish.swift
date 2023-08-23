@@ -10,7 +10,7 @@ import Foundation
 struct QuotationFinish: Codable {
     let carName: String
     let engineName: String
-    let drvingSystemName: String
+    let drivingSystemName: String
     let trimName: String
     let bodyName: String
     let exteriorColorName: String
@@ -19,7 +19,7 @@ struct QuotationFinish: Codable {
     let interiorColorName: String
     let interiorColorImageURL: String
     let interiorColorPrice: Int
-    let optionList: [OptionInfoDTO]
+    let optionList: [OptionInfo]
     let basicPrice: Int
     let pdfURL: String
     let totalPrice: Int
@@ -28,7 +28,7 @@ struct QuotationFinish: Codable {
         return QuotationFinishDTO(
             carName: carName,
             engineName: engineName,
-            drvingSystemName: drvingSystemName,
+            drivingSystemName: drivingSystemName,
             trimName: trimName,
             bodyName: bodyName,
             exteriorColorName: exteriorColorName,
@@ -37,7 +37,7 @@ struct QuotationFinish: Codable {
             interiorColorName: interiorColorName,
             interiorColorImageURL: interiorColorImageURL,
             interiorColorPrice: interiorColorPrice,
-            optionList: optionList,
+            optionList: optionList.map { $0.toDTO() },
             basicPrice: basicPrice,
             pdfURL: pdfURL,
             totalPrice: totalPrice)

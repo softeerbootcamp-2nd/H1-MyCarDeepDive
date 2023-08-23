@@ -16,30 +16,10 @@ class QuotationTableView: UITableView {
     // MARK: - UI properties
     
     // MARK: - Properties
-    private var colorImageArray: [UIImage?] = [
-        UIImage(named: "recommendOptioncolorchip"),
-        UIImage(named: "recommendOptionBlackColor")
-    ]
-    private var colorNameArray: [String] = [
-        "외장 - 크리미 화이트 펄",
-        "내장 - 인조가죽 (블랙)"
-    ]
-    private var colorPriceArray: [Int] = [
-        0,
-        2000000
-    ]
-    private var optionImageArray: [UIImage?] = [
-        UIImage(named: "recommendCarOption"),
-        UIImage(named: "recommendCarOption")
-    ]
-    private var optionNameArray: [String] = [
-        "컴포트 II",
-        "현대 스마트센스 III"
-    ]
-    private var optionPriceArray: [Int] = [
-        1090000,
-        1390000
-    ]
+    private var colorImageURLArray: [String] = []
+    private var colorNames: [String] = []
+    private var colorPrices: [Int] = []
+    private var optionList: [OptionInfo] = []
     
     // MARK: - Lifecycles
     convenience init() {
@@ -78,19 +58,16 @@ class QuotationTableView: UITableView {
     
     // MARK: - Functions
     func setData(
-        colorImages: [UIImage?],
         colorNames: [String],
+        colorImageURLArray: [String],
         colorPrices: [Int],
-        optionImages: [UIImage?],
-        optionNames: [String],
-        optionPrices: [Int]
+        optionList: [OptionInfo]
     ) {
-        self.colorImageArray = colorImages
-        self.colorNameArray = colorNames
-        self.colorPriceArray = colorPrices
-        self.optionImageArray = optionImages
-        self.optionNameArray = optionNames
-        self.optionPriceArray = optionPrices
+        self.colorNames = colorNames
+        self.colorImageURLArray = colorImageURLArray
+        self.colorPrices = colorPrices
+        self.optionList = optionList
+        self.reloadData()
     }
     
     // MARK: - Objc Functions
@@ -134,9 +111,9 @@ extension QuotationTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return colorNameArray.count
+            return colorNames.count
         } else {
-            return optionNameArray.count
+            return optionList.count
         }
     }
     
@@ -146,16 +123,17 @@ extension QuotationTableView: UITableViewDataSource {
             for: indexPath) as? QuotationFinishTableCell else {
             return UITableViewCell()
         }
+        
         if indexPath.section == 0 {
             cell.setOption(
-                image: colorImageArray[indexPath.row],
-                name: colorNameArray[indexPath.row],
-                price: colorPriceArray[indexPath.row])
+                imageURL: colorImageURLArray[indexPath.row],
+                name: colorNames[indexPath.row],
+                price: colorPrices[indexPath.row])
         } else {
             cell.setOption(
-                image: optionImageArray[indexPath.row],
-                name: optionNameArray[indexPath.row],
-                price: optionPriceArray[indexPath.row])
+                imageURL: optionList[indexPath.row].optionImageURL,
+                name: optionList[indexPath.row].optionName,
+                price: optionList[indexPath.row].optionPrice)
         }
         return cell
     }
