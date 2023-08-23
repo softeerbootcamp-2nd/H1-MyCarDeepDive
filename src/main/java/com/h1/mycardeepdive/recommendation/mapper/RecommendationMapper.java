@@ -45,10 +45,10 @@ public class RecommendationMapper {
                         + exteriorColor.getPrice()
                         + interiorColor.getPrice()
                         + recommendationOptionInfos.stream()
-                                .mapToLong(RecommendationOptionInfo::getPrice)
+                                .mapToLong(RecommendationOptionInfo::getOption_price)
                                 .sum()
                         + recommendationPackageDtos.stream()
-                                .mapToLong(RecommendationOptionInfo::getPrice)
+                                .mapToLong(RecommendationOptionInfo::getOption_price)
                                 .sum();
 
         return new RecommendationResponse(

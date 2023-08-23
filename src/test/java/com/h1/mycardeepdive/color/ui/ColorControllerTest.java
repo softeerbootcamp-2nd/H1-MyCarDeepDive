@@ -252,7 +252,7 @@ class ColorControllerTest extends ControllerTestConfig {
                                         .accept(MediaType.APPLICATION_JSON))
                         .andDo(
                                 MockMvcRestDocumentationWrapper.document(
-                                        "exterior-color-click",
+                                        "interior-color-click",
                                         preprocessRequest(prettyPrint()),
                                         preprocessResponse(prettyPrint()),
                                         resource(

@@ -24,5 +24,5 @@ public class RecommendationResponse {
     RecommendationColorInfo interior_color;
     List<RecommendationOptionInfo> options;
     List<RecommendationOptionInfo> packages;
-    private long totalPrice;
+    private long total_price;
 }
