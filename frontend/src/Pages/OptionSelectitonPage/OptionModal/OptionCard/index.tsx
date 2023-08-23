@@ -1,36 +1,38 @@
+import { useContext } from 'react';
+import { CarContext } from '@/context/CarProvider';
 import CloseModal from '@/Components/Modal/CloseModal';
 import UnSelectedButton from '@/Pages/OptionSelectitonPage/AdditionalOption/Option/UnSelectedButton';
 import CardTag from './CardTag';
 import DetailOption from './DetailOption';
 import DotButtons from './DotButtons';
+import { optionDetailType } from '@/global/type';
+import SelectedButton from '../../AdditionalOption/Option/SelectedButton';
 
-interface OptionCardProps {
-  tag: string[];
-  image: string;
-  optionName: string;
-  detailOptionName: string;
-  price: string;
-  description: string;
-  detailOptions: string[];
+interface OptionCardProps extends optionDetailType {
+  detailOptions: string[] | undefined;
   index: number;
   length: number;
   jumpPage: (page: number) => void;
   isSet: boolean;
+  category: string;
 }
 
 function OptionCard({
-  tag,
-  image,
-  optionName,
-  detailOptionName,
+  option_id,
+  option_name,
+  option_description,
+  tag_list,
   price,
-  description,
+  option_img_url,
   detailOptions,
   index,
   length,
   jumpPage,
   isSet,
+  category,
 }: OptionCardProps) {
+  const { optionIdList } = useContext(CarContext);
+
   return (
     <div
       className='w-[900px] h-[440px] bg-grey-1000 rounded-xl flex overflow-hidden flex-shrink-0 relative'
@@ -39,10 +41,14 @@ function OptionCard({
         marginRight: index === length - 1 ? (window.innerWidth - 900) / 2 : 0,
       }}
     >
-      <img src={image} alt={optionName} className='rounded-l-xl' />
+      <img
+        src={'https://' + option_img_url}
+        alt={option_name}
+        className='rounded-l-xl w-[556px] h-[440px]'
+      />
       <div className='absolute top-6 left-6 flex gap-2'>
-        {tag.map(item => (
-          <CardTag tag={item} key={item} />
+        {tag_list.map(item => (
+          <CardTag tag={item.tag_name} key={item.tag_id} />
         ))}
       </div>
       <div className='w-full relative'>
@@ -51,35 +57,46 @@ function OptionCard({
           <div className='w-full flex justify-between'>
             <div className='flex flex-col gap-1'>
               <div className='h-[18px] font-caption1-medium text-grey-400'>
-                {isSet && optionName}
+                {isSet && option_name}
               </div>
-              <div className='font-h2-medium text-grey-0'>
-                {detailOptionName}
-              </div>
+              <div className='font-h2-medium text-grey-0'>{option_name}</div>
               <div className='font-body3-medium text-grey-200'>
                 {`${price} 원`}
               </div>
             </div>
-            <div className='mt-auto'>
-              <UnSelectedButton />
-            </div>
+            {category === '추가 옵션' && length < 2 && (
+              <div className='mt-auto'>
+                {optionIdList.includes(option_id) ? (
+                  <SelectedButton
+                    optionIdList={[option_id]}
+                    optionData={{ name: option_name, price: price }}
+                  />
+                ) : (
+                  <UnSelectedButton
+                    optionIdList={[option_id]}
+                    optionData={{ name: option_name, price: price }}
+                  />
+                )}
+              </div>
+            )}
           </div>
-          <div className='mt-5 mb-4 font-body4-regular text-grey-200'>
-            {description}
+          <div className='mt-5 mb-[190px] h-[90px] font-body4-regular text-grey-200 overflow-y-auto'>
+            {option_description}
           </div>
         </div>
         {isSet && (
-          <div className='w-[344px] h-[190px] absolute bottom-0 left-0 bg-grey-900 rounded-br-xl p-7'>
+          <div className='w-[344px] h-[190px] overflow-y-auto absolute bottom-0 left-0 bg-grey-900 rounded-br-xl p-7'>
             <div className='grid grid-cols-2 gap-3.5'>
-              {detailOptions.map((item, idx) => (
-                <DetailOption
-                  detailOption={item}
-                  key={item}
-                  detailOptionName={detailOptionName}
-                  order={idx}
-                  jumpPage={jumpPage}
-                />
-              ))}
+              {detailOptions &&
+                detailOptions.map((item, idx) => (
+                  <DetailOption
+                    detailOption={item}
+                    key={item}
+                    detailOptionName={option_name}
+                    order={idx}
+                    jumpPage={jumpPage}
+                  />
+                ))}
             </div>
             <DotButtons index={index} length={length} jumpPage={jumpPage} />
           </div>

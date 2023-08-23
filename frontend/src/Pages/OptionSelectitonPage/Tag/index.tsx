@@ -63,15 +63,22 @@ interface TagProps {
   tag: string;
   setTag: React.Dispatch<React.SetStateAction<string>>;
   category: string;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function Tag({ tag, setTag, category }: TagProps) {
+function Tag({ tag, setTag, category, setPage }: TagProps) {
   return (
     <div className='h-16 max-w-5xl mx-auto flex gap-2 items-center border-b border-grey-700'>
       {TagData.map(item => {
         if (category === '추가 옵션' && item.tagName === '대표') return;
         return (
-          <TagButton {...item} tag={tag} setTag={setTag} key={item.tagName} />
+          <TagButton
+            {...item}
+            tag={tag}
+            setTag={setTag}
+            key={item.tagName}
+            setPage={setPage}
+          />
         );
       })}
     </div>

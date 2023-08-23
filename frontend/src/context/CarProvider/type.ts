@@ -32,7 +32,8 @@ export interface InitialStateType {
     };
   };
 
-  optionList: number[];
+  optionIdList: number[];
+  optionData: { name: string; price: number }[];
 }
 
 export interface CarContextType extends InitialStateType {
@@ -99,11 +100,20 @@ interface InteriorColorAction {
 
 interface OptionAddAction {
   type: 'ADD_OPTION';
-  option: number;
+  optionIdList: number[];
 }
 interface OptionDeleteAction {
   type: 'DELETE_OPTION';
-  option: number;
+  optionIdList: number[];
+}
+
+interface OptionAddDataAction {
+  type: 'ADD_OPTION_DATA';
+  optionData: { name: string; price: number };
+}
+interface OptionDeleteDataAction {
+  type: 'DELETE_OPTION_DATA';
+  optionData: { name: string; price: number };
 }
 
 export type ActionType =
@@ -117,7 +127,9 @@ export type ActionType =
   | ExteriorColorAction
   | InteriorColorAction
   | OptionAddAction
-  | OptionDeleteAction;
+  | OptionDeleteAction
+  | OptionAddDataAction
+  | OptionDeleteDataAction;
 
 export const SET_CARSPECID = 'SET_CARSPECID';
 export const SET_CARSPECPRICE = 'SET_CARSPECPRICE';
@@ -130,3 +142,5 @@ export const SET_EXTERIORCOLOR = 'SET_EXTERIORCOLOR';
 export const SET_INTERIORCOLOR = 'SET_INTERIORCOLOR';
 export const ADD_OPTION = 'ADD_OPTION';
 export const DELETE_OPTION = 'DELETE_OPTION';
+export const ADD_OPTION_DATA = 'ADD_OPTION_DATA';
+export const DELETE_OPTION_DATA = 'DELETE_OPTION_DATA';

@@ -15,6 +15,8 @@ import {
   SET_INTERIORCOLOR,
   ADD_OPTION,
   DELETE_OPTION,
+  ADD_OPTION_DATA,
+  DELETE_OPTION_DATA,
 } from './type';
 
 const initialState: InitialStateType = {
@@ -47,7 +49,8 @@ const initialState: InitialStateType = {
       chooseRate: 70,
     },
   },
-  optionList: [],
+  optionIdList: [],
+  optionData: [],
 };
 
 export const CarContext = createContext<CarContextType>({
@@ -160,12 +163,27 @@ const reducer = (state: InitialStateType, action: ActionType) => {
         },
       };
     case ADD_OPTION:
-      return { ...state, optionList: [...state.optionList, action.option] };
+      return {
+        ...state,
+        optionIdList: [...state.optionIdList, ...action.optionIdList],
+      };
     case DELETE_OPTION:
       return {
         ...state,
-        optionList: state.optionList.filter(
-          (item: number) => item !== action.option,
+        optionIdList: state.optionIdList.filter(
+          item => !action.optionIdList.includes(item),
+        ),
+      };
+    case ADD_OPTION_DATA:
+      return {
+        ...state,
+        optionData: [...state.optionData, { ...action.optionData }],
+      };
+    case DELETE_OPTION_DATA:
+      return {
+        ...state,
+        optionData: state.optionData.filter(
+          item => item.name !== action.optionData.name,
         ),
       };
     default:

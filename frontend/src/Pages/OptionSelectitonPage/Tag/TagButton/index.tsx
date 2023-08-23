@@ -4,6 +4,7 @@ interface TagButtonProps {
   primaryIcon: string;
   tag: string;
   setTag: React.Dispatch<React.SetStateAction<string>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function TagButton({
@@ -12,6 +13,7 @@ function TagButton({
   primaryIcon,
   tag,
   setTag,
+  setPage,
 }: TagButtonProps) {
   const getStyle = (ischecked: boolean) => {
     if (ischecked)
@@ -23,7 +25,10 @@ function TagButton({
   return (
     <button
       className={getStyle(tag === tagName)}
-      onClick={() => setTag(tagName)}
+      onClick={() => {
+        setTag(tagName);
+        setPage(1);
+      }}
     >
       <img src={tag === tagName ? primaryIcon : blackIcon} alt={tagName} />
       <span>{tagName}</span>

@@ -31,3 +31,17 @@ export interface setShowPriceInfoProps {
 export interface TagIconProps {
   fillColor: boolean;
 }
+
+export interface optionDetailType {
+  option_id: number;
+  option_name: string;
+  option_description: string;
+  tag_list: [
+    {
+      tag_id: number;
+      tag_name: string;
+    },
+  ];
+  price: number;
+  option_img_url: string;
+}
