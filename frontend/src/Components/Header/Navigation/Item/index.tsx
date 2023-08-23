@@ -1,3 +1,4 @@
+import { truncateText } from '@/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export interface Props {
@@ -11,7 +12,11 @@ function Item({ name, index, value, address }: Props) {
   const navigation = useNavigate();
   const location = useLocation();
   return (
-    <div className='flex gap-3'>
+    <div
+      className={`flex gap-3 ${
+        index === 1 ? 'w-40' : index === 2 ? 'w-48' : ''
+      }`}
+    >
       <button onClick={() => navigation(`/select/${address}`)}>
         <p
           className={`${
@@ -36,7 +41,7 @@ function Item({ name, index, value, address }: Props) {
           maxWidth: '238px',
         }}
       >
-        {value}
+        {truncateText(value, index === 1 ? 30 : index === 2 ? 14 : 40)}
       </p>
     </div>
   );
