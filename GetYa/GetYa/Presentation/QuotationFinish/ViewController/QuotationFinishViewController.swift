@@ -11,7 +11,62 @@ import Combine
 
 class QuotationFinishViewController: BaseViewController {
     enum Constatns {
-        
+        enum ThumbnailView {
+            static let height: CGFloat = .toScaledHeight(value: 440)
+        }
+        enum CarInfoView {
+            static let height: CGFloat = .toScaledHeight(value: 89)
+        }
+        enum QoutateTableView {
+            static let basicHeight: CGFloat = .toScaledHeight(value: 3)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+        }
+        enum TotalNameAndPriceView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 16)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 24)
+        }
+        enum ShareButton {
+            static let topMargin: CGFloat = .toScaledHeight(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 40)
+            static let width: CGFloat = .toScaledHeight(value: 40)
+        }
+        enum PDFButton {
+            static let topMargin: CGFloat = .toScaledHeight(value: 32)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+            static let width: CGFloat = .toScaledWidth(value: 168)
+        }
+        enum MailButton {
+            static let topMargin: CGFloat = .toScaledHeight(value: 32)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+            static let width: CGFloat = .toScaledWidth(value: 168)
+        }
+        enum StoreButton {
+            static let topMargin: CGFloat = .toScaledHeight(value: 8)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+        }
+        enum LineView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 24)
+            static let height: CGFloat = .toScaledHeight(value: 4)
+        }
+        enum PurchaseView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 20)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+        }
+        enum LeftAndButtonStackView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 40)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+        }
     }
     
     // MARK: - UI properties
@@ -256,35 +311,40 @@ class QuotationFinishViewController: BaseViewController {
     }
     
     private func configureThumbnailView() {
+        typealias Const = Constatns.ThumbnailView
+        
         NSLayoutConstraint.activate([
             thumbnailView.topAnchor.constraint(equalTo: contentView.topAnchor),
             thumbnailView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             thumbnailView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            thumbnailView.heightAnchor.constraint(equalToConstant: CGFloat(440).scaledHeight)
+            thumbnailView.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configureCarInfoView() {
+        typealias Const = Constatns.CarInfoView
+        
         NSLayoutConstraint.activate([
             carInfoView.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor),
             carInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             carInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            carInfoView.heightAnchor.constraint(equalToConstant: CGFloat(89).scaledHeight)
+            carInfoView.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configureQuotationTableView() {
+        typealias Const = Constatns.QoutateTableView
         typealias ConstTable = QuotationTableView.Constants
         quotateTableViewTopConstraint = qoutateTableView.heightAnchor.constraint(
-            equalToConstant: ConstTable.headerHeight * 2 + CGFloat(3).scaledHeight)
+            equalToConstant: ConstTable.headerHeight * 2 + Const.basicHeight)
         NSLayoutConstraint.activate([
             qoutateTableView.topAnchor.constraint(equalTo: carInfoView.bottomAnchor),
             qoutateTableView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             qoutateTableView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
+                constant: Const.trailingMargin),
             quotateTableViewTopConstraint
         ])
     }
@@ -302,109 +362,127 @@ class QuotationFinishViewController: BaseViewController {
     }
     
     private func configureTotalNameAndPriceView() {
+        typealias Const = Constatns.TotalNameAndPriceView
+        
         NSLayoutConstraint.activate([
             totalNameAndPriceView.topAnchor.constraint(
                 equalTo: qoutateTableView.bottomAnchor,
-                constant: CGFloat(16).scaledHeight),
+                constant: Const.topMargin),
             totalNameAndPriceView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             totalNameAndPriceView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
-            totalNameAndPriceView.heightAnchor.constraint(equalToConstant: 24)
+                constant: Const.trailingMargin),
+            totalNameAndPriceView.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configureShareButton() {
-        shareButton.layer.cornerRadius = CGFloat(40).scaledHeight / 2
+        typealias Const = Constatns.ShareButton
+        
+        shareButton.layer.cornerRadius = Const.height / 2
         
         NSLayoutConstraint.activate([
             shareButton.topAnchor.constraint(
                 equalTo: thumbnailView.imageView.topAnchor,
-                constant: CGFloat(16).scaledHeight),
+                constant: Const.topMargin),
             shareButton.trailingAnchor.constraint(
                 equalTo: thumbnailView.imageView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
-            shareButton.heightAnchor.constraint(equalToConstant: CGFloat(40).scaledHeight),
-            shareButton.widthAnchor.constraint(equalToConstant: CGFloat(40).scaledHeight)
+                constant: Const.trailingMargin),
+            shareButton.heightAnchor.constraint(equalToConstant: Const.height),
+            shareButton.widthAnchor.constraint(equalToConstant: Const.width)
         ])
     }
     
     private func configurePDFButton() {
+        typealias Const = Constatns.PDFButton
+        
         NSLayoutConstraint.activate([
             pdfButton.topAnchor.constraint(
                 equalTo: totalNameAndPriceView.bottomAnchor,
-                constant: CGFloat(32).scaledHeight),
+                constant: Const.topMargin),
             pdfButton.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
-            pdfButton.heightAnchor.constraint(equalToConstant: CGFloat(52).scaledHeight),
-            pdfButton.widthAnchor.constraint(equalToConstant: CGFloat(168).scaledWidth)
+                constant: Const.leadingMargin),
+            pdfButton.heightAnchor.constraint(equalToConstant: Const.height),
+            pdfButton.widthAnchor.constraint(equalToConstant: Const.width)
         ])
     }
     
     private func configureMailButton() {
+        typealias Const = Constatns.MailButton
+        
         NSLayoutConstraint.activate([
             mailButton.topAnchor.constraint(
                 equalTo: totalNameAndPriceView.bottomAnchor,
-                constant: CGFloat(32).scaledHeight),
+                constant: Const.topMargin),
             mailButton.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
-            mailButton.heightAnchor.constraint(equalToConstant: CGFloat(52).scaledHeight),
-            mailButton.widthAnchor.constraint(equalToConstant: CGFloat(168).scaledWidth)
+                constant: Const.trailingMargin),
+            mailButton.heightAnchor.constraint(equalToConstant: Const.height),
+            mailButton.widthAnchor.constraint(equalToConstant: Const.width)
         ])
     }
     
     private func configureStoreButton() {
+        typealias Const = Constatns.StoreButton
+        
         NSLayoutConstraint.activate([
             storeButton.topAnchor.constraint(
                 equalTo: pdfButton.bottomAnchor,
-                constant: CGFloat(8).scaledHeight),
+                constant: Const.topMargin),
             storeButton.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             storeButton.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
-            storeButton.heightAnchor.constraint(equalToConstant: CGFloat(52).scaledHeight)
+                constant: Const.trailingMargin),
+            storeButton.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configureLineView() {
+        typealias Const = Constatns.LineView
+        
         NSLayoutConstraint.activate([
-            lineView.topAnchor.constraint(equalTo: storeButton.bottomAnchor, constant: CGFloat(24).scaledHeight),
+            lineView.topAnchor.constraint(equalTo: storeButton.bottomAnchor, constant: Const.topMargin),
             lineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             lineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            lineView.heightAnchor.constraint(equalToConstant: CGFloat(4).scaledHeight)
+            lineView.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configurePurchaseView() {
+        typealias Const = Constatns.PurchaseView
+        
         NSLayoutConstraint.activate([
-            purchaseView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: CGFloat(20).scaledHeight),
+            purchaseView.topAnchor.constraint(
+                equalTo: lineView.bottomAnchor,
+                constant: Const.topMargin),
             purchaseView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             purchaseView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth)
+                constant: Const.trailingMargin)
         ])
     }
     
     private func configureLeftAndRightStackView() {
+        typealias Const = Constatns.LeftAndButtonStackView
+        
         NSLayoutConstraint.activate([
             leftAndButtonStackView.topAnchor.constraint(
                 equalTo: purchaseView.bottomAnchor,
-                constant: CGFloat(40).scaledHeight),
+                constant: Const.topMargin),
             leftAndButtonStackView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             leftAndButtonStackView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
-            leftAndButtonStackView.heightAnchor.constraint(equalToConstant: CGFloat(52).scaledHeight),
+                constant: Const.trailingMargin),
+            leftAndButtonStackView.heightAnchor.constraint(equalToConstant: Const.height),
             leftAndButtonStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
