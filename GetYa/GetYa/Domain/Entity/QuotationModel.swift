@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Quotation {
+struct QuotationModel {
     let trimName: String
     let carImgUrl: String
     let comment1: String
