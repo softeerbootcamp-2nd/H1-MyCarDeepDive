@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class DetailQuotationPreviewViewController: BaseViewController {
     private enum Constants {
@@ -25,6 +26,10 @@ final class DetailQuotationPreviewViewController: BaseViewController {
         any DetailQuotationPreviewViewModelable
         & DetailQuotationPreviewAdapterDataSource
         & CommonQuotationPreviewAdapterDataSource)!
+    private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
+    private let customButtonEvent = PassthroughSubject<Void, Never>()
+    private let quickQuoteEvent = PassthroughSubject<Void, Never>()
+    private var subscription: AnyCancellable?
     
     // MARK: - Lifecycles
     init(
@@ -38,16 +43,26 @@ final class DetailQuotationPreviewViewController: BaseViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        viewModel = DetailQuotationPreviewViewModel()
+        let repository = DefaultQuotationRepository()
+        let userSelectedModel = CustomRecomendationModel(
+            drivingExperienceId: 0,
+            familyMembersId: 0,
+            carPurposeId: 0,
+            personalValueId: 0,
+            maxBudget: 0)
+        let defualtQuotationUseCase = DefaultQuotationUseCase(
+            defaultQuotationRepository: repository,
+            userSelectedQuestionModel: userSelectedModel)
+        viewModel = DetailQuotationPreviewViewModel(
+            keywords: [],
+            quotationUseCase: defualtQuotationUseCase)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        adapter = .init(
-            tableView: tableView,
-            dataSource: viewModel)
-        
+        bind()
+        viewDidLoadEvent.send()
     }
     
     // MARK: - Functions
@@ -58,15 +73,50 @@ final class DetailQuotationPreviewViewController: BaseViewController {
     }
 }
 
+// MARK: - ViewBindable
+extension DetailQuotationPreviewViewController: ViewBindable {
+    typealias Input = DetailQuotationPreviewViewModel.DetailQuotationPreviewInput
+    typealias State = DetailQuotationPreviewViewModel.DetailQuotationPreviewState
+    typealias ErrorType = Error
+    
+    func bind() {
+        let input = Input(
+            viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
+            customButtonEvent: customButtonEvent.eraseToAnyPublisher(),
+            quickQuoteEvent: quickQuoteEvent.eraseToAnyPublisher())
+        let output = viewModel.transform(input: input)
+        subscription = output.receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.render($0)
+            }
+    }
+    
+    func render(_ state: State) {
+        switch state {
+        case .none:
+            break
+        case .updateDetailQuotationPreview:
+            adapter = .init(
+                tableView: tableView,
+                dataSource: viewModel)
+        case .gotoCompletionPage:
+            // TODO: 로딩 페이지 후 서버에서 완료되면 5.1화면으로 이동
+            navigationController?.pushViewController(LoadingViewController(), animated: true)
+        case .gotoCustomPage:
+            // TODO: 3-1화면으로 이동해야 합니다. (추천 트림, 색상, 옵션 선택된 상태로)
+            break
+        }
+    }
+}
+
 // MARK: - CustomOrQuoteSelectViewDelegate
 extension DetailQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate {
     func gotoCustomPage() {
-        // TODO: 3-1화면으로 이동해야합니다. (추천 트림, 색상, 옵션 선택된 상태로)
+        customButtonEvent.send()
     }
     
     func gotoQuotePage() {
-        // TODO: 로딩 페이지 후 서버에서 완료되면 5.1화면으로 이동
-        navigationController?.pushViewController(LoadingViewController(), animated: true)
+        quickQuoteEvent.send()
     }
 }
 
@@ -85,25 +135,20 @@ extension DetailQuotationPreviewViewController: LayoutSupportable {
     
     // MARK: - LayoutSupportable private helper
     private func configureTableView() {
-        _=tableView.set {
-            NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                $0.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
-        }
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
     }
     
     private func configureBottomCustomOrQuoteView() {
-        _=bottomCustomOrQuoteView.set {
-            NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                $0.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                $0.heightAnchor.constraint(equalToConstant: Constants.BottomCustomOrQuoteView.height),
-                $0.topAnchor.constraint(
-                    equalTo: tableView.bottomAnchor,
-                    constant: -CustomOrQuoteSelectView.Constants.gradientLayerHeight)])
-        
-        }
+        NSLayoutConstraint.activate([
+            bottomCustomOrQuoteView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomCustomOrQuoteView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomCustomOrQuoteView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomCustomOrQuoteView.heightAnchor.constraint(equalToConstant: Constants.BottomCustomOrQuoteView.height),
+            bottomCustomOrQuoteView.topAnchor.constraint(
+                equalTo: tableView.bottomAnchor,
+                constant: -CustomOrQuoteSelectView.Constants.gradientLayerHeight)])
     }
 }
