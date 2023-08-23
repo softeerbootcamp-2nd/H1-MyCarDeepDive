@@ -1,9 +1,9 @@
 package com.h1.mycardeepdive.global.scheduler;
 
+import java.io.File;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import java.io.File;
 
 @Slf4j
 @Component
