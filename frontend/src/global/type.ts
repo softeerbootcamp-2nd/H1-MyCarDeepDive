@@ -49,3 +49,17 @@ export interface ColorsType {
   unavailable_colors: ColorType[];
   other_trim_colors: ColorType[];
 }
+
+export interface optionDetailType {
+  option_id: number;
+  option_name: string;
+  option_description: string;
+  tag_list: [
+    {
+      tag_id: number;
+      tag_name: string;
+    },
+  ];
+  price: number;
+  option_img_url: string;
+}

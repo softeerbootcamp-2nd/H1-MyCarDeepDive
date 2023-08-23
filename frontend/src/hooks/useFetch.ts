@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const API = 'https://api.make-my-car.shop/api/v1';
+const API = 'https://dev.make-my-car.shop/api/v1';
 
 const PENDING = 'pending';
 const FULFILLED = 'fulfilled';

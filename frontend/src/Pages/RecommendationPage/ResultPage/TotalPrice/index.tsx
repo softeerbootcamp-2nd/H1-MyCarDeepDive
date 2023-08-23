@@ -1,8 +1,10 @@
-interface RecommendTotalPrice {
-  totalPrice: string;
+import { priceToString } from '@/utils';
+
+interface Props {
+  total_price: number;
 }
 
-function TotalPrice({ totalPrice }: RecommendTotalPrice) {
+function TotalPrice({ total_price }: Props) {
   return (
     <div className='flex justify-between items-center mb-[59px]'>
       <div className='font-body3-regular'>
@@ -10,7 +12,7 @@ function TotalPrice({ totalPrice }: RecommendTotalPrice) {
       </div>
       <div className='font-h2-medium'>
         <span className='text-2xl leading-[30px] text-grey-0'>
-          {totalPrice}원
+          {priceToString(total_price)}원
         </span>
       </div>
     </div>

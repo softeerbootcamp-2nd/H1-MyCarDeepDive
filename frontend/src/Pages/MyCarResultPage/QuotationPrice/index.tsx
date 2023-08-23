@@ -1,4 +1,10 @@
-function QuotationPrice() {
+import { priceToString } from '@/utils';
+
+interface Props {
+  total_price: number;
+}
+
+function QuotationPrice({ total_price }: Props) {
   return (
     <div className='mt-[34px] mb-[66px] flex justify-between'>
       <div className='font-h5-regular text-grey-100'>
@@ -7,7 +13,9 @@ function QuotationPrice() {
         </span>
       </div>
       <div className='font-h1-medium text-secondary'>
-        <span className='text-[24px] leading-[30px]'>48,120,000원</span>
+        <span className='text-[24px] leading-[30px]'>{`${priceToString(
+          total_price,
+        )}원`}</span>
       </div>
     </div>
   );

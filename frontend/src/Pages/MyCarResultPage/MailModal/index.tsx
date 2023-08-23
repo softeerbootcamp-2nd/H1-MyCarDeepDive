@@ -1,14 +1,53 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ModalProps } from '@/global/type';
 import Button from '@/Components/Button';
 import Modal from '@/Components/Modal';
 import CloseModal from '@/Components/Modal/CloseModal';
+import Toast from '@/Components/Toast';
 
 function MailModal({ showModal, setShowModal }: ModalProps) {
+  const { id } = useParams();
   const [email, setEmail] = useState('');
+  const [showToast, setShowToast] = useState(false);
+  const [success, setSuccess] = useState(true);
+  const [toastMessage, setToastMessage] = useState('');
 
   const emailHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(target.value);
+
+  const setErrorToast = () => {
+    setSuccess(false);
+    setToastMessage('이메일 전송에 실패했습니다...');
+  };
+
+  const setSuccessToast = () => {
+    setSuccess(true);
+    setToastMessage('해당 이메일 주소로 차량을 전송했습니다!');
+  };
+
+  const sendMail = async () => {
+    try {
+      const res = await fetch(
+        `https://api.make-my-car.shop/api/v1/pdf/${id}/email/${email}`,
+      );
+
+      if (!res.ok) setErrorToast();
+      else {
+        const data = await res.json();
+        if (!data.data) setErrorToast();
+        else setSuccessToast();
+      }
+    } catch (error: any) {
+      setErrorToast();
+    } finally {
+      setShowToast(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!showModal) setEmail('');
+  }, [showModal]);
 
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
@@ -33,10 +72,17 @@ function MailModal({ showModal, setShowModal }: ModalProps) {
             height='h-[46px]'
             variant='primary'
             text='보내기'
-            onClick={() => alert('전송 완료!')}
+            onClick={sendMail}
           />
         </div>
       </div>
+
+      <Toast
+        success={success}
+        message={toastMessage}
+        showToast={showToast}
+        setShowToast={setShowToast}
+      />
     </Modal>
   );
 }
