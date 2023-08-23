@@ -59,10 +59,11 @@ class QuotationFinishThumbnailView: UIView {
     private let trimNameLabel = CommonLabel(
         fontType: .mediumHead4,
         color: .GetYaPalette.gray0)
-    private let imageView: UIImageView = UIImageView().set {
+    let imageView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
+        $0.image = UIImage(named: "quotationfinishcar")
     }
     private let logoImageView: UIImageView = UIImageView(
         image: UIImage(named: "Black_Logo_Title")
@@ -72,14 +73,8 @@ class QuotationFinishThumbnailView: UIView {
     }
     
     // MARK: - Lifecycles
-    init(image: UIImage?, carName: String, trimName: String) {
-        super.init(frame: .zero)
-        
-        imageView.image = image
-        carNameLabel.text = carName
-        trimNameLabel.text = trimName
-        setupViews()
-        configureUI()
+    convenience init() {
+        self.init(frame: .zero)
     }
     
     override init(frame: CGRect) {
@@ -253,16 +248,9 @@ class QuotationFinishThumbnailView: UIView {
     }
     
     // MARK: - Functions
-    func setImage(image: UIImage?) {
-        imageView.image = image
-    }
-    
-    func setCarName(text: String) {
-        carNameLabel.text = text
-    }
-    
-    func setTrimName(text: String) {
-        trimNameLabel.text = text
+    func setData(carName: String, trimName: String) {
+        carNameLabel.text = carName
+        trimNameLabel.text = trimName
     }
     
     // MARK: - Objc Functions
