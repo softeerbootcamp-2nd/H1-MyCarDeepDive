@@ -6,3 +6,23 @@
 //
 
 import Foundation
+
+class QuotaionFinishViewModel {
+    // MARK: - Input
+    struct Input {
+        
+    }
+    
+    // MARK: - Output
+    struct Output {
+        
+    }
+    
+    // MARK: - Dependency
+    
+    // MARK: - Properties
+    
+    // MARK: - LifeCycle
+    
+    // MARK: - Functions
+}
