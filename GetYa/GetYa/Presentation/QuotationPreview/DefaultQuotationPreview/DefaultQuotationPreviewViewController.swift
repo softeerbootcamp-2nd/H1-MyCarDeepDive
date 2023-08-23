@@ -50,7 +50,7 @@ final class DefaultQuotationPreviewViewController: BaseViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        viewModel = DefaultQuotationPreviewViewModel()
+        viewModel = DefaultQuotationPreviewViewModel(dataSource: [])
     }
     
     override func viewDidLoad() {

@@ -30,12 +30,11 @@ final class DefaultQuotationPreviewViewModel: CommonQuotationPreviewTableViewMod
     private var mainSectionHeader: DefaultQuotationPreviewMainHeaderModel
     private var sectionHeaders: [String]
     private var secondSectionFooter: String
-    
-    override init() {
+    override init(dataSource: [[OptionInfo]]) {
         mainSectionHeader = .mock
         sectionHeaders = QuotationPreviewHeaderTitleList.lists
         secondSectionFooter = "48,120,000원"
-        super.init(dataSource: QuotationPreviewCarProductOptionModel.mocks)
+        super.init(dataSource: dataSource)
     }
 }
 

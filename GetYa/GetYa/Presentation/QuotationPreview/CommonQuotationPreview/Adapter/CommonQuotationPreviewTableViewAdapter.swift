@@ -48,7 +48,7 @@ extension CommonQuotationPreviewTableViewAdapter: UITableViewDataSource {
                 reuseIdentifier: CommonQuotationPreviewCell.identifier)
         }
         let item = dataSource.cellItem(in: indexPath.section, indexPath.row)
-        cell.configure(with: item)
+        //cell.configure(with: item)
         return cell
     }
 }
