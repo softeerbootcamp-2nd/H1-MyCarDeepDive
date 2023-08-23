@@ -20,7 +20,7 @@ final class OptionDetailViewController: BaseViewController {
                 height: OptionType.package.maximumContentHeight)
             static let lineSpacing: CGFloat = .toScaledWidth(value: 8)
             static let leadingInset: CGFloat = .toScaledWidth(value: 22)
-            static let trailingInset: CGFloat = .toScaledWidth(value: 8)
+            static let trailingInset = leadingInset
         }
     }
     enum OptionType {
@@ -65,7 +65,7 @@ final class OptionDetailViewController: BaseViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.showsHorizontalScrollIndicator = false
             $0.backgroundColor = .clear
-            
+            $0.decelerationRate = .init(rawValue: 0.42)
             $0.delegate = self
             $0.dataSource = self
             $0.register(
@@ -184,13 +184,13 @@ final class OptionDetailViewController: BaseViewController {
 extension OptionDetailViewController: BaseOptionDetailRoundViewDelegate {
     func touchUpCloseButton(_ baseOptionDetailRoundView: UIView) {
         // getIdentifierTODO: - 델리게이트 호출 시점에 옵션에 대한 identifier를 받아오는 방법 좋겠습니다.
-        var selectedIdx: Int?
-        _=optionPackageCollectionView.visibleCells.enumerated().map { (index, element) in
-            if element.isSelected {
-                selectedIdx = index
-            }
-        }
-        print(selectedIdx)
+//        var selectedIdx: Int?
+//        _=optionPackageCollectionView.visibleCells.enumerated().map { (index, element) in
+//            if element.isSelected {
+//                selectedIdx = index
+//            }
+//        }
+//        print(selectedIdx)
         /// dismiss할때 컴플리션이든 이전 화면에게 선택된 idx전달.
         UIView.animate(
             withDuration: 0.34,
@@ -241,6 +241,7 @@ extension OptionDetailViewController: UICollectionViewDataSource {
                 cell.configureFirstSetting()
                 isClearFirstSetting.toggle()
             }
+            cell.setPageControlSelectedPage(currentPage: idx)
             cell.tag = idx
             return cell
         }
@@ -295,6 +296,20 @@ extension OptionDetailViewController: UICollectionViewDelegate {
             }
             optionPackageCollectionView.cellForItem(at: indexPath)?.isSelected = true
         }
+    }
+    
+    func scrollViewWillEndDragging(
+        _ scrollView: UIScrollView,
+        withVelocity velocity: CGPoint,
+        targetContentOffset: UnsafeMutablePointer<CGPoint>
+    ) {
+        typealias Const = Constants.OptionPackageCollectionView
+        let offset = targetContentOffset.pointee
+        let cellWidthAndSpacing: CGFloat = Const.itemSize.width + Const.lineSpacing
+        let index = round((offset.x + Const.leadingInset) / cellWidthAndSpacing)
+        targetContentOffset.pointee = CGPoint(
+            x: index * cellWidthAndSpacing,
+            y: 0)
     }
 }
 
