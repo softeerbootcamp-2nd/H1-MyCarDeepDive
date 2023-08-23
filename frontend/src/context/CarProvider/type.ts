@@ -123,6 +123,9 @@ interface OptionAddListDataAction {
   type: 'ADD_OPTION_DATA_LIST';
   optionData: { name: string; price: number }[];
 }
+interface SetDefaultAction {
+  type: 'SET_DEFAULT';
+}
 
 export type ActionType =
   | CarSpecIdAction
@@ -139,7 +142,8 @@ export type ActionType =
   | OptionAddDataAction
   | OptionDeleteDataAction
   | OptionAddListAction
-  | OptionAddListDataAction;
+  | OptionAddListDataAction
+  | SetDefaultAction;
 
 export const SET_CARSPECID = 'SET_CARSPECID';
 export const SET_CARSPECPRICE = 'SET_CARSPECPRICE';
@@ -156,3 +160,4 @@ export const ADD_OPTION_DATA = 'ADD_OPTION_DATA';
 export const DELETE_OPTION_DATA = 'DELETE_OPTION_DATA';
 export const ADD_OPTION_LIST = 'ADD_OPTION_LIST';
 export const ADD_OPTION_DATA_LIST = 'ADD_OPTION_DATA_LIST';
+export const SET_DEFAULT = 'SET_DEFAULT';

@@ -1,10 +1,10 @@
 import { priceToString } from '@/utils';
 
 interface Props {
-  totalPrice: number;
+  total_price: number;
 }
 
-function TotalPrice({ totalPrice }: Props) {
+function TotalPrice({ total_price }: Props) {
   return (
     <div className='flex justify-between items-center mb-[59px]'>
       <div className='font-body3-regular'>
@@ -12,7 +12,7 @@ function TotalPrice({ totalPrice }: Props) {
       </div>
       <div className='font-h2-medium'>
         <span className='text-2xl leading-[30px] text-grey-0'>
-          {priceToString(totalPrice)}원
+          {priceToString(total_price)}원
         </span>
       </div>
     </div>

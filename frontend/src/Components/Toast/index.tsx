@@ -41,7 +41,7 @@ function Toast({ success, message, showToast, setShowToast }: Props) {
 
   return (
     <div
-      className={`flex items-center w-full max-w-sm p-4 text-gray-500 bg-white rounded-lg fixed top-10 right-10 transition-transform duration-1000 ease-in-out ${
+      className={`flex items-center w-full max-w-sm p-4 text-gray-500 bg-white rounded-lg fixed top-10 right-10 transition-transform duration-700 ease-in-out ${
         animation ? 'translate-x-0' : 'translate-x-[500px]'
       }`}
     >

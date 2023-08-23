@@ -19,6 +19,7 @@ import {
   DELETE_OPTION_DATA,
   ADD_OPTION_DATA_LIST,
   ADD_OPTION_LIST,
+  SET_DEFAULT,
 } from './type';
 
 const initialState: InitialStateType = {
@@ -197,6 +198,40 @@ const reducer = (state: InitialStateType, action: ActionType) => {
       return {
         ...state,
         optionData: [...action.optionData],
+      };
+    case SET_DEFAULT:
+      return {
+        carSpec: {
+          id: 2,
+          price: 43460200,
+          feature: {
+            engine: '디젤 2.2',
+            body: '7인승',
+            drivingSystem: '2WD',
+          },
+          trim: {
+            id: 2,
+            name: 'Le Blanc',
+          },
+        },
+        color: {
+          exteriorColor: {
+            id: 1,
+            name: '크리미 화이트 펄',
+            imgUrl: '/src/assets/image/exterior-creamy.png',
+            price: 100000,
+            chooseRate: 90,
+          },
+          interiorColor: {
+            id: 1,
+            name: '퀄팅천연 (블랙)',
+            imgUrl: '/src/assets/image/interior-quilted.png',
+            price: 0,
+            chooseRate: 70,
+          },
+        },
+        optionIdList: [],
+        optionData: [],
       };
     default:
       throw new Error();
