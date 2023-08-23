@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 protocol QuotationUseCase {
-    func fetchCarQuotation(customRecomendationModel: CustomRecomendationModel) -> Quotation
+    var carQuotation: PassthroughSubject<QuotationModel, Never> { get set }
+    
+    func fetchCarQuotation()
 }
