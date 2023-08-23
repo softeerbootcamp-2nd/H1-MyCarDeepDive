@@ -68,6 +68,8 @@
 		15A8A2A22A95EB86007C47AB /* Quotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8A2A12A95EB86007C47AB /* Quotation.swift */; };
 		15A8A2A42A95EF97007C47AB /* ColorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8A2A32A95EF97007C47AB /* ColorInfo.swift */; };
 		15A8A2A62A95EFB3007C47AB /* OptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8A2A52A95EFB3007C47AB /* OptionInfo.swift */; };
+		15A8A2A82A95F1FE007C47AB /* QuotationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8A2A72A95F1FE007C47AB /* QuotationUseCase.swift */; };
+		15A8A2AA2A95F4AA007C47AB /* CustomRecomendationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8A2A92A95F4AA007C47AB /* CustomRecomendationModel.swift */; };
 		15D026372A94B027001D1659 /* PackageInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D026362A94B027001D1659 /* PackageInfoDTO.swift */; };
 		15D026392A94B068001D1659 /* OptionInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D026382A94B068001D1659 /* OptionInfoDTO.swift */; };
 		15D0263B2A94B5CE001D1659 /* ColorInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */; };
@@ -318,6 +320,8 @@
 		15A8A2A12A95EB86007C47AB /* Quotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotation.swift; sourceTree = "<group>"; };
 		15A8A2A32A95EF97007C47AB /* ColorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInfo.swift; sourceTree = "<group>"; };
 		15A8A2A52A95EFB3007C47AB /* OptionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionInfo.swift; sourceTree = "<group>"; };
+		15A8A2A72A95F1FE007C47AB /* QuotationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationUseCase.swift; sourceTree = "<group>"; };
+		15A8A2A92A95F4AA007C47AB /* CustomRecomendationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRecomendationModel.swift; sourceTree = "<group>"; };
 		15D026362A94B027001D1659 /* PackageInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageInfoDTO.swift; sourceTree = "<group>"; };
 		15D026382A94B068001D1659 /* OptionInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionInfoDTO.swift; sourceTree = "<group>"; };
 		15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInfoDTO.swift; sourceTree = "<group>"; };
@@ -1308,6 +1312,7 @@
 				6457D12F2A948EA200B3AAAF /* TrimSelectUseCase.swift */,
 				6457D1312A94988600B3AAAF /* ColorSelectUseCase.swift */,
 				6457D1332A94989100B3AAAF /* OptionSelectUseCase.swift */,
+				15A8A2A72A95F1FE007C47AB /* QuotationUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1319,21 +1324,22 @@
 				6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */,
 				6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */,
 				6457CFB32A93959B00B3AAAF /* BasicOption.swift */,
+				6457D1222A9463B200B3AAAF /* CarSettingSelectModel.swift */,
+				15A8A2A32A95EF97007C47AB /* ColorInfo.swift */,
+				6457D1272A9465AF00B3AAAF /* ColorSelectModel.swift */,
 				64ADA48A2A7788900003E2C1 /* Entity.swift */,
 				6457CFB52A9395D100B3AAAF /* OptionDetail.swift */,
+				15A8A2A52A95EFB3007C47AB /* OptionInfo.swift */,
+				6457D1252A9465A500B3AAAF /* OptionSelectModel.swift */,
 				6457CFB72A93960500B3AAAF /* PackageOptionDetail.swift */,
+				15A8A2A12A95EB86007C47AB /* Quotation.swift */,
 				6457CFB12A9394DB00B3AAAF /* Tag.swift */,
 				6457CFB92A9397A500B3AAAF /* TagDetail.swift */,
 				6457CFBB2A9397D600B3AAAF /* TagOption.swift */,
 				6457CFA92A938F8E00B3AAAF /* TrimOption.swift */,
-				6457CFA72A938F8700B3AAAF /* TrimSubOptionSelectModel.swift */,
-				6457D1222A9463B200B3AAAF /* CarSettingSelectModel.swift */,
 				6457D1292A9465B400B3AAAF /* TrimSelectModel.swift */,
-				6457D1272A9465AF00B3AAAF /* ColorSelectModel.swift */,
-				6457D1252A9465A500B3AAAF /* OptionSelectModel.swift */,
-				15A8A2A12A95EB86007C47AB /* Quotation.swift */,
-				15A8A2A32A95EF97007C47AB /* ColorInfo.swift */,
-				15A8A2A52A95EFB3007C47AB /* OptionInfo.swift */,
+				6457CFA72A938F8700B3AAAF /* TrimSubOptionSelectModel.swift */,
+				15A8A2A92A95F4AA007C47AB /* CustomRecomendationModel.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1682,6 +1688,7 @@
 				155B72AA2A8C8FEB0091A7F4 /* OptionSelectViewController.swift in Sources */,
 				15D2ABD32A9381C200F7DE8E /* MemoryCache.swift in Sources */,
 				6484A79D2A90F43800434136 /* OptionSelectSegmentedControl.swift in Sources */,
+				15A8A2A82A95F1FE007C47AB /* QuotationUseCase.swift in Sources */,
 				6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */,
 				6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */,
 				15A8A2A22A95EB86007C47AB /* Quotation.swift in Sources */,
@@ -1861,6 +1868,7 @@
 				15D2ABD12A93817400F7DE8E /* Cacheable.swift in Sources */,
 				6457CFAA2A938F8E00B3AAAF /* TrimOption.swift in Sources */,
 				64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */,
+				15A8A2AA2A95F4AA007C47AB /* CustomRecomendationModel.swift in Sources */,
 				64E26A482A8A3E2800F6BC3A /* TrimOptionDetailColorCollectionView.swift in Sources */,
 				155776E32A90D29900E3C0E1 /* HTTPMethod.swift in Sources */,
 				15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */,
