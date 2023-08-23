@@ -32,17 +32,17 @@ export interface recommendType {
     option_id: number;
     option_name: string;
     option_img_url: string;
-    price: number;
-    comment: string;
+    option_price: number;
+    option_comment: string;
   }[];
   packages: {
     option_id: number;
     option_name: string;
     option_img_url: string;
-    price: number;
-    comment: string;
+    option_price: number;
+    option_comment: string;
   }[];
-  totalPrice: number;
+  total_price: number;
 }
 
 export interface getRecommendationType {

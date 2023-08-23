@@ -20,15 +20,15 @@ interface RecommendCarOptionProps {
     option_id: number;
     option_name: string;
     option_img_url: string;
-    price: number;
-    comment: string;
+    option_price: number;
+    option_comment: string;
   }[];
   packages: {
     option_id: number;
     option_name: string;
     option_img_url: string;
-    price: number;
-    comment: string;
+    option_price: number;
+    option_comment: string;
   }[];
 }
 
@@ -62,8 +62,8 @@ function CarOption({
               key={item.option_id}
               image={item.option_img_url}
               name={item.option_name}
-              price={item.price}
-              description={item.comment}
+              price={item.option_price}
+              description={item.option_comment}
             />
           ))}
         </div>

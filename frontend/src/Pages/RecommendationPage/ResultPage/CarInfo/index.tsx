@@ -3,7 +3,7 @@ import { priceToString } from '@/utils';
 
 function CarInfo({
   trim_name,
-  totalPrice,
+  total_price,
   engine_name,
   driving_system_name,
   body_name,
@@ -18,7 +18,7 @@ function CarInfo({
           </span>
         </div>
         <span className='font-h4-medium text-grey-100'>
-          {priceToString(totalPrice)}원
+          {`${priceToString(total_price)}원`}
         </span>
       </div>
       <p className='font-body4-regular text-grey-400 mt-[5px]'>

@@ -1,19 +1,29 @@
+import { useState } from 'react';
 import { ModalProps } from '@/global/type';
 import Button from '@/Components/Button';
 import Modal from '@/Components/Modal';
 import CloseModal from '@/Components/Modal/CloseModal';
+import Toast from '@/Components/Toast';
 
 function ShareModal({ showModal, setShowModal }: ModalProps) {
-  const copyURL = () => {
-    const currentURL = window.location.href;
+  const [showToast, setShowToast] = useState(false);
+  const [success, setSuccess] = useState(true);
+  const [toastMessage, setToastMessage] = useState('');
 
+  const currentURL = window.location.href;
+
+  const copyURL = () => {
     navigator.clipboard
       .writeText(currentURL)
       .then(() => {
-        alert('복사 완료');
+        setSuccess(true);
+        setToastMessage('공유 URL이 클립보드에 복사되었습니다!');
+        setShowToast(true);
       })
       .catch(() => {
-        alert('복사 실패');
+        setSuccess(false);
+        setToastMessage('공유 URL 복사에 실패했습니다...');
+        setShowToast(true);
       });
   };
 
@@ -30,8 +40,10 @@ function ShareModal({ showModal, setShowModal }: ModalProps) {
             <br />
             (30일간 유효)
           </p>
-          <div className='mb-8 font-body4-regular text-grey-600 px-3 py-[9px] border border-primary rounded-lg'>
-            https://www.hyundai.com/kr/ko/e/vehicles/estimation/
+          <div className='mb-8 font-body4-regular text-grey-600 border border-primary rounded-lg'>
+            <div className='mx-3 my-[9px] overflow-auto noScrollBar'>
+              {currentURL}
+            </div>
           </div>
           <Button
             width='w-full'
@@ -42,6 +54,13 @@ function ShareModal({ showModal, setShowModal }: ModalProps) {
           />
         </div>
       </div>
+
+      <Toast
+        success={success}
+        message={toastMessage}
+        showToast={showToast}
+        setShowToast={setShowToast}
+      />
     </Modal>
   );
 }

@@ -17,14 +17,14 @@ export interface InitialStateType {
 
   color: {
     exteriorColor: {
-      // id: number;
+      id: number;
       name: string;
       imgUrl: string;
       price: number;
       chooseRate: number;
     };
     interiorColor: {
-      // id: number;
+      id: number;
       name: string;
       imgUrl: string;
       price: number;
@@ -79,7 +79,7 @@ interface TrimNameAction {
 interface ExteriorColorAction {
   type: 'SET_EXTERIORCOLOR';
   exteriorColor: {
-    // id: number;
+    id: number;
     name: string;
     imgUrl: string;
     price: number;
@@ -90,7 +90,7 @@ interface ExteriorColorAction {
 interface InteriorColorAction {
   type: 'SET_INTERIORCOLOR';
   interiorColor: {
-    // id: number;
+    id: number;
     name: string;
     imgUrl: string;
     price: number;
@@ -115,6 +115,17 @@ interface OptionDeleteDataAction {
   type: 'DELETE_OPTION_DATA';
   optionData: { name: string; price: number };
 }
+interface OptionAddListAction {
+  type: 'ADD_OPTION_LIST';
+  optionIdList: number[];
+}
+interface OptionAddListDataAction {
+  type: 'ADD_OPTION_DATA_LIST';
+  optionData: { name: string; price: number }[];
+}
+interface SetDefaultAction {
+  type: 'SET_DEFAULT';
+}
 
 export type ActionType =
   | CarSpecIdAction
@@ -129,7 +140,10 @@ export type ActionType =
   | OptionAddAction
   | OptionDeleteAction
   | OptionAddDataAction
-  | OptionDeleteDataAction;
+  | OptionDeleteDataAction
+  | OptionAddListAction
+  | OptionAddListDataAction
+  | SetDefaultAction;
 
 export const SET_CARSPECID = 'SET_CARSPECID';
 export const SET_CARSPECPRICE = 'SET_CARSPECPRICE';
@@ -144,3 +158,6 @@ export const ADD_OPTION = 'ADD_OPTION';
 export const DELETE_OPTION = 'DELETE_OPTION';
 export const ADD_OPTION_DATA = 'ADD_OPTION_DATA';
 export const DELETE_OPTION_DATA = 'DELETE_OPTION_DATA';
+export const ADD_OPTION_LIST = 'ADD_OPTION_LIST';
+export const ADD_OPTION_DATA_LIST = 'ADD_OPTION_DATA_LIST';
+export const SET_DEFAULT = 'SET_DEFAULT';

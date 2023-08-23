@@ -46,8 +46,8 @@ function ResultPage() {
         <UnderLine margin={'mt-10 mb-6'} />
         <CarOption title='옵션' {...recommendResult.data} />
         <UnderLine margin={'mt-10 mb-4'} />
-        <TotalPrice totalPrice={recommendResult.data.totalPrice} />
-        <Buttons />
+        <TotalPrice total_price={recommendResult.data.total_price} />
+        <Buttons {...recommendResult.data} />
       </Body>
     </RecommendResultPageWrapper>
   );
