@@ -14,8 +14,8 @@ function OptionInfo({ option_list }: Props) {
     <>
       <div className='font-caption1-regular text-grey-300 mb-1.5'>옵션</div>
       <div className='grid grid-cols-2 gap-4'>
-        {option_list.map(option => (
-          <OptionItem {...option} key={option.option_name} />
+        {option_list.map((option, index) => (
+          <OptionItem {...option} key={option.option_name + index} />
         ))}
       </div>
       <UnderLine margin={'mt-10 mb-4'} />

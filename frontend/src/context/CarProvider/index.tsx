@@ -17,6 +17,8 @@ import {
   DELETE_OPTION,
   ADD_OPTION_DATA,
   DELETE_OPTION_DATA,
+  ADD_OPTION_DATA_LIST,
+  ADD_OPTION_LIST,
 } from './type';
 
 const initialState: InitialStateType = {
@@ -185,6 +187,16 @@ const reducer = (state: InitialStateType, action: ActionType) => {
         optionData: state.optionData.filter(
           item => item.name !== action.optionData.name,
         ),
+      };
+    case ADD_OPTION_LIST:
+      return {
+        ...state,
+        optionIdList: [...action.optionIdList],
+      };
+    case ADD_OPTION_DATA_LIST:
+      return {
+        ...state,
+        optionData: [...action.optionData],
       };
     default:
       throw new Error();
