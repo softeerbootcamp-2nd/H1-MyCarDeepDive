@@ -55,7 +55,6 @@ final class OptionPackageDescriptionView: UIView {
         $0.layer.backgroundColor = UIColor(red: 0.983, green: 0.983, blue: 0.983, alpha: 1).cgColor
         $0.alpha = 0
     }
-    
     private let optionKeywordCollectionView = {
         typealias Const = Constants.OptionKeywordCollectionView
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().set {
@@ -86,6 +85,22 @@ final class OptionPackageDescriptionView: UIView {
         configureUI()
     }
     
+    func reloadData() {
+        optionKeywordCollectionView.reloadData()
+    }
+    
+    func optionKeywordDataSource(
+        dataSource: UICollectionViewDataSource?
+    ) {
+        optionKeywordCollectionView.dataSource = dataSource
+    }
+    
+    func optionKeywordDelegate(
+        delegate: UICollectionViewDelegate?
+    ) {
+        optionKeywordCollectionView.delegate = delegate
+    }
+    
     // MARK: - Private Functions
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -102,6 +117,13 @@ final class OptionPackageDescriptionView: UIView {
         pageControl.currentPage = currentPage
     }
     
+    func setKeywordCollectionViewSelected(_ indexPath: IndexPath) {
+        guard let cell = optionKeywordCollectionView.cellForItem(
+            at: indexPath
+        ) as? OptionDetailKeywordCell else { return }
+        cell.setLabelColor()
+    }
+    
     // MARK: - Functions
     func configure(
         pages: Int?,
@@ -116,14 +138,11 @@ final class OptionPackageDescriptionView: UIView {
         setOptionDetailDescriptionView(title: title, price: price, description: description)
     }
     
-    func configureOptionKeyordCollectionView(
-        from optionKeywordDelegator: (UICollectionViewDataSource & UICollectionViewDelegate)?
+    private func setOptionDetailDescriptionView(
+        title: String?,
+        price: String?,
+        description: String?
     ) {
-        optionKeywordCollectionView.delegate = optionKeywordDelegator
-        optionKeywordCollectionView.dataSource = optionKeywordDelegator
-    }
-    
-    private func setOptionDetailDescriptionView(title: String?, price: String?, description: String?) {
         optionDetailDescriptionView.configure(
             optionTitle: title,
             optionPrice: price,
