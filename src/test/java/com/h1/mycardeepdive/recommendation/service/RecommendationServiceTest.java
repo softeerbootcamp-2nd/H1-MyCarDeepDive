@@ -83,8 +83,8 @@ class RecommendationServiceTest {
                 .isEqualTo(recommendationResponse1.getOptions().size());
         assertThat(recommendationResponse2.getPackages().size())
                 .isEqualTo(recommendationResponse1.getPackages().size());
-        assertThat(recommendationResponse2.getTotalPrice())
-                .isEqualTo(recommendationResponse1.getTotalPrice());
+        assertThat(recommendationResponse2.getTotal_price())
+                .isEqualTo(recommendationResponse1.getTotal_price());
     }
 
     @Test
@@ -154,7 +154,7 @@ class RecommendationServiceTest {
                 .isEqualTo(recommendationResponse1.getOptions().size());
         assertThat(recommendationResponse2.getPackages().size())
                 .isEqualTo(recommendationResponse1.getPackages().size());
-        assertThat(recommendationResponse2.getTotalPrice())
-                .isEqualTo(recommendationResponse1.getTotalPrice());
+        assertThat(recommendationResponse2.getTotal_price())
+                .isEqualTo(recommendationResponse1.getTotal_price());
     }
 }
