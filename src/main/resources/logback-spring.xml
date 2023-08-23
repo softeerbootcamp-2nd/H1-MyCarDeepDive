@@ -9,19 +9,11 @@
 
     <!-- File appender 설정-->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <pattern>
-                    <pattern>{"serviceID":"mycardeepdive"}</pattern>
-                </pattern>
-                <timestamp/>
-                <threadName/>
-                <message/>
-                <loggerName/>
-                <logLevel/>
-                <stackTrace/>
-                <callerData/>
-            </providers>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"serviceID":"mycardeepdive"}</customFields>
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+
         </encoder>
         <file>/tmp/log/logback.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -56,7 +48,7 @@
     </appender>
 
     <springProfile name="local">
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="Console"/>
             <appender-ref ref="FILE"/>
         </root>
