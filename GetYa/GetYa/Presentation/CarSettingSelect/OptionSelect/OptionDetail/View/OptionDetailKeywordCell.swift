@@ -16,12 +16,6 @@ final class OptionDetailKeywordCell: UICollectionViewCell {
         color: .GetYaPalette.gray400,
         text: "준비중입니다..")
     
-//    override var isSelected: Bool {
-//        didSet {
-//            keywordLabel.textColor = isSelected ? .GetYaPalette.acriveBlue : .GetYaPalette.gray400
-//        }
-//    }
-    
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
