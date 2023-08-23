@@ -16,6 +16,7 @@ final class SessionProvider {
         case timeout
         case emptyBytes
         case failedDecode(Error)
+        case invalidBodyParameters
     }
     
     private let session: URLSession
