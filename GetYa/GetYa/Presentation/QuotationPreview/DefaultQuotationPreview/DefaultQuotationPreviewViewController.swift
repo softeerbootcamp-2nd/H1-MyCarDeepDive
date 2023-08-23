@@ -77,7 +77,13 @@ extension DefaultQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate
     }
     
     func gotoQuotePage() {
-        navigationController?.pushViewController(LoadingViewController(), animated: true)
+        navigationController?.pushViewController(
+            LoadingViewController(
+                viewModel: LoadingViewModel(
+                    useCase: DefaultLoadingUseCase(
+                        repository: DefaultLoadingRepository(
+                            provider: SessionProvider())))),
+            animated: true)
     }
 }
 

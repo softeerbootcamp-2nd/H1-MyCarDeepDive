@@ -66,7 +66,13 @@ extension DetailQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate 
     
     func gotoQuotePage() {
         // TODO: 로딩 페이지 후 서버에서 완료되면 5.1화면으로 이동
-        navigationController?.pushViewController(LoadingViewController(), animated: true)
+        navigationController?.pushViewController(
+            LoadingViewController(
+                viewModel: LoadingViewModel(
+                    useCase: DefaultLoadingUseCase(
+                        repository: DefaultLoadingRepository(
+                            provider: SessionProvider())))),
+            animated: true)
     }
 }
 
