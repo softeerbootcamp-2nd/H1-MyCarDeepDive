@@ -42,7 +42,7 @@ class QuotationFinishViewController: BaseViewController {
         $0.addAction(
             UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                touchUpShareButtonEvent.send(())
+                touchUpShareButtonEvent.send()
             }),
             for: .touchUpInside)
     }
@@ -54,8 +54,9 @@ class QuotationFinishViewController: BaseViewController {
             color: .white)
     ).set {
         $0.setTitle("PDF로 저장", for: .normal)
-        $0.addAction(UIAction(handler: { _ in
-            // pdf 열기
+        $0.addAction(UIAction(handler: { [weak self] _ in
+            guard let self else { return }
+            self.touchUpPDFButtonEvent.send()
         }), for: .touchUpInside)
     }
     private lazy var mailButton = CommonButton(
@@ -87,12 +88,9 @@ class QuotationFinishViewController: BaseViewController {
                 buttonType: .twoButton,
                 leftTitle: "아니요",
                 rightTitle: "네",
-                rightButtonHandler: {
-                    guard let url = URL(string: "https://prd.kr-ccapi.hyundai.com/web/v1/user/signin") else { return }
-                    let safariVC = SFSafariViewController(url: url)
-                    safariVC.modalPresentationStyle = .fullScreen
-
-                    self.present(safariVC, animated: true, completion: nil)
+                rightButtonHandler: { [weak self] in
+                    guard let self else { return }
+                    self.presentSafariViewController(urlString: "https://prd.kr-ccapi.hyundai.com/web/v1/user/signin")
                 })
         }), for: .touchUpInside)
     }
@@ -117,12 +115,9 @@ class QuotationFinishViewController: BaseViewController {
                         nextViewController: CarSettingSelectViewController(carSpecID: 1))
             }
         })
-        $0.setRightButton(title: "구매/상담", handler: {
-            guard let url = URL(string: "https://www.hyundai.com/kr/ko/e/vehicles/purchase-consult") else { return }
-            let safariVC = SFSafariViewController(url: url)
-            safariVC.modalPresentationStyle = .fullScreen
-
-            self.present(safariVC, animated: true, completion: nil)
+        $0.setRightButton(title: "구매/상담", handler: { [weak self] in
+            guard let self else { return }
+            self.presentSafariViewController(urlString: "https://www.hyundai.com/kr/ko/e/vehicles/purchase-consult")
         })
     }
     
@@ -132,6 +127,7 @@ class QuotationFinishViewController: BaseViewController {
     private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
     private let postEmailEvent = PassthroughSubject<String, Never>()
     private let touchUpShareButtonEvent = PassthroughSubject<Void, Never>()
+    private let touchUpPDFButtonEvent = PassthroughSubject<Void, Never>()
     
     // MARK: - Lifecycles
     init(viewModel: QuotationFinishViewModel) {
@@ -157,7 +153,8 @@ class QuotationFinishViewController: BaseViewController {
         let input = QuotationFinishViewModel.Input(
             viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
             postEmailEvent: postEmailEvent.eraseToAnyPublisher(),
-            touchUpShareButtonEvent: touchUpShareButtonEvent.eraseToAnyPublisher())
+            touchUpShareButtonEvent: touchUpShareButtonEvent.eraseToAnyPublisher(),
+            touchUpPDFButtonEvent: touchUpPDFButtonEvent.eraseToAnyPublisher())
         let output = viewModel.transform(input: input)
         
         output.carInquery
@@ -181,6 +178,14 @@ class QuotationFinishViewController: BaseViewController {
                     type: .share(pdfID: $0),
                     buttonType: .oneButton,
                     rightTitle: "공유하기")
+            })
+            .store(in: &cancellables)
+        
+        output.pdfURL
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                self.presentSafariViewController(urlString: "https://" + $0)
             })
             .store(in: &cancellables)
     }
@@ -424,6 +429,14 @@ class QuotationFinishViewController: BaseViewController {
         calculateQuotationTablewViewHeight(optionCount: carInquery.optionList.count)
         totalNameAndPriceView.setPrice(value: carInquery.basicPrice)
         purchaseView.setTotalPrice(totalPrice: carInquery.totalPrice)
+    }
+    
+    private func presentSafariViewController(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.modalPresentationStyle = .fullScreen
+
+        self.present(safariVC, animated: true, completion: nil)
     }
     
     // MARK: - Functions

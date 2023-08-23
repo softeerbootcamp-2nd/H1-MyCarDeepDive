@@ -29,6 +29,7 @@ enum ResponseType {
     case pdfID
     case pdfCarInfomation(pdfID: String)
     case pdfEmail(pdfEmail: PdfEmail)
+    case pdfURL(pdfID: String)
     
     var path: String {
         switch self {
@@ -46,6 +47,8 @@ enum ResponseType {
             return "pdf/\(pdfID)/car-information"
         case .pdfEmail(let pdfEmail):
             return "pdf/\(pdfEmail.pdfID)/email/\(pdfEmail.emailName)"
+        case .pdfURL(let pdfID):
+            return "pdf/\(pdfID)"
         default:
             break
         }

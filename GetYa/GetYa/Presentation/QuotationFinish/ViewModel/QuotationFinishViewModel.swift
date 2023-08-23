@@ -14,6 +14,7 @@ class QuotationFinishViewModel {
         let viewDidLoadEvent: AnyPublisher<Void, Never>
         let postEmailEvent: AnyPublisher<String, Never>
         let touchUpShareButtonEvent: AnyPublisher<Void, Never>
+        let touchUpPDFButtonEvent: AnyPublisher<Void, Never>
     }
     
     // MARK: - Output
@@ -21,6 +22,7 @@ class QuotationFinishViewModel {
         let carInquery = PassthroughSubject<QuotationFinish, Never>()
         let emailResult = PassthroughSubject<Bool, Never>()
         let pdfID = PassthroughSubject<String, Never>()
+        let pdfURL = PassthroughSubject<String, Never>()
     }
     
     // MARK: - Dependency
@@ -59,6 +61,13 @@ class QuotationFinishViewModel {
             })
             .store(in: &cancellables)
         
+        input.touchUpPDFButtonEvent
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                useCase.fetchPdfURL()
+            })
+            .store(in: &cancellables)
+        
         useCase.carInquery
             .sink(receiveValue: {
                 output.carInquery.send($0)
@@ -68,6 +77,12 @@ class QuotationFinishViewModel {
         useCase.emailResult
             .sink(receiveValue: {
                 output.emailResult.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.pdfURL
+            .sink(receiveValue: {
+                output.pdfURL.send($0)
             })
             .store(in: &cancellables)
         

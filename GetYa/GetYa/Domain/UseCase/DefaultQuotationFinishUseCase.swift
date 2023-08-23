@@ -17,6 +17,7 @@ class DefaultQuotationFinishUseCase: QuotationFinishUseCase {
     var pdfID = CurrentValueSubject<String, Never>("")
     var carInquery = PassthroughSubject<QuotationFinish, Never>()
     var emailResult = PassthroughSubject<Bool, Never>()
+    var pdfURL = PassthroughSubject<String, Never>()
     
     // MARK: - LifeCycle
     init(pdfID: String, repository: QuotationFinishRepository) {
@@ -45,6 +46,18 @@ class DefaultQuotationFinishUseCase: QuotationFinishUseCase {
                 self.emailResult.send(emailResult)
             } catch {
                 print("이메일 전송을 실패하였습니다.")
+            }
+        })
+    }
+    
+    func fetchPdfURL() {
+        Task(operation: {
+            do {
+                let pdfURL = try await repository.fetchPdfURL(with: pdfID.value)
+                guard let pdfURL else { return }
+                self.pdfURL.send(pdfURL)
+            } catch {
+                print("PDF 파일 다운로드를 실패하였습니다.")
             }
         })
     }
