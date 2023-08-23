@@ -69,7 +69,11 @@ final class OptionDetailDescriptionAreaView: UIView {
     
     // MARK: - Properties
     var isSelectedOptinoSelectButton: Bool {
-        optionSelectButton.isSelected
+        get {
+            optionSelectButton.isSelected
+        } set {
+            optionSelectButton.isSelected = newValue
+        }
     }
     
     // MARK: - Lifecycles
