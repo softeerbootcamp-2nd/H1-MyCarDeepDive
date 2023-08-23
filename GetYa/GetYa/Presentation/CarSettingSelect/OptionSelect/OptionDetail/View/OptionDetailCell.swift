@@ -10,39 +10,89 @@ import UIKit
 final class OptionDetailCell: UICollectionViewCell {
     static let identifier: String = "OptionDetailCell"
     // MARK: - UI properties
+    private var optionPackageView: OptionPackageDescriptionView!
+    private lazy var baseOptionContainerView: BaseOptionDetailRoundView = {
+        let contentView = OptionPackageDescriptionView(frame: .zero)
+        optionPackageView = contentView
+        let baseView = BaseOptionDetailRoundView(contentView: contentView)
+        return baseView
+    }()
+    
     // MARK: - Properties
+    var isSelectedOkButton: Bool {
+        optionPackageView.isSelectedOptinoSelectButton
+    }
+    
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureUI()
     }
     
     // MARK: - Private Functions
     private func configureUI() {
-        
+        setupUI()
     }
     
     // MARK: - Functions
-    
-    // MARK: - Objc Functions
-}
-
-
-// MARK: - UICollectionViewDataSource
-extension OptionDetailCell: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+    func configure(
+        baseOptionContainerViewDelegate: BaseOptionDetailRoundViewDelegate?,
+        optionPackageKeywordDelegator: (
+            UICollectionViewDataSource & UICollectionViewDelegate)?
+    ) {
+        baseOptionContainerView.delegate = baseOptionContainerViewDelegate
+        optionPackageView.configureOptionKeyordCollectionView(from: optionPackageKeywordDelegator)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return .init()
+    func configureBaseOptionView(
+        image: UIImage?,
+        closeButtonAlpha: CGFloat?
+    ) {
+        baseOptionContainerView.configure(
+            image: image,
+            closeButtonAlpha: closeButtonAlpha)
+    }
+    
+    func configure(
+        pages: Int?,
+        packageTitle: String?,
+        title: String?,
+        price: String?,
+        description: String?
+    ) {
+        optionPackageView.configure(
+            pages: pages,
+            packageTitle: packageTitle,
+            title: title,
+            price: price,
+            description: description)
+    }
+    
+    func configureFirstSetting() {
+        optionPackageView.configureFirstSetting()
     }
 }
 
-// MARK: - UICollectionViewDelegate
-extension OptionDetailCell: UICollectionViewDelegate {
+// MARK: - LayoutSupportable
+extension OptionDetailCell: LayoutSupportable {
+    func setupViews() {
+        contentView.addSubview(baseOptionContainerView)
+    }
     
+    func setupConstriants() {
+        NSLayoutConstraint.activate([
+            baseOptionContainerView.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor),
+            baseOptionContainerView.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor),
+            baseOptionContainerView.topAnchor.constraint(
+                equalTo: contentView.topAnchor),
+            baseOptionContainerView.bottomAnchor.constraint(
+                equalTo: contentView.bottomAnchor)])
+    }
 }
