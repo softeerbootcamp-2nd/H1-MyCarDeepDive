@@ -14,9 +14,10 @@ final class OptionDetailViewController: BaseViewController {
             static let trailingMargin: CGFloat = .toScaledWidth(value: -22)
         }
         enum OptionPackageCollectionView {
+            /// : .toScaledHeight(value: 578)
             static let itemSize: CGSize = .init(
                 width: .toScaledWidth(value: 330),
-                height: .toScaledHeight(value: 578))
+                height: OptionType.package.maximumContentHeight)
             static let interItemSpacing: CGFloat = .toScaledWidth(value: 8)
             static let leadingInset: CGFloat = .toScaledWidth(value: 22)
             static let trailingInset: CGFloat = .toScaledWidth(value: 8)
@@ -46,9 +47,9 @@ final class OptionDetailViewController: BaseViewController {
     // MARK: - UI properties
     private var singleOptionDetailContentView: OptionDetailDescriptionAreaView?
     private lazy var baseSingleOptionContainerView: BaseOptionDetailRoundView = {
-        let contentView = OptionDetailDescriptionAreaView()
-        contentView.setOptionSelect(singleOptionSelectAction)
+        let contentView = OptionDetailDescriptionAreaView(frame: .zero)
         singleOptionDetailContentView = contentView
+        contentView.setOptionSelect(singleOptionSelectAction)
         let baseView = BaseOptionDetailRoundView(contentView: contentView)
         return baseView
     }()
@@ -109,14 +110,15 @@ final class OptionDetailViewController: BaseViewController {
         super.viewDidLoad()
         configureUI()
         view.layer.backgroundColor = UIColor(red: 0.059, green: 0.067, blue: 0.078, alpha: 0.5).cgColor
-        
+
         /// 서버에서 데이터 받아왔다 가정. 0.5초에 보여주는게 좋을 것 같습니다.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.configure(
                 images: [UIImage(named: "threeColumnHeatRaysOption")],
-                optionTitles: ["헤드업 디스플레이"],
+                packageTitle: "컴포트 II",
+                optionTitles: ["헤드업 디스플레이","헤드업 디스플레이","헤드업 디스플레이","헤드업 디스플레이"],
                 optionPrice: ["1,090,000 원"],
-                optionDescription: ["주요 주행 정보를 전면 윈드시트에 표시하며, 밝기가 최적화 되어 주간에도 시인성이 뛰어납니다."])
+                optionDescription: ["주요 주행 정보를 전면 윈드시트에 표시하며, 밝기가 최적화 되어 주간에도 시인성이 뛰어납니다.주요 주행 정보를 전면 윈드시트에 표시하며, 밝기가 최적화 되어 주간에도 시인성이 뛰어납니다."])
         }
     }
     
@@ -130,9 +132,10 @@ final class OptionDetailViewController: BaseViewController {
     
     func configure(
         images: [UIImage?],
-        optionTitles: [String],
-        optionPrice: [String],
-        optionDescription: [String]
+        packageTitle: String?,
+        optionTitles: [String?],
+        optionPrice: [String?],
+        optionDescription: [String?]
     ) {
         if optionType == .single {
             baseSingleOptionContainerView.configure(
@@ -149,7 +152,6 @@ final class OptionDetailViewController: BaseViewController {
     }
     // MARK: - Objc Functions
 }
-
 
 // MARK: - BaseOptionDetailRoundViewDelegate
 extension OptionDetailViewController: BaseOptionDetailRoundViewDelegate {
@@ -174,22 +176,37 @@ extension OptionDetailViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        <#code#>
+        return 5
     }
     
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        <#code#>
+        if collectionView === optionPackageCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: OptionDetailCell.identifier,
+                for: indexPath
+            ) as? OptionDetailCell else {
+                return .init(frame: .zero)
+            }
+            return cell
+        }
+        
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: OptionDetailKeywordCell.identifier,
+            for: indexPath
+        ) as? OptionDetailKeywordCell else {
+            return .init(frame: .zero)
+        }
+        cell.configure("완성 거의 다 했다: ]")
+        return cell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegate
 extension OptionDetailViewController: UICollectionViewDelegate {
-    
+    /// 스크롤되고 스크롤완료될떄. 내부 TitleCollectionView도 같이 해주는게 좋겠당 ㅇㅇ
 }
 
 // MARK: - LayoutSupportable
@@ -199,7 +216,8 @@ extension OptionDetailViewController: LayoutSupportable {
         case .single:
             view.addSubview(baseSingleOptionContainerView)
         case .package:
-            view.addSubview(optionPackageCollectionView)
+            break
+            //view.addSubview(optionPackageCollectionView)
         }
     }
     
@@ -224,7 +242,8 @@ extension OptionDetailViewController: LayoutSupportable {
             baseSingleOptionContainerView.centerYAnchor.constraint(
                 equalTo: view.centerYAnchor),
             baseSingleOptionContainerView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: optionType.maximumContentHeight)])
+                equalToConstant: Constants.OptionPackageCollectionView.itemSize.height)])
+        //                lessThanOrEqualToConstant: optionType.maximumContentHeight)
     }
     
     private func configureOptionPackageCollectionView() {
