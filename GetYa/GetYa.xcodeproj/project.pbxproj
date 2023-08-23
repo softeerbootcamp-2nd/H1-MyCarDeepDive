@@ -161,6 +161,7 @@
 		6457D1A42A967E7900B3AAAF /* ContractionQuotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1A32A967E7900B3AAAF /* ContractionQuotation.swift */; };
 		6457D1A62A96867400B3AAAF /* ContractionQuotationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1A52A96867400B3AAAF /* ContractionQuotationDTO.swift */; };
 		6457D1A82A96875300B3AAAF /* PdfIdDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1A72A96875300B3AAAF /* PdfIdDTO.swift */; };
+		6457D1AA2A968CE300B3AAAF /* MyActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1A92A968CE300B3AAAF /* MyActivityItemSource.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
 		6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
@@ -441,6 +442,7 @@
 		6457D1A32A967E7900B3AAAF /* ContractionQuotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionQuotation.swift; sourceTree = "<group>"; };
 		6457D1A52A96867400B3AAAF /* ContractionQuotationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionQuotationDTO.swift; sourceTree = "<group>"; };
 		6457D1A72A96875300B3AAAF /* PdfIdDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfIdDTO.swift; sourceTree = "<group>"; };
+		6457D1A92A968CE300B3AAAF /* MyActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyActivityItemSource.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -876,6 +878,7 @@
 		15DF95A32A7C98C30093EAC7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6457D1A92A968CE300B3AAAF /* MyActivityItemSource.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1832,6 +1835,7 @@
 				6457D1702A95D50600B3AAAF /* DefaultQuotationFinishRepository.swift in Sources */,
 				64E26A702A8C076500F6BC3A /* ColorLearnMoreView.swift in Sources */,
 				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
+				6457D1AA2A968CE300B3AAAF /* MyActivityItemSource.swift in Sources */,
 				15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */,
 				150636402A9394710057724E /* QuotationDTO.swift in Sources */,
 				64E26A502A8A3E2800F6BC3A /* TrimSubOptionButton.swift in Sources */,

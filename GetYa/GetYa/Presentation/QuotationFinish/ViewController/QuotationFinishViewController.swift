@@ -42,10 +42,7 @@ class QuotationFinishViewController: BaseViewController {
         $0.addAction(
             UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                showAlert(
-                    type: .share(pdfID: ""),
-                    buttonType: .oneButton,
-                    rightTitle: "공유하기")
+                touchUpShareButtonEvent.send(())
             }),
             for: .touchUpInside)
     }
@@ -123,6 +120,7 @@ class QuotationFinishViewController: BaseViewController {
     private var cancellables = Set<AnyCancellable>()
     private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
     private let postEmailEvent = PassthroughSubject<String, Never>()
+    private let touchUpShareButtonEvent = PassthroughSubject<Void, Never>()
     
     // MARK: - Lifecycles
     init(viewModel: QuotationFinishViewModel) {
@@ -147,7 +145,8 @@ class QuotationFinishViewController: BaseViewController {
     private func bind() {
         let input = QuotationFinishViewModel.Input(
             viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
-            postEmailEvent: postEmailEvent.eraseToAnyPublisher())
+            postEmailEvent: postEmailEvent.eraseToAnyPublisher(),
+            touchUpShareButtonEvent: touchUpShareButtonEvent.eraseToAnyPublisher())
         let output = viewModel.transform(input: input)
         
         output.carInquery
@@ -161,6 +160,16 @@ class QuotationFinishViewController: BaseViewController {
         output.emailResult
             .sink(receiveValue: {
                 print("이메일 전송 결과: \($0)")
+            })
+            .store(in: &cancellables)
+        
+        output.pdfID
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                showAlert(
+                    type: .share(pdfID: $0),
+                    buttonType: .oneButton,
+                    rightTitle: "공유하기")
             })
             .store(in: &cancellables)
     }

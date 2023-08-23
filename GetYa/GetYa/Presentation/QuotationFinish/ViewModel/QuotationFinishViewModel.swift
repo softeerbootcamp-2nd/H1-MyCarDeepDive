@@ -13,12 +13,14 @@ class QuotationFinishViewModel {
     struct Input {
         let viewDidLoadEvent: AnyPublisher<Void, Never>
         let postEmailEvent: AnyPublisher<String, Never>
+        let touchUpShareButtonEvent: AnyPublisher<Void, Never>
     }
     
     // MARK: - Output
     struct Output {
         let carInquery = PassthroughSubject<QuotationFinish, Never>()
         let emailResult = PassthroughSubject<Bool, Never>()
+        let pdfID = PassthroughSubject<String, Never>()
     }
     
     // MARK: - Dependency
@@ -47,6 +49,13 @@ class QuotationFinishViewModel {
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
                 useCase.fetchEmail(email: $0)
+            })
+            .store(in: &cancellables)
+        
+        input.touchUpShareButtonEvent
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                output.pdfID.send(useCase.pdfID.value)
             })
             .store(in: &cancellables)
         

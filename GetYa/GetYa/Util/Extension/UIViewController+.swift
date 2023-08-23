@@ -49,7 +49,9 @@ extension UIViewController {
                 handler: {
                     self.dismiss(animated: false, completion: {
                         let activityVC = UIActivityViewController(
-                            activityItems: [urlString],
+                            activityItems: [MyActivityItemSource(
+                                title: "내 차 만들기 견적을 공유합니다.",
+                                text: urlString)],
                             applicationActivities: nil)
                         activityVC.popoverPresentationController?.sourceView = self.view
                         activityVC.popoverPresentationController?.sourceRect = CGRect(

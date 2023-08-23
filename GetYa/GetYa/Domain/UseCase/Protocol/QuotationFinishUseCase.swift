@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 protocol QuotationFinishUseCase {
+    var pdfID: CurrentValueSubject<String, Never> { get set }
     var carInquery: PassthroughSubject<QuotationFinish, Never> { get set }
     var emailResult: PassthroughSubject<Bool, Never> { get set }
     
