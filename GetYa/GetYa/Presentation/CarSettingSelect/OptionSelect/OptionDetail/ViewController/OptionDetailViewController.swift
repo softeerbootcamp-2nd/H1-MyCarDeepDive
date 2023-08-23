@@ -184,13 +184,7 @@ final class OptionDetailViewController: BaseViewController {
 extension OptionDetailViewController: BaseOptionDetailRoundViewDelegate {
     func touchUpCloseButton(_ baseOptionDetailRoundView: UIView) {
         // getIdentifierTODO: - 델리게이트 호출 시점에 옵션에 대한 identifier를 받아오는 방법 좋겠습니다.
-//        var selectedIdx: Int?
-//        _=optionPackageCollectionView.visibleCells.enumerated().map { (index, element) in
-//            if element.isSelected {
-//                selectedIdx = index
-//            }
-//        }
-//        print(selectedIdx)
+
         /// dismiss할때 컴플리션이든 이전 화면에게 선택된 idx전달.
         UIView.animate(
             withDuration: 0.34,
@@ -226,6 +220,8 @@ extension OptionDetailViewController: UICollectionViewDataSource {
             ) as? OptionDetailCell else {
                 return .init(frame: .zero)
             }
+            
+            // TODO: - 서버에서 받아야 데이터
             cell.configureBaseOptionView(image: mockImages[idx], closeButtonAlpha: 1)
             cell.configure(
                 pages: mockImages.count,
@@ -233,27 +229,23 @@ extension OptionDetailViewController: UICollectionViewDataSource {
                 title: mockOptionTitles[idx],
                 price: mockOptionPrice[idx],
                 description: mockOptionDescription[idx])
+            cell.configureKeywordCollectionView(
+                mockOptionTitles,
+                currentIndexPath: indexPath)
+            cell.configure(optionPackageKeywordDelegate: self)
             cell.configure(
                 baseOptionContainerViewDelegate: self,
-                optionPackageKeywordDelegator: self,
                 optionSelectedDelegate: self)
+            cell.setPageControlSelectedPage(currentPage: idx)
+            cell.tag = idx
+            cell.setKeywordCellSelected(indexPath: indexPath)
             if !isClearFirstSetting {
                 cell.configureFirstSetting()
                 isClearFirstSetting.toggle()
             }
-            cell.setPageControlSelectedPage(currentPage: idx)
-            cell.tag = idx
             return cell
         }
-        
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: OptionDetailKeywordCell.identifier,
-            for: indexPath
-        ) as? OptionDetailKeywordCell else {
-            return .init(frame: .zero)
-        }
-        cell.configure(mockOptionTitles[idx])
-        return cell
+        return .init(frame: .zero)
     }
 }
 
@@ -275,8 +267,6 @@ extension OptionDetailViewController: OptionPackageDescriptionViewDelegate {
 // MARK: - UICollectionViewDelegate
 extension OptionDetailViewController: UICollectionViewDelegate {
     /// 스크롤되고 스크롤완료될떄. 내부 TitleCollectionView도 같이 해주는게 좋겠당 ㅇㅇ
-    ///
-    /// // TODO: - 옵션 키워드 셀렉에 대해서 화면 변경하기. 동기화 그리고 pageControl도 동기화
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
@@ -290,11 +280,6 @@ extension OptionDetailViewController: UICollectionViewDelegate {
                 at: indexPath,
                 at: .centeredHorizontally,
                 animated: true)
-            collectionView.cellForItem(at: indexPath)?.isSelected = true
-            _=optionPackageCollectionView.visibleCells.map {
-                if $0.isSelected { $0.isSelected.toggle() }
-            }
-            optionPackageCollectionView.cellForItem(at: indexPath)?.isSelected = true
         }
     }
     
