@@ -11,4 +11,13 @@ struct CustomRecomendationModel {
     let carPurposeId: Int
     let personalValueId: Int
     let maxBudget: Int
+    
+    func toDTO() -> CustomRecomendation {
+        CustomRecomendation(
+            drivingExperienceId: drivingExperienceId,
+            familyMembersId: familyMembersId,
+            carPurposeId: carPurposeId,
+            personalValueId: personalValueId,
+            maxBudget: maxBudget)
+    }
 }
