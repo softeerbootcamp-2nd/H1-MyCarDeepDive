@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-class QuotationFinishViewController: UIViewController {
+class QuotationFinishViewController: BaseViewController {
     enum Constatns {
         
     }
@@ -50,9 +50,8 @@ class QuotationFinishViewController: UIViewController {
         $0.addAction(
             UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                let urlString = ""
                 showAlert(
-                    type: .share(pdfID: 1, urlString: urlString),
+                    type: .share(pdfID: 1),
                     buttonType: .oneButton,
                     rightTitle: "공유하기")
             }),
@@ -189,7 +188,6 @@ class QuotationFinishViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
         
-        configureNavigationBar()
         configureSrollView()
         configureContentView()
         configureThumbnailView()
@@ -374,18 +372,18 @@ class QuotationFinishViewController: UIViewController {
         ])
     }
     
-    private func configureNavigationBar() {
-        let image = UIImage(named: "Black_Logo")
-        navigationItem.title = ""
-        navigationItem.titleView = UIImageView(image: image)
-        navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "arrow.left")?
-            .withTintColor(
-            .GetYaPalette.gray0,
-            renderingMode: .alwaysOriginal)
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left")?
-            .withTintColor(
-            .GetYaPalette.gray0,
-            renderingMode: .alwaysOriginal)
+    override func touchUpNavigationBackButton() {
+        showAlert(
+            type: .message(
+                title: "추천이 도움이 되었나요?",
+                description: "고객님의 답변을 반영해 더 나은 서비스를 만들게요."),
+            buttonType: .twoButton,
+            leftButtonHandler: {
+                self.navigationController?.popViewController(animated: true)
+            },
+            rightButtonHandler: {
+                self.navigationController?.popViewController(animated: true)
+            })
     }
     
     // MARK: - Functions
