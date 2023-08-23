@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ColorInfo {
+struct ColorInfoModel {
     let colorId: Int
     let colorName: String
     let colorPrice: Int
