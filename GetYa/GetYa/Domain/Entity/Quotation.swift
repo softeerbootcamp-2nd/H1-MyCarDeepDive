@@ -18,8 +18,8 @@ struct Quotation {
     let bodyName: String
     let carSpecId: Int
     let trimId: Int
-    let exteriorColor: ColorInfo
-    let interiorColor: ColorInfo
+    let exteriorColor: ColorInfoModel
+    let interiorColor: ColorInfoModel
     let options: [OptionInfo]
     let packages: [OptionInfo]
     let totalPrice: Int
