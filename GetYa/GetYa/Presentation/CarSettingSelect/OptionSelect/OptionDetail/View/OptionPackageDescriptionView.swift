@@ -16,9 +16,12 @@ final class OptionPackageDescriptionView: UIView {
             static let topMargin: CGFloat = .toScaledHeight(value: 4)
             static let minimumBottomMargin: CGFloat = .toScaledHeight(value: -16)
         }
-        enum OptionTitleCollectionView {
+        enum OptionKeywordCollectionView {
             static let topMargin: CGFloat = .toScaledHeight(value: 28)
             static let height: CGFloat = .toScaledHeight(value: 94)
+            static let itemSize: CGSize = .init(
+                width: .toScaledWidth(value: 138),
+                height: .toScaledHeight(value: 22))
             static let bottomMargin: CGFloat = .toScaledHeight(value: -28)
         }
         enum BottomBackgroundView {
@@ -35,15 +38,19 @@ final class OptionPackageDescriptionView: UIView {
     private let optionPackageLabel = CommonLabel(
         fontType: .mediumCaption1,
         color: .GetYaPalette.gray400,
-        text: " r"
-    ).set { $0.numberOfLines = 1 }
+        text: "패키지 준비중입니다."
+    ).set {
+        $0.numberOfLines = 1
+        $0.alpha = 0
+    }
     private let optionDetailDescriptionView = OptionDetailDescriptionAreaView(frame: .zero)
     private let bottomBackgroundView = UIView(frame: .zero).set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.backgroundColor = UIColor(red: 0.983, green: 0.983, blue: 0.983, alpha: 1).cgColor
         $0.alpha = 0
     }
-    private let optionKeywordCollectionView: UICollectionView = {
+    
+    private let optionKeywordCollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().set {
             $0.scrollDirection = .horizontal
             $0.itemSize = .init(
@@ -52,16 +59,9 @@ final class OptionPackageDescriptionView: UIView {
             $0.minimumLineSpacing = 7
             $0.minimumInteritemSpacing = 7
         }
-        return UICollectionView(frame: .zero, collectionViewLayout: layout).set {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.isPagingEnabled = true
-            $0.showsHorizontalScrollIndicator = false
-            $0.backgroundColor = .clear
-            $0.register(
-                OptionDetailKeywordCell.self,
-                forCellWithReuseIdentifier: OptionDetailKeywordCell.identifier)
-        }
+        return OptionKeywordCollectionView(frame: .zero, collectionViewLayout: layout)
     }()
+    
     private var pageControl = CommonPageControl(numberOfPages: 1)
     
     // MARK: - Properties
@@ -101,6 +101,7 @@ final class OptionPackageDescriptionView: UIView {
         price: String?,
         description: String?
     ) {
+        optionPackageLabel.alpha = 1
         optionPackageLabel.text = packageTitle
         setPageCount(with: pages)
         setOptionDetailDescriptionView(title: title, price: price, description: description)
@@ -197,7 +198,7 @@ extension OptionPackageDescriptionView: LayoutSupportable {
     }
     
     private func configureOptionKeywordCollectionView() {
-        typealias Const = Constants.OptionTitleCollectionView
+        typealias Const = Constants.OptionKeywordCollectionView
         NSLayoutConstraint.activate([
             optionKeywordCollectionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor),
