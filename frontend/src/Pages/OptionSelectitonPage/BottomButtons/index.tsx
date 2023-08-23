@@ -18,7 +18,7 @@ function BottomButtons() {
         height='h-[52px]'
         variant='primary'
         text='견적내기'
-        onClick={() => navigation('/mycar/result')}
+        onClick={() => navigation('/mycar/ready')}
       />
     </div>
   );

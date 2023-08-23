@@ -35,14 +35,14 @@ const initialState: InitialStateType = {
   },
   color: {
     exteriorColor: {
-      // id: 1,
+      id: 1,
       name: '크리미 화이트 펄',
       imgUrl: '/src/assets/image/exterior-creamy.png',
       price: 100000,
       chooseRate: 90,
     },
     interiorColor: {
-      // id: 1,
+      id: 1,
       name: '퀄팅천연 (블랙)',
       imgUrl: '/src/assets/image/interior-quilted.png',
       price: 0,
