@@ -43,10 +43,12 @@ final class OptionDetailCell: UICollectionViewCell {
     func configure(
         baseOptionContainerViewDelegate: BaseOptionDetailRoundViewDelegate?,
         optionPackageKeywordDelegator: (
-            UICollectionViewDataSource & UICollectionViewDelegate)?
+            UICollectionViewDataSource & UICollectionViewDelegate)?,
+        optionSelectedDelegate: OptionPackageDescriptionViewDelegate?
     ) {
         baseOptionContainerView.delegate = baseOptionContainerViewDelegate
         optionPackageView.configureOptionKeyordCollectionView(from: optionPackageKeywordDelegator)
+        optionPackageView.delegate = optionSelectedDelegate
     }
     
     func configureBaseOptionView(
