@@ -103,8 +103,19 @@ class QuotationFinishViewController: BaseViewController {
     private let purchaseView = PurchaseView()
     private lazy var leftAndButtonStackView = LeftAndRightButtonStackView().set {
         $0.setLeftButton(title: "수정", handler: {
-            // TODO: 2.1 트림 선택 화면으로
-            print("수정")
+            if let trimViewControllerIndex = self.navigationController?
+                .viewControllers
+                .firstIndex(where: {
+                    $0 is TrimSelectViewController
+                }) {
+                print(trimViewControllerIndex)
+            } else {
+                guard let homeViewController = self.navigationController?.viewControllers.first else { return }
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .removeAllViewContrllerExcept(
+                        to: homeViewController,
+                        nextViewController: CarSettingSelectViewController(carSpecID: 1))
+            }
         })
         $0.setRightButton(title: "구매/상담", handler: {
             guard let url = URL(string: "https://www.hyundai.com/kr/ko/e/vehicles/purchase-consult") else { return }
@@ -414,7 +425,6 @@ class QuotationFinishViewController: BaseViewController {
         totalNameAndPriceView.setPrice(value: carInquery.basicPrice)
         purchaseView.setTotalPrice(totalPrice: carInquery.totalPrice)
     }
-    
     
     // MARK: - Functions
     override func touchUpNavigationBackButton() {

@@ -85,13 +85,13 @@ class LoadingViewController: UIViewController {
                                 pdfID: pdfID,
                                 repository: DefaultQuotationFinishRepository(
                                     provider: SessionProvider()))))
+                    
                     if let navigationController,
                        let firstViewController = navigationController.viewControllers.first {
-                        navigationController.pushViewController(finishViewController, animated: true)
-                        navigationController.viewControllers.removeAll(where: { targetViewController in
-                            return (targetViewController != firstViewController &&
-                                    targetViewController != finishViewController)
-                        })
+                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                            .removeAllViewContrllerExcept(
+                                to: firstViewController,
+                                nextViewController: finishViewController)
                     }
                 })
             .store(in: &cancellables)
