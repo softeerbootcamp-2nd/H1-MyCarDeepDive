@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol OptionPackageDescriptionViewDelegate: AnyObject {
+    func touchUpOptionSelectButton(
+        _ packageView: OptionPackageDescriptionView?,
+        isSelected: Bool)
+}
+
 final class OptionPackageDescriptionView: UIView {
     enum Constants {
         enum OptionPackageLabel {
@@ -68,6 +74,8 @@ final class OptionPackageDescriptionView: UIView {
     var isSelectedOptinoSelectButton: Bool {
         optionDetailDescriptionView.isSelectedOptinoSelectButton
     }
+    
+    var delegate: OptionPackageDescriptionViewDelegate?
 
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -85,6 +93,9 @@ final class OptionPackageDescriptionView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         optionDetailDescriptionView.setOptionSelect(UIAction { [weak self] _ in
             self?.optionDetailDescriptionView.setOptionSelectButtonSelectState()
+            self?.delegate?.touchUpOptionSelectButton(
+                self,
+                isSelected: self?.optionDetailDescriptionView.isSelectedOptinoSelectButton ?? false)
         })
         setupUI()
     }
