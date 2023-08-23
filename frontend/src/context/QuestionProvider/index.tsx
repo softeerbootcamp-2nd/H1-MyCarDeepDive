@@ -11,7 +11,7 @@ import {
   SET_LIFEVALUE,
   SET_BUDGET,
 } from './type';
-import { createContext, useReducer } from 'react';
+import { createContext, useMemo, useReducer } from 'react';
 
 const initialState: InitialStateType = {
   age: '20대',
@@ -84,13 +84,12 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 const QuestionProvider = ({ children }: QuestionProviderProps) => {
   const [state, questionDispatch] = useReducer(reducer, initialState);
 
+  const memoValue = useMemo(() => {
+    return { ...state, questionDispatch };
+  }, [state, questionDispatch]);
+
   return (
-    <QuestionContext.Provider
-      value={{
-        ...state,
-        questionDispatch,
-      }}
-    >
+    <QuestionContext.Provider value={memoValue}>
       {children}
     </QuestionContext.Provider>
   );
