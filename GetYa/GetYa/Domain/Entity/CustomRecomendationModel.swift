@@ -5,7 +5,7 @@
 //  Created by 양승현 on 2023/08/23.
 //
 
-struct CustomRecomendationModel: Encodable {
+struct CustomRecomendationModel {
     let drivingExperienceId: Int
     let familyMembersId: Int
     let carPurposeId: Int
