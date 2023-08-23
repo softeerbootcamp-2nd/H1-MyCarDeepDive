@@ -21,7 +21,7 @@ struct QuotationDTO: Decodable {
     let exteriorColor: ColorInfoDTO
     let interiorColor: ColorInfoDTO
     let options: [OptionInfoDTO]
-    let packages: [PackageInfoDTO]
+    let packages: [OptionInfoDTO]
     let totalPrice: Int
     
     enum CodingKeys: String, CodingKey {
@@ -40,5 +40,24 @@ struct QuotationDTO: Decodable {
         case options
         case packages
         case totalPrice
+    }
+    
+    func toDomain() -> Quotation {
+        Quotation(
+            trimName: trimName,
+            carImgUrl: carImgUrl,
+            comment1: comment1,
+            comment2: comment2,
+            keyword: keyword,
+            engineName: engineName,
+            drivingSystemName: drivingSystemName,
+            bodyName: bodyName,
+            carSpecId: carSpecId,
+            trimId: trimId,
+            exteriorColor: exteriorColor.toDomain(),
+            interiorColor: interiorColor.toDomain(),
+            options: options.map { $0.toDomain() },
+            packages: packages.map { $0.toDomain() },
+            totalPrice: totalPrice)
     }
 }
