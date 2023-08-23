@@ -53,6 +53,7 @@ public class RecommendationMapper {
 
         return new RecommendationResponse(
                 trim.getName(),
+                carSpec.getPrice(),
                 exteriorColor.getExteriorImgUrl() + "/image_001.png",
                 recommendationCar.getComment1(),
                 recommendationCar.getComment2(),
