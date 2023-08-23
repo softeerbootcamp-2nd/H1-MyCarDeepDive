@@ -9,10 +9,8 @@ import static org.mockito.Mockito.when;
 import com.h1.mycardeepdive.color.domain.*;
 import com.h1.mycardeepdive.color.domain.repository.TrimExteriorColorRepository;
 import com.h1.mycardeepdive.color.domain.repository.TrimInteriorColorRepository;
-import com.h1.mycardeepdive.color.ui.dto.ExteriorColorInfo;
-import com.h1.mycardeepdive.color.ui.dto.ExteriorColorResponse;
-import com.h1.mycardeepdive.color.ui.dto.InteriorColorInfo;
-import com.h1.mycardeepdive.color.ui.dto.InteriorColorResponse;
+import com.h1.mycardeepdive.color.ui.dto.ColorInfo;
+import com.h1.mycardeepdive.color.ui.dto.ColorResponse;
 import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.ArrayList;
 import java.util.List;
@@ -163,10 +161,9 @@ class ColorServiceTest {
                 .thenReturn(List.of(trimExteriorColor1));
 
         // when
-        ExteriorColorResponse colorResponse =
-                colorService.findExteriorColors(trimId, interiorColorId);
-        ExteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
-        ExteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(0);
+        ColorResponse colorResponse = colorService.findExteriorColors(trimId, interiorColorId);
+        ColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
+        ColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(0);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(exteriorColor1.getName());
@@ -301,20 +298,21 @@ class ColorServiceTest {
                 .thenReturn(List.of(trimInteriorColor1));
 
         // when
-        InteriorColorResponse colorResponse =
-                colorService.findInteriorColors(trimId, exteriorColorId);
-        InteriorColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
-        InteriorColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(0);
+        ColorResponse colorResponse = colorService.findInteriorColors(trimId, exteriorColorId);
+        ColorInfo availableColor = colorResponse.getAvailable_colors().get(0);
+        ColorInfo otherTrimColor = colorResponse.getOther_trim_colors().get(0);
 
         // then
         assertThat(availableColor.getName()).isEqualTo(interiorColor1.getName());
         assertThat(availableColor.getImg_url()).isEqualTo(interiorColor1.getImgUrl());
-        assertThat(availableColor.getCar_img_url()).isEqualTo(interiorColor1.getInteriorImgUrl());
+        assertThat(availableColor.getCar_img_urls())
+                .isEqualTo(List.of(interiorColor1.getInteriorImgUrl()));
         assertThat(availableColor.getChoose_rate()).isEqualTo(interiorColor1.getChooseRate());
 
         assertThat(otherTrimColor.getName()).isEqualTo(interiorColor2.getName());
         assertThat(otherTrimColor.getImg_url()).isEqualTo(interiorColor2.getImgUrl());
-        assertThat(otherTrimColor.getCar_img_url()).isEqualTo(interiorColor2.getInteriorImgUrl());
+        assertThat(otherTrimColor.getCar_img_urls())
+                .isEqualTo(List.of(interiorColor2.getInteriorImgUrl()));
         assertThat(otherTrimColor.getChoose_rate()).isEqualTo(interiorColor2.getChooseRate());
     }
 

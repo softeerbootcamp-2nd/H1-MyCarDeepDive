@@ -13,8 +13,11 @@ public class RecommendationResponse {
     private String comment2;
     private String keyword;
     private String engine_name;
+    private long engine_id;
     private String driving_system_name;
+    private long driving_system_id;
     private String body_name;
+    private long body_id;
     private long car_spec_id;
     private long trim_id;
     RecommendationColorInfo exterior_color;

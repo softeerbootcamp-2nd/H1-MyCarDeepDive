@@ -51,17 +51,15 @@ class ColorControllerTest extends ControllerTestConfig {
         info.add("trimId", String.valueOf(trimId));
         info.add("interiorColorId", String.valueOf(interiorId));
 
-        ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor, trim);
-        List<ExteriorColorInfo> availableColors = new ArrayList<>();
-        List<ExteriorColorInfo> unavailableColors = new ArrayList<>();
-        List<ExteriorColorInfo> otherTrimColors = new ArrayList<>();
-        availableColors.add(exteriorColorInfo);
-        unavailableColors.add(exteriorColorInfo);
-        otherTrimColors.add(exteriorColorInfo);
+        ColorInfo colorInfo = toExteriorColorInfo(exteriorColor, trim);
+        List<ColorInfo> availableColors = new ArrayList<>();
+        List<ColorInfo> unavailableColors = new ArrayList<>();
+        List<ColorInfo> otherTrimColors = new ArrayList<>();
+        availableColors.add(colorInfo);
+        unavailableColors.add(colorInfo);
+        otherTrimColors.add(colorInfo);
         when(colorService.findExteriorColors(trimId, interiorId))
-                .thenReturn(
-                        new ExteriorColorResponse(
-                                availableColors, unavailableColors, otherTrimColors));
+                .thenReturn(new ColorResponse(availableColors, unavailableColors, otherTrimColors));
         // then
         ResultActions resultActions =
                 mockMvc.perform(
@@ -103,18 +101,16 @@ class ColorControllerTest extends ControllerTestConfig {
         info.add("trimId", String.valueOf(trimId));
         info.add("exteriorColorId", String.valueOf(exteriorId));
 
-        InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor, trim);
-        List<InteriorColorInfo> availableColors = new ArrayList<>();
-        List<InteriorColorInfo> unavailableColors = new ArrayList<>();
-        List<InteriorColorInfo> otherTrimColors = new ArrayList<>();
+        ColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor, trim);
+        List<ColorInfo> availableColors = new ArrayList<>();
+        List<ColorInfo> unavailableColors = new ArrayList<>();
+        List<ColorInfo> otherTrimColors = new ArrayList<>();
         availableColors.add(interiorColorInfo);
         unavailableColors.add(interiorColorInfo);
         otherTrimColors.add(interiorColorInfo);
 
         when(colorService.findInteriorColors(trimId, exteriorId))
-                .thenReturn(
-                        new InteriorColorResponse(
-                                availableColors, unavailableColors, otherTrimColors));
+                .thenReturn(new ColorResponse(availableColors, unavailableColors, otherTrimColors));
         // then
         ResultActions resultActions =
                 mockMvc.perform(
@@ -155,34 +151,34 @@ class ColorControllerTest extends ControllerTestConfig {
 
         info.add("trimId", String.valueOf(trimId));
 
-        ExteriorColorInfo exteriorColorInfo = toExteriorColorInfo(exteriorColor, trim);
-        List<ExteriorColorInfo> availableExteriorColors = new ArrayList<>();
-        List<ExteriorColorInfo> unavailableExteriorColors = new ArrayList<>();
-        List<ExteriorColorInfo> otherTrimExteriorColors = new ArrayList<>();
-        availableExteriorColors.add(exteriorColorInfo);
-        availableExteriorColors.add(exteriorColorInfo);
-        availableExteriorColors.add(exteriorColorInfo);
+        ColorInfo colorInfo = toExteriorColorInfo(exteriorColor, trim);
+        List<ColorInfo> availableExteriorColors = new ArrayList<>();
+        List<ColorInfo> unavailableExteriorColors = new ArrayList<>();
+        List<ColorInfo> otherTrimExteriorColors = new ArrayList<>();
+        availableExteriorColors.add(colorInfo);
+        availableExteriorColors.add(colorInfo);
+        availableExteriorColors.add(colorInfo);
 
-        InteriorColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor, trim);
-        List<InteriorColorInfo> availableInteriorColors = new ArrayList<>();
-        List<InteriorColorInfo> unavailableInteriorColors = new ArrayList<>();
-        List<InteriorColorInfo> otherTrimInteriorColors = new ArrayList<>();
+        ColorInfo interiorColorInfo = toInteriorColorInfo(interiorColor, trim);
+        List<ColorInfo> availableInteriorColors = new ArrayList<>();
+        List<ColorInfo> unavailableInteriorColors = new ArrayList<>();
+        List<ColorInfo> otherTrimInteriorColors = new ArrayList<>();
         availableInteriorColors.add(interiorColorInfo);
         unavailableInteriorColors.add(interiorColorInfo);
         otherTrimInteriorColors.add(interiorColorInfo);
 
-        ExteriorColorResponse exteriorColorResponse =
-                new ExteriorColorResponse(
+        ColorResponse colorResponse =
+                new ColorResponse(
                         availableExteriorColors,
                         unavailableExteriorColors,
                         otherTrimExteriorColors);
-        InteriorColorResponse interiorColorResponse =
-                new InteriorColorResponse(
+        ColorResponse interiorColorResponse =
+                new ColorResponse(
                         availableInteriorColors,
                         unavailableInteriorColors,
                         otherTrimInteriorColors);
         when(colorService.findAllColors(trimId))
-                .thenReturn(new AllColorResponse(exteriorColorResponse, interiorColorResponse));
+                .thenReturn(new AllColorResponse(colorResponse, interiorColorResponse));
         // then
         ResultActions resultActions =
                 mockMvc.perform(
