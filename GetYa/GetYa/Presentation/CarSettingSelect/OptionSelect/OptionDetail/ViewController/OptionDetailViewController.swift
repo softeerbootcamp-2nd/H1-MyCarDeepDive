@@ -220,15 +220,14 @@ extension OptionDetailViewController: UICollectionViewDataSource {
             ) as? OptionDetailCell else {
                 return .init(frame: .zero)
             }
-            
-            // TODO: - 서버에서 받아야 데이터
             cell.configureBaseOptionView(image: mockImages[idx], closeButtonAlpha: 1)
             cell.configure(
                 pages: mockImages.count,
                 packageTitle: mockPackageTitle,
                 title: mockOptionTitles[idx],
                 price: mockOptionPrice[idx],
-                description: mockOptionDescription[idx])
+                description: mockOptionDescription[idx],
+                indexPath: indexPath)
             cell.configureKeywordCollectionView(
                 mockOptionTitles,
                 currentIndexPath: indexPath)
@@ -237,8 +236,10 @@ extension OptionDetailViewController: UICollectionViewDataSource {
                 baseOptionContainerViewDelegate: self,
                 optionSelectedDelegate: self)
             cell.setPageControlSelectedPage(currentPage: idx)
-            cell.tag = idx
             cell.setKeywordCellSelected(indexPath: indexPath)
+            if selectedIndexList.contains(indexPath.row) {
+                cell.isSelectedOkButton = true
+            }
             if !isClearFirstSetting {
                 cell.configureFirstSetting()
                 isClearFirstSetting.toggle()
@@ -249,12 +250,26 @@ extension OptionDetailViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: -
+// MARK: - OptionPackageDescriptionViewDelegate
 extension OptionDetailViewController: OptionPackageDescriptionViewDelegate {
+    func touchUpOptionSelectButton(
+        _ indexPath: IndexPath?,
+        isSelected: Bool
+    ) {
+        // TODO: - 선택 부분 수정 해야함.
+        guard let index = indexPath?.item else { return }
+        if isSelected, !selectedIndexList.contains(index) {
+            selectedIndexList.append(index)
+            return
+        }
+        selectedIndexList = selectedIndexList.filter { !($0 == index) }
+    }
+    
     func touchUpOptionSelectButton(
         _ packageView: OptionPackageDescriptionView?,
         isSelected: Bool
     ) {
+        
         guard let packageView = packageView else { return }
         if isSelected, !selectedIndexList.contains(packageView.tag) {
             selectedIndexList.append(packageView.tag)
@@ -266,7 +281,6 @@ extension OptionDetailViewController: OptionPackageDescriptionViewDelegate {
 
 // MARK: - UICollectionViewDelegate
 extension OptionDetailViewController: UICollectionViewDelegate {
-    /// 스크롤되고 스크롤완료될떄. 내부 TitleCollectionView도 같이 해주는게 좋겠당 ㅇㅇ
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
