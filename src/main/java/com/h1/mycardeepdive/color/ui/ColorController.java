@@ -2,8 +2,7 @@ package com.h1.mycardeepdive.color.ui;
 
 import com.h1.mycardeepdive.color.service.ColorService;
 import com.h1.mycardeepdive.color.ui.dto.AllColorResponse;
-import com.h1.mycardeepdive.color.ui.dto.ExteriorColorResponse;
-import com.h1.mycardeepdive.color.ui.dto.InteriorColorResponse;
+import com.h1.mycardeepdive.color.ui.dto.ColorResponse;
 import com.h1.mycardeepdive.global.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,19 +14,18 @@ public class ColorController {
     private final ColorService colorService;
 
     @GetMapping("/exterior-colors")
-    public ApiResponse<ExteriorColorResponse> getExteriorColors(
+    public ApiResponse<ColorResponse> getExteriorColors(
             @RequestParam("trimId") Long trimId,
             @RequestParam("interiorColorId") Long interiorColorId) {
-        ExteriorColorResponse exteriorColorResponse =
-                colorService.findExteriorColors(trimId, interiorColorId);
-        return new ApiResponse<>(exteriorColorResponse);
+        ColorResponse colorResponse = colorService.findExteriorColors(trimId, interiorColorId);
+        return new ApiResponse<>(colorResponse);
     }
 
     @GetMapping("/interior-colors")
-    public ApiResponse<InteriorColorResponse> getInteriorColors(
+    public ApiResponse<ColorResponse> getInteriorColors(
             @RequestParam("trimId") Long trimId,
             @RequestParam("exteriorColorId") Long exteriorColorId) {
-        InteriorColorResponse interiorColorResponse =
+        ColorResponse interiorColorResponse =
                 colorService.findInteriorColors(trimId, exteriorColorId);
         return new ApiResponse<>(interiorColorResponse);
     }
