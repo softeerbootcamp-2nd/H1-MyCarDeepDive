@@ -20,7 +20,11 @@ final class OptionDetailCell: UICollectionViewCell {
     
     // MARK: - Properties
     var isSelectedOkButton: Bool {
-        optionPackageView.isSelectedOptinoSelectButton
+        get {
+            optionPackageView.isSelectedOptinoSelectButton
+        } set {
+            optionPackageView.isSelectedOptinoSelectButton = newValue
+        }
     }
     private lazy var optionTitles: [String?] = []
     private var currentIndexPath: IndexPath?
@@ -72,14 +76,16 @@ final class OptionDetailCell: UICollectionViewCell {
         packageTitle: String?,
         title: String?,
         price: String?,
-        description: String?
+        description: String?,
+        indexPath: IndexPath?
     ) {
         optionPackageView.configure(
             pages: pages,
             packageTitle: packageTitle,
             title: title,
             price: price,
-            description: description)
+            description: description,
+            indexPath: indexPath)
     }
     
     func configureKeywordCollectionView(
