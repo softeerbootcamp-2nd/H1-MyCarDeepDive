@@ -65,6 +65,9 @@ final class OptionPackageDescriptionView: UIView {
     private var pageControl = CommonPageControl(numberOfPages: 1)
     
     // MARK: - Properties
+    var isSelectedOptinoSelectButton: Bool {
+        optionDetailDescriptionView.isSelectedOptinoSelectButton
+    }
 
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -80,6 +83,9 @@ final class OptionPackageDescriptionView: UIView {
     // MARK: - Private Functions
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
+        optionDetailDescriptionView.setOptionSelect(UIAction { [weak self] _ in
+            self?.optionDetailDescriptionView.setOptionSelectButtonSelectState()
+        })
         setupUI()
     }
     
