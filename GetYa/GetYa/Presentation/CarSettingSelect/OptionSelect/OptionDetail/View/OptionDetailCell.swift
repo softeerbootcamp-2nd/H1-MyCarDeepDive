@@ -78,6 +78,10 @@ final class OptionDetailCell: UICollectionViewCell {
     func configureFirstSetting() {
         optionPackageView.configureFirstSetting()
     }
+    
+    func setPageControlSelectedPage(currentPage: Int) {
+        optionPackageView.setPageControlSelectedPage(currentPage: currentPage)
+    }
 }
 
 // MARK: - LayoutSupportable
