@@ -22,7 +22,7 @@
                 <stackTrace/>
                 <callerData/>
             </providers>
-        </encoder>der>
+        </encoder>
         <file>/tmp/log/logback.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>/tmp/log/mycardeepdive/mycardeepdive-%d{yyyy-MM-dd-HH-mm}.%i.log</fileNamePattern>
@@ -55,9 +55,24 @@
         </filter>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="Console" />
-        <appender-ref ref="FILE"/>
-        <appender-ref ref="ASYNC_SLACK"/>
-    </root>
+    <springProfile name="local">
+        <root level="DEBUG">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="ASYNC_SLACK"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="ASYNC_SLACK"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
 </configuration>
