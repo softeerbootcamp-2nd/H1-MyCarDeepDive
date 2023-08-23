@@ -27,17 +27,15 @@ extension UIImageView {
             case badImage
         }
         
+        let urlString = "https://" + urlString
+        
         if DefaultGetYaCacheService.shared.isExist(urlString) {
             guard let data = DefaultGetYaCacheService.shared.load(urlString) else {
                 throw ImageLoadError.wrongCacheData
             }
-            let maybeImage = UIImage(data: data)
-            guard let thumbnail = await maybeImage?.thumbnail else {
-                throw ImageLoadError.badImage
-            }
-            return thumbnail
+            return UIImage(data: data)
         } else {
-            guard let url = URL(string: "https://" + urlString) else {
+            guard let url = URL(string: urlString) else {
                 throw ImageLoadError.wrongURLString
             }
             let (data, response) = try await URLSession.shared.data(from: url)
