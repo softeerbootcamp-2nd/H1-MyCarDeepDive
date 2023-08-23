@@ -63,23 +63,6 @@ class LoadingViewController: UIViewController {
         
         lottieView.play()
         viewDidLoadEvent.send(())
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            let finishViewController = QuotationFinishViewController(
-                viewModel: QuotationFinishViewModel(
-                    useCase: DefaultQuotationFinishUseCase(
-                        pdfID: "64e478c8980e0b4882d3eef5",
-                        repository: DefaultQuotationFinishRepository(
-                            provider: SessionProvider()))))
-            if let navigationController = self.navigationController,
-               let firstViewController = navigationController.viewControllers.first {
-                navigationController.pushViewController(finishViewController, animated: true)
-                self.lottieView.stop()
-                navigationController.viewControllers.removeAll(where: { targetViewController in
-                    return (targetViewController != firstViewController &&
-                            targetViewController != finishViewController)
-                })
-            }
-        }
     }
     
     // MARK: - Private Functions
@@ -87,6 +70,31 @@ class LoadingViewController: UIViewController {
         let input = LoadingViewModel.Input(
             viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher())
         let output = viewModel.transform(input: input)
+        
+        output.pdfID
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] _ in
+                    guard let self else { return }
+                    lottieView.stop()
+                }, receiveValue: { [weak self] pdfID in
+                    guard let self else { return }
+                    let finishViewController = QuotationFinishViewController(
+                        viewModel: QuotationFinishViewModel(
+                            useCase: DefaultQuotationFinishUseCase(
+                                pdfID: pdfID,
+                                repository: DefaultQuotationFinishRepository(
+                                    provider: SessionProvider()))))
+                    if let navigationController,
+                       let firstViewController = navigationController.viewControllers.first {
+                        navigationController.pushViewController(finishViewController, animated: true)
+                        navigationController.viewControllers.removeAll(where: { targetViewController in
+                            return (targetViewController != firstViewController &&
+                                    targetViewController != finishViewController)
+                        })
+                    }
+                })
+            .store(in: &cancellables)
     }
     
     private func setupViews() {

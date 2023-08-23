@@ -14,7 +14,7 @@ class DefaultQuotationFinishUseCase: QuotationFinishUseCase {
     // MARK: - Properties
     private let repository: QuotationFinishRepository
     private var cancellabels = Set<AnyCancellable>()
-    var pdfID = CurrentValueSubject<String, Never>("64e478c8980e0b4882d3eef5")
+    var pdfID = CurrentValueSubject<String, Never>("")
     var carInquery = PassthroughSubject<QuotationFinish, Never>()
     var emailResult = PassthroughSubject<Bool, Never>()
     

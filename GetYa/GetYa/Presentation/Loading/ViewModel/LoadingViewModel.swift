@@ -16,7 +16,7 @@ class LoadingViewModel {
     
     // MARK: - Output
     struct Output {
-        
+        let pdfID = PassthroughSubject<String, Never>()
     }
     
     // MARK: - Dependency
@@ -45,7 +45,7 @@ class LoadingViewModel {
         
         useCase.pdfID
             .sink(receiveValue: {
-                print($0)
+                output.pdfID.send($0)
             })
             .store(in: &cancellables)
         
