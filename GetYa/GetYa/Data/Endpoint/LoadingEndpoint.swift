@@ -11,9 +11,10 @@ struct LoadingEndpoint {
     private init() {}
     static let shared = LoadingEndpoint()
     
-    func fetchPdfID(with request: ContractionQuotation) -> Endpoint<String> {
+    func fetchPdfID(with request: ContractionQuotation) -> Endpoint<PdfIdDTO> {
         return Endpoint(
             method: .post,
-            responseType: .pdfID)
+            responseType: .pdfID,
+            bodyParameters: request.toDTO())
     }
 }

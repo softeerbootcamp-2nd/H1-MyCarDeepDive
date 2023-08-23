@@ -16,9 +16,9 @@ class DefaultLoadingRepository: LoadingRepository {
         self.provider = provider
     }
     
-    func fetchPdfID(with request: ContractionQuotation) async throws -> String {
+    func fetchPdfID(with request: ContractionQuotation) async throws -> String? {
         let endpoint = Endpoint.shared.fetchPdfID(with: request)
         let commonDTO = try await provider.request(endpoint: endpoint)
-        return commonDTO.data
+        return commonDTO.data.pdfID
     }
 }

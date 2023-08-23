@@ -13,4 +13,8 @@ struct ContractionQuotation: Codable {
     let exteriorColorID: Int
     let interiorColorID: Int
     let additionalOptionIDList: [Int]
+    
+    func toDTO() -> ContractionQuotationDTO {
+        return ContractionQuotationDTO(contractionQuotation: self)
+    }
 }
