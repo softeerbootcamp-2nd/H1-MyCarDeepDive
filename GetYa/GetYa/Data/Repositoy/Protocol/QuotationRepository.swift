@@ -8,7 +8,5 @@
 import Foundation
 
 protocol QuotationRepository {
-    func fetchCarDetailRecommendation(
-        with requestDTO: CustomRecomendation
-    ) async throws -> QuotationDTO
+    func fetchCarDetailRecommendation(with requestDTO: CustomRecomendation) async throws
 }
