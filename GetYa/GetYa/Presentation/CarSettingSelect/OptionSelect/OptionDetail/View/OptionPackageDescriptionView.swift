@@ -169,7 +169,8 @@ extension OptionPackageDescriptionView: LayoutSupportable {
         NSLayoutConstraint.activate([
             optionPackageLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             optionPackageLabel.topAnchor.constraint(equalTo: topAnchor),
-            optionPackageLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor)])
+            optionPackageLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+            optionPackageLabel.heightAnchor.constraint(equalToConstant: GetYaFont.mediumCaption1.lineHeight)])
     }
     
     private func configureOptionDetailDescriptionView() {
