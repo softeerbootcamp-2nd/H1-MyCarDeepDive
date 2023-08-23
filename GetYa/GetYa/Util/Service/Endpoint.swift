@@ -16,6 +16,7 @@ final class Endpoint<ResponseModel>: NetworkInteractionable where ResponseModel:
     var prefixPath: String
     var responseType: ResponseType
     var queryParams: Encodable?
+    var bodyParameters: Encodable?
     var headers: [String: String]?
     
     init(
@@ -25,6 +26,7 @@ final class Endpoint<ResponseModel>: NetworkInteractionable where ResponseModel:
         prefixPath: String = "/api/v1/",
         responseType: ResponseType,
         queryParams: Encodable? = nil,
+        bodyParameters: Encodable? = nil,
         headers: [String: String]? = ["Content-Type": "application/json"]
     ) {
         self.scheme = scheme
@@ -33,6 +35,7 @@ final class Endpoint<ResponseModel>: NetworkInteractionable where ResponseModel:
         self.prefixPath = prefixPath
         self.responseType = responseType
         self.queryParams = queryParams
+        self.bodyParameters = bodyParameters
         self.headers = headers
     }
 }
