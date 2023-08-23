@@ -18,7 +18,6 @@ import Title from './Trim/Title';
 import CompareButton from './Trim/CompareButton';
 import TrimRadio from './Trim/TrimRadio';
 import ChangeModal from './Trim/ChangeModal';
-import ControlButtons from '@/Components/ControlButtons';
 
 function TrimSelectionPage() {
   const navigation = useNavigate();
@@ -28,7 +27,6 @@ function TrimSelectionPage() {
     trimId: null,
     trimName: null,
   });
-  const [rotation, setRotation] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
   const [toolTipInfo, setToolTipInfo] = useState({
@@ -98,7 +96,7 @@ function TrimSelectionPage() {
       <SelectionCarWrapper>
         <ReRecommendCardLink />
         <Background />
-        <CarRotation rotation={rotation} />
+        <CarRotation rotation={false} carImageUrl={['/palisade/base.png']} />
       </SelectionCarWrapper>
 
       <FeatureAndTrimSelectionWrapper>

@@ -19,7 +19,7 @@ import {
 
 function Buttons({
   car_spec_id,
-  totalPrice,
+  total_price,
   engine_name,
   body_name,
   driving_system_name,
@@ -35,7 +35,7 @@ function Buttons({
 
   const setRecommendData = () => {
     carDispatch({ type: SET_CARSPECID, carSpecId: car_spec_id });
-    carDispatch({ type: SET_CARSPECPRICE, carSpecPrice: totalPrice });
+    carDispatch({ type: SET_CARSPECPRICE, carSpecPrice: total_price });
     carDispatch({ type: SET_ENGINE, engine: engine_name });
     carDispatch({ type: SET_BODY, body: body_name });
     carDispatch({
@@ -72,7 +72,7 @@ function Buttons({
     carDispatch({
       type: ADD_OPTION_DATA_LIST,
       optionData: [...options, ...packages].map(item => {
-        return { name: item.option_name, price: item.price };
+        return { name: item.option_name, price: item.option_price };
       }),
     });
   };

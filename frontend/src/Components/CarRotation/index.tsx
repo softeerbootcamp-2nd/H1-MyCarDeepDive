@@ -14,7 +14,6 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
   const [pointerPosition, setPointerPosition] = useState<number>(
     window.innerWidth / 2,
   );
-  if (!carImageUrl) return;
 
   const onMouseDownHandler = (e: MouseEvent<HTMLDivElement>) => {
     if (!rotation) return;
@@ -71,8 +70,7 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
     setAppear(true);
   }, [setAppear]);
 
-  useEffect(() => {}, []);
-
+  if (carImageUrl === undefined) return null;
   return (
     <div
       className={`w-full z-40 relative transition-transform duration-1000 ease-out ${
@@ -83,17 +81,25 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
       onMouseUp={onMouseOverHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      {carImageUrl.map((image, idx) => (
+      {carImageUrl.length > 1 ? (
+        carImageUrl.map((image, idx) => (
+          <img
+            className='w-[85%] z-10 ml-32'
+            key={idx}
+            src={`https:\\${image}`}
+            style={
+              focus === idx ? { display: 'inline-block' } : { display: 'none' }
+            }
+            draggable={false}
+          />
+        ))
+      ) : (
         <img
           className='w-[85%] z-10 ml-32'
-          key={idx}
-          src={`https:\\${image}`}
-          style={
-            focus === idx ? { display: 'inline-block' } : { display: 'none' }
-          }
+          src={carImageUrl[0]}
           draggable={false}
         />
-      ))}
+      )}
       <div
         className={`w-[85%] h-24 ml-32 absolute top-[59%] left-0 -z-10 transition-opacity duration-1000 ${
           rotation ? 'opacity-100' : 'opacity-0'
