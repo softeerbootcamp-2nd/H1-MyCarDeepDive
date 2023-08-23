@@ -57,13 +57,11 @@ final class OptionPackageDescriptionView: UIView {
     }
     
     private let optionKeywordCollectionView = {
+        typealias Const = Constants.OptionKeywordCollectionView
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout().set {
             $0.scrollDirection = .horizontal
-            $0.itemSize = .init(
-                width: .toScaledWidth(value: 138),
-                height: 22)
+            $0.itemSize = Const.itemSize
             $0.minimumLineSpacing = 7
-            $0.minimumInteritemSpacing = 7
         }
         return OptionKeywordCollectionView(frame: .zero, collectionViewLayout: layout)
     }()
@@ -100,7 +98,7 @@ final class OptionPackageDescriptionView: UIView {
         setupUI()
     }
     
-    private func setPageControlSelectedPage(currentPage: Int) {
+    func setPageControlSelectedPage(currentPage: Int) {
         pageControl.currentPage = currentPage
     }
     
