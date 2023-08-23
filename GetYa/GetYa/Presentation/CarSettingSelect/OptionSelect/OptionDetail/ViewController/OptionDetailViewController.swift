@@ -18,7 +18,7 @@ final class OptionDetailViewController: BaseViewController {
             static let itemSize: CGSize = .init(
                 width: .toScaledWidth(value: 330),
                 height: OptionType.package.maximumContentHeight)
-            static let interItemSpacing: CGFloat = .toScaledWidth(value: 8)
+            static let lineSpacing: CGFloat = .toScaledWidth(value: 8)
             static let leadingInset: CGFloat = .toScaledWidth(value: 22)
             static let trailingInset: CGFloat = .toScaledWidth(value: 8)
         }
@@ -58,13 +58,16 @@ final class OptionDetailViewController: BaseViewController {
         let layout = UICollectionViewFlowLayout().set {
             $0.itemSize = Const.itemSize
             $0.scrollDirection = .horizontal
-            $0.minimumInteritemSpacing = Const.interItemSpacing
-            $0.minimumLineSpacing = 0
+            $0.minimumLineSpacing = Const.lineSpacing
             $0.sectionInset = .init(top: 0, left: Const.leadingInset, bottom: 0, right: Const.trailingInset)
         }
         return UICollectionView(frame: .zero, collectionViewLayout: layout).set {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.showsHorizontalScrollIndicator = false
+            $0.backgroundColor = .clear
+            
+            $0.delegate = self
+            $0.dataSource = self
             $0.register(
                 OptionDetailCell.self,
                 forCellWithReuseIdentifier: OptionDetailCell.identifier)
@@ -76,6 +79,31 @@ final class OptionDetailViewController: BaseViewController {
     private lazy var singleOptionSelectAction = UIAction { [weak self] _ in
         self?.singleOptionDetailContentView?.setOptionSelectButtonSelectState()
     }
+    
+    private var isClearFirstSetting = false
+    private var selectedIndexList: [Int] = []
+    
+    var mockImages = [
+        UIImage(named: "threeColumnHeatRaysOption"),
+        UIImage(named: "threeColumnHeatRaysOption"),
+        UIImage(named: "threeColumnHeatRaysOption"),
+        UIImage(named: "threeColumnHeatRaysOption")]
+    var mockPackageTitle = "컴포트 II"
+    var mockOptionTitles = [
+        "헤드업 디스플레이I",
+        "헤드업 디스플레이II",
+        "헤드업 디스플레이III",
+        "헤드업 디스플레이IIII"]
+    var mockOptionPrice = [
+        "1,090,000 원",
+        "1,090,001 원",
+        "1,090,002 원",
+        "1,090,003 원"]
+    var mockOptionDescription = [
+        "주요 주행 정보를 전면 윈드시트에 표시하며, 밝기가 최적화 되어 주간에도 시인성이 뛰어납니다.주요 주행 정보를 전면 윈드시트에 표시하며, 밝기가 최적화 되어 주간에도 시인성이 뛰어납니다.",
+        "주요 주행 정보를 전면 윈드시트에 표시합니다",
+        "주요 주행 정보를 전면 윈드시트에 표시하며, 밝기가 최적화 되어 주간에도 시인성이 뛰어납니다.",
+        "주요 주행 정보를 전면 윈드시트에 표시하며, 밝기가 최적화 되어 주간에도 시인성이 뛰어납니다.주요 주행 정보를 전면 윈드시트에 표시합니다."]
     
     // MARK: - Lifecycles
     init(optionType: OptionType) {
@@ -114,11 +142,11 @@ final class OptionDetailViewController: BaseViewController {
         /// 서버에서 데이터 받아왔다 가정. 0.5초에 보여주는게 좋을 것 같습니다.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.configure(
-                images: [UIImage(named: "threeColumnHeatRaysOption")],
-                packageTitle: "컴포트 II",
-                optionTitles: ["헤드업 디스플레이","헤드업 디스플레이","헤드업 디스플레이","헤드업 디스플레이"],
-                optionPrice: ["1,090,000 원"],
-                optionDescription: ["주요 주행 정보를 전면 윈드시트에 표시하며, 밝기가 최적화 되어 주간에도 시인성이 뛰어납니다.주요 주행 정보를 전면 윈드시트에 표시하며, 밝기가 최적화 되어 주간에도 시인성이 뛰어납니다."])
+                images: self.mockImages,
+                packageTitle: self.mockPackageTitle,
+                optionTitles: self.mockOptionTitles,
+                optionPrice: self.mockOptionPrice,
+                optionDescription: self.mockOptionDescription)
         }
     }
     
@@ -129,7 +157,6 @@ final class OptionDetailViewController: BaseViewController {
     }
     
     // MARK: - Functions
-    
     func configure(
         images: [UIImage?],
         packageTitle: String?,
@@ -147,7 +174,7 @@ final class OptionDetailViewController: BaseViewController {
                 optionPrice: optionPrice[0],
                 optionDescription: optionDescription[0])
         } else {
-            /// 컬랙션 뷰 데이터 소스 업데이트
+            optionPackageCollectionView.reloadData()
         }
     }
     // MARK: - Objc Functions
@@ -157,6 +184,14 @@ final class OptionDetailViewController: BaseViewController {
 extension OptionDetailViewController: BaseOptionDetailRoundViewDelegate {
     func touchUpCloseButton(_ baseOptionDetailRoundView: UIView) {
         // getIdentifierTODO: - 델리게이트 호출 시점에 옵션에 대한 identifier를 받아오는 방법 좋겠습니다.
+        var selectedIdx: Int?
+        _=optionPackageCollectionView.visibleCells.enumerated().map { (index, element) in
+            if element.isSelected {
+                selectedIdx = index
+            }
+        }
+        print(selectedIdx)
+        /// dismiss할때 컴플리션이든 이전 화면에게 선택된 idx전달.
         UIView.animate(
             withDuration: 0.34,
             delay: 0,
@@ -176,13 +211,14 @@ extension OptionDetailViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 5
+        return mockOptionTitles.count
     }
     
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
+        let idx = indexPath.row
         if collectionView === optionPackageCollectionView {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: OptionDetailCell.identifier,
@@ -190,6 +226,22 @@ extension OptionDetailViewController: UICollectionViewDataSource {
             ) as? OptionDetailCell else {
                 return .init(frame: .zero)
             }
+            cell.configureBaseOptionView(image: mockImages[idx], closeButtonAlpha: 1)
+            cell.configure(
+                pages: mockImages.count,
+                packageTitle: mockPackageTitle,
+                title: mockOptionTitles[idx],
+                price: mockOptionPrice[idx],
+                description: mockOptionDescription[idx])
+            cell.configure(
+                baseOptionContainerViewDelegate: self,
+                optionPackageKeywordDelegator: self,
+                optionSelectedDelegate: self)
+            if !isClearFirstSetting {
+                cell.configureFirstSetting()
+                isClearFirstSetting.toggle()
+            }
+            cell.tag = idx
             return cell
         }
         
@@ -199,14 +251,51 @@ extension OptionDetailViewController: UICollectionViewDataSource {
         ) as? OptionDetailKeywordCell else {
             return .init(frame: .zero)
         }
-        cell.configure("완성 거의 다 했다: ]")
+        cell.configure(mockOptionTitles[idx])
         return cell
+    }
+}
+
+// MARK: -
+extension OptionDetailViewController: OptionPackageDescriptionViewDelegate {
+    func touchUpOptionSelectButton(
+        _ packageView: OptionPackageDescriptionView?,
+        isSelected: Bool
+    ) {
+        guard let packageView = packageView else { return }
+        if isSelected, !selectedIndexList.contains(packageView.tag) {
+            selectedIndexList.append(packageView.tag)
+            return
+        }
+        selectedIndexList = selectedIndexList.filter { !($0 == packageView.tag) }
     }
 }
 
 // MARK: - UICollectionViewDelegate
 extension OptionDetailViewController: UICollectionViewDelegate {
     /// 스크롤되고 스크롤완료될떄. 내부 TitleCollectionView도 같이 해주는게 좋겠당 ㅇㅇ
+    ///
+    /// // TODO: - 옵션 키워드 셀렉에 대해서 화면 변경하기. 동기화 그리고 pageControl도 동기화
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        if collectionView is OptionKeywordCollectionView  && !mockOptionPrice.isEmpty {
+            collectionView.scrollToItem(
+                at: indexPath,
+                at: .centeredHorizontally,
+                animated: true)
+            optionPackageCollectionView.scrollToItem(
+                at: indexPath,
+                at: .centeredHorizontally,
+                animated: true)
+            collectionView.cellForItem(at: indexPath)?.isSelected = true
+            _=optionPackageCollectionView.visibleCells.map {
+                if $0.isSelected { $0.isSelected.toggle() }
+            }
+            optionPackageCollectionView.cellForItem(at: indexPath)?.isSelected = true
+        }
+    }
 }
 
 // MARK: - LayoutSupportable
@@ -216,8 +305,7 @@ extension OptionDetailViewController: LayoutSupportable {
         case .single:
             view.addSubview(baseSingleOptionContainerView)
         case .package:
-            break
-            //view.addSubview(optionPackageCollectionView)
+            view.addSubview(optionPackageCollectionView)
         }
     }
     
