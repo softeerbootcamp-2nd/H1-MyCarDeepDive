@@ -17,4 +17,5 @@ public class ColorInfo {
     private List<String> car_img_urls;
     private long price;
     private double choose_rate;
+    private List<Long> opposite_color_ids;
 }
