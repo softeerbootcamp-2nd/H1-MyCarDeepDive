@@ -13,15 +13,4 @@ struct CustomRecomendation: Encodable {
     let carPurposeId: Int
     let personalValueId: Int
     let maxBudget: Int
-    
-    func toDTO(
-        _ customRecommendationModel: CustomRecomendationModel
-    ) -> CustomRecomendation {
-        CustomRecomendation(
-            drivingExperienceId: customRecommendationModel.drivingExperienceId,
-            familyMembersId: customRecommendationModel.familyMembersId,
-            carPurposeId: customRecommendationModel.carPurposeId,
-            personalValueId: customRecommendationModel.personalValueId,
-            maxBudget: customRecommendationModel.maxBudget)
-    }
 }
