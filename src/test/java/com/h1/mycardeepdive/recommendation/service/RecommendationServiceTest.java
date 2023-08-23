@@ -36,7 +36,7 @@ class RecommendationServiceTest {
 
         Recommendation recommendation = createRecommendation(ageGroupId, lifeStyleId);
         RecommendationResponse recommendationResponse1 =
-                toRecommendationResponse(recommendation.getRecommendationCar());
+                toRecommendationResponse(recommendation.getRecommendationCar(), recommendation);
         RecommendationColorInfo exteriorColor1 = recommendationResponse1.getExterior_color();
         RecommendationColorInfo interiorColor1 = recommendationResponse1.getInterior_color();
         when(recommendationRepository.findByAgeGroupIdAndLifeStyleId(ageGroupId, lifeStyleId))

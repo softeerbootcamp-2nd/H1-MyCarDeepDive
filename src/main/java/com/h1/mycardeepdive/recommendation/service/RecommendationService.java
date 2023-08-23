@@ -26,7 +26,7 @@ public class RecommendationService {
                 recommendationRepository
                         .findByAgeGroupIdAndLifeStyleId(ageGroupId, lifeStyleId)
                         .orElseThrow();
-        return toRecommendationResponse(recommendation.getRecommendationCar());
+        return toRecommendationResponse(recommendation.getRecommendationCar(), recommendation);
     }
 
     public RecommendationResponse findCustomRecommendation(
