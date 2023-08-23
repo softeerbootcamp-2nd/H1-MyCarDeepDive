@@ -138,7 +138,7 @@ const reducer = (state: InitialStateType, action: ActionType) => {
           ...state.color,
           exteriorColor: {
             ...state.color.exteriorColor,
-            // id: action.exteriorColor.id,
+            id: action.exteriorColor.id,
             name: action.exteriorColor.name,
             imgUrl: action.exteriorColor.imgUrl,
             price: action.exteriorColor.price,
@@ -154,7 +154,7 @@ const reducer = (state: InitialStateType, action: ActionType) => {
           ...state.color,
           interiorColor: {
             ...state.color.interiorColor,
-            // id: action.interiorColor.id,
+            id: action.interiorColor.id,
             name: action.interiorColor.name,
             imgUrl: action.interiorColor.imgUrl,
             price: action.interiorColor.price,
