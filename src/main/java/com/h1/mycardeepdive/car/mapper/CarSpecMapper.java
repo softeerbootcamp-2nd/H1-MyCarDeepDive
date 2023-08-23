@@ -38,7 +38,10 @@ public class CarSpecMapper {
     }
 
     public static CarSpecInfo toCarSpecResponse(
-            CarSpec carSpec, List<String> basicOptionNames, List<Long> basicOptionIds) {
+            CarSpec carSpec,
+            List<String> basicOptionNames,
+            List<Long> basicOptionIds,
+            List<String> basicOptionUrls) {
         Trim trim = carSpec.getTrim();
         return new CarSpecInfo(
                 trim.getName(),
@@ -48,6 +51,7 @@ public class CarSpecMapper {
                 trim.getId(),
                 trim.getImgUrl(),
                 basicOptionNames,
-                basicOptionIds);
+                basicOptionIds,
+                basicOptionUrls);
     }
 }
