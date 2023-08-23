@@ -41,7 +41,7 @@ function Item({ name, index, value, address }: Props) {
           maxWidth: '238px',
         }}
       >
-        {truncateText(value, index === 1 ? 30 : index === 2 ? 14 : 40)}
+        {truncateText(value, index === 1 ? 30 : index === 2 ? 12 : 40)}
       </p>
     </div>
   );
