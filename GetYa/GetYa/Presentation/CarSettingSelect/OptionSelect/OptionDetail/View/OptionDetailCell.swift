@@ -65,14 +65,16 @@ final class OptionDetailCell: UICollectionViewCell {
         packageTitle: String?,
         title: String?,
         price: String?,
-        description: String?
+        description: String?,
+        currentKeywordIndexPath: IndexPath?
     ) {
         optionPackageView.configure(
             pages: pages,
             packageTitle: packageTitle,
             title: title,
             price: price,
-            description: description)
+            description: description,
+            currentKeywordIndexPath: currentKeywordIndexPath)
     }
     
     func configureFirstSetting() {
@@ -81,6 +83,10 @@ final class OptionDetailCell: UICollectionViewCell {
     
     func setPageControlSelectedPage(currentPage: Int) {
         optionPackageView.setPageControlSelectedPage(currentPage: currentPage)
+    }
+    
+    func setKeywordCellSelected(indexPath: IndexPath) {
+        optionPackageView.setKeywordCollectionViewSelected(indexPath)
     }
 }
 
