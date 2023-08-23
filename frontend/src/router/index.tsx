@@ -30,7 +30,7 @@ function Router() {
       </Route>
 
       <Route path='/mycar/ready' element={<MyCarReady />} />
-      <Route path='/mycar/result' element={<MyCarResultPage />} />
+      <Route path='/mycar/result/:id' element={<MyCarResultPage />} />
       <Route path='/error/:status' element={<ErrorPage />} />
       <Route path='*' element={<ErrorPage />} />
     </Routes>

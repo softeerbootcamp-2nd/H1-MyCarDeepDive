@@ -4,14 +4,13 @@ import postResult, { postResultType } from '@/api/myCar/postResult';
 
 function MyCarReady() {
   const navigation = useNavigate();
-  const data: postResultType | undefined = postResult();
+  const resultData: postResultType | undefined = postResult();
 
   useEffect(() => {
-    if (data === undefined) return;
+    if (resultData === undefined) return;
 
-    console.log(data);
-    navigation('/mycar/result', { replace: true });
-  }, [data]);
+    navigation(`/mycar/result/${resultData.data.pdfId}`, { replace: true });
+  }, [resultData]);
 
   return null;
 }

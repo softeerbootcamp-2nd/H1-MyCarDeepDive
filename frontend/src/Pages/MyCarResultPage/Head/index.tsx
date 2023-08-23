@@ -5,9 +5,11 @@ import Logo from '@/assets/icon/logo.svg';
 
 interface Props {
   setShowShareModal: React.Dispatch<React.SetStateAction<boolean>>;
+  car_name: string;
+  trim_name: string;
 }
 
-function Head({ setShowShareModal }: Props) {
+function Head({ setShowShareModal, car_name, trim_name }: Props) {
   const navigation = useNavigate();
 
   return (
@@ -20,7 +22,11 @@ function Head({ setShowShareModal }: Props) {
       />
       <div className='absolute top-[89px] left-1/2 -translate-x-1/2 font-h1-medium'>
         <Phrases />
-        <Card setShowShareModal={setShowShareModal} />
+        <Card
+          setShowShareModal={setShowShareModal}
+          car_name={car_name}
+          trim_name={trim_name}
+        />
       </div>
     </div>
   );
