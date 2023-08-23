@@ -31,7 +31,7 @@ struct QuestionSlider {
     }
 }
 
-// 고민TODO: - 선택 정보를 저장해야하는데 골라야 할 목차가 5개가 아니라 여러개가된다면?..
+// 질문은 로컬에서 고정
 final class CharacterDetailSelectViewModel {
     // MARK: - Properties
     private var questionDescriptionTexts: [QuestionDescriptionLabelModel] = QuestionDescriptionLabelModel.mock
@@ -70,19 +70,16 @@ extension CharacterDetailSelectViewModel: CharacterDetailSelectViewModelabe {
             .map { [weak self] (maxPrice: Int?) -> State in
                 guard let self else { return .none }
                 userSelectionIdxList[questionDescriptionTexts.count-1] = maxPrice ?? 4200
-                // 태그 표시는 항상 최소가로
                 userSelectionItems[questionDescriptionTexts.count - 1] = "\(questionSliderViewModel.minimumCarPrice)만원"
-                // TODO: 서버한테 maxPrice 포함 사용자의 선택 5개 전송
-                userSelectionIdxList
-                return .gotoDetailQuotationPreviewPage(userSelection: userSelectionItems)
+                return .gotoDetailQuotationPreviewPage(
+                    userSelection: userSelectionItems,
+                    userSelectIndexList: userSelectionIdxList)
             }.eraseToAnyPublisher()
     }
     
     private func viewLoadStream(input: Input) -> Output {
         return input.viewLoad
             .map { [weak self] in
-                // TODO: 서버에서 question title 및 dscription, question list 받아와야 합니다.
-                // fetch 로직 후 아래 함수 호출
                 self?.fetchCompleted.send()
                 return .none
             }.eraseToAnyPublisher()

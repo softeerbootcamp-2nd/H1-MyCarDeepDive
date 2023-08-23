@@ -206,8 +206,18 @@ extension CharacterDetailSelectViewController: ViewBindable {
             pageViewController.setViewControllers(
                 [viewController], direction: .forward,
                 animated: true)
-        case .gotoDetailQuotationPreviewPage(let userSelectionList):
-            let quotationViewModel = DetailQuotationPreviewViewModel.init(keywords: userSelectionList)
+        case .gotoDetailQuotationPreviewPage(let userSelectionList, let userSelectionIdxList):
+            let defaultQuotationUseCase = DefaultQuotationUseCase(
+                defaultQuotationRepository: DefaultQuotationRepository(),
+                userSelectedQuestionModel: CustomRecomendationModel(
+                    drivingExperienceId: userSelectionIdxList[0],
+                    familyMembersId: userSelectionIdxList[1],
+                    carPurposeId: userSelectionIdxList[2],
+                    personalValueId: userSelectionIdxList[3],
+                    maxBudget: userSelectionIdxList[4]))
+            let quotationViewModel = DetailQuotationPreviewViewModel(
+                keywords: userSelectionList,
+                quotationUseCase: defaultQuotationUseCase)
             let presentedVC = DetailQuotationPreviewViewController(viewModel: quotationViewModel)
             navigationController?.pushViewController(presentedVC, animated: true)
         }
