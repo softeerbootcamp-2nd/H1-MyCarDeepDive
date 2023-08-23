@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 struct DefaultQuotationFinishRepository: QuotationFinishRepository {
     typealias Endpoints = QuotationFinishEndpoint
