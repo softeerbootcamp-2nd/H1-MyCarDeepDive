@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const API = 'https://dev.make-my-car.shop/api/v1';
@@ -24,6 +24,7 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
   );
   const [result, setResult] = useState<T>();
   const [error, setError] = useState<Error>();
+  const [isPending, startTransition] = useTransition();
 
   const resolvePromise = (result: any) => {
     setStatus(FULFILLED);
@@ -59,9 +60,13 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
 
   useEffect(() => {
     setStatus(PENDING);
-    setPromise(fetchData());
+    startTransition(() => {
+      setPromise(fetchData());
+    });
+    // setPromise(fetchData());
   }, [url]);
 
+  if (isPending) return undefined;
   if (status === PENDING && promise) throw promise;
   if (status === ERROR) throw error;
   return result;
