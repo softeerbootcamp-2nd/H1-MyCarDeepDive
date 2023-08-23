@@ -14,4 +14,5 @@ public class CarSpecInfo {
     private String trim_img_url;
     private List<String> basic_option_names;
     private List<Long> basic_option_ids;
+    private List<String> basic_option_urls;
 }

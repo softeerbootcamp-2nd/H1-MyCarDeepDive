@@ -35,7 +35,8 @@ public class CarSpecService {
                     toCarSpecResponse(
                             carSpec,
                             getBasicOptionNames(trim.getId()),
-                            getBasicOptionIds(trim.getId()));
+                            getBasicOptionIds(trim.getId()),
+                            getBasicOptionUrls(trim.getId()));
             carSpecInfos.add(carSpecInfo);
         }
         return new CarSpecResponse(carSpecInfos, 2L);
@@ -80,6 +81,30 @@ public class CarSpecService {
             return List.of(129L, 86L, 116L);
         } else {
             return List.of(52L, 127L, 27L);
+        }
+    }
+
+    private List<String> getBasicOptionUrls(Long trimId) {
+        if (trimId == 1) {
+            return List.of(
+                    "img.make-my-car.shop/option/fca.jpg",
+                    "img.make-my-car.shop/option/ncss.jpg",
+                    "img.make-my-car.shop/option/safetypowerwindow.jpg");
+        } else if (trimId == 2) {
+            return List.of(
+                    "img.make-my-car.shop/option/realleather.jpg",
+                    "img.make-my-car.shop/option/12.3cluster.jpg",
+                    "img.make-my-car.shop/option/svm.jpg");
+        } else if (trimId == 3) {
+            return List.of(
+                    "img.make-my-car.shop/option/2_cooling.jpg",
+                    "img.make-my-car.shop/option/smartcontrol.jpg",
+                    "img.make-my-car.shop/option/manualcurtain.jpg");
+        } else {
+            return List.of(
+                    "img.make-my-car.shop/option/calligraphydesign.jpg",
+                    "img.make-my-car.shop/option/krellsound.jpg",
+                    "img.make-my-car.shop/option/rspa.jpg");
         }
     }
 

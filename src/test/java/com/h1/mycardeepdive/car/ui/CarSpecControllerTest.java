@@ -50,8 +50,14 @@ class CarSpecControllerTest extends ControllerTestConfig {
         CarSpec carSpec = createCarSpecD72E();
         List<String> basicOptionNames = List.of("전방 충돌 방지 보조", "내비 기반 크루즈 컨트롤", "세이프티 파워 윈도우");
         List<Long> basicOptionIds = List.of(1L, 2L, 3L);
+        List<String> basicOptionUrls =
+                List.of(
+                        "img.make-my-car.shop/option/calligraphydesign.jpg",
+                        "img.make-my-car.shop/option/krellsound.jpg",
+                        "img.make-my-car.shop/option/rspa.jpg");
 
-        CarSpecInfo carSpecInfo = toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds);
+        CarSpecInfo carSpecInfo =
+                toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds, basicOptionUrls);
         CarSpecResponse carSpecResponse =
                 new CarSpecResponse(
                         List.of(carSpecInfo, carSpecInfo, carSpecInfo, carSpecInfo), 2L);
@@ -188,8 +194,14 @@ class CarSpecControllerTest extends ControllerTestConfig {
         CarSpec carSpec = createCarSpecD72E();
         List<String> basicOptionNames = List.of("전방 충돌 방지 보조", "내비 기반 크루즈 컨트롤", "세이프티 파워 윈도우");
         List<Long> basicOptionIds = List.of(1L, 2L, 3L);
+        List<String> basicOptionUrls =
+                List.of(
+                        "img.make-my-car.shop/option/calligraphydesign.jpg",
+                        "img.make-my-car.shop/option/krellsound.jpg",
+                        "img.make-my-car.shop/option/rspa.jpg");
 
-        CarSpecInfo carSpecInfo = toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds);
+        CarSpecInfo carSpecInfo =
+                toCarSpecResponse(carSpec, basicOptionNames, basicOptionIds, basicOptionUrls);
         CarSpecResponse carSpecResponse =
                 new CarSpecResponse(
                         List.of(carSpecInfo, carSpecInfo, carSpecInfo, carSpecInfo), 2L);
