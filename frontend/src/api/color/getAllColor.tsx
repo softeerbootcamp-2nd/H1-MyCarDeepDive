@@ -18,13 +18,11 @@ export interface getInitialColorType {
   data: {
     exterior_color_response: {
       available_colors: initialColorType[];
-
       unavailable_colors: initialColorType[];
       other_trim_colors: initialColorType[];
     };
     interior_color_response: {
       available_colors: initialColorType[];
-
       unavailable_colors: initialColorType[];
       other_trim_colors: initialColorType[];
     };

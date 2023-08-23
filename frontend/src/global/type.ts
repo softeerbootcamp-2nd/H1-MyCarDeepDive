@@ -43,3 +43,9 @@ export interface ColorType {
   price: number;
   choose_rate: number;
 }
+
+export interface ColorsType {
+  available_colors: ColorType[];
+  unavailable_colors: ColorType[];
+  other_trim_colors: ColorType[];
+}

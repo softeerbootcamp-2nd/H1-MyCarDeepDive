@@ -12,7 +12,7 @@ export interface getInteriorColorType {
   };
 }
 
-function getInteriorColor(): getInteriorColorType | undefined {
+function getInitialInteriorColor(): getInteriorColorType | undefined {
   const { carSpec, color } = useContext(CarContext);
 
   return useFetch({
@@ -21,4 +21,4 @@ function getInteriorColor(): getInteriorColorType | undefined {
   });
 }
 
-export default getInteriorColor;
+export default getInitialInteriorColor;

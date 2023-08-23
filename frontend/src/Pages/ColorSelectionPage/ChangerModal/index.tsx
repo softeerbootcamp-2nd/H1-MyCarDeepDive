@@ -13,14 +13,19 @@ import ChangePrice from './ChangePrice';
 
 interface Props extends ModalProps {
   wantedOtherColor: any;
-  otherColorChangeHandler: ({}: any) => void;
+
+  clickHandler: {
+    clickAvailableColorHandler: ({
+      currentTarget,
+    }: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  };
 }
 
 function ChangerModal({
   showModal,
   setShowModal,
   wantedOtherColor,
-  otherColorChangeHandler,
+  clickHandler,
 }: Props) {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
@@ -35,7 +40,7 @@ function ChangerModal({
           <ChangePrice priceGap={12100000} />
           <Buttons
             wantedOtherColor={wantedOtherColor}
-            otherColorChangeHandler={otherColorChangeHandler}
+            clickHandler={clickHandler}
           />
         </div>
       </ModalContentsWrapper>
