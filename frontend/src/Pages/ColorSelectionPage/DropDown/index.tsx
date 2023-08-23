@@ -2,35 +2,37 @@ import DownArrow from '@/assets/icon/down-arrow.svg';
 import { useState } from 'react';
 import ColorItems from '../ColorItems';
 import ChangerModal from '../ChangerModal';
-
-interface colorProps {
-  name: string;
-  imgUrl: string;
-  price: number;
-  trim?: string;
-}
+import { ColorType } from '@/global/type';
 
 interface Props {
   phrase: string;
-  data: colorProps[];
-  otherColorChangeHandler: ({}: any) => void;
+  data: {
+    availableColor?: ColorType[] | undefined;
+    unavailableColor?: ColorType[] | undefined;
+    otherColorOfTrim?: ColorType[] | undefined;
+  };
+  clickHandler: {
+    clickAvailableColorHandler: ({
+      currentTarget,
+    }: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  };
 }
 
-function DropDown({ phrase, data, otherColorChangeHandler }: Props) {
+function DropDown({ phrase, data, clickHandler }: Props) {
+  if (!data.otherColorOfTrim) return;
   const [showOtherColor, setShowOtherColor] = useState(false);
   const [wantedOtherColor, setWantedOtherColor] = useState<any>();
   const [showModal, setShowModal] = useState(false);
 
-  const otherColorClickHandler = ({
-    currentTarget,
-  }: React.MouseEvent<HTMLButtonElement>) => {
-    const dataObject = currentTarget.getAttribute('data-object');
-    if (dataObject) {
-      const colorInfo = JSON.parse(dataObject);
-      setWantedOtherColor(colorInfo);
-    }
-  };
-
+  // const otherColorClickHandler = ({
+  //   currentTarget,
+  // }: React.MouseEvent<HTMLButtonElement>) => {
+  //   const dataObject = currentTarget.getAttribute('data-object');
+  //   if (dataObject) {
+  //     const colorInfo = JSON.parse(dataObject);
+  //     setWantedOtherColor(colorInfo);
+  //   }
+  // };
   return (
     <>
       <div className='border border-primary rounded pl-4 pr-3 mb-8'>
@@ -48,11 +50,11 @@ function DropDown({ phrase, data, otherColorChangeHandler }: Props) {
         >
           <ColorItems
             data={data}
-            clickHandler={otherColorClickHandler}
+            clickHandler={clickHandler}
             setShowModal={setShowModal}
             colorType='other'
           />
-          {showOtherColor && !data.length && (
+          {showOtherColor && !data.otherColorOfTrim.length && (
             <p className='flex justify-center items-center py-10 font-body4-medium text-grey-500 '>
               다른 색상이 없습니다.
             </p>
@@ -63,7 +65,7 @@ function DropDown({ phrase, data, otherColorChangeHandler }: Props) {
         wantedOtherColor={wantedOtherColor}
         showModal={showModal}
         setShowModal={setShowModal}
-        otherColorChangeHandler={otherColorChangeHandler}
+        clickHandler={clickHandler}
       />
     </>
   );

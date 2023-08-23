@@ -3,28 +3,18 @@ import roundedIcon from '@/assets/icon/rounded.svg';
 
 interface CarRotationProps {
   rotation: boolean;
+  carImageUrl?: string[];
 }
 
-function CarRotation({ rotation }: CarRotationProps) {
+function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
   const [appear, setAppear] = useState(false);
   const [isAnimate, setIsAnimate] = useState(false);
-  const [carList, setCarList] = useState<{ path: string }[]>([]);
   const [focus, setFocus] = useState<number>(10);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [pointerPosition, setPointerPosition] = useState<number>(
     window.innerWidth / 2,
   );
-  useEffect(() => {
-    let newCarList = [] as { path: string }[];
-
-    for (let idx = 1; idx <= 60; idx++) {
-      const num = idx < 10 ? '00' + idx : '0' + idx;
-      const path = `/palisade/abyss/image_${num}.png`;
-      newCarList = [...newCarList, { path }];
-    }
-
-    setCarList(newCarList);
-  }, []);
+  if (!carImageUrl) return;
 
   const onMouseDownHandler = (e: MouseEvent<HTMLDivElement>) => {
     if (!rotation) return;
@@ -81,6 +71,8 @@ function CarRotation({ rotation }: CarRotationProps) {
     setAppear(true);
   }, [setAppear]);
 
+  useEffect(() => {}, []);
+
   return (
     <div
       className={`w-full z-40 relative transition-transform duration-1000 ease-out ${
@@ -91,11 +83,11 @@ function CarRotation({ rotation }: CarRotationProps) {
       onMouseUp={onMouseOverHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      {carList.map((it, idx) => (
+      {carImageUrl.map((image, idx) => (
         <img
           className='w-[85%] z-10 ml-32'
           key={idx}
-          src={it.path}
+          src={`https:\\${image}`}
           style={
             focus === idx ? { display: 'inline-block' } : { display: 'none' }
           }

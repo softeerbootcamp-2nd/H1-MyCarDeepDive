@@ -10,195 +10,49 @@ import ColorItems from './ColorItems';
 import UnderLine from '@/Components/UnderLine';
 import DropDown from './DropDown';
 import Buttons from './Buttons';
-import { colors } from '@/global/data';
 import ContentsWrapper from './ContentsWrapper';
 import CarRotation from '@/Components/CarRotation';
-import ControlButtons from '../TrimSelectionPage/Car/ControlButtons';
+
 import { CarContext } from '@/context/CarProvider';
-import {
-  SET_EXTERIORCOLOR,
-  SET_INTERIORCOLOR,
-  SET_TRIMNAME,
-} from '@/context/CarProvider/type';
-
-interface colorProps {
-  trim?: string;
-  name: string;
-  imgUrl: string;
-  price: number;
-  chooseRate: number;
-}
-
-interface colorsProps {
-  trim: string;
-  exteriorColor: colorProps[];
-  interiorColor: colorProps[];
-  otherExteriorColor?: colorProps[];
-  otherInteriorColor?: colorProps[];
-}
-
-interface Props {
-  colorsData?: colorsProps[];
-  colorType?: 'exterior' | 'interior';
-  colorData?: colorProps[];
-  selectedColor?: colorProps;
-  trim?: string;
-}
-
-function getColorOfTrim({ colorsData, trim }: Props) {
-  return colorsData?.find(color => color.trim === trim);
-}
-
-function getBestColor({ colorsData, trim, colorType }: Props) {
-  return colorType === 'exterior'
-    ? getColorOfTrim({ colorsData, trim })?.exteriorColor[0]
-    : getColorOfTrim({ colorsData, trim })?.interiorColor[0];
-}
+import { useInitialColor } from '@/hooks/useInitialColor';
+import ControlButtons from '@/Components/ControlButtons';
 
 function ColorSelectionPage() {
-  const { color, carDispatch, carSpec } = useContext(CarContext);
+  const { color } = useContext(CarContext);
   const [rotation, setRotation] = useState(false);
-  const [exteriorColors, setExteriorColors] = useState<colorProps[]>([]);
-  const [interiorColors, setInteriorColors] = useState<colorProps[]>([]);
-  const [otherExteriorColors, setOtherExteriorColors] = useState<colorProps[]>(
-    [],
-  );
-  const [otherInteriorColors, setOtherInteriorColors] = useState<colorProps[]>(
-    [],
-  );
-
-  const exteriorBestColor = getBestColor({
-    colorsData: colors,
-    trim: carSpec.trim.name,
-    colorType: 'exterior',
-  });
-  const interiorBestColor = getBestColor({
-    colorsData: colors,
-    trim: carSpec.trim.name,
-    colorType: 'interior',
-  });
-
-  const unlockSelectExteriorColor = () => {
-    if (exteriorBestColor?.name === undefined) return;
-    if (
-      exteriorColors.find(
-        carColor => carColor.name === color.exteriorColor.name,
-      ) === undefined
-    ) {
-      const { name, imgUrl, price, chooseRate } = exteriorBestColor;
-      carDispatch({
-        type: SET_EXTERIORCOLOR,
-        exteriorColor: { name, imgUrl, price, chooseRate },
-      });
-    }
-  };
-
-  const unlockSelectInteriorColor = () => {
-    if (interiorBestColor?.name === undefined) return;
-    if (
-      interiorColors.find(
-        carColor => carColor.name === color.interiorColor.name,
-      ) === undefined
-    ) {
-      const { name, imgUrl, price, chooseRate } = interiorBestColor;
-      carDispatch({
-        type: SET_INTERIORCOLOR,
-        interiorColor: { name, imgUrl, price, chooseRate },
-      });
-    }
-  };
-
+  const [view, setView] = useState('exterial');
+  const {
+    interiorColors,
+    exteriorColors,
+    carImageUrl,
+    exteriorColorsClickHandler,
+    interiorColorsClickHandler,
+  } = useInitialColor();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    const colorData = getColorOfTrim({
-      colorsData: colors,
-      trim: carSpec.trim.name,
-    });
-    setExteriorColors(colorData?.exteriorColor || []);
-    setInteriorColors(colorData?.interiorColor || []);
-    setOtherExteriorColors(colorData?.otherExteriorColor || []);
-    setOtherInteriorColors(colorData?.otherInteriorColor || []);
-  }, [carSpec.trim.name]);
-
-  useEffect(() => {
-    unlockSelectExteriorColor();
-    unlockSelectInteriorColor();
-  }, [exteriorColors, interiorColors]);
-
-  const exteriorColorHandler = ({
-    currentTarget,
-  }: React.MouseEvent<HTMLButtonElement>) => {
-    const dataObject = currentTarget.getAttribute('data-object');
-    if (!dataObject) return;
-    const colorInfo = JSON.parse(dataObject);
-    const { name, imgUrl, price, chooseRate } = colorInfo;
-    carDispatch({
-      type: SET_EXTERIORCOLOR,
-      exteriorColor: { name, imgUrl, price, chooseRate },
-    });
-  };
-
-  const interiorColorHandler = ({
-    currentTarget,
-  }: React.MouseEvent<HTMLButtonElement>) => {
-    const dataObject = currentTarget.getAttribute('data-object');
-    if (!dataObject) return;
-    const colorInfo = JSON.parse(dataObject);
-    const { name, imgUrl, price, chooseRate } = colorInfo;
-    carDispatch({
-      type: SET_INTERIORCOLOR,
-      interiorColor: {
-        name,
-        imgUrl,
-        price,
-        chooseRate,
-      },
-    });
-  };
-  const otherExteriorColorChangeHandler = ({
-    trim,
-    name,
-    imgUrl,
-    price,
-    chooseRate,
-  }: any) => {
-    carDispatch({ type: SET_TRIMNAME, trimName: trim });
-    carDispatch({
-      type: SET_EXTERIORCOLOR,
-      exteriorColor: { name, imgUrl, price, chooseRate },
-    });
-  };
-
-  const otherInteriorColorChangeHandler = ({
-    trim,
-    name,
-    imgUrl,
-    price,
-    chooseRate,
-  }: any) => {
-    carDispatch({ type: SET_TRIMNAME, trimName: trim });
-    carDispatch({
-      type: SET_INTERIORCOLOR,
-      interiorColor: { name, imgUrl, price, chooseRate },
-    });
-  };
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-    });
-  }, []);
+  //모든 이미지 받아오기
+  //
 
   return (
     <>
       <SelectionCarWrapper>
         <ReRecommendCardLink />
-        <Background />
-        <CarRotation rotation={rotation} />
-        <ControlButtons rotation={rotation} setRotation={setRotation} />
+        {view === 'exterial' && (
+          <>
+            <CarRotation rotation={rotation} carImageUrl={carImageUrl} />
+            <Background />
+          </>
+        )}
+        {/* {view === 'interial' && } */}
+
+        <ControlButtons
+          rotation={rotation}
+          setRotation={setRotation}
+          view={view}
+          setView={setView}
+        />
       </SelectionCarWrapper>
       <ContentsWrapper>
         <ColorTitle title={'외장 색상'} />
@@ -209,13 +63,14 @@ function ColorSelectionPage() {
         <ColorItems
           data={exteriorColors || []}
           selectedColor={color.exteriorColor}
-          clickHandler={exteriorColorHandler}
+          clickHandler={exteriorColorsClickHandler}
           colorType='exterior'
         />
+
         <DropDown
           phrase={'다른 외장 색상을 찾고 있나요?'}
-          data={otherExteriorColors || []}
-          otherColorChangeHandler={otherExteriorColorChangeHandler}
+          data={exteriorColors || []}
+          clickHandler={exteriorColorsClickHandler}
         />
         <UnderLine margin='mb-6' />
         <ColorTitle title={'내장 색상'} />
@@ -226,13 +81,13 @@ function ColorSelectionPage() {
         <ColorItems
           data={interiorColors || []}
           selectedColor={color.interiorColor}
-          clickHandler={interiorColorHandler}
+          clickHandler={interiorColorsClickHandler}
           colorType='interior'
         />
         <DropDown
           phrase={'다른 내장 색상을 찾고 있나요?'}
-          data={otherInteriorColors || []}
-          otherColorChangeHandler={otherInteriorColorChangeHandler}
+          data={interiorColors || []}
+          clickHandler={interiorColorsClickHandler}
         />
         <Buttons />
       </ContentsWrapper>
