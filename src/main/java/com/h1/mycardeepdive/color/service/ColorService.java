@@ -10,6 +10,7 @@ import com.h1.mycardeepdive.trims.domain.Trim;
 import java.util.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.logstash.logback.marker.Markers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -133,10 +134,12 @@ public class ColorService {
     }
 
     public boolean userClickedExteriorColorLog(Long exteriorColorId) {
+        log.info(Markers.append("id", exteriorColorId), "exterior_color");
         return true;
     }
 
     public boolean userClickedInteriorColorLog(Long interiorColorId) {
+        log.info(Markers.append("id", interiorColorId), "interior_color");
         return true;
     }
 }
