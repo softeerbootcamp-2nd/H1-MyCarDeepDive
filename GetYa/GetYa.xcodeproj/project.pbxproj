@@ -18,6 +18,7 @@
 		150636442A93AA560057724E /* DefaultQuotationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150636432A93AA560057724E /* DefaultQuotationRepository.swift */; };
 		150636462A93B1650057724E /* CarRecommendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150636452A93B1650057724E /* CarRecommendUseCase.swift */; };
 		1506364A2A9460610057724E /* CommonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150636492A9460610057724E /* CommonDTO.swift */; };
+		152EE9C52A959E41006801AA /* OptionKeywordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152EE9C42A959E41006801AA /* OptionKeywordCollectionView.swift */; };
 		155776E12A90D27300E3C0E1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E02A90D27300E3C0E1 /* Endpoint.swift */; };
 		155776E32A90D29900E3C0E1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E22A90D29900E3C0E1 /* HTTPMethod.swift */; };
 		155776E62A90DA6B00E3C0E1 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155776E52A90DA6B00E3C0E1 /* Requestable.swift */; };
@@ -274,6 +275,7 @@
 		150636432A93AA560057724E /* DefaultQuotationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationRepository.swift; sourceTree = "<group>"; };
 		150636452A93B1650057724E /* CarRecommendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarRecommendUseCase.swift; sourceTree = "<group>"; };
 		150636492A9460610057724E /* CommonDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDTO.swift; sourceTree = "<group>"; };
+		152EE9C42A959E41006801AA /* OptionKeywordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionKeywordCollectionView.swift; sourceTree = "<group>"; };
 		155729FE2A89563200D136C6 /* QuotationPreviewMainHeaderModel+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuotationPreviewMainHeaderModel+Mock.swift"; sourceTree = "<group>"; };
 		155776E02A90D27300E3C0E1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		155776E22A90D29900E3C0E1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -725,6 +727,7 @@
 				15940E8C2A922D810042A5F5 /* OptionDetailDescriptionAreaView.swift */,
 				15D2ABB12A928C6100F7DE8E /* OptionPackageDescriptionView.swift */,
 				15D0263F2A954AEC001D1659 /* OptionDetailKeywordCell.swift */,
+				152EE9C42A959E41006801AA /* OptionKeywordCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1819,6 +1822,7 @@
 				155DDD102A846077009AE2BC /* QuotationPreviewCarInfoModel+Mock.swift in Sources */,
 				6484A7742A8E4CD100434136 /* LoadingViewController.swift in Sources */,
 				641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */,
+				152EE9C52A959E41006801AA /* OptionKeywordCollectionView.swift in Sources */,
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
 				64E26A102A895C0F00F6BC3A /* ColorSelectViewController.swift in Sources */,
 				64ADA48B2A7788900003E2C1 /* Entity.swift in Sources */,
