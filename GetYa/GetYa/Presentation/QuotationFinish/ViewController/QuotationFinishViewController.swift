@@ -50,7 +50,11 @@ class QuotationFinishViewController: UIViewController {
         $0.addAction(
             UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                showActivityViewController(url: URL(string: "pdf")!)
+                let urlString = ""
+                showAlert(
+                    type: .share(pdfID: 1, urlString: urlString),
+                    buttonType: .oneButton,
+                    rightTitle: "공유하기")
             }),
             for: .touchUpInside)
     }
@@ -382,17 +386,6 @@ class QuotationFinishViewController: UIViewController {
             .withTintColor(
             .GetYaPalette.gray0,
             renderingMode: .alwaysOriginal)
-    }
-    
-    private func showActivityViewController(url: URL) {
-        let activityVC = UIActivityViewController(activityItems: [""], applicationActivities: nil)
-        activityVC.popoverPresentationController?.sourceView = view
-        activityVC.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.midX,
-                                                                      y: view.bounds.midY,
-                                                                      width: 0,
-                                                                      height: 0)
-
-        present(activityVC, animated: true)
     }
     
     // MARK: - Functions
