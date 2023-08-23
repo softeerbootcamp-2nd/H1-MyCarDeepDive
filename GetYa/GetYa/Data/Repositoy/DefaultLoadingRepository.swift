@@ -16,16 +16,8 @@ class DefaultLoadingRepository: LoadingRepository {
         self.provider = provider
     }
     
-    func fetchCarInquery(
-        with request: String
-    ) async throws -> QuotationFinish {
-        let endpoint = Endpoint.shared.fetchCarInquery(with: request)
-        let commonDTO = try await provider.request(endpoint: endpoint)
-        return commonDTO.data.toDomain()
-    }
-    
-    func fetchPdfEmail(with request: PdfEmail) async throws -> Bool {
-        let endpoint = Endpoint.shared.fetchPdfEmail(with: request)
+    func fetchPdfID(with request: ContractionQuotation) async throws -> String {
+        let endpoint = Endpoint.shared.fetchPdfID(with: request)
         let commonDTO = try await provider.request(endpoint: endpoint)
         return commonDTO.data
     }

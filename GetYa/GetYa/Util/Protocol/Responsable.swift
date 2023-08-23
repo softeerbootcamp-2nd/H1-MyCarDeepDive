@@ -26,6 +26,7 @@ enum ResponseType {
     case packageOptionsActivityLog(optionId: Int)
     case optionPackageDetails(optionId: Int)
     case optionCarSpecIdTagsTagId(carSpecId: Int, tagId: Int)
+    case pdfID
     case pdfCarInfomation(pdfID: String)
     case pdfEmail(pdfEmail: PdfEmail)
     
@@ -39,6 +40,8 @@ enum ResponseType {
             return "car-spec"
         case .carSpecAdditionalOption(let carSpecId):
             return "car-spec/\(carSpecId)/additional-options"
+        case .pdfID:
+            return "pdfId"
         case .pdfCarInfomation(let pdfID):
             return "pdf/\(pdfID)/car-information"
         case .pdfEmail(let pdfEmail):

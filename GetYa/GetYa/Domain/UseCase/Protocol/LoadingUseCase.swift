@@ -9,5 +9,6 @@ import Foundation
 import Combine
 
 protocol LoadingUseCase {
-    
+    var pdfID: PassthroughSubject<String, Never> { get set }
+    func fetchPdfID(contrationQuotation: ContractionQuotation)
 }

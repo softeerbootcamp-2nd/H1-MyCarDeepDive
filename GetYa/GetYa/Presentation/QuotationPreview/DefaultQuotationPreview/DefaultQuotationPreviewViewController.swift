@@ -80,6 +80,12 @@ extension DefaultQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate
         navigationController?.pushViewController(
             LoadingViewController(
                 viewModel: LoadingViewModel(
+                    contrationQuotation: ContractionQuotation(
+                        carSpecID: 1,
+                        trimID: 1,
+                        exteriorColorID: 1,
+                        interiorColorID: 1,
+                        additionalOptionIDList: []),
                     useCase: DefaultLoadingUseCase(
                         repository: DefaultLoadingRepository(
                             provider: SessionProvider())))),

@@ -42,6 +42,7 @@ class LoadingViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: LoadingViewModel
     private var cancellables = Set<AnyCancellable>()
+    private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
     
     // MARK: - Lifecycles
     init(viewModel: LoadingViewModel) {
@@ -53,15 +54,15 @@ class LoadingViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bind()
         setupViews()
         configureUI()
         
-        // TODO: 여기서 네트워크 요청이 완료되면 화면 dismiss 하도록 하기 (Lottie가 제대로 없어지는지 확인 필요)
         lottieView.play()
-        /// 임시적으로 3초뒤에 불러와진다고 가정
+        viewDidLoadEvent.send(())
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             let finishViewController = QuotationFinishViewController(
                 viewModel: QuotationFinishViewModel(
@@ -82,6 +83,12 @@ class LoadingViewController: UIViewController {
     }
     
     // MARK: - Private Functions
+    private func bind() {
+        let input = LoadingViewModel.Input(
+            viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher())
+        let output = viewModel.transform(input: input)
+    }
+    
     private func setupViews() {
         view.addSubviews([
             label,

@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol LoadingRepository {
-    
+    func fetchPdfID(with request: ContractionQuotation) async throws -> String
 }

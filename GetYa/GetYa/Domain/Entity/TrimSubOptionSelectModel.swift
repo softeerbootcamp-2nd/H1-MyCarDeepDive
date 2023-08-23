@@ -11,10 +11,4 @@ struct TrimSubOptionSelectModel {
     var engineID: Int
     var bodyID: Int
     var drivingSystemID: Int
-    
-    init(engineID: Int, bodyID: Int, drivingSystemID: Int) {
-        self.engineID = engineID
-        self.bodyID = bodyID
-        self.drivingSystemID = drivingSystemID
-    }
 }
