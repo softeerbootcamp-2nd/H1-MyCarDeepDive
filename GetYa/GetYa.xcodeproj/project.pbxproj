@@ -146,6 +146,7 @@
 		6457D1602A9523F000B3AAAF /* TrimColorInquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D15F2A9523F000B3AAAF /* TrimColorInquery.swift */; };
 		6457D1622A9523FF00B3AAAF /* TrimColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1612A9523FF00B3AAAF /* TrimColor.swift */; };
 		6457D1642A952E4F00B3AAAF /* TrimID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1632A952E4F00B3AAAF /* TrimID.swift */; };
+		6457D1662A95378400B3AAAF /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1652A95378400B3AAAF /* UIImageView+.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
 		6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
@@ -412,6 +413,7 @@
 		6457D15F2A9523F000B3AAAF /* TrimColorInquery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColorInquery.swift; sourceTree = "<group>"; };
 		6457D1612A9523FF00B3AAAF /* TrimColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColor.swift; sourceTree = "<group>"; };
 		6457D1632A952E4F00B3AAAF /* TrimID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimID.swift; sourceTree = "<group>"; };
+		6457D1652A95378400B3AAAF /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -1253,6 +1255,7 @@
 				15DF95982A7C8A110093EAC7 /* UIView+.swift */,
 				6484A7692A8DEDF100434136 /* UIViewController+.swift */,
 				15940E7F2A91F4EC0042A5F5 /* UIImage+.swift */,
+				6457D1652A95378400B3AAAF /* UIImageView+.swift */,
 				6457D12B2A94894300B3AAAF /* String+.swift */,
 			);
 			path = Extension;
@@ -1730,6 +1733,7 @@
 				6457CFB62A9395D100B3AAAF /* OptionDetail.swift in Sources */,
 				6457D1122A945C6E00B3AAAF /* AdditionalOptionViewController.swift in Sources */,
 				6457D1542A95127100B3AAAF /* ColorRepository.swift in Sources */,
+				6457D1662A95378400B3AAAF /* UIImageView+.swift in Sources */,
 				155EAB3A2A80824B00833B0E /* DetailQuotationPreviewViewController.swift in Sources */,
 				155DDD0A2A835FEF009AE2BC /* DetailQuotationPreviewSecionHeaderView.swift in Sources */,
 				6457D1522A95126700B3AAAF /* DefaultColorRepository.swift in Sources */,
