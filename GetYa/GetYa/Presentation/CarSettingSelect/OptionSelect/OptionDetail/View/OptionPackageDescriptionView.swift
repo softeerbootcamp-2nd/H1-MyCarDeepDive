@@ -9,7 +9,7 @@ import UIKit
 
 protocol OptionPackageDescriptionViewDelegate: AnyObject {
     func touchUpOptionSelectButton(
-        _ packageView: OptionPackageDescriptionView?,
+        _ indexPath: IndexPath?,
         isSelected: Bool)
 }
 
@@ -69,11 +69,16 @@ final class OptionPackageDescriptionView: UIView {
     
     // MARK: - Properties
     var isSelectedOptinoSelectButton: Bool {
-        optionDetailDescriptionView.isSelectedOptinoSelectButton
+        get {
+            optionDetailDescriptionView.isSelectedOptinoSelectButton
+        } set {
+            optionDetailDescriptionView.isSelectedOptinoSelectButton = newValue
+        }
     }
     
     var delegate: OptionPackageDescriptionViewDelegate?
-
+    var currentIndexPath: IndexPath?
+    
     // MARK: - Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -106,9 +111,10 @@ final class OptionPackageDescriptionView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         optionDetailDescriptionView.setOptionSelect(UIAction { [weak self] _ in
             self?.optionDetailDescriptionView.setOptionSelectButtonSelectState()
+            let isSelectedButton = self?.optionDetailDescriptionView.isSelectedOptinoSelectButton ?? false
             self?.delegate?.touchUpOptionSelectButton(
-                self,
-                isSelected: self?.optionDetailDescriptionView.isSelectedOptinoSelectButton ?? false)
+                self?.currentIndexPath,
+                isSelected: isSelectedButton)
         })
         setupUI()
     }
@@ -130,12 +136,14 @@ final class OptionPackageDescriptionView: UIView {
         packageTitle: String?,
         title: String?,
         price: String?,
-        description: String?
+        description: String?,
+        indexPath: IndexPath?
     ) {
         optionPackageLabel.alpha = 1
         optionPackageLabel.text = packageTitle
         setPageCount(with: pages)
         setOptionDetailDescriptionView(title: title, price: price, description: description)
+        self.currentIndexPath = indexPath
     }
     
     private func setOptionDetailDescriptionView(
