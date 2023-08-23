@@ -13,9 +13,9 @@ struct DefaultQuotationRepository: QuotationRepository {
     
     func fetchCarDetailRecommendation(
         with requestDTO: CustomRecomendation
-    ) async throws -> QuotationDTO {
+    ) async throws -> QuotationModel {
         let endpoint = Endpoints.shared.fetchCarDetailRecommendationOption(with: requestDTO)
         let commonDTO = try await provider.request(endpoint: endpoint)
-        return commonDTO.data
+        return commonDTO.data.toDomain()
     }
 }
