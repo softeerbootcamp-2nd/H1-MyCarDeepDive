@@ -19,4 +19,13 @@ struct ColorInfoDTO: Decodable {
         case colorComment = "color_comment"
         case colorIconUrl = "color_icon_url"
     }
+    
+    func toDomain() -> ColorInfoModel {
+        return ColorInfoModel(
+            colorId: colorId,
+            colorName: colorName,
+            colorPrice: colorPrice,
+            colorComment: colorComment,
+            colorIconUrl: colorIconUrl)
+    }
 }
