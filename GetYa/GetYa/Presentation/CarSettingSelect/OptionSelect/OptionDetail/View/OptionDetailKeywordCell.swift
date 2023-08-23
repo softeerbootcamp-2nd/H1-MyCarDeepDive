@@ -16,11 +16,11 @@ final class OptionDetailKeywordCell: UICollectionViewCell {
         color: .GetYaPalette.gray400,
         text: "준비중입니다..")
     
-    override var isSelected: Bool {
-        didSet {
-            keywordLabel.textColor = isSelected ? .GetYaPalette.acriveBlue : .GetYaPalette.gray400
-        }
-    }
+//    override var isSelected: Bool {
+//        didSet {
+//            keywordLabel.textColor = isSelected ? .GetYaPalette.acriveBlue : .GetYaPalette.gray400
+//        }
+//    }
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -38,9 +38,18 @@ final class OptionDetailKeywordCell: UICollectionViewCell {
         setupUI()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        keywordLabel.textColor = .GetYaPalette.gray400
+    }
+    
     // MARK: - Functions
     func configure(_ text: String?) {
         keywordLabel.text = text
+    }
+    
+    func setLabelColor() {
+        keywordLabel.textColor = .GetYaPalette.acriveBlue
     }
 }
 
