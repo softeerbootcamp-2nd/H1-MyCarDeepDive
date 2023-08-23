@@ -135,7 +135,7 @@ extension CharacterSelectViewController: BaseCharacterSelectpageViewDelegate {
 // MARK: - LifeStyleViewController Delegate
 extension CharacterSelectViewController: LifeStyleViewControllerDelegate {
     func touchUpSuccessButton(sender: UIButton) {
-        let quotationViewModel = DefaultQuotationPreviewViewModel()
+        let quotationViewModel = DefaultQuotationPreviewViewModel(dataSource: [])
         let quotationViewController = DefaultQuotationPreviewViewController(viewModel: quotationViewModel)
         navigationController?.pushViewController(quotationViewController, animated: true)
     }
