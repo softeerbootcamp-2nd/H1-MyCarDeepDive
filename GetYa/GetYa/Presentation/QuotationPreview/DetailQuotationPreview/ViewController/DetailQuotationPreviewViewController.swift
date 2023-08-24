@@ -100,13 +100,14 @@ extension DetailQuotationPreviewViewController: ViewBindable {
                 tableView: tableView,
                 dataSource: viewModel)
             tableView.reloadData()
-        case .gotoCompletionPage:
+        case .gotoCompletionPage(let additionalTrimCarSpec):
             // TODO: - 로딩화면 갈 때 트림아이디, 구동방식 아이디, 엔진아이디 적용해야합니다.
             // TODO: 로딩 페이지 후 서버에서 완료되면 5.1화면으로 이동
+            print(additionalTrimCarSpec)
             navigationController?.pushViewController(LoadingViewController(), animated: true)
-        case .gotoCustomPage:
-            // TODO: 3-1화면으로 이동해야 합니다. (추천 트림, 색상, 옵션 선택된 상태로)
-            break
+        case .gotoCustomPage(let trimCarSpec):
+            // TODO: 2-1화면으로 이동해야 합니다. (추천 트림, 색상, 옵션 선택된 상태로)
+            print(trimCarSpec)
         }
     }
 }

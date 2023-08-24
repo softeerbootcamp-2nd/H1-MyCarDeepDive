@@ -52,7 +52,7 @@ final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewMode
         case none
         case updateDetailQuotationPreview
         case gotoCustomPage(TrimCarSpec)
-        case gotoCompletionPage
+        case gotoCompletionPage(AdditionalTrimCarSpec)
     }
     
     // MARK: - Dependencies
@@ -151,7 +151,11 @@ private extension DetailQuotationPreviewViewModel {
     // 서버에서 받아와서 업데이트?!
     func quickQuoteEventChains(_ input: Input) -> Output {
         return input.quickQuoteEvent
-            .map { _ -> State in return .updateDetailQuotationPreview }
+            .map { _ -> State in
+                return .gotoCompletionPage(
+                    .init(trimCarSpec: self.quotationTrimCarSpec,
+                          aditoinalOptionIdList: []))
+            }
             .eraseToAnyPublisher()
     }
     
