@@ -16,16 +16,7 @@ struct DefaultQuotationPreviewMainHeaderModel {
     var firstSectionTitle: String
 }
 
-extension DefaultQuotationPreviewMainHeaderModel {
-//    static let mock: Self = .init(
-//        carName: "펠리세이드 - Prestige",
-//        carImageUrl: "characterSelectSuccessCar",
-//        recommendCarProductOption: .palisadeMock,
-//        firstSectionTitle: "색상")
-}
-
 final class DefaultQuotationPreviewViewModel: CommonQuotationPreviewTableViewModel {
-    // TODO: 서버에서 받아와야 할 데이터
     // MARK: - Properties
     private var mainSectionHeader: DefaultQuotationPreviewMainHeaderModel
     private var sectionHeaders: [String]
