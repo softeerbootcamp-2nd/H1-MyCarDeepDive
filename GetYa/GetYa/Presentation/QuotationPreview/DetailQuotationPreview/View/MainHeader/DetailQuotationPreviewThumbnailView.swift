@@ -133,7 +133,7 @@ final class DetailQuotationPreviewThumbnailView: UIView {
     }
     
     func configure(imageUrl: String) {
-        recommendCarImageView.setImage(urlString: imageUrl)
+        recommendCarImageView.setImage(urlString: imageUrl, .normal)
     }
     
     func configureRecommendKeywordStackView(_ texts: [String]) {
@@ -260,7 +260,8 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: trailingAnchor),
             recommendCarImageView.topAnchor.constraint(
                 equalTo: recommendDiscriptionView.bottomAnchor),
-            recommendCarImageView.heightAnchor.constraint(lessThanOrEqualToConstant: Const.height)])
+            recommendCarImageView.heightAnchor.constraint(
+                lessThanOrEqualToConstant: Const.height)])
     }
     
     func configureRecommendCarBackgroundView() {
