@@ -77,7 +77,19 @@ extension DefaultQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate
     }
     
     func gotoQuotePage() {
-        navigationController?.pushViewController(LoadingViewController(), animated: true)
+        navigationController?.pushViewController(
+            LoadingViewController(
+                viewModel: LoadingViewModel(
+                    contrationQuotation: ContractionQuotation(
+                        carSpecID: 1,
+                        trimID: 1,
+                        exteriorColorID: 1,
+                        interiorColorID: 1,
+                        additionalOptionIDList: []),
+                    useCase: DefaultLoadingUseCase(
+                        repository: DefaultLoadingRepository(
+                            provider: SessionProvider())))),
+            animated: true)
     }
 }
 

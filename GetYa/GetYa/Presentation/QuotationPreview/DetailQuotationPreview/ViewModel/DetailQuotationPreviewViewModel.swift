@@ -52,7 +52,7 @@ final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewMode
         case none
         case updateDetailQuotationPreview
         case gotoCustomPage(TrimCarSpec)
-        case gotoCompletionPage(AdditionalTrimCarSpec)
+        case gotoCompletionPage(ContractionQuotation)
     }
     
     // MARK: - Dependencies
@@ -62,10 +62,16 @@ final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewMode
     private var mainSectionHeader = QuotationPreviewMainHeaderModel()
     private var sectionHeaders: [String] = []
     private var secondSectionFooter: String = "데이터 불러오는 중입니다."
-    private var quotationTrimCarSpec = TrimCarSpec(
+    private var trimCarSpec = TrimCarSpec(
         engineId: 0,
         bodyId: 0,
         drivingSystemId: 0)
+    private var contractionQuotation = ContractionQuotation(
+        carSpecID: 0,
+        trimID: 0,
+        exteriorColorID: 0,
+        interiorColorID: 0,
+        additionalOptionIDList: [])
     private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Lifecycles
@@ -101,10 +107,16 @@ private extension DetailQuotationPreviewViewModel {
                     quotationModel.drivingSystemName,
                     quotationModel.bodyName
                 ].joined(separator: " ・ ")
-                self?.quotationTrimCarSpec = TrimCarSpec(
+                self?.trimCarSpec = TrimCarSpec(
                     engineId: quotationModel.engineId,
                     bodyId: quotationModel.bodyId,
                     drivingSystemId: quotationModel.drivingSystemId)
+                self?.contractionQuotation = ContractionQuotation(
+                    carSpecID: quotationModel.carSpecId,
+                    trimID: quotationModel.trimId,
+                    exteriorColorID: quotationModel.exteriorColor.colorId,
+                    interiorColorID: quotationModel.interiorColor.colorId,
+                    additionalOptionIDList: [])
                 let recommendCarProductOption = QuotationPreviewCarInfoModel(
                     carName: "펠리세이드",
                     trimName: quotationModel.trimName,
@@ -137,19 +149,18 @@ private extension DetailQuotationPreviewViewModel {
     
     func customButtonEventChains(_ input: Input) -> Output {
         return input.customButtonEvent
-            .map { _ -> State in
-                return .gotoCustomPage(self.quotationTrimCarSpec)
+            .map { [weak self] _ -> State in
+                guard let self else { return .none }
+                return .gotoCustomPage(trimCarSpec)
             }
             .eraseToAnyPublisher()
     }
     
-    // 서버에서 받아와서 업데이트?!
     func quickQuoteEventChains(_ input: Input) -> Output {
         return input.quickQuoteEvent
-            .map { _ -> State in
-                return .gotoCompletionPage(
-                    .init(trimCarSpec: self.quotationTrimCarSpec,
-                          aditoinalOptionIdList: []))
+            .map { [weak self] _ -> State in
+                guard let self else { return .none }
+                return .gotoCompletionPage(contractionQuotation)
             }
             .eraseToAnyPublisher()
     }

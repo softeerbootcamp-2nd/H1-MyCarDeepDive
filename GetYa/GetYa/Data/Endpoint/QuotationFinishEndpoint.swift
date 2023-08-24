@@ -24,4 +24,10 @@ struct QuotationFinishEndpoint {
             method: .get,
             responseType: .pdfEmail(pdfEmail: request))
     }
+    
+    func fetchPdfURL(with request: String) -> Endpoint<PdfUrlDTO> {
+        return Endpoint<PdfUrlDTO>(
+            method: .get,
+            responseType: .pdfURL(pdfID: request))
+    }
 }
