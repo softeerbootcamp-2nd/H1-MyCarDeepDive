@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class AlertViewController: UIViewController {
-    enum Constatns {
+    enum Constants {
         enum ContainerView {
             static let height: CGFloat = .toScaledHeight(value: 60)
             static let leadingMargin: CGFloat = .toScaledWidth(value: 40)
@@ -108,7 +108,7 @@ class AlertViewController: UIViewController {
     }
     
     private func configureContainerView() {
-        typealias Const = Constatns.ContainerView
+        typealias Const = Constants.ContainerView
         
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -123,7 +123,7 @@ class AlertViewController: UIViewController {
     }
     
     private func configureTitleLabel() {
-        typealias Const = Constatns.TitleLabel
+        typealias Const = Constants.TitleLabel
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(
@@ -136,7 +136,7 @@ class AlertViewController: UIViewController {
     }
     
     private func configureDescriptionLabel() {
-        typealias Const = Constatns.DescriptionLabel
+        typealias Const = Constants.DescriptionLabel
         
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(
@@ -152,7 +152,7 @@ class AlertViewController: UIViewController {
     }
     
     private func configureButtonStackView() {
-        typealias Const = Constatns.ButtonStackView
+        typealias Const = Constants.ButtonStackView
         
         buttonStackViewTopConstraint = buttonStackView.topAnchor.constraint(
             equalTo: descriptionLabel.bottomAnchor,
@@ -173,8 +173,9 @@ class AlertViewController: UIViewController {
     }
     
     private func configureSettingAlertView() {
-        typealias Const = Constatns.SettingAlertView
+        typealias Const = Constants.SettingAlertView
         
+        buttonStackViewTopConstraint.isActive = false
         NSLayoutConstraint.activate([
             settingAlertView.topAnchor.constraint(
                 equalTo: descriptionLabel.bottomAnchor,
@@ -186,10 +187,14 @@ class AlertViewController: UIViewController {
                 equalTo: containerView.trailingAnchor,
                 constant: Const.trailingMargin)
         ])
+        buttonStackViewTopConstraint = buttonStackView.topAnchor.constraint(
+            equalTo: settingAlertView.bottomAnchor,
+            constant: Constants.ButtonStackView.topMarginAtAlertView)
+        buttonStackViewTopConstraint.isActive = true
     }
     
     private func configureTextField() {
-        typealias Const = Constatns.TextField
+        typealias Const = Constants.TextField
         
         buttonStackViewTopConstraint.isActive = false
         NSLayoutConstraint.activate([
@@ -206,7 +211,7 @@ class AlertViewController: UIViewController {
         ])
         buttonStackViewTopConstraint = buttonStackView.topAnchor.constraint(
             equalTo: textField.bottomAnchor,
-            constant: Constatns.ButtonStackView.topMarginAtAlertView)
+            constant: Constants.ButtonStackView.topMarginAtAlertView)
         buttonStackViewTopConstraint.isActive = true
     }
     
@@ -224,6 +229,37 @@ class AlertViewController: UIViewController {
         textField.isEnabled = isEnaled
         
         containerView.addSubview(textField)
+    }
+    
+    func setTrimChangeModel(trimChangeModel: TrimChangeModel) {
+        settingAlertView = SettingAlertView()
+        
+        if let trimSelect = trimChangeModel.trimSelectModel,
+           let otherTrimSelect = trimChangeModel.otherTrimSelectModel {
+            settingAlertView.setChangeOtherTrim(
+                trimName: trimSelect.trimName,
+                trimPrice: trimSelect.trimPrice,
+                otherTrim: otherTrimSelect.trimName,
+                otherTrimPirce: otherTrimSelect.trimPrice)
+        }
+        
+        if let exteriorColorSelect = trimChangeModel.exteriorColorSelectModel {
+            settingAlertView.setReleaseExteriorColor(
+                colorName: exteriorColorSelect.colorName,
+                colorPrice: exteriorColorSelect.colorPrice)
+        }
+        
+        if let interiorColorSelect = trimChangeModel.interiorColorSelectModel {
+            settingAlertView.setReleaseInteriorColor(
+                colorName: interiorColorSelect.colorName,
+                colorPrice: interiorColorSelect.colorPrice)
+        }
+        
+        if let optionSelect = trimChangeModel.optionSelectModel {
+            
+        }
+        
+        containerView.addSubview(settingAlertView)
     }
     
     func setLeftButtonAction(title: String, handler: (() -> Void)? = nil) {

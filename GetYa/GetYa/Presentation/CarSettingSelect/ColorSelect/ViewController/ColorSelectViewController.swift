@@ -82,7 +82,7 @@ class ColorSelectViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                print($0)
+                showAlertByColorChangeType(type: $0)
             })
             .store(in: &cancellables)
         
@@ -90,7 +90,7 @@ class ColorSelectViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                print($0)
+                showAlertByColorChangeType(type: $0)
             })
             .store(in: &cancellables)
     }
@@ -136,6 +136,25 @@ class ColorSelectViewController: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func showAlertByColorChangeType(type: ColorChangeType) {
+        switch type {
+        case .needChangeTrim(let trimChangeModel):
+            showAlert(
+                type: .settingChange(trimChangeModel: trimChangeModel),
+                buttonType: .twoButton,
+                leftTitle: "아니요",
+                rightTitle: "변경하기")
+        case .needChangeExteriorColor:
+            break
+        case .needChangeExteriorColorWithTrim:
+            break
+        case .needChangeInteriorColor:
+            break
+        case .needChangeInteriorColorWithTrim:
+            break
+        }
     }
     
     // MARK: - Functions

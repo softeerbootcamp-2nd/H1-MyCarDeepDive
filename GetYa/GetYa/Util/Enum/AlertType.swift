@@ -12,12 +12,7 @@ enum AlertType {
     case message(title: String, description: String)
     case share(pdfID: String)
     case mail
-    case settingChange(
-        trimName: String? = nil, trimPirce: Int? = nil,
-        otherTrimName: String? = nil, otherTrimPrice: Int? = nil,
-        exteriorColorName: String? = nil, exteriorColorPrice: Int? = nil,
-        interiorColorName: String? = nil, interiorColorPirce: Int? = nil,
-        optionNames: [String]? = nil, optionPrices: [Int]? = nil)
+    case settingChange(trimChangeModel: TrimChangeModel)
 }
 
 enum AlertButtonType {

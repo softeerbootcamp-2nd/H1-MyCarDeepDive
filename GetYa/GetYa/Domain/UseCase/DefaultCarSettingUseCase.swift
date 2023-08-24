@@ -73,8 +73,7 @@ extension DefaultCarSettingUseCase {
                       let carSpec = trimInquery.carSpecs.first(where: {
                           $0.trimID == trimSelectModel.trimID
                       }) else { return }
-                let result = try await trimSelectRepository.fetchTrimSelectLog(
-                    with: carSpec.trimID)
+                _=try await trimSelectRepository.fetchTrimSelectLog(with: carSpec.trimID)
                 self.trimSelect.send(trimSelectModel)
                 self.trimSelectResult.send(carSpec.trimImageURL)
             } catch {
@@ -163,9 +162,20 @@ extension DefaultCarSettingUseCase {
         if let exteriorColorSelect = exteriorColorSelect.value {
             if interiorColor.oppositeColors.contains(exteriorColorSelect.colorID) {
                 if interiorColor.trimID != exteriorColorSelect.trimID {
-                    interiorColorChangeResult.send(
+                    guard let otherTrim = trimInquery.value?.carSpecs
+                        .first(where: { $0.trimID == interiorColor.trimID }),
+                          let trimSelect = trimSelect.value else { return }
+                    
+                    exteriorColorChangeResult.send(
                         .needChangeTrim(
-                            trimChangeModel: TrimChangeModel()))
+                            trimChangeModel: TrimChangeModel(
+                                trimSelectModel: trimSelect,
+                                otherTrimSelectModel: TrimSelectModel(
+                                    trimID: otherTrim.trimID,
+                                    trimTag: trimSelect.trimTag,
+                                    trimName: otherTrim.trimName,
+                                    trimPrice: otherTrim.price),
+                                exteriorColorSelectModel: exteriorColorSelect)))
                 } else {
                     interiorColorSelect.send(interiorColor)
                     fetchExteriorColorInquery(interiorColor: interiorColor)
@@ -190,15 +200,20 @@ extension DefaultCarSettingUseCase {
         if let interiorColorSelect = interiorColorSelect.value {
             if exteriorColor.oppositeColors.contains(interiorColorSelect.colorID) {
                 if exteriorColor.trimID != interiorColorSelect.trimID {
-                    guard let otherTrim = trimInquery.value?.carSpecs.first(where: {
-                        $0.trimID == exteriorColor.trimID
-                    }) else { return }
+                    guard let otherTrim = trimInquery.value?.carSpecs
+                        .first(where: { $0.trimID == exteriorColor.trimID }),
+                          let trimSelect = trimSelect.value else { return }
                     
                     exteriorColorChangeResult.send(
                         .needChangeTrim(
                             trimChangeModel: TrimChangeModel(
-                                trimSelectModel: trimSelect.value,
-                                otherTrimSelectModel: nil)))
+                                trimSelectModel: trimSelect,
+                                otherTrimSelectModel: TrimSelectModel(
+                                    trimID: otherTrim.trimID,
+                                    trimTag: trimSelect.trimTag,
+                                    trimName: otherTrim.trimName,
+                                    trimPrice: otherTrim.price),
+                                interiorColorSelectModel: interiorColorSelect)))
                 } else {
                     exteriorColorSelect.send(exteriorColor)
                     fetchInteriorColorInquery(exteriorColor: exteriorColor)

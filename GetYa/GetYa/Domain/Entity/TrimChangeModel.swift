@@ -9,19 +9,19 @@ import Foundation
 
 struct TrimChangeModel {
     let trimSelectModel: TrimSelectModel?
-    let otherSelectModel: TrimSelectModel?
+    let otherTrimSelectModel: TrimSelectModel?
     let exteriorColorSelectModel: ColorSelectModel?
     let interiorColorSelectModel: ColorSelectModel?
     let optionSelectModel: OptionSelectModel?
     
     init(
         trimSelectModel: TrimSelectModel? = nil,
-        otherSelectModel: TrimSelectModel? = nil,
+        otherTrimSelectModel: TrimSelectModel? = nil,
         exteriorColorSelectModel: ColorSelectModel? = nil,
         interiorColorSelectModel: ColorSelectModel? = nil,
         optionSelectModel: OptionSelectModel? = nil) {
         self.trimSelectModel = trimSelectModel
-        self.otherSelectModel = otherSelectModel
+        self.otherTrimSelectModel = otherTrimSelectModel
         self.exteriorColorSelectModel = exteriorColorSelectModel
         self.interiorColorSelectModel = interiorColorSelectModel
         self.optionSelectModel = optionSelectModel
