@@ -8,7 +8,7 @@
 import Foundation
 
 struct DefaultQuotationRepository: QuotationRepository {
-    typealias Endpoints = QuotationEndpoints
+    typealias Endpoints = QuotationEndpoint
     let provider = SessionProvider()
     
     func fetchCarDetailRecommendation(

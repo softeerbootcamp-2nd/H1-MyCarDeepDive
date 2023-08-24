@@ -156,7 +156,7 @@ class TrimSelectViewController: UIViewController {
                 carSpecCount = trimInquery.carSpecs.count
                 updateTrimOptionContentCollectionViewHeight()
                 headerView.setImage(
-                    urlString: trimInquery.carSpecs[trimInquery.recommendTrimID].trimImageURL)
+                    urlString: trimInquery.carSpecs[trimInquery.recommendTrimID - 1].trimImageURL)
                 trimOptionContentCollectionView.setTrimInquery(
                     data: trimInquery,
                     trimSubOptionSelectNames: trimSubOptionSelectNames)

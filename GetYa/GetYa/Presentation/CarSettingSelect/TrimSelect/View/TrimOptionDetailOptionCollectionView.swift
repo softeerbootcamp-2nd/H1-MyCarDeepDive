@@ -10,16 +10,14 @@ import UIKit
 class TrimOptionDetailOptionCollectionView: UICollectionView {
     enum Constants {
         enum Cell {
-            static let spacing = CGFloat(9).scaledWidth
-            static let width = CGFloat(80).scaledWidth
+            static let spacing = CGFloat(8).scaledWidth
+            static let width = CGFloat(95).scaledWidth
             static let height = CGFloat(124).scaledHeight
         }
     }
     // MARK: - UI properties
     
     // MARK: - Properties
-    
-    // TODO: - 이 부분은 나중에 모델로 만들어 쓸 예정
     private(set) var optionImageURLArray: [String] = []
     private(set) var optionDescriptionTexts: [String] = []
     

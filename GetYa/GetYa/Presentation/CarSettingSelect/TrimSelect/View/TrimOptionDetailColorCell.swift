@@ -55,6 +55,6 @@ class TrimOptionDetailColorCell: UICollectionViewCell {
     
     // MARK: - Functions
     func setImage(imageURL: String) {
-        // TODO: Image 처리
+        imageView.setImage(urlString: imageURL)
     }
 }

@@ -62,6 +62,6 @@ class TrimHeaderView: SettingSelectTitleBackgroundVIew {
     
     // MARK: - Functions
     func setImage(urlString: String) {
-        //TODO: 이미지 처리해야함
+        imageView.setImage(urlString: urlString)
     }
 }

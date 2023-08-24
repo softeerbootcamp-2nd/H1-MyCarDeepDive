@@ -21,6 +21,8 @@ class TrimOptionDetailOptionCell: UICollectionViewCell {
     private let imageView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = CGFloat(4).scaledHeight
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
     }
     private let label = CommonLabel(
         fontType: .regularCaption1,
@@ -82,7 +84,7 @@ class TrimOptionDetailOptionCell: UICollectionViewCell {
     
     // MARK: - Functions
     func setImage(imageURL: String) {
-        // TODO: 이미지 처리
+        imageView.setImage(urlString: imageURL)
     }
     
     func setText(text: String) {

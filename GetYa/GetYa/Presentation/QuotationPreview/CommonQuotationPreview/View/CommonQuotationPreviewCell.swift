@@ -80,21 +80,17 @@ final class CommonQuotationPreviewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         let reset = QuotationPreviewCarProductOptionModel(
-            optionImage: nil,
-            optionName: nil,
-            optionPrice: nil,
+            optionImage: "",
+            optionName: "",
+            optionPrice: 0,
             optionReview: nil)
         configure(with: reset)
     }
     
     // MARK: - Functions
     func configure(with productOptionModel: QuotationPreviewCarProductOptionModel) {
-        var image: UIImage?
-        if let imageName = productOptionModel.optionImage {
-            image = UIImage(named: imageName)
-        }
         recommendCarOptionView.configureDetail(
-            image: image,
+            imageURL: productOptionModel.optionImage,
             title: productOptionModel.optionName,
             price: productOptionModel.optionPrice)
         reviewdTextView.text = productOptionModel.optionReview

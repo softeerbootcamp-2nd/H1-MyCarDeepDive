@@ -9,8 +9,8 @@ import Foundation
 
 extension QuotationPreviewCarInfoModel {
     static let palisadeMock: Self = .init(
-        carKrName: "팰리세이드",
-        carEnTrimName: "Prestige",
+        carName: "팰리세이드",
+        trimName: "Prestige",
         carPrice: "43,460,000"+"원",
         carOptions: "가솔린 ・ 2WD ・ 8인승")  
 }
