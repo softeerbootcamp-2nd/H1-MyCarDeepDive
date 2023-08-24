@@ -41,7 +41,6 @@ function ExteriorDropDown({
   const clickHandler = ({
     currentTarget,
   }: React.MouseEvent<HTMLButtonElement>) => {
-    setView('exterial');
     const dataObject = currentTarget.getAttribute('data-object');
     if (dataObject) {
       const colorInfo = JSON.parse(dataObject);
@@ -55,6 +54,7 @@ function ExteriorDropDown({
 
   const changeHandler = () => {
     closeModalHandler();
+    setView('exterial');
     const {
       color_id,
       name,
