@@ -17,11 +17,11 @@ struct DefaultQuotationPreviewMainHeaderModel {
 }
 
 extension DefaultQuotationPreviewMainHeaderModel {
-    static let mock: Self = .init(
-        carName: "펠리세이드 - Prestige",
-        carImageUrl: "characterSelectSuccessCar",
-        recommendCarProductOption: .palisadeMock,
-        firstSectionTitle: "색상")
+//    static let mock: Self = .init(
+//        carName: "펠리세이드 - Prestige",
+//        carImageUrl: "characterSelectSuccessCar",
+//        recommendCarProductOption: .palisadeMock,
+//        firstSectionTitle: "색상")
 }
 
 final class DefaultQuotationPreviewViewModel: CommonQuotationPreviewTableViewModel {
@@ -31,7 +31,15 @@ final class DefaultQuotationPreviewViewModel: CommonQuotationPreviewTableViewMod
     private var sectionHeaders: [String]
     private var secondSectionFooter: String
     override init(dataSource: [[OptionInfo]]) {
-        mainSectionHeader = .mock
+        mainSectionHeader = .init(
+            carName: "",
+            carImageUrl: "",
+            recommendCarProductOption: .init(
+                carName: "",
+                trimName: "",
+                carPrice: "",
+                carOptions: ""),
+            firstSectionTitle: "")
         sectionHeaders = QuotationPreviewHeaderTitleList.lists
         secondSectionFooter = "48,120,000원"
         super.init(dataSource: dataSource)
