@@ -118,7 +118,6 @@ private extension DetailQuotationPreviewViewModel {
                 self?.mainSectionHeader.recommendCarProductOption = recommendCarProductOption
                 self?.mainSectionHeader.firstSectionTitle = "색상"
                 self?.mainSectionHeader.thumbnailUrl = quotationModel.carImgUrl
-                self?.sectionHeaders = ["옵션", "패키지"]
                 self?.secondSectionFooter = quotationModel.totalPrice.toPriceFormat+"원"
                 let exteriorColor = quotationModel.exteriorColor
                 let interiorColor = quotationModel.interiorColor
@@ -169,7 +168,7 @@ private extension DetailQuotationPreviewViewModel {
 // MARK: - CharacterSSTableViewAdapterDataSource
 extension DetailQuotationPreviewViewModel: DetailQuotationPreviewAdapterDataSource {
     var lastSectionHeaderItem: String {
-        sectionHeaders[1]
+        sectionHeaders[2]
     }
     
     var lastSectionFooterItem: String {
@@ -181,6 +180,6 @@ extension DetailQuotationPreviewViewModel: DetailQuotationPreviewAdapterDataSour
     }
     
     var secondSectionHeaderItem: String {
-        sectionHeaders[0]
+        sectionHeaders[1]
     }
 }
