@@ -65,17 +65,9 @@ public class PdfService {
                                         new MyCarDeepDiveException(
                                                 HttpStatus.BAD_REQUEST, ErrorType.PDF_NOT_FOUND));
         List<SimpleOption> simpleOptionList =
-                pdfIdRequest.getAdditional_option_id_list().stream()
-                        .map(
-                                id ->
-                                        optionsRepository
-                                                .findById(id)
-                                                .orElseThrow(
-                                                        () ->
-                                                                new MyCarDeepDiveException(
-                                                                        HttpStatus.BAD_REQUEST,
-                                                                        ErrorType
-                                                                                .OPTION_NOT_FOUND)))
+                optionsRepository
+                        .findAllOptionsByList(pdfIdRequest.getAdditional_option_id_list())
+                        .stream()
                         .map(
                                 option ->
                                         new SimpleOption(
