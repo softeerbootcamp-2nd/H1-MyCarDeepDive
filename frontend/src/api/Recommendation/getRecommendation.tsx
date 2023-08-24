@@ -60,7 +60,6 @@ function getRecommendation(): getRecommendationType | undefined {
     url: `/car-recommendation?ageGroupId=${
       ageQuestionList.indexOf(age) + 1
     }&lifeStyleId=${lifeStyle}`,
-    showLoading: true,
   });
 }
 

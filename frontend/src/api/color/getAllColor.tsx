@@ -35,7 +35,6 @@ function getAllColor(): getInitialColorType | undefined {
   return useFetch({
     method: GET,
     url: `/color/trim-colors?trimId=${carSpec.trim.id}`,
-    showLoading: false,
   });
 }
 

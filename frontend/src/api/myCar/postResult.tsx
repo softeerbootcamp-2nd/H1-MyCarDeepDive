@@ -24,7 +24,6 @@ function postResult(): postResultType | undefined {
     method: POST,
     url: `/pdfId`,
     body: body,
-    showLoading: true,
   });
 }
 

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useTransition } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CacheContext } from '@/context/CacheProvider';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,10 +15,9 @@ interface useFetchParameter {
   method: 'get' | 'post';
   url: string;
   body?: {};
-  showLoading: boolean;
 }
 
-function useFetch<T>({ method, url, body, showLoading }: useFetchParameter) {
+function useFetch<T>({ method, url, body }: useFetchParameter) {
   const navigation = useNavigate();
   const [promise, setPromise] = useState<Promise<any>>();
   const [status, setStatus] = useState<'pending' | 'fulfilled' | 'error'>(
@@ -26,7 +25,6 @@ function useFetch<T>({ method, url, body, showLoading }: useFetchParameter) {
   );
   const [result, setResult] = useState<T>();
   const [error, setError] = useState<Error>();
-  const [isPending, startTransition] = useTransition();
   const { getByCache, setByCache } = useContext(CacheContext);
 
   const resolvePromise = (result: any) => {
@@ -67,15 +65,9 @@ function useFetch<T>({ method, url, body, showLoading }: useFetchParameter) {
 
   useEffect(() => {
     setStatus(PENDING);
-
-    if (showLoading) setPromise(fetchData());
-    else
-      startTransition(() => {
-        setPromise(fetchData());
-      });
+    setPromise(fetchData());
   }, [url]);
 
-  if (isPending) return undefined;
   if (status === PENDING && promise) throw promise;
   if (status === ERROR) throw error;
   return result;

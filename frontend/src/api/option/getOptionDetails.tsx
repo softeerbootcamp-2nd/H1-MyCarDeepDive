@@ -15,7 +15,6 @@ function getOptionDetails(): getOptionDetailsType | undefined {
   return useFetch({
     method: GET,
     url: `/options/${optionId}/details`,
-    showLoading: false,
   });
 }
 
