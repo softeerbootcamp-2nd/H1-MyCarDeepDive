@@ -5,6 +5,7 @@ import { ageQuestionList } from '@/global/data';
 
 export interface recommendType {
   trim_name: string;
+  trim_price: number;
   car_img_url: string;
   comment1: string;
   comment2: string;
