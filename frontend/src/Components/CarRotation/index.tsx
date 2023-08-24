@@ -1,12 +1,14 @@
 import { useEffect, useState, MouseEvent } from 'react';
 import roundedIcon from '@/assets/icon/rounded.svg';
+import usePrevious from '@/hooks/usePrevious';
 
 interface CarRotationProps {
   rotation: boolean;
-  carImageUrl?: string[];
+  carImageUrl: string[];
 }
 
 function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
+  const prevImageUrl = usePrevious(carImageUrl);
   const [appear, setAppear] = useState(false);
   const [isAnimate, setIsAnimate] = useState(false);
   const [focus, setFocus] = useState<number>(10);
@@ -14,6 +16,7 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
   const [pointerPosition, setPointerPosition] = useState<number>(
     window.innerWidth / 2,
   );
+  const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
 
   const onMouseDownHandler = (e: MouseEvent<HTMLDivElement>) => {
     if (!rotation) return;
@@ -67,14 +70,24 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
   }, [rotation, setIsAnimate]);
 
   useEffect(() => {
-    setAppear(true);
-  }, [setAppear]);
+    if (prevImageUrl && prevImageUrl[0] === carImageUrl[0]) return;
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(undefined);
+    }
+    setAppear(false);
 
-  if (carImageUrl === undefined) return null;
+    setTimeout(() => {
+      setAppear(true);
+    }, 500);
+  }, [setAppear, carImageUrl]);
+
   return (
     <div
-      className={`w-full z-40 relative transition-transform duration-1000 ease-out ${
-        appear ? 'translate-x-0' : 'translate-x-[100%]'
+      className={`w-full z-40 relative ${
+        appear
+          ? 'translate-x-0 transition-transform duration-1000 ease-out'
+          : 'translate-x-[200%]'
       }`}
       onMouseDown={onMouseDownHandler}
       onMouseMove={onMouseMoveHandler}
