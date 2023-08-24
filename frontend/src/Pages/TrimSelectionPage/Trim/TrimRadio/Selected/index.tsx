@@ -2,6 +2,7 @@ import { useCallback, useContext, useRef } from 'react';
 import { priceToString } from '@/utils';
 import checkCircleBlue from '@/assets/icon/check-circle-lifecycle-blue.svg';
 import { CarContext } from '@/context/CarProvider';
+import useLogFetch from '@/hooks/useLogFetch';
 
 export interface Props {
   carSpecData: {
@@ -52,6 +53,11 @@ function Selected({ carSpecData, optionToolTipHandler }: Props) {
         id={carSpecData.trim_name}
         value={carSpecData.trim_name}
         className='hidden'
+        onClick={() =>
+          useLogFetch({
+            url: `/car-spec/activity-log/${carSpecData.car_spec_id}`,
+          })
+        }
       />
       <label htmlFor={carSpecData.trim_name}>
         <div className='relative'>

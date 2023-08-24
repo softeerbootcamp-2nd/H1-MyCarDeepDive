@@ -15,6 +15,7 @@ import {
 import { getExteriorColorType } from '@/api/color/getExteriorColor';
 import ColorItems from '../ColorItems';
 import { getInteriorColorType } from '@/api/color/getInteriorColors';
+import useLogFetch from '@/hooks/useLogFetch';
 
 interface Props {
   initialColor: initialColorType | undefined;
@@ -72,6 +73,11 @@ function ExteriorItems({
       opposite_color_ids,
       car_img_urls,
     } = colorInfo;
+
+    useLogFetch({
+      url: `/color/exterior-colors/activity-log/${color_id}`,
+    });
+
     carDispatch({
       type: SET_EXTERIORCOLOR,
       exteriorColor: {

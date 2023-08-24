@@ -6,6 +6,7 @@ import PageButtons from './PageButtons';
 import OptionCard from './OptionCard';
 import { OptionContext } from '@/context/OptionProvider';
 import getPackageOptionDetails from '@/api/option/getPackageOptionDetails';
+import useLogFetch from '@/hooks/useLogFetch';
 
 interface OptionModalProps {
   showOptionModal: boolean;
@@ -18,7 +19,7 @@ function OptionModal({
   setShowOptionModal,
   category,
 }: OptionModalProps) {
-  const { packageOption } = useContext(OptionContext);
+  const { optionId, packageOption } = useContext(OptionContext);
   const optionDetailData = packageOption ? undefined : getOptionDetails();
   const packageOptionDetailData = packageOption
     ? getPackageOptionDetails()
@@ -64,6 +65,17 @@ function OptionModal({
       setOptionCardData([optionDetailData.data]);
     }
   }, [packageOptionDetailData, optionDetailData]);
+
+  useEffect(() => {
+    if (packageOption)
+      useLogFetch({
+        url: `/package-options/activity-log/${optionId}`,
+      });
+    else
+      useLogFetch({
+        url: `/options/activity-log/${optionId}`,
+      });
+  }, []);
 
   if (!optionCardData) return null;
   return (

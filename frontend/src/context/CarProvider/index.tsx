@@ -1,4 +1,4 @@
-import { useReducer, createContext } from 'react';
+import { useReducer, createContext, useMemo } from 'react';
 import {
   InitialStateType,
   CarContextType,
@@ -241,15 +241,12 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 const CarProvider = ({ children }: CarProviderProps) => {
   const [state, carDispatch] = useReducer(reducer, initialState);
 
+  const memoValue = useMemo(() => {
+    return { ...state, carDispatch };
+  }, [state, carDispatch]);
+
   return (
-    <CarContext.Provider
-      value={{
-        ...state,
-        carDispatch,
-      }}
-    >
-      {children}
-    </CarContext.Provider>
+    <CarContext.Provider value={memoValue}>{children}</CarContext.Provider>
   );
 };
 

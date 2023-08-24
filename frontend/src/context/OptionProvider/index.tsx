@@ -1,4 +1,4 @@
-import { useReducer, createContext } from 'react';
+import { useReducer, createContext, useMemo } from 'react';
 import {
   InitialStateType,
   OptionContextType,
@@ -32,13 +32,12 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 const OptionProvider = ({ children }: OptionProviderProps) => {
   const [state, optionDispatch] = useReducer(reducer, initialState);
 
+  const memoValue = useMemo(() => {
+    return { ...state, optionDispatch };
+  }, [state, optionDispatch]);
+
   return (
-    <OptionContext.Provider
-      value={{
-        ...state,
-        optionDispatch,
-      }}
-    >
+    <OptionContext.Provider value={memoValue}>
       {children}
     </OptionContext.Provider>
   );
