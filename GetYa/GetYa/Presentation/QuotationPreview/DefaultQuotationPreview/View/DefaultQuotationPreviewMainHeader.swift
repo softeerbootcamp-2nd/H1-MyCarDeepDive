@@ -90,12 +90,15 @@ extension DefaultQuotationPreviewMainHeader: LayoutSupportable {
 // MARK: - LayoutSupportable private functions
 private extension DefaultQuotationPreviewMainHeader {
     func configureThumbnailView() {
+        typealias Const = DefaultQuotationPreviewThumbnailView.Constants
         NSLayoutConstraint.activate([
             thumbnailView.leadingAnchor.constraint(
                 equalTo: leadingAnchor),
             thumbnailView.trailingAnchor.constraint(
                 equalTo: trailingAnchor),
-            thumbnailView.topAnchor.constraint(equalTo: topAnchor)])
+            thumbnailView.topAnchor.constraint(equalTo: topAnchor),
+            thumbnailView.heightAnchor.constraint(
+                equalToConstant: Const.intrinsicContentHeight)])
     }
     
     func configureRecommendCarInfo() {
