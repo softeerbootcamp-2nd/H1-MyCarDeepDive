@@ -164,8 +164,10 @@ class TrimSelectViewController: UIViewController {
             .store(in: &cancellables)
         
         output.trimSelectResult
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
+                scrollView.setContentOffset(.zero, animated: true)
                 headerView.setImage(urlString: $0)
             })
             .store(in: &cancellables)

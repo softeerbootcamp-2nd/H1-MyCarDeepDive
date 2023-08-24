@@ -62,6 +62,12 @@ class TrimHeaderView: SettingSelectTitleBackgroundVIew {
     
     // MARK: - Functions
     func setImage(urlString: String) {
+        imageView.transform = CGAffineTransform(translationX: 400, y: 0)
         imageView.setImage(urlString: urlString)
+        
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            guard let self else { return }
+            imageView.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
     }
 }
