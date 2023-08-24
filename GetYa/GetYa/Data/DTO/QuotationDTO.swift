@@ -14,8 +14,11 @@ struct QuotationDTO: Decodable {
     let comment2: String
     let keyword: String
     let engineName: String
+    let engineId: Int
     let drivingSystemName: String
+    let drivingSystemId: Int
     let bodyName: String
+    let bodyId: Int
     let carSpecId: Int
     let trimId: Int
     let exteriorColor: ColorInfoDTO
@@ -31,15 +34,18 @@ struct QuotationDTO: Decodable {
         case comment2
         case keyword
         case engineName = "engine_name"
+        case engineId = "engine_id"
         case drivingSystemName = "driving_system_name"
+        case drivingSystemId = "driving_system_id"
         case bodyName = "body_name"
+        case bodyId = "body_id"
         case carSpecId = "car_spec_id"
         case trimId = "trim_id"
         case exteriorColor = "exterior_color"
         case interiorColor = "interior_color"
         case options
         case packages
-        case totalPrice
+        case totalPrice = "total_price"
     }
     
     func toDomain() -> QuotationModel {
