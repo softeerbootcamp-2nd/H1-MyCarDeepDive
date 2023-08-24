@@ -36,7 +36,6 @@ function getComparison(): getComparisonType | undefined {
   return useFetch({
     method: GET,
     url: `/car-spec/comparison?engineId=${engineId}&bodyId=${bodyId}&drivingSystemId=${drivingSystemId}`,
-    showLoading: false,
   });
 }
 

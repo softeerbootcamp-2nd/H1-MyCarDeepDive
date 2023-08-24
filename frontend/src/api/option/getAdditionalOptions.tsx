@@ -41,7 +41,6 @@ function getAdditionalOptions(): getAdditionalOptionsType | undefined {
   return useFetch({
     method: GET,
     url: `/car-spec/${carSpec.id}/additional-options`,
-    showLoading: false,
   });
 }
 

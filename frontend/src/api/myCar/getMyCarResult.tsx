@@ -34,7 +34,6 @@ function getMyCarResult(): getMyCarResultType | undefined {
   return useFetch({
     method: GET,
     url: `/pdf/${id}/car-information`,
-    showLoading: true,
   });
 }
 

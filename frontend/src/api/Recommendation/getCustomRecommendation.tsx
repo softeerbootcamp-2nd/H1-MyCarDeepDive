@@ -21,7 +21,6 @@ function getCustomRecommendation(): getRecommendationType | undefined {
   return useFetch({
     method: GET,
     url: `/car-recommendation/custom?drivingExperienceId=${drivingExperienceId}&familyMembersId=${familyMembersId}&carPurposeId=${carPurposeId}&personalValueId=${personalValueId}&maxBudget=${myLifeStyle.budget}`,
-    showLoading: true,
   });
 }
 
