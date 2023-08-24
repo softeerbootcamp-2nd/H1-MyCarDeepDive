@@ -14,7 +14,7 @@ export interface getExteriorColorType {
 
 function getExteriorColor(): getExteriorColorType | undefined {
   const { carSpec, color } = useContext(CarContext);
-  const [interiorId, setInteriorId] = useState<number>();
+  const [interiorId, setInteriorId] = useState(0);
 
   useEffect(() => {
     setInteriorId(color.interiorColor.id);

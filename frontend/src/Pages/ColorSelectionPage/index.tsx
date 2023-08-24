@@ -5,35 +5,107 @@ import ReRecommendCardLink from '../TrimSelectionPage/Car/ReRecommendCarLink';
 import SelectionCarWrapper from '../TrimSelectionPage/SelectionCarWrapper';
 import ColorTitle from './ColorTitle';
 import Description from './Description';
-import ColorItems from './ColorItems';
 
 import UnderLine from '@/Components/UnderLine';
-import DropDown from './DropDown';
 import Buttons from './Buttons';
 import ContentsWrapper from './ContentsWrapper';
 import CarRotation from '@/Components/CarRotation';
 
 import { CarContext } from '@/context/CarProvider';
-import { useInitialColor } from '@/hooks/useInitialColor';
 import ControlButtons from '@/Components/ControlButtons';
+import InteriorItems from './InteriorItems';
+import ExteriorItems from './ExteriorItems';
+import getAllColor, { getInitialColorType } from '@/api/color/getAllColor';
+import getExteriorColor, {
+  getExteriorColorType,
+} from '@/api/color/getExteriorColor';
+
+import getInteriorColor, {
+  getInteriorColorType,
+} from '@/api/color/getInteriorColors';
+import ExteriorDropDown from './ExteriorDropDown';
+import InteriorDropDown from './InteriorDropDown';
+import getTrim, { getTrimType } from '@/api/trim/getTrim';
+import InteriorImg from './InteriorImg';
 
 function ColorSelectionPage() {
   const { color } = useContext(CarContext);
   const [rotation, setRotation] = useState(false);
   const [view, setView] = useState('exterial');
-  const {
-    interiorColors,
-    exteriorColors,
-    carImageUrl,
-    exteriorColorsClickHandler,
-    interiorColorsClickHandler,
-  } = useInitialColor();
+  const [exteriorCarImage, setExteriorCarImage] = useState<string[]>([]);
+  const [interiorCarImage, setInteriorCarImage] = useState<string>();
+  const initialAllColor: getInitialColorType | undefined = getAllColor();
+  const classifiedExteriorColor: getExteriorColorType | undefined =
+    getExteriorColor();
+  const classifiedInteriorColor: getInteriorColorType | undefined =
+    getInteriorColor();
+
+  const getTrimInfo: getTrimType | undefined = getTrim();
+
+  const [initialExteriorColor, setInitialExteriorColor] = useState<any>();
+  const [initialInteriorColor, setInitialInteriorColor] = useState<any>();
+
+  useEffect(() => {
+    if (!classifiedExteriorColor || !initialAllColor) return;
+    const idx = classifiedExteriorColor.data.available_colors.findIndex(
+      item => item.color_id === color.exteriorColor.id,
+    );
+
+    setInitialExteriorColor(
+      initialAllColor?.data.exterior_color_response.available_colors[
+        Math.max(idx, 0)
+      ],
+    );
+
+    setExteriorCarImage(
+      initialAllColor?.data.exterior_color_response.available_colors[
+        Math.max(idx, 0)
+      ].car_img_urls,
+    );
+  }, [classifiedExteriorColor]);
+
+  useEffect(() => {
+    if (!classifiedInteriorColor) return;
+    const idx = classifiedInteriorColor.data.available_colors.findIndex(
+      item => item.color_id === color.interiorColor.id,
+    );
+
+    setInitialInteriorColor(
+      initialAllColor?.data.interior_color_response.available_colors[
+        Math.max(idx, 0)
+      ],
+    );
+  }, [classifiedInteriorColor]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  //모든 이미지 받아오기
-  //
+  useEffect(() => {
+    setInitialExteriorColor(
+      initialAllColor?.data.exterior_color_response.available_colors[0],
+    );
+    setInitialInteriorColor(
+      initialAllColor?.data.interior_color_response.available_colors[0],
+    );
+    const initialExteriorCarImage =
+      initialAllColor?.data.exterior_color_response.available_colors.find(
+        exteriorColor => exteriorColor.color_id === color.exteriorColor.id,
+      );
+    const initialInteriorCarImage =
+      initialAllColor?.data.interior_color_response.available_colors.find(
+        interiorColor => interiorColor.color_id === color.interiorColor.id,
+      );
+
+    if (initialExteriorCarImage)
+      setExteriorCarImage(initialExteriorCarImage?.car_img_urls);
+    if (initialInteriorCarImage)
+      setInteriorCarImage(initialInteriorCarImage.car_img_urls[0]);
+  }, [initialAllColor]);
+
+  useEffect(() => {
+    if (view === 'interial') setRotation(false);
+  }, [view]);
 
   return (
     <>
@@ -41,12 +113,13 @@ function ColorSelectionPage() {
         <ReRecommendCardLink />
         {view === 'exterial' && (
           <>
-            <CarRotation rotation={rotation} carImageUrl={carImageUrl} />
+            <CarRotation rotation={rotation} carImageUrl={exteriorCarImage} />
             <Background />
           </>
         )}
-        {/* {view === 'interial' && } */}
-
+        {view === 'interial' && (
+          <InteriorImg interiorCarImage={interiorCarImage} />
+        )}
         <ControlButtons
           rotation={rotation}
           setRotation={setRotation}
@@ -60,17 +133,22 @@ function ColorSelectionPage() {
           color={color.exteriorColor.name}
           chooseRate={color.exteriorColor.chooseRate}
         />
-        <ColorItems
-          data={exteriorColors || []}
-          selectedColor={color.exteriorColor}
-          clickHandler={exteriorColorsClickHandler}
-          colorType='exterior'
+        <ExteriorItems
+          initialColor={initialExteriorColor}
+          classifiedExteriorColor={classifiedExteriorColor}
+          classifiedInteriorColor={classifiedInteriorColor}
+          setExteriorCarImage={setExteriorCarImage}
+          setInteriorCarImage={setInteriorCarImage}
+          setView={setView}
         />
 
-        <DropDown
-          phrase={'다른 외장 색상을 찾고 있나요?'}
-          data={exteriorColors || []}
-          clickHandler={exteriorColorsClickHandler}
+        <ExteriorDropDown
+          classifiedExteriorColor={classifiedExteriorColor}
+          classifiedInteriorColor={classifiedInteriorColor}
+          getTrimInfo={getTrimInfo}
+          setExteriorCarImage={setExteriorCarImage}
+          setInteriorCarImage={setInteriorCarImage}
+          setView={setView}
         />
         <UnderLine margin='mb-6' />
         <ColorTitle title={'내장 색상'} />
@@ -78,16 +156,19 @@ function ColorSelectionPage() {
           color={color.interiorColor.name}
           chooseRate={color.interiorColor.chooseRate}
         />
-        <ColorItems
-          data={interiorColors || []}
-          selectedColor={color.interiorColor}
-          clickHandler={interiorColorsClickHandler}
-          colorType='interior'
+        <InteriorItems
+          initialColor={initialInteriorColor}
+          classifiedInteriorColor={classifiedInteriorColor}
+          classifiedExteriorColor={classifiedExteriorColor}
+          setExteriorCarImage={setExteriorCarImage}
+          setInteriorCarImage={setInteriorCarImage}
+          setView={setView}
         />
-        <DropDown
-          phrase={'다른 내장 색상을 찾고 있나요?'}
-          data={interiorColors || []}
-          clickHandler={interiorColorsClickHandler}
+        <InteriorDropDown
+          classifiedExteriorColor={classifiedExteriorColor}
+          classifiedInteriorColor={classifiedInteriorColor}
+          getTrimInfo={getTrimInfo}
+          setView={setView}
         />
         <Buttons />
       </ContentsWrapper>

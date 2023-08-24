@@ -38,10 +38,10 @@ export interface ColorType {
   trim_name: string;
   name: string;
   img_url: string;
-  car_img_url?: string;
   car_img_urls?: string[];
   price: number;
   choose_rate: number;
+  opposite_color_ids: number[];
 }
 
 export interface ColorsType {
