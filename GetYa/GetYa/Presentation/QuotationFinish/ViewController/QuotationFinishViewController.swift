@@ -125,7 +125,8 @@ class QuotationFinishViewController: BaseViewController {
         $0.addAction(UIAction(handler: { _ in
             self.showAlert(
                 type: .mail,
-                buttonType: .oneButton,
+                buttonType: .twoButton,
+                leftTitle: "아니요",
                 rightTitle: "보내기")
         }), for: .touchUpInside)
     }

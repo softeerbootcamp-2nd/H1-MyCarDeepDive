@@ -115,6 +115,7 @@ class LoadingViewController: UIViewController {
     private func configureNavigationBar() {
         navigationItem.title = ""
         navigationItem.titleView = UIImageView(image: UIImage(named: "Black_Logo"))
+        navigationItem.setHidesBackButton(true, animated: true)
     }
     
     private func configureLabel() {
