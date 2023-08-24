@@ -14,8 +14,11 @@ struct QuotationModel {
     let comment2: String
     let keyword: String
     let engineName: String
+    let engineId: Int
     let drivingSystemName: String
+    let drivingSystemId:Int
     let bodyName: String
+    let bodyId: String
     let carSpecId: Int
     let trimId: Int
     let exteriorColor: ColorInfoModel
