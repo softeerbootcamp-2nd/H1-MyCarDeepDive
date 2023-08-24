@@ -10,7 +10,7 @@ import Combine
 
 protocol TrimSelectUseCase {
     var trimSelect: PassthroughSubject<TrimSelectModel, Never> { get set }
+    var trimInquery: PassthroughSubject<TrimInquery, Never> { get set }
     
-    func fetchTrim(trimSubOptionSelectModel: TrimSubOptionSelectModel)
-    func fetchTrim(carSpecID: Int)
+    func fetchTrimInqeury(trimSubOptionSelect: TrimSubOptionSelect)
 }

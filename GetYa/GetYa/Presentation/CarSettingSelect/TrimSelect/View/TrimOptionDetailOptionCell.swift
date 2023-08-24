@@ -81,8 +81,8 @@ class TrimOptionDetailOptionCell: UICollectionViewCell {
     }
     
     // MARK: - Functions
-    func setImage(image: UIImage?) {
-        imageView.image = image
+    func setImage(imageURL: String) {
+        // TODO: 이미지 처리
     }
     
     func setText(text: String) {

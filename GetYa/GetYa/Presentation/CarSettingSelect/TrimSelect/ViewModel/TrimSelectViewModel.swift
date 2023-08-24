@@ -11,13 +11,13 @@ class TrimSelectViewModel {
     // MARK: - Input
     struct Input {
         let viewDidLoadEvent: AnyPublisher<Void, Never>
-        let touchUpSubOptionSelect: AnyPublisher<TrimSubOptionSelectModel, Never>
+        let touchUpSubOptionSelect: AnyPublisher<TrimSubOptionSelect, Never>
         let touchUpTrimSelectButton: AnyPublisher<TrimSelectModel, Never>
     }
     
     // MARK: - Output
     struct Output {
-        
+        let trimInquery = PassthroughSubject<(TrimInquery, [String]), Never>()
     }
     
     // MARK: - Dependency
@@ -25,12 +25,12 @@ class TrimSelectViewModel {
     
     // MARK: - Properties
     private var useCase: TrimSelectUseCase
-    private let carSpecID: Int
+    private let trimSubOptionSelect: TrimSubOptionSelect
     
     // MARK: - LifeCycle
-    init(carSpecID: Int, useCase: TrimSelectUseCase) {
+    init(trimSubOptionSelect: TrimSubOptionSelect, useCase: TrimSelectUseCase) {
         self.useCase = useCase
-        self.carSpecID = carSpecID
+        self.trimSubOptionSelect = trimSubOptionSelect
     }
     
     // MARK: - Functions
@@ -40,7 +40,7 @@ class TrimSelectViewModel {
         input.viewDidLoadEvent
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                useCase.fetchTrim(carSpecID: carSpecID)
+                useCase.fetchTrimInqeury(trimSubOptionSelect: trimSubOptionSelect)
             })
             .store(in: &cancellables)
         
@@ -54,7 +54,21 @@ class TrimSelectViewModel {
         input.touchUpSubOptionSelect
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                useCase.fetchTrim(trimSubOptionSelectModel: $0)
+                useCase.fetchTrimInqeury(trimSubOptionSelect: $0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.trimInquery
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                var trimSubOptionNames: [String] = []
+                trimSubOptionNames.append(
+                    Engine.allCases[trimSubOptionSelect.engineID].rawValue)
+                trimSubOptionNames.append(
+                    Body.allCases[trimSubOptionSelect.bodyID].rawValue)
+                trimSubOptionNames.append(
+                    DrivingSystem.allCases[trimSubOptionSelect.drivingSystemID].rawValue)
+                output.trimInquery.send(($0, trimSubOptionNames))
             })
             .store(in: &cancellables)
         return output

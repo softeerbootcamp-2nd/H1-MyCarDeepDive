@@ -70,7 +70,7 @@
 		15D0263B2A94B5CE001D1659 /* ColorInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */; };
 		15D2ABBC2A9350FD00F7DE8E /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */; };
 		15D2ABC22A93567C00F7DE8E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC12A93567C00F7DE8E /* Status.swift */; };
-		15D2ABC62A9357C100F7DE8E /* TrimCarSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC52A9357C100F7DE8E /* TrimCarSpec.swift */; };
+		15D2ABC62A9357C100F7DE8E /* TrimInqueryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC52A9357C100F7DE8E /* TrimInqueryDTO.swift */; };
 		15D2ABCF2A937EF900F7DE8E /* DefaultGetYaCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABCE2A937EF900F7DE8E /* DefaultGetYaCacheService.swift */; };
 		15D2ABD12A93817400F7DE8E /* Cacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABD02A93817400F7DE8E /* Cacheable.swift */; };
 		15D2ABD32A9381C200F7DE8E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABD22A9381C200F7DE8E /* MemoryCache.swift */; };
@@ -102,7 +102,7 @@
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
 		641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */; };
 		641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */; };
-		6457CFA82A938F8700B3AAAF /* TrimSubOptionSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOptionSelectModel.swift */; };
+		6457CFA82A938F8700B3AAAF /* TrimSubOptionSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */; };
 		6457CFAA2A938F8E00B3AAAF /* TrimOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA92A938F8E00B3AAAF /* TrimOption.swift */; };
 		6457CFAC2A93941D00B3AAAF /* AdditionalOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */; };
 		6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */; };
@@ -136,6 +136,14 @@
 		6457D1322A94988600B3AAAF /* ColorSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1312A94988600B3AAAF /* ColorSelectUseCase.swift */; };
 		6457D1342A94989100B3AAAF /* OptionSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1332A94989100B3AAAF /* OptionSelectUseCase.swift */; };
 		6457D1362A9498B200B3AAAF /* DefaultCarSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1352A9498B200B3AAAF /* DefaultCarSettingUseCase.swift */; };
+		6457D1422A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1412A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift */; };
+		6457D1442A94C64600B3AAAF /* TrimSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1432A94C64600B3AAAF /* TrimSelectRepository.swift */; };
+		6457D1462A94E8FF00B3AAAF /* TrimSelectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1452A94E8FF00B3AAAF /* TrimSelectEndpoint.swift */; };
+		6457D1482A94EA6B00B3AAAF /* TrimCarSpecDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1472A94EA6B00B3AAAF /* TrimCarSpecDTO.swift */; };
+		6457D14A2A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */; };
+		6457D14C2A95013D00B3AAAF /* TrimInquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D14B2A95013D00B3AAAF /* TrimInquery.swift */; };
+		6457D14E2A95016D00B3AAAF /* TrimCarSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */; };
+		6457D1AE2A96F26900B3AAAF /* TrimSubOptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1AD2A96F26900B3AAAF /* TrimSubOptionType.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
 		6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
@@ -311,7 +319,7 @@
 		15D0263A2A94B5CE001D1659 /* ColorInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInfoDTO.swift; sourceTree = "<group>"; };
 		15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		15D2ABC12A93567C00F7DE8E /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
-		15D2ABC52A9357C100F7DE8E /* TrimCarSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpec.swift; sourceTree = "<group>"; };
+		15D2ABC52A9357C100F7DE8E /* TrimInqueryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimInqueryDTO.swift; sourceTree = "<group>"; };
 		15D2ABCE2A937EF900F7DE8E /* DefaultGetYaCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetYaCacheService.swift; sourceTree = "<group>"; };
 		15D2ABD02A93817400F7DE8E /* Cacheable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cacheable.swift; sourceTree = "<group>"; };
 		15D2ABD22A9381C200F7DE8E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
@@ -355,7 +363,7 @@
 		6457CF9B2A92B51300B3AAAF /* OptionSelectTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectTooltipView.swift; sourceTree = "<group>"; };
 		6457CF9D2A92B6EB00B3AAAF /* OptionSelectImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectImageCell.swift; sourceTree = "<group>"; };
 		6457CF9F2A92B76600B3AAAF /* OptionSelectImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectImageCollectionView.swift; sourceTree = "<group>"; };
-		6457CFA72A938F8700B3AAAF /* TrimSubOptionSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionSelectModel.swift; sourceTree = "<group>"; };
+		6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionSelect.swift; sourceTree = "<group>"; };
 		6457CFA92A938F8E00B3AAAF /* TrimOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimOption.swift; sourceTree = "<group>"; };
 		6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionList.swift; sourceTree = "<group>"; };
 		6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionPackage.swift; sourceTree = "<group>"; };
@@ -392,6 +400,14 @@
 		6457D1312A94988600B3AAAF /* ColorSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectUseCase.swift; sourceTree = "<group>"; };
 		6457D1332A94989100B3AAAF /* OptionSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectUseCase.swift; sourceTree = "<group>"; };
 		6457D1352A9498B200B3AAAF /* DefaultCarSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCarSettingUseCase.swift; sourceTree = "<group>"; };
+		6457D1412A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTrimSelectRepository.swift; sourceTree = "<group>"; };
+		6457D1432A94C64600B3AAAF /* TrimSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectRepository.swift; sourceTree = "<group>"; };
+		6457D1452A94E8FF00B3AAAF /* TrimSelectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectEndpoint.swift; sourceTree = "<group>"; };
+		6457D1472A94EA6B00B3AAAF /* TrimCarSpecDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpecDTO.swift; sourceTree = "<group>"; };
+		6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionSelectDTO.swift; sourceTree = "<group>"; };
+		6457D14B2A95013D00B3AAAF /* TrimInquery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimInquery.swift; sourceTree = "<group>"; };
+		6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpec.swift; sourceTree = "<group>"; };
+		6457D1AD2A96F26900B3AAAF /* TrimSubOptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionType.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -738,6 +754,7 @@
 			isa = PBXGroup;
 			children = (
 				1506363B2A9392150057724E /* QuotationEndpoints.swift */,
+				6457D1452A94E8FF00B3AAAF /* TrimSelectEndpoint.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1243,6 +1260,7 @@
 				15DF95942A7C89DF0093EAC7 /* GetYaFont.swift */,
 				6484A7612A8CB8D900434136 /* AlertType.swift */,
 				6457CFBF2A93A76D00B3AAAF /* TagCategoryType.swift */,
+				6457D1AD2A96F26900B3AAAF /* TrimSubOptionType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1302,8 +1320,10 @@
 				6457CFB92A9397A500B3AAAF /* TagDetail.swift */,
 				6457CFBB2A9397D600B3AAAF /* TagOption.swift */,
 				6457CFA92A938F8E00B3AAAF /* TrimOption.swift */,
-				6457CFA72A938F8700B3AAAF /* TrimSubOptionSelectModel.swift */,
+				6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */,
 				6457D1222A9463B200B3AAAF /* CarSettingSelectModel.swift */,
+				6457D14B2A95013D00B3AAAF /* TrimInquery.swift */,
+				6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */,
 				6457D1292A9465B400B3AAAF /* TrimSelectModel.swift */,
 				6457D1272A9465AF00B3AAAF /* ColorSelectModel.swift */,
 				6457D1252A9465A500B3AAAF /* OptionSelectModel.swift */,
@@ -1316,6 +1336,7 @@
 			children = (
 				64ADA4822A77886F0003E2C1 /* Protocol */,
 				150636432A93AA560057724E /* DefaultQuotationRepository.swift */,
+				6457D1412A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift */,
 			);
 			path = Repositoy;
 			sourceTree = "<group>";
@@ -1329,7 +1350,9 @@
 				15D026382A94B068001D1659 /* OptionInfoDTO.swift */,
 				15D026362A94B027001D1659 /* PackageInfoDTO.swift */,
 				1506363F2A9394710057724E /* QuotationDTO.swift */,
-				15D2ABC52A9357C100F7DE8E /* TrimCarSpec.swift */,
+				15D2ABC52A9357C100F7DE8E /* TrimInqueryDTO.swift */,
+				6457D1472A94EA6B00B3AAAF /* TrimCarSpecDTO.swift */,
+				6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1339,6 +1362,7 @@
 			children = (
 				64ADA4882A77888C0003E2C1 /* RepositoyProtocol.swift */,
 				150636412A93A8F00057724E /* QuotationRepository.swift */,
+				6457D1432A94C64600B3AAAF /* TrimSelectRepository.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1641,7 +1665,7 @@
 				6484A7542A8C835D00434136 /* CommonView.swift in Sources */,
 				6484A7862A902D0800434136 /* QuotationFinishViewController.swift in Sources */,
 				6484A73E2A8C791C00434136 /* GetYaFont.swift in Sources */,
-				6457CFA82A938F8700B3AAAF /* TrimSubOptionSelectModel.swift in Sources */,
+				6457CFA82A938F8700B3AAAF /* TrimSubOptionSelect.swift in Sources */,
 				6484A73D2A8C791500434136 /* UIView+.swift in Sources */,
 				6484A7622A8CB8D900434136 /* AlertType.swift in Sources */,
 				6484A73C2A8C790A00434136 /* ConvenienceInit.swift in Sources */,
@@ -1650,9 +1674,11 @@
 				6484A73B2A8C790200434136 /* ViewController.swift in Sources */,
 				155B72B42A8CA29E0091A7F4 /* QuestionListTextModel+Mock.swift in Sources */,
 				6484A7602A8CB86F00434136 /* AlertViewController.swift in Sources */,
+				6457D14A2A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift in Sources */,
 				6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */,
 				6484A73A2A8C78F400434136 /* QuotationPreviewMainHeaderModel+Mock.swift in Sources */,
 				155B72AA2A8C8FEB0091A7F4 /* OptionSelectViewController.swift in Sources */,
+				6457D14E2A95016D00B3AAAF /* TrimCarSpec.swift in Sources */,
 				15D2ABD32A9381C200F7DE8E /* MemoryCache.swift in Sources */,
 				6484A79D2A90F43800434136 /* OptionSelectSegmentedControl.swift in Sources */,
 				6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */,
@@ -1692,6 +1718,7 @@
 				15A738842A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift in Sources */,
 				64E26A572A8A3E2800F6BC3A /* TrimLearnMoreView.swift in Sources */,
 				155776F72A911D6000E3C0E1 /* SessionProvider.swift in Sources */,
+				6457D1462A94E8FF00B3AAAF /* TrimSelectEndpoint.swift in Sources */,
 				6412D0842A80ABCA001E4005 /* QuestionNumberView.swift in Sources */,
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
 				6457CFB62A9395D100B3AAAF /* OptionDetail.swift in Sources */,
@@ -1701,6 +1728,7 @@
 				15D8CC8F2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift in Sources */,
 				64ADA4BC2A7A22780003E2C1 /* CommonLabel.swift in Sources */,
 				15040FC92A8E4C5E00DDC411 /* TagViewCell.swift in Sources */,
+				6457D1482A94EA6B00B3AAAF /* TrimCarSpecDTO.swift in Sources */,
 				159B2CF92A825D07003F47D6 /* DetailQuotationPreviewAdapterDataSource.swift in Sources */,
 				6457D11A2A945C9500B3AAAF /* BasicCollectionView.swift in Sources */,
 				159B2CFE2A825F5F003F47D6 /* CommonQuotationPreviewCell.swift in Sources */,
@@ -1739,10 +1767,12 @@
 				155B72A12A8C882C0091A7F4 /* TrimOptionDetailOptionCollectionView.swift in Sources */,
 				6457D11B2A945C9500B3AAAF /* OptionSelectBasicItemCell.swift in Sources */,
 				64E26A522A8A3E2800F6BC3A /* TrimOptionDetailColorCell.swift in Sources */,
+				6457D14C2A95013D00B3AAAF /* TrimInquery.swift in Sources */,
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
 				6484A7512A8C82FE00434136 /* EnginePerformanceDescriptionView.swift in Sources */,
 				15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */,
 				64E26A4F2A8A3E2800F6BC3A /* TrimTooltipView.swift in Sources */,
+				6457D1422A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift in Sources */,
 				6484A79B2A90F3E800434136 /* AdditionalCollectionView.swift in Sources */,
 				64ADA4BE2A7A26090003E2C1 /* Int+.swift in Sources */,
 				64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */,
@@ -1766,11 +1796,13 @@
 				6412D09A2A8332E5001E4005 /* PeekQuestionView.swift in Sources */,
 				155EAB462A81F0AF00833B0E /* DetailQuotationPreviewMainHeader.swift in Sources */,
 				15D2ABC22A93567C00F7DE8E /* Status.swift in Sources */,
+				6457D1AE2A96F26900B3AAAF /* TrimSubOptionType.swift in Sources */,
 				6484A7882A902D7600434136 /* QuotationTableView.swift in Sources */,
 				6484A7682A8DBA6D00434136 /* SettingAlertView.swift in Sources */,
 				6412D0862A80AC92001E4005 /* LifeStyleDetailCell.swift in Sources */,
 				155B72A82A8C8FB20091A7F4 /* TrimSubOptionContentStackView.swift in Sources */,
 				6484A7532A8C82FE00434136 /* SubOptionDetailSegmentedControl.swift in Sources */,
+				6457D1442A94C64600B3AAAF /* TrimSelectRepository.swift in Sources */,
 				155B72B22A8CA02D0091A7F4 /* CharacterDetailSelectViewModel.swift in Sources */,
 				6412D08C2A81E5C1001E4005 /* LifeStylePeekViewController.swift in Sources */,
 				155ED71E2A7E5AD60052896A /* UIControl+Publihser.swift in Sources */,
@@ -1829,7 +1861,7 @@
 				64E26A482A8A3E2800F6BC3A /* TrimOptionDetailColorCollectionView.swift in Sources */,
 				155776E32A90D29900E3C0E1 /* HTTPMethod.swift in Sources */,
 				15837B9D2A7E5931000FE728 /* UIControl+CombineInteractionPublisher.swift in Sources */,
-				15D2ABC62A9357C100F7DE8E /* TrimCarSpec.swift in Sources */,
+				15D2ABC62A9357C100F7DE8E /* TrimInqueryDTO.swift in Sources */,
 				64ADA4C42A7A32950003E2C1 /* CommonOptionSelectButton.swift in Sources */,
 				64E26A462A8A3E2800F6BC3A /* TrimOptionContentCell.swift in Sources */,
 				6412D07C2A7E607D001E4005 /* LifeStyleCell.swift in Sources */,

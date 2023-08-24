@@ -20,19 +20,15 @@ class TrimOptionDetailOptionCollectionView: UICollectionView {
     // MARK: - Properties
     
     // TODO: - 이 부분은 나중에 모델로 만들어 쓸 예정
-    private(set) var optionImages: [UIImage?] = [
-        UIImage(systemName: "house"),
-        UIImage(systemName: "person"),
-        UIImage(systemName: "sun.min")
-    ]
-    private(set) var optionDescriptionTexts: [String] = ["20인치 알로이 휠", "12.3인치 클러스터(컬러 LCD)", "서라운드 뷰 모니터"]
+    private(set) var optionImageURLArray: [String] = []
+    private(set) var optionDescriptionTexts: [String] = []
     
     // MARK: - Lifecycles
-    init(optionImages: [UIImage?], optionDescriptionTexts: [String]) {
+    init(optionImageURLArray: [String], optionDescriptionTexts: [String]) {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         configureUI()
-        setOptionImages(images: optionImages)
+        setOptionImageURLArray(optionImageURLArray: optionImageURLArray)
         setDescriptionTexts(texts: optionDescriptionTexts)
     }
     
@@ -59,8 +55,8 @@ class TrimOptionDetailOptionCollectionView: UICollectionView {
     }
     
     // MARK: - Functions
-    func setOptionImages(images: [UIImage?]) {
-        optionImages = images
+    func setOptionImageURLArray(optionImageURLArray: [String]) {
+        self.optionImageURLArray = optionImageURLArray
     }
     
     func setDescriptionTexts(texts: [String]) {
@@ -79,7 +75,7 @@ extension TrimOptionDetailOptionCollectionView: UICollectionViewDelegate {
 // MARK: - UICollectionView DataSource
 extension TrimOptionDetailOptionCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return optionImages.count
+        return optionImageURLArray.count
     }
     
     func collectionView(
@@ -92,7 +88,7 @@ extension TrimOptionDetailOptionCollectionView: UICollectionViewDataSource {
         ) as? TrimOptionDetailOptionCell else {
             return UICollectionViewCell()
         }
-        cell.setImage(image: optionImages[indexPath.row])
+        cell.setImage(imageURL: optionImageURLArray[indexPath.row])
         cell.setText(text: optionDescriptionTexts[indexPath.row])
         
         return cell
