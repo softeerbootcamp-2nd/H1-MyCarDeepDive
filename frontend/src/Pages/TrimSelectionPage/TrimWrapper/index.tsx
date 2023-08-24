@@ -27,7 +27,7 @@ function TrimWrapper({
   return (
     <div
       ref={trimRef}
-      className='mt-8'
+      className='mt-8 h-[864px]'
       onMouseEnter={() => hoverHandler()}
       onMouseLeave={() => setShowToolTip(false)}
     >
