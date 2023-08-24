@@ -16,6 +16,7 @@ enum ResponseType {
     case carRecommendationCustom
     case carSpec
     case carSpecTrims
+    case carSpecActivityLog(tirmID: Int)
     case carSpecComparison
     case exteriorColor
     case interiorColor
@@ -40,6 +41,8 @@ enum ResponseType {
             return "car-spec"
         case .carSpecTrims:
             return "car-spec/trims"
+        case .carSpecActivityLog(let trimID):
+            return "car-spec/activity-log/\(trimID)"
         case .carSpecAdditionalOption(let carSpecId):
             return "car-spec/\(carSpecId)/additional-options"
         case .pdfCarInfomation(let pdfID):

@@ -19,4 +19,11 @@ struct TrimSelectEndpoint {
             responseType: .carSpec,
             queryParams: request.toDTO())
     }
+    func fetchTrimSelectLog(
+        with request: Int
+    ) -> Endpoint<Bool> {
+        return Endpoint<Bool>(
+            method: .post,
+            responseType: .carSpecActivityLog(tirmID: request))
+    }
 }

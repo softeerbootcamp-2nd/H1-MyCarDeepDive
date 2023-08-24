@@ -17,7 +17,8 @@ class TrimSelectViewModel {
     
     // MARK: - Output
     struct Output {
-        let trimInquery = PassthroughSubject<(TrimInquery, [String]), Never>()
+        let trimInquery = PassthroughSubject<(TrimInquery?, [String]), Never>()
+        let trimSelectResult = PassthroughSubject<String, Never>()
     }
     
     // MARK: - Dependency
@@ -47,7 +48,7 @@ class TrimSelectViewModel {
         input.touchUpTrimSelectButton
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                useCase.trimSelect.send($0)
+                useCase.fetchTrimSelectLog(trimSelectModel: $0)
             })
             .store(in: &cancellables)
         
@@ -72,6 +73,14 @@ class TrimSelectViewModel {
                 output.trimInquery.send(($0, trimSubOptionNames))
             })
             .store(in: &cancellables)
+        
+        useCase.trimSelectResult
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                output.trimSelectResult.send($0)
+            })
+            .store(in: &cancellables)
+        
         return output
     }
 }

@@ -9,8 +9,10 @@ import Foundation
 import Combine
 
 protocol TrimSelectUseCase {
-    var trimSelect: PassthroughSubject<TrimSelectModel, Never> { get set }
-    var trimInquery: PassthroughSubject<TrimInquery, Never> { get set }
+    var trimSelect: CurrentValueSubject<TrimSelectModel?, Never> { get set }
+    var trimInquery: CurrentValueSubject<TrimInquery?, Never> { get set }
+    var trimSelectResult: PassthroughSubject<String, Never> { get set }
     
     func fetchTrimInqeury(trimSubOptionSelect: TrimSubOptionSelect)
+    func fetchTrimSelectLog(trimSelectModel: TrimSelectModel)
 }

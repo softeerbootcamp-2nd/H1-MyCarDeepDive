@@ -172,12 +172,15 @@ extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
                 $0?.setSelectButtonIsSelected(isSelected: false)
             }
             selectedIndexPath = indexPath
-            if let cell = sender as? TrimOptionContentCell {
+            if let cell = sender as? TrimOptionContentCell, let selectedIndexPath {
                 cell.setSelectButtonIsSelected(isSelected: true)
+                let index = selectedIndexPath.row
                 trimOptionDelegate?.touchUpCellSelectButton(
                     trimSelectModel: TrimSelectModel(
-                        trimName: cell.nameLabel.text ?? "",
-                        trimPrice: cell.priceLabel.text?.toInt ?? 0))
+                        index: index,
+                        trimTag: tagTexts[index],
+                        trimName: titleTexts[index],
+                        trimPrice: priceValues[index]))
             }
         }
     }

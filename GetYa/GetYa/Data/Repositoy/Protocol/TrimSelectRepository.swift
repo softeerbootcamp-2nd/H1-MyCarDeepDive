@@ -9,4 +9,5 @@ import Foundation
 
 protocol TrimSelectRepository {
     func fetchTrimInquery(with request: TrimSubOptionSelect) async throws -> TrimInquery
+    func fetchTrimSelectLog(with request: Int) async throws -> Bool
 }

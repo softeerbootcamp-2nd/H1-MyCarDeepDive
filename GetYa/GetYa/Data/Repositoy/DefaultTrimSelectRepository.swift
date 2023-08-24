@@ -23,4 +23,12 @@ class DefaultTrimSelectRepository: TrimSelectRepository {
         let commonDTO = try await provider.request(endpoint: endpoint)
         return commonDTO.data.toDomain()
     }
+    
+    func fetchTrimSelectLog(
+        with request: Int
+    ) async throws -> Bool {
+        let endpoint = Endpoint.shared.fetchTrimSelectLog(with: request)
+        let commonDTO = try await provider.request(endpoint: endpoint)
+        return commonDTO.data
+    }
 }

@@ -152,7 +152,7 @@ class TrimSelectViewController: UIViewController {
         output.trimInquery
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] (trimInquery, trimSubOptionSelectNames) in
-                guard let self else { return }
+                guard let self, let trimInquery else { return }
                 carSpecCount = trimInquery.carSpecs.count
                 updateTrimOptionContentCollectionViewHeight()
                 headerView.setImage(
@@ -160,6 +160,13 @@ class TrimSelectViewController: UIViewController {
                 trimOptionContentCollectionView.setTrimInquery(
                     data: trimInquery,
                     trimSubOptionSelectNames: trimSubOptionSelectNames)
+            })
+            .store(in: &cancellables)
+        
+        output.trimSelectResult
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                headerView.setImage(urlString: $0)
             })
             .store(in: &cancellables)
     }
