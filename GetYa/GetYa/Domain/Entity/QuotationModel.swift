@@ -18,7 +18,7 @@ struct QuotationModel {
     let drivingSystemName: String
     let drivingSystemId:Int
     let bodyName: String
-    let bodyId: String
+    let bodyId: Int
     let carSpecId: Int
     let trimId: Int
     let exteriorColor: ColorInfoModel
