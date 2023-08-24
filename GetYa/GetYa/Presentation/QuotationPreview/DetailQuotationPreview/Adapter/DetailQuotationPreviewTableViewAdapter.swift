@@ -65,7 +65,7 @@ extension DetailQuotationPreviewTableViewAdapter: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 1 {
+        if section == 2 {
             return DetailQuotationPreviewFooterView.Constants.intrinsicContentHeight
         }
         return 0
