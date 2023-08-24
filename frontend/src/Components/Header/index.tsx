@@ -74,7 +74,7 @@ function Header() {
           <div className='max-w-5xl mx-auto'>
             <div className='h-[135px] flex overflow-scroll'>
               <div className='flex my-auto'>
-                <div className='flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                <div className='w-40 flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   <div className='flex gap-4 justify-between'>
                     <p>{carSpec.feature.engine}</p>
                     <p className='font-body4-medium text-grey-100'>
@@ -91,7 +91,7 @@ function Header() {
 
                 <div className='h-[94px] my-auto mx-4 border-[0.5px] border-grey-700'></div>
 
-                <div className='w-52 flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                <div className='w-48 flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   <div className='flex gap-4 justify-between'>
                     <p>{color.exteriorColor.name}</p>
                     <p className='font-body4-medium text-grey-100'>
@@ -108,7 +108,7 @@ function Header() {
 
                 <div className='h-[94px] my-auto mx-4 border-[0.5px] border-grey-700'></div>
 
-                <div className='w-[17rem] flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                <div className='flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   {optionData.map(item => (
                     <OptionItem {...item} key={item.name} />
                   ))}
