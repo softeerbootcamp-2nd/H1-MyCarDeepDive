@@ -101,6 +101,7 @@ extension DetailQuotationPreviewViewController: ViewBindable {
                 dataSource: viewModel)
             tableView.reloadData()
         case .gotoCompletionPage:
+            // TODO: - 로딩화면 갈 때 트림아이디, 구동방식 아이디, 엔진아이디 적용해야합니다.
             // TODO: 로딩 페이지 후 서버에서 완료되면 5.1화면으로 이동
             navigationController?.pushViewController(LoadingViewController(), animated: true)
         case .gotoCustomPage:
