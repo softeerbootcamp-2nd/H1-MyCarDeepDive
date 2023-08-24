@@ -113,10 +113,7 @@ function ColorSelectionPage() {
         <ReRecommendCardLink />
         {view === 'exterial' && (
           <>
-            <CarRotation
-              rotation={rotation}
-              exteriorCarImage={exteriorCarImage}
-            />
+            <CarRotation rotation={rotation} carImageUrl={exteriorCarImage} />
             <Background />
           </>
         )}

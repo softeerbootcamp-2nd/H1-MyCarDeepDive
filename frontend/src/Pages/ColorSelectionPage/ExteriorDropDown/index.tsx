@@ -16,6 +16,7 @@ import { getInteriorColorType } from '@/api/color/getInteriorColors';
 import { getTrimType } from '@/api/trim/getTrim';
 import ChangerModal from '../ChangerModal';
 import { getExteriorColorType } from '@/api/color/getExteriorColor';
+import useLogFetch from '@/hooks/useLogFetch';
 
 interface Props {
   classifiedExteriorColor: getExteriorColorType | undefined;
@@ -46,6 +47,9 @@ function ExteriorDropDown({
       const colorInfo = JSON.parse(dataObject);
       setWantedOtherColor(colorInfo);
       setShowModal(true);
+      useLogFetch({
+        url: `/color/exterior-colors/activity-log/${colorInfo.color_id}`,
+      });
     }
   };
 
