@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class RecommendationResponse {
     private String trim_name;
+    private long trim_price;
     private String car_img_url;
     private String comment1;
     private String comment2;

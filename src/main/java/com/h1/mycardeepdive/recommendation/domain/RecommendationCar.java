@@ -30,11 +30,7 @@ public class RecommendationCar {
     @JoinColumn(name = "exterior_color_id")
     private ExteriorColor exteriorColor;
 
-    private String comment1;
-
-    private String comment2;
-
-    private String keyword;
+    private long price;
 
     @OneToMany(mappedBy = "recommendationCar", fetch = FetchType.LAZY)
     private List<RecommendationCarOption> recommendationCarOptions;
@@ -48,18 +44,12 @@ public class RecommendationCar {
             CarSpec carSpec,
             InteriorColor interiorColor,
             ExteriorColor exteriorColor,
-            String comment1,
-            String comment2,
-            String keyword,
             List<RecommendationCarOption> recommendationCarOptions,
             List<RecommendationCarPackage> recommendationCarPackages) {
         this.id = id;
         this.carSpec = carSpec;
         this.interiorColor = interiorColor;
         this.exteriorColor = exteriorColor;
-        this.comment1 = comment1;
-        this.comment2 = comment2;
-        this.keyword = keyword;
         this.recommendationCarOptions = recommendationCarOptions;
         this.recommendationCarPackages = recommendationCarPackages;
     }

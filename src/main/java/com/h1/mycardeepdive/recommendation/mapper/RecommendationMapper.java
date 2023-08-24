@@ -6,6 +6,7 @@ import static com.h1.mycardeepdive.recommendation.mapper.RecommendationOptionInf
 import com.h1.mycardeepdive.car.domain.CarSpec;
 import com.h1.mycardeepdive.color.domain.ExteriorColor;
 import com.h1.mycardeepdive.color.domain.InteriorColor;
+import com.h1.mycardeepdive.recommendation.domain.Recommendation;
 import com.h1.mycardeepdive.recommendation.domain.RecommendationCar;
 import com.h1.mycardeepdive.recommendation.domain.RecommendationCarOption;
 import com.h1.mycardeepdive.recommendation.domain.RecommendationCarPackage;
@@ -53,10 +54,68 @@ public class RecommendationMapper {
 
         return new RecommendationResponse(
                 trim.getName(),
+                carSpec.getPrice(),
                 exteriorColor.getExteriorImgUrl() + "/image_001.png",
-                recommendationCar.getComment1(),
-                recommendationCar.getComment2(),
-                recommendationCar.getKeyword(),
+                "",
+                "",
+                "",
+                carSpec.getEngine().getName(),
+                carSpec.getEngine().getId(),
+                carSpec.getDrivingSystem().getName(),
+                carSpec.getDrivingSystem().getId(),
+                carSpec.getBody().getName(),
+                carSpec.getBody().getId(),
+                carSpec.getId(),
+                trim.getId(),
+                toRecommendationColorInfo(exteriorColor),
+                RecommendationColorInfoMapper.toRecommendationColorInfo(interiorColor),
+                recommendationOptionInfos,
+                recommendationPackageDtos,
+                totalPrice);
+    }
+
+    public static RecommendationResponse toRecommendationResponse(
+            RecommendationCar recommendationCar, Recommendation recommendation) {
+        CarSpec carSpec = recommendationCar.getCarSpec();
+        Trim trim = carSpec.getTrim();
+        ExteriorColor exteriorColor = recommendationCar.getExteriorColor();
+        InteriorColor interiorColor = recommendationCar.getInteriorColor();
+        List<RecommendationCarOption> recommendationCarOptions =
+                recommendationCar.getRecommendationCarOptions();
+        List<RecommendationCarPackage> recommendationCarPackages =
+                recommendationCar.getRecommendationCarPackages();
+        List<RecommendationOptionInfo> recommendationOptionInfos =
+                recommendationCarOptions.stream()
+                        .map(
+                                recommendationCarOption ->
+                                        RecommendationOptionInfoMapper.toRecommendationOptionInfo(
+                                                recommendationCarOption.getOption()))
+                        .collect(Collectors.toList());
+        List<RecommendationOptionInfo> recommendationPackageDtos =
+                recommendationCarPackages.stream()
+                        .map(
+                                recommendationCarPackage ->
+                                        toRecommendationOptionInfo(
+                                                recommendationCarPackage.getPackages()))
+                        .collect(Collectors.toList());
+        long totalPrice =
+                carSpec.getPrice()
+                        + exteriorColor.getPrice()
+                        + interiorColor.getPrice()
+                        + recommendationOptionInfos.stream()
+                                .mapToLong(RecommendationOptionInfo::getOption_price)
+                                .sum()
+                        + recommendationPackageDtos.stream()
+                                .mapToLong(RecommendationOptionInfo::getOption_price)
+                                .sum();
+
+        return new RecommendationResponse(
+                trim.getName(),
+                carSpec.getPrice(),
+                exteriorColor.getExteriorImgUrl() + "/image_001.png",
+                recommendation.getComment1(),
+                recommendation.getComment2(),
+                recommendation.getKeyword(),
                 carSpec.getEngine().getName(),
                 carSpec.getEngine().getId(),
                 carSpec.getDrivingSystem().getName(),
