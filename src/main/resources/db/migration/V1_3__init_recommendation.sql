@@ -44,6 +44,13 @@ create table custom_recommendation
     driving_experience_id    bigint,
     family_members_id        bigint,
     personal_value_id        bigint,
-    recommendation_car_id    bigint,
     primary key (custom_recommendation_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+create table custom_recommendation_car
+(
+    custom_recommendation_car_id bigint not null auto_increment,
+    custom_recommendation_id     bigint,
+    recommendation_car_id            bigint,
+    primary key (custom_recommendation_car_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
