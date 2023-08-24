@@ -26,7 +26,9 @@ class OptionSelectViewController: UIViewController {
     private var viewControllers: [UIViewController] = []
     private var currentSegmentedIndex: Int = 0 {
         didSet {
-            let direction: UIPageViewController.NavigationDirection = oldValue <= currentSegmentedIndex ? .forward : .reverse
+            let direction: UIPageViewController.NavigationDirection = oldValue <= currentSegmentedIndex
+            ? .forward
+            : .reverse
             self.pageViewController.setViewControllers(
                 [viewControllers[currentSegmentedIndex]],
                 direction: direction,

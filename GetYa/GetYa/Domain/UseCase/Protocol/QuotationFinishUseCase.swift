@@ -9,9 +9,12 @@ import Foundation
 import Combine
 
 protocol QuotationFinishUseCase {
+    var pdfID: CurrentValueSubject<String, Never> { get set }
     var carInquery: PassthroughSubject<QuotationFinish, Never> { get set }
     var emailResult: PassthroughSubject<Bool, Never> { get set }
+    var pdfURL: PassthroughSubject<String, Never> { get set }
     
     func fetchCarInquery()
     func fetchEmail(email: String)
+    func fetchPdfURL()
 }

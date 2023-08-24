@@ -29,4 +29,10 @@ struct DefaultQuotationFinishRepository: QuotationFinishRepository {
         let commonDTO = try await provider.request(endpoint: endpoint)
         return commonDTO.data
     }
+    
+    func fetchPdfURL(with request: String) async throws -> String? {
+        let endpoint = Endpoint.shared.fetchPdfURL(with: request)
+        let commonDTO = try await provider.request(endpoint: endpoint)
+        return commonDTO.data.pdfURL
+    }
 }
