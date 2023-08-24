@@ -106,4 +106,9 @@ public class OptionsRepositoryImpl implements OptionsRepositoryCustom {
                                 .and(optionTag.position_y.gt(0)))
                 .fetch();
     }
+
+    @Override
+    public List<Options> findAllOptionsByList(List<Long> optionIdList) {
+        return queryFactory.selectFrom(options).where(options.id.in(optionIdList)).fetch();
+    }
 }
