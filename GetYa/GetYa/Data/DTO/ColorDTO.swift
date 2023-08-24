@@ -16,6 +16,7 @@ struct ColorDTO: Codable {
     let carImageURLArray: [String]
     let price: Int
     let selectRate: Int
+    let oppositeColors: [Int]
     
     enum CodingKeys: String, CodingKey {
         case colorID = "color_id"
@@ -26,6 +27,7 @@ struct ColorDTO: Codable {
         case carImageURLArray = "car_img_urls"
         case price
         case selectRate = "choose_rate"
+        case oppositeColors = "opposite_color_ids"
     }
     
     func toDomain() -> Color {
@@ -37,6 +39,7 @@ struct ColorDTO: Codable {
             imageURL: imageURL,
             carImageURLArray: carImageURLArray,
             price: price,
-            selectRate: selectRate)
+            selectRate: selectRate,
+            oppositeColors: oppositeColors)
     }
 }

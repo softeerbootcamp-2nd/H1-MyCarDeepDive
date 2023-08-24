@@ -12,11 +12,13 @@ class ColorSelectViewModel {
     // MARK: - Input
     struct Input {
         let viewDidLoadEvent: AnyPublisher<Void, Never>
+        let touchUpColorCell: AnyPublisher<ColorSelectModel, Never>
     }
     
     // MARK: - Output
     struct Output {
         let trimInquery = PassthroughSubject<TrimColorInquery, Never>()
+//        let touchUpColorCellResult = PassthroughSubject<
     }
     
     // MARK: - Dependency
@@ -37,6 +39,31 @@ class ColorSelectViewModel {
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
                 useCase.fetchColorInquery()
+            })
+            .store(in: &cancellables)
+        
+        input.touchUpColorCell
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                if $0.colorType == .exterior {
+                    useCase.validateExteriorColor(exteriorColor: $0)
+                        .sink(
+                            receiveCompletion: {
+                                print($0)
+                            }, receiveValue: {
+                                print($0)
+                            })
+                        .store(in: &cancellables)
+                } else {
+                    useCase.validateInteriorColor(interiorColor: $0)
+                        .sink(
+                            receiveCompletion: {
+                                print($0)
+                            }, receiveValue: {
+                                print($0)
+                            })
+                        .store(in: &cancellables)
+                }
             })
             .store(in: &cancellables)
         

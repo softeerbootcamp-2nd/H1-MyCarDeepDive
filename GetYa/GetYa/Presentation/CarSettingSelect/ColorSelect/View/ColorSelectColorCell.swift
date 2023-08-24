@@ -170,6 +170,7 @@ class ColorSelectColorCell: UICollectionViewCell {
     
     // MARK: - Functions
     func setImageURL(imageURL: String, isAvailable: Bool) {
+        contentImageView.setImage(urlString: imageURL)
         exclamationmarkImageView.isHidden = !isAvailable
     }
     

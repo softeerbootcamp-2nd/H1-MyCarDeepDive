@@ -7,17 +7,9 @@
 
 import UIKit
 
-// TODO: 서버에서 들어오는 데이터에 따라 모델 만들기
-struct ColorSelectData {
-    let name: String
-    let colorImageURL: String
-    let carImageURL: String
-    let adoptionRate: Int
-}
-
 protocol ColorContentViewDelegate: AnyObject {
-    func touchUpCell(type: ColorContentView.ColorType, color: Color)
-    func touchUpLearnMoreViewButton(type: ColorContentView.ColorType, isExpanded: Bool)
+    func touchUpCell(type: ColorType, color: Color)
+    func touchUpLearnMoreViewButton(type: ColorType, isExpanded: Bool)
 }
 
 class ColorContentView: UIView {
@@ -52,29 +44,6 @@ class ColorContentView: UIView {
         }
     }
     
-    enum ColorType {
-        case exterior
-        case interior
-        
-        var title: String {
-            switch self {
-            case .exterior:
-                return "외장 색상"
-            case .interior:
-                return "내장 색상"
-            }
-        }
-        
-        var learnMoreText: String {
-            switch self {
-            case .exterior:
-                return "다른 외장 색상을 찾고 있나요?"
-            case .interior:
-                return "다른 내장 색상을 찾고 있나요?"
-            }
-        }
-    }
-    
     // MARK: - UI properties
     private var titleLabelTopConstraint: NSLayoutConstraint!
     private let titleLabel = CommonLabel(
@@ -90,6 +59,7 @@ class ColorContentView: UIView {
         $0.colorSelectDelegate = self
     }
     private lazy var learnMoreView = ColorLearnMoreView().set {
+        $0.colorLearnMoreViewDelegate = self
         $0.delegate = self
     }
     
@@ -173,8 +143,8 @@ class ColorContentView: UIView {
     private func configureByColorType(type: ColorType) {
         collectionView.setColorType(type: type)
         self.colorType = type
-        self.titleLabel.text = type.title
-        self.learnMoreView.configureText(text: type.learnMoreText)
+        self.titleLabel.text = type == .exterior ? "외장 색상" : "내장 색상"
+        self.learnMoreView.configureText(type: type)
     }
     
     private func configureTitleLabel() {
@@ -253,6 +223,13 @@ class ColorContentView: UIView {
 extension ColorContentView: LearnMoreViewDelegate {
     func touchUpExpandButtonByIsSelected(sender: LearnMoreView, isSelected: Bool) {
         delegate?.touchUpLearnMoreViewButton(type: colorType, isExpanded: isSelected)
+    }
+}
+
+// MARK: - ColorLearnMoreViewDelegate
+extension ColorContentView: ColorLearnMoreViewDelegate {
+    func touchUpMoreColorCell(color: Color) {
+        delegate?.touchUpCell(type: colorType, color: color)
     }
 }
 

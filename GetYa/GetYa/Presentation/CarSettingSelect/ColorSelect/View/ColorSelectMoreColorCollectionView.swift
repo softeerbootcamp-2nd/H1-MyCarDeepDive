@@ -21,7 +21,7 @@ class ColorSelectMoreColorCollectionView: UICollectionView {
     
     // MARK: - Properties
     weak var colorSelectDelegate: ColorSelectMoreColorDelegate?
-    private var colorType: ColorContentView.ColorType = .exterior
+    private var colorType: ColorType = .exterior
     private var trimNames: [String] = []
     private var colorImages: [UIImage?] = []
     private var colorImageURLs: [String] = []
@@ -37,7 +37,7 @@ class ColorSelectMoreColorCollectionView: UICollectionView {
             })
     }
     
-    convenience init(type: ColorContentView.ColorType) {
+    convenience init(type: ColorType) {
         self.init(
             frame: .zero,
             collectionViewLayout: UICollectionViewFlowLayout().set {
@@ -95,7 +95,7 @@ class ColorSelectMoreColorCollectionView: UICollectionView {
         colorImages = images
     }
     
-    func setColorType(type: ColorContentView.ColorType) {
+    func setColorType(type: ColorType) {
         self.colorType = type
     }
 }

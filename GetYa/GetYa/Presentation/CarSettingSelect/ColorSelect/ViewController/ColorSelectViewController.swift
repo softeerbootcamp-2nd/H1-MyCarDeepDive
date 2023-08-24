@@ -10,12 +10,15 @@ import Combine
 
 class ColorSelectViewController: UIViewController {
     // MARK: - UI properties
-    private lazy var contentView = ColorSelectContentView()
+    private lazy var contentView = ColorSelectContentView().set {
+        $0.contentDelegate = self
+    }
     
     // MARK: - Properties
     private var viewModel: ColorSelectViewModel!
     private var cancellables = Set<AnyCancellable>()
     private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
+    private let touchUpColorCell = PassthroughSubject<ColorSelectModel, Never>()
     
     // MARK: - Lifecycles
     init(viewModel: ColorSelectViewModel) {
@@ -29,7 +32,7 @@ class ColorSelectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         bind()
         setupViews()
         configureUI()
@@ -39,13 +42,16 @@ class ColorSelectViewController: UIViewController {
     // MARK: - Private Functions
     private func bind() {
         let input = ColorSelectViewModel.Input(
-            viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher())
+            viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
+            touchUpColorCell: touchUpColorCell.eraseToAnyPublisher()
+        )
         
         let output = viewModel.transform(input: input)
         
         output.trimInquery
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
+                print($0)
                 contentView.setData(
                     exteriorColor: $0.exteriorColor,
                     interiorColor: $0.interiorColor)
@@ -76,4 +82,17 @@ class ColorSelectViewController: UIViewController {
     
     // MARK: - Objc Functions
 
+}
+
+// MARK: - ColorSelectContentViewDelegate
+
+extension ColorSelectViewController: ColorSelectContentViewDelegate {
+    func touchUpColorCell(type: ColorType, color: Color) {
+        touchUpColorCell.send(ColorSelectModel(
+            colorType: type,
+            colorID: color.colorID,
+            colorName: color.name,
+            colorPrice: color.price,
+            trimID: color.trimID))
+    }
 }

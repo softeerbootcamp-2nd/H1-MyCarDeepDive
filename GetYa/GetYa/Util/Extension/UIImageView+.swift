@@ -14,13 +14,14 @@ extension UIImageView {
                 let image = try await loadImageFrom(urlString: urlString)
                 self.setImage(image: image)
             } catch {
-                print("아?")
+                print("Image Load에 실패하였습니다.")
             }
         })
     }
     
     func loadImageFrom(urlString: String) async throws -> UIImage? {
         enum ImageLoadError: Error {
+            case cacheLoadFail
             case wrongURLString
             case badResponse
         }

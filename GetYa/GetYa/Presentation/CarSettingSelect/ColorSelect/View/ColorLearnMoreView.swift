@@ -48,12 +48,8 @@ class ColorLearnMoreView: LearnMoreView {
     weak var colorLearnMoreViewDelegate: ColorLearnMoreViewDelegate?
     
     // MARK: - Lifecycles
-    init(text: String) {
-        super.init(frame: .zero)
-        
-        setupViews()
-        configureUI()
-        configureText(text: text)
+    convenience init() {
+        self.init(frame: .zero)
     }
     
     override init(frame: CGRect) {
@@ -127,8 +123,13 @@ class ColorLearnMoreView: LearnMoreView {
     }
     
     // MARK: - Functions
-    func configureText(text: String) {
-        label.text = text
+    func configureText(type: ColorType) {
+        switch type {
+        case .exterior:
+            label.text = "다른 외장 색상을 찾고 있나요?"
+        case .interior:
+            label.text = "다른 내장 색상을 찾고 있나요?"
+        }
     }
     
     func configureTextColor(color: UIColor) {
@@ -176,7 +177,6 @@ class ColorLearnMoreView: LearnMoreView {
 // MARK: - ColorSelectMoreColorDelegate
 extension ColorLearnMoreView: ColorSelectMoreColorDelegate {
     func touchUpMoreColorCell(index: Int) {
-        print(#function)
         colorLearnMoreViewDelegate?.touchUpMoreColorCell(color: colorArray[index])
     }
 }

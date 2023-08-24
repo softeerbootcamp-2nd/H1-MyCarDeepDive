@@ -25,7 +25,7 @@ class ColorSelectColorCollectionView: UICollectionView {
     // MARK: - UI properties
     
     // MARK: - Properties
-    private var colorType: ColorContentView.ColorType = .exterior
+    private var colorType: ColorType = .exterior
     weak var colorSelectDelegate: ColorSelectColorDelegate?
     private var availableColorArray: [Color] = []
     private var unAvailableColorArray: [Color] = []
@@ -74,8 +74,6 @@ class ColorSelectColorCollectionView: UICollectionView {
     }
     
     // MARK: - Functions
-    
-    // TODO: 밑에 두 함수는 데이터 모델을 받을 수 있는 하나의 함수로 합쳐질것임
     func setUnAvailableColorArray(colorArray: [Color]) {
         unAvailableColorArray = colorArray
     }
@@ -84,7 +82,7 @@ class ColorSelectColorCollectionView: UICollectionView {
         availableColorArray = colorArray
     }
     
-    func setColorType(type: ColorContentView.ColorType) {
+    func setColorType(type: ColorType) {
         colorType = type
     }
     
@@ -123,7 +121,6 @@ extension ColorSelectColorCollectionView: UICollectionViewDataSource {
             let color = unAvailableColorArray[indexPath.row]
             cell.setImageURL(imageURL: color.imageURL, isAvailable: false)
         }
-        
         
         switch colorType {
         case .exterior:

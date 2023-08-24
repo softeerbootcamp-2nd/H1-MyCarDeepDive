@@ -16,4 +16,5 @@ struct Color: Codable {
     let carImageURLArray: [String]
     let price: Int
     let selectRate: Int
+    let oppositeColors: [Int]
 }

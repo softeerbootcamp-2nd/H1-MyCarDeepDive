@@ -8,6 +8,9 @@
 import Foundation
 
 struct ColorSelectModel {
+    var colorType: ColorType
+    var colorID: Int
     var colorName: String
     var colorPrice: Int
+    var trimID: Int
 }

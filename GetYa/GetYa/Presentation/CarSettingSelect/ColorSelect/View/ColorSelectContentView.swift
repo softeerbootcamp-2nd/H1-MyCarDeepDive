@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ColorSelectContentViewDelegate: AnyObject {
+    func touchUpColorCell(type: ColorType, color: Color)
+}
+
 class ColorSelectContentView: UIScrollView {
     enum Constnats {
         enum InteriorContentView {
@@ -38,6 +42,7 @@ class ColorSelectContentView: UIScrollView {
     private var interiorContentViewHeightContraint: NSLayoutConstraint!
     
     // MARK: - Properties
+    weak var contentDelegate: ColorSelectContentViewDelegate?
     private var exteriorColor: TrimColor? {
         didSet {
             guard let exteriorColor else { return }
@@ -141,11 +146,11 @@ class ColorSelectContentView: UIScrollView {
 
 // MARK: - ColorContentViewDelegate
 extension ColorSelectContentView: ColorContentViewDelegate {
-    func touchUpCell(type: ColorContentView.ColorType, color: Color) {
-        
+    func touchUpCell(type: ColorType, color: Color) {
+        contentDelegate?.touchUpColorCell(type: type, color: color)
     }
     
-    func touchUpLearnMoreViewButton(type: ColorContentView.ColorType, isExpanded: Bool) {
+    func touchUpLearnMoreViewButton(type: ColorType, isExpanded: Bool) {
         typealias Const = ColorContentView.Constants.LearnMoreView.ContentView
         let basicHeight = Constnats.contentViewHeight
         let exteriorMoreColorCount = exteriorColor?.otherTrimColors.count
