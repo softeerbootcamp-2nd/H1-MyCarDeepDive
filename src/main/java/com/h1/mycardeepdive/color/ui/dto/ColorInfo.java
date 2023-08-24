@@ -1,5 +1,6 @@
 package com.h1.mycardeepdive.color.ui.dto;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,13 +8,14 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class InteriorColorInfo {
+public class ColorInfo {
     private long color_id;
     private long trim_id;
     private String trim_name;
     private String name;
     private String img_url;
-    private String car_img_url;
+    private List<String> car_img_urls;
     private long price;
     private double choose_rate;
+    private List<Long> opposite_color_ids;
 }

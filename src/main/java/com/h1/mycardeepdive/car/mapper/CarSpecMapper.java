@@ -38,8 +38,19 @@ public class CarSpecMapper {
     }
 
     public static CarSpecInfo toCarSpecResponse(
-            CarSpec carSpec, List<String> basicOptionNames, List<Long> basicOptionIds) {
+            CarSpec carSpec,
+            List<String> basicOptionNames,
+            List<Long> basicOptionIds,
+            List<String> basicOptionUrls) {
         Trim trim = carSpec.getTrim();
+        List<String> exteriorColorImgUrls = new ArrayList<>();
+        List<String> interiorColorImgUrls = new ArrayList<>();
+        for (TrimExteriorColor trimExteriorColor : trim.getTrimExteriorColors()) {
+            exteriorColorImgUrls.add(trimExteriorColor.getExteriorColor().getImgUrl());
+        }
+        for (TrimInteriorColor trimInteriorColor : trim.getTrimInteriorColors()) {
+            interiorColorImgUrls.add(trimInteriorColor.getInteriorColor().getImgUrl());
+        }
         return new CarSpecInfo(
                 trim.getName(),
                 carSpec.getPrice(),
@@ -47,7 +58,10 @@ public class CarSpecMapper {
                 carSpec.getId(),
                 trim.getId(),
                 trim.getImgUrl(),
+                exteriorColorImgUrls,
+                interiorColorImgUrls,
                 basicOptionNames,
-                basicOptionIds);
+                basicOptionIds,
+                basicOptionUrls);
     }
 }

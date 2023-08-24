@@ -7,6 +7,24 @@
         </encoder>
     </appender>
 
+    <!-- File appender 설정-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"serviceID":"mycardeepdive"}</customFields>
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+
+        </encoder>
+        <file>/tmp/log/logback.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>/tmp/log/mycardeepdive/mycardeepdive-%d{yyyy-MM-dd-HH-mm}.%i.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>5GB</totalSizeCap>
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+
     <!-- Slack appender 설정 -->
     <springProperty name="SLACK_WEBHOOK_URI" source="logging.slack.webhook-error-uri"/>
     <springProperty name="PROFILE_NAME" source="spring.profiles.active"/>
@@ -29,8 +47,24 @@
         </filter>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="Console" />
-        <appender-ref ref="ASYNC_SLACK"/>
-    </root>
+    <springProfile name="local">
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="ASYNC_SLACK"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="ASYNC_SLACK"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
 </configuration>

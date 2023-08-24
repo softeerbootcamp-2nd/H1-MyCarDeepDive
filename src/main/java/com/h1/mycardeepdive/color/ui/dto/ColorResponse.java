@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExteriorColorResponse {
-    List<ExteriorColorInfo> available_colors;
-    List<ExteriorColorInfo> unavailable_colors;
-    List<ExteriorColorInfo> other_trim_colors;
+public class ColorResponse {
+    List<ColorInfo> available_colors;
+    List<ColorInfo> unavailable_colors;
+    List<ColorInfo> other_trim_colors;
 }

@@ -9,6 +9,6 @@ public class RecommendationOptionInfo {
     private long option_id;
     private String option_name;
     private String option_img_url;
-    private long price;
-    private String comment;
+    private long option_price;
+    private String option_comment;
 }

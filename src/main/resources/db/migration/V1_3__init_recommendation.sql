@@ -2,7 +2,10 @@ create table recommendation
 (
     recommendation_id     bigint not null auto_increment,
     age_group_id          bigint,
+    comment1              varchar(255),
+    comment2              varchar(255),
     description           varchar(255),
+    keyword               varchar(255),
     life_style_id         bigint,
     recommendation_car_id bigint,
     primary key (recommendation_id)
@@ -11,9 +14,7 @@ create table recommendation
 create table recommendation_car
 (
     recommendation_car_id bigint not null auto_increment,
-    comment1              varchar(255),
-    comment2              varchar(255),
-    keyword               varchar(255),
+    price                 bigint not null,
     car_spec_id           bigint,
     exterior_color_id     bigint,
     interior_color_id     bigint,
