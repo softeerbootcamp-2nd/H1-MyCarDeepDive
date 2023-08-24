@@ -47,23 +47,23 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
         color: .GetYaPalette.gray300,
         text: "기본 포함 옵션")
     private lazy var optionCollectionView = TrimOptionDetailOptionCollectionView(
-        optionImages: optionImages,
+        optionImageURLArray: optionImageURLArray,
         optionDescriptionTexts: optionDescriptionTexts)
     
     // MARK: - Properties
-    private var exteriorColorArray: [UIColor] = [] {
+    private var exteriorColorArray: [String] = [] {
         didSet {
             exteriorColorCollectionview.setColorArray(colorArray: exteriorColorArray)
         }
     }
-    private var interiorColorArray: [UIColor] = [] {
+    private var interiorColorArray: [String] = [] {
         didSet {
             interiorColorCollectionView.setColorArray(colorArray: interiorColorArray)
         }
     }
-    private var optionImages: [UIImage?] = [] {
+    private var optionImageURLArray: [String] = [] {
         didSet {
-            optionCollectionView.setOptionImages(images: optionImages)
+            optionCollectionView.setOptionImageURLArray(optionImageURLArray: optionImageURLArray)
         }
     }
     private var optionDescriptionTexts: [String] = [] {
@@ -74,9 +74,9 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
     
     // MARK: - Lifecycles
     init(
-        exteriorColorArray: [UIColor],
-        interiorColorArray: [UIColor],
-        optionImages: [UIImage?],
+        exteriorColorArray: [String],
+        interiorColorArray: [String],
+        optionImageURLArray: [String],
         optionDescriptionTexts: [String]
     ) {
         super.init(frame: .zero)
@@ -85,7 +85,7 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
         configureUI()
         setExteriorColorArray(colorArray: exteriorColorArray)
         setInteriorColorArray(colorArray: interiorColorArray)
-        setOptionImages(images: optionImages)
+        setOptionImageURLArray(imageURLArray: optionImageURLArray)
         setOptionDescriptionTexts(texts: optionDescriptionTexts)
     }
     
@@ -189,16 +189,16 @@ class TrimOptionDetailView: UIView, UICollectionViewDelegate {
     }
     
     // MARK: - Functions
-    func setExteriorColorArray(colorArray: [UIColor]) {
+    func setExteriorColorArray(colorArray: [String]) {
         exteriorColorArray = colorArray
     }
     
-    func setInteriorColorArray(colorArray: [UIColor]) {
+    func setInteriorColorArray(colorArray: [String]) {
         interiorColorArray = colorArray
     }
     
-    func setOptionImages(images: [UIImage?]) {
-        optionImages = images
+    func setOptionImageURLArray(imageURLArray: [String]) {
+        optionImageURLArray = imageURLArray
     }
     
     func setOptionDescriptionTexts(texts: [String]) {
