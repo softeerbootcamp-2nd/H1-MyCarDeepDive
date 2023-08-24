@@ -43,6 +43,9 @@ final class OptionDetailCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         optionPackageView.isSelectedOptinoSelectButton = false
+        configure(pages: nil, packageTitle: nil, title: nil, price: nil, description: nil, indexPath: nil)
+        configure(optionPackageKeywordDelegate: nil)
+        configure(baseOptionContainerViewDelegate: nil, optionSelectedDelegate: nil)
     }
     
     // MARK: - Private Functions
