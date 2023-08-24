@@ -40,6 +40,11 @@ final class OptionDetailCell: UICollectionViewCell {
         configureUI()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        optionPackageView.isSelectedOptinoSelectButton = false
+    }
+    
     // MARK: - Private Functions
     private func configureUI() {
         setupUI()

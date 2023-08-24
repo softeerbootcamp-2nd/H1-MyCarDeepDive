@@ -256,13 +256,15 @@ extension OptionDetailViewController: OptionPackageDescriptionViewDelegate {
         _ indexPath: IndexPath?,
         isSelected: Bool
     ) {
+        print(indexPath?.item, isSelected)
         // TODO: - 선택 부분 수정 해야함.
         guard let index = indexPath?.item else { return }
         if isSelected, !selectedIndexList.contains(index) {
             selectedIndexList.append(index)
-            return
+        } else if !isSelected, selectedIndexList.contains(index) {
+            selectedIndexList = selectedIndexList.filter { !($0 == index) }
         }
-        selectedIndexList = selectedIndexList.filter { !($0 == index) }
+        print(selectedIndexList)
     }
     
     func touchUpOptionSelectButton(
