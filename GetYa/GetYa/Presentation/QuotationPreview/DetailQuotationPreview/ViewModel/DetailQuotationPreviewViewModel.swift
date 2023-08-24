@@ -51,7 +51,7 @@ final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewMode
     enum DetailQuotationPreviewState {
         case none
         case updateDetailQuotationPreview
-        case gotoCustomPage(TrimCarSpec)
+        case gotoCustomPage(DefaultTrimCarSpec)
         case gotoCompletionPage(ContractionQuotation)
     }
     
@@ -62,7 +62,7 @@ final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewMode
     private var mainSectionHeader = QuotationPreviewMainHeaderModel()
     private var sectionHeaders: [String] = []
     private var secondSectionFooter: String = "데이터 불러오는 중입니다."
-    private var trimCarSpec = TrimCarSpec(
+    private var trimCarSpec = DefaultTrimCarSpec(
         engineId: 0,
         bodyId: 0,
         drivingSystemId: 0)
@@ -107,7 +107,7 @@ private extension DetailQuotationPreviewViewModel {
                     quotationModel.drivingSystemName,
                     quotationModel.bodyName
                 ].joined(separator: " ・ ")
-                self?.trimCarSpec = TrimCarSpec(
+                self?.trimCarSpec = DefaultTrimCarSpec(
                     engineId: quotationModel.engineId,
                     bodyId: quotationModel.bodyId,
                     drivingSystemId: quotationModel.drivingSystemId)

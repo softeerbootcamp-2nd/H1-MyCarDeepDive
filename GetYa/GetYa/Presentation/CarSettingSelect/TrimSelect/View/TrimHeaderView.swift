@@ -19,22 +19,13 @@ class TrimHeaderView: SettingSelectTitleBackgroundVIew {
     // MARK: - UI properties
     private let imageView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        
-        // TODO: 임시이므로 나중에 차 사진을 넣든, 서버에서 받든 처리해야함.
-        $0.image = UIImage(named: "LifeStylePeekTitle")
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
     }
     
     // MARK: - Properties
     
     // MARK: - Lifecycles
-    init(titleImage: UIImage?) {
-        super.init(frame: .zero)
-        
-        setupViews()
-        configureUI()
-        setImage(image: titleImage)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -70,7 +61,13 @@ class TrimHeaderView: SettingSelectTitleBackgroundVIew {
     }
     
     // MARK: - Functions
-    func setImage(image: UIImage?) {
-        imageView.image = image
+    func setImage(urlString: String) {
+        imageView.transform = CGAffineTransform(translationX: 400, y: 0)
+        imageView.setImage(urlString: urlString)
+        
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            guard let self else { return }
+            imageView.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
     }
 }

@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct TrimSubOptionSelectModel {
+struct TrimSubOptionSelect {
     var engineID: Int
     var bodyID: Int
     var drivingSystemID: Int
+    
+    func toDTO() -> TrimSubOptionSelectDTO {
+        return .init(trimSubOptionSelect: self)
+    }
 }
