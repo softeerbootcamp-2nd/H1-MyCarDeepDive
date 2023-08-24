@@ -134,12 +134,12 @@ public class ColorService {
     }
 
     public boolean userClickedExteriorColorLog(Long exteriorColorId) {
-        log.info(Markers.append("id", exteriorColorId), "exterior_color");
+        log.info(Markers.append("exterior_color", exteriorColorId), "exterior_color");
         return true;
     }
 
     public boolean userClickedInteriorColorLog(Long interiorColorId) {
-        log.info(Markers.append("id", interiorColorId), "interior_color");
+        log.info(Markers.append("interior_color", interiorColorId), "interior_color");
         return true;
     }
 }

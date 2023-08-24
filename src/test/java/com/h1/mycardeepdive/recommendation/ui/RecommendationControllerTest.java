@@ -96,10 +96,18 @@ class RecommendationControllerTest extends ControllerTestConfig {
                 createCustomRecommendation(
                         drivingExperienceId, familyMembersId, carPurposeId, personalValueId);
         RecommendationResponse recommendationResponse =
-                toRecommendationResponse(customRecommendation.getRecommendationCar());
+                toRecommendationResponse(
+                        customRecommendation
+                                .getCustomRecommendationCars()
+                                .get(0)
+                                .getRecommendationCar());
 
         when(recommendationService.findCustomRecommendation(
-                        drivingExperienceId, familyMembersId, carPurposeId, personalValueId))
+                        drivingExperienceId,
+                        familyMembersId,
+                        carPurposeId,
+                        personalValueId,
+                        9000000L))
                 .thenReturn(recommendationResponse);
         // then
         ResultActions resultActions =

@@ -1,5 +1,6 @@
 package com.h1.mycardeepdive.recommendation.domain;
 
+import java.util.List;
 import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,9 +23,8 @@ public class CustomRecommendation {
 
     private Long personalValueId;
 
-    @ManyToOne
-    @JoinColumn(name = "recommendation_car_id")
-    private RecommendationCar recommendationCar;
+    @OneToMany(mappedBy = "customRecommendation", fetch = FetchType.LAZY)
+    private List<CustomRecommendationCar> customRecommendationCars;
 
     @Builder
     public CustomRecommendation(
@@ -32,13 +32,13 @@ public class CustomRecommendation {
             Long drivingExperienceId,
             Long familyMembersId,
             Long carPurposeId,
-            Long personalValueid,
-            RecommendationCar recommendationCar) {
+            Long personalValueId,
+            List<CustomRecommendationCar> customRecommendationCars) {
         this.id = id;
         this.drivingExperienceId = drivingExperienceId;
         this.familyMembersId = familyMembersId;
         this.carPurposeId = carPurposeId;
-        this.personalValueId = personalValueid;
-        this.recommendationCar = recommendationCar;
+        this.personalValueId = personalValueId;
+        this.customRecommendationCars = customRecommendationCars;
     }
 }

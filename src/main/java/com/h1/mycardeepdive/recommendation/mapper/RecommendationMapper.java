@@ -41,16 +41,7 @@ public class RecommendationMapper {
                                         toRecommendationOptionInfo(
                                                 recommendationCarPackage.getPackages()))
                         .collect(Collectors.toList());
-        long totalPrice =
-                carSpec.getPrice()
-                        + exteriorColor.getPrice()
-                        + interiorColor.getPrice()
-                        + recommendationOptionInfos.stream()
-                                .mapToLong(RecommendationOptionInfo::getOption_price)
-                                .sum()
-                        + recommendationPackageDtos.stream()
-                                .mapToLong(RecommendationOptionInfo::getOption_price)
-                                .sum();
+        long totalPrice = recommendationCar.getPrice();
 
         return new RecommendationResponse(
                 trim.getName(),
@@ -98,16 +89,7 @@ public class RecommendationMapper {
                                         toRecommendationOptionInfo(
                                                 recommendationCarPackage.getPackages()))
                         .collect(Collectors.toList());
-        long totalPrice =
-                carSpec.getPrice()
-                        + exteriorColor.getPrice()
-                        + interiorColor.getPrice()
-                        + recommendationOptionInfos.stream()
-                                .mapToLong(RecommendationOptionInfo::getOption_price)
-                                .sum()
-                        + recommendationPackageDtos.stream()
-                                .mapToLong(RecommendationOptionInfo::getOption_price)
-                                .sum();
+        long totalPrice = recommendationCar.getPrice();
 
         return new RecommendationResponse(
                 trim.getName(),
