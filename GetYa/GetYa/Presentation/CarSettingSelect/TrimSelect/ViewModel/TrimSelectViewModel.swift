@@ -25,7 +25,7 @@ class TrimSelectViewModel {
     
     // MARK: - Properties
     private var useCase: TrimSelectUseCase
-    private let trimSubOptionSelect: TrimSubOptionSelect
+    private var trimSubOptionSelect: TrimSubOptionSelect
     
     // MARK: - LifeCycle
     init(trimSubOptionSelect: TrimSubOptionSelect, useCase: TrimSelectUseCase) {
@@ -54,6 +54,7 @@ class TrimSelectViewModel {
         input.touchUpSubOptionSelect
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
+                trimSubOptionSelect = $0
                 useCase.fetchTrimInqeury(trimSubOptionSelect: $0)
             })
             .store(in: &cancellables)
@@ -63,11 +64,11 @@ class TrimSelectViewModel {
                 guard let self else { return }
                 var trimSubOptionNames: [String] = []
                 trimSubOptionNames.append(
-                    Engine.allCases[trimSubOptionSelect.engineID].rawValue)
+                    Engine.allCases[trimSubOptionSelect.engineID - 1].rawValue)
                 trimSubOptionNames.append(
-                    Body.allCases[trimSubOptionSelect.bodyID].rawValue)
+                    Body.allCases[trimSubOptionSelect.bodyID - 1].rawValue)
                 trimSubOptionNames.append(
-                    DrivingSystem.allCases[trimSubOptionSelect.drivingSystemID].rawValue)
+                    DrivingSystem.allCases[trimSubOptionSelect.drivingSystemID - 1].rawValue)
                 output.trimInquery.send(($0, trimSubOptionNames))
             })
             .store(in: &cancellables)

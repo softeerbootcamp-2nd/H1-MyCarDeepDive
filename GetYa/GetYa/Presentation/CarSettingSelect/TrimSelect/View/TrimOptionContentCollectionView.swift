@@ -66,8 +66,22 @@ class TrimOptionContentCollectionView: UICollectionView {
         isScrollEnabled = false
     }
     
+    private func initializeProperties() {
+        titleTexts = []
+        descriptionTexts = []
+        priceValues = []
+        optionDescriptionTexts = []
+        optionImageURLArray = []
+        exteriorColorImageURLArray = []
+        interiorColorImageURLArray = []
+        tagTexts = []
+        selectedIndexPath = nil
+        expandedIndexPath = []
+    }
+    
     // MARK: - Functions
     func setTrimInquery(data: TrimInquery, trimSubOptionSelectNames: [String]) {
+        initializeProperties()
         data.carSpecs.forEach {
             titleTexts.append($0.trimName)
             descriptionTexts.append($0.summary)
