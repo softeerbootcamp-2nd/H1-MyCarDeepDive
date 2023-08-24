@@ -26,18 +26,18 @@ class CarSettingSelectViewController: UIViewController {
     private var bottomSheetViewHeightConstaint: NSLayoutConstraint!
     
     // MARK: - Properties
-    private var carSpecID = 0
+    private var trimSubOptionSelect: TrimSubOptionSelect
     private var viewControllers: [UIViewController] = []
     private var currentPageIndex: Int = 0
     
     // MARK: - LifeCycles
-    init(carSpecID: Int) {
+    init(trimSubOptionSelect: TrimSubOptionSelect) {
+        self.trimSubOptionSelect = trimSubOptionSelect
         super.init(nibName: nil, bundle: nil)
-        self.carSpecID = carSpecID
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -57,17 +57,17 @@ class CarSettingSelectViewController: UIViewController {
         ])
         pageViewController.didMove(toParent: self)
         
-        let colorRepository = DefaultColorRepository(provider: SessionProvider())
-        let useCase = DefaultCarSettingUseCase(colorRepository: colorRepository)
+        let trimSelectRepository = DefaultTrimSelectRepository(provider: SessionProvider())
+        let colorSelectRepository = DefaultColorSelectRepository(provider: SessionProvider())
+        let useCase = DefaultCarSettingUseCase(
+            trimSelectRepository: trimSelectRepository,
+            colorSelectRepository: colorSelectRepository)
         let colorSelectViewController = ColorSelectViewController(
             viewModel: ColorSelectViewModel(useCase: useCase))
-        
         let trimSelectViewController = TrimSelectViewController(
             viewModel: TrimSelectViewModel(
-                carSpecID: 1,
+                trimSubOptionSelect: trimSubOptionSelect,
                 useCase: useCase))
-        
-        
         viewControllers = [
             trimSelectViewController,
             colorSelectViewController,

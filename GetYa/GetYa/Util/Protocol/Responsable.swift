@@ -15,6 +15,8 @@ enum ResponseType {
     case carRecommendation
     case carRecommendationCustom
     case carSpec
+    case carSpecTrims
+    case carSpecActivityLog(tirmID: Int)
     case carSpecComparison
     case exteriorColor
     case interiorColor
@@ -26,6 +28,10 @@ enum ResponseType {
     case packageOptionsActivityLog(optionId: Int)
     case optionPackageDetails(optionId: Int)
     case optionCarSpecIdTagsTagId(carSpecId: Int, tagId: Int)
+    case pdfID
+    case pdfCarInfomation(pdfID: String)
+    case pdfEmail(pdfEmail: PdfEmail)
+    case pdfURL(pdfID: String)
     
     var path: String {
         switch self {
@@ -35,10 +41,22 @@ enum ResponseType {
             return "car-recommendation/custom"
         case .carSpec:
             return "car-spec"
+        case .carSpecTrims:
+            return "car-spec/trims"
+        case .carSpecActivityLog(let trimID):
+            return "car-spec/activity-log/\(trimID)"
         case .carSpecAdditionalOption(let carSpecId):
             return "car-spec/\(carSpecId)/additional-options"
         case .trimColor:
             return "color/trim-colors"
+        case .pdfID:
+            return "pdfId"
+        case .pdfCarInfomation(let pdfID):
+            return "pdf/\(pdfID)/car-information"
+        case .pdfEmail(let pdfEmail):
+            return "pdf/\(pdfEmail.pdfID)/email/\(pdfEmail.emailName)"
+        case .pdfURL(let pdfID):
+            return "pdf/\(pdfID)"
         default:
             break
         }

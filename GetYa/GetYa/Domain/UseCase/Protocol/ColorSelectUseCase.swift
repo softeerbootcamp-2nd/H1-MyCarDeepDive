@@ -13,12 +13,11 @@ enum ColorSelectUseCaseError: Error {
     case notExistInteriorColor
 }
 
-
 protocol ColorSelectUseCase {
-    var exteriorColorSelect: CurrentValueSubject<ColorSelectModel?, Never> { get set }
-    var interiorColorSelect: CurrentValueSubject<ColorSelectModel?, Never> { get set }
+    var exteriorColorSelect: CurrentValueSubject<Color?, Never> { get set }
+    var interiorColorSelect: CurrentValueSubject<Color?, Never> { get set }
     var trimColorInquery: PassthroughSubject<TrimColorInquery, Never> { get set }
-    var colorRepository: ColorRepository { get set }
+    var colorSelectRepository: ColorSelectRepository { get set }
     
     func fetchColorInquery()
     func validateInteriorColor(

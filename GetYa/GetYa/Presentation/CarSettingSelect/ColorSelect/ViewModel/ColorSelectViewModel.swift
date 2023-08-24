@@ -17,8 +17,8 @@ class ColorSelectViewModel {
     
     // MARK: - Output
     struct Output {
-        let trimInquery = PassthroughSubject<TrimColorInquery, Never>()
-//        let touchUpColorCellResult = PassthroughSubject<
+        let trimColorInquery = PassthroughSubject<TrimColorInquery, Never>()
+        let touchUpColorCellResult = PassthroughSubject<ColorChangeType, ColorSelectUseCaseError>()
     }
     
     // MARK: - Dependency
@@ -43,13 +43,19 @@ class ColorSelectViewModel {
             .store(in: &cancellables)
         
         input.touchUpColorCell
+            .dropFirst(2)
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
                 if $0.colorType == .exterior {
                     useCase.validateExteriorColor(exteriorColor: $0)
                         .sink(
                             receiveCompletion: {
-                                print($0)
+                                switch $0 {
+                                case .failure(let error):
+                                    print(error)
+                                case .finished:
+                                    break
+                                }
                             }, receiveValue: {
                                 print($0)
                             })
@@ -58,9 +64,10 @@ class ColorSelectViewModel {
                     useCase.validateInteriorColor(interiorColor: $0)
                         .sink(
                             receiveCompletion: {
-                                print($0)
+                                if $0 == .finished { return }
+                                output.touchUpColorCellResult.send(completion: $0)
                             }, receiveValue: {
-                                print($0)
+                                output.touchUpColorCellResult.send($0)
                             })
                         .store(in: &cancellables)
                 }
@@ -69,7 +76,7 @@ class ColorSelectViewModel {
         
         useCase.trimColorInquery
             .sink(receiveValue: {
-                output.trimInquery.send($0)
+                output.trimColorInquery.send($0)
             })
             .store(in: &cancellables)
         

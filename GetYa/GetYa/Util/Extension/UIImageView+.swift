@@ -21,21 +21,34 @@ extension UIImageView {
     
     func loadImageFrom(urlString: String) async throws -> UIImage? {
         enum ImageLoadError: Error {
-            case cacheLoadFail
+            case wrongCacheData
             case wrongURLString
             case badResponse
+            case badImage
         }
         
+        let urlString = "https://" + urlString
+        
         if DefaultGetYaCacheService.shared.isExist(urlString) {
-            guard let data = DefaultGetYaCacheService.shared.load(urlString) else { throw NSError() }
+            guard let data = DefaultGetYaCacheService.shared.load(urlString) else {
+                throw ImageLoadError.wrongCacheData
+            }
             return UIImage(data: data)
         } else {
-            guard let url = URL(string: urlString) else { throw ImageLoadError.wrongURLString }
+            guard let url = URL(string: urlString) else {
+                throw ImageLoadError.wrongURLString
+            }
             let (data, response) = try await URLSession.shared.data(from: url)
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw ImageLoadError.badResponse}
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+                throw ImageLoadError.badResponse
+            }
             DefaultGetYaCacheService.shared.write(urlString, data: data)
             
-            return UIImage(data: data)
+            let maybeImage = UIImage(data: data)
+            guard let thumbnail = await maybeImage?.thumbnail else {
+                throw ImageLoadError.badImage
+            }
+            return thumbnail
         }
     }
     

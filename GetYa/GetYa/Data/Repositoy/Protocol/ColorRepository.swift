@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ColorRepository {
+protocol ColorSelectRepository {
     func fetchTrimInquery(with trimID: Int) async throws -> TrimColorInquery
 }

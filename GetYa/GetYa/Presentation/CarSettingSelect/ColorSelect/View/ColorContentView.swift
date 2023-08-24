@@ -72,7 +72,8 @@ class ColorContentView: UIView {
             collectionView.setAvailableColorArray(colorArray: trimColor.availableColors)
             collectionView.setUnAvailableColorArray(colorArray: trimColor.unAvailableColors)
             collectionView.reloadData()
-            
+            collectionView.selectItem(at: [0, 0], animated: false, scrollPosition: .init())
+            collectionView.collectionView(collectionView.self, didSelectItemAt: [0, 0])
             setLearnMoreContentData(colorArray: trimColor.otherTrimColors)
         }
     }
@@ -178,9 +179,6 @@ class ColorContentView: UIView {
     }
     
     private func configureCollectionView() {
-        collectionView.selectItem(at: [0, 0], animated: false, scrollPosition: .init())
-        collectionView.collectionView(collectionView.self, didSelectItemAt: [0, 0])
-        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
                 equalTo: colorNameLabel.bottomAnchor,

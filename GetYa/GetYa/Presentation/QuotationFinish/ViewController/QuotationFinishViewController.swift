@@ -7,8 +7,68 @@
 
 import UIKit
 import SafariServices
+import Combine
 
-class QuotationFinishViewController: UIViewController {
+class QuotationFinishViewController: BaseViewController {
+    enum Constatns {
+        enum ThumbnailView {
+            static let height: CGFloat = .toScaledHeight(value: 440)
+        }
+        enum CarInfoView {
+            static let height: CGFloat = .toScaledHeight(value: 89)
+        }
+        enum QoutateTableView {
+            static let basicHeight: CGFloat = .toScaledHeight(value: 3)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+        }
+        enum TotalNameAndPriceView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 16)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 24)
+        }
+        enum ShareButton {
+            static let topMargin: CGFloat = .toScaledHeight(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 40)
+            static let width: CGFloat = .toScaledHeight(value: 40)
+        }
+        enum PDFButton {
+            static let topMargin: CGFloat = .toScaledHeight(value: 32)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+            static let width: CGFloat = .toScaledWidth(value: 168)
+        }
+        enum MailButton {
+            static let topMargin: CGFloat = .toScaledHeight(value: 32)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+            static let width: CGFloat = .toScaledWidth(value: 168)
+        }
+        enum StoreButton {
+            static let topMargin: CGFloat = .toScaledHeight(value: 8)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+        }
+        enum LineView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 24)
+            static let height: CGFloat = .toScaledHeight(value: 4)
+        }
+        enum PurchaseView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 20)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+        }
+        enum LeftAndButtonStackView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 40)
+            static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
+            static let height: CGFloat = .toScaledHeight(value: 52)
+        }
+    }
+    
     // MARK: - UI properties
     private let scrollView: UIScrollView = UIScrollView().set {
         $0.showsVerticalScrollIndicator = false
@@ -17,17 +77,8 @@ class QuotationFinishViewController: UIViewController {
     private let contentView: UIView = UIView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let thumbnailView = QuotationFinishThumbnailView(
-        image: UIImage(named: "LifeStylePeekTitle"),
-        carName: "펠리세이드",
-        trimName: "Le Blanc(르블랑)")
-    private let carInfoView = CommonQuotationPreviewCarInfoView().set {
-        $0.configure(with: QuotationPreviewCarInfoModel(
-            carKrName: "펠리세이드",
-            carEnTrimName: "Prestige",
-            carPrice: "\(43460000.toPriceFormat)",
-            carOptions: ["가솔린", "2WD", "8인승"].joined(separator: " ・ ")))
-    }
+    private let thumbnailView = QuotationFinishThumbnailView()
+    private let carInfoView = CommonQuotationPreviewCarInfoView()
     private let qoutateTableView = QuotationTableView()
     private var quotateTableViewTopConstraint: NSLayoutConstraint!
     private let totalNameAndPriceView: OptionNameAndPriceView = OptionNameAndPriceView().set {
@@ -37,6 +88,19 @@ class QuotationFinishViewController: UIViewController {
         $0.setPriceLabelColor(color: .GetYaPalette.gray0)
         $0.setPriceLabelFont(fontType: .mediumHead3)
     }
+    private lazy var shareButton: UIButton = UIButton().set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.clipsToBounds = true
+        $0.backgroundColor = .GetYaPalette.gray1000.withAlphaComponent(0.5)
+        $0.imageView?.contentMode = .scaleAspectFit
+        $0.setImage(UIImage(named: "share")?.resize(targetSize: CGSize(width: 18, height: 18)), for: .normal)
+        $0.addAction(
+            UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                touchUpShareButtonEvent.send()
+            }),
+            for: .touchUpInside)
+    }
     private lazy var pdfButton = CommonButton(
         font: GetYaFont.mediumBody3.uiFont,
         buttonBackgroundColorType: .custom(
@@ -45,8 +109,9 @@ class QuotationFinishViewController: UIViewController {
             color: .white)
     ).set {
         $0.setTitle("PDF로 저장", for: .normal)
-        $0.addAction(UIAction(handler: { _ in
-            // pdf 열기
+        $0.addAction(UIAction(handler: { [weak self] _ in
+            guard let self else { return }
+            self.touchUpPDFButtonEvent.send()
         }), for: .touchUpInside)
     }
     private lazy var mailButton = CommonButton(
@@ -60,11 +125,9 @@ class QuotationFinishViewController: UIViewController {
         $0.addAction(UIAction(handler: { _ in
             self.showAlert(
                 type: .mail,
-                buttonType: .oneButton,
-                rightTitle: "보내기",
-                rightButtonHandler: {
-                    print("Mail 보내기 액션")
-                })
+                buttonType: .twoButton,
+                leftTitle: "아니요",
+                rightTitle: "보내기")
         }), for: .touchUpInside)
     }
     private lazy var storeButton = CommonButton(
@@ -81,12 +144,9 @@ class QuotationFinishViewController: UIViewController {
                 buttonType: .twoButton,
                 leftTitle: "아니요",
                 rightTitle: "네",
-                rightButtonHandler: {
-                    guard let url = URL(string: "https://prd.kr-ccapi.hyundai.com/web/v1/user/signin") else { return }
-                    let safariVC = SFSafariViewController(url: url)
-                    safariVC.modalPresentationStyle = .fullScreen
-
-                    self.present(safariVC, animated: true, completion: nil)
+                rightButtonHandler: { [weak self] in
+                    guard let self else { return }
+                    self.presentSafariViewController(urlString: "https://prd.kr-ccapi.hyundai.com/web/v1/user/signin")
                 })
         }), for: .touchUpInside)
     }
@@ -97,56 +157,96 @@ class QuotationFinishViewController: UIViewController {
     private let purchaseView = PurchaseView()
     private lazy var leftAndButtonStackView = LeftAndRightButtonStackView().set {
         $0.setLeftButton(title: "수정", handler: {
-            // TODO: 2.1 트림 선택 화면으로
-            print("수정")
+            if let trimViewControllerIndex = self.navigationController?
+                .viewControllers
+                .firstIndex(where: {
+                    $0 is TrimSelectViewController
+                }) {
+                print(trimViewControllerIndex)
+            } else {
+                guard let homeViewController = self.navigationController?.viewControllers.first else { return }
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .removeAllViewContrllerExcept(
+                        to: homeViewController,
+                        nextViewController: CarSettingSelectViewController(
+                            trimSubOptionSelect: TrimSubOptionSelect(engineID: 1, bodyID: 1, drivingSystemID: 1)))
+            }
         })
-        $0.setRightButton(title: "구매/상담", handler: {
-            guard let url = URL(string: "https://www.hyundai.com/kr/ko/e/vehicles/purchase-consult") else { return }
-            let safariVC = SFSafariViewController(url: url)
-            safariVC.modalPresentationStyle = .fullScreen
-
-            self.present(safariVC, animated: true, completion: nil)
+        $0.setRightButton(title: "구매/상담", handler: { [weak self] in
+            guard let self else { return }
+            self.presentSafariViewController(urlString: "https://www.hyundai.com/kr/ko/e/vehicles/purchase-consult")
         })
     }
     
     // MARK: - Properties
-    private let colorImageArray: [UIImage?] = [
-        UIImage(named: "recommendOptioncolorchip"),
-        UIImage(named: "recommendOptionBlackColor")
-    ]
-    private let colorNameArray: [String] = [
-        "외장 - 크리미 화이트 펄",
-        "내장 - 인조가죽 (블랙)"
-    ]
-    private let colorPriceArray: [Int] = [
-        0,
-        2000000
-    ]
-    private let optionImageArray: [UIImage?] = [
-        UIImage(named: "recommendCarOption"),
-        UIImage(named: "recommendCarOption")
-    ]
-    private let optionNameArray: [String] = [
-        "컴포트 II",
-        "현대 스마트센스 III"
-    ]
-    private let optionPriceArray: [Int] = [
-        1090000,
-        1390000
-    ]
-    private var totalPrice: Int {
-        return 43460000 + optionPriceArray.reduce(0, +) + colorPriceArray.reduce(0, +)
-    }
+    private let viewModel: QuotationFinishViewModel
+    private var cancellables = Set<AnyCancellable>()
+    private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
+    private let postEmailEvent = PassthroughSubject<String, Never>()
+    private let touchUpShareButtonEvent = PassthroughSubject<Void, Never>()
+    private let touchUpPDFButtonEvent = PassthroughSubject<Void, Never>()
     
     // MARK: - Lifecycles
+    init(viewModel: QuotationFinishViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         setupViews()
         configureUI()
+        viewDidLoadEvent.send(())
     }
     
     // MARK: - Private Functions
+    private func bind() {
+        let input = QuotationFinishViewModel.Input(
+            viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
+            postEmailEvent: postEmailEvent.eraseToAnyPublisher(),
+            touchUpShareButtonEvent: touchUpShareButtonEvent.eraseToAnyPublisher(),
+            touchUpPDFButtonEvent: touchUpPDFButtonEvent.eraseToAnyPublisher())
+        let output = viewModel.transform(input: input)
+        
+        output.carInquery
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] carInquery in
+                guard let self else { return }
+                configureData(carInquery: carInquery)
+            })
+            .store(in: &cancellables)
+        
+        output.emailResult
+            .sink(receiveValue: {
+                print("이메일 전송 결과: \($0)")
+            })
+            .store(in: &cancellables)
+        
+        output.pdfID
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                showAlert(
+                    type: .share(pdfID: $0),
+                    buttonType: .oneButton,
+                    rightTitle: "공유하기")
+            })
+            .store(in: &cancellables)
+        
+        output.pdfURL
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                self.presentSafariViewController(urlString: "https://" + $0)
+            })
+            .store(in: &cancellables)
+    }
+    
     private func setupViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -155,6 +255,7 @@ class QuotationFinishViewController: UIViewController {
             carInfoView,
             qoutateTableView,
             totalNameAndPriceView,
+            shareButton,
             pdfButton,
             mailButton,
             storeButton,
@@ -162,18 +263,28 @@ class QuotationFinishViewController: UIViewController {
             purchaseView,
             leftAndButtonStackView
         ])
+        
+        setupNotificationCenter()
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getEmail),
+            name: Notification.Name("AlertEmail"),
+            object: nil)
     }
     
     private func configureUI() {
         view.backgroundColor = .white
         
-        configureNavigationBar()
         configureSrollView()
         configureContentView()
         configureThumbnailView()
         configureCarInfoView()
         configureQuotationTableView()
         configureTotalNameAndPriceView()
+        configureShareButton()
         configurePDFButton()
         configureMailButton()
         configureStoreButton()
@@ -202,54 +313,66 @@ class QuotationFinishViewController: UIViewController {
     }
     
     private func configureThumbnailView() {
+        typealias Const = Constatns.ThumbnailView
+        
         NSLayoutConstraint.activate([
             thumbnailView.topAnchor.constraint(equalTo: contentView.topAnchor),
             thumbnailView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             thumbnailView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            thumbnailView.heightAnchor.constraint(equalToConstant: CGFloat(440).scaledHeight)
+            thumbnailView.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configureCarInfoView() {
+        typealias Const = Constatns.CarInfoView
+        
         NSLayoutConstraint.activate([
             carInfoView.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor),
             carInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             carInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            carInfoView.heightAnchor.constraint(equalToConstant: CGFloat(89).scaledHeight)
+            carInfoView.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configureQuotationTableView() {
+        typealias Const = Constatns.QoutateTableView
         typealias ConstTable = QuotationTableView.Constants
-        var height: CGFloat = .toScaledHeight(value: 3)
-        if colorNameArray.count != 0 {
-            height += ConstTable.headerHeight + ConstTable.cellHeight * CGFloat(colorNameArray.count)
-        }
-        if optionNameArray.count != 0 {
-            height += ConstTable.headerHeight + ConstTable.cellHeight * CGFloat(optionNameArray.count)
-        }
-        quotateTableViewTopConstraint = qoutateTableView.heightAnchor.constraint(equalToConstant: height)
+        quotateTableViewTopConstraint = qoutateTableView.heightAnchor.constraint(
+            equalToConstant: ConstTable.headerHeight * 2 + Const.basicHeight)
         NSLayoutConstraint.activate([
             qoutateTableView.topAnchor.constraint(equalTo: carInfoView.bottomAnchor),
             qoutateTableView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             qoutateTableView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
+                constant: Const.trailingMargin),
             quotateTableViewTopConstraint
         ])
     }
     
+    private func calculateQuotationTablewViewHeight(optionCount: Int) {
+        typealias ConstTable = QuotationTableView.Constants
+        var height: CGFloat = .toScaledHeight(value: 3)
+        height += ConstTable.headerHeight + ConstTable.cellHeight * 2
+        if optionCount != 0 {
+            height += ConstTable.headerHeight + ConstTable.cellHeight * CGFloat(optionCount)
+        }
+        quotateTableViewTopConstraint.isActive = false
+        quotateTableViewTopConstraint.constant = height
+        quotateTableViewTopConstraint.isActive = true
+    }
+    
     private func configureTotalNameAndPriceView() {
-        totalNameAndPriceView.setPrice(value: totalPrice)
+        typealias Const = Constatns.TotalNameAndPriceView
+        
         NSLayoutConstraint.activate([
             totalNameAndPriceView.topAnchor.constraint(
                 equalTo: qoutateTableView.bottomAnchor,
-                constant: CGFloat(16).scaledHeight),
+                constant: Const.topMargin),
             totalNameAndPriceView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             totalNameAndPriceView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
                 constant: CGFloat(-16).scaledWidth),
@@ -257,100 +380,163 @@ class QuotationFinishViewController: UIViewController {
         ])
     }
     
+    private func configureShareButton() {
+        typealias Const = Constatns.ShareButton
+        
+        shareButton.layer.cornerRadius = Const.height / 2
+        
+        NSLayoutConstraint.activate([
+            shareButton.topAnchor.constraint(
+                equalTo: thumbnailView.imageView.topAnchor,
+                constant: Const.topMargin),
+            shareButton.trailingAnchor.constraint(
+                equalTo: thumbnailView.imageView.trailingAnchor,
+                constant: Const.trailingMargin),
+            shareButton.heightAnchor.constraint(equalToConstant: Const.height),
+            shareButton.widthAnchor.constraint(equalToConstant: Const.width)
+        ])
+    }
+    
     private func configurePDFButton() {
+        typealias Const = Constatns.PDFButton
+        
         NSLayoutConstraint.activate([
             pdfButton.topAnchor.constraint(
                 equalTo: totalNameAndPriceView.bottomAnchor,
-                constant: CGFloat(32).scaledHeight),
+                constant: Const.topMargin),
             pdfButton.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
-            pdfButton.heightAnchor.constraint(equalToConstant: CGFloat(52).scaledHeight),
-            pdfButton.widthAnchor.constraint(equalToConstant: CGFloat(168).scaledWidth)
+                constant: Const.leadingMargin),
+            pdfButton.heightAnchor.constraint(equalToConstant: Const.height),
+            pdfButton.widthAnchor.constraint(equalToConstant: Const.width)
         ])
     }
     
     private func configureMailButton() {
+        typealias Const = Constatns.MailButton
+        
         NSLayoutConstraint.activate([
             mailButton.topAnchor.constraint(
                 equalTo: totalNameAndPriceView.bottomAnchor,
-                constant: CGFloat(32).scaledHeight),
+                constant: Const.topMargin),
             mailButton.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
-            mailButton.heightAnchor.constraint(equalToConstant: CGFloat(52).scaledHeight),
-            mailButton.widthAnchor.constraint(equalToConstant: CGFloat(168).scaledWidth)
+                constant: Const.trailingMargin),
+            mailButton.heightAnchor.constraint(equalToConstant: Const.height),
+            mailButton.widthAnchor.constraint(equalToConstant: Const.width)
         ])
     }
     
     private func configureStoreButton() {
+        typealias Const = Constatns.StoreButton
+        
         NSLayoutConstraint.activate([
             storeButton.topAnchor.constraint(
                 equalTo: pdfButton.bottomAnchor,
-                constant: CGFloat(8).scaledHeight),
+                constant: Const.topMargin),
             storeButton.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             storeButton.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
-            storeButton.heightAnchor.constraint(equalToConstant: CGFloat(52).scaledHeight)
+                constant: Const.trailingMargin),
+            storeButton.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configureLineView() {
+        typealias Const = Constatns.LineView
+        
         NSLayoutConstraint.activate([
-            lineView.topAnchor.constraint(equalTo: storeButton.bottomAnchor, constant: CGFloat(24).scaledHeight),
+            lineView.topAnchor.constraint(equalTo: storeButton.bottomAnchor, constant: Const.topMargin),
             lineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             lineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            lineView.heightAnchor.constraint(equalToConstant: CGFloat(4).scaledHeight)
+            lineView.heightAnchor.constraint(equalToConstant: Const.height)
         ])
     }
     
     private func configurePurchaseView() {
-        purchaseView.setTotalPrice(totalPrice: totalPrice)
+        typealias Const = Constatns.PurchaseView
+        
         NSLayoutConstraint.activate([
-            purchaseView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: CGFloat(20).scaledHeight),
+            purchaseView.topAnchor.constraint(
+                equalTo: lineView.bottomAnchor,
+                constant: Const.topMargin),
             purchaseView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             purchaseView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth)
+                constant: Const.trailingMargin)
         ])
     }
     
     private func configureLeftAndRightStackView() {
+        typealias Const = Constatns.LeftAndButtonStackView
+        
         NSLayoutConstraint.activate([
             leftAndButtonStackView.topAnchor.constraint(
                 equalTo: purchaseView.bottomAnchor,
-                constant: CGFloat(40).scaledHeight),
+                constant: Const.topMargin),
             leftAndButtonStackView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: CGFloat(16).scaledWidth),
+                constant: Const.leadingMargin),
             leftAndButtonStackView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: CGFloat(-16).scaledWidth),
-            leftAndButtonStackView.heightAnchor.constraint(equalToConstant: CGFloat(52).scaledHeight),
+                constant: Const.trailingMargin),
+            leftAndButtonStackView.heightAnchor.constraint(equalToConstant: Const.height),
             leftAndButtonStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
-    private func configureNavigationBar() {
-        let image = UIImage(named: "Black_Logo")
-        navigationItem.title = ""
-        navigationItem.titleView = UIImageView(image: image)
-        navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "arrow.left")?
-            .withTintColor(
-            .GetYaPalette.gray0,
-            renderingMode: .alwaysOriginal)
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left")?
-            .withTintColor(
-            .GetYaPalette.gray0,
-            renderingMode: .alwaysOriginal)
+    private func configureData(carInquery: QuotationFinish) {
+        thumbnailView.setData(carName: carInquery.carName, trimName: carInquery.trimName)
+        carInfoView.configure(
+            with: QuotationPreviewCarInfoModel(
+                carName: carInquery.carName,
+                trimName: carInquery.trimName,
+                carPrice: carInquery.basicPrice.toPriceFormat + "원",
+                carOptions: [
+                    carInquery.engineName,
+                    carInquery.drivingSystemName,
+                    carInquery.bodyName
+                ].joined(separator: " ・ ")))
+        qoutateTableView.setData(
+            colorNames: [carInquery.exteriorColorName, carInquery.interiorColorName],
+            colorImageURLArray: [carInquery.exteriorColorImageURL, carInquery.interiorColorImageURL],
+            colorPrices: [carInquery.exteriorColorPrice, carInquery.interiorColorPrice],
+            optionList: carInquery.optionList)
+        calculateQuotationTablewViewHeight(optionCount: carInquery.optionList.count)
+        totalNameAndPriceView.setPrice(value: carInquery.basicPrice)
+        purchaseView.setTotalPrice(totalPrice: carInquery.totalPrice)
+    }
+    
+    private func presentSafariViewController(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.modalPresentationStyle = .fullScreen
+
+        self.present(safariVC, animated: true, completion: nil)
     }
     
     // MARK: - Functions
+    override func touchUpNavigationBackButton() {
+        showAlert(
+            type: .message(
+                title: "추천이 도움이 되었나요?",
+                description: "고객님의 답변을 반영해 더 나은 서비스를 만들게요."),
+            buttonType: .twoButton,
+            leftButtonHandler: {
+                self.navigationController?.popViewController(animated: true)
+            },
+            rightButtonHandler: {
+                self.navigationController?.popViewController(animated: true)
+            })
+    }
     
     // MARK: - Objc Functions
+    @objc private func getEmail(_ notification: Notification) {
+        guard let text = notification.userInfo?["email"] as? String else { return }
+        postEmailEvent.send(text)
+    }
 }

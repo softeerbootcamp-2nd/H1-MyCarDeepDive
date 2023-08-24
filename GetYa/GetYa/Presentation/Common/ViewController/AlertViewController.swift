@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class AlertViewController: UIViewController {
     enum Constatns {
@@ -51,11 +52,11 @@ class AlertViewController: UIViewController {
         $0.layer.cornerRadius = CGFloat(12).scaledHeight
         $0.backgroundColor = .white
     }
-    private let titleLabel = CommonLabel(fontType: .mediumHead4, color: .GetYaPalette.gray0)
-    private let descriptionLabel = CommonLabel(fontType: .regularBody4, color: .GetYaPalette.gray300)
+    let titleLabel = CommonLabel(fontType: .mediumHead4, color: .GetYaPalette.gray0)
+    let descriptionLabel = CommonLabel(fontType: .regularBody4, color: .GetYaPalette.gray300)
     private lazy var buttonStackView = LeftAndRightButtonStackView()
     private var settingAlertView: SettingAlertView!
-    private let textField: UITextField = UITextField().set {
+    let textField: UITextField = UITextField().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         $0.leftViewMode = .always
@@ -66,6 +67,7 @@ class AlertViewController: UIViewController {
     
     // MARK: - Properties
     private var buttonStackViewTopConstraint: NSLayoutConstraint!
+    private var cancellabels = Set<AnyCancellable>()
     
     // MARK: - Lifecycles
     override func viewDidLoad() {

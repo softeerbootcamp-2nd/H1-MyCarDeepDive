@@ -10,5 +10,7 @@ import Foundation
 enum ColorChangeType {
     case canChange
     case needChnageExteriorColor
+    case needChnageExteriorColorWithTrim
     case needChnageInteriorColor
+    case needChnageInteriorColorWithTrim
 }

@@ -48,10 +48,10 @@ class ColorSelectViewController: UIViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.trimInquery
+        output.trimColorInquery
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                print($0)
                 contentView.setData(
                     exteriorColor: $0.exteriorColor,
                     interiorColor: $0.interiorColor)
@@ -93,6 +93,7 @@ extension ColorSelectViewController: ColorSelectContentViewDelegate {
             colorID: color.colorID,
             colorName: color.name,
             colorPrice: color.price,
-            trimID: color.trimID))
+            trimID: color.trimID,
+            oppositeColors: color.oppositeColors))
     }
 }

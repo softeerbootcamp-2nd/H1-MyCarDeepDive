@@ -114,18 +114,12 @@ class TrimSelectViewController: UIViewController {
         text: "트림")
     
     // MARK: - Properties
+    private var cancellables = Set<AnyCancellable>()
     private var viewModel: TrimSelectViewModel!
     private var viewDidLoadEvent = PassthroughSubject<Void, Never>()
     private var touchUpTrimSelectButton = PassthroughSubject<TrimSelectModel, Never>()
-    private var touchUpSubOptionSelectButton = PassthroughSubject<TrimSubOptionSelectModel, Never>()
-    private let titleTexts = ["Exclusive", "Le Blanc (르블랑)", "Prestige", "Caligraphy"]
-    private let tagTexts = [
-        ["디젤 2.2", "7인승", "2WD"],
-        ["디젤 2.2", "7인승", "2WD"],
-        ["디젤 2.2", "7인승", "2WD"],
-        ["디젤 2.2", "7인승", "2WD"]]
-    private let descriptionTexts = ["합리적인 가격의 인기 옵션", "필수적인 옵션만 모은", "가치있는 드라이빙 경험을 주는", "남들과 차별화된 경험"]
-    private let priceValues = [43460000, 40440000, 47720000, 52540000]
+    private var touchUpSubOptionSelectButton = PassthroughSubject<TrimSubOptionSelect, Never>()
+    private var carSpecCount: Int = 0
     
     // MARK: - Lifecycles
     init(viewModel: TrimSelectViewModel) {
@@ -143,7 +137,6 @@ class TrimSelectViewController: UIViewController {
         bind()
         setupViews()
         configureUI()
-        setOptionContentData()
         setTrimAreaToolTipViewIsHidden(isHidden: false)
         viewDidLoadEvent.send(())
     }
@@ -155,6 +148,29 @@ class TrimSelectViewController: UIViewController {
             touchUpSubOptionSelect: touchUpSubOptionSelectButton.eraseToAnyPublisher(),
             touchUpTrimSelectButton: touchUpTrimSelectButton.eraseToAnyPublisher())
         let output = viewModel.transform(input: input)
+        
+        output.trimInquery
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] (trimInquery, trimSubOptionSelectNames) in
+                guard let self, let trimInquery else { return }
+                carSpecCount = trimInquery.carSpecs.count
+                updateTrimOptionContentCollectionViewHeight()
+                headerView.setImage(
+                    urlString: trimInquery.carSpecs[trimInquery.recommendTrimID - 1].trimImageURL)
+                trimOptionContentCollectionView.setTrimInquery(
+                    data: trimInquery,
+                    trimSubOptionSelectNames: trimSubOptionSelectNames)
+            })
+            .store(in: &cancellables)
+        
+        output.trimSelectResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                scrollView.setContentOffset(.zero, animated: true)
+                headerView.setImage(urlString: $0)
+            })
+            .store(in: &cancellables)
     }
     
     private func setupViews() {
@@ -255,10 +271,9 @@ class TrimSelectViewController: UIViewController {
     
     private func configureTrimOptionContentCollectionView() {
         let const = Constants.TrimOptionContentCollectionView.self
-        let height = createTrimOptionContentCollectionViewHeight()
         collectionViewHeightConstarint = trimOptionContentCollectionView
             .heightAnchor
-            .constraint(equalToConstant: height)
+            .constraint(equalToConstant: 0)
         configureCollectionViewTopConstraint()
         NSLayoutConstraint.activate([
             trimOptionContentCollectionView.leadingAnchor.constraint(
@@ -323,21 +338,16 @@ class TrimSelectViewController: UIViewController {
         ])
     }
     
-    private func createTrimOptionContentCollectionViewHeight() -> CGFloat {
+    private func updateTrimOptionContentCollectionViewHeight() {
         let expandedCount = trimOptionContentCollectionView.expandedIndexPath.count
         let height = TrimOptionContentCollectionView.Constants.Cell.height *
-        CGFloat(titleTexts.count - expandedCount) +
+        CGFloat(carSpecCount - expandedCount) +
         TrimOptionContentCollectionView.Constants.Cell.expandedHeight *
         CGFloat(expandedCount)
         
-        return height
-    }
-    
-    private func setOptionContentData() {
-        trimOptionContentCollectionView.setTitleTexts(texts: titleTexts)
-        trimOptionContentCollectionView.setTagTexts(texts: tagTexts)
-        trimOptionContentCollectionView.setDescriptionTexts(texts: descriptionTexts)
-        trimOptionContentCollectionView.setPrice(values: priceValues)
+        collectionViewHeightConstarint.isActive = false
+        collectionViewHeightConstarint.constant = height
+        collectionViewHeightConstarint.isActive = true
     }
 
     // MARK: - Functions
@@ -428,7 +438,7 @@ extension TrimSelectViewController: TrimSubOptionContentStackViewDelegate {
     
     func sendAllSubOptionSelectedIndex(indexList: [Int]) {
         touchUpSubOptionSelectButton.send(
-            TrimSubOptionSelectModel(
+            TrimSubOptionSelect(
                 engineID: indexList[0],
                 bodyID: indexList[1],
                 drivingSystemID: indexList[2]))
@@ -442,12 +452,7 @@ extension TrimSelectViewController: TrimOptionContentCollectionViewDelegate {
     }
     
     func touchUpLearnMoreViewButton() {
-        collectionViewHeightConstarint.isActive = false
-        let height = createTrimOptionContentCollectionViewHeight()
-        collectionViewHeightConstarint = trimOptionContentCollectionView
-            .heightAnchor
-            .constraint(equalToConstant: height)
-        collectionViewHeightConstarint.isActive = true
+        updateTrimOptionContentCollectionViewHeight()
         
         self.view.layoutIfNeeded()
     }

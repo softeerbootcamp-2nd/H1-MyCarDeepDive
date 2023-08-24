@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DefaultColorRepository: ColorRepository {
+class DefaultColorSelectRepository: ColorSelectRepository {
     typealias Endpoint = ColorSelectEndpoint
     
     private let provider: EndpointProvider

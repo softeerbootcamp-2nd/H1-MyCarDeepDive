@@ -28,14 +28,10 @@ class TrimOptionContentCollectionView: UICollectionView {
     weak var trimOptionDelegate: TrimOptionContentCollectionViewDelegate?
     private(set) var selectedIndexPath: IndexPath?
     private(set) var expandedIndexPath: [IndexPath] = []
-    
-    // TODO: - 이 부분은 모델로 짜여질 예정
-    private(set) var exteriorColors: [UIColor] = []
-    private(set) var interiorColors: [UIColor] = []
-    private(set) var optionImages: [UIImage?] = []
-    private(set) var optionDescriptionTexts: [String] = []
-    
-    // TODO: - 이 부분은 모델로 짜여질 예정
+    private(set) var exteriorColorImageURLArray: [[String]] = []
+    private(set) var interiorColorImageURLArray: [[String]] = []
+    private(set) var optionImageURLArray: [[String]] = []
+    private(set) var optionDescriptionTexts: [[String]] = []
     private(set) var titleTexts: [String] = []
     private(set) var tagTexts: [[String]] = []
     private(set) var descriptionTexts: [String] = []
@@ -44,21 +40,6 @@ class TrimOptionContentCollectionView: UICollectionView {
     // MARK: - Lifecycles
     convenience init() {
         self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    init(
-        titleTexts: [String],
-        tagTexts: [[String]],
-        descriptionTexts: [String],
-        priceValues: [Int]
-    ) {
-        super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        
-        configureUI()
-        setTitleTexts(texts: titleTexts)
-        setTagTexts(texts: tagTexts)
-        setDescriptionTexts(texts: descriptionTexts)
-        setPrice(values: priceValues)
     }
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -85,21 +66,34 @@ class TrimOptionContentCollectionView: UICollectionView {
         isScrollEnabled = false
     }
     
-    // MARK: - Functions    
-    func setTitleTexts(texts: [String]) {
-        self.titleTexts = texts
+    private func initializeProperties() {
+        titleTexts = []
+        descriptionTexts = []
+        priceValues = []
+        optionDescriptionTexts = []
+        optionImageURLArray = []
+        exteriorColorImageURLArray = []
+        interiorColorImageURLArray = []
+        tagTexts = []
+        selectedIndexPath = nil
+        expandedIndexPath = []
     }
     
-    func setTagTexts(texts: [[String]]) {
-        self.tagTexts = texts
-    }
-    
-    func setDescriptionTexts(texts: [String]) {
-        self.descriptionTexts = texts
-    }
-    
-    func setPrice(values: [Int]) {
-        self.priceValues = values
+    // MARK: - Functions
+    func setTrimInquery(data: TrimInquery, trimSubOptionSelectNames: [String]) {
+        initializeProperties()
+        data.carSpecs.forEach {
+            titleTexts.append($0.trimName)
+            descriptionTexts.append($0.summary)
+            priceValues.append($0.price)
+            optionDescriptionTexts.append($0.basicOptionNames)
+            optionImageURLArray.append($0.basicOptionImageURLArray)
+            exteriorColorImageURLArray.append($0.exteriorColorImageURLArray)
+            interiorColorImageURLArray.append($0.interiorColorImageURLArray)
+            tagTexts.append(trimSubOptionSelectNames)
+        }
+        selectedIndexPath = [0, data.recommendTrimID - 1]
+        reloadData()
     }
 }
 
@@ -123,21 +117,20 @@ extension TrimOptionContentCollectionView: UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: TrimOptionContentCell.identifier,
-            for: indexPath) as? TrimOptionContentCell else { return UICollectionViewCell() }
+            for: indexPath) as? TrimOptionContentCell
+        else { return UICollectionViewCell() }
+        cell.delegate = self
+        cell.learnMoreView.button.isSelected = expandedIndexPath.contains(indexPath)
         cell.configureDescriptionText(text: descriptionTexts[indexPath.row])
         cell.configureNameText(text: titleTexts[indexPath.row])
         cell.configureTagTexts(texts: tagTexts[indexPath.row])
         cell.configurePriceText(price: priceValues[indexPath.row])
         cell.setSelectButtonIsSelected(isSelected: indexPath == selectedIndexPath)
-        cell.learnMoreView.button.isSelected = expandedIndexPath.contains(indexPath)
-        cell.delegate = self
-        
-        //TODO: 서버에서 받아온 데이터로 처리해야함
         cell.learnMoreView.setContentView(view: TrimOptionDetailView(
-            exteriorColorArray: [.red, .black, .blue],
-            interiorColorArray: [.orange],
-            optionImages: [UIImage(systemName: "house"), UIImage(systemName: "person"), UIImage(systemName: "sun.min")],
-            optionDescriptionTexts: ["20인치 알로이 휠", "12.3인치 클러스터(컬러 LCD)", "서라운드 뷰 모니터"]))
+            exteriorColorArray: exteriorColorImageURLArray[indexPath.row],
+            interiorColorArray: interiorColorImageURLArray[indexPath.row],
+            optionImageURLArray: optionImageURLArray[indexPath.row],
+            optionDescriptionTexts: optionDescriptionTexts[indexPath.row]))
         
         return cell
     }
@@ -179,12 +172,15 @@ extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
                 $0?.setSelectButtonIsSelected(isSelected: false)
             }
             selectedIndexPath = indexPath
-            if let cell = sender as? TrimOptionContentCell {
+            if let cell = sender as? TrimOptionContentCell, let selectedIndexPath {
                 cell.setSelectButtonIsSelected(isSelected: true)
+                let index = selectedIndexPath.row
                 trimOptionDelegate?.touchUpCellSelectButton(
                     trimSelectModel: TrimSelectModel(
-                        trimName: cell.nameLabel.text ?? "",
-                        trimPrice: cell.priceLabel.text?.toInt ?? 0))
+                        index: index,
+                        trimTag: tagTexts[index],
+                        trimName: titleTexts[index],
+                        trimPrice: priceValues[index]))
             }
         }
     }

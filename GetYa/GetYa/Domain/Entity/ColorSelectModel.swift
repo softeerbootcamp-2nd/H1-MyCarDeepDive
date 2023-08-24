@@ -13,4 +13,5 @@ struct ColorSelectModel {
     var colorName: String
     var colorPrice: Int
     var trimID: Int
+    var oppositeColors: [Int]
 }

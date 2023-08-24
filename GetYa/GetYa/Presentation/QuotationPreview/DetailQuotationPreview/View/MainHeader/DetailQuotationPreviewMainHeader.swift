@@ -106,9 +106,10 @@ private extension DetailQuotationPreviewMainHeader {
     }
     
     func configureSectionDivider() {
-        NSLayoutConstraint.activate([sectionDivider.leadingAnchor.constraint(equalTo: leadingAnchor),
-         sectionDivider.trailingAnchor.constraint(equalTo: trailingAnchor),
-         sectionDivider.topAnchor.constraint(equalTo: recommendCarInfoView.bottomAnchor),
-         sectionDivider.bottomAnchor.constraint(equalTo: bottomAnchor)])
+        NSLayoutConstraint.activate([
+            sectionDivider.leadingAnchor.constraint(equalTo: leadingAnchor),
+            sectionDivider.trailingAnchor.constraint(equalTo: trailingAnchor),
+            sectionDivider.topAnchor.constraint(equalTo: recommendCarInfoView.bottomAnchor),
+            sectionDivider.bottomAnchor.constraint(equalTo: bottomAnchor)])
     }
 }

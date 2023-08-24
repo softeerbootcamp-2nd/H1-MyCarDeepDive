@@ -7,7 +7,6 @@
 
 import UIKit
 
-// TODO: isHighlight 를 흰색이나 아니면 애니메이션 공동으로 적용시키기!!
 final class CommonButton: UIButton {
     enum ButtonBackgroundColorType {
         case primary

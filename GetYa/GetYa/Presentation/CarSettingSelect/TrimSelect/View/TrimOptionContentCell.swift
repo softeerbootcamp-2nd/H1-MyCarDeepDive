@@ -210,7 +210,7 @@ class TrimOptionContentCell: UICollectionViewCell {
     }
     
     func configurePriceText(price: Int) {
-        priceLabel.text = price.toPriceFormat
+        priceLabel.text = price.toPriceFormat + "원"
     }
     
     func setSelectButtonIsSelected(isSelected: Bool) {

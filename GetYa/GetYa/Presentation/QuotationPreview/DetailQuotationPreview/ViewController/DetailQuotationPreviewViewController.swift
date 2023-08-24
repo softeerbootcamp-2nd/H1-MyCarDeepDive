@@ -65,16 +65,19 @@ extension DetailQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate 
     }
     
     func gotoQuotePage() {
-        let finishViewController = QuotationFinishViewController(nibName: nil, bundle: nil)
-        if let navigationController = navigationController,
-           let firstViewController = navigationController.viewControllers.first {
-            navigationController.pushViewController(finishViewController, animated: true)
-            
-            navigationController.viewControllers.removeAll(where: { targetViewController in
-                return (targetViewController != firstViewController &&
-                        targetViewController != finishViewController)
-            })
-        }
+        navigationController?.pushViewController(
+            LoadingViewController(
+                viewModel: LoadingViewModel(
+                    contrationQuotation: ContractionQuotation(
+                        carSpecID: 1,
+                        trimID: 1,
+                        exteriorColorID: 1,
+                        interiorColorID: 1,
+                        additionalOptionIDList: []),
+                    useCase: DefaultLoadingUseCase(
+                        repository: DefaultLoadingRepository(
+                            provider: SessionProvider())))),
+            animated: true)
     }
 }
 
