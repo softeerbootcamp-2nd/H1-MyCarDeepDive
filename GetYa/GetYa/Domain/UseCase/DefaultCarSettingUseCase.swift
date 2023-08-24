@@ -22,7 +22,7 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase {
     var exteriorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
     var interiorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
     
-    var optionSelect = PassthroughSubject<OptionSelectModel, Never>()
+    var optionSelect = CurrentValueSubject<OptionSelectModel?, Never>(nil)
     
     // MARK: - Properties
     var trimSelectRepository: TrimSelectRepository
@@ -51,7 +51,7 @@ extension DefaultCarSettingUseCase {
                 let recommendCarSpec = trimInquery.carSpecs[recommendID]
                 self.trimSelect.send(
                     TrimSelectModel(
-                        index: recommendID - 1,
+                        trimID: recommendCarSpec.trimID,
                         trimTag: [
                             Engine.allCases[trimSubOptionSelect.engineID - 1].rawValue,
                             Body.allCases[trimSubOptionSelect.bodyID - 1].rawValue,
@@ -69,8 +69,10 @@ extension DefaultCarSettingUseCase {
     func fetchTrimSelectLog(trimSelectModel: TrimSelectModel) {
         Task(operation: {
             do {
-                guard let trimInquery = trimInquery.value else { return }
-                let carSpec = trimInquery.carSpecs[trimSelectModel.index]
+                guard let trimInquery = trimInquery.value,
+                      let carSpec = trimInquery.carSpecs.first(where: {
+                          $0.trimID == trimSelectModel.trimID
+                      }) else { return }
                 let result = try await trimSelectRepository.fetchTrimSelectLog(
                     with: carSpec.trimID)
                 self.trimSelect.send(trimSelectModel)
@@ -88,7 +90,7 @@ extension DefaultCarSettingUseCase {
         Task(operation: {
             do {
                 guard let trimSelect = trimSelect.value else { return }
-                let trimColorInquery = try await colorSelectRepository.fetchTrimColorInquery(with: trimSelect.index + 1)
+                let trimColorInquery = try await colorSelectRepository.fetchTrimColorInquery(with: trimSelect.trimID)
                 self.trimColorInquery.send(trimColorInquery)
                 
                 let availableExteriorColor = trimColorInquery.exteriorColor.availableColors[0]
@@ -161,16 +163,22 @@ extension DefaultCarSettingUseCase {
         if let exteriorColorSelect = exteriorColorSelect.value {
             if interiorColor.oppositeColors.contains(exteriorColorSelect.colorID) {
                 if interiorColor.trimID != exteriorColorSelect.trimID {
-                    interiorColorChangeResult.send(.needChangeTrim)
+                    interiorColorChangeResult.send(
+                        .needChangeTrim(
+                            trimChangeModel: TrimChangeModel()))
                 } else {
                     interiorColorSelect.send(interiorColor)
                     fetchExteriorColorInquery(interiorColor: interiorColor)
                 }
             } else {
                 if interiorColor.trimID != exteriorColorSelect.trimID {
-                    interiorColorChangeResult.send(.needChnageExteriorColorWithTrim)
+                    interiorColorChangeResult.send(
+                        .needChangeExteriorColorWithTrim(
+                            trimChangeModel: TrimChangeModel()))
                 } else {
-                    interiorColorChangeResult.send(.needChnageExteriorColor)
+                    interiorColorChangeResult.send(
+                        .needChangeExteriorColor(
+                            trimChangeModel: TrimChangeModel()))
                 }
             }
         }
@@ -182,16 +190,28 @@ extension DefaultCarSettingUseCase {
         if let interiorColorSelect = interiorColorSelect.value {
             if exteriorColor.oppositeColors.contains(interiorColorSelect.colorID) {
                 if exteriorColor.trimID != interiorColorSelect.trimID {
-                    exteriorColorChangeResult.send(.needChangeTrim)
+                    guard let otherTrim = trimInquery.value?.carSpecs.first(where: {
+                        $0.trimID == exteriorColor.trimID
+                    }) else { return }
+                    
+                    exteriorColorChangeResult.send(
+                        .needChangeTrim(
+                            trimChangeModel: TrimChangeModel(
+                                trimSelectModel: trimSelect.value,
+                                otherTrimSelectModel: nil)))
                 } else {
                     exteriorColorSelect.send(exteriorColor)
                     fetchInteriorColorInquery(exteriorColor: exteriorColor)
                 }
             } else {
                 if exteriorColor.trimID != interiorColorSelect.trimID {
-                    exteriorColorChangeResult.send(.needChnageInteriorColorWithTrim)
+                    exteriorColorChangeResult.send(
+                        .needChangeInteriorColorWithTrim(
+                            trimChangeModel: TrimChangeModel()))
                 } else {
-                    exteriorColorChangeResult.send(.needChnageInteriorColor)
+                    exteriorColorChangeResult.send(
+                        .needChangeInteriorColor(
+                            trimChangeModel: TrimChangeModel()))
                 }
             }
         }

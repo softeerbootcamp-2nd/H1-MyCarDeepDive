@@ -28,6 +28,7 @@ class TrimOptionContentCollectionView: UICollectionView {
     weak var trimOptionDelegate: TrimOptionContentCollectionViewDelegate?
     private(set) var selectedIndexPath: IndexPath?
     private(set) var expandedIndexPath: [IndexPath] = []
+    private(set) var trimIDArray: [Int] = []
     private(set) var exteriorColorImageURLArray: [[String]] = []
     private(set) var interiorColorImageURLArray: [[String]] = []
     private(set) var optionImageURLArray: [[String]] = []
@@ -67,6 +68,7 @@ class TrimOptionContentCollectionView: UICollectionView {
     }
     
     private func initializeProperties() {
+        trimIDArray = []
         titleTexts = []
         descriptionTexts = []
         priceValues = []
@@ -83,6 +85,7 @@ class TrimOptionContentCollectionView: UICollectionView {
     func setTrimInquery(data: TrimInquery, trimSubOptionSelectNames: [String]) {
         initializeProperties()
         data.carSpecs.forEach {
+            trimIDArray.append($0.trimID)
             titleTexts.append($0.trimName)
             descriptionTexts.append($0.summary)
             priceValues.append($0.price)
@@ -177,7 +180,7 @@ extension TrimOptionContentCollectionView: TrimOptionContentCellDelegate {
                 let index = selectedIndexPath.row
                 trimOptionDelegate?.touchUpCellSelectButton(
                     trimSelectModel: TrimSelectModel(
-                        index: index,
+                        trimID: trimIDArray[index],
                         trimTag: tagTexts[index],
                         trimName: titleTexts[index],
                         trimPrice: priceValues[index]))
