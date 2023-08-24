@@ -1362,6 +1362,7 @@
 			children = (
 				64ADA47E2A77884D0003E2C1 /* Protocol */,
 				6457D1352A9498B200B3AAAF /* DefaultCarSettingUseCase.swift */,
+				15A8A2AB2A95F54A007C47AB /* DefaultQuotationUseCase.swift */,
 				6457D16B2A95D4DE00B3AAAF /* DefaultQuotationFinishUseCase.swift */,
 				6457D1992A9678C800B3AAAF /* DefaultLoadingUseCase.swift */,
 			);
@@ -1377,7 +1378,6 @@
 				6457D1312A94988600B3AAAF /* ColorSelectUseCase.swift */,
 				6457D1332A94989100B3AAAF /* OptionSelectUseCase.swift */,
 				15A8A2A72A95F1FE007C47AB /* QuotationUseCase.swift */,
-				15A8A2AB2A95F54A007C47AB /* DefaultQuotationUseCase.swift */,
 				6457D16D2A95D4EA00B3AAAF /* QuotationFinishUseCase.swift */,
 				6457D19B2A967A1200B3AAAF /* LoadingUseCase.swift */,
 			);
@@ -1393,7 +1393,6 @@
 				6457CFB32A93959B00B3AAAF /* BasicOption.swift */,
 				6457D1222A9463B200B3AAAF /* CarSettingSelectModel.swift */,
 				15A8A2A32A95EF97007C47AB /* ColorInfoModel.swift */,
-				64ADA48A2A7788900003E2C1 /* Entity.swift */,
 				6457CFB52A9395D100B3AAAF /* OptionDetail.swift */,
 				15A8A2A52A95EFB3007C47AB /* OptionInfo.swift */,
 				6457CFB72A93960500B3AAAF /* PackageOptionDetail.swift */,
