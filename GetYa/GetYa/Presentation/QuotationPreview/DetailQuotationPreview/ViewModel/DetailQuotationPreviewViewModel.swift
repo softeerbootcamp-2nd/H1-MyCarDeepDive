@@ -20,6 +20,7 @@ struct QuotationPreviewMainHeaderModel {
     var thumbnailKeywords: [String]
     var recommendCarProductOption: QuotationPreviewCarInfoModel
     var firstSectionTitle: String
+    var thumbnailUrl: String
     
     init(
         thumbnailKeywords: [String] = [],
@@ -28,11 +29,13 @@ struct QuotationPreviewMainHeaderModel {
             trimName: "",
             carPrice: "",
             carOptions: ""),
-        firstSectionTitle: String = ""
+        firstSectionTitle: String = "",
+        thumbnailUrl: String = ""
     ) {
         self.thumbnailKeywords = thumbnailKeywords
         self.recommendCarProductOption = recommendCarProductOption
         self.firstSectionTitle = firstSectionTitle
+        self.thumbnailUrl = thumbnailUrl
     }
 }
 
@@ -114,6 +117,7 @@ private extension DetailQuotationPreviewViewModel {
                     carOptions: carOptions)
                 self?.mainSectionHeader.recommendCarProductOption = recommendCarProductOption
                 self?.mainSectionHeader.firstSectionTitle = "색상"
+                self?.mainSectionHeader.thumbnailUrl = quotationModel.carImgUrl
                 self?.sectionHeaders = ["옵션", "패키지"]
                 self?.secondSectionFooter = quotationModel.totalPrice.toPriceFormat+"원"
                 let exteriorColor = quotationModel.exteriorColor
@@ -165,7 +169,7 @@ private extension DetailQuotationPreviewViewModel {
 // MARK: - CharacterSSTableViewAdapterDataSource
 extension DetailQuotationPreviewViewModel: DetailQuotationPreviewAdapterDataSource {
     var lastSectionHeaderItem: String {
-        sectionHeaders[2]
+        sectionHeaders[1]
     }
     
     var lastSectionFooterItem: String {
@@ -177,6 +181,6 @@ extension DetailQuotationPreviewViewModel: DetailQuotationPreviewAdapterDataSour
     }
     
     var secondSectionHeaderItem: String {
-        sectionHeaders[1]
+        sectionHeaders[0]
     }
 }
