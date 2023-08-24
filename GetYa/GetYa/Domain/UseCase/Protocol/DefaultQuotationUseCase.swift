@@ -30,22 +30,7 @@ final class DefaultQuotationUseCase: QuotationUseCase {
                     .fetchCarDetailRecommendation(with: userSelectedQuestionModel.toDTO())
                 carQuotation.send(quotation)
             } catch let error as SessionProvider.SessionError {
-                switch error {
-                case .unknown:
-                    break
-                case .components:
-                    break
-                case .emptyBytes:
-                    break
-                case .failedDecode:
-                    break
-                case .failedStatusCode:
-                    break
-                case .timeout:
-                    break
-                case .urlRequest:
-                    break
-                }
+                print("Error 발생: \(error.localizedDescription)")
             } catch {
                 print(error.localizedDescription)
             }

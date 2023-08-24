@@ -87,14 +87,15 @@ extension DetailQuotationPreviewViewModel: DetailQuotationPreviewViewModelable {
 private extension DetailQuotationPreviewViewModel {
     
     func updateQuotationPreview() -> Output {
-        quotationUseCase.carQuotation
+        return quotationUseCase
+            .carQuotation
             .map { [weak self] quotationModel -> State in
                 let carOptions = [
                     quotationModel.engineName,
                     quotationModel.drivingSystemName,
                     quotationModel.bodyName
                 ].joined(separator: " ・ ")
-                    
+                
                 // TODO: - 추후 차량 트림 가격 Api추가==car trim Price 대체.. -> QuotationDTO랑 Quotation수정해야함
                 let recommendCarProductOption = QuotationPreviewCarInfoModel(
                     carName: "펠리세이드",
@@ -105,23 +106,23 @@ private extension DetailQuotationPreviewViewModel {
                 self?.mainSectionHeader.firstSectionTitle = "색상"
                 self?.sectionHeaders = ["옵션", "패키지"]
                 self?.secondSectionFooter = quotationModel.totalPrice.toPriceFormat+"원"
-                
                 let exteriorColor = quotationModel.exteriorColor
                 let interiorColor = quotationModel.interiorColor
+                
                 let optionList: [[OptionInfo]] = [
-                    [.init(optionId: exteriorColor.colorId,
-                           price: exteriorColor.colorPrice,
+                    [.init(optionID: exteriorColor.colorId,
                            optionName: exteriorColor.colorName,
-                           optionImgUrl: exteriorColor.colorIconUrl,
-                           comment: exteriorColor.colorComment),
-                     .init(optionId: interiorColor.colorId,
-                           price: interiorColor.colorPrice,
+                           optionImageURL: exteriorColor.colorIconUrl,
+                           optionPrice: exteriorColor.colorPrice,
+                           optionComment: exteriorColor.colorComment),
+                     .init(optionID: interiorColor.colorId,
                            optionName: interiorColor.colorName,
-                           optionImgUrl: interiorColor.colorIconUrl,
-                           comment: interiorColor.colorComment)],
+                           optionImageURL: interiorColor.colorIconUrl,
+                           optionPrice: interiorColor.colorPrice,
+                           optionComment: interiorColor.colorComment)],
                     quotationModel.options,
                     quotationModel.packages]
-                self?.setDataSource(with: optionList)
+                    self?.setDataSource(with: optionList)
                 return .updateDetailQuotationPreview
             }.eraseToAnyPublisher()
     }
@@ -153,7 +154,11 @@ private extension DetailQuotationPreviewViewModel {
 
 // MARK: - CharacterSSTableViewAdapterDataSource
 extension DetailQuotationPreviewViewModel: DetailQuotationPreviewAdapterDataSource {
-    var secondSectionFooterItem: String {
+    var lastSectionHeaderItem: String {
+        sectionHeaders[2]
+    }
+    
+    var lastSectionFooterItem: String {
         secondSectionFooter
     }
     

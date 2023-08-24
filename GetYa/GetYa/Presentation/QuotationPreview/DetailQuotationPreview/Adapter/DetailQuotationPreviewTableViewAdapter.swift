@@ -46,7 +46,7 @@ extension DetailQuotationPreviewTableViewAdapter: UITableViewDelegate {
             withIdentifier: DetailQuotationPreviewMainHeader.identifier
         ) as? DetailQuotationPreviewMainHeader {
             return header.set { $0.configure(with: dataSource.mainSectionHeaderItem) }
-        } else if section == 1, let header = tableView.dequeueReusableHeaderFooterView(
+        } else if section == 1 || section == 2, let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: DetailQuotationPreviewSecionHeaderView.identifier
         ) as? DetailQuotationPreviewSecionHeaderView {
             return header.set { $0.configure(with: dataSource.secondSectionHeaderItem) }
@@ -57,7 +57,7 @@ extension DetailQuotationPreviewTableViewAdapter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return DetailQuotationPreviewMainHeader.Constants.intrinsicContentHeight
-        } else if section == 1 {
+        } else if section == 1 || section == 2 {
             return CommonQuotationPreviewTitleView
                 .Constants.intrinsicContentHeight
         }
@@ -72,11 +72,11 @@ extension DetailQuotationPreviewTableViewAdapter: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == 1, let footer = tableView.dequeueReusableHeaderFooterView(
+        if section == 2, let footer = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: DetailQuotationPreviewFooterView.identifier
         ) as? DetailQuotationPreviewFooterView {
             return footer.set {
-                $0.configure(with: dataSource.secondSectionFooterItem)
+                $0.configure(with: dataSource.lastSectionFooterItem)
             }
         }
         return nil

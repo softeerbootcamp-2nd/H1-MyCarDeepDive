@@ -60,6 +60,7 @@ final class DiskCache {
     
     func isExist(_ key: String) -> Bool {
         guard let fileURL = URL(string: key),
+              fileURL.lastPathComponent != "",
               let findURL = folderURL?.appendingPathComponent(fileURL.lastPathComponent) else {
             return false
         }

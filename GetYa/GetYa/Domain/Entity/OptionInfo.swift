@@ -2,15 +2,19 @@
 //  OptionInfo.swift
 //  GetYa
 //
-//  Created by 양승현 on 2023/08/23.
+//  Created by 배남석 on 2023/08/23.
 //
 
 import Foundation
 
-struct OptionInfo {
-    let optionId: Int
-    let price: Int
+struct OptionInfo: Codable {
+    let optionID: Int?
     let optionName: String
-    let optionImgUrl: String
-    let comment: String
+    let optionImageURL: String
+    let optionPrice: Int
+    let optionComment: String?
+    
+    func toDTO() -> OptionInfoDTO {
+        return OptionInfoDTO(optionInfo: self)
+    }
 }

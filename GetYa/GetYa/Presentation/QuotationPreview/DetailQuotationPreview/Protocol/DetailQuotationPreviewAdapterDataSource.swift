@@ -8,5 +8,6 @@
 protocol DetailQuotationPreviewAdapterDataSource: AnyObject {
     var mainSectionHeaderItem: QuotationPreviewMainHeaderModel { get }
     var secondSectionHeaderItem: String { get }
-    var secondSectionFooterItem: String { get }
+    var lastSectionHeaderItem: String { get }
+    var lastSectionFooterItem: String { get }
 }
