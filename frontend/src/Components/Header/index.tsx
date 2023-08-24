@@ -10,6 +10,7 @@ import DropDownIcon from './DropDownIcon';
 import upArrowIcon from '@/assets/icon/up-arrow-icon.svg';
 import UnderLine from '../UnderLine';
 import { CarContext } from '@/context/CarProvider';
+import OptionItem from './OptionItem';
 
 function Header() {
   const location = useLocation();
@@ -18,7 +19,7 @@ function Header() {
   const [showPriceInfo, setShowPriceInfo] = useState(false);
   const [displayPriceInfo, setDisplayPriceInfo] = useState(false);
   const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
-  const { carSpec, color } = useContext(CarContext);
+  const { carSpec, color, optionData } = useContext(CarContext);
 
   useEffect(() => {
     if (!showPriceInfo) {
@@ -73,7 +74,7 @@ function Header() {
           <div className='max-w-5xl mx-auto'>
             <div className='h-[135px] flex overflow-scroll'>
               <div className='flex my-auto'>
-                <div className='flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                <div className='w-40 flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   <div className='flex gap-4 justify-between'>
                     <p>{carSpec.feature.engine}</p>
                     <p className='font-body4-medium text-grey-100'>
@@ -90,32 +91,27 @@ function Header() {
 
                 <div className='h-[94px] my-auto mx-4 border-[0.5px] border-grey-700'></div>
 
-                <div className='w-52 flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                <div className='w-48 flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
                   <div className='flex gap-4 justify-between'>
                     <p>{color.exteriorColor.name}</p>
                     <p className='font-body4-medium text-grey-100'>
-                      {color.exteriorColor.price.toLocaleString('en-US')}원
+                      {priceToString(color.exteriorColor.price)}원
                     </p>
                   </div>
                   <div className='flex gap-4 justify-between'>
                     <p>{color.interiorColor.name}</p>
                     <p className='font-body4-medium text-grey-100'>
-                      {color.interiorColor.price.toLocaleString('en-US')}원
+                      {priceToString(color.interiorColor.price)}원
                     </p>
                   </div>
                 </div>
 
                 <div className='h-[94px] my-auto mx-4 border-[0.5px] border-grey-700'></div>
 
-                <div className='w-[17rem] flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
-                  <div className='flex gap-4 justify-between'>
-                    <p>컴포트2</p>
-                    <p className='font-body4-medium text-grey-100'>500,000원</p>
-                  </div>
-                  <div className='flex gap-4 justify-between'>
-                    <p>현대 스마트센스</p>
-                    <p className='font-body4-medium text-grey-100'>300,000원</p>
-                  </div>
+                <div className='flex flex-col gap-1.5 justify-start font-body4-regular text-grey-300'>
+                  {optionData.map(item => (
+                    <OptionItem {...item} key={item.name} />
+                  ))}
                 </div>
               </div>
             </div>
@@ -130,11 +126,12 @@ function Header() {
               </button>
               <p className='font-h1-medium'>
                 <span className='text-[24px] text-grey-50'>
-                  {(
+                  {priceToString(
                     carSpec.price +
-                    color.exteriorColor.price +
-                    color.interiorColor.price
-                  ).toLocaleString('en-US')}
+                      color.exteriorColor.price +
+                      color.interiorColor.price +
+                      optionData.reduce((sum, item) => sum + item.price, 0),
+                  )}
                   원
                 </span>
               </p>

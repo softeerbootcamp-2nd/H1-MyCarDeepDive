@@ -77,7 +77,7 @@ function FeatureRadio({ toolTipHandler, setShowToolTip }: Props) {
             </p>
             <div className='flex justify-center items-center'>
               {valueList.map((value, index) =>
-                selectedValue === value ? (
+                selectedValue.indexOf(value) !== -1 ? (
                   <Selected
                     key={index}
                     name={type}

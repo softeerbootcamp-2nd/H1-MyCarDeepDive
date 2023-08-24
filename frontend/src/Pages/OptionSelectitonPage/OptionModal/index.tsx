@@ -1,28 +1,34 @@
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { optionDetailType } from '@/global/type';
+import getOptionDetails from '@/api/option/getOptionDetails';
 import Modal from '@/Components/Modal';
 import PageButtons from './PageButtons';
 import OptionCard from './OptionCard';
+import { OptionContext } from '@/context/OptionProvider';
+import getPackageOptionDetails from '@/api/option/getPackageOptionDetails';
+import useLogFetch from '@/hooks/useLogFetch';
 
 interface OptionModalProps {
   showOptionModal: boolean;
   setShowOptionModal: React.Dispatch<React.SetStateAction<boolean>>;
-  OptionCardData: {
-    tag: string[];
-    image: string;
-    optionName: string;
-    detailOptionName: string;
-    price: string;
-    description: string;
-    detailOptions: string[];
-  }[];
+  category: string;
 }
 
 function OptionModal({
   showOptionModal,
   setShowOptionModal,
-  OptionCardData,
+  category,
 }: OptionModalProps) {
+  const { optionId, packageOption } = useContext(OptionContext);
+  const optionDetailData = packageOption ? undefined : getOptionDetails();
+  const packageOptionDetailData = packageOption
+    ? getPackageOptionDetails()
+    : undefined;
+  const [detailOptions, setDetailOptions] = useState<string[]>();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [optionCardData, setOptionCardData] = useState<
+    optionDetailType[] | undefined
+  >();
 
   const movePage = (direction: number) => {
     if (!scrollRef.current) return;
@@ -47,21 +53,48 @@ function OptionModal({
     });
   };
 
+  useEffect(() => {
+    if (packageOption) {
+      if (packageOptionDetailData === undefined) return;
+      setOptionCardData(packageOptionDetailData.data);
+      setDetailOptions(
+        packageOptionDetailData.data.map(item => item.option_name),
+      );
+    } else {
+      if (optionDetailData === undefined) return;
+      setOptionCardData([optionDetailData.data]);
+    }
+  }, [packageOptionDetailData, optionDetailData]);
+
+  useEffect(() => {
+    if (packageOption)
+      useLogFetch({
+        url: `/package-options/activity-log/${optionId}`,
+      });
+    else
+      useLogFetch({
+        url: `/options/activity-log/${optionId}`,
+      });
+  }, []);
+
+  if (!optionCardData) return null;
   return (
     <Modal showModal={showOptionModal} setShowModal={setShowOptionModal}>
-      {OptionCardData.length > 1 && <PageButtons movePage={movePage} />}
+      {optionCardData.length > 1 && <PageButtons movePage={movePage} />}
       <div
         className='w-full h-[440px] absolute top-1/2 left-0 transform -translate-y-1/2 flex gap-20 overflow-x-auto noScrollBar'
         ref={scrollRef}
       >
-        {OptionCardData.map((item, idx) => (
+        {optionCardData.map((item, idx) => (
           <OptionCard
             {...item}
+            detailOptions={detailOptions}
             index={idx}
-            length={OptionCardData.length}
+            length={optionCardData.length}
             key={idx}
             jumpPage={jumpPage}
-            isSet={OptionCardData.length > 1}
+            isSet={optionCardData.length > 1}
+            category={category}
           />
         ))}
       </div>

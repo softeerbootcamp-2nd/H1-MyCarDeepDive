@@ -1,12 +1,22 @@
+import { useContext } from 'react';
+import { QuestionContext } from '@/context/QuestionProvider';
 import Tag from './Tag';
 import Description from './Description';
 
 interface RecommendCarSummaryProps {
-  tag: string[];
   carImage: string;
 }
 
-function CarSummary({ tag, carImage }: RecommendCarSummaryProps) {
+function CarSummary({ carImage }: RecommendCarSummaryProps) {
+  const { myLifeStyle } = useContext(QuestionContext);
+  const tag = [
+    myLifeStyle.drivingExperience,
+    myLifeStyle.numberOfFamilyMembers,
+    myLifeStyle.purpose,
+    myLifeStyle.lifeValue,
+    myLifeStyle.budget + '만원',
+  ];
+
   return (
     <div className='w-full h-[334px] absolute top-0 left-0'>
       <div className='w-[1280px] h-full mx-auto relative'>
@@ -19,7 +29,7 @@ function CarSummary({ tag, carImage }: RecommendCarSummaryProps) {
           <Description />
         </div>
         <img
-          src={carImage}
+          src={'https://' + carImage}
           alt='Recommend-Car'
           className='h-[334px] object-cover absolute top-0 right-12'
         />

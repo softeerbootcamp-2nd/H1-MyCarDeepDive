@@ -1,30 +1,22 @@
 import { useEffect, useState, MouseEvent } from 'react';
 import roundedIcon from '@/assets/icon/rounded.svg';
+import usePrevious from '@/hooks/usePrevious';
 
 interface CarRotationProps {
   rotation: boolean;
+  carImageUrl: string[];
 }
 
-function CarRotation({ rotation }: CarRotationProps) {
+function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
+  const prevImageUrl = usePrevious(carImageUrl);
   const [appear, setAppear] = useState(false);
   const [isAnimate, setIsAnimate] = useState(false);
-  const [carList, setCarList] = useState<{ path: string }[]>([]);
   const [focus, setFocus] = useState<number>(10);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [pointerPosition, setPointerPosition] = useState<number>(
     window.innerWidth / 2,
   );
-  useEffect(() => {
-    let newCarList = [] as { path: string }[];
-
-    for (let idx = 1; idx <= 60; idx++) {
-      const num = idx < 10 ? '00' + idx : '0' + idx;
-      const path = `/palisade/abyss/image_${num}.png`;
-      newCarList = [...newCarList, { path }];
-    }
-
-    setCarList(newCarList);
-  }, []);
+  const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
 
   const onMouseDownHandler = (e: MouseEvent<HTMLDivElement>) => {
     if (!rotation) return;
@@ -78,30 +70,49 @@ function CarRotation({ rotation }: CarRotationProps) {
   }, [rotation, setIsAnimate]);
 
   useEffect(() => {
-    setAppear(true);
-  }, [setAppear]);
+    if (prevImageUrl && prevImageUrl[0] === carImageUrl[0]) return;
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(undefined);
+    }
+    setAppear(false);
+
+    setTimeout(() => {
+      setAppear(true);
+    }, 500);
+  }, [setAppear, carImageUrl]);
 
   return (
     <div
-      className={`w-full z-40 relative transition-transform duration-1000 ease-out ${
-        appear ? 'translate-x-0' : 'translate-x-[100%]'
+      className={`w-full z-40 relative ${
+        appear
+          ? 'translate-x-0 transition-transform duration-1000 ease-out'
+          : 'translate-x-[200%]'
       }`}
       onMouseDown={onMouseDownHandler}
       onMouseMove={onMouseMoveHandler}
       onMouseUp={onMouseOverHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      {carList.map((it, idx) => (
+      {carImageUrl.length > 1 ? (
+        carImageUrl.map((image, idx) => (
+          <img
+            className='w-[85%] z-10 ml-32'
+            key={idx}
+            src={`https:\\${image}`}
+            style={
+              focus === idx ? { display: 'inline-block' } : { display: 'none' }
+            }
+            draggable={false}
+          />
+        ))
+      ) : (
         <img
           className='w-[85%] z-10 ml-32'
-          key={idx}
-          src={it.path}
-          style={
-            focus === idx ? { display: 'inline-block' } : { display: 'none' }
-          }
+          src={carImageUrl[0]}
           draggable={false}
         />
-      ))}
+      )}
       <div
         className={`w-[85%] h-24 ml-32 absolute top-[59%] left-0 -z-10 transition-opacity duration-1000 ${
           rotation ? 'opacity-100' : 'opacity-0'

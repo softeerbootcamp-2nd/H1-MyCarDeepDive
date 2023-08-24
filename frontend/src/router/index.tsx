@@ -7,6 +7,7 @@ import ColorSelectionPage from '@/Pages/ColorSelectionPage';
 import OptionSelectitonPage from '@/Pages/OptionSelectitonPage';
 import RecommendationPage from '@/Pages/RecommendationPage';
 import TrimSelectionPage from '@/Pages/TrimSelectionPage';
+import MyCarReady from '@/Pages/OptionSelectitonPage/MyCarReady';
 import MyCarResultPage from '@/Pages/MyCarResultPage';
 import ErrorPage from '@/Pages/ErrorPage';
 
@@ -28,7 +29,8 @@ function Router() {
         </Route>
       </Route>
 
-      <Route path='/mycar/result' element={<MyCarResultPage />} />
+      <Route path='/mycar/ready' element={<MyCarReady />} />
+      <Route path='/mycar/result/:id' element={<MyCarResultPage />} />
       <Route path='/error/:status' element={<ErrorPage />} />
       <Route path='*' element={<ErrorPage />} />
     </Routes>

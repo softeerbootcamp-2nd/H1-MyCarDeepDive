@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { CacheContext } from '@/context/CacheProvider';
 import { useNavigate } from 'react-router-dom';
 
 const API = 'https://api.make-my-car.shop/api/v1';
@@ -24,6 +25,7 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
   );
   const [result, setResult] = useState<T>();
   const [error, setError] = useState<Error>();
+  const { getByCache, setByCache } = useContext(CacheContext);
 
   const resolvePromise = (result: any) => {
     setStatus(FULFILLED);
@@ -37,6 +39,9 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
   };
 
   const fetchData = async () => {
+    const cacheData = getByCache(url);
+    if (cacheData) return resolvePromise(cacheData);
+
     try {
       const config = {
         method,
@@ -51,6 +56,7 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
       if (!res.ok) return navigation('/error/server');
 
       const data = await res.json();
+      if (method === GET) setByCache(url, data);
       resolvePromise(data);
     } catch (error: any) {
       rejectPromise(error);

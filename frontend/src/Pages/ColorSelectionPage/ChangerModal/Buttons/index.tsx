@@ -3,10 +3,10 @@ import { closeModalHandler } from '@/utils';
 
 interface Props {
   wantedOtherColor: any;
-  otherColorChangeHandler: ({}: any) => void;
+  clickHandler: () => void;
 }
 
-function Buttons({ wantedOtherColor, otherColorChangeHandler }: Props) {
+function Buttons({ clickHandler }: Props) {
   return (
     <div className='flex justify-end gap-2.5 mt-[33px] mb-6'>
       <Button
@@ -22,7 +22,7 @@ function Buttons({ wantedOtherColor, otherColorChangeHandler }: Props) {
         variant='primary'
         text='변경하기'
         onClick={() => {
-          otherColorChangeHandler(wantedOtherColor);
+          clickHandler();
           closeModalHandler();
         }}
       />

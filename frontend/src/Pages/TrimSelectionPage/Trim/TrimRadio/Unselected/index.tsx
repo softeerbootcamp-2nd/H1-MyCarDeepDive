@@ -2,6 +2,7 @@ import { useCallback, useContext, useRef } from 'react';
 import { priceToString } from '@/utils';
 import checkCircleGrey from '@/assets/icon/trim-select-circle-grey.svg';
 import { CarContext } from '@/context/CarProvider';
+import useLogFetch from '@/hooks/useLogFetch';
 
 export interface Props {
   carSpecData: {
@@ -65,7 +66,12 @@ function Unselected({
         name='carSpec'
         value={carSpecData.trim_name}
         className='hidden'
-        onClick={wantedTrimHandler}
+        onClick={e => {
+          useLogFetch({
+            url: `/car-spec/activity-log/${carSpecData.car_spec_id}`,
+          });
+          wantedTrimHandler(e);
+        }}
         data-object={JSON.stringify(myCarSpecData)}
       />
       <label htmlFor={carSpecData.trim_name}>

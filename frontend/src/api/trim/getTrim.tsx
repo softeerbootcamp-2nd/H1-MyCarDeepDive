@@ -5,14 +5,17 @@ import useFetch, { GET } from '@/hooks/useFetch';
 export interface getTrimType {
   status: { code: string; message: string };
   data: {
-    car_spec_id: number;
-    trim_id: number;
-    trim_name: string;
-    price: number;
-    summary: string;
-    basic_option_ids: number[];
-    basic_option_names: string[];
-  }[];
+    car_specs: {
+      car_spec_id: number;
+      trim_id: number;
+      trim_name: string;
+      price: number;
+      summary: string;
+      basic_option_ids: number[];
+      basic_option_names: string[];
+    }[];
+    recommend_trim_id: number;
+  };
 }
 
 function getTrim(): getTrimType | undefined {
@@ -25,7 +28,7 @@ function getTrim(): getTrimType | undefined {
     setEngineId(carSpec.feature.engine === '디젤 2.2' ? '1' : '2');
     setBodyId(carSpec.feature.body === '7인승' ? '1' : '2');
     setDrivingSystemId(carSpec.feature.drivingSystem === '2WD' ? '1' : '2');
-  }, [carSpec.feature]);
+  }, [carSpec.feature, carSpec.trim.id]);
 
   return useFetch({
     method: GET,

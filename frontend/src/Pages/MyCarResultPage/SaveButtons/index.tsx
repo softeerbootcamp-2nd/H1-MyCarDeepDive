@@ -4,9 +4,18 @@ import UnderLine from '@/Components/UnderLine';
 interface Props {
   setShowMailModal: React.Dispatch<React.SetStateAction<boolean>>;
   setShowLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
+  pdf_url: string;
 }
 
-function SaveButtons({ setShowMailModal, setShowLoginModal }: Props) {
+function SaveButtons({ setShowMailModal, setShowLoginModal, pdf_url }: Props) {
+  const pdfDownload = () => {
+    const link = document.createElement('a');
+    link.href = 'https://' + pdf_url;
+    link.target = '_blank';
+    link.download = 'palisade.pdf';
+    link.click();
+  };
+
   return (
     <>
       <div className='flex justify-center gap-2'>
@@ -22,7 +31,7 @@ function SaveButtons({ setShowMailModal, setShowLoginModal }: Props) {
           height='h-[52px]'
           variant='myCar'
           text='PDF로 저장'
-          onClick={() => console.log('견적내기')}
+          onClick={pdfDownload}
         />
         <Button
           width='w-full'
