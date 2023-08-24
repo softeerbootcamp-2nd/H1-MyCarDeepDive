@@ -49,6 +49,7 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
         setThumbnailView(with.thumbnailKeywords)
         setRecommendCarInfoView(with.recommendCarProductOption)
         setSectionDivider(with.firstSectionTitle)
+        thumbnailView.configure(imageUrl: with.thumbnailUrl)
     }
     
     func showAnimation() {
