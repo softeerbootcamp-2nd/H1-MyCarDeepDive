@@ -46,10 +46,14 @@ extension DetailQuotationPreviewTableViewAdapter: UITableViewDelegate {
             withIdentifier: DetailQuotationPreviewMainHeader.identifier
         ) as? DetailQuotationPreviewMainHeader {
             return header.set { $0.configure(with: dataSource.mainSectionHeaderItem) }
-        } else if section == 1 || section == 2, let header = tableView.dequeueReusableHeaderFooterView(
+        } else if section == 1, let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: DetailQuotationPreviewSecionHeaderView.identifier
         ) as? DetailQuotationPreviewSecionHeaderView {
             return header.set { $0.configure(with: dataSource.secondSectionHeaderItem) }
+        } else if section == 2, let header = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: DetailQuotationPreviewSecionHeaderView.identifier
+        ) as? DetailQuotationPreviewSecionHeaderView {
+            return header.set { $0.configure(with: dataSource.lastSectionHeaderItem) }
         }
         return .init(frame: .zero)
     }
