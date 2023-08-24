@@ -32,17 +32,13 @@ class DefaultGetYaCacheService {
         return nil
     }
     
-    func write<T: Encodable>(_ key: String, data: T?) {
-        guard let data,
-              let encodedData = try? JSONEncoder().encode(data) else {
-            return
-        }
-        memoryCache.write(key, data: encodedData)
-        diskCache.write(key, data: encodedData)
+    func write(_ key: String, data: Data) {
+        memoryCache.write(key, data: data)
+        diskCache.write(key, data: data)
     }
     
     func isExist(_ key: String) -> Bool {
-        memoryCache.isExist(key) || diskCache.isExist(key)
+        return memoryCache.isExist(key) || diskCache.isExist(key)
     }
     
     func removeAll() {

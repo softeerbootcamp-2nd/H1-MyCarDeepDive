@@ -50,7 +50,12 @@ class LoadingViewController: UIViewController {
         lottieView.play()
         /// 임시적으로 3초뒤에 불러와진다고 가정
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            let finishViewController = QuotationFinishViewController(nibName: nil, bundle: nil)
+            let finishViewController = QuotationFinishViewController(
+                viewModel: QuotationFinishViewModel(
+                    useCase: DefaultQuotationFinishUseCase(
+                        pdfID: "64e478c8980e0b4882d3eef5",
+                        repository: DefaultQuotationFinishRepository(
+                            provider: SessionProvider()))))
             if let navigationController = self.navigationController,
                let firstViewController = navigationController.viewControllers.first {
                 navigationController.pushViewController(finishViewController, animated: true)

@@ -38,7 +38,7 @@ class QuotationFinishTableCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        optionView.configureDetail(image: nil, title: nil, price: nil)
+        optionView.prepareForReuse()
     }
     
     // MARK: - Private Functions
@@ -59,7 +59,7 @@ class QuotationFinishTableCell: UITableViewCell {
     }
     
     // MARK: - Functions
-    func setOption(image: UIImage?, name: String, price: Int) {
-        optionView.configureDetail(image: image, title: name, price: price)
+    func setOption(imageURL: String, name: String, price: Int) {
+        optionView.configureDetail(imageURL: imageURL, title: name, price: price)
     }
 }
