@@ -40,10 +40,10 @@ function ChangerModal({
           <ChangeTrim />
           <UnderLine margin='mt-9 mb-[13px]' color='bg-grey-500' />
           {type === 'exterial' && (
-            <ChangePrice priceGap={color.exteriorColor.price - price} />
+            <ChangePrice priceGap={price - color.exteriorColor.price} />
           )}
           {type === 'interial' && (
-            <ChangePrice priceGap={color.interiorColor.price - price} />
+            <ChangePrice priceGap={price - color.interiorColor.price} />
           )}
 
           <Buttons

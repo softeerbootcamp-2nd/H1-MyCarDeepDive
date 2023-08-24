@@ -17,7 +17,6 @@ import { getInteriorColorType } from '@/api/color/getInteriorColors';
 import { getExteriorColorType } from '@/api/color/getExteriorColor';
 import ChangerModal from '../ChangerModal';
 import { getTrimType } from '@/api/trim/getTrim';
-import useLogFetch from '@/hooks/useLogFetch';
 
 interface Props {
   classifiedInteriorColor: getInteriorColorType | undefined;
@@ -43,10 +42,8 @@ function InteriorDropDown({
     if (dataObject) {
       const colorInfo = JSON.parse(dataObject);
       setWantedOtherColor(colorInfo);
+
       setShowModal(true);
-      useLogFetch({
-        url: `/color/interior-colors/activity-log/${colorInfo.color_id}`,
-      });
     }
   };
 
