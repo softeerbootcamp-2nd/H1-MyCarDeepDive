@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useTransition } from 'react';
+import { CacheContext } from '@/context/CacheProvider';
 import { useNavigate } from 'react-router-dom';
 
 const API = 'https://api.make-my-car.shop/api/v1';
@@ -14,9 +15,10 @@ interface useFetchParameter {
   method: 'get' | 'post';
   url: string;
   body?: {};
+  showLoading: boolean;
 }
 
-function useFetch<T>({ method, url, body }: useFetchParameter) {
+function useFetch<T>({ method, url, body, showLoading }: useFetchParameter) {
   const navigation = useNavigate();
   const [promise, setPromise] = useState<Promise<any>>();
   const [status, setStatus] = useState<'pending' | 'fulfilled' | 'error'>(
@@ -24,6 +26,8 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
   );
   const [result, setResult] = useState<T>();
   const [error, setError] = useState<Error>();
+  const [isPending, startTransition] = useTransition();
+  const { getByCache, setByCache } = useContext(CacheContext);
 
   const resolvePromise = (result: any) => {
     setStatus(FULFILLED);
@@ -37,6 +41,9 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
   };
 
   const fetchData = async () => {
+    const cacheData = getByCache(url);
+    if (cacheData) return resolvePromise(cacheData);
+
     try {
       const config = {
         method,
@@ -51,6 +58,7 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
       if (!res.ok) return navigation('/error/server');
 
       const data = await res.json();
+      if (method === GET) setByCache(url, data);
       resolvePromise(data);
     } catch (error: any) {
       rejectPromise(error);
@@ -59,9 +67,15 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
 
   useEffect(() => {
     setStatus(PENDING);
-    setPromise(fetchData());
+
+    if (showLoading) setPromise(fetchData());
+    else
+      startTransition(() => {
+        setPromise(fetchData());
+      });
   }, [url]);
 
+  if (isPending) return undefined;
   if (status === PENDING && promise) throw promise;
   if (status === ERROR) throw error;
   return result;

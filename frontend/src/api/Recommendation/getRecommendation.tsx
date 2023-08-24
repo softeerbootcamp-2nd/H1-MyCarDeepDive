@@ -5,6 +5,7 @@ import { ageQuestionList } from '@/global/data';
 
 export interface recommendType {
   trim_name: string;
+  trim_price: number;
   car_img_url: string;
   comment1: string;
   comment2: string;
@@ -59,6 +60,7 @@ function getRecommendation(): getRecommendationType | undefined {
     url: `/car-recommendation?ageGroupId=${
       ageQuestionList.indexOf(age) + 1
     }&lifeStyleId=${lifeStyle}`,
+    showLoading: true,
   });
 }
 

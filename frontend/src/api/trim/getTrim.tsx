@@ -33,6 +33,7 @@ function getTrim(): getTrimType | undefined {
   return useFetch({
     method: GET,
     url: `/car-spec?engineId=${engineId}&bodyId=${bodyId}&drivingSystemId=${drivingSystemId}`,
+    showLoading: true,
   });
 }
 
