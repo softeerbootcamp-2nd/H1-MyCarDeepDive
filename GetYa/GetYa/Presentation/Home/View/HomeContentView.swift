@@ -77,7 +77,6 @@ class HomeContentView: UIView {
     var player: AVQueuePlayer!
     weak var delegate: HomeContentDelegate?
    
-    
     // MARK: - LifeCycles
     convenience init() {
         self.init(frame: .zero)

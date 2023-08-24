@@ -97,6 +97,9 @@ final class CommonQuotationPreviewCell: UITableViewCell {
     func configure(with productOptionModel: OptionInfo) {
         recommendCarOptionView.configureDetail(
             imageURL: productOptionModel.optionImageURL,
+//    func configure(with productOptionModel: QuotationPreviewCarProductOptionModel) {
+//        recommendCarOptionView.configureDetail(
+//            imageURL: productOptionModel.optionImage,
             title: productOptionModel.optionName,
             price: productOptionModel.optionPrice)
         if !(productOptionModel.optionComment ?? "").isEmpty {
