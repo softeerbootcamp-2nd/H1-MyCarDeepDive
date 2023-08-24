@@ -1,6 +1,7 @@
 package com.h1.mycardeepdive.fixture;
 
 import static com.h1.mycardeepdive.fixture.CarSpecFixture.createCarSpecD72E;
+import static com.h1.mycardeepdive.fixture.CustomRecommendationCarFixture.createCustomRecommendationCar;
 import static com.h1.mycardeepdive.fixture.ExteriorColorFixture.createExteriorColor;
 import static com.h1.mycardeepdive.fixture.InteriorColorFixture.createInteriorColor;
 import static com.h1.mycardeepdive.fixture.OptionFixture.createOptionBuiltInCam;
@@ -8,10 +9,7 @@ import static com.h1.mycardeepdive.fixture.OptionFixture.createOptionBuiltInCam;
 import com.h1.mycardeepdive.options.domain.OptionPackage;
 import com.h1.mycardeepdive.options.domain.Options;
 import com.h1.mycardeepdive.options.domain.Packages;
-import com.h1.mycardeepdive.recommendation.domain.CustomRecommendation;
-import com.h1.mycardeepdive.recommendation.domain.RecommendationCar;
-import com.h1.mycardeepdive.recommendation.domain.RecommendationCarOption;
-import com.h1.mycardeepdive.recommendation.domain.RecommendationCarPackage;
+import com.h1.mycardeepdive.recommendation.domain.*;
 import java.util.List;
 
 public class CustomRecommendationFixture {
@@ -55,8 +53,8 @@ public class CustomRecommendationFixture {
                 .drivingExperienceId(drivingExperienceId)
                 .familyMembersId(familyMembersId)
                 .carPurposeId(carPurpose)
-                .personalValueid(personalValueId)
-                .recommendationCar(recommendationCar)
+                .personalValueId(personalValueId)
+                .customRecommendationCars(List.of(createCustomRecommendationCar()))
                 .build();
     }
 }

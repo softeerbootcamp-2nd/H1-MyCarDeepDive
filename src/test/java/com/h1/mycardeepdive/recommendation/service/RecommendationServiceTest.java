@@ -100,7 +100,11 @@ class RecommendationServiceTest {
                 createCustomRecommendation(
                         drivingExperienceId, familyMembersId, carPurposeId, personalValueId);
         RecommendationResponse recommendationResponse1 =
-                toRecommendationResponse(customRecommendation.getRecommendationCar());
+                toRecommendationResponse(
+                        customRecommendation
+                                .getCustomRecommendationCars()
+                                .get(0)
+                                .getRecommendationCar());
         RecommendationColorInfo exteriorColor1 = recommendationResponse1.getExterior_color();
         RecommendationColorInfo interiorColor1 = recommendationResponse1.getInterior_color();
         when(customRecommendationRepository
@@ -113,7 +117,11 @@ class RecommendationServiceTest {
         // when
         RecommendationResponse recommendationResponse2 =
                 recommendationService.findCustomRecommendation(
-                        drivingExperienceId, familyMembersId, carPurposeId, personalValueId);
+                        drivingExperienceId,
+                        familyMembersId,
+                        carPurposeId,
+                        personalValueId,
+                        9000000L);
         RecommendationColorInfo exteriorColor2 = recommendationResponse2.getExterior_color();
         RecommendationColorInfo interiorColor2 = recommendationResponse2.getInterior_color();
 
