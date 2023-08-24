@@ -3,7 +3,7 @@ import roundedIcon from '@/assets/icon/rounded.svg';
 
 interface CarRotationProps {
   rotation: boolean;
-  carImageUrl?: string[];
+  carImageUrl: string[];
 }
 
 function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
@@ -81,6 +81,7 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
       onMouseUp={onMouseOverHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
+
       {carImageUrl.length > 1 ? (
         carImageUrl.map((image, idx) => (
           <img
@@ -94,6 +95,7 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
           />
         ))
       ) : (
+
         <img
           className='w-[85%] z-10 ml-32'
           src={carImageUrl[0]}

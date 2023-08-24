@@ -10,15 +10,13 @@ import CurrentTrim from './CurrentTrim';
 import ChangeTrim from './ChangeTrim';
 import UnderLine from '@/Components/UnderLine';
 import ChangePrice from './ChangePrice';
+import { useContext } from 'react';
+import { CarContext } from '@/context/CarProvider';
 
 interface Props extends ModalProps {
   wantedOtherColor: any;
-
-  clickHandler: {
-    clickAvailableColorHandler: ({
-      currentTarget,
-    }: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  };
+  clickHandler: () => void;
+  type: 'exterial' | 'interial';
 }
 
 function ChangerModal({
@@ -26,7 +24,11 @@ function ChangerModal({
   setShowModal,
   wantedOtherColor,
   clickHandler,
+  type,
 }: Props) {
+  const { color } = useContext(CarContext);
+  if (!wantedOtherColor) return;
+  const { price } = wantedOtherColor;
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <ModalContentsWrapper>
@@ -37,7 +39,13 @@ function ChangerModal({
           <CurrentTrim />
           <ChangeTrim />
           <UnderLine margin='mt-9 mb-[13px]' color='bg-grey-500' />
-          <ChangePrice priceGap={12100000} />
+          {type === 'exterial' && (
+            <ChangePrice priceGap={color.exteriorColor.price - price} />
+          )}
+          {type === 'interial' && (
+            <ChangePrice priceGap={color.interiorColor.price - price} />
+          )}
+
           <Buttons
             wantedOtherColor={wantedOtherColor}
             clickHandler={clickHandler}
