@@ -1,18 +1,23 @@
 package com.h1.mycardeepdive.options.service;
 
+import com.h1.mycardeepdive.exception.ErrorType;
+import com.h1.mycardeepdive.exception.MyCarDeepDiveException;
 import com.h1.mycardeepdive.options.domain.Options;
 import com.h1.mycardeepdive.options.domain.Packages;
 import com.h1.mycardeepdive.options.domain.repository.OptionsRepository;
 import com.h1.mycardeepdive.options.domain.repository.PackageRepository;
 import com.h1.mycardeepdive.options.mapper.OptionMapper;
 import com.h1.mycardeepdive.options.ui.dto.*;
+import com.h1.mycardeepdive.tags.domain.OptionTag;
 import com.h1.mycardeepdive.tags.domain.Tags;
 import com.h1.mycardeepdive.tags.domain.repository.OptionTagRepository;
 import com.h1.mycardeepdive.tags.domain.repository.TagRepository;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import net.logstash.logback.marker.Markers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,24 +92,41 @@ public class OptionsService {
     }
 
     public OptionDetailResponse findOptionDetail(Long optionId) {
-        Options options = optionsRepository.findById(optionId).orElseThrow();
+        Options options =
+                optionsRepository
+                        .findById(optionId)
+                        .orElseThrow(
+                                () ->
+                                        new MyCarDeepDiveException(
+                                                HttpStatus.BAD_REQUEST,
+                                                ErrorType.OPTION_NOT_FOUND));
         return OptionMapper.optionToOptionDetailResponse(
                 options, tagRepository.findTagsByOptionId(options.getId()));
     }
 
     public OptionTagResponse findOptionTagDetail(Long tagId, Long carSpecId) {
-        Tags tags = tagRepository.findById(tagId).orElseThrow();
+        Tags tags =
+                tagRepository
+                        .findById(tagId)
+                        .orElseThrow(
+                                () ->
+                                        new MyCarDeepDiveException(
+                                                HttpStatus.BAD_REQUEST,
+                                                ErrorType.OPTION_NOT_FOUND));
         List<Options> optionsList =
                 optionsRepository.findOptionsByTagIdAndCarSpecId(tagId, carSpecId);
+        Map<Long, OptionTag> optionTagMap =
+                optionTagRepository.findOptionTagByOptionListAndTagId(optionsList, tagId);
+
         return new OptionTagResponse(
                 tags.getImg_url(),
                 optionsList.stream()
                         .map(
-                                options ->
-                                        OptionMapper.optionToOptionCoordinatesResponse(
-                                                options,
-                                                optionTagRepository.findOptionTagByOptionIdAndTagId(
-                                                        options.getId(), tagId)))
+                                options -> {
+                                    OptionTag optionTag = optionTagMap.get(options.getId());
+                                    return OptionMapper.optionToOptionCoordinatesResponse(
+                                            options, optionTag);
+                                })
                         .collect(Collectors.toList()));
     }
 }

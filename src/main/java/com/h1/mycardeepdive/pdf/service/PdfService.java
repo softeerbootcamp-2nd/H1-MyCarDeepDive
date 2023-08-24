@@ -65,17 +65,9 @@ public class PdfService {
                                         new MyCarDeepDiveException(
                                                 HttpStatus.BAD_REQUEST, ErrorType.PDF_NOT_FOUND));
         List<SimpleOption> simpleOptionList =
-                pdfIdRequest.getAdditional_option_id_list().stream()
-                        .map(
-                                id ->
-                                        optionsRepository
-                                                .findById(id)
-                                                .orElseThrow(
-                                                        () ->
-                                                                new MyCarDeepDiveException(
-                                                                        HttpStatus.BAD_REQUEST,
-                                                                        ErrorType
-                                                                                .OPTION_NOT_FOUND)))
+                optionsRepository
+                        .findAllOptionsByList(pdfIdRequest.getAdditional_option_id_list())
+                        .stream()
                         .map(
                                 option ->
                                         new SimpleOption(
@@ -149,7 +141,6 @@ public class PdfService {
                                         new MyCarDeepDiveException(
                                                 HttpStatus.BAD_REQUEST, ErrorType.PDF_NOT_FOUND));
         String htmlContent = getHtmlContentFromThymeleafTemplate(pdfInfo);
-        System.out.println(htmlContent);
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             ITextRenderer renderer = new ITextRenderer();
             SharedContext sharedContext = renderer.getSharedContext();

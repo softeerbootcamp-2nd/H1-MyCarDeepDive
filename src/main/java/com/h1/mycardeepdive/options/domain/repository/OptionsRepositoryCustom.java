@@ -14,4 +14,6 @@ public interface OptionsRepositoryCustom {
     List<Options> findOptionsByPackageId(Long packageId);
 
     List<Options> findOptionsByTagIdAndCarSpecId(Long tagId, Long carSpecId);
+
+    List<Options> findAllOptionsByList(List<Long> optionIdList);
 }
