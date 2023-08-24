@@ -18,7 +18,6 @@ import Title from './Trim/Title';
 import CompareButton from './Trim/CompareButton';
 import TrimRadio from './Trim/TrimRadio';
 import ChangeModal from './Trim/ChangeModal';
-import ControlButtons from '@/Components/ControlButtons';
 
 function TrimSelectionPage() {
   const navigation = useNavigate();

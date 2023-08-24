@@ -3,10 +3,10 @@ import roundedIcon from '@/assets/icon/rounded.svg';
 
 interface CarRotationProps {
   rotation: boolean;
-  carImageUrl?: string[];
+  exteriorCarImage?: string[];
 }
 
-function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
+function CarRotation({ rotation, exteriorCarImage }: CarRotationProps) {
   const [appear, setAppear] = useState(false);
   const [isAnimate, setIsAnimate] = useState(false);
   const [focus, setFocus] = useState<number>(10);
@@ -14,7 +14,7 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
   const [pointerPosition, setPointerPosition] = useState<number>(
     window.innerWidth / 2,
   );
-  if (!carImageUrl) return;
+  if (!exteriorCarImage) return;
 
   const onMouseDownHandler = (e: MouseEvent<HTMLDivElement>) => {
     if (!rotation) return;
@@ -83,7 +83,7 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
       onMouseUp={onMouseOverHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      {carImageUrl.map((image, idx) => (
+      {exteriorCarImage.map((image, idx) => (
         <img
           className='w-[85%] z-10 ml-32'
           key={idx}

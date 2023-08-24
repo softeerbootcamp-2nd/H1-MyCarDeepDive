@@ -28,7 +28,7 @@ function getTrim(): getTrimType | undefined {
     setEngineId(carSpec.feature.engine === '디젤 2.2' ? '1' : '2');
     setBodyId(carSpec.feature.body === '7인승' ? '1' : '2');
     setDrivingSystemId(carSpec.feature.drivingSystem === '2WD' ? '1' : '2');
-  }, [carSpec.feature]);
+  }, [carSpec.feature, carSpec.trim.id]);
 
   return useFetch({
     method: GET,
