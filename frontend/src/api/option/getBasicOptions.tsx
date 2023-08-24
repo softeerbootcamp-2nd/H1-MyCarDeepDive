@@ -21,6 +21,7 @@ function getBasicOptions(): getBasicOptionsType | undefined {
   return useFetch({
     method: GET,
     url: `/car-spec/${carSpec.id}/basic-options`,
+    showLoading: false,
   });
 }
 

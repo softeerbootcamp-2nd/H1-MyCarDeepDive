@@ -15,6 +15,7 @@ function getPackageOptionDetails(): getPackageOptionDetailsType | undefined {
   return useFetch({
     method: GET,
     url: `/options/package/${optionId}/details`,
+    showLoading: false,
   });
 }
 

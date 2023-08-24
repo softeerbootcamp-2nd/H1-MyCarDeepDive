@@ -36,6 +36,7 @@ function getSituationOptions(tag: string): getSituationOptionsType | undefined {
   return useFetch({
     method: GET,
     url: `/options/${carSpec.id}/tags/${tagId}`,
+    showLoading: true,
   });
 }
 

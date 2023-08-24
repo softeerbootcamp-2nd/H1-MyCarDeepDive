@@ -18,6 +18,7 @@ function getInitialInteriorColor(): getInteriorColorType | undefined {
   return useFetch({
     method: GET,
     url: `/color/interior-colors?trimId=${carSpec.trim.id}&exteriorColorId=${color.exteriorColor.id}`,
+    showLoading: false,
   });
 }
 

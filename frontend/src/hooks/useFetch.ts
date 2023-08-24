@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useTransition } from 'react';
 import { CacheContext } from '@/context/CacheProvider';
 import { useNavigate } from 'react-router-dom';
 
-const API = 'https://dev.make-my-car.shop/api/v1';
+const API = 'https://api.make-my-car.shop/api/v1';
 
 const PENDING = 'pending';
 const FULFILLED = 'fulfilled';
@@ -15,9 +15,10 @@ interface useFetchParameter {
   method: 'get' | 'post';
   url: string;
   body?: {};
+  showLoading: boolean;
 }
 
-function useFetch<T>({ method, url, body }: useFetchParameter) {
+function useFetch<T>({ method, url, body, showLoading }: useFetchParameter) {
   const navigation = useNavigate();
   const [promise, setPromise] = useState<Promise<any>>();
   const [status, setStatus] = useState<'pending' | 'fulfilled' | 'error'>(
@@ -66,10 +67,12 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
 
   useEffect(() => {
     setStatus(PENDING);
-    startTransition(() => {
-      setPromise(fetchData());
-    });
-    // setPromise(fetchData());
+
+    if (showLoading) setPromise(fetchData());
+    else
+      startTransition(() => {
+        setPromise(fetchData());
+      });
   }, [url]);
 
   if (isPending) return undefined;
