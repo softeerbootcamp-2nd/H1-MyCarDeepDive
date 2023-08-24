@@ -85,30 +85,21 @@ final class CommonQuotationPreviewCell: UITableViewCell {
             optionPrice: 0,
             optionComment: nil)
         configure(with: reset)
-        reviewdTextView.isHidden = true
     }
     
     // MARK: - Functions
     func configureUI() {
         selectionStyle = .none
         setupUI()
-        reviewdTextView.isHidden = true
     }
     func configure(with productOptionModel: OptionInfo) {
+        let url = productOptionModel.optionImageURL.replacingOccurrences(of: "\r", with: "")
         recommendCarOptionView.configureDetail(
-            imageURL: productOptionModel.optionImageURL,
-//    func configure(with productOptionModel: QuotationPreviewCarProductOptionModel) {
-//        recommendCarOptionView.configureDetail(
-//            imageURL: productOptionModel.optionImage,
+            imageURL: url,
             title: productOptionModel.optionName,
             price: productOptionModel.optionPrice)
-        if !(productOptionModel.optionComment ?? "").isEmpty {
-            reviewdTextView.text = productOptionModel.optionComment
-            reviewdTextView.isHidden = false
-        }
+        reviewdTextView.text = productOptionModel.optionComment
     }
-
-    // MARK: - Objc Functions
 }
 
 // MARK: - LayoutSupportable
