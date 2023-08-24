@@ -9,6 +9,7 @@ import Foundation
 
 struct QuotationModel {
     let trimName: String
+    let trimPrice: Int
     let carImgUrl: String
     let comment1: String
     let comment2: String
@@ -16,7 +17,7 @@ struct QuotationModel {
     let engineName: String
     let engineId: Int
     let drivingSystemName: String
-    let drivingSystemId:Int
+    let drivingSystemId: Int
     let bodyName: String
     let bodyId: Int
     let carSpecId: Int

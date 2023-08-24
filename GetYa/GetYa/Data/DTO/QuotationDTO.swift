@@ -9,6 +9,7 @@ import Foundation
 
 struct QuotationDTO: Decodable {
     let trimName: String
+    let trimPrice: Int
     let carImgUrl: String
     let comment1: String
     let comment2: String
@@ -29,6 +30,7 @@ struct QuotationDTO: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case trimName = "trim_name"
+        case trimPrice = "trim_price"
         case carImgUrl = "car_img_url"
         case comment1
         case comment2
@@ -51,6 +53,7 @@ struct QuotationDTO: Decodable {
     func toDomain() -> QuotationModel {
         QuotationModel(
             trimName: trimName,
+            trimPrice: trimPrice,
             carImgUrl: carImgUrl,
             comment1: comment1,
             comment2: comment2,

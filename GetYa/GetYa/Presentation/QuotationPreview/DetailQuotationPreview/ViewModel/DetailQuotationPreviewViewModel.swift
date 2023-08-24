@@ -96,24 +96,19 @@ private extension DetailQuotationPreviewViewModel {
         return quotationUseCase
             .carQuotation
             .map { [weak self] quotationModel -> State in
-                print(quotationModel)
                 let carOptions = [
                     quotationModel.engineName,
                     quotationModel.drivingSystemName,
                     quotationModel.bodyName
                 ].joined(separator: " ・ ")
-                
-                // TODO: - 추후 차량 트림 가격 Api추가==car trim Price 대체.. -> QuotationDTO랑 Quotation수정해야함
                 self?.quotationTrimCarSpec = TrimCarSpec(
                     engineId: quotationModel.engineId,
                     bodyId: quotationModel.bodyId,
                     drivingSystemId: quotationModel.drivingSystemId)
-                
-                // TODO: - api db수정되면 외장, 내장일 때 리뷰 커멘트 잘 나오는지 확인. 그리고 이미지들 잘 나오는지 확인
                 let recommendCarProductOption = QuotationPreviewCarInfoModel(
                     carName: "펠리세이드",
                     trimName: quotationModel.trimName,
-                    carPrice: quotationModel.totalPrice.toPriceFormat+"원",
+                    carPrice: quotationModel.trimPrice.toPriceFormat+"원",
                     carOptions: carOptions)
                 self?.mainSectionHeader.recommendCarProductOption = recommendCarProductOption
                 self?.mainSectionHeader.firstSectionTitle = "색상"
