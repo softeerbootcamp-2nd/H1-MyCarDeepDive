@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol ColorLearnMoreViewDelegate: AnyObject {
-    func touchUpMoreColorCell(color: Color)
-}
-
 class ColorLearnMoreView: LearnMoreView {
     enum Constants {
         enum Label {
@@ -31,7 +27,6 @@ class ColorLearnMoreView: LearnMoreView {
     // MARK: - UI properties
     private let label = CommonLabel(fontType: .mediumBody4, color: .GetYaPalette.primary)
     private lazy var collectionView = ColorSelectMoreColorCollectionView().set {
-        $0.colorSelectDelegate = self
         $0.isHidden = true
     }
     private var collectionViewHeightConstraint: NSLayoutConstraint!
@@ -45,7 +40,6 @@ class ColorLearnMoreView: LearnMoreView {
     
     // MARK: - Properties
     private var colorArray: [Color] = []
-    weak var colorLearnMoreViewDelegate: ColorLearnMoreViewDelegate?
     
     // MARK: - Lifecycles
     convenience init() {
@@ -159,11 +153,4 @@ class ColorLearnMoreView: LearnMoreView {
     }
     
     // MARK: - Objc Functions
-}
-
-// MARK: - ColorSelectMoreColorDelegate
-extension ColorLearnMoreView: ColorSelectMoreColorDelegate {
-    func touchUpMoreColorCell(index: Int) {
-        colorLearnMoreViewDelegate?.touchUpMoreColorCell(color: colorArray[index])
-    }
 }

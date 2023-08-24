@@ -6,11 +6,6 @@
 //
 
 import UIKit
-
-protocol ColorSelectMoreColorDelegate: AnyObject {
-    func touchUpMoreColorCell(index: Int)
-}
-
 class ColorSelectMoreColorCollectionView: UICollectionView {
     enum Constatns {
         static let spacing: CGFloat = .toScaledWidth(value: 12)
@@ -20,7 +15,6 @@ class ColorSelectMoreColorCollectionView: UICollectionView {
     // MARK: - UI properties
     
     // MARK: - Properties
-    weak var colorSelectDelegate: ColorSelectMoreColorDelegate?
     private var colorType: ColorType = .exterior
     private var colorArray: [Color] = [] {
         didSet {
@@ -91,7 +85,6 @@ extension ColorSelectMoreColorCollectionView: UICollectionViewDelegate {
             name: Notification.Name("touchColorCellNotification"),
             object: nil,
             userInfo: ["color": colorArray[indexPath.row], "colorType": colorType])
-        colorSelectDelegate?.touchUpMoreColorCell(index: indexPath.row)
     }
 }
 

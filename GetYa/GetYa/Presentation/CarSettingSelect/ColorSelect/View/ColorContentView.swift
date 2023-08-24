@@ -8,7 +8,6 @@
 import UIKit
 
 protocol ColorContentViewDelegate: AnyObject {
-    func touchUpCell(type: ColorType, color: Color)
     func touchUpLearnMoreViewButton(type: ColorType, isExpanded: Bool)
 }
 
@@ -54,11 +53,8 @@ class ColorContentView: UIView {
     private let adoptionRateLabel = CommonLabel(
         fontType: .mediumCaption1,
         color: .GetYaPalette.gray300)
-    private lazy var collectionView = ColorSelectColorCollectionView().set {
-        $0.colorSelectDelegate = self
-    }
+    private lazy var collectionView = ColorSelectColorCollectionView()
     private lazy var learnMoreView = ColorLearnMoreView().set {
-        $0.colorLearnMoreViewDelegate = self
         $0.delegate = self
     }
     
@@ -239,26 +235,5 @@ class ColorContentView: UIView {
 extension ColorContentView: LearnMoreViewDelegate {
     func touchUpExpandButtonByIsSelected(sender: LearnMoreView, isSelected: Bool) {
         delegate?.touchUpLearnMoreViewButton(type: colorType, isExpanded: isSelected)
-    }
-}
-
-// MARK: - ColorLearnMoreViewDelegate
-extension ColorContentView: ColorLearnMoreViewDelegate {
-    func touchUpMoreColorCell(color: Color) {
-        delegate?.touchUpCell(type: colorType, color: color)
-    }
-}
-
-// MARK: - ColorSelectColorCollectionViewDelegate
-extension ColorContentView: ColorSelectColorDelegate {
-    func touchUpColorCell(index: Int, isAvailable: Bool) {
-        guard let trimColor else { return }
-        let color = isAvailable ? trimColor.availableColors[index] : trimColor.unAvailableColors[index]
-        delegate?.touchUpCell(type: colorType, color: color)
-        colorNameLabel.text = color.name
-        adoptionRateLabel.text = "\(color.selectRate)%의 구매자가 선택한"
-        adoptionRateLabel.configurePartTextColor(
-            partText: "\(color.selectRate)%",
-            partTextColor: .GetYaPalette.acriveBlue)
     }
 }
