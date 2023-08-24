@@ -110,7 +110,7 @@ public class CarSpecService {
     }
 
     public boolean userClickedTrimLog(Long trimId) {
-        log.info(Markers.append("id", trimId), "trim");
+        log.info(Markers.append("trim", trimId), "trim");
         return true;
     }
 
