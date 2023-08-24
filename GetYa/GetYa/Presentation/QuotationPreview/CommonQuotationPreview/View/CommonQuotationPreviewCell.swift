@@ -59,7 +59,7 @@ final class CommonQuotationPreviewCell: UITableViewCell {
         padding: .init(top: 12, left: 12, bottom: 12, right: 12),
         fontType: Constants.ReviewdTextView.fontType,
         color: .GetYaPalette.acriveBlue,
-        text: "리뷰를 불러오고 있습니다 ..."
+        text: ""
     ).set {
         $0.layer.cornerRadius = Constants.ReviewdTextView.radius
         $0.clipsToBounds = true
@@ -69,8 +69,7 @@ final class CommonQuotationPreviewCell: UITableViewCell {
     // MARK: - Lifecycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-        setupUI()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -85,21 +84,25 @@ final class CommonQuotationPreviewCell: UITableViewCell {
             optionImageURL: "",
             optionPrice: 0,
             optionComment: nil)
-//        let reset = QuotationPreviewCarProductOptionModel(
-//            optionImage: "",
-//            optionName: "",
-//            optionPrice: 0,
-//            optionReview: nil)
         configure(with: reset)
+        reviewdTextView.isHidden = true
     }
     
     // MARK: - Functions
+    func configureUI() {
+        selectionStyle = .none
+        setupUI()
+        reviewdTextView.isHidden = true
+    }
     func configure(with productOptionModel: OptionInfo) {
         recommendCarOptionView.configureDetail(
             imageURL: productOptionModel.optionImageURL,
             title: productOptionModel.optionName,
             price: productOptionModel.optionPrice)
-        reviewdTextView.text = productOptionModel.optionComment
+        if !(productOptionModel.optionComment ?? "").isEmpty {
+            reviewdTextView.text = productOptionModel.optionComment
+            reviewdTextView.isHidden = false
+        }
     }
 
     // MARK: - Objc Functions
