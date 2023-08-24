@@ -11,4 +11,5 @@ import Combine
 protocol QuotationFinishRepository {
     func fetchCarInquery(with request: String) async throws -> QuotationFinish
     func fetchPdfEmail(with request: PdfEmail) async throws -> Bool
+    func fetchPdfURL(with request: String) async throws -> String?
 }

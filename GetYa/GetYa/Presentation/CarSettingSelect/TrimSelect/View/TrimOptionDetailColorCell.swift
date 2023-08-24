@@ -40,6 +40,7 @@ class TrimOptionDetailColorCell: UICollectionViewCell {
     
     private func configureUI() {
         layer.cornerRadius = CGFloat(2).scaledHeight
+        clipsToBounds = true
         
         configureImageView()
     }

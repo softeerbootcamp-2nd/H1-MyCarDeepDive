@@ -7,6 +7,7 @@
 
 import UIKit
 import Lottie
+import Combine
 
 class LoadingViewController: UIViewController {
     enum Constants {
@@ -39,36 +40,63 @@ class LoadingViewController: UIViewController {
     }
     
     // MARK: - Properties
+    private let viewModel: LoadingViewModel
+    private var cancellables = Set<AnyCancellable>()
+    private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
     
     // MARK: - Lifecycles
+    init(viewModel: LoadingViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bind()
         setupViews()
         configureUI()
         
-        // TODO: 여기서 네트워크 요청이 완료되면 화면 dismiss 하도록 하기 (Lottie가 제대로 없어지는지 확인 필요)
         lottieView.play()
-        /// 임시적으로 3초뒤에 불러와진다고 가정
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            let finishViewController = QuotationFinishViewController(
-                viewModel: QuotationFinishViewModel(
-                    useCase: DefaultQuotationFinishUseCase(
-                        pdfID: "64e478c8980e0b4882d3eef5",
-                        repository: DefaultQuotationFinishRepository(
-                            provider: SessionProvider()))))
-            if let navigationController = self.navigationController,
-               let firstViewController = navigationController.viewControllers.first {
-                navigationController.pushViewController(finishViewController, animated: true)
-                self.lottieView.stop()
-                navigationController.viewControllers.removeAll(where: { targetViewController in
-                    return (targetViewController != firstViewController &&
-                            targetViewController != finishViewController)
-                })
-            }
-        }
+        viewDidLoadEvent.send(())
     }
     
     // MARK: - Private Functions
+    private func bind() {
+        let input = LoadingViewModel.Input(
+            viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher())
+        let output = viewModel.transform(input: input)
+        
+        output.pdfID
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] _ in
+                    guard let self else { return }
+                    lottieView.stop()
+                }, receiveValue: { [weak self] pdfID in
+                    guard let self else { return }
+                    let finishViewController = QuotationFinishViewController(
+                        viewModel: QuotationFinishViewModel(
+                            useCase: DefaultQuotationFinishUseCase(
+                                pdfID: pdfID,
+                                repository: DefaultQuotationFinishRepository(
+                                    provider: SessionProvider()))))
+                    
+                    if let navigationController,
+                       let firstViewController = navigationController.viewControllers.first {
+                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                            .removeAllViewContrllerExcept(
+                                to: firstViewController,
+                                nextViewController: finishViewController)
+                    }
+                })
+            .store(in: &cancellables)
+    }
+    
     private func setupViews() {
         view.addSubviews([
             label,
@@ -87,6 +115,7 @@ class LoadingViewController: UIViewController {
     private func configureNavigationBar() {
         navigationItem.title = ""
         navigationItem.titleView = UIImageView(image: UIImage(named: "Black_Logo"))
+        navigationItem.setHidesBackButton(true, animated: true)
     }
     
     private func configureLabel() {

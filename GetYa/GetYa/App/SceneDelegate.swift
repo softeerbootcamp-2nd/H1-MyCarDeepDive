@@ -48,6 +48,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
+    func removeAllViewContrllerExcept(to viewController: UIViewController, nextViewController: UIViewController) {
+        guard let navigationController = self.window?.rootViewController as? UINavigationController,
+              let viewControllerIndex = navigationController.viewControllers.firstIndex(of: viewController)
+        else { return }
+        navigationController.pushViewController(nextViewController, animated: true)
+        navigationController.viewControllers = navigationController
+            .viewControllers
+            .enumerated()
+            .filter { (idx, viewController) in
+                if idx <= viewControllerIndex {
+                    return true
+                } else if viewController == nextViewController {
+                    return true
+                }
+                return false
+            }
+            .map { $0.element }
+    }
 }
 
