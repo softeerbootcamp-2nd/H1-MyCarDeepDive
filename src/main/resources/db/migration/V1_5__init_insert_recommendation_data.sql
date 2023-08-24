@@ -1,47 +1,37 @@
-INSERT INTO recommendation_car (recommendation_car_id, comment1, comment2, keyword, car_spec_id, exterior_color_id, interior_color_id) VALUES (1, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', '가족', 32, 5, 2);
-INSERT INTO recommendation_car (recommendation_car_id, comment1, comment2, keyword, car_spec_id, exterior_color_id, interior_color_id) VALUES (2, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', '가족', 23, 2, 7);
-INSERT INTO recommendation_car (recommendation_car_id, comment1, comment2, keyword, car_spec_id, exterior_color_id, interior_color_id) VALUES (3, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', '가족', 12, 4, 9);
-INSERT INTO recommendation_car (recommendation_car_id, comment1, comment2, keyword, car_spec_id, exterior_color_id, interior_color_id) VALUES (4, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', '가족', 4, 3, 6);
-INSERT INTO recommendation_car (recommendation_car_id, comment1, comment2, keyword, car_spec_id, exterior_color_id, interior_color_id) VALUES (5, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', '가족', 5, 1, 5);
+LOAD DATA INFILE '/var/lib/mysql/mycar_db/recommendation_car.csv'
+INTO TABLE recommendation_car
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
 
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (1, 130, 1);
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (2, 133, 1);
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (3, 133, 2);
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (4, 139, 2);
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (5, 134, 3);
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (6, 135, 3);
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (7, 130, 4);
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (8, 137, 4);
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (9, 129, 5);
-INSERT INTO recommendation_car_option (recommendation_car_option_id, option_id, recommendation_car_id) VALUES (10, 140, 5);
+LOAD DATA INFILE '/var/lib/mysql/mycar_db/recommendation_car_option.csv'
+INTO TABLE recommendation_car_option
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
 
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (1, 1, 1, NULL, 1);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (2, 1, 2, NULL, 2);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (3, 1, 3, NULL, 3);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (4, 1, 4, NULL, 4);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (5, 2, 1, NULL, 5);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (6, 2, 2, NULL, 1);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (7, 2, 3, NULL, 2);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (8, 2, 4, NULL, 3);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (9, 3, 1, NULL, 4);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (10, 3, 2, NULL, 5);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (11, 3, 3, NULL, 1);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (12, 3, 4, NULL, 2);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (13, 4, 1, NULL, 3);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (14, 4, 2, NULL, 4);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (15, 4, 3, NULL, 5);
-INSERT INTO recommendation (recommendation_id, age_group_id, life_style_id, description, recommendation_car_id) VALUES (16, 4, 4, NULL, 1);
-
-INSERT INTO recommendation_car_package (recommendation_car_package_id, package_id, recommendation_car_id) VALUES (1, 14, 1);
-INSERT INTO recommendation_car_package (recommendation_car_package_id, package_id, recommendation_car_id) VALUES (2, 2, 2);
-INSERT INTO recommendation_car_package (recommendation_car_package_id, package_id, recommendation_car_id) VALUES (3, 8, 2);
-INSERT INTO recommendation_car_package (recommendation_car_package_id, package_id, recommendation_car_id) VALUES (4, 6, 3);
-INSERT INTO recommendation_car_package (recommendation_car_package_id, package_id, recommendation_car_id) VALUES (5, 9, 3);
-INSERT INTO recommendation_car_package (recommendation_car_package_id, package_id, recommendation_car_id) VALUES (6, 13, 4);
-INSERT INTO recommendation_car_package (recommendation_car_package_id, package_id, recommendation_car_id) VALUES (7, 9, 4);
-INSERT INTO recommendation_car_package (recommendation_car_package_id, package_id, recommendation_car_id) VALUES (8, 1, 5);
-INSERT INTO recommendation_car_package (recommendation_car_package_id, package_id, recommendation_car_id) VALUES (9, 3, 5);
-
+LOAD DATA INFILE '/var/lib/mysql/mycar_db/recommendation_car_package.csv'
+INTO TABLE recommendation_car_package
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+--
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (1, 1, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 1, 1);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (2, 1, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 2, 2);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (3, 1, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 3, 3);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (4, 1, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 4, 4);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (5, 2, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 1, 5);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (6, 2, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 2, 1);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (7, 2, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 3, 2);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (8, 2, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 4, 3);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (9, 3, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 1, 4);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (10, 3, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 2, 5);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (11, 3, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 3, 1);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (12, 3, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 4, 2);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (13, 4, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 1, 3);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (14, 4, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 2, 4);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (15, 4, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 3, 5);
+INSERT INTO recommendation (recommendation_id, age_group_id, comment1, comment2, description, keyword, life_style_id, recommendation_car_id) VALUES (16, 4, '가족을 생각하는 당신을 위한 팰리세이드', '우리 아이들과 함께 타는 차는 항상 안전해야 한다고 생각해요', NULL, '가족', 4, 1);
 --
 INSERT INTO custom_recommendation (custom_recommendation_id, driving_experience_id, family_members_id, car_purpose_id, personal_value_id, recommendation_car_id) VALUES (1, 1, 1, 1, 1, 1);
 INSERT INTO custom_recommendation (custom_recommendation_id, driving_experience_id, family_members_id, car_purpose_id, personal_value_id, recommendation_car_id) VALUES (2, 1, 1, 1, 2, 2);

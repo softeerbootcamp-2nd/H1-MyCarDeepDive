@@ -20,6 +20,12 @@ public class Recommendation {
 
     private String description;
 
+    private String comment1;
+
+    private String comment2;
+
+    private String keyword;
+
     @ManyToOne
     @JoinColumn(name = "recommendation_car_id")
     private RecommendationCar recommendationCar;
@@ -30,11 +36,17 @@ public class Recommendation {
             Long ageGroupId,
             Long lifeStyleId,
             String description,
+            String comment1,
+            String comment2,
+            String keyword,
             RecommendationCar recommendationCar) {
         this.id = id;
         this.ageGroupId = ageGroupId;
         this.lifeStyleId = lifeStyleId;
         this.description = description;
+        this.comment1 = comment1;
+        this.comment2 = comment2;
+        this.keyword = keyword;
         this.recommendationCar = recommendationCar;
     }
 }
