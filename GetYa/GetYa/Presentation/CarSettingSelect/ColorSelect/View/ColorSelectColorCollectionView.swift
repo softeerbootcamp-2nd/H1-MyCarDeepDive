@@ -29,14 +29,7 @@ class ColorSelectColorCollectionView: UICollectionView {
     weak var colorSelectDelegate: ColorSelectColorDelegate?
     private var availableColorArray: [Color] = []
     private var unAvailableColorArray: [Color] = []
-    private var selectedIndexPath: IndexPath? {
-        didSet {
-            if let indexPath = selectedIndexPath {
-                let index = indexPath.row
-                colorSelectDelegate?.touchUpColorCell(index: index, isAvailable: index < availableColorArray.count)
-            }
-        }
-    }
+    private var selectedIndexPath: IndexPath?
     
     // MARK: - Lifecycles
     convenience init() {
@@ -74,6 +67,10 @@ class ColorSelectColorCollectionView: UICollectionView {
     }
     
     // MARK: - Functions
+    func setSelectedIndexPath(index: Int) {
+        selectedIndexPath = [0, index]
+    }
+    
     func setUnAvailableColorArray(colorArray: [Color]) {
         unAvailableColorArray = colorArray
     }
@@ -95,7 +92,17 @@ extension ColorSelectColorCollectionView: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        selectedIndexPath = indexPath
+        if selectedIndexPath != indexPath {
+            selectedIndexPath = indexPath
+            let color = indexPath.row < availableColorArray.count
+            ? availableColorArray[indexPath.row]
+            : unAvailableColorArray[indexPath.row - availableColorArray.count]
+            
+            NotificationCenter.default.post(
+                name: NSNotification.Name("touchColorCellNotification"),
+                object: nil,
+                userInfo: ["color": color, "colorType": colorType])
+        }
     }
 }
 
@@ -132,7 +139,7 @@ extension ColorSelectColorCollectionView: UICollectionViewDataSource {
                 cell.setInteriorTagViewIsHidden(isHidden: false)
             }
         }
-        cell.isSelected = selectedIndexPath == indexPath ? true : false
+        cell.setSelectedImageViewIsHidden(isHidden: selectedIndexPath != indexPath ? true : false)
         
         return cell
     }

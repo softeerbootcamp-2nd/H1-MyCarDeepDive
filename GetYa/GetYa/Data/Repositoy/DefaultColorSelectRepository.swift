@@ -16,8 +16,24 @@ class DefaultColorSelectRepository: ColorSelectRepository {
         self.provider = provider
     }
     
-    func fetchTrimInquery(with trimID: Int) async throws -> TrimColorInquery {
-        let endpoint = Endpoint.shared.fetchColorInquery(with: trimID)
+    func fetchTrimColorInquery(with trimID: Int) async throws -> TrimColorInquery {
+        let endpoint = Endpoint.shared.fetchTrimColorInquery(with: trimID)
+        let commonDTO = try await provider.request(endpoint: endpoint)
+        return commonDTO.data.toDomain()
+    }
+    
+    func fetchInteriorColor(
+        with exteriorColor: ColorSelectModel
+    ) async throws -> TrimColor {
+        let endpoint = Endpoint.shared.fetchInteriorColor(with: exteriorColor)
+        let commonDTO = try await provider.request(endpoint: endpoint)
+        return commonDTO.data.toDomain()
+    }
+    
+    func fetchExteriorColor(
+        with interiorColor: ColorSelectModel
+    ) async throws -> TrimColor {
+        let endpoint = Endpoint.shared.fetchExteriorColor(with: interiorColor)
         let commonDTO = try await provider.request(endpoint: endpoint)
         return commonDTO.data.toDomain()
     }

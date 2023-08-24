@@ -24,35 +24,33 @@ class ColorSelectContentView: UIScrollView {
     private let contentView: UIView = UIView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private lazy var exteriorContentView = ColorContentView(
-        type: .exterior,
-        headerView: RotationView(type: .abyss)
-    ).set {
+    private lazy var exteriorContentView = ColorContentView(type: .exterior).set {
         $0.delegate = self
     }
     private var exteriorContentViewHeightContraint: NSLayoutConstraint!
-    private lazy var interiorContentView = ColorContentView(
-        type: .interior,
-        headerView: UIImageView(image: UIImage(named: "LifeStylePeekTitle")).set {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-    ).set {
+    private lazy var interiorContentView = ColorContentView(type: .interior).set {
         $0.delegate = self
     }
     private var interiorContentViewHeightContraint: NSLayoutConstraint!
     
     // MARK: - Properties
     weak var contentDelegate: ColorSelectContentViewDelegate?
+    private var exteriorColorSelectIndex: Int = 0
+    private var interiorColorSelectIndex: Int = 0
     private var exteriorColor: TrimColor? {
         didSet {
             guard let exteriorColor else { return }
-            exteriorContentView.setTrimColor(color: exteriorColor)
+            exteriorContentView.setTrimColor(
+                color: exteriorColor,
+                selectIndex: exteriorColorSelectIndex)
         }
     }
     private var interiorColor: TrimColor? {
         didSet {
             guard let interiorColor else { return }
-            interiorContentView.setTrimColor(color: interiorColor)
+            interiorContentView.setTrimColor(
+                color: interiorColor,
+                selectIndex: interiorColorSelectIndex)
         }
     }
     
@@ -139,6 +137,66 @@ class ColorSelectContentView: UIScrollView {
     func setData(exteriorColor: TrimColor, interiorColor: TrimColor) {
         self.exteriorColor = exteriorColor
         self.interiorColor = interiorColor
+        exteriorContentView.setTrimColor(color: exteriorColor, selectIndex: 0)
+        exteriorContentView.setupHeaderView(view: RotationView().set {
+            $0.setImageURLArray(imageURLArray: exteriorColor.availableColors[0].carImageURLArray)
+        })
+        interiorContentView.setTrimColor(color: interiorColor, selectIndex: 0)
+        interiorContentView.setupHeaderView(view: UIImageView().set {
+            $0.clipsToBounds = true
+            $0.contentMode = .scaleAspectFill
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.setImage(urlString: interiorColor.availableColors[0].carImageURLArray[0])
+        })
+    }
+    
+    func setData(
+        exteriorColor: TrimColor,
+        interiorColorSelect: ColorSelectModel,
+        selectIndex: Int
+    ) {
+        self.exteriorColorSelectIndex = selectIndex
+        self.exteriorColor = exteriorColor
+        exteriorContentView.setupHeaderView(view: RotationView().set {
+            $0.setImageURLArray(imageURLArray: exteriorColor.availableColors[selectIndex].carImageURLArray)
+        })
+        
+        guard let colorAndIndex = interiorColor?.availableColors
+            .enumerated()
+            .filter({ $0.element.colorID == interiorColorSelect.colorID }).first else { return }
+        interiorContentView.setSelectIndex(index: colorAndIndex.offset)
+        interiorContentView.setDataByTrimColor(color: colorAndIndex.element)
+        interiorContentView.setupHeaderView(view: UIImageView().set {
+            $0.clipsToBounds = true
+            $0.contentMode = .scaleAspectFill
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.setImage(urlString: colorAndIndex.element.carImageURLArray[0])
+        })
+        self.interiorContentView.reloadCollectionView()
+    }
+    
+    func setData(
+        interiorColor: TrimColor,
+        exteriorColorSelect: ColorSelectModel,
+        selectIndex: Int
+    ) {
+        self.interiorColorSelectIndex = selectIndex
+        self.interiorColor = interiorColor
+        interiorContentView.setupHeaderView(view: UIImageView().set {
+            $0.clipsToBounds = true
+            $0.contentMode = .scaleAspectFill
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.setImage(urlString: interiorColor.availableColors[selectIndex].carImageURLArray[0])
+        })
+        guard let colorAndIndex = exteriorColor?.availableColors
+            .enumerated()
+            .filter({ $0.element.colorID == exteriorColorSelect.colorID }).first else { return }
+        exteriorContentView.setSelectIndex(index: colorAndIndex.offset)
+        exteriorContentView.setDataByTrimColor(color: colorAndIndex.element)
+        exteriorContentView.setupHeaderView(view: RotationView().set {
+            $0.setImageURLArray(imageURLArray: colorAndIndex.element.carImageURLArray)
+        })
+        self.exteriorContentView.reloadCollectionView()
     }
     
     // MARK: - Objc Functions
@@ -153,18 +211,24 @@ extension ColorSelectContentView: ColorContentViewDelegate {
     func touchUpLearnMoreViewButton(type: ColorType, isExpanded: Bool) {
         typealias Const = ColorContentView.Constants.LearnMoreView.ContentView
         let basicHeight = Constnats.contentViewHeight
-        let exteriorMoreColorCount = exteriorColor?.otherTrimColors.count
-        let interiorMoreColorCount = interiorColor?.otherTrimColors.count
-        var exteriorExpandedHeight = basicHeight + Const.collectionViewHeight * CGFloat(exteriorMoreColorCount ?? 0 / 4)
-        exteriorExpandedHeight += exteriorMoreColorCount == 0 ? Const.emptyLabelHeight : Const.collectionViewHeight
-        var interiorExpandedHeight = basicHeight + Const.collectionViewHeight * CGFloat(interiorMoreColorCount ?? 0 / 4)
-        interiorExpandedHeight += interiorMoreColorCount == 0 ? Const.emptyLabelHeight : Const.collectionViewHeight
         switch type {
         case .exterior:
+            guard let exteriorMoreColorCount = exteriorColor?.otherTrimColors.count else { return }
+            var exteriorExpandedHeight = basicHeight
+            + Const.collectionViewHeight
+            * CGFloat((exteriorMoreColorCount - 1) / 4)
+            exteriorExpandedHeight += exteriorMoreColorCount == 0 ? Const.emptyLabelHeight : Const.collectionViewHeight
+            
             exteriorContentViewHeightContraint.isActive = false
             exteriorContentViewHeightContraint.constant = isExpanded ? exteriorExpandedHeight : basicHeight
             exteriorContentViewHeightContraint.isActive = true
         case .interior:
+            guard let interiorMoreColorCount = interiorColor?.otherTrimColors.count else { return }
+            var interiorExpandedHeight = basicHeight
+            + Const.collectionViewHeight
+            * CGFloat((interiorMoreColorCount - 1) / 4)
+            interiorExpandedHeight += interiorMoreColorCount == 0 ? Const.emptyLabelHeight : Const.collectionViewHeight
+            
             interiorContentViewHeightContraint.isActive = false
             interiorContentViewHeightContraint.constant = isExpanded ? interiorExpandedHeight : basicHeight
             interiorContentViewHeightContraint.isActive = true

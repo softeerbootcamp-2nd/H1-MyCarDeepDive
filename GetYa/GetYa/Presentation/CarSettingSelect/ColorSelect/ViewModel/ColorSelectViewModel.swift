@@ -18,7 +18,10 @@ class ColorSelectViewModel {
     // MARK: - Output
     struct Output {
         let trimColorInquery = PassthroughSubject<TrimColorInquery, Never>()
-        let touchUpColorCellResult = PassthroughSubject<ColorChangeType, ColorSelectUseCaseError>()
+        let exteriorColorChangeModel = PassthroughSubject<ColorChangeModel, Never>()
+        let interiorColorChangeModel = PassthroughSubject<ColorChangeModel, Never>()
+        let touchUpExterirorColorResult = PassthroughSubject<ColorChangeType, Never>()
+        let touchUpInterirorColorResult = PassthroughSubject<ColorChangeType, Never>()
     }
     
     // MARK: - Dependency
@@ -43,33 +46,12 @@ class ColorSelectViewModel {
             .store(in: &cancellables)
         
         input.touchUpColorCell
-            .dropFirst(2)
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
                 if $0.colorType == .exterior {
                     useCase.validateExteriorColor(exteriorColor: $0)
-                        .sink(
-                            receiveCompletion: {
-                                switch $0 {
-                                case .failure(let error):
-                                    print(error)
-                                case .finished:
-                                    break
-                                }
-                            }, receiveValue: {
-                                print($0)
-                            })
-                        .store(in: &cancellables)
                 } else {
                     useCase.validateInteriorColor(interiorColor: $0)
-                        .sink(
-                            receiveCompletion: {
-                                if $0 == .finished { return }
-                                output.touchUpColorCellResult.send(completion: $0)
-                            }, receiveValue: {
-                                output.touchUpColorCellResult.send($0)
-                            })
-                        .store(in: &cancellables)
                 }
             })
             .store(in: &cancellables)
@@ -77,6 +59,31 @@ class ColorSelectViewModel {
         useCase.trimColorInquery
             .sink(receiveValue: {
                 output.trimColorInquery.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.exteriorColorChangeModel
+            .sink(receiveValue: {
+                output.exteriorColorChangeModel.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.interiorColorChangeModel
+            .sink(receiveValue: {
+                output.interiorColorChangeModel.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.exteriorColorChangeResult
+            .sink(receiveValue: {
+                
+                output.touchUpExterirorColorResult.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.interiorColorChangeResult
+            .sink(receiveValue: {
+                output.touchUpInterirorColorResult.send($0)
             })
             .store(in: &cancellables)
         

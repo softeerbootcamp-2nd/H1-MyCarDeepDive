@@ -138,15 +138,14 @@ class ColorLearnMoreView: LearnMoreView {
     
     func setColor(colorArray: [Color]) {
         typealias Const = Constants.CollectionView
+        self.colorArray = colorArray
         
         if colorArray.count == 0 {
             collectionView.isHidden = true
             emptyLabel.isHidden = false
         } else {
             emptyLabel.isHidden = true
-            collectionView.setData(
-                names: colorArray.map { $0.trimName },
-                imageURLs: colorArray.map { $0.imageURL })
+            collectionView.setColorArray(colorArray: colorArray)
             collectionView.isHidden = false
 
             collectionViewHeightConstraint.isActive = false
@@ -155,20 +154,8 @@ class ColorLearnMoreView: LearnMoreView {
         }
     }
     
-    func setColorData(trimNames: [String], colorImages: [UIImage?]) {
-        typealias Const = Constants.CollectionView
-        if trimNames.count == 0 {
-            collectionView.isHidden = true
-            emptyLabel.isHidden = false
-        } else {
-            emptyLabel.isHidden = true
-            collectionView.setData(names: trimNames, images: colorImages)
-            collectionView.isHidden = false
-
-            collectionViewHeightConstraint.isActive = false
-            collectionViewHeightConstraint.constant = Const.height * ceil(CGFloat(trimNames.count) / 4)
-            collectionViewHeightConstraint.isActive = true
-        }
+    func setColorType(colorType: ColorType) {
+        collectionView.setColorType(type: colorType)
     }
     
     // MARK: - Objc Functions

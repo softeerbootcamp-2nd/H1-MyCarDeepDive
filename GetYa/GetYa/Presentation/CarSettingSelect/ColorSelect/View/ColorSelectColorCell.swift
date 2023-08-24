@@ -68,11 +68,6 @@ class ColorSelectColorCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let identifier = "ColorSelectColorCell"
-    override var isSelected: Bool {
-        didSet {
-            selectedView.isHidden = !isSelected
-        }
-    }
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -182,6 +177,10 @@ class ColorSelectColorCell: UICollectionViewCell {
     func setInteriorTagViewIsHidden(isHidden: Bool) {
         tagView.text = "Best"
         tagView.isHidden = isHidden
+    }
+    
+    func setSelectedImageViewIsHidden(isHidden: Bool) {
+        selectedView.isHidden = isHidden
     }
     
     // MARK: - Objc Functions

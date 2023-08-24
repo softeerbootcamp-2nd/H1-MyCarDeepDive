@@ -10,7 +10,6 @@ import UIKit
 class ColorSelectMoreColorCell: UICollectionViewCell {
     enum Constants {
         enum NameLabel {
-            static let leadingMargin: CGFloat = .toScaledWidth(value: 7)
             static let height: CGFloat = .toScaledHeight(value: 14)
         }
         enum ImageView {
@@ -70,9 +69,7 @@ class ColorSelectMoreColorCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: topAnchor),
-            nameLabel.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
-                constant: const.leadingMargin),
+            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             nameLabel.heightAnchor.constraint(equalToConstant: const.height)
         ])
     }

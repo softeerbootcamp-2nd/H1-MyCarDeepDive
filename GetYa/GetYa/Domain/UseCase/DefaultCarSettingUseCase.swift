@@ -12,11 +12,17 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase {
     // MARK: - Dependency
     var trimSelect = CurrentValueSubject<TrimSelectModel?, Never>(nil)
     var trimInquery = CurrentValueSubject<TrimInquery?, Never>(nil)
-    var exteriorColorSelect = CurrentValueSubject<Color?, Never>(nil)
-    var interiorColorSelect = CurrentValueSubject<Color?, Never>(nil)
-    var optionSelect = PassthroughSubject<OptionSelectModel, Never>()
-    var trimColorInquery = PassthroughSubject<TrimColorInquery, Never>()
     var trimSelectResult = PassthroughSubject<String, Never>()
+    
+    var exteriorColorSelect = CurrentValueSubject<ColorSelectModel?, Never>(nil)
+    var interiorColorSelect = CurrentValueSubject<ColorSelectModel?, Never>(nil)
+    var trimColorInquery = PassthroughSubject<TrimColorInquery, Never>()
+    var exteriorColorChangeModel = PassthroughSubject<ColorChangeModel, Never>()
+    var interiorColorChangeModel = PassthroughSubject<ColorChangeModel, Never>()
+    var exteriorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
+    var interiorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
+    
+    var optionSelect = PassthroughSubject<OptionSelectModel, Never>()
     
     // MARK: - Properties
     var trimSelectRepository: TrimSelectRepository
@@ -81,45 +87,113 @@ extension DefaultCarSettingUseCase {
     func fetchColorInquery() {
         Task(operation: {
             do {
-                let trimColorInquery = try await colorSelectRepository.fetchTrimInquery(with: 1)
+                guard let trimSelect = trimSelect.value else { return }
+                let trimColorInquery = try await colorSelectRepository.fetchTrimColorInquery(with: trimSelect.index + 1)
                 self.trimColorInquery.send(trimColorInquery)
                 
                 let availableExteriorColor = trimColorInquery.exteriorColor.availableColors[0]
                 let availableInteriorColor = trimColorInquery.interiorColor.availableColors[0]
-                self.exteriorColorSelect.send(availableExteriorColor)
-                self.interiorColorSelect.send(availableInteriorColor)
+                self.exteriorColorSelect.send(
+                    ColorSelectModel(
+                        colorType: .exterior,
+                        colorID: availableExteriorColor.colorID,
+                        colorName: availableExteriorColor.name,
+                        colorPrice: availableExteriorColor.price,
+                        trimID: availableExteriorColor.trimID,
+                        oppositeColors: availableExteriorColor.oppositeColors))
+                self.interiorColorSelect.send(
+                    ColorSelectModel(
+                        colorType: .interior,
+                        colorID: availableInteriorColor.colorID,
+                        colorName: availableInteriorColor.name,
+                        colorPrice: availableInteriorColor.price,
+                        trimID: availableInteriorColor.trimID,
+                        oppositeColors: availableInteriorColor.oppositeColors))
             } catch {
                 print("TrimColorInquery 데이터를 받아오지 못하였습니다.")
             }
         })
     }
     
+    func fetchExteriorColorInquery(interiorColor: ColorSelectModel) {
+        Task(operation: {
+            do {
+                let exteriorColor = try await colorSelectRepository
+                    .fetchExteriorColor(with: interiorColor)
+                let index = exteriorColor.availableColors.firstIndex(where: {
+                    exteriorColorSelect.value?.colorID == $0.colorID
+                })
+                guard let interiorColorSelect = interiorColorSelect.value else { return }
+                self.exteriorColorChangeModel.send(
+                    ColorChangeModel(
+                        trimColor: exteriorColor,
+                        colorSelectModel: interiorColorSelect,
+                        selectIndex: index ?? 0))
+            } catch {
+                print("ExteriorColor 데이터를 받아오지 못했습니다.")
+            }
+        })
+    }
+    
+    func fetchInteriorColorInquery(exteriorColor: ColorSelectModel) {
+        Task(operation: {
+            do {
+                let interiorColor = try await colorSelectRepository
+                    .fetchInteriorColor(with: exteriorColor)
+                let index = interiorColor.availableColors.firstIndex(where: {
+                    interiorColorSelect.value?.colorID == $0.colorID
+                })
+                guard let exteriorColorSelect = exteriorColorSelect.value else { return }
+                self.interiorColorChangeModel.send(
+                    ColorChangeModel(
+                        trimColor: interiorColor,
+                        colorSelectModel: exteriorColorSelect,
+                        selectIndex: index ?? 0))
+            } catch {
+                print("InteriorColor 데이터를 받아오지 못했습니다.")
+            }
+        })
+    }
+    
     func validateInteriorColor(
         interiorColor: ColorSelectModel
-    ) -> AnyPublisher<ColorChangeType, ColorSelectUseCaseError> {
-        if let exteriorColor = exteriorColorSelect.value {
-            // 외장색깔.호환가능한내장색상.cotains(interiorColor)
-            // true 면 바로변경
-            // false 면 타입 내려주기, 타입에 따라 알럿 보여주기, 변경하기 클릭 시 타입에 따라 API 변경
-        } else {
-            return Fail(error: ColorSelectUseCaseError.notExistExteriorColor)
-                .eraseToAnyPublisher()
+    ) {
+        if let exteriorColorSelect = exteriorColorSelect.value {
+            if interiorColor.oppositeColors.contains(exteriorColorSelect.colorID) {
+                if interiorColor.trimID != exteriorColorSelect.trimID {
+                    interiorColorChangeResult.send(.needChangeTrim)
+                } else {
+                    interiorColorSelect.send(interiorColor)
+                    fetchExteriorColorInquery(interiorColor: interiorColor)
+                }
+            } else {
+                if interiorColor.trimID != exteriorColorSelect.trimID {
+                    interiorColorChangeResult.send(.needChnageExteriorColorWithTrim)
+                } else {
+                    interiorColorChangeResult.send(.needChnageExteriorColor)
+                }
+            }
         }
-        
-        return Just(.canChange)
-            .setFailureType(to: ColorSelectUseCaseError.self)
-            .eraseToAnyPublisher()
     }
     
     func validateExteriorColor(
         exteriorColor: ColorSelectModel
-    ) -> AnyPublisher<ColorChangeType, ColorSelectUseCaseError> {
+    ) {
         if let interiorColorSelect = interiorColorSelect.value {
-            
-            return Just(.canChange).setFailureType(to: ColorSelectUseCaseError.self).eraseToAnyPublisher()
-        } else {
-            return Fail(error: ColorSelectUseCaseError.notExistInteriorColor)
-                .eraseToAnyPublisher()
+            if exteriorColor.oppositeColors.contains(interiorColorSelect.colorID) {
+                if exteriorColor.trimID != interiorColorSelect.trimID {
+                    exteriorColorChangeResult.send(.needChangeTrim)
+                } else {
+                    exteriorColorSelect.send(exteriorColor)
+                    fetchInteriorColorInquery(exteriorColor: exteriorColor)
+                }
+            } else {
+                if exteriorColor.trimID != interiorColorSelect.trimID {
+                    exteriorColorChangeResult.send(.needChnageInteriorColorWithTrim)
+                } else {
+                    exteriorColorChangeResult.send(.needChnageInteriorColor)
+                }
+            }
         }
     }
 }

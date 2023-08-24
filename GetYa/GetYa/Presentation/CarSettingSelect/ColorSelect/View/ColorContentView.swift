@@ -18,7 +18,7 @@ class ColorContentView: UIView {
             static let height: CGFloat = .toScaledHeight(value: 185)
         }
         enum TitleLabel {
-            static let topMargin: CGFloat = .toScaledHeight(value: 24)
+            static let topMargin: CGFloat = .toScaledHeight(value: 209)
             static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
         }
         enum ColorNameLabel {
@@ -45,7 +45,6 @@ class ColorContentView: UIView {
     }
     
     // MARK: - UI properties
-    private var titleLabelTopConstraint: NSLayoutConstraint!
     private let titleLabel = CommonLabel(
         fontType: .mediumHead3,
         color: .GetYaPalette.gray0)
@@ -72,19 +71,14 @@ class ColorContentView: UIView {
             collectionView.setAvailableColorArray(colorArray: trimColor.availableColors)
             collectionView.setUnAvailableColorArray(colorArray: trimColor.unAvailableColors)
             collectionView.reloadData()
-            collectionView.selectItem(at: [0, 0], animated: false, scrollPosition: .init())
-            collectionView.collectionView(collectionView.self, didSelectItemAt: [0, 0])
+            setDataByTrimColor(color: trimColor.availableColors[0])
             setLearnMoreContentData(colorArray: trimColor.otherTrimColors)
         }
     }
     
     // MARK: - Lifecycles
-    init(type: ColorType, headerView: UIView) {
-        super.init(frame: .zero)
-        
-        setupViews()
-        setupHeaderView(view: headerView)
-        configureUI()
+    convenience init(type: ColorType) {
+        self.init(frame: .zero)
         configureByColorType(type: type)
     }
     
@@ -113,24 +107,6 @@ class ColorContentView: UIView {
         ])
     }
     
-    private func setupHeaderView(view: UIView) {
-        addSubview(view)
-        
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: topAnchor),
-            view.leadingAnchor.constraint(equalTo: leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: trailingAnchor),
-            view.heightAnchor.constraint(equalToConstant: Constants.HeaderView.height)
-        ])
-        if let titleLabelTopConstraint {
-            titleLabelTopConstraint.isActive = false
-        }
-        titleLabelTopConstraint = titleLabel.topAnchor.constraint(
-            equalTo: view.bottomAnchor,
-            constant: Constants.TitleLabel.topMargin)
-        titleLabelTopConstraint.isActive = true
-    }
-    
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -152,7 +128,10 @@ class ColorContentView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: Constants.TitleLabel.leadingMargin)
+                constant: Constants.TitleLabel.leadingMargin),
+            titleLabel.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: Constants.TitleLabel.topMargin)
         ])
     }
     
@@ -205,13 +184,52 @@ class ColorContentView: UIView {
         ])
     }
     
+    private func selectCollectionViewCell(index: Int) {
+        collectionView.setSelectedIndexPath(index: index)
+    }
+    
     // MARK: - Functions
-    func setTrimColor(color: TrimColor) {
+    func setupHeaderView(view: UIView) {
+        subviews.forEach {
+            if $0 is UIImageView || $0 is RotationView {
+                $0.removeFromSuperview()
+            }
+        }
+        
+        addSubview(view)
+        
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: topAnchor),
+            view.leadingAnchor.constraint(equalTo: leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: trailingAnchor),
+            view.heightAnchor.constraint(equalToConstant: Constants.HeaderView.height)
+        ])
+    }
+    
+    func setTrimColor(color: TrimColor, selectIndex: Int) {
         trimColor = color
+        selectCollectionViewCell(index: selectIndex)
+    }
+    
+    func setSelectIndex(index: Int) {
+        selectCollectionViewCell(index: index)
+    }
+    
+    func reloadCollectionView() {
+        collectionView.reloadData()
+    }
+    
+    func setDataByTrimColor(color: Color) {
+        colorNameLabel.text = color.name
+        adoptionRateLabel.text = "\(color.selectRate)%의 구매자가 선택한"
+        adoptionRateLabel.configurePartTextColor(
+            partText: "\(color.selectRate)%",
+            partTextColor: .GetYaPalette.acriveBlue)
     }
     
     func setLearnMoreContentData(colorArray: [Color]) {
         learnMoreView.setColor(colorArray: colorArray)
+        learnMoreView.setColorType(colorType: colorType)
     }
     
     // MARK: - Objc Functions

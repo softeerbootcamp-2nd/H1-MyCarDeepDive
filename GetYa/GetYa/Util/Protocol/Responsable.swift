@@ -47,6 +47,10 @@ enum ResponseType {
             return "car-spec/activity-log/\(trimID)"
         case .carSpecAdditionalOption(let carSpecId):
             return "car-spec/\(carSpecId)/additional-options"
+        case .exteriorColor:
+            return "color/exterior-colors"
+        case .interiorColor:
+            return "color/interior-colors"
         case .trimColor:
             return "color/trim-colors"
         case .pdfID:

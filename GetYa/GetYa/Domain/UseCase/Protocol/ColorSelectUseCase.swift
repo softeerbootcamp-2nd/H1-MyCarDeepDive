@@ -14,16 +14,16 @@ enum ColorSelectUseCaseError: Error {
 }
 
 protocol ColorSelectUseCase {
-    var exteriorColorSelect: CurrentValueSubject<Color?, Never> { get set }
-    var interiorColorSelect: CurrentValueSubject<Color?, Never> { get set }
+    var exteriorColorSelect: CurrentValueSubject<ColorSelectModel?, Never> { get set }
+    var interiorColorSelect: CurrentValueSubject<ColorSelectModel?, Never> { get set }
     var trimColorInquery: PassthroughSubject<TrimColorInquery, Never> { get set }
+    var exteriorColorChangeModel: PassthroughSubject<ColorChangeModel, Never> { get set }
+    var interiorColorChangeModel: PassthroughSubject<ColorChangeModel, Never> { get set }
+    var exteriorColorChangeResult: PassthroughSubject<ColorChangeType, Never> { get set }
+    var interiorColorChangeResult: PassthroughSubject<ColorChangeType, Never> { get set }
     var colorSelectRepository: ColorSelectRepository { get set }
     
     func fetchColorInquery()
-    func validateInteriorColor(
-        interiorColor: ColorSelectModel
-    ) -> AnyPublisher<ColorChangeType, ColorSelectUseCaseError>
-    func validateExteriorColor(
-        exteriorColor: ColorSelectModel
-    ) -> AnyPublisher<ColorChangeType, ColorSelectUseCaseError>
+    func validateInteriorColor(interiorColor: ColorSelectModel)
+    func validateExteriorColor(exteriorColor: ColorSelectModel)
 }

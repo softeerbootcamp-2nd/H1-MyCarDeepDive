@@ -52,15 +52,75 @@ class ColorSelectViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
+                contentView.setData(exteriorColor: $0.exteriorColor, interiorColor: $0.interiorColor)
+            })
+            .store(in: &cancellables)
+        
+        output.exteriorColorChangeModel
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
                 contentView.setData(
-                    exteriorColor: $0.exteriorColor,
-                    interiorColor: $0.interiorColor)
+                    exteriorColor: $0.trimColor,
+                    interiorColorSelect: $0.colorSelectModel,
+                    selectIndex: $0.selectIndex)
+            })
+            .store(in: &cancellables)
+        
+        output.interiorColorChangeModel
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                contentView.setData(
+                    interiorColor: $0.trimColor,
+                    exteriorColorSelect: $0.colorSelectModel,
+                    selectIndex: $0.selectIndex)
+            })
+            .store(in: &cancellables)
+        
+        output.touchUpExterirorColorResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                print($0)
+            })
+            .store(in: &cancellables)
+        
+        output.touchUpInterirorColorResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                print($0)
             })
             .store(in: &cancellables)
     }
     
     private func setupViews() {
         view.addSubview(contentView)
+        
+        setupNotification()
+    }
+    
+    private func setupNotification() {
+        NotificationCenter.default
+            .publisher(
+                for: Notification.Name("touchColorCellNotification"),
+                object: nil)
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let color = $0.userInfo?["color"] as? Color,
+                      let colorType = $0.userInfo?["colorType"] as? ColorType
+                else { return }
+                
+                touchUpColorCell.send(ColorSelectModel(
+                    colorType: colorType,
+                    colorID: color.colorID,
+                    colorName: color.name,
+                    colorPrice: color.price,
+                    trimID: color.trimID,
+                    oppositeColors: color.oppositeColors))
+            })
+            .store(in: &cancellables)
     }
     
     private func configureUI() {
@@ -81,7 +141,6 @@ class ColorSelectViewController: UIViewController {
     // MARK: - Functions
     
     // MARK: - Objc Functions
-
 }
 
 // MARK: - ColorSelectContentViewDelegate
