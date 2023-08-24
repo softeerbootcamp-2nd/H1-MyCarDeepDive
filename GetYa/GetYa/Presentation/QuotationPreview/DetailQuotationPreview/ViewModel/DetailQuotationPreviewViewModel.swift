@@ -58,8 +58,11 @@ final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewMode
     // MARK: - Properties
     private var mainSectionHeader = QuotationPreviewMainHeaderModel()
     private var sectionHeaders: [String] = []
-    private var secondSectionFooter: String = ""
-    private var quotationTrimCarSpec: TrimCarSpec = .init(engineId: 0, bodyId: 0, drivingSystemId: 0)
+    private var secondSectionFooter: String = "데이터 불러오는 중입니다."
+    private var quotationTrimCarSpec = TrimCarSpec(
+        engineId: 0,
+        bodyId: 0,
+        drivingSystemId: 0)
     private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Lifecycles
@@ -90,6 +93,7 @@ private extension DetailQuotationPreviewViewModel {
         return quotationUseCase
             .carQuotation
             .map { [weak self] quotationModel -> State in
+                print(quotationModel)
                 let carOptions = [
                     quotationModel.engineName,
                     quotationModel.drivingSystemName,
@@ -97,6 +101,12 @@ private extension DetailQuotationPreviewViewModel {
                 ].joined(separator: " ・ ")
                 
                 // TODO: - 추후 차량 트림 가격 Api추가==car trim Price 대체.. -> QuotationDTO랑 Quotation수정해야함
+                self?.quotationTrimCarSpec = TrimCarSpec(
+                    engineId: quotationModel.engineId,
+                    bodyId: quotationModel.bodyId,
+                    drivingSystemId: quotationModel.drivingSystemId)
+                
+                // TODO: - api db수정되면 외장, 내장일 때 리뷰 커멘트 잘 나오는지 확인. 그리고 이미지들 잘 나오는지 확인
                 let recommendCarProductOption = QuotationPreviewCarInfoModel(
                     carName: "펠리세이드",
                     trimName: quotationModel.trimName,
