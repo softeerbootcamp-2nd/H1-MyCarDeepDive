@@ -406,7 +406,6 @@ class QuotationFinishViewController: BaseViewController {
         purchaseView.setTotalPrice(totalPrice: carInquery.totalPrice)
     }
     
-    
     // MARK: - Functions
     override func touchUpNavigationBackButton() {
         showAlert(

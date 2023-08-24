@@ -8,8 +8,6 @@
 import UIKit
 import AVKit
 
-// TODO: 백그라운드로 나갔다오면 video가 재생안됨. 멈춰있음
-
 protocol HomeContentDelegate: AnyObject {
     func touchUpRecomandButton()
     func touchUpCustomButton()
@@ -77,7 +75,6 @@ class HomeContentView: UIView {
     var player: AVQueuePlayer!
     weak var delegate: HomeContentDelegate?
    
-    
     // MARK: - LifeCycles
     convenience init() {
         self.init(frame: .zero)
@@ -105,9 +102,17 @@ class HomeContentView: UIView {
         ].forEach {
             addSubview($0)
         }
-        
+        setupNotificationCenter()
         recomandButton.addTarget(self, action: #selector(touchUpRecomandButton), for: .touchUpInside)
         customButton.addTarget(self, action: #selector(touchUpCustomButton), for: .touchUpInside)
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(detectedForeground),
+            name: UIScene.willEnterForegroundNotification,
+            object: nil)
     }
     
     private func setupAVPlayerLayer() {
@@ -229,5 +234,14 @@ class HomeContentView: UIView {
     @objc func touchUpCustomButton(sender: UIButton) {
         player.pause()
         delegate?.touchUpCustomButton()
+    }
+    
+    @objc func detectedForeground(notifiaction: Notification) {
+        switch player.status {
+        case .readyToPlay:
+            player.play()
+        default:
+            player.pause()
+        }
     }
 }
