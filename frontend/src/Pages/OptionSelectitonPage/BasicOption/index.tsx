@@ -29,7 +29,7 @@ function BasicOption({
   setTotalCount,
   tag,
 }: BasicOptionProps) {
-  const basicOptionData: getBasicOptionsType | undefined = getBasicOptions();
+  const basicOptionData: getBasicOptionsType = getBasicOptions();
   const [basicOptionFilter, setBasicOptionFilter] = useState<
     BasicOptionType[] | undefined
   >();

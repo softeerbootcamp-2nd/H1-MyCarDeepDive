@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Tab from './Tab';
 import Tag from './Tag';
 import AllCount from './AllCount';
@@ -8,6 +8,7 @@ import BottomButtons from './BottomButtons';
 import OptionModal from './OptionModal';
 import BasicOption from './BasicOption';
 import SituationOption from './SituationOption';
+import Loading from '@/Components/Loading';
 
 function OptionSelectitonPage() {
   const [offsetX, setOffsetX] = useState(0);
@@ -46,24 +47,28 @@ function OptionSelectitonPage() {
         <AllCount totalCount={totalCount} />
       )}
 
-      {category === '추가 옵션' && tag === '전체' ? (
-        <AdditionalOption
-          page={page}
-          setShowOptionModal={setShowOptionModal}
-          setMaxPage={setMaxPage}
-          setTotalCount={setTotalCount}
-        />
-      ) : category === '기본 포함 옵션' ? (
-        <BasicOption
-          page={page}
-          setShowOptionModal={setShowOptionModal}
-          setMaxPage={setMaxPage}
-          setTotalCount={setTotalCount}
-          tag={tag}
-        />
-      ) : (
-        <SituationOption tag={tag} setShowOptionModal={setShowOptionModal} />
-      )}
+      <Suspense fallback={<Loading />}>
+        {category === '추가 옵션' && tag === '전체' ? (
+          <AdditionalOption
+            page={page}
+            setShowOptionModal={setShowOptionModal}
+            setMaxPage={setMaxPage}
+            setTotalCount={setTotalCount}
+          />
+        ) : category === '기본 포함 옵션' ? (
+          <Suspense fallback={<Loading />}>
+            <BasicOption
+              page={page}
+              setShowOptionModal={setShowOptionModal}
+              setMaxPage={setMaxPage}
+              setTotalCount={setTotalCount}
+              tag={tag}
+            />
+          </Suspense>
+        ) : (
+          <SituationOption tag={tag} setShowOptionModal={setShowOptionModal} />
+        )}
+      </Suspense>
 
       {(category !== '추가 옵션' || tag === '전체') && (
         <Pagination page={page} setPage={setPage} maxPage={maxPage} />
