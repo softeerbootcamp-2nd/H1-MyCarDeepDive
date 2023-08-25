@@ -36,6 +36,10 @@ class ColorSelectViewController: UIViewController {
         bind()
         setupViews()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewDidLoadEvent.send(())
     }
     
@@ -140,20 +144,17 @@ class ColorSelectViewController: UIViewController {
     
     private func showAlertByColorChangeType(type: ColorChangeType) {
         switch type {
-        case .needChangeTrim(let trimChangeModel):
+        case .needChangeTrim(let trimChangeModel),
+             .needChangeExteriorColor(let trimChangeModel),
+             .needChangeExteriorColorWithTrim(let trimChangeModel),
+             .needChangeInteriorColor(let trimChangeModel),
+             .needChangeInteriorColorWithTrim(let trimChangeModel):
+            
             showAlert(
                 type: .settingChange(trimChangeModel: trimChangeModel),
                 buttonType: .twoButton,
                 leftTitle: "아니요",
                 rightTitle: "변경하기")
-        case .needChangeExteriorColor:
-            break
-        case .needChangeExteriorColorWithTrim:
-            break
-        case .needChangeInteriorColor:
-            break
-        case .needChangeInteriorColorWithTrim:
-            break
         }
     }
     

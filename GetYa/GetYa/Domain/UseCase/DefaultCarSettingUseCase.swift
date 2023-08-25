@@ -22,7 +22,7 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase {
     var exteriorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
     var interiorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
     
-    var optionSelect = CurrentValueSubject<OptionSelectModel?, Never>(nil)
+    var optionSelectArray = CurrentValueSubject<[OptionSelectModel], Never>([])
     
     // MARK: - Properties
     var trimSelectRepository: TrimSelectRepository
@@ -175,20 +175,45 @@ extension DefaultCarSettingUseCase {
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
-                                exteriorColorSelectModel: exteriorColorSelect)))
+                                exteriorColorSelectModel: exteriorColorSelect,
+                                optionSelectModelArray: optionSelectArray.value
+                            )))
                 } else {
                     interiorColorSelect.send(interiorColor)
                     fetchExteriorColorInquery(interiorColor: interiorColor)
                 }
             } else {
                 if interiorColor.trimID != exteriorColorSelect.trimID {
+                    guard let otherTrim = trimInquery.value?.carSpecs
+                        .first(where: { $0.trimID == interiorColor.trimID }),
+                          let trimSelect = trimSelect.value else { return }
+                    
                     interiorColorChangeResult.send(
                         .needChangeExteriorColorWithTrim(
-                            trimChangeModel: TrimChangeModel()))
+                            trimChangeModel: TrimChangeModel(
+                                trimSelectModel: trimSelect,
+                                otherTrimSelectModel: TrimSelectModel(
+                                    trimID: otherTrim.trimID,
+                                    trimTag: trimSelect.trimTag,
+                                    trimName: otherTrim.trimName,
+                                    trimPrice: otherTrim.price),
+                                exteriorColorSelectModel: exteriorColorSelect,
+                                optionSelectModelArray: optionSelectArray.value
+                            )))
                 } else {
                     interiorColorChangeResult.send(
                         .needChangeExteriorColor(
-                            trimChangeModel: TrimChangeModel()))
+                            trimChangeModel: TrimChangeModel(
+                                exteriorColorSelectModel: exteriorColorSelect,
+                                interiorColorSelectModel: ColorSelectModel(
+                                    colorType: .interior,
+                                    colorID: -1,
+                                    colorName: interiorColor.colorName,
+                                    colorPrice: interiorColor.colorPrice,
+                                    trimID: interiorColor.trimID,
+                                    oppositeColors: interiorColor.oppositeColors),
+                                optionSelectModelArray: optionSelectArray.value
+                            )))
                 }
             }
         }
@@ -213,20 +238,44 @@ extension DefaultCarSettingUseCase {
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
-                                interiorColorSelectModel: interiorColorSelect)))
+                                interiorColorSelectModel: interiorColorSelect,
+                                optionSelectModelArray: optionSelectArray.value)))
                 } else {
                     exteriorColorSelect.send(exteriorColor)
                     fetchInteriorColorInquery(exteriorColor: exteriorColor)
                 }
             } else {
                 if exteriorColor.trimID != interiorColorSelect.trimID {
+                    guard let otherTrim = trimInquery.value?.carSpecs
+                        .first(where: { $0.trimID == exteriorColor.trimID }),
+                          let trimSelect = trimSelect.value else { return }
+                    
                     exteriorColorChangeResult.send(
                         .needChangeInteriorColorWithTrim(
-                            trimChangeModel: TrimChangeModel()))
+                            trimChangeModel: TrimChangeModel(
+                                trimSelectModel: trimSelect,
+                                otherTrimSelectModel: TrimSelectModel(
+                                    trimID: otherTrim.trimID,
+                                    trimTag: trimSelect.trimTag,
+                                    trimName: otherTrim.trimName,
+                                    trimPrice: otherTrim.price),
+                                interiorColorSelectModel: interiorColorSelect,
+                                optionSelectModelArray: optionSelectArray.value
+                            )))
                 } else {
                     exteriorColorChangeResult.send(
                         .needChangeInteriorColor(
-                            trimChangeModel: TrimChangeModel()))
+                            trimChangeModel: TrimChangeModel(
+                                exteriorColorSelectModel: ColorSelectModel(
+                                    colorType: .exterior,
+                                    colorID: -1,
+                                    colorName: exteriorColor.colorName,
+                                    colorPrice: exteriorColor.colorPrice,
+                                    trimID: exteriorColor.trimID,
+                                    oppositeColors: exteriorColor.oppositeColors),
+                                interiorColorSelectModel: interiorColorSelect,
+                                optionSelectModelArray: optionSelectArray.value
+                            )))
                 }
             }
         }

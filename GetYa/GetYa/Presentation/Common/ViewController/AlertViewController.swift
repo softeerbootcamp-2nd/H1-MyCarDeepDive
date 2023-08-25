@@ -18,6 +18,7 @@ class AlertViewController: UIViewController {
         enum TitleLabel {
             static let topMargin: CGFloat = .toScaledHeight(value: 20)
             static let leadingMargin: CGFloat = .toScaledWidth(value: 20)
+            static let trailingMargin: CGFloat = .toScaledWidth(value: -17)
         }
         enum DescriptionLabel {
             static let topMargin: CGFloat = .toScaledHeight(value: 8)
@@ -131,7 +132,10 @@ class AlertViewController: UIViewController {
                 constant: Const.topMargin),
             titleLabel.leadingAnchor.constraint(
                 equalTo: containerView.leadingAnchor,
-                constant: Const.leadingMargin)
+                constant: Const.leadingMargin),
+            titleLabel.trailingAnchor.constraint(
+                equalTo: containerView.trailingAnchor,
+                constant: Const.trailingMargin)
         ])
     }
     
@@ -243,19 +247,19 @@ class AlertViewController: UIViewController {
                 otherTrimPirce: otherTrimSelect.trimPrice)
         }
         
-        if let exteriorColorSelect = trimChangeModel.exteriorColorSelectModel {
+        if let exteriorColorSelect = trimChangeModel.exteriorColorSelectModel, exteriorColorSelect.colorID != -1 {
             settingAlertView.setReleaseExteriorColor(
                 colorName: exteriorColorSelect.colorName,
                 colorPrice: exteriorColorSelect.colorPrice)
         }
         
-        if let interiorColorSelect = trimChangeModel.interiorColorSelectModel {
+        if let interiorColorSelect = trimChangeModel.interiorColorSelectModel, interiorColorSelect.colorID != -1 {
             settingAlertView.setReleaseInteriorColor(
                 colorName: interiorColorSelect.colorName,
                 colorPrice: interiorColorSelect.colorPrice)
         }
         
-        if let optionSelect = trimChangeModel.optionSelectModel {
+        if !trimChangeModel.optionSelectModelArray.isEmpty {
             
         }
         
