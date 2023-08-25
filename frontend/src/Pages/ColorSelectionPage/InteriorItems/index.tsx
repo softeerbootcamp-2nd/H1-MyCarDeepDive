@@ -134,7 +134,7 @@ function InteriorItems({
                   imgUrl={interiorColor.img_url}
                 />
                 {interiorColor.name === color.interiorColor.name && (
-                  <Icon imgUrl={CheckCircle} />
+                  <Icon imgUrl={CheckCircle} type='available' />
                 )}
                 {index === 0 && <Tag description='Best' />}
               </Button>
@@ -160,7 +160,7 @@ function InteriorItems({
                   imgUrl={interiorColor.img_url}
                 />
 
-                <Icon imgUrl={Exclamation} />
+                <Icon imgUrl={Exclamation} type='unavailable' />
               </Button>
             </Items>
           );
