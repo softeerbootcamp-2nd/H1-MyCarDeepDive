@@ -73,12 +73,12 @@ public class OptionsService {
     }
 
     public boolean userClickedOptionLog(Long optionId) {
-        log.info(Markers.append("id", optionId), "option");
+        log.info(Markers.append("option", optionId), "option");
         return true;
     }
 
     public boolean userClickedPackageLog(Long optionId) {
-        log.info(Markers.append("id", optionId), "package");
+        log.info(Markers.append("package", optionId), "package");
         return true;
     }
 

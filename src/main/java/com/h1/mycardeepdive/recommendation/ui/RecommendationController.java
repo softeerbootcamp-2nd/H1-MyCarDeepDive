@@ -33,7 +33,11 @@ public class RecommendationController {
             @RequestParam("maxBudget") Long maxBudget) {
         RecommendationResponse recommendation =
                 recommendationService.findCustomRecommendation(
-                        drivingExperienceId, familyMembersId, carPurposeId, personalValueId);
+                        drivingExperienceId,
+                        familyMembersId,
+                        carPurposeId,
+                        personalValueId,
+                        maxBudget);
         return new ApiResponse<>(recommendation);
     }
 }
