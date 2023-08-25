@@ -133,7 +133,7 @@ final class DetailQuotationPreviewThumbnailView: UIView {
     }
     
     func configure(imageUrl: String) {
-        recommendCarImageView.setImage(urlString: imageUrl, .normal)
+        recommendCarImageView.setImage(urlString: imageUrl)
     }
     
     func configureRecommendKeywordStackView(_ texts: [String]) {

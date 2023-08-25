@@ -12,10 +12,10 @@ extension UIImageView {
         case thumbnail
         case normal
     }
-    func setImage(urlString: String, _ imageType: ImageType = .normal) {
+    func setImage(urlString: String) {
         Task(operation: {
             do {
-                let image = try await loadImageFrom(urlString: urlString, imageType)
+                let image = try await loadImageFrom(urlString: urlString)
                 self.setImage(image: image)
             } catch {
                 print("Image Load에 실패하였습니다.")
@@ -23,7 +23,7 @@ extension UIImageView {
         })
     }
     
-    func loadImageFrom(urlString: String, _ imageType: ImageType) async throws -> UIImage? {
+    func loadImageFrom(urlString: String) async throws -> UIImage? {
         enum ImageLoadError: Error {
             case wrongCacheData
             case wrongURLString
@@ -49,9 +49,6 @@ extension UIImageView {
             DefaultGetYaCacheService.shared.write(urlString, data: data)
             
             let maybeImage = UIImage(data: data)
-            if imageType == .normal {
-                return maybeImage
-            }
             guard let thumbnail = await maybeImage?.thumbnail else {
                 throw ImageLoadError.badImage
             }

@@ -175,6 +175,13 @@
 		6457D1A82A96875300B3AAAF /* PdfIdDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1A72A96875300B3AAAF /* PdfIdDTO.swift */; };
 		6457D1AA2A968CE300B3AAAF /* MyActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1A92A968CE300B3AAAF /* MyActivityItemSource.swift */; };
 		6457D1AC2A96963700B3AAAF /* PdfUrlDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1AB2A96963700B3AAAF /* PdfUrlDTO.swift */; };
+		6457D1422A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1412A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift */; };
+		6457D1442A94C64600B3AAAF /* TrimSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1432A94C64600B3AAAF /* TrimSelectRepository.swift */; };
+		6457D1462A94E8FF00B3AAAF /* TrimSelectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1452A94E8FF00B3AAAF /* TrimSelectEndpoint.swift */; };
+		6457D1482A94EA6B00B3AAAF /* TrimCarSpecDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1472A94EA6B00B3AAAF /* TrimCarSpecDTO.swift */; };
+		6457D14A2A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */; };
+		6457D14C2A95013D00B3AAAF /* TrimInquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D14B2A95013D00B3AAAF /* TrimInquery.swift */; };
+		6457D14E2A95016D00B3AAAF /* TrimCarSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */; };
 		6457D1AE2A96F26900B3AAAF /* TrimSubOptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1AD2A96F26900B3AAAF /* TrimSubOptionType.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
@@ -467,6 +474,13 @@
 		6457D1A72A96875300B3AAAF /* PdfIdDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfIdDTO.swift; sourceTree = "<group>"; };
 		6457D1A92A968CE300B3AAAF /* MyActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyActivityItemSource.swift; sourceTree = "<group>"; };
 		6457D1AB2A96963700B3AAAF /* PdfUrlDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfUrlDTO.swift; sourceTree = "<group>"; };
+		6457D1412A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTrimSelectRepository.swift; sourceTree = "<group>"; };
+		6457D1432A94C64600B3AAAF /* TrimSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectRepository.swift; sourceTree = "<group>"; };
+		6457D1452A94E8FF00B3AAAF /* TrimSelectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectEndpoint.swift; sourceTree = "<group>"; };
+		6457D1472A94EA6B00B3AAAF /* TrimCarSpecDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpecDTO.swift; sourceTree = "<group>"; };
+		6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionSelectDTO.swift; sourceTree = "<group>"; };
+		6457D14B2A95013D00B3AAAF /* TrimInquery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimInquery.swift; sourceTree = "<group>"; };
+		6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpec.swift; sourceTree = "<group>"; };
 		6457D1AD2A96F26900B3AAAF /* TrimSubOptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionType.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
@@ -1420,6 +1434,7 @@
 				6457CFB92A9397A500B3AAAF /* TagDetail.swift */,
 				6457CFBB2A9397D600B3AAAF /* TagOption.swift */,
 				6457CFA92A938F8E00B3AAAF /* TrimOption.swift */,
+				6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */,
 				6457D1222A9463B200B3AAAF /* CarSettingSelectModel.swift */,
 				6457D14B2A95013D00B3AAAF /* TrimInquery.swift */,
 				6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */,
