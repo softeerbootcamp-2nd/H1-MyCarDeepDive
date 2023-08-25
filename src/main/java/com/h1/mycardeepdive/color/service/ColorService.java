@@ -93,19 +93,13 @@ public class ColorService {
     public AllColorResponse findAllColors(Long trimId) {
         List<TrimExteriorColor> trimExteriorColors =
                 trimExteriorColorRepository.findByTrimId(trimId);
-        Set<ExteriorColor> exteriorColorSet = new HashSet<>();
-        for (TrimExteriorColor trimExteriorColor : trimExteriorColors) {
-            exteriorColorSet.add(trimExteriorColor.getExteriorColor());
-        }
         ExteriorColor exteriorColor =
-                exteriorColorSet.stream()
-                        .max((o1, o2) -> (int) (o2.getChooseRate() - o1.getChooseRate()))
+                trimExteriorColors.stream()
+                        .map(TrimExteriorColor::getExteriorColor)
+                        .findFirst()
                         .orElseThrow();
         ColorResponse interiorColorResponse = findInteriorColors(trimId, exteriorColor.getId());
-        ColorInfo interiorColorInfo =
-                interiorColorResponse.getAvailable_colors().stream()
-                        .max((o1, o2) -> (int) (o2.getChoose_rate() - o1.getChoose_rate()))
-                        .orElseThrow();
+        ColorInfo interiorColorInfo = interiorColorResponse.getAvailable_colors().get(0);
         Long interiorId = interiorColorInfo.getColor_id();
         ColorResponse colorResponse = findExteriorColors(trimId, interiorId);
         return new AllColorResponse(colorResponse, interiorColorResponse);
