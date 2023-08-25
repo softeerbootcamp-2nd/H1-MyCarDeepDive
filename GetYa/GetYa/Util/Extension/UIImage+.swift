@@ -8,13 +8,6 @@
 import UIKit
 
 extension UIImage {
-    var thumbnail: UIImage? {
-        get async {
-            let size = CGSize(width: 50, height: 50)
-            return await self.byPreparingThumbnail(ofSize: size)
-        }
-    }
-    
     func resize(targetSize: CGSize, opaque: Bool = false) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(targetSize, opaque, 0)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
