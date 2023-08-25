@@ -168,7 +168,8 @@ class QuotationFinishViewController: BaseViewController {
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
                     .removeAllViewContrllerExcept(
                         to: homeViewController,
-                        nextViewController: CarSettingSelectViewController(carSpecID: 1))
+                        nextViewController: CarSettingSelectViewController(
+                            trimSubOptionSelect: TrimSubOptionSelect(engineID: 1, bodyID: 1, drivingSystemID: 1)))
             }
         })
         $0.setRightButton(title: "구매/상담", handler: { [weak self] in
@@ -374,8 +375,8 @@ class QuotationFinishViewController: BaseViewController {
                 constant: Const.leadingMargin),
             totalNameAndPriceView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: Const.trailingMargin),
-            totalNameAndPriceView.heightAnchor.constraint(equalToConstant: Const.height)
+                constant: CGFloat(-16).scaledWidth),
+            totalNameAndPriceView.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
     

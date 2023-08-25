@@ -17,10 +17,10 @@ class TrimOptionDetailColorCollectionView: UICollectionView {
     }
     
     // MARK: - Properties
-    private var colorArray: [UIColor] = []
+    private var colorArray: [String] = []
     
     // MARK: - Lifecycles
-    convenience init(colorArray: [UIColor]) {
+    convenience init(colorArray: [String]) {
         self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         setColorArray(colorArray: colorArray)
@@ -49,7 +49,7 @@ class TrimOptionDetailColorCollectionView: UICollectionView {
     }
     
     // MARK: - Functions
-    func setColorArray(colorArray: [UIColor]) {
+    func setColorArray(colorArray: [String]) {
         self.colorArray = colorArray
     }
 }
@@ -73,7 +73,7 @@ extension TrimOptionDetailColorCollectionView: UICollectionViewDataSource {
             withReuseIdentifier: TrimOptionDetailColorCell.identifier,
             for: indexPath
         ) as? TrimOptionDetailColorCell else { return UICollectionViewCell()}
-        cell.layer.backgroundColor = colorArray[indexPath.row].cgColor
+        cell.setImage(imageURL: colorArray[indexPath.row])
         
         return cell
     }

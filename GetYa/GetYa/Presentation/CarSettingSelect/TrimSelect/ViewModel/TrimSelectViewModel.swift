@@ -11,13 +11,14 @@ class TrimSelectViewModel {
     // MARK: - Input
     struct Input {
         let viewDidLoadEvent: AnyPublisher<Void, Never>
-        let touchUpSubOptionSelect: AnyPublisher<TrimSubOptionSelectModel, Never>
+        let touchUpSubOptionSelect: AnyPublisher<TrimSubOptionSelect, Never>
         let touchUpTrimSelectButton: AnyPublisher<TrimSelectModel, Never>
     }
     
     // MARK: - Output
     struct Output {
-        
+        let trimInquery = PassthroughSubject<(TrimInquery?, [String]), Never>()
+        let trimSelectResult = PassthroughSubject<String, Never>()
     }
     
     // MARK: - Dependency
@@ -25,12 +26,12 @@ class TrimSelectViewModel {
     
     // MARK: - Properties
     private var useCase: TrimSelectUseCase
-    private let carSpecID: Int
+    private var trimSubOptionSelect: TrimSubOptionSelect
     
     // MARK: - LifeCycle
-    init(carSpecID: Int, useCase: TrimSelectUseCase) {
+    init(trimSubOptionSelect: TrimSubOptionSelect, useCase: TrimSelectUseCase) {
         self.useCase = useCase
-        self.carSpecID = carSpecID
+        self.trimSubOptionSelect = trimSubOptionSelect
     }
     
     // MARK: - Functions
@@ -40,23 +41,46 @@ class TrimSelectViewModel {
         input.viewDidLoadEvent
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                useCase.fetchTrim(carSpecID: carSpecID)
+                useCase.fetchTrimInqeury(trimSubOptionSelect: trimSubOptionSelect)
             })
             .store(in: &cancellables)
         
         input.touchUpTrimSelectButton
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                useCase.trimSelect.send($0)
+                useCase.fetchTrimSelectLog(trimSelectModel: $0)
             })
             .store(in: &cancellables)
         
         input.touchUpSubOptionSelect
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                useCase.fetchTrim(trimSubOptionSelectModel: $0)
+                trimSubOptionSelect = $0
+                useCase.fetchTrimInqeury(trimSubOptionSelect: $0)
             })
             .store(in: &cancellables)
+        
+        useCase.trimInquery
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                var trimSubOptionNames: [String] = []
+                trimSubOptionNames.append(
+                    Engine.allCases[trimSubOptionSelect.engineID - 1].rawValue)
+                trimSubOptionNames.append(
+                    Body.allCases[trimSubOptionSelect.bodyID - 1].rawValue)
+                trimSubOptionNames.append(
+                    DrivingSystem.allCases[trimSubOptionSelect.drivingSystemID - 1].rawValue)
+                output.trimInquery.send(($0, trimSubOptionNames))
+            })
+            .store(in: &cancellables)
+        
+        useCase.trimSelectResult
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                output.trimSelectResult.send($0)
+            })
+            .store(in: &cancellables)
+        
         return output
     }
 }
