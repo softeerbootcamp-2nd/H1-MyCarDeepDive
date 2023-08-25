@@ -18,6 +18,9 @@ class ColorSelectColorCell: UICollectionViewCell {
             static let height: CGFloat = .toScaledHeight(value: 20)
             static let width: CGFloat = .toScaledHeight(value: 40)
         }
+        enum ContentImageView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 12.5)
+        }
         enum SelectedImageView {
             static let height: CGFloat = .toScaledHeight(value: 24)
             static let width: CGFloat = .toScaledHeight(value: 24)
@@ -41,11 +44,15 @@ class ColorSelectColorCell: UICollectionViewCell {
     }
     private let contentImageView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = CGFloat(4).scaledHeight
+        $0.clipsToBounds = true
     }
     private let selectedView: UIView = UIView().set {
         $0.isHidden = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .GetYaPalette.primary.withAlphaComponent(0.5)
+        $0.layer.cornerRadius = CGFloat(4).scaledHeight
+        $0.clipsToBounds = true
     }
     private lazy var selectedImageView: UIImageView = UIImageView(
         image: UIImage(named: "White-Check-Circle")
@@ -105,8 +112,6 @@ class ColorSelectColorCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        layer.cornerRadius = CGFloat(4).scaledHeight
-        
         configureTagView()
         configureContentImageView()
         configureSelectedView()
@@ -116,7 +121,7 @@ class ColorSelectColorCell: UICollectionViewCell {
     
     private func configureTagView() {
         NSLayoutConstraint.activate([
-            tagView.topAnchor.constraint(equalTo: topAnchor),
+            tagView.topAnchor.constraint(equalTo: contentImageView.topAnchor),
             tagView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tagView.heightAnchor.constraint(equalToConstant: Constatns.TagView.height),
             tagView.widthAnchor.constraint(equalToConstant: Constatns.TagView.width)
@@ -124,8 +129,12 @@ class ColorSelectColorCell: UICollectionViewCell {
     }
     
     private func configureContentImageView() {
+        typealias Const = Constatns.ContentImageView
+        
         NSLayoutConstraint.activate([
-            contentImageView.topAnchor.constraint(equalTo: topAnchor),
+            contentImageView.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: Const.topMargin),
             contentImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             contentImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -134,7 +143,7 @@ class ColorSelectColorCell: UICollectionViewCell {
     
     private func configureSelectedView() {
         NSLayoutConstraint.activate([
-            selectedView.topAnchor.constraint(equalTo: topAnchor),
+            selectedView.topAnchor.constraint(equalTo: contentImageView.topAnchor),
             selectedView.leadingAnchor.constraint(equalTo: leadingAnchor),
             selectedView.trailingAnchor.constraint(equalTo: trailingAnchor),
             selectedView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -156,8 +165,8 @@ class ColorSelectColorCell: UICollectionViewCell {
         typealias Const = Constatns.ExclamationmarkImageView
         
         NSLayoutConstraint.activate([
-            exclamationmarkImageView.centerYAnchor.constraint(equalTo: topAnchor),
-            exclamationmarkImageView.centerXAnchor.constraint(equalTo: trailingAnchor),
+            exclamationmarkImageView.centerYAnchor.constraint(equalTo: contentImageView.topAnchor),
+            exclamationmarkImageView.centerXAnchor.constraint(equalTo: contentImageView.trailingAnchor),
             exclamationmarkImageView.heightAnchor.constraint(equalToConstant: Const.height),
             exclamationmarkImageView.widthAnchor.constraint(equalToConstant: Const.width)
         ])

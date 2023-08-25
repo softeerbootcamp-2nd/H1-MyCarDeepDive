@@ -29,8 +29,7 @@ class ColorContentView: UIView {
             static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
         }
         enum CollectionView {
-            static let topMargin: CGFloat = .toScaledHeight(value: 12)
-            static let height: CGFloat = .toScaledHeight(value: 64)
+            static let height: CGFloat = .toScaledHeight(value: 76.5)
         }
         enum LearnMoreView {
             static let topMargin: CGFloat = .toScaledHeight(value: 12)
@@ -155,9 +154,7 @@ class ColorContentView: UIView {
     
     private func configureCollectionView() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(
-                equalTo: colorNameLabel.bottomAnchor,
-                constant: Constants.CollectionView.topMargin),
+            collectionView.topAnchor.constraint(equalTo: colorNameLabel.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.heightAnchor.constraint(

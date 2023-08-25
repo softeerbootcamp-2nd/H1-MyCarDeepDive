@@ -14,7 +14,8 @@ protocol ColorSelectColorDelegate: AnyObject {
 class ColorSelectColorCollectionView: UICollectionView {
     enum Constatns {
         static let spacing: CGFloat = .toScaledWidth(value: 12)
-        static let cellLength: CGFloat = .toScaledHeight(value: 64)
+        static let cellHeight: CGFloat = .toScaledHeight(value: 76.5)
+        static let cellWidth: CGFloat = .toScaledHeight(value: 64)
         static let inset: UIEdgeInsets = UIEdgeInsets(
             top: 0,
             left: .toScaledWidth(value: 16),
@@ -37,7 +38,7 @@ class ColorSelectColorCollectionView: UICollectionView {
             frame: .zero,
             collectionViewLayout: UICollectionViewFlowLayout().set {
                 $0.minimumLineSpacing = Constatns.spacing
-                $0.itemSize = CGSize(width: Constatns.cellLength, height: Constatns.cellLength)
+                $0.itemSize = CGSize(width: Constatns.cellWidth, height: Constatns.cellHeight)
                 $0.scrollDirection = .horizontal
             })
     }
@@ -125,7 +126,7 @@ extension ColorSelectColorCollectionView: UICollectionViewDataSource {
             let color = availableColorArray[indexPath.row]
             cell.setImageURL(imageURL: color.imageURL, isAvailable: true)
         } else {
-            let color = unAvailableColorArray[indexPath.row]
+            let color = unAvailableColorArray[indexPath.row - availableColorArray.count]
             cell.setImageURL(imageURL: color.imageURL, isAvailable: false)
         }
         
