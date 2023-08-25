@@ -50,9 +50,6 @@ public class CustomRecommendationFixture {
                         .carSpec(createCarSpecD72E())
                         .exteriorColor(createExteriorColor())
                         .interiorColor(createInteriorColor())
-                        .comment1("가족을 생각하는 당신을 위한 팰리세이드")
-                        .comment2("우리 아이들과 함께타는 차는 항상 안전해 한다고 생각해요")
-                        .keyword("가족")
                         .build();
         return CustomRecommendation.builder()
                 .drivingExperienceId(drivingExperienceId)

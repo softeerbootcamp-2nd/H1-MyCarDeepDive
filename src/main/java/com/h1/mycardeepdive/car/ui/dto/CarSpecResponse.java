@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CarSpecResponse {
-    List<CarSpecInfo> car_specs;
-    long recommend_trim_id;
+    private List<CarSpecInfo> car_specs;
+    private long recommend_trim_id;
 }

@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import net.logstash.logback.marker.Markers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,10 +73,12 @@ public class OptionsService {
     }
 
     public boolean userClickedOptionLog(Long optionId) {
+        log.info(Markers.append("id", optionId), "option");
         return true;
     }
 
     public boolean userClickedPackageLog(Long optionId) {
+        log.info(Markers.append("id", optionId), "package");
         return true;
     }
 
