@@ -134,7 +134,7 @@ function ExteriorItems({
                   imgUrl={exteriorColor.img_url}
                 />
                 {exteriorColor.name === color.exteriorColor.name && (
-                  <Icon imgUrl={CheckCircle} />
+                  <Icon imgUrl={CheckCircle} type='available' />
                 )}
                 {index < 3 && <Tag description='Top' index={index} />}
               </Button>
@@ -159,7 +159,7 @@ function ExteriorItems({
                   colorName={exteriorColor.name}
                   imgUrl={exteriorColor.img_url}
                 />
-                <Icon imgUrl={Exclamation} />
+                <Icon imgUrl={Exclamation} type='unavailable' />
               </Button>
             </Items>
           );
