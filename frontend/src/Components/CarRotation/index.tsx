@@ -99,7 +99,7 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
           <img
             className='w-[85%] z-10 ml-32'
             key={idx}
-            src={`https:\\${image}`}
+            src={`https://${image}`}
             style={
               focus === idx ? { display: 'inline-block' } : { display: 'none' }
             }
