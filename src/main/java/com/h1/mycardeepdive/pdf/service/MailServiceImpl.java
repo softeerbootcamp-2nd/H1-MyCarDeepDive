@@ -2,12 +2,10 @@ package com.h1.mycardeepdive.pdf.service;
 
 import com.h1.mycardeepdive.exception.ErrorType;
 import com.h1.mycardeepdive.exception.MyCarDeepDiveException;
-
 import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,8 +50,7 @@ public class MailServiceImpl implements MailService {
 
         try {
             byte[] pdfBytes = pdfService.generatePdf(pdfId);
-            helper.addAttachment(
-                    PDF_FILE_NAME, new ByteArrayResource(pdfBytes), CONTENT_TYPE);
+            helper.addAttachment(PDF_FILE_NAME, new ByteArrayResource(pdfBytes), CONTENT_TYPE);
         } catch (Exception e) {
             throw new MyCarDeepDiveException(HttpStatus.BAD_REQUEST, ErrorType.PDF_CREATE_ERROR);
         }

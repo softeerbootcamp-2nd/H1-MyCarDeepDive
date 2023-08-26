@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class CarSpecService {
 
+    public static final String TRIM = "trim";
     private final CarSpecRepository carSpecRepository;
 
     public CarSpecResponse findCarSpecsBySpec(Long engineId, Long bodyId, Long drivingSystemId) {
@@ -110,7 +111,7 @@ public class CarSpecService {
     }
 
     public boolean userClickedTrimLog(Long trimId) {
-        log.info(Markers.append("trim", trimId), "trim");
+        log.info(Markers.append(TRIM, trimId), TRIM);
         return true;
     }
 
