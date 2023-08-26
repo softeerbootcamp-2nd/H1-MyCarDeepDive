@@ -25,7 +25,7 @@ import {
 const initialState: InitialStateType = {
   carSpec: {
     id: 2,
-    price: 43460200,
+    price: 43460000,
     feature: {
       engine: '디젤 2.2',
       body: '7인승',
@@ -203,7 +203,7 @@ const reducer = (state: InitialStateType, action: ActionType) => {
       return {
         carSpec: {
           id: 2,
-          price: 43460200,
+          price: 43460000,
           feature: {
             engine: '디젤 2.2',
             body: '7인승',
