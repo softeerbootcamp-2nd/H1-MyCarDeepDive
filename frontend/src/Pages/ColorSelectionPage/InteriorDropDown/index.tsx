@@ -32,6 +32,7 @@ function InteriorDropDown({
 }: Props) {
   const [showOtherColor, setShowOtherColor] = useState(false);
   const [wantedOtherColor, setWantedOtherColor] = useState<any>();
+  const [wantedOtherColorTrim, setWantedOtherColorTrim] = useState<any>();
   const [showModal, setShowModal] = useState(false);
   const { carDispatch } = useContext(CarContext);
 
@@ -42,7 +43,12 @@ function InteriorDropDown({
     if (dataObject) {
       const colorInfo = JSON.parse(dataObject);
       setWantedOtherColor(colorInfo);
-
+      const index = getTrimInfo?.data.car_specs.findIndex(
+        id => id.trim_id === colorInfo.trim_id,
+      );
+      if (index === undefined || !getTrimInfo) return;
+      const wantedOtherColorTrim = getTrimInfo?.data.car_specs[index];
+      setWantedOtherColorTrim(wantedOtherColorTrim);
       setShowModal(true);
     }
   };
@@ -103,6 +109,7 @@ function InteriorDropDown({
 
       <ChangerModal
         wantedOtherColor={wantedOtherColor}
+        wantedOtherColorTrim={wantedOtherColorTrim}
         showModal={showModal}
         setShowModal={setShowModal}
         clickHandler={changeHandler}
