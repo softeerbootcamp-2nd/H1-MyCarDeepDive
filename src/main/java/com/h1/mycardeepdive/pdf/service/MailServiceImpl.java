@@ -1,12 +1,11 @@
 package com.h1.mycardeepdive.pdf.service;
 
+import com.h1.mycardeepdive.exception.ErrorType;
+import com.h1.mycardeepdive.exception.MyCarDeepDiveException;
 import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import com.h1.mycardeepdive.exception.ErrorType;
-import com.h1.mycardeepdive.exception.MyCarDeepDiveException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +25,7 @@ public class MailServiceImpl implements MailService {
             "https://cdn-icons-png.flaticon.com/512/3154/3154400.png";
     private static final String PURCHASE_LINK =
             "https://www.hyundai.com/kr/ko/e/vehicles/purchase-consult";
+    private static final String DOMAIN = "@naver.com";
     private final JavaMailSender emailSender;
     private final PdfService pdfService;
 
@@ -42,7 +42,7 @@ public class MailServiceImpl implements MailService {
         message.setSubject("[현대자동차 MyCarDeepDive] 내차만들기 견적서");
 
         helper.setText(renderMailHtml(), true);
-        helper.setFrom(new InternetAddress(username + "@naver.com", "MyCarDeepDive"));
+        helper.setFrom(new InternetAddress(createEmailDomain(username), "MyCarDeepDive"));
 
         try {
             byte[] pdfBytes = pdfService.generatePdf(pdfId);
@@ -68,5 +68,9 @@ public class MailServiceImpl implements MailService {
         msgg += "</div>";
 
         return msgg;
+    }
+
+    private String createEmailDomain(final String name) {
+        return name + DOMAIN;
     }
 }
