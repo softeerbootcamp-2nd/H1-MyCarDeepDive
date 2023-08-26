@@ -154,6 +154,33 @@ class ColorSelectContentView: UIScrollView {
         })
     }
     
+    func setData(exteriorColorSelect: ColorSelectModel) {
+        guard let colorAndIndex = exteriorColor?.availableColors
+            .enumerated()
+            .filter({ $0.element.colorID == exteriorColorSelect.colorID }).first else { return }
+        exteriorContentView.setSelectIndex(index: colorAndIndex.offset)
+        exteriorContentView.setDataByTrimColor(color: colorAndIndex.element)
+        exteriorContentView.setupHeaderView(view: RotationView().set {
+            $0.setImageURLArray(imageURLArray: colorAndIndex.element.carImageURLArray)
+        })
+        self.exteriorContentView.reloadCollectionView()
+    }
+    
+    func setData(interiorColorSelect: ColorSelectModel) {
+        guard let colorAndIndex = interiorColor?.availableColors
+            .enumerated()
+            .filter({ $0.element.colorID == interiorColorSelect.colorID }).first else { return }
+        interiorContentView.setSelectIndex(index: colorAndIndex.offset)
+        interiorContentView.setDataByTrimColor(color: colorAndIndex.element)
+        interiorContentView.setupHeaderView(view: UIImageView().set {
+            $0.clipsToBounds = true
+            $0.contentMode = .scaleAspectFill
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.setImage(urlString: colorAndIndex.element.carImageURLArray[0])
+        })
+        self.interiorContentView.reloadCollectionView()
+    }
+    
     func setData(
         exteriorColor: TrimColor,
         interiorColorSelect: ColorSelectModel,

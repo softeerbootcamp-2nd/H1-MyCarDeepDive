@@ -62,6 +62,22 @@ class ColorSelectViewController: UIViewController {
             })
             .store(in: &cancellables)
         
+        output.exteriorColorSelect
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                contentView.setData(exteriorColorSelect: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.interiorColorSelect
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                contentView.setData(interiorColorSelect: $0)
+            })
+            .store(in: &cancellables)
+        
         output.exteriorColorChangeModel
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in

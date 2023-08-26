@@ -92,24 +92,30 @@ extension DefaultCarSettingUseCase {
                 let trimColorInquery = try await colorSelectRepository.fetchTrimColorInquery(with: trimSelect.trimID)
                 self.trimColorInquery.send(trimColorInquery)
                 
-                let availableExteriorColor = trimColorInquery.exteriorColor.availableColors[0]
-                let availableInteriorColor = trimColorInquery.interiorColor.availableColors[0]
-                self.exteriorColorSelect.send(
-                    ColorSelectModel(
-                        colorType: .exterior,
-                        colorID: availableExteriorColor.colorID,
-                        colorName: availableExteriorColor.name,
-                        colorPrice: availableExteriorColor.price,
-                        trimID: availableExteriorColor.trimID,
-                        oppositeColors: availableExteriorColor.oppositeColors))
-                self.interiorColorSelect.send(
-                    ColorSelectModel(
-                        colorType: .interior,
-                        colorID: availableInteriorColor.colorID,
-                        colorName: availableInteriorColor.name,
-                        colorPrice: availableInteriorColor.price,
-                        trimID: availableInteriorColor.trimID,
-                        oppositeColors: availableInteriorColor.oppositeColors))
+                if let exteriorColorSelect = exteriorColorSelect.value,
+                   let interiorColorSelect = interiorColorSelect.value {
+                    self.exteriorColorSelect.send(exteriorColorSelect)
+                    self.interiorColorSelect.send(interiorColorSelect)
+                } else {
+                    let availableExteriorColor = trimColorInquery.exteriorColor.availableColors[0]
+                    let availableInteriorColor = trimColorInquery.interiorColor.availableColors[0]
+                    self.exteriorColorSelect.send(
+                        ColorSelectModel(
+                            colorType: .exterior,
+                            colorID: availableExteriorColor.colorID,
+                            colorName: availableExteriorColor.name,
+                            colorPrice: availableExteriorColor.price,
+                            trimID: availableExteriorColor.trimID,
+                            oppositeColors: availableExteriorColor.oppositeColors))
+                    self.interiorColorSelect.send(
+                        ColorSelectModel(
+                            colorType: .interior,
+                            colorID: availableInteriorColor.colorID,
+                            colorName: availableInteriorColor.name,
+                            colorPrice: availableInteriorColor.price,
+                            trimID: availableInteriorColor.trimID,
+                            oppositeColors: availableInteriorColor.oppositeColors))
+                }
             } catch {
                 print("TrimColorInquery 데이터를 받아오지 못하였습니다.")
             }

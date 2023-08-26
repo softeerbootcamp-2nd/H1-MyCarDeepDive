@@ -19,6 +19,8 @@ class ColorSelectViewModel {
     // MARK: - Output
     struct Output {
         let trimColorInquery = PassthroughSubject<TrimColorInquery, Never>()
+        let exteriorColorSelect = PassthroughSubject<ColorSelectModel, Never>()
+        let interiorColorSelect = PassthroughSubject<ColorSelectModel, Never>()
         let exteriorColorChangeModel = PassthroughSubject<ColorChangeModel, Never>()
         let interiorColorChangeModel = PassthroughSubject<ColorChangeModel, Never>()
         let touchUpExterirorColorResult = PassthroughSubject<ColorChangeType, Never>()
@@ -67,6 +69,20 @@ class ColorSelectViewModel {
         useCase.trimColorInquery
             .sink(receiveValue: {
                 output.trimColorInquery.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.exteriorColorSelect
+            .sink(receiveValue: {
+                guard let exteriorColorSelect = $0 else { return }
+                output.exteriorColorSelect.send(exteriorColorSelect)
+            })
+            .store(in: &cancellables)
+        
+        useCase.interiorColorSelect
+            .sink(receiveValue: {
+                guard let interiorColorSelect = $0 else { return }
+                output.interiorColorSelect.send(interiorColorSelect)
             })
             .store(in: &cancellables)
         
