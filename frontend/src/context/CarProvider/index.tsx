@@ -47,8 +47,8 @@ const initialState: InitialStateType = {
     interiorColor: {
       id: 10,
       name: '쿨그레이',
-      imgUrl: 'img.make-my-car.shop/icon/black.png',
-      price: 100000,
+      imgUrl: 'img.make-my-car.shop/interior/icon/YJY.jpg',
+      price: 0,
       chooseRate: 50,
     },
   },
@@ -225,8 +225,8 @@ const reducer = (state: InitialStateType, action: ActionType) => {
           interiorColor: {
             id: 10,
             name: '쿨그레이',
-            imgUrl: 'img.make-my-car.shop/icon/black.png',
-            price: 100000,
+            imgUrl: 'img.make-my-car.shop/interior/icon/YJY.jpg',
+            price: 0,
             chooseRate: 50,
           },
         },
