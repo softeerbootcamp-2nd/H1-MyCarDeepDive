@@ -2,10 +2,12 @@ package com.h1.mycardeepdive.pdf.service;
 
 import com.h1.mycardeepdive.exception.ErrorType;
 import com.h1.mycardeepdive.exception.MyCarDeepDiveException;
+
 import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +28,11 @@ public class MailServiceImpl implements MailService {
     private static final String PURCHASE_LINK =
             "https://www.hyundai.com/kr/ko/e/vehicles/purchase-consult";
     private static final String DOMAIN = "@naver.com";
+    private static final String EMAIL_SUBJECT = "[현대자동차 MyCarDeepDive] 내차만들기 견적서";
+    public static final String EMAIL_PERSONAL = "MyCarDeepDive";
+    public static final String CONTENT_TYPE = "application/pdf";
+    public static final String PDF_FILE_NAME = "내차만들기견적서.pdf";
+    public static final String ENCODING = "utf-8";
     private final JavaMailSender emailSender;
     private final PdfService pdfService;
 
@@ -36,18 +43,17 @@ public class MailServiceImpl implements MailService {
     public boolean createMessage(String to, String pdfId)
             throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = emailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, ENCODING);
 
         helper.setTo(to);
-        message.setSubject("[현대자동차 MyCarDeepDive] 내차만들기 견적서");
-
+        message.setSubject(EMAIL_SUBJECT);
         helper.setText(renderMailHtml(), true);
-        helper.setFrom(new InternetAddress(createEmailDomain(username), "MyCarDeepDive"));
+        helper.setFrom(new InternetAddress(createEmailDomain(username), EMAIL_PERSONAL));
 
         try {
             byte[] pdfBytes = pdfService.generatePdf(pdfId);
             helper.addAttachment(
-                    "내차만들기견적서.pdf", new ByteArrayResource(pdfBytes), "application/pdf");
+                    PDF_FILE_NAME, new ByteArrayResource(pdfBytes), CONTENT_TYPE);
         } catch (Exception e) {
             throw new MyCarDeepDiveException(HttpStatus.BAD_REQUEST, ErrorType.PDF_CREATE_ERROR);
         }
