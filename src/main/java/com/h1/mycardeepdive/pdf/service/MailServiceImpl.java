@@ -4,10 +4,14 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import com.h1.mycardeepdive.exception.ErrorType;
+import com.h1.mycardeepdive.exception.MyCarDeepDiveException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -56,7 +60,7 @@ public class MailServiceImpl implements MailService {
             helper.addAttachment(
                     "내차만들기견적서.pdf", new ByteArrayResource(pdfBytes), "application/pdf");
         } catch (Exception e) {
-            // 예외 처리
+            throw new MyCarDeepDiveException(HttpStatus.BAD_REQUEST, ErrorType.PDF_CREATE_ERROR);
         }
         emailSender.send(message);
         return true;
