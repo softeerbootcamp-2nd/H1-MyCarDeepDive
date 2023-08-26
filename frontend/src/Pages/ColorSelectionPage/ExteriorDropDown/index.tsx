@@ -62,26 +62,14 @@ function ExteriorDropDown({
   const changeHandler = () => {
     setView('exterial');
     closeModalHandler();
-    const {
-      color_id,
-      name,
-      img_url,
-      price,
-      choose_rate,
-      trim_id,
-      car_img_urls,
-    } = wantedOtherColor;
-    const index = getTrimInfo?.data.car_specs.findIndex(
-      id => id.trim_id === trim_id,
-    );
-
-    if (index === undefined || !getTrimInfo) return;
+    const { color_id, name, img_url, price, choose_rate, car_img_urls } =
+      wantedOtherColor;
     const {
       trim_id: trimId,
       trim_name,
       car_spec_id: carSpecId,
       price: carSpecPrice,
-    } = getTrimInfo.data.car_specs[index];
+    } = wantedOtherColorTrim;
 
     carDispatch({ type: SET_TRIMID, trimId });
     carDispatch({ type: SET_TRIMNAME, trimName: trim_name });
