@@ -22,7 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Slf4j
 public class MailServiceImpl implements MailService {
-
+    private static final String BUTTON_IMG =
+            "https://cdn-icons-png.flaticon.com/512/3154/3154400.png";
+    private static final String PURCHASE_LINK =
+            "https://www.hyundai.com/kr/ko/e/vehicles/purchase-consult";
     private final JavaMailSender emailSender;
     private final PdfService pdfService;
 
@@ -38,21 +41,7 @@ public class MailServiceImpl implements MailService {
         helper.setTo(to);
         message.setSubject("[현대자동차 MyCarDeepDive] 내차만들기 견적서");
 
-        String msgg = "<div style='margin:100px;'>";
-        msgg += "<h1> 안녕하세요 </h1>";
-        msgg += "<h1> 현대자동차 내차만들기 MyCarDeepDive 입니다. </h1>";
-        msgg += "<br>";
-        msgg += "<h3> 요청하신 pdf 견적서 파일입니다. </h3>";
-        String buttonImg = "https://cdn-icons-png.flaticon.com/512/3154/3154400.png";
-        String link = "https://www.hyundai.com/kr/ko/e/vehicles/purchase-consult";
-
-        msgg += "<h2> 차 구매하러 가기 </h2><br>";
-        msgg += "<a href='" + link + "'>";
-        msgg += "<img src=" + buttonImg + " width=100px height=auto>";
-        msgg += "</a>";
-        msgg += "</div>";
-        helper.setText(msgg, true);
-
+        helper.setText(renderMailHtml(), true);
         helper.setFrom(new InternetAddress(username + "@naver.com", "MyCarDeepDive"));
 
         try {
@@ -64,5 +53,20 @@ public class MailServiceImpl implements MailService {
         }
         emailSender.send(message);
         return true;
+    }
+
+    private String renderMailHtml() {
+        String msgg = "<div style='margin:100px;'>";
+        msgg += "<h1> 안녕하세요 </h1>";
+        msgg += "<h1> 현대자동차 내차만들기 MyCarDeepDive 입니다. </h1>";
+        msgg += "<br>";
+        msgg += "<h3> 요청하신 pdf 견적서 파일입니다. </h3>";
+        msgg += "<h2> 차 구매하러 가기 </h2><br>";
+        msgg += "<a href='" + PURCHASE_LINK + "'>";
+        msgg += "<img src=" + BUTTON_IMG + " width=100px height=auto>";
+        msgg += "</a>";
+        msgg += "</div>";
+
+        return msgg;
     }
 }
