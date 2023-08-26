@@ -72,7 +72,11 @@ function Buttons({
     carDispatch({
       type: ADD_OPTION_DATA_LIST,
       optionData: [...options, ...packages].map(item => {
-        return { name: item.option_name, price: item.option_price };
+        return {
+          name: item.option_name,
+          price: item.option_price,
+          imgUrl: item.option_img_url,
+        };
       }),
     });
   };

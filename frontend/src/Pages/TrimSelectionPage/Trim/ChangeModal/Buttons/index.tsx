@@ -38,7 +38,7 @@ function Buttons({ wantedTrim }: Props) {
     closeModalHandler();
   };
   return (
-    <div className='flex justify-end gap-2.5'>
+    <div className='flex justify-end gap-2.5 mb-6'>
       <Button
         width='w-[120px]'
         height='h-[46px]'
