@@ -108,7 +108,6 @@
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
 		641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */; };
 		641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */; };
-		6457CFA82A938F8700B3AAAF /* TrimSubOptionSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */; };
 		6457CFAA2A938F8E00B3AAAF /* TrimOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA92A938F8E00B3AAAF /* TrimOption.swift */; };
 		6457CFAC2A93941D00B3AAAF /* AdditionalOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */; };
 		6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */; };
@@ -187,6 +186,7 @@
 		6457D1B22A97C67B00B3AAAF /* TrimIdWithInteriorColorID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1B12A97C67B00B3AAAF /* TrimIdWithInteriorColorID.swift */; };
 		6457D1B42A97D76000B3AAAF /* ColorChangeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1B32A97D76000B3AAAF /* ColorChangeModel.swift */; };
 		6457D1B62A97E45A00B3AAAF /* TrimChangeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1B52A97E45A00B3AAAF /* TrimChangeModel.swift */; };
+		6457D1B72A988EF700B3AAAF /* TrimSubOptionSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
 		6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
@@ -1807,6 +1807,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6457D1B72A988EF700B3AAAF /* TrimSubOptionSelect.swift in Sources */,
 				6457D1212A945D1A00B3AAAF /* OptionSelectTagItemCell.swift in Sources */,
 				6484A7932A90F29400434136 /* CommonQuotationPreviewAdapterDataSource.swift in Sources */,
 				6457CFD72A93D13400B3AAAF /* QuotationFinishViewModel.swift in Sources */,
@@ -1815,9 +1816,7 @@
 				6484A7542A8C835D00434136 /* CommonView.swift in Sources */,
 				6484A7862A902D0800434136 /* QuotationFinishViewController.swift in Sources */,
 				6484A73E2A8C791C00434136 /* GetYaFont.swift in Sources */,
-				6457CFA82A938F8700B3AAAF /* TrimSubOptionSelect.swift in Sources */,
 				6457D15C2A951BC300B3AAAF /* ColorDTO.swift in Sources */,
-				6457CFA82A938F8700B3AAAF /* TrimSubOptionSelect.swift in Sources */,
 				6484A73D2A8C791500434136 /* UIView+.swift in Sources */,
 				6484A7622A8CB8D900434136 /* AlertType.swift in Sources */,
 				6484A73C2A8C790A00434136 /* ConvenienceInit.swift in Sources */,

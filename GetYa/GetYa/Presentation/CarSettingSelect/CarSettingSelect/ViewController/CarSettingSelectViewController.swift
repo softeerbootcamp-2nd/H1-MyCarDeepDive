@@ -188,6 +188,18 @@ extension CarSettingSelectViewController: BottomSheetDelegate {
                 [viewControllers[currentPageIndex]],
                 direction: .forward,
                 animated: true)
+        } else {
+            let viewController = LoadingViewController(
+                viewModel: LoadingViewModel(
+                    contrationQuotation: ContractionQuotation(
+                        carSpecID: 1,
+                        trimID: 1,
+                        exteriorColorID: 1,
+                        interiorColorID: 1,
+                        additionalOptionIDList: [1, 3, 4]),
+                    useCase: DefaultLoadingUseCase(
+                        repository: DefaultLoadingRepository(provider: SessionProvider()))))
+            navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }

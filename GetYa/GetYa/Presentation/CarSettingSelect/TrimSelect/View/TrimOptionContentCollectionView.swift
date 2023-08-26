@@ -98,6 +98,12 @@ class TrimOptionContentCollectionView: UICollectionView {
         selectedIndexPath = [0, data.recommendTrimID - 1]
         reloadData()
     }
+    
+    func setTrimSelectModel(trimSelectModel: TrimSelectModel) {
+        guard let index = trimIDArray.first(where: { $0 == trimSelectModel.trimID }) else { return }
+        selectedIndexPath = [0, index - 1]
+        reloadData()
+    }
 }
 
 // MARK: - UICollectionView Delegate

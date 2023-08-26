@@ -94,7 +94,6 @@ extension ColorSelectColorCollectionView: UICollectionViewDelegate {
         didSelectItemAt indexPath: IndexPath
     ) {
         if selectedIndexPath != indexPath {
-            selectedIndexPath = indexPath
             let color = indexPath.row < availableColorArray.count
             ? availableColorArray[indexPath.row]
             : unAvailableColorArray[indexPath.row - availableColorArray.count]

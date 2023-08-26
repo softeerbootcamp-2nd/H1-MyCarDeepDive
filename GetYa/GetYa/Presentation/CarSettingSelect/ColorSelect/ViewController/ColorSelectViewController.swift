@@ -19,6 +19,7 @@ class ColorSelectViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
     private let touchUpColorCell = PassthroughSubject<ColorSelectModel, Never>()
+    private let changeColorEvent = PassthroughSubject<ColorSelectModel, Never>()
     
     // MARK: - Lifecycles
     init(viewModel: ColorSelectViewModel) {
@@ -47,7 +48,8 @@ class ColorSelectViewController: UIViewController {
     private func bind() {
         let input = ColorSelectViewModel.Input(
             viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
-            touchUpColorCell: touchUpColorCell.eraseToAnyPublisher()
+            touchUpColorCell: touchUpColorCell.eraseToAnyPublisher(),
+            changeColorEvent: changeColorEvent.eraseToAnyPublisher()
         )
         
         let output = viewModel.transform(input: input)
@@ -144,17 +146,42 @@ class ColorSelectViewController: UIViewController {
     
     private func showAlertByColorChangeType(type: ColorChangeType) {
         switch type {
-        case .needChangeTrim(let trimChangeModel),
-             .needChangeExteriorColor(let trimChangeModel),
-             .needChangeExteriorColorWithTrim(let trimChangeModel),
-             .needChangeInteriorColor(let trimChangeModel),
-             .needChangeInteriorColorWithTrim(let trimChangeModel):
-            
+        case .needChangeTrim(let trimChangeModel):
             showAlert(
                 type: .settingChange(trimChangeModel: trimChangeModel),
                 buttonType: .twoButton,
                 leftTitle: "아니요",
-                rightTitle: "변경하기")
+                rightTitle: "변경하기",
+                rightButtonHandler: { [weak self] in
+                    guard let self else { return }
+                    if let colorSelectModel = trimChangeModel.exteriorColorSelectModel {
+                        self.changeColorEvent.send(colorSelectModel)
+                    } else if let colorSelectModel = trimChangeModel.interiorColorSelectModel {
+                        self.changeColorEvent.send(colorSelectModel)
+                    }
+                })
+        case .needChangeExteriorColor(
+                let trimChangeModel,
+                let colorSelectModel),
+             .needChangeExteriorColorWithTrim(
+                let trimChangeModel,
+                let colorSelectModel),
+             .needChangeInteriorColor(
+                let trimChangeModel,
+                let colorSelectModel),
+             .needChangeInteriorColorWithTrim(
+                let trimChangeModel,
+                let colorSelectModel):
+            
+            showAlert(
+                type: .settingChange(trimChangeModel: trimChangeModel, colorSelectModel: colorSelectModel),
+                buttonType: .twoButton,
+                leftTitle: "아니요",
+                rightTitle: "변경하기",
+                rightButtonHandler: { [weak self] in
+                    guard let self else { return }
+                    self.changeColorEvent.send(colorSelectModel)
+                })
         }
     }
     

@@ -26,4 +26,7 @@ protocol ColorSelectUseCase {
     func fetchColorInquery()
     func validateInteriorColor(interiorColor: ColorSelectModel)
     func validateExteriorColor(exteriorColor: ColorSelectModel)
+    func fetchExteriorInteriorTrimColor(colorSelect: ColorSelectModel)
+    func fetchExteriorTrimColor(interiorColor: ColorSelectModel)
+    func fetchInteriorTrimColor(exteriorColor: ColorSelectModel)
 }

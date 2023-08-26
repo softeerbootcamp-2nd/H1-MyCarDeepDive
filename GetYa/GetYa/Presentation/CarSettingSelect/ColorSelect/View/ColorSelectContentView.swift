@@ -43,6 +43,10 @@ class ColorSelectContentView: UIScrollView {
             exteriorContentView.setTrimColor(
                 color: exteriorColor,
                 selectIndex: exteriorColorSelectIndex)
+            exteriorContentView.setupHeaderView(view: RotationView().set {
+                $0.setImageURLArray(
+                    imageURLArray: exteriorColor.availableColors[exteriorColorSelectIndex].carImageURLArray)
+            })
         }
     }
     private var interiorColor: TrimColor? {
@@ -157,9 +161,6 @@ class ColorSelectContentView: UIScrollView {
     ) {
         self.exteriorColorSelectIndex = selectIndex
         self.exteriorColor = exteriorColor
-        exteriorContentView.setupHeaderView(view: RotationView().set {
-            $0.setImageURLArray(imageURLArray: exteriorColor.availableColors[selectIndex].carImageURLArray)
-        })
         
         guard let colorAndIndex = interiorColor?.availableColors
             .enumerated()

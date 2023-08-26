@@ -13,6 +13,7 @@ class ColorSelectViewModel {
     struct Input {
         let viewDidLoadEvent: AnyPublisher<Void, Never>
         let touchUpColorCell: AnyPublisher<ColorSelectModel, Never>
+        let changeColorEvent: AnyPublisher<ColorSelectModel, Never>
     }
     
     // MARK: - Output
@@ -56,6 +57,13 @@ class ColorSelectViewModel {
             })
             .store(in: &cancellables)
         
+        input.changeColorEvent
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                useCase.fetchExteriorInteriorTrimColor(colorSelect: $0)
+            })
+            .store(in: &cancellables)
+        
         useCase.trimColorInquery
             .sink(receiveValue: {
                 output.trimColorInquery.send($0)
@@ -76,7 +84,6 @@ class ColorSelectViewModel {
         
         useCase.exteriorColorChangeResult
             .sink(receiveValue: {
-                
                 output.touchUpExterirorColorResult.send($0)
             })
             .store(in: &cancellables)

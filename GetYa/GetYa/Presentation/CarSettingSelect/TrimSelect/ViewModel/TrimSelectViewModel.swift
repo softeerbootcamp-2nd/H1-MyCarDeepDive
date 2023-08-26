@@ -18,6 +18,7 @@ class TrimSelectViewModel {
     // MARK: - Output
     struct Output {
         let trimInquery = PassthroughSubject<(TrimInquery?, [String]), Never>()
+        let trimSelectModel = PassthroughSubject<TrimSelectModel, Never>()
         let trimSelectResult = PassthroughSubject<String, Never>()
     }
     
@@ -71,6 +72,13 @@ class TrimSelectViewModel {
                 trimSubOptionNames.append(
                     DrivingSystem.allCases[trimSubOptionSelect.drivingSystemID - 1].rawValue)
                 output.trimInquery.send(($0, trimSubOptionNames))
+            })
+            .store(in: &cancellables)
+        
+        useCase.trimSelect
+            .sink(receiveValue: {
+                guard let trimSelectModel = $0 else { return }
+                output.trimSelectModel.send(trimSelectModel)
             })
             .store(in: &cancellables)
         

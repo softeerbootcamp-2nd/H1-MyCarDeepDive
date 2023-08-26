@@ -116,9 +116,104 @@ extension DefaultCarSettingUseCase {
         })
     }
     
-    func fetchExteriorColorInquery(interiorColor: ColorSelectModel) {
+    func fetchExteriorInteriorTrimColor(colorSelect: ColorSelectModel) {
         Task(operation: {
             do {
+                if colorSelect.colorType == .exterior {
+                    self.exteriorColorSelect.send(colorSelect)
+                    guard let trimInquery = trimInquery.value,
+                          let trimSelect = trimSelect.value else { return }
+                    let trim = trimInquery.carSpecs.filter { $0.trimID == colorSelect.trimID }[0]
+                    fetchTrimSelectLog(
+                        trimSelectModel: TrimSelectModel(
+                            trimID: trim.trimID,
+                            trimTag: trimSelect.trimTag,
+                            trimName: trim.trimName,
+                            trimPrice: trim.price))
+                    
+                    let interiorTrimColor = try await self.colorSelectRepository.fetchInteriorColor(
+                        with: colorSelect)
+                    let interiorIndex = interiorTrimColor.availableColors.firstIndex(where: {
+                        interiorColorSelect.value?.colorID == $0.colorID
+                    })
+                    
+                    let interiorColor = interiorTrimColor.availableColors[interiorIndex ?? 0]
+                    let interiorColorSelectModel = ColorSelectModel(
+                        colorType: .interior,
+                        colorID: interiorColor.colorID,
+                        colorName: interiorColor.name,
+                        colorPrice: interiorColor.price,
+                        trimID: interiorColor.trimID,
+                        oppositeColors: interiorColor.oppositeColors)
+                    self.interiorColorChangeModel.send(
+                        ColorChangeModel(
+                            trimColor: interiorTrimColor,
+                            colorSelectModel: colorSelect,
+                            selectIndex: interiorIndex ?? 0))
+                    self.interiorColorSelect.send(interiorColorSelectModel)
+                    let exteriorColor = try await colorSelectRepository.fetchExteriorColor(
+                        with: interiorColorSelectModel)
+                    let exteriorIndex = exteriorColor.availableColors.firstIndex(where: {
+                        colorSelect.colorID == $0.colorID
+                    })
+                    self.exteriorColorChangeModel.send(
+                        ColorChangeModel(
+                            trimColor: exteriorColor,
+                            colorSelectModel: interiorColorSelectModel,
+                            selectIndex: exteriorIndex ?? 0))
+                } else {
+                    self.interiorColorSelect.send(colorSelect)
+                    guard let trimInquery = trimInquery.value,
+                          let trimSelect = trimSelect.value else { return }
+                    let trim = trimInquery.carSpecs.filter { $0.trimID == colorSelect.trimID }[0]
+                    fetchTrimSelectLog(
+                        trimSelectModel: TrimSelectModel(
+                            trimID: trim.trimID,
+                            trimTag: trimSelect.trimTag,
+                            trimName: trim.trimName,
+                            trimPrice: trim.price))
+                    
+                    let exteriorTrimColor = try await self.colorSelectRepository.fetchExteriorColor(
+                        with: colorSelect)
+                    let exteriorIndex = exteriorTrimColor.availableColors.firstIndex(where: {
+                        exteriorColorSelect.value?.colorID == $0.colorID
+                    })
+                    
+                    let exteriorColor = exteriorTrimColor.availableColors[exteriorIndex ?? 0]
+                    let exteriorColorSelectModel = ColorSelectModel(
+                        colorType: .interior,
+                        colorID: exteriorColor.colorID,
+                        colorName: exteriorColor.name,
+                        colorPrice: exteriorColor.price,
+                        trimID: exteriorColor.trimID,
+                        oppositeColors: exteriorColor.oppositeColors)
+                    self.exteriorColorChangeModel.send(
+                        ColorChangeModel(
+                            trimColor: exteriorTrimColor,
+                            colorSelectModel: colorSelect,
+                            selectIndex: exteriorIndex ?? 0))
+                    self.exteriorColorSelect.send(exteriorColorSelectModel)
+                    let interiorColor = try await colorSelectRepository.fetchInteriorColor(
+                        with: exteriorColorSelectModel)
+                    let interiorIndex = interiorColor.availableColors.firstIndex(where: {
+                        colorSelect.colorID == $0.colorID
+                    })
+                    self.interiorColorChangeModel.send(
+                        ColorChangeModel(
+                            trimColor: interiorColor,
+                            colorSelectModel: exteriorColorSelectModel,
+                            selectIndex: interiorIndex ?? 0))
+                }
+            } catch {
+                print("색상 변경에 따른 데이터 통신이 잘못되었습니다.")
+            }
+        })
+    }
+    
+    func fetchExteriorTrimColor(interiorColor: ColorSelectModel) {
+        Task(operation: {
+            do {
+                self.interiorColorSelect.send(interiorColor)
                 let exteriorColor = try await colorSelectRepository
                     .fetchExteriorColor(with: interiorColor)
                 let index = exteriorColor.availableColors.firstIndex(where: {
@@ -136,9 +231,10 @@ extension DefaultCarSettingUseCase {
         })
     }
     
-    func fetchInteriorColorInquery(exteriorColor: ColorSelectModel) {
+    func fetchInteriorTrimColor(exteriorColor: ColorSelectModel) {
         Task(operation: {
             do {
+                self.exteriorColorSelect.send(exteriorColor)
                 let interiorColor = try await colorSelectRepository
                     .fetchInteriorColor(with: exteriorColor)
                 let index = interiorColor.availableColors.firstIndex(where: {
@@ -175,12 +271,10 @@ extension DefaultCarSettingUseCase {
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
-                                exteriorColorSelectModel: exteriorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value
-                            )))
+                                interiorColorSelectModel: interiorColor,
+                                optionSelectModelArray: optionSelectArray.value)))
                 } else {
-                    interiorColorSelect.send(interiorColor)
-                    fetchExteriorColorInquery(interiorColor: interiorColor)
+                    fetchExteriorTrimColor(interiorColor: interiorColor)
                 }
             } else {
                 if interiorColor.trimID != exteriorColorSelect.trimID {
@@ -198,8 +292,9 @@ extension DefaultCarSettingUseCase {
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 exteriorColorSelectModel: exteriorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value
-                            )))
+                                optionSelectModelArray: optionSelectArray.value),
+                            colorSelectModel: interiorColor
+                        ))
                 } else {
                     interiorColorChangeResult.send(
                         .needChangeExteriorColor(
@@ -212,8 +307,9 @@ extension DefaultCarSettingUseCase {
                                     colorPrice: interiorColor.colorPrice,
                                     trimID: interiorColor.trimID,
                                     oppositeColors: interiorColor.oppositeColors),
-                                optionSelectModelArray: optionSelectArray.value
-                            )))
+                                optionSelectModelArray: optionSelectArray.value),
+                            colorSelectModel: interiorColor
+                        ))
                 }
             }
         }
@@ -238,11 +334,10 @@ extension DefaultCarSettingUseCase {
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
-                                interiorColorSelectModel: interiorColorSelect,
+                                exteriorColorSelectModel: exteriorColor,
                                 optionSelectModelArray: optionSelectArray.value)))
                 } else {
-                    exteriorColorSelect.send(exteriorColor)
-                    fetchInteriorColorInquery(exteriorColor: exteriorColor)
+                    fetchInteriorTrimColor(exteriorColor: exteriorColor)
                 }
             } else {
                 if exteriorColor.trimID != interiorColorSelect.trimID {
@@ -260,8 +355,9 @@ extension DefaultCarSettingUseCase {
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 interiorColorSelectModel: interiorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value
-                            )))
+                                optionSelectModelArray: optionSelectArray.value),
+                            colorSelectModel: exteriorColor
+                        ))
                 } else {
                     exteriorColorChangeResult.send(
                         .needChangeInteriorColor(
@@ -274,8 +370,9 @@ extension DefaultCarSettingUseCase {
                                     trimID: exteriorColor.trimID,
                                     oppositeColors: exteriorColor.oppositeColors),
                                 interiorColorSelectModel: interiorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value
-                            )))
+                                optionSelectModelArray: optionSelectArray.value),
+                            colorSelectModel: exteriorColor
+                        ))
                 }
             }
         }

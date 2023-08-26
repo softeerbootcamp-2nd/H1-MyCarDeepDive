@@ -163,6 +163,14 @@ class TrimSelectViewController: UIViewController {
             })
             .store(in: &cancellables)
         
+        output.trimSelectModel
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                trimOptionContentCollectionView.setTrimSelectModel(trimSelectModel: $0)
+            })
+            .store(in: &cancellables)
+        
         output.trimSelectResult
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
