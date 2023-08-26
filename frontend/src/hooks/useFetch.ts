@@ -53,7 +53,7 @@ function useFetch<T>({ method, url, body }: useFetchParameter) {
 
       const res = await fetch(API + url, body && config);
 
-      if (!res.ok) return navigation('/error/server');
+      if (!res.ok) return rejectPromise(new Error());
 
       const data = await res.json();
       if (method === GET) setByCache(url, data);
