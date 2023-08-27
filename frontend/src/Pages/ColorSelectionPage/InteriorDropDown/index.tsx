@@ -14,13 +14,11 @@ import {
 
 import OtherInteriorItems from '../OtherInteriorItems';
 import { getInteriorColorType } from '@/api/color/getInteriorColors';
-import { getExteriorColorType } from '@/api/color/getExteriorColor';
 import ChangerModal from '../ChangerModal';
 import { getTrimType } from '@/api/trim/getTrim';
 
 interface Props {
   classifiedInteriorColor: getInteriorColorType | undefined;
-  classifiedExteriorColor: getExteriorColorType | undefined;
   getTrimInfo: getTrimType | undefined;
   setView: React.Dispatch<React.SetStateAction<string>>;
 }

@@ -136,18 +136,14 @@ function ColorSelectionPage() {
         <ExteriorItems
           initialColor={initialExteriorColor}
           classifiedExteriorColor={classifiedExteriorColor}
-          classifiedInteriorColor={classifiedInteriorColor}
           setExteriorCarImage={setExteriorCarImage}
-          setInteriorCarImage={setInteriorCarImage}
           setView={setView}
         />
 
         <ExteriorDropDown
           classifiedExteriorColor={classifiedExteriorColor}
-          classifiedInteriorColor={classifiedInteriorColor}
           getTrimInfo={getTrimInfo}
           setExteriorCarImage={setExteriorCarImage}
-          setInteriorCarImage={setInteriorCarImage}
           setView={setView}
         />
         <UnderLine margin='mb-6' />
@@ -159,13 +155,10 @@ function ColorSelectionPage() {
         <InteriorItems
           initialColor={initialInteriorColor}
           classifiedInteriorColor={classifiedInteriorColor}
-          classifiedExteriorColor={classifiedExteriorColor}
-          setExteriorCarImage={setExteriorCarImage}
           setInteriorCarImage={setInteriorCarImage}
           setView={setView}
         />
         <InteriorDropDown
-          classifiedExteriorColor={classifiedExteriorColor}
           classifiedInteriorColor={classifiedInteriorColor}
           getTrimInfo={getTrimInfo}
           setView={setView}

@@ -12,7 +12,6 @@ import {
   SET_TRIMID,
   SET_TRIMNAME,
 } from '@/context/CarProvider/type';
-import { getInteriorColorType } from '@/api/color/getInteriorColors';
 import { getTrimType } from '@/api/trim/getTrim';
 import ChangerModal from '../ChangerModal';
 import { getExteriorColorType } from '@/api/color/getExteriorColor';
@@ -20,10 +19,8 @@ import useLogFetch from '@/hooks/useLogFetch';
 
 interface Props {
   classifiedExteriorColor: getExteriorColorType | undefined;
-  classifiedInteriorColor: getInteriorColorType | undefined;
   getTrimInfo: getTrimType | undefined;
   setExteriorCarImage: React.Dispatch<React.SetStateAction<string[]>>;
-  setInteriorCarImage: React.Dispatch<React.SetStateAction<string | undefined>>;
   setView: React.Dispatch<React.SetStateAction<string>>;
 }
 

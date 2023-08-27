@@ -8,30 +8,22 @@ import Tag from '../ColorItems/Tag';
 import { useContext, useEffect } from 'react';
 import { CarContext } from '@/context/CarProvider';
 import { initialColorType } from '@/api/color/getAllColor';
-import {
-  SET_EXTERIORCOLOR,
-  SET_INTERIORCOLOR,
-} from '@/context/CarProvider/type';
+import { SET_EXTERIORCOLOR } from '@/context/CarProvider/type';
 import { getExteriorColorType } from '@/api/color/getExteriorColor';
 import ColorItems from '../ColorItems';
-import { getInteriorColorType } from '@/api/color/getInteriorColors';
 import useLogFetch from '@/hooks/useLogFetch';
 
 interface Props {
   initialColor: initialColorType | undefined;
-  classifiedInteriorColor: getInteriorColorType | undefined;
   classifiedExteriorColor: getExteriorColorType | undefined;
   setExteriorCarImage: React.Dispatch<React.SetStateAction<string[]>>;
-  setInteriorCarImage: React.Dispatch<React.SetStateAction<string | undefined>>;
   setView: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function ExteriorItems({
   initialColor,
   classifiedExteriorColor,
-  classifiedInteriorColor,
   setExteriorCarImage,
-  setInteriorCarImage,
   setView,
 }: Props) {
   const { color, carDispatch } = useContext(CarContext);
@@ -64,15 +56,8 @@ function ExteriorItems({
     const dataObject = currentTarget.getAttribute('data-object');
     if (!dataObject) return;
     const colorInfo = JSON.parse(dataObject);
-    const {
-      color_id,
-      name,
-      img_url,
-      price,
-      choose_rate,
-      opposite_color_ids,
-      car_img_urls,
-    } = colorInfo;
+    const { color_id, name, img_url, price, choose_rate, car_img_urls } =
+      colorInfo;
 
     useLogFetch({
       url: `/color/exterior-colors/activity-log/${color_id}`,
@@ -89,29 +74,6 @@ function ExteriorItems({
       },
     });
     setExteriorCarImage(car_img_urls);
-    if (opposite_color_ids.indexOf(color.interiorColor.id) !== -1) return;
-
-    if (!classifiedInteriorColor) return;
-    const {
-      color_id: id,
-      name: colorName,
-      img_url: imgUrl,
-      price: colorPrice,
-      choose_rate: chooseRate,
-      car_img_urls: carImgUrl,
-    } = classifiedInteriorColor?.data.available_colors[0];
-
-    carDispatch({
-      type: SET_INTERIORCOLOR,
-      interiorColor: {
-        id,
-        name: colorName,
-        imgUrl,
-        price: colorPrice,
-        chooseRate,
-      },
-    });
-    if (carImgUrl) setInteriorCarImage(carImgUrl[0]);
   };
 
   return (
