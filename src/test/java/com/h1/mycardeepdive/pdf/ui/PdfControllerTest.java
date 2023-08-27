@@ -44,7 +44,7 @@ class PdfControllerTest extends ControllerTestConfig {
         // given
         String pdfId = "64e231fe2d19c0147d010b21";
         String email = "mycardeepdiveto@test.com";
-        when(mailService.createMessage(email, pdfId)).thenReturn(true);
+        when(mailService.sendMessage(email, pdfId)).thenReturn(true);
 
         // then
         ResultActions resultActions =

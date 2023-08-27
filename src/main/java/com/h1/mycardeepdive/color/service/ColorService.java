@@ -20,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class ColorService {
 
+    public static final String EXTERIOR_COLOR = "exterior_color";
+    public static final String INTERIOR_COLOR = "interior_color";
     private final TrimExteriorColorRepository trimExteriorColorRepository;
     private final TrimInteriorColorRepository trimInteriorColorRepository;
 
@@ -128,12 +130,12 @@ public class ColorService {
     }
 
     public boolean userClickedExteriorColorLog(Long exteriorColorId) {
-        log.info(Markers.append("exterior_color", exteriorColorId), "exterior_color");
+        log.info(Markers.append(EXTERIOR_COLOR, exteriorColorId), EXTERIOR_COLOR);
         return true;
     }
 
     public boolean userClickedInteriorColorLog(Long interiorColorId) {
-        log.info(Markers.append("interior_color", interiorColorId), "interior_color");
+        log.info(Markers.append(INTERIOR_COLOR, interiorColorId), INTERIOR_COLOR);
         return true;
     }
 }

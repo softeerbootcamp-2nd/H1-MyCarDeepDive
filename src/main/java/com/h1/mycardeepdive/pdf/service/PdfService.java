@@ -36,6 +36,23 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 @RequiredArgsConstructor
 @Slf4j
 public class PdfService {
+    public static final String PDF_ID = "pdfId";
+    public static final String MODEL_NAME = "modelName";
+    public static final String BLANK = " ";
+    public static final String CAR_IMG_URL = "carImgUrl";
+    public static final String MODEL_PRICE = "modelPrice";
+    public static final String MAX_POWER = "maxPower";
+    public static final String MAX_TORQUE = "maxTorque";
+    public static final String EXTERIOR_COLOR_NAME = "exteriorColorName";
+    public static final String EXTERIOR_COLOR_URL = "exteriorColorUrl";
+    public static final String EXTERIOR_COLOR_PRICE = "exteriorColorPrice";
+    public static final String INTERIOR_COLOR_NAME = "interiorColorName";
+    public static final String INTERIOR_COLOR_URL = "interiorColorUrl";
+    public static final String INTERIOR_COLOR_PRICE = "interiorColorPrice";
+    public static final String OPTIONS = "options";
+    public static final String TOTAL_PRICE = "totalPrice";
+    public static final String TEMPLATE = "template";
+    public static final String IMAGE_001_PNG = "/image_001.png";
     private final SpringTemplateEngine templateEngine;
     private final B64ImgReplacedElementFactory b64ImgReplacedElementFactory;
     private final PdfRepository pdfRepository;
@@ -94,7 +111,7 @@ public class PdfService {
                                                 ErrorType.INVALID_REQUEST_ERROR));
         PdfInfo pdfInfo =
                 PdfInfo.builder()
-                        .car_image_url(exteriorColor.getExteriorImgUrl() + "/image_001.png")
+                        .car_image_url(exteriorColor.getExteriorImgUrl() + IMAGE_001_PNG)
                         .car_name(carSpec.getCar().getName())
                         .engine_name(carSpec.getEngine().getName())
                         .driving_system_name(carSpec.getDrivingSystem().getName())
@@ -113,7 +130,7 @@ public class PdfService {
                         .build();
         pdfInfo = pdfRepository.save(pdfInfo);
         byte[] pdfBytes = generatePdf(pdfInfo.getId());
-        MockMultipartFile pdfMultipartFile = new MockMultipartFile("pdfId", pdfBytes);
+        MockMultipartFile pdfMultipartFile = new MockMultipartFile(PDF_ID, pdfBytes);
         String fileUrl = s3Service.saveFile(pdfMultipartFile, pdfInfo.getId());
 
         pdfInfo.setPdf_url(fileUrl);
@@ -121,7 +138,7 @@ public class PdfService {
         return new PdfIdResponse(pdfInfo.getId());
     }
 
-    public PdfUrlResponse findPdf(String pdfId) throws Exception {
+    public PdfUrlResponse findPdf(String pdfId) {
         PdfInfo pdfInfo =
                 pdfRepository
                         .findById(pdfId)
@@ -159,26 +176,26 @@ public class PdfService {
     private String getHtmlContentFromThymeleafTemplate(PdfInfo pdfInfo) {
         Context thymeleafContext = new Context();
         thymeleafContext.setVariable(
-                "modelName",
+                MODEL_NAME,
                 pdfInfo.getCar_name()
-                        + " "
+                        + BLANK
                         + pdfInfo.getEngine_name()
-                        + " "
+                        + BLANK
                         + pdfInfo.getTrim_name()
-                        + " "
+                        + BLANK
                         + pdfInfo.getBody_name());
 
-        thymeleafContext.setVariable("carImgUrl", pdfInfo.getCar_image_url());
-        thymeleafContext.setVariable("modelPrice", pdfInfo.getBasic_price());
-        thymeleafContext.setVariable("maxPower", pdfInfo.getMax_power());
-        thymeleafContext.setVariable("maxTorque", pdfInfo.getMax_torque());
-        thymeleafContext.setVariable("exteriorColorName", pdfInfo.getExterior_color_name());
-        thymeleafContext.setVariable("exteriorColorUrl", pdfInfo.getExterior_color_img_url());
-        thymeleafContext.setVariable("exteriorColorPrice", pdfInfo.getExterior_color_price());
-        thymeleafContext.setVariable("interiorColorName", pdfInfo.getInterior_color_name());
-        thymeleafContext.setVariable("interiorColorUrl", pdfInfo.getInterior_color_img_url());
-        thymeleafContext.setVariable("interiorColorPrice", pdfInfo.getInterior_color_price());
-        thymeleafContext.setVariable("options", pdfInfo.getOptionList());
+        thymeleafContext.setVariable(CAR_IMG_URL, pdfInfo.getCar_image_url());
+        thymeleafContext.setVariable(MODEL_PRICE, pdfInfo.getBasic_price());
+        thymeleafContext.setVariable(MAX_POWER, pdfInfo.getMax_power());
+        thymeleafContext.setVariable(MAX_TORQUE, pdfInfo.getMax_torque());
+        thymeleafContext.setVariable(EXTERIOR_COLOR_NAME, pdfInfo.getExterior_color_name());
+        thymeleafContext.setVariable(EXTERIOR_COLOR_URL, pdfInfo.getExterior_color_img_url());
+        thymeleafContext.setVariable(EXTERIOR_COLOR_PRICE, pdfInfo.getExterior_color_price());
+        thymeleafContext.setVariable(INTERIOR_COLOR_NAME, pdfInfo.getInterior_color_name());
+        thymeleafContext.setVariable(INTERIOR_COLOR_URL, pdfInfo.getInterior_color_img_url());
+        thymeleafContext.setVariable(INTERIOR_COLOR_PRICE, pdfInfo.getInterior_color_price());
+        thymeleafContext.setVariable(OPTIONS, pdfInfo.getOptionList());
 
         long total_price =
                 pdfInfo.getBasic_price()
@@ -188,8 +205,8 @@ public class PdfService {
                                 .mapToLong(SimpleOption::getOption_price)
                                 .sum();
 
-        thymeleafContext.setVariable("totalPrice", total_price);
-        return templateEngine.process("template", thymeleafContext);
+        thymeleafContext.setVariable(TOTAL_PRICE, total_price);
+        return templateEngine.process(TEMPLATE, thymeleafContext);
     }
 
     private void addFonts(ITextRenderer renderer) throws IOException {

@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @RequiredArgsConstructor
 public class S3Service {
+    private static final String CLOUDFRONT_PDF_DOMAIN = "pdf.make-my-car.shop/";
+    public static final String PDF = ".pdf";
     private final AmazonS3 amazonS3;
 
     @Value("${cloud.aws.s3.bucket}")
@@ -21,7 +23,7 @@ public class S3Service {
         metadata.setContentLength(multipartFile.getSize());
         metadata.setContentType(multipartFile.getContentType());
 
-        amazonS3.putObject(bucket, fileName + ".pdf", multipartFile.getInputStream(), metadata);
-        return "pdf.make-my-car.shop/" + fileName + ".pdf";
+        amazonS3.putObject(bucket, fileName + PDF, multipartFile.getInputStream(), metadata);
+        return CLOUDFRONT_PDF_DOMAIN + fileName + PDF;
     }
 }
