@@ -54,6 +54,7 @@ extension DefaultCarSettingUseCase {
                 let recommendCarSpec = trimInquery.carSpecs[recommendID]
                 self.trimSelect.send(
                     TrimSelectModel(
+                        carSpecID: recommendCarSpec.carSpecID,
                         trimID: recommendCarSpec.trimID,
                         trimTag: [
                             Engine.allCases[trimSubOptionSelect.engineID - 1].rawValue,
@@ -135,6 +136,7 @@ extension DefaultCarSettingUseCase {
                     let trim = trimInquery.carSpecs.filter { $0.trimID == colorSelect.trimID }[0]
                     fetchTrimSelectLog(
                         trimSelectModel: TrimSelectModel(
+                            carSpecID: trim.carSpecID,
                             trimID: trim.trimID,
                             trimTag: trimSelect.trimTag,
                             trimName: trim.trimName,
@@ -177,6 +179,7 @@ extension DefaultCarSettingUseCase {
                     let trim = trimInquery.carSpecs.filter { $0.trimID == colorSelect.trimID }[0]
                     fetchTrimSelectLog(
                         trimSelectModel: TrimSelectModel(
+                            carSpecID: trim.carSpecID,
                             trimID: trim.trimID,
                             trimTag: trimSelect.trimTag,
                             trimName: trim.trimName,
@@ -276,6 +279,7 @@ extension DefaultCarSettingUseCase {
                             trimChangeModel: TrimChangeModel(
                                 trimSelectModel: trimSelect,
                                 otherTrimSelectModel: TrimSelectModel(
+                                    carSpecID: otherTrim.carSpecID,
                                     trimID: otherTrim.trimID,
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
@@ -296,6 +300,7 @@ extension DefaultCarSettingUseCase {
                             trimChangeModel: TrimChangeModel(
                                 trimSelectModel: trimSelect,
                                 otherTrimSelectModel: TrimSelectModel(
+                                    carSpecID: otherTrim.carSpecID,
                                     trimID: otherTrim.trimID,
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
@@ -339,6 +344,7 @@ extension DefaultCarSettingUseCase {
                             trimChangeModel: TrimChangeModel(
                                 trimSelectModel: trimSelect,
                                 otherTrimSelectModel: TrimSelectModel(
+                                    carSpecID: otherTrim.carSpecID,
                                     trimID: otherTrim.trimID,
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
@@ -359,6 +365,7 @@ extension DefaultCarSettingUseCase {
                             trimChangeModel: TrimChangeModel(
                                 trimSelectModel: trimSelect,
                                 otherTrimSelectModel: TrimSelectModel(
+                                    carSpecID: otherTrim.carSpecID,
                                     trimID: otherTrim.trimID,
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
