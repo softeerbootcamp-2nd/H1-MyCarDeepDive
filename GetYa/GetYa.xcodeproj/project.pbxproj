@@ -109,7 +109,7 @@
 		641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */; };
 		641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */; };
 		6457CFAA2A938F8E00B3AAAF /* TrimOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA92A938F8E00B3AAAF /* TrimOption.swift */; };
-		6457CFAC2A93941D00B3AAAF /* AdditionalOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */; };
+		6457CFAC2A93941D00B3AAAF /* AdditionalOptionInquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAB2A93941D00B3AAAF /* AdditionalOptionInquery.swift */; };
 		6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */; };
 		6457CFB02A93944800B3AAAF /* AdditionalOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAF2A93944800B3AAAF /* AdditionalOption.swift */; };
 		6457CFB22A9394DB00B3AAAF /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFB12A9394DB00B3AAAF /* Tag.swift */; };
@@ -190,6 +190,10 @@
 		6457D1BB2A9B3ABA00B3AAAF /* OptionSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1BA2A9B3ABA00B3AAAF /* OptionSelectRepository.swift */; };
 		6457D1BD2A9B3AD800B3AAAF /* DefaultOptionSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1BC2A9B3AD800B3AAAF /* DefaultOptionSelectRepository.swift */; };
 		6457D1BF2A9B3AFB00B3AAAF /* OptionSelectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1BE2A9B3AFB00B3AAAF /* OptionSelectEndpoint.swift */; };
+		6457D1C12A9B446400B3AAAF /* AdditionalOptionInqueryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1C02A9B446400B3AAAF /* AdditionalOptionInqueryDTO.swift */; };
+		6457D1C32A9B448200B3AAAF /* AdditionalOptionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1C22A9B448200B3AAAF /* AdditionalOptionDTO.swift */; };
+		6457D1C52A9B448E00B3AAAF /* AdditionalOptionPackageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1C42A9B448E00B3AAAF /* AdditionalOptionPackageDTO.swift */; };
+		6457D1C72A9B459700B3AAAF /* TagDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1C62A9B459700B3AAAF /* TagDTO.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
 		6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
@@ -413,7 +417,7 @@
 		6457CF9F2A92B76600B3AAAF /* OptionSelectImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectImageCollectionView.swift; sourceTree = "<group>"; };
 		6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionSelect.swift; sourceTree = "<group>"; };
 		6457CFA92A938F8E00B3AAAF /* TrimOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimOption.swift; sourceTree = "<group>"; };
-		6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionList.swift; sourceTree = "<group>"; };
+		6457CFAB2A93941D00B3AAAF /* AdditionalOptionInquery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionInquery.swift; sourceTree = "<group>"; };
 		6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionPackage.swift; sourceTree = "<group>"; };
 		6457CFAF2A93944800B3AAAF /* AdditionalOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOption.swift; sourceTree = "<group>"; };
 		6457CFB12A9394DB00B3AAAF /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -496,6 +500,10 @@
 		6457D1BA2A9B3ABA00B3AAAF /* OptionSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectRepository.swift; sourceTree = "<group>"; };
 		6457D1BC2A9B3AD800B3AAAF /* DefaultOptionSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultOptionSelectRepository.swift; sourceTree = "<group>"; };
 		6457D1BE2A9B3AFB00B3AAAF /* OptionSelectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectEndpoint.swift; sourceTree = "<group>"; };
+		6457D1C02A9B446400B3AAAF /* AdditionalOptionInqueryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionInqueryDTO.swift; sourceTree = "<group>"; };
+		6457D1C22A9B448200B3AAAF /* AdditionalOptionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionDTO.swift; sourceTree = "<group>"; };
+		6457D1C42A9B448E00B3AAAF /* AdditionalOptionPackageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionPackageDTO.swift; sourceTree = "<group>"; };
+		6457D1C62A9B459700B3AAAF /* TagDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDTO.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -1436,8 +1444,8 @@
 		64ADA47F2A7788510003E2C1 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				6457CFAB2A93941D00B3AAAF /* AdditionalOptionInquery.swift */,
 				6457CFAF2A93944800B3AAAF /* AdditionalOption.swift */,
-				6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */,
 				6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */,
 				6457CFB32A93959B00B3AAAF /* BasicOption.swift */,
 				6457CFB52A9395D100B3AAAF /* OptionDetail.swift */,
@@ -1502,6 +1510,10 @@
 				15D2ABC52A9357C100F7DE8E /* TrimInqueryDTO.swift */,
 				6457D1472A94EA6B00B3AAAF /* TrimCarSpecDTO.swift */,
 				6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */,
+				6457D1C02A9B446400B3AAAF /* AdditionalOptionInqueryDTO.swift */,
+				6457D1C22A9B448200B3AAAF /* AdditionalOptionDTO.swift */,
+				6457D1C42A9B448E00B3AAAF /* AdditionalOptionPackageDTO.swift */,
+				6457D1C62A9B459700B3AAAF /* TagDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1816,6 +1828,7 @@
 				155B72AA2A8C8FEB0091A7F4 /* OptionSelectViewController.swift in Sources */,
 				6457D14E2A95016D00B3AAAF /* TrimCarSpec.swift in Sources */,
 				15D2ABD32A9381C200F7DE8E /* MemoryCache.swift in Sources */,
+				6457D1C32A9B448200B3AAAF /* AdditionalOptionDTO.swift in Sources */,
 				6484A79D2A90F43800434136 /* OptionSelectSegmentedControl.swift in Sources */,
 				6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */,
 				6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */,
@@ -1841,6 +1854,7 @@
 				6457CFC02A93A76D00B3AAAF /* TagCategoryType.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
 				6457D1642A952E4F00B3AAAF /* TrimID.swift in Sources */,
+				6457D1C12A9B446400B3AAAF /* AdditionalOptionInqueryDTO.swift in Sources */,
 				64E26A622A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift in Sources */,
 				15D2ABBC2A9350FD00F7DE8E /* Responsable.swift in Sources */,
 				6457D1582A951A2500B3AAAF /* TrimColorInqueryDTO.swift in Sources */,
@@ -1860,6 +1874,7 @@
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
 				6457D1B62A97E45A00B3AAAF /* TrimChangeModel.swift in Sources */,
 				6457D1112A945C6E00B3AAAF /* BasicOptionViewController.swift in Sources */,
+				6457D1C52A9B448E00B3AAAF /* AdditionalOptionPackageDTO.swift in Sources */,
 				6457D1A82A96875300B3AAAF /* PdfIdDTO.swift in Sources */,
 				15A738822A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift in Sources */,
 				15A738842A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift in Sources */,
@@ -2000,8 +2015,9 @@
 				15E1D2202A8FF4970048DAC7 /* DefaultQuotationPreviewTableViewAdapter.swift in Sources */,
 				6457CFBC2A9397D600B3AAAF /* TagOption.swift in Sources */,
 				155B72AC2A8C9A460091A7F4 /* QuestionContentView.swift in Sources */,
-				6457CFAC2A93941D00B3AAAF /* AdditionalOptionList.swift in Sources */,
+				6457CFAC2A93941D00B3AAAF /* AdditionalOptionInquery.swift in Sources */,
 				155B72A32A8C88570091A7F4 /* BottomSheetView.swift in Sources */,
+				6457D1C72A9B459700B3AAAF /* TagDTO.swift in Sources */,
 				155B72AB2A8C9A2E0091A7F4 /* UIColor+.swift in Sources */,
 				6457D1AC2A96963700B3AAAF /* PdfUrlDTO.swift in Sources */,
 				15040FC22A8D3CAB00DDC411 /* DetailQuestionCarPriceSelectView.swift in Sources */,

@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct AdditionalOptionPackage: Hashable {
+struct AdditionalOptionPackage: Codable, Hashable {
     let optionID: Int
     let optionImageURL: String
-    let selectRate: CGFloat
+    let selectRate: Int
     let optionName: String
     let optionSummary: String
     let tagList: [Tag]

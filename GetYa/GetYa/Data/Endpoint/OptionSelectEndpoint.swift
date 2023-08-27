@@ -11,4 +11,10 @@ struct OptionSelectEndpoint {
     private init() {}
     static let shared = OptionSelectEndpoint()
     
+    func fetchAdditionalOption(with carSpecID: Int) -> Endpoint<AdditionalOptionInqueryDTO> {
+        return Endpoint(
+            method: .get,
+            responseType: .carSpecAdditionalOption(carSpecId: carSpecID)
+        )
+    }
 }

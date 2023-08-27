@@ -25,6 +25,8 @@ class OptionSelectViewController: UIViewController {
     
     // MARK: - Properties
     private let viewModel: OptionSelectViewModel
+    private var cancellables = Set<AnyCancellable>()
+    private let viewWillAppearEvent = PassthroughSubject<Void, Never>()
     private var viewControllers: [UIViewController] = []
     private var currentSegmentedIndex: Int = 0 {
         didSet {
@@ -52,8 +54,15 @@ class OptionSelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bind()
         setupViews()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewWillAppearEvent.send()
     }
     
     override func viewSafeAreaInsetsDidChange() {
@@ -62,6 +71,14 @@ class OptionSelectViewController: UIViewController {
     }
     
     // MARK: - Private Functions
+    private func bind() {
+        let input = OptionSelectViewModel.Input(
+            viewWillAppearEvent: viewWillAppearEvent.eraseToAnyPublisher()
+        )
+        
+        let output = viewModel.transform(input: input)
+    }
+    
     private func setupViews() {
         view.addSubviews([
             segmentedControl,

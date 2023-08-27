@@ -15,4 +15,10 @@ class DefaultOptionSelectRepository: OptionSelectRepository {
     init(provider: EndpointProvider) {
         self.provider = provider
     }
+    
+    func fetchAdditionalOption(with carSpecID: Int) async throws -> AdditionalOptionInquery {
+        let endpoint = Endpoint.shared.fetchAdditionalOption(with: carSpecID)
+        let commonDTO = try await provider.request(endpoint: endpoint)
+        return commonDTO.data.toDomain()
+    }
 }

@@ -394,3 +394,20 @@ extension DefaultCarSettingUseCase {
         }
     }
 }
+
+// MARK: - OptionSelectUseCase
+extension DefaultCarSettingUseCase {
+    func fetchAdditionalOptions() {
+        Task(operation: {
+            do {
+                guard let trimSelect = trimSelect.value else { return }
+                let additionalOptionInquery = try await self.optionSelectRepository
+                    .fetchAdditionalOption(with: trimSelect.carSpecID)
+                
+                print(additionalOptionInquery)
+            } catch {
+                print("Car Spec ID에 해당하는 추가 옵션 리스트를 전송받지 못하였습니다.")
+            }
+        })
+    }
+}
