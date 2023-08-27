@@ -964,18 +964,11 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		6457CFCB2A93CEE500B3AAAF /* CarSettingSelect */ = {
-			isa = PBXGroup;
-			children = (
-				6457CFCC2A93CF0700B3AAAF /* View */,
-				6457CFCD2A93CF0B00B3AAAF /* ViewController */,
-			);
-			path = CarSettingSelect;
-			sourceTree = "<group>";
-		};
 		6457CFCC2A93CF0700B3AAAF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				64E26A612A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift */,
+				64E26A402A8A3E2800F6BC3A /* SettingProgressView.swift */,
 				64E26A3B2A8A3E2800F6BC3A /* BottomSheetLargeContentView.swift */,
 				64E26A332A8A3E2800F6BC3A /* BottomSheetSmallContentView.swift */,
 				64E26A372A8A3E2800F6BC3A /* BottomSheetView.swift */,
@@ -1123,6 +1116,15 @@
 				6484A7732A8E4CD100434136 /* LoadingViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6457D1B82A9B2D7400B3AAAF /* SettingSelect */ = {
+			isa = PBXGroup;
+			children = (
+				6457CFCC2A93CF0700B3AAAF /* View */,
+				6457CFCD2A93CF0B00B3AAAF /* ViewController */,
+			);
+			path = SettingSelect;
 			sourceTree = "<group>";
 		};
 		647FBF132A7CB5C900507AE9 /* View */ = {
@@ -1557,8 +1559,7 @@
 		64E26A0E2A895B9C00F6BC3A /* CarSettingSelect */ = {
 			isa = PBXGroup;
 			children = (
-				64E26A5F2A8B3DED00F6BC3A /* Common */,
-				6457CFCB2A93CEE500B3AAAF /* CarSettingSelect */,
+				6457D1B82A9B2D7400B3AAAF /* SettingSelect */,
 				64E26A2D2A8A3E2800F6BC3A /* TrimSelect */,
 				64E26A0C2A895B7E00F6BC3A /* ColorSelect */,
 				64E26A0D2A895B8600F6BC3A /* OptionSelect */,
@@ -1619,23 +1620,6 @@
 				64E26A6B2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift */,
 				64E26A6D2A8BF41400F6BC3A /* ColorSelectMoreColorCell.swift */,
 				64E26A692A8BE5E200F6BC3A /* ColorSelectContentView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		64E26A5F2A8B3DED00F6BC3A /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				64E26A602A8B3DF100F6BC3A /* View */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		64E26A602A8B3DF100F6BC3A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				64E26A612A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift */,
-				64E26A402A8A3E2800F6BC3A /* SettingProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
