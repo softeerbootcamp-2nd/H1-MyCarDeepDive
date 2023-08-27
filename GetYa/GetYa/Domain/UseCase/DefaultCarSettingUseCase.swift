@@ -66,8 +66,8 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
                 guard let trimSelect = $0 else { return }
                 self.smallTitle.send(trimSelect.trimName)
                 self.totalPrice.send(trimSelect.trimPrice)
-                self.modelTitle.send("\(trimSelect.trimName) \(trimSelect.trimTag.joined(separator: " "))")
                 self.modelPrice.send(trimSelect.trimPrice)
+                self.modelTitle.send("\(trimSelect.trimName) \(trimSelect.trimTag.joined(separator: " "))")
             })
             .store(in: &cancellables)
         
@@ -190,13 +190,12 @@ extension DefaultCarSettingUseCase {
                 let trimColorInquery = try await colorSelectRepository.fetchTrimColorInquery(with: trimSelect.trimID)
                 self.trimColorInquery.send(trimColorInquery)
                 
-                if let exteriorColorSelect = exteriorColorSelect.value,
-                   let interiorColorSelect = interiorColorSelect.value {
-                    self.exteriorColorSelect.send(exteriorColorSelect)
-                    self.interiorColorSelect.send(interiorColorSelect)
+                if trimColorInquery.exteriorColor.availableColors.contains(where: {
+                    $0.colorID == exteriorColorSelect.value?.colorID
+                }) {
+                    self.exteriorColorSelect.send(exteriorColorSelect.value)
                 } else {
                     let availableExteriorColor = trimColorInquery.exteriorColor.availableColors[0]
-                    let availableInteriorColor = trimColorInquery.interiorColor.availableColors[0]
                     self.exteriorColorSelect.send(
                         ColorSelectModel(
                             colorType: .exterior,
@@ -205,6 +204,14 @@ extension DefaultCarSettingUseCase {
                             colorPrice: availableExteriorColor.price,
                             trimID: availableExteriorColor.trimID,
                             oppositeColors: availableExteriorColor.oppositeColors))
+                }
+                
+                if trimColorInquery.interiorColor.availableColors.contains(where: {
+                    $0.colorID == interiorColorSelect.value?.colorID
+                }) {
+                    self.interiorColorSelect.send(interiorColorSelect.value)
+                } else {
+                    let availableInteriorColor = trimColorInquery.interiorColor.availableColors[0]
                     self.interiorColorSelect.send(
                         ColorSelectModel(
                             colorType: .interior,

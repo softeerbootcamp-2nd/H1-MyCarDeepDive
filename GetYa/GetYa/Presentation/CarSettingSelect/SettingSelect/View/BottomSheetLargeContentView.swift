@@ -194,10 +194,8 @@ class BottomSheetLargeContentView: UIView {
     
     // MARK: - Functions
     func setModelInfo(info: (String, Int)) {
-        if let view = optionSummaryStackView.arrangedSubviews
-            .map({ $0 as? OptionSummaryContentView })
-            .filter({ $0?.titleLabel.text == "모델" }).first {
-            view?.removeFromSuperview()
+        optionSummaryStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
         }
         
         let newSummaryView = OptionSummaryContentView(titleText: "모델")

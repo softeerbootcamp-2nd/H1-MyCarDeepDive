@@ -69,7 +69,7 @@ class CarSettingSelectViewModel {
             .store(in: &cancellables)
         
         useCase.modelTitle
-            .zip(useCase.modelPrice)
+            .combineLatest(useCase.modelPrice)
             .sink(receiveValue: {
                 output.modelInfo.send($0)
             })
@@ -83,7 +83,7 @@ class CarSettingSelectViewModel {
             .store(in: &cancellables)
         
         useCase.optionTitles
-            .zip(useCase.optionPrices)
+            .combineLatest(useCase.optionPrices)
             .sink(receiveValue: {
                 output.optionInfo.send($0)
             })
