@@ -13,11 +13,11 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
     var totalPrice = CurrentValueSubject<Int, Never>(0)
     var smallTitle = PassthroughSubject<String, Never>()
     var modelTitle = PassthroughSubject<String, Never>()
-    var modelPrice = PassthroughSubject<Int, Never>()
+    var modelPrice = CurrentValueSubject<Int, Never>(0)
     var exteriorColorTitle = PassthroughSubject<String, Never>()
-    var exteriorColorPrice = PassthroughSubject<Int, Never>()
+    var exteriorColorPrice = CurrentValueSubject<Int, Never>(0)
     var interiorColorTitle = PassthroughSubject<String, Never>()
-    var interiorColorPrice = PassthroughSubject<Int, Never>()
+    var interiorColorPrice = CurrentValueSubject<Int, Never>(0)
     var optionTitles = CurrentValueSubject<[String], Never>([])
     var optionPrices = CurrentValueSubject<[Int], Never>([])
     
@@ -65,7 +65,7 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
             .sink(receiveValue: {
                 guard let trimSelect = $0 else { return }
                 self.smallTitle.send(trimSelect.trimName)
-                self.totalPrice.send(self.totalPrice.value + trimSelect.trimPrice)
+                self.totalPrice.send(trimSelect.trimPrice)
                 self.modelTitle.send("\(trimSelect.trimName) \(trimSelect.trimTag.joined(separator: " "))")
                 self.modelPrice.send(trimSelect.trimPrice)
             })
@@ -74,7 +74,11 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
         self.exteriorColorSelect
             .sink(receiveValue: {
                 guard let exteriorColorSelect = $0 else { return }
-                self.totalPrice.send(self.totalPrice.value + exteriorColorSelect.colorPrice)
+                self.totalPrice.send(
+                    self.modelPrice.value +
+                    self.optionPrices.value.reduce(0, +) +
+                    exteriorColorSelect.colorPrice +
+                    self.interiorColorPrice.value)
                 self.exteriorColorTitle.send(exteriorColorSelect.colorName)
                 self.exteriorColorPrice.send(exteriorColorSelect.colorPrice)
             })
@@ -83,7 +87,11 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
         self.interiorColorSelect
             .sink(receiveValue: {
                 guard let interiorColorSelect = $0 else { return }
-                self.totalPrice.send(self.totalPrice.value + ($0?.colorPrice ?? 0))
+                self.totalPrice.send(
+                    self.modelPrice.value +
+                    self.optionPrices.value.reduce(0, +) +
+                    self.exteriorColorPrice.value +
+                    interiorColorSelect.colorPrice)
                 self.interiorColorTitle.send(interiorColorSelect.colorName)
                 self.interiorColorPrice.send(interiorColorSelect.colorPrice)
             })
@@ -91,8 +99,6 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
         
         self.additionalOptionSelectArray
             .sink(receiveValue: {
-//                self.totalPrice.send(self.totalPrice.value + $0.map { $0.price }.reduce(0, +))
-                
                 let packageNames = self.additionalPackageOptionSelectArray.value.map { $0.optionName }
                 let packagePrices = self.additionalPackageOptionSelectArray.value.map { $0.price }
                 self.optionTitles.send($0.map { $0.optionName } + packageNames)
@@ -102,8 +108,6 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
         
         self.additionalPackageOptionSelectArray
             .sink(receiveValue: {
-//                self.totalPrice.send(self.totalPrice.value + $0.map { $0.price }.reduce(0, +))
-                
                 let optionNames = self.additionalOptionSelectArray.value.map { $0.optionName }
                 let optionPrices = self.additionalOptionSelectArray.value.map { $0.price }
                 self.optionTitles.send($0.map { $0.optionName } + optionNames)

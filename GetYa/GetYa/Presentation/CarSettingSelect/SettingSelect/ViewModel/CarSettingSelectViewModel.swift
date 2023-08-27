@@ -67,7 +67,7 @@ class CarSettingSelectViewModel {
             .store(in: &cancellables)
         
         useCase.exteriorColorTitle
-            .zip(useCase.exteriorColorPrice, useCase.interiorColorTitle, useCase.interiorColorPrice)
+            .combineLatest(useCase.exteriorColorPrice, useCase.interiorColorTitle, useCase.interiorColorPrice)
             .sink(receiveValue: {
                 output.colorInfo.send($0)
             })

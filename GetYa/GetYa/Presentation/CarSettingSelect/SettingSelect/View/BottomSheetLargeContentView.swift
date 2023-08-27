@@ -189,12 +189,24 @@ class BottomSheetLargeContentView: UIView {
     
     // MARK: - Functions
     func setModelInfo(info: (String, Int)) {
+        if let view = optionSummaryStackView.arrangedSubviews
+            .map({ $0 as? OptionSummaryContentView })
+            .filter({ $0?.titleLabel.text == "모델" }).first {
+            view?.removeFromSuperview()
+        }
+        
         let newSummaryView = OptionSummaryContentView(titleText: "모델")
         newSummaryView.setOptionDatum(text: info.0, price: info.1)
         optionSummaryStackView.addArrangedSubview(newSummaryView)
     }
     
     func setColorInfo(info: (String, Int, String, Int)) {
+        if let view = optionSummaryStackView.arrangedSubviews
+            .map({ $0 as? OptionSummaryContentView })
+            .filter({ $0?.titleLabel.text == "색상" }).first {
+            view?.removeFromSuperview()
+        }
+        
         let newSummaryView = OptionSummaryContentView(titleText: "색상")
         newSummaryView.setOptionDatum(text: "외장 - " + info.0, price: info.1)
         newSummaryView.setOptionDatum(text: "내장 - " + info.2, price: info.3)
