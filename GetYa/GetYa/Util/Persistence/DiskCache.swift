@@ -36,7 +36,7 @@ final class DiskCache {
     
     func load(_ key: String) -> Data? {
         guard let fileURL = URL(string: key),
-              let loadURL = folderURL?.appendingPathComponent(fileURL.lastPathComponent),
+              let loadURL = folderURL?.appendingPathComponent(fileURL.pathComponents.dropFirst().joined()),
               let data = FileManager.default.contents(atPath: loadURL.path) else {
             return nil
         }
@@ -45,7 +45,7 @@ final class DiskCache {
     
     func write(_ key: String, data: Data?) {
         guard let fileURL = URL(string: key),
-              let writeURL = folderURL?.appendingPathComponent(fileURL.lastPathComponent),
+              let writeURL = folderURL?.appendingPathComponent(fileURL.pathComponents.dropFirst().joined()),
               let data else {
             return
         }
@@ -61,7 +61,7 @@ final class DiskCache {
     func isExist(_ key: String) -> Bool {
         guard let fileURL = URL(string: key),
               fileURL.lastPathComponent != "",
-              let findURL = folderURL?.appendingPathComponent(fileURL.lastPathComponent) else {
+              let findURL = folderURL?.appendingPathComponent(fileURL.pathComponents.dropFirst().joined()) else {
             return false
         }
         return FileManager.default.fileExists(atPath: findURL.path)

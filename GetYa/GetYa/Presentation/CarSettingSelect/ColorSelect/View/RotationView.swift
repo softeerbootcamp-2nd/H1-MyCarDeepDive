@@ -43,7 +43,7 @@ class RotationView: SettingSelectTitleBackgroundVIew {
     }
     private lazy var markImageView: UIImageView = UIImageView().set {
         $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "RotationMark")
+        $0.image = UIImage(named: "rotation_mark")
         $0.translatesAutoresizingMaskIntoConstraints = false
         markView.addSubview($0)
     }
@@ -52,6 +52,7 @@ class RotationView: SettingSelectTitleBackgroundVIew {
     private var imageNumber = 1
     private var previousImageNumber = 1
     private var type: ColorType = .white
+    private var imageURLArray: [String] = []
     
     // MARK: - Lifecycles
     init(type: ColorType) {
@@ -149,6 +150,10 @@ class RotationView: SettingSelectTitleBackgroundVIew {
     }
     
     // MARK: - Functions
+    func setImageURLArray(imageURLArray: [String]) {
+        self.imageURLArray = imageURLArray
+        self.imageView.setImage(urlString: imageURLArray[0])
+    }
     
     // MARK: - Objc Functions
     @objc private func panAction(sender: UIPanGestureRecognizer) {
@@ -169,7 +174,7 @@ class RotationView: SettingSelectTitleBackgroundVIew {
             if imageNumber <= 0 {
                 imageNumber += 60
             }
-            imageView.image = UIImage(named: "\(type.rawValue)_\(imageNumber)")
+            imageView.setImage(urlString: imageURLArray[imageNumber - 1])
         case .ended:
             previousImageNumber = imageNumber
             UIView.animate(withDuration: 0.3, animations: {

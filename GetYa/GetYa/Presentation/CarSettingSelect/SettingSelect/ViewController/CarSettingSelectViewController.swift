@@ -57,15 +57,20 @@ class CarSettingSelectViewController: UIViewController {
         ])
         pageViewController.didMove(toParent: self)
         
-        let useCase = DefaultCarSettingUseCase(repository: DefaultTrimSelectRepository(provider: SessionProvider()))
+        let trimSelectRepository = DefaultTrimSelectRepository(provider: SessionProvider())
+        let colorSelectRepository = DefaultColorSelectRepository(provider: SessionProvider())
+        let useCase = DefaultCarSettingUseCase(
+            trimSelectRepository: trimSelectRepository,
+            colorSelectRepository: colorSelectRepository)
+        let colorSelectViewController = ColorSelectViewController(
+            viewModel: ColorSelectViewModel(useCase: useCase))
         let trimSelectViewController = TrimSelectViewController(
             viewModel: TrimSelectViewModel(
                 trimSubOptionSelect: trimSubOptionSelect,
                 useCase: useCase))
-        
         viewControllers = [
             trimSelectViewController,
-            ColorSelectViewController(),
+            colorSelectViewController,
             OptionSelectViewController()]
     }
     
@@ -183,6 +188,18 @@ extension CarSettingSelectViewController: BottomSheetDelegate {
                 [viewControllers[currentPageIndex]],
                 direction: .forward,
                 animated: true)
+        } else {
+            let viewController = LoadingViewController(
+                viewModel: LoadingViewModel(
+                    contrationQuotation: ContractionQuotation(
+                        carSpecID: 1,
+                        trimID: 1,
+                        exteriorColorID: 1,
+                        interiorColorID: 1,
+                        additionalOptionIDList: [1, 3, 4]),
+                    useCase: DefaultLoadingUseCase(
+                        repository: DefaultLoadingRepository(provider: SessionProvider()))))
+            navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }

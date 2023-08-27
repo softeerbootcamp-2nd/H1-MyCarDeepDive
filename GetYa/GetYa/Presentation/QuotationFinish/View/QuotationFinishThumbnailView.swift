@@ -63,7 +63,7 @@ class QuotationFinishThumbnailView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
-        $0.image = UIImage(named: "quotationfinishcar")
+        $0.image = UIImage(named: "quotationfinishCar")
     }
     private let logoImageView: UIImageView = UIImageView(
         image: UIImage(named: "Black_Logo_Title")

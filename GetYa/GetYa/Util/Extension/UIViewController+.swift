@@ -79,8 +79,19 @@ extension UIViewController {
                             userInfo: ["email": text])
                     })
                 })
-        default:
-            break
+        case .settingChange(let trimChangeModel, let colorSelectModel):
+            if let _ = trimChangeModel.trimSelectModel,
+               let otherTrimSelectModel = trimChangeModel.otherTrimSelectModel {
+                alertViewController.setTitle(text: "\(otherTrimSelectModel.trimName) 트림으로 변경하시겠어요?")
+            } else if let colorSelectModel {
+                if colorSelectModel.colorType == .exterior {
+                    alertViewController.setTitle(text: "\(colorSelectModel.colorName) 색상으로 변경하시겠어요?")
+                } else {
+                    alertViewController.setTitle(text: "\(colorSelectModel.colorName) 색상으로 변경하시겠어요?")
+                }
+            }
+            alertViewController.setDescription(text: "지금 변경하시면 선택한 색상과 옵션이 해제돼요.")
+            alertViewController.setTrimChangeModel(trimChangeModel: trimChangeModel)
         }
         
         present(alertViewController, animated: false)
