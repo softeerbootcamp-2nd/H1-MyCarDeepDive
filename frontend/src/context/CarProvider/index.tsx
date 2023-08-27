@@ -20,6 +20,7 @@ import {
   ADD_OPTION_DATA_LIST,
   ADD_OPTION_LIST,
   SET_DEFAULT,
+  SET_OPTION_DEFAULT,
 } from './type';
 
 const initialState: InitialStateType = {
@@ -230,6 +231,13 @@ const reducer = (state: InitialStateType, action: ActionType) => {
             chooseRate: 50,
           },
         },
+        optionIdList: [],
+        optionData: [],
+      };
+
+    case SET_OPTION_DEFAULT:
+      return {
+        ...state,
         optionIdList: [],
         optionData: [],
       };
