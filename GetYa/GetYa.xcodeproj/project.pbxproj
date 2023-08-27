@@ -108,6 +108,7 @@
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
 		641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */; };
 		641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */; };
+		6457CFA82A938F8700B3AAAF /* TrimSubOptionSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */; };
 		6457CFAA2A938F8E00B3AAAF /* TrimOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA92A938F8E00B3AAAF /* TrimOption.swift */; };
 		6457CFAC2A93941D00B3AAAF /* AdditionalOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */; };
 		6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */; };
