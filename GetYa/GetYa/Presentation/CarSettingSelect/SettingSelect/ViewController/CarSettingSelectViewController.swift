@@ -59,19 +59,23 @@ class CarSettingSelectViewController: UIViewController {
         
         let trimSelectRepository = DefaultTrimSelectRepository(provider: SessionProvider())
         let colorSelectRepository = DefaultColorSelectRepository(provider: SessionProvider())
+        let optionSelectRepository = DefaultOptionSelectRepository(provider: SessionProvider())
         let useCase = DefaultCarSettingUseCase(
             trimSelectRepository: trimSelectRepository,
-            colorSelectRepository: colorSelectRepository)
+            colorSelectRepository: colorSelectRepository,
+            optionSelectRepository: optionSelectRepository)
         let colorSelectViewController = ColorSelectViewController(
             viewModel: ColorSelectViewModel(useCase: useCase))
         let trimSelectViewController = TrimSelectViewController(
             viewModel: TrimSelectViewModel(
                 trimSubOptionSelect: trimSubOptionSelect,
                 useCase: useCase))
+        let optionSelectViewController = OptionSelectViewController(
+            viewModel: OptionSelectViewModel(useCase: useCase))
         viewControllers = [
             trimSelectViewController,
             colorSelectViewController,
-            OptionSelectViewController()]
+            optionSelectViewController]
     }
     
     private func configureUI() {

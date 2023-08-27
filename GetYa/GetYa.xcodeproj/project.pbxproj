@@ -1471,8 +1471,8 @@
 			children = (
 				64ADA4822A77886F0003E2C1 /* Protocol */,
 				150636432A93AA560057724E /* DefaultQuotationRepository.swift */,
-				6457D1512A95126700B3AAAF /* DefaultColorSelectRepository.swift */,
 				6457D1412A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift */,
+				6457D1512A95126700B3AAAF /* DefaultColorSelectRepository.swift */,
 				6457D1BC2A9B3AD800B3AAAF /* DefaultOptionSelectRepository.swift */,
 				6457D16F2A95D50600B3AAAF /* DefaultQuotationFinishRepository.swift */,
 				6457D19D2A967A4500B3AAAF /* DefaultLoadingRepository.swift */,

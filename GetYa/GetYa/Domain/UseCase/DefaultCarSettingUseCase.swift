@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase {
+class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSelectUseCase {
     // MARK: - Dependency
     var trimSelect = CurrentValueSubject<TrimSelectModel?, Never>(nil)
     var trimInquery = CurrentValueSubject<TrimInquery?, Never>(nil)
@@ -27,15 +27,18 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase {
     // MARK: - Properties
     var trimSelectRepository: TrimSelectRepository
     var colorSelectRepository: ColorSelectRepository
+    var optionSelectRepository: OptionSelectRepository
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - LifeCycle
     init(
         trimSelectRepository: TrimSelectRepository,
-        colorSelectRepository: ColorSelectRepository
+        colorSelectRepository: ColorSelectRepository,
+        optionSelectRepository: OptionSelectRepository
     ) {
         self.trimSelectRepository = trimSelectRepository
         self.colorSelectRepository = colorSelectRepository
+        self.optionSelectRepository = optionSelectRepository
     }
     
     // MARK: - Functions

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol OptionSelectUseCase {
-    
+    var optionSelectRepository: OptionSelectRepository { get set }
 }

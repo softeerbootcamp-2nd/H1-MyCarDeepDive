@@ -8,5 +8,11 @@
 import Foundation
 
 class DefaultOptionSelectRepository: OptionSelectRepository {
+    typealias Endpoint = OptionSelectEndpoint
     
+    private let provider: EndpointProvider
+    
+    init(provider: EndpointProvider) {
+        self.provider = provider
+    }
 }
