@@ -8,6 +8,7 @@ import {
   SET_CARSPECID,
   SET_CARSPECPRICE,
   SET_INTERIORCOLOR,
+  SET_OPTION_DEFAULT,
   SET_TRIMID,
   SET_TRIMNAME,
 } from '@/context/CarProvider/type';
@@ -79,6 +80,7 @@ function InteriorDropDown({
         chooseRate: choose_rate,
       },
     });
+    carDispatch({ type: SET_OPTION_DEFAULT });
   };
 
   return (

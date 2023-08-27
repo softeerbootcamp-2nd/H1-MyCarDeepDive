@@ -9,6 +9,7 @@ import {
   SET_CARSPECID,
   SET_CARSPECPRICE,
   SET_EXTERIORCOLOR,
+  SET_OPTION_DEFAULT,
   SET_TRIMID,
   SET_TRIMNAME,
 } from '@/context/CarProvider/type';
@@ -30,7 +31,6 @@ interface Props {
 function ExteriorDropDown({
   classifiedExteriorColor,
   getTrimInfo,
-  setExteriorCarImage,
   setView,
 }: Props) {
   const [showOtherColor, setShowOtherColor] = useState(false);
@@ -62,8 +62,7 @@ function ExteriorDropDown({
   const changeHandler = () => {
     setView('exterial');
     closeModalHandler();
-    const { color_id, name, img_url, price, choose_rate, car_img_urls } =
-      wantedOtherColor;
+    const { color_id, name, img_url, price, choose_rate } = wantedOtherColor;
     const {
       trim_id: trimId,
       trim_name,
@@ -86,7 +85,7 @@ function ExteriorDropDown({
         chooseRate: choose_rate,
       },
     });
-    setExteriorCarImage(car_img_urls);
+    carDispatch({ type: SET_OPTION_DEFAULT });
   };
 
   return (
