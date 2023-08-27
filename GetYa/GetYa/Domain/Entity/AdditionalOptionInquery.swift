@@ -8,6 +8,6 @@
 import Foundation
 
 struct AdditionalOptionInquery: Codable, Hashable {
-    let optionPackageList: [AdditionalOptionPackage]
+    let optionPackageList: [AdditionalOption]
     let additionalOptionList: [AdditionalOption]
 }

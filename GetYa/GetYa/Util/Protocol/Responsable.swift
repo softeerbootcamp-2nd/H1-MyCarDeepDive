@@ -27,7 +27,7 @@ enum ResponseType {
     case optionsDetails(optionId: Int)
     case packageOptionsActivityLog(optionId: Int)
     case optionPackageDetails(optionId: Int)
-    case optionCarSpecIdTagsTagId(carSpecId: Int, tagId: Int)
+    case optionCarSpecIdTagsTagId(carSpecID: Int, tagID: Int)
     case pdfID
     case pdfCarInfomation(pdfID: String)
     case pdfEmail(pdfEmail: PdfEmail)
@@ -45,14 +45,16 @@ enum ResponseType {
             return "car-spec/trims"
         case .carSpecActivityLog(let trimID):
             return "car-spec/activity-log/\(trimID)"
-        case .carSpecAdditionalOption(let carSpecId):
-            return "car-spec/\(carSpecId)/additional-options"
         case .exteriorColor:
             return "color/exterior-colors"
         case .interiorColor:
             return "color/interior-colors"
         case .trimColor:
             return "color/trim-colors"
+        case .carSpecAdditionalOption(let carSpecID):
+            return "car-spec/\(carSpecID)/additional-options"
+        case .optionCarSpecIdTagsTagId(let carSpecID, let tagID):
+            return "options/\(carSpecID)/tags/\(tagID)"
         case .pdfID:
             return "pdfId"
         case .pdfCarInfomation(let pdfID):

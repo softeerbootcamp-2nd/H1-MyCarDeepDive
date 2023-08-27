@@ -16,4 +16,5 @@ struct AdditionalOption: Codable, Hashable {
     let tagList: [Tag]
     let badgeName: String
     let price: Int
+    var additionalOptionIDList: [Int]? = nil
 }

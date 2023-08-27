@@ -21,4 +21,10 @@ class DefaultOptionSelectRepository: OptionSelectRepository {
         let commonDTO = try await provider.request(endpoint: endpoint)
         return commonDTO.data.toDomain()
     }
+    
+    func fetchAdditionalOptionByTag(carSpecID: Int, tagID: Int) async throws -> AdditionalTagOptionInquery {
+        let endpoint = Endpoint.shared.fetchAdditionalOptionByTag(carSpecID: carSpecID, tagID: tagID)
+        let commonDTO = try await provider.request(endpoint: endpoint)
+        return commonDTO.data.toDomain()
+    }
 }

@@ -12,18 +12,18 @@ struct TrimChangeModel {
     let otherTrimSelectModel: TrimSelectModel?
     let exteriorColorSelectModel: ColorSelectModel?
     let interiorColorSelectModel: ColorSelectModel?
-    let optionSelectModelArray: [OptionSelectModel]
+    let optionSelectModel: AdditionalOptionSelectModel?
     
     init(
         trimSelectModel: TrimSelectModel? = nil,
         otherTrimSelectModel: TrimSelectModel? = nil,
         exteriorColorSelectModel: ColorSelectModel? = nil,
         interiorColorSelectModel: ColorSelectModel? = nil,
-        optionSelectModelArray: [OptionSelectModel] = []) {
+        optionSelectModel: AdditionalOptionSelectModel? = nil) {
         self.trimSelectModel = trimSelectModel
         self.otherTrimSelectModel = otherTrimSelectModel
         self.exteriorColorSelectModel = exteriorColorSelectModel
         self.interiorColorSelectModel = interiorColorSelectModel
-        self.optionSelectModelArray = optionSelectModelArray
+        self.optionSelectModel = optionSelectModel
     }
 }

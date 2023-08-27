@@ -190,10 +190,10 @@ class OptionSelectAdditionalItemCell: UICollectionViewCell {
         }
     }
     
-    private func configureRateBadge(rate: CGFloat) {
+    private func configureRateBadge(rate: Int) {
         if rate >= 60 {
             rateBadgeLabel.isHidden = false
-            rateBadgeLabel.text = "\(Int(rate))% 의 사용자가 선택"
+            rateBadgeLabel.text = "\(rate)% 의 사용자가 선택"
         }
     }
     
@@ -213,10 +213,10 @@ class OptionSelectAdditionalItemCell: UICollectionViewCell {
         selectButton.isSelected = isSelected
     }
     
-    func setData(datum: AdditionalOptionItem) {
-        imageView.image = UIImage(named: "LifeStylePeekForYou") // data.imageURL
+    func setData(datum: AdditionalOption) {
+        imageView.setImage(urlString: datum.optionImageURL)
         optionNameLabel.text = datum.optionName
-        optionPriceLabel.text = datum.optionPrice.toPriceFormat + "원"
+        optionPriceLabel.text = datum.price.toPriceFormat + "원"
         configureRateBadge(rate: datum.selectRate)
         configureBadge(name: datum.badgeName)
     }

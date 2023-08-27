@@ -22,7 +22,9 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
     var exteriorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
     var interiorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
     
-    var optionSelectArray = CurrentValueSubject<[OptionSelectModel], Never>([])
+    var additionalOptionInqeury = CurrentValueSubject<AdditionalOptionInquery?, Never>(nil)
+    var additionalOptionSelect = CurrentValueSubject<AdditionalOptionSelectModel?, Never>(nil)
+    var additionTagOptionInquery = PassthroughSubject<AdditionalTagOptionInquery, Never>()
     
     // MARK: - Properties
     var trimSelectRepository: TrimSelectRepository
@@ -285,7 +287,7 @@ extension DefaultCarSettingUseCase {
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 interiorColorSelectModel: interiorColor,
-                                optionSelectModelArray: optionSelectArray.value)))
+                                optionSelectModel: additionalOptionSelect.value)))
                 } else {
                     fetchExteriorTrimColor(interiorColor: interiorColor)
                 }
@@ -306,7 +308,7 @@ extension DefaultCarSettingUseCase {
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 exteriorColorSelectModel: exteriorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value),
+                                optionSelectModel: additionalOptionSelect.value),
                             colorSelectModel: interiorColor
                         ))
                 } else {
@@ -321,7 +323,7 @@ extension DefaultCarSettingUseCase {
                                     colorPrice: interiorColor.colorPrice,
                                     trimID: interiorColor.trimID,
                                     oppositeColors: interiorColor.oppositeColors),
-                                optionSelectModelArray: optionSelectArray.value),
+                                optionSelectModel: additionalOptionSelect.value),
                             colorSelectModel: interiorColor
                         ))
                 }
@@ -350,7 +352,7 @@ extension DefaultCarSettingUseCase {
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 exteriorColorSelectModel: exteriorColor,
-                                optionSelectModelArray: optionSelectArray.value)))
+                                optionSelectModel: additionalOptionSelect.value)))
                 } else {
                     fetchInteriorTrimColor(exteriorColor: exteriorColor)
                 }
@@ -371,7 +373,7 @@ extension DefaultCarSettingUseCase {
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 interiorColorSelectModel: interiorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value),
+                                optionSelectModel: additionalOptionSelect.value),
                             colorSelectModel: exteriorColor
                         ))
                 } else {
@@ -386,7 +388,7 @@ extension DefaultCarSettingUseCase {
                                     trimID: exteriorColor.trimID,
                                     oppositeColors: exteriorColor.oppositeColors),
                                 interiorColorSelectModel: interiorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value),
+                                optionSelectModel: additionalOptionSelect.value),
                             colorSelectModel: exteriorColor
                         ))
                 }
@@ -404,9 +406,28 @@ extension DefaultCarSettingUseCase {
                 let additionalOptionInquery = try await self.optionSelectRepository
                     .fetchAdditionalOption(with: trimSelect.carSpecID)
                 
-                print(additionalOptionInquery)
+                self.additionalOptionInqeury.send(additionalOptionInquery)
             } catch {
                 print("Car Spec ID에 해당하는 추가 옵션 리스트를 전송받지 못하였습니다.")
+            }
+        })
+    }
+    
+    func fetchAdditionalOptionsByTag(tagID: Int) {
+        Task(operation: {
+            do {
+                guard let trimSelect = trimSelect.value else { return }
+                
+                if tagID == 1 {
+                    self.additionalOptionInqeury.send(additionalOptionInqeury.value)
+                } else {
+                    let additionalTagOptionInquery = try await self.optionSelectRepository
+                        .fetchAdditionalOptionByTag(carSpecID: trimSelect.carSpecID, tagID: tagID)
+                    
+                    self.additionTagOptionInquery.send(additionalTagOptionInquery)
+                }
+            } catch {
+                print("Car Spec ID와 Tag ID에 해당하는 추가 태그 옵션 리스트를 전송받지 못하였습니다.")
             }
         })
     }

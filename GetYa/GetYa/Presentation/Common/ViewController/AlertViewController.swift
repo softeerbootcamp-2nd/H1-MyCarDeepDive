@@ -259,7 +259,7 @@ class AlertViewController: UIViewController {
                 colorPrice: interiorColorSelect.colorPrice)
         }
         
-        if !trimChangeModel.optionSelectModelArray.isEmpty {
+        if let optionSelectModel = trimChangeModel.optionSelectModel {
             
         }
         

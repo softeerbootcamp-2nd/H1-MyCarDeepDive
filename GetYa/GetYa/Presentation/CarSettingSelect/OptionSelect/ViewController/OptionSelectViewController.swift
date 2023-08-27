@@ -22,11 +22,14 @@ class OptionSelectViewController: UIViewController {
     private var pageViewController: UIPageViewController = UIPageViewController(
         transitionStyle: .scroll,
         navigationOrientation: .horizontal)
+    private let additionalOptionViewController = AdditionalOptionViewController()
+    private let basicOptionViewController = BasicOptionViewController()
     
     // MARK: - Properties
     private let viewModel: OptionSelectViewModel
     private var cancellables = Set<AnyCancellable>()
     private let viewWillAppearEvent = PassthroughSubject<Void, Never>()
+    private let touchUpCategoryEvent = PassthroughSubject<Int, Never>()
     private var viewControllers: [UIViewController] = []
     private var currentSegmentedIndex: Int = 0 {
         didSet {
@@ -56,6 +59,7 @@ class OptionSelectViewController: UIViewController {
 
         bind()
         setupViews()
+        setNotification()
         configureUI()
     }
     
@@ -73,10 +77,27 @@ class OptionSelectViewController: UIViewController {
     // MARK: - Private Functions
     private func bind() {
         let input = OptionSelectViewModel.Input(
-            viewWillAppearEvent: viewWillAppearEvent.eraseToAnyPublisher()
+            viewWillAppearEvent: viewWillAppearEvent.eraseToAnyPublisher(),
+            touchUpcategoryEvent: touchUpCategoryEvent.eraseToAnyPublisher()
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.additionalOptionInquery
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                additionalOptionViewController.setOptionInquery(inquery: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.additionalTagOptionInquery
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                additionalOptionViewController.setTagOptionInquery(inquery: $0)
+            })
+            .store(in: &cancellables)
     }
     
     private func setupViews() {
@@ -87,7 +108,17 @@ class OptionSelectViewController: UIViewController {
         addChild(pageViewController)
         pageViewController.didMove(toParent: self)
         
-        viewControllers = [AdditionalOptionViewController(), BasicOptionViewController()]
+        viewControllers = [additionalOptionViewController, basicOptionViewController]
+    }
+    
+    private func setNotification() {
+        NotificationCenter.default.publisher(for: Notification.Name("touchUpCategoryNotification"))
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let tagNumber = $0.userInfo?["tagNumber"] as? Int else { return }
+                touchUpCategoryEvent.send(tagNumber)
+            })
+            .store(in: &cancellables)
     }
     
     private func configureUI() {

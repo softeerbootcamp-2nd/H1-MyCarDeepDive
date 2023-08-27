@@ -17,4 +17,13 @@ struct OptionSelectEndpoint {
             responseType: .carSpecAdditionalOption(carSpecId: carSpecID)
         )
     }
+    func fetchAdditionalOptionByTag(
+        carSpecID: Int,
+        tagID: Int
+    ) -> Endpoint<AdditionalTagOptionInqueryDTO> {
+        return Endpoint(
+            method: .get,
+            responseType: .optionCarSpecIdTagsTagId(carSpecID: carSpecID, tagID: tagID)
+        )
+    }
 }

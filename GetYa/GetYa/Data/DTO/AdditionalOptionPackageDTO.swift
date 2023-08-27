@@ -30,8 +30,8 @@ struct AdditionalOptionPackageDTO: Codable {
         case additionalOptionIDList = "additional_option_id_list"
     }
     
-    func toDomain() -> AdditionalOptionPackage {
-        AdditionalOptionPackage(
+    func toDomain() -> AdditionalOption {
+        AdditionalOption(
             optionID: optionID,
             optionImageURL: optionImageURL,
             selectRate: selectRate,

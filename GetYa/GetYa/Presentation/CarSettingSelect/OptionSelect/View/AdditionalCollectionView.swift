@@ -20,14 +20,15 @@ class AdditionalCollectionView: UICollectionView {
 
     enum Items: Hashable {
         case category(type: TagCategoryType)
-        case all(datum: AdditionalOptionItem)
-        case other(datum: OptionTagData)
+        case all(datum: AdditionalOption)
+        case other(inquery: AdditionalTagOptionInquery)
     }
     
     // MARK: - Properties
     typealias DataSource = UICollectionViewDiffableDataSource<Sections, Items>
     private var diffableDatasource: DataSource!
-    private var currentSelectedCategoryIndexPath: IndexPath = [0, 0]
+    private var allItemCount: Int = 0
+    private var selectedCategoryIndexPath: IndexPath = [0, 0]
     private var selectedItemIndexPath: [IndexPath] = [] {
         didSet {
             print(selectedItemIndexPath)
@@ -76,7 +77,7 @@ class AdditionalCollectionView: UICollectionView {
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _ ) -> NSCollectionLayoutSection? in
             
-            if self.currentSelectedCategoryIndexPath.row == 0 {
+            if self.selectedCategoryIndexPath.row == 0 {
                 if sectionIndex == 0 {
                     return self.configureCategoryLayout()
                 } else {
@@ -194,11 +195,13 @@ class AdditionalCollectionView: UICollectionView {
                         })
                         return cell
                     }
-                case .other(let datum):
+                case .other(let inquery):
                     if let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: OptionSelectTagItemCell.identifier,
                         for: indexPath) as? OptionSelectTagItemCell {
-                        cell.setData(datum: datum)
+                        
+                        let tagName = TagCategoryType.allCases[self.selectedCategoryIndexPath.row + 1].title
+                        cell.setData(inqeury: inquery, tagName: tagName)
                         
                         return cell
                     }
@@ -215,8 +218,11 @@ class AdditionalCollectionView: UICollectionView {
                     return UICollectionReusableView()
                 }
                 
-                header.setText(text: "전체 \(15)")
-                header.setPartText(text: "15", fontType: .mediumBody3, color: .GetYaPalette.primary)
+                header.setText(text: "전체 \(self.allItemCount)")
+                header.setPartText(
+                    text: "\(self.allItemCount)",
+                    fontType: .mediumBody3,
+                    color: .GetYaPalette.primary)
                 
                 return header
             }
@@ -235,36 +241,38 @@ class AdditionalCollectionView: UICollectionView {
         diffableDatasource.apply(snapshot, completion: { [weak self] in
             guard let self else { return }
             selectItem(at: [0, 0], animated: false, scrollPosition: .init())
-            collectionView(self, didSelectItemAt: [0, 0])
         })
     }
     
-    func updateItemSnapShot(data: [AdditionalOptionItem]) {
+    func updateItemSnapShot(data: [AdditionalOption]) {
+        allItemCount = data.count
         var snapshot = diffableDatasource.snapshot()
         if snapshot.sectionIdentifiers.contains(.other) {
             snapshot.deleteSections([.other])
         }
         
-        if !snapshot.sectionIdentifiers.contains(.all) {
-            snapshot.appendSections([.all])
+        if snapshot.sectionIdentifiers.contains(.all) {
+            snapshot.deleteSections([.all])
         }
+        snapshot.appendSections([.all])
         
         snapshot.appendItems(data.map { .all(datum: $0) }, toSection: .all)
         diffableDatasource.apply(snapshot)
     }
     
-    func updateTagItemSnasphot(data: [OptionTagData]) {
+    func updateTagItemSnasphot(inquery: AdditionalTagOptionInquery) {
         var snapshot = diffableDatasource.snapshot()
         
         if snapshot.sectionIdentifiers.contains(.all) {
             snapshot.deleteSections([.all])
         }
         
-        if !snapshot.sectionIdentifiers.contains(.other) {
-            snapshot.appendSections([.other])
+        if snapshot.sectionIdentifiers.contains(.other) {
+            snapshot.deleteSections([.other])
         }
+        snapshot.appendSections([.other])
         
-        snapshot.appendItems(data.map { .other(datum: $0) }, toSection: .other)
+        snapshot.appendItems([.other(inquery: inquery)], toSection: .other)
         diffableDatasource.apply(snapshot)
     }
     
@@ -275,83 +283,14 @@ class AdditionalCollectionView: UICollectionView {
 extension AdditionalCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            currentSelectedCategoryIndexPath = indexPath
+            selectedCategoryIndexPath = indexPath
             
-            if indexPath.row != 0 {
-                updateTagItemSnasphot(data: [
-                    OptionTagData(
-                        tagImageURL: "",
-                        items: [
-                            OptionTagItem(
-                                name: "빌트인 캠(보조배터리 포함)",
-                                price: 0,
-                                imageURL: "a",
-                                xPosition: 16.0,
-                                yPosition: 10.0),
-                            OptionTagItem(
-                                name: "빌트인 캠(보조배터리 포함)",
-                                price: 0,
-                                imageURL: "b",
-                                xPosition: .toScaledWidth(value: 150),
-                                yPosition: 10.0),
-                            OptionTagItem(
-                                name: "빌트인 캠(보조배터리 포함)",
-                                price: 0,
-                                imageURL: "c",
-                                xPosition: .toScaledWidth(value: 200),
-                                yPosition: 10.0),
-                            OptionTagItem(
-                                name: "현대 스마트 센스 Ⅰ",
-                                price: 0,
-                                imageURL: "d",
-                                xPosition: .toScaledWidth(value: 120),
-                                yPosition: 80.0),
-                            OptionTagItem(
-                                name: "현대 스마트 센스 Ⅰ",
-                                price: 0,
-                                imageURL: "d",
-                                xPosition: .toScaledWidth(value: 250),
-                                yPosition: 150.0)
-                            ])
-                ])
-            } else {
-                updateItemSnapShot(data: [
-                    .init(
-                        id: 1,
-                        imageURL: "",
-                        selectRate: 6.5,
-                        optionName: "현대 스마트 센스 Ⅰ",
-                        optionPrice: 1090000,
-                        badgeName: "H Genuine Accessories",
-                        tagList: [Tag(id: 1, name: "사용편의")]),
-                    .init(
-                        id: 1,
-                        imageURL: "",
-                        selectRate: 6.5,
-                        optionName: "빌트인 캠(보조배터리 포함)",
-                        optionPrice: 1090000,
-                        badgeName: "H Genuine Accessories",
-                        tagList: [Tag(id: 1, name: "사용편의")]),
-                    .init(
-                        id: 1,
-                        imageURL: "",
-                        selectRate: 82.0,
-                        optionName: "현대 스마트 센스 Ⅰ",
-                        optionPrice: 1090000,
-                        badgeName: "N Performance",
-                        tagList: [Tag(id: 1, name: "사용편의")]),
-                    .init(
-                        id: 1,
-                        imageURL: "",
-                        selectRate: 65.0,
-                        optionName: "현대 스마트 센스 Ⅰ",
-                        optionPrice: 1090000,
-                        badgeName: "None",
-                        tagList: [Tag(id: 1, name: "사용편의")])
-                ])
-            }
+            NotificationCenter.default.post(
+                name: NSNotification.Name("touchUpCategoryNotification"),
+                object: nil,
+                userInfo: ["tagNumber": selectedCategoryIndexPath.row + 1])
         } else {
-            selectItem(at: currentSelectedCategoryIndexPath, animated: false, scrollPosition: .init())
+            selectItem(at: selectedCategoryIndexPath, animated: false, scrollPosition: .init())
         }
     }
 }

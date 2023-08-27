@@ -42,6 +42,14 @@ class AdditionalOptionViewController: UIViewController {
     
     // MARK: - Functions
     
+    func setOptionInquery(inquery: AdditionalOptionInquery) {
+        collectionView.updateItemSnapShot(data: inquery.optionPackageList + inquery.additionalOptionList)
+    }
+    
+    func setTagOptionInquery(inquery: AdditionalTagOptionInquery) {
+        collectionView.updateTagItemSnasphot(inquery: inquery)
+    }
+    
     // MARK: - Objc Functions
 
 }
