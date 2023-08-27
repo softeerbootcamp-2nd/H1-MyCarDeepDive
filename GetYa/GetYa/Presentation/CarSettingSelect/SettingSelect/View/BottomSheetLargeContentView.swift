@@ -75,6 +75,11 @@ class BottomSheetLargeContentView: UIView {
         font: GetYaFont.mediumBody3.uiFont,
         buttonBackgroundColorType: .primary
     ).set {
+        $0.addAction(
+            UIAction(handler: { _ in
+                NotificationCenter.default.post(name: NSNotification.Name("touchUpQuoteButton"), object: nil)
+            }),
+            for: .touchUpInside)
         $0.setTitle("견적내기", for: .normal)
     }
     

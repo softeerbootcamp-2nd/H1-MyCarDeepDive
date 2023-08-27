@@ -30,6 +30,7 @@ class CarSettingSelectViewController: UIViewController {
     private let viewModel: CarSettingSelectViewModel
     private var cancellables = Set<AnyCancellable>()
     private let touchUpNextButton = PassthroughSubject<Void, Never>()
+    private let touchUpQuoteButton = PassthroughSubject<Void, Never>()
     private var viewControllers: [UIViewController] = []
     private var currentPageIndex: Int = 0
     
@@ -48,13 +49,16 @@ class CarSettingSelectViewController: UIViewController {
 
         bind()
         setupViews()
+        setNotification()
         configureUI()
     }
     
     // MARK: - Functions
     private func bind() {
         let input = CarSettingSelectViewModel.Input(
-            touchUpNextButton: touchUpNextButton.eraseToAnyPublisher())
+            touchUpNextButton: touchUpNextButton.eraseToAnyPublisher(),
+            touchUpQuoteButton: touchUpQuoteButton.eraseToAnyPublisher()
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -120,6 +124,16 @@ class CarSettingSelectViewController: UIViewController {
             bottomSheetView
         ])
         pageViewController.didMove(toParent: self)
+    }
+    
+    private func setNotification() {
+        NotificationCenter.default
+            .publisher(for: Notification.Name("touchUpQuoteButton"))
+            .sink(receiveValue: { [weak self] _ in
+                guard let self else { return }
+                touchUpQuoteButton.send()
+            })
+            .store(in: &cancellables)
     }
     
     private func configureUI() {

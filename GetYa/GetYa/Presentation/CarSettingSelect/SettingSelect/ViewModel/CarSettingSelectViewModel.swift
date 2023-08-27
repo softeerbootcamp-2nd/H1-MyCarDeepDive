@@ -12,6 +12,7 @@ class CarSettingSelectViewModel {
     // MARK: - Input
     struct Input {
         let touchUpNextButton: AnyPublisher<Void, Never>
+        let touchUpQuoteButton: AnyPublisher<Void, Never>
     }
     
     // MARK: - Output
@@ -40,6 +41,14 @@ class CarSettingSelectViewModel {
         let output = Output()
         
         input.touchUpNextButton
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let contracitionQuotation = useCase.fetchContractionQuotation() else { return }
+                output.contractionQuotation.send(contracitionQuotation)
+            })
+            .store(in: &cancellables)
+        
+        input.touchUpQuoteButton
             .sink(receiveValue: { [weak self] in
                 guard let self,
                       let contracitionQuotation = useCase.fetchContractionQuotation() else { return }
