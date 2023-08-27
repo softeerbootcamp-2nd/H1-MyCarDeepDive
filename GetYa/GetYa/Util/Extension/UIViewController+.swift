@@ -80,7 +80,7 @@ extension UIViewController {
                     })
                 })
         case .settingChange(let trimChangeModel, let colorSelectModel):
-            if let trimSelectModel = trimChangeModel.trimSelectModel,
+            if let _ = trimChangeModel.trimSelectModel,
                let otherTrimSelectModel = trimChangeModel.otherTrimSelectModel {
                 alertViewController.setTitle(text: "\(otherTrimSelectModel.trimName) 트림으로 변경하시겠어요?")
             } else if let colorSelectModel {

@@ -83,8 +83,7 @@ class TrimSelectViewModel {
             .store(in: &cancellables)
         
         useCase.trimSelectResult
-            .sink(receiveValue: { [weak self] in
-                guard let self else { return }
+            .sink(receiveValue: {
                 output.trimSelectResult.send($0)
             })
             .store(in: &cancellables)
