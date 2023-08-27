@@ -75,6 +75,12 @@ function ColorSelectionPage() {
         Math.max(idx, 0)
       ],
     );
+
+    setInteriorCarImage(
+      initialAllColor?.data.interior_color_response.available_colors[
+        Math.max(idx, 0)
+      ].car_img_urls[0],
+    );
   }, [classifiedInteriorColor]);
 
   useEffect(() => {
@@ -82,12 +88,6 @@ function ColorSelectionPage() {
   }, []);
 
   useEffect(() => {
-    setInitialExteriorColor(
-      initialAllColor?.data.exterior_color_response.available_colors[0],
-    );
-    setInitialInteriorColor(
-      initialAllColor?.data.interior_color_response.available_colors[0],
-    );
     const initialExteriorCarImage =
       initialAllColor?.data.exterior_color_response.available_colors.find(
         exteriorColor => exteriorColor.color_id === color.exteriorColor.id,
