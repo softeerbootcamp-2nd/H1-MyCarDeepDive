@@ -9,5 +9,6 @@ import Foundation
 
 protocol OptionSelectRepository {
     func fetchAdditionalOption(with carSpecID: Int) async throws -> AdditionalOptionInquery
+    func fetchBasicOption(with carSpecID: Int) async throws -> [BasicOption]
     func fetchAdditionalOptionByTag(carSpecID: Int, tagID: Int) async throws -> AdditionalTagOptionInquery
 }

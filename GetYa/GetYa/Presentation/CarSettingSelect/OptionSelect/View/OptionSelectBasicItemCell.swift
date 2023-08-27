@@ -7,13 +7,6 @@
 
 import UIKit
 
-struct BasicOptionItem: Hashable {
-    let id: Int
-    let imageURL: String
-    let optionName: String
-    let tagList: [Tag]
-}
-
 class OptionSelectBasicItemCell: UICollectionViewCell {
     enum Constants {
         enum ImageView {
@@ -121,8 +114,8 @@ class OptionSelectBasicItemCell: UICollectionViewCell {
         learnMoreView.addButtonAction(handler: handler)
     }
     
-    func setData(datum: BasicOptionItem) {
-        imageView.image = UIImage(named: "LifeStylePeekForYou") // data.imageURL
+    func setData(datum: BasicOption) {
+        imageView.setImage(urlString: datum.optionImageURL)
         optionNameLabel.text = datum.optionName
     }
     

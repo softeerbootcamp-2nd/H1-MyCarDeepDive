@@ -22,6 +22,12 @@ class AdditionalOptionViewController: UIViewController {
         collectionView.updateCategorySnapShot(types: Array(TagCategoryType.allCases[1...]))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("AdditionalViewWillAppear"), object: nil)
+    }
+    
     // MARK: - Private Functions
     private func setupViews() {
         view.addSubview(collectionView)

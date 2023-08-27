@@ -23,6 +23,8 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
     var interiorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
     
     var additionalOptionInqeury = CurrentValueSubject<AdditionalOptionInquery?, Never>(nil)
+    var basicOptionArray = CurrentValueSubject<[BasicOption], Never>([])
+    var basicTagOptionArray = CurrentValueSubject<[BasicOption], Never>([])
     var additionalTagOptionInquery = PassthroughSubject<AdditionalTagOptionInquery, Never>()
     var additionalOptionSelectArray = CurrentValueSubject<[AdditionalOption], Never>([])
     var additionalPackageOptionSelectArray = CurrentValueSubject<[AdditionalOption], Never>([])
@@ -422,6 +424,19 @@ extension DefaultCarSettingUseCase {
         })
     }
     
+    func fetchBasicOptions() {
+        Task(operation: {
+            do {
+                guard let trimSelect = trimSelect.value else { return }
+                let basicOptionArray = try await self.optionSelectRepository
+                    .fetchBasicOption(with: trimSelect.carSpecID)
+                self.basicOptionArray.send(basicOptionArray)
+            } catch {
+                print("Car Spec ID에 해당하는 기본 옵션 리스트를 전송받지 못하였습니다.")
+            }
+        })
+    }
+    
     func fetchAdditionalOptionsByTag(tagID: Int) {
         Task(operation: {
             do {
@@ -439,6 +454,17 @@ extension DefaultCarSettingUseCase {
                 print("Car Spec ID와 Tag ID에 해당하는 추가 태그 옵션 리스트를 전송받지 못하였습니다.")
             }
         })
+    }
+    
+    func fetchBasicOptionsByTag(tagID: Int) {
+        if tagID == 1 || tagID == 2 {
+            basicOptionArray.send(basicOptionArray.value)
+        } else {
+            let basicTagOptionArray = basicOptionArray.value.filter { option in
+                !option.tagList.filter { tag in tag.id == tagID }.isEmpty
+            }
+            self.basicTagOptionArray.send(basicTagOptionArray)
+        }
     }
     
     func storeSelectOptionList(optionNumbers: [Int]) {

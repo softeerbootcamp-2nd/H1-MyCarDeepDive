@@ -11,8 +11,10 @@ import Combine
 class OptionSelectViewModel {
     // MARK: - Input
     struct Input {
-        let viewWillAppearEvent: AnyPublisher<Void, Never>
-        let touchUpcategoryEvent: AnyPublisher<Int, Never>
+        let additionalViewWillAppearEvent: AnyPublisher<Void, Never>
+        let basicViewWillAppearEvent: AnyPublisher<Void, Never>
+        let touchUpCategoryEvent: AnyPublisher<Int, Never>
+        let touchUpBasicCategoryEvent: AnyPublisher<Int, Never>
         let selectedOptionNumberList: AnyPublisher<[Int], Never>
         let selectedPackageOptionNumberList: AnyPublisher<[Int], Never>
     }
@@ -20,7 +22,9 @@ class OptionSelectViewModel {
     // MARK: - Output
     struct Output {
         let additionalOptionInquery = PassthroughSubject<AdditionalOptionInquery, Never>()
+        let basicOptionArray = PassthroughSubject<[BasicOption], Never>()
         let additionalTagOptionInquery = PassthroughSubject<AdditionalTagOptionInquery, Never>()
+        let basicTagOptionArray = PassthroughSubject<[BasicOption], Never>()
     }
     
     // MARK: - Dependency
@@ -38,17 +42,31 @@ class OptionSelectViewModel {
     func transform(input: Input) -> Output {
         let output = Output()
         
-        input.viewWillAppearEvent
+        input.additionalViewWillAppearEvent
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
                 useCase.fetchAdditionalOptions()
             })
             .store(in: &cancellables)
         
-        input.touchUpcategoryEvent
+        input.basicViewWillAppearEvent
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                useCase.fetchBasicOptions()
+            })
+            .store(in: &cancellables)
+        
+        input.touchUpCategoryEvent
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
                 useCase.fetchAdditionalOptionsByTag(tagID: $0)
+            })
+            .store(in: &cancellables)
+        
+        input.touchUpBasicCategoryEvent
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                useCase.fetchBasicOptionsByTag(tagID: $0)
             })
             .store(in: &cancellables)
         
@@ -73,9 +91,21 @@ class OptionSelectViewModel {
             })
             .store(in: &cancellables)
         
+        useCase.basicOptionArray
+            .sink(receiveValue: {
+                output.basicOptionArray.send($0)
+            })
+            .store(in: &cancellables)
+        
         useCase.additionalTagOptionInquery
             .sink(receiveValue: {
                 output.additionalTagOptionInquery.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.basicTagOptionArray
+            .sink(receiveValue: {
+                output.basicTagOptionArray.send($0)
             })
             .store(in: &cancellables)
         

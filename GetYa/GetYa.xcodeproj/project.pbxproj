@@ -194,6 +194,7 @@
 		6457D1D12A9B6DC100B3AAAF /* AdditionalTagOptionInquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1D02A9B6DC100B3AAAF /* AdditionalTagOptionInquery.swift */; };
 		6457D1D32A9B6DC600B3AAAF /* AdditionalTagOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1D22A9B6DC600B3AAAF /* AdditionalTagOption.swift */; };
 		6457D1D52A9B6F7200B3AAAF /* OptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1D42A9B6F7200B3AAAF /* OptionInfo.swift */; };
+		6457D1D92A9B952000B3AAAF /* BasicOptionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1D82A9B952000B3AAAF /* BasicOptionDTO.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
 		6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
@@ -504,6 +505,7 @@
 		6457D1D02A9B6DC100B3AAAF /* AdditionalTagOptionInquery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTagOptionInquery.swift; sourceTree = "<group>"; };
 		6457D1D22A9B6DC600B3AAAF /* AdditionalTagOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTagOption.swift; sourceTree = "<group>"; };
 		6457D1D42A9B6F7200B3AAAF /* OptionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionInfo.swift; sourceTree = "<group>"; };
+		6457D1D82A9B952000B3AAAF /* BasicOptionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOptionDTO.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -1513,6 +1515,7 @@
 				6457D1C42A9B448E00B3AAAF /* AdditionalOptionPackageDTO.swift */,
 				6457D1CC2A9B6CE500B3AAAF /* AdditionalTagOptionInqueryDTO.swift */,
 				6457D1CE2A9B6CEF00B3AAAF /* AdditionalTagOptionDTO.swift */,
+				6457D1D82A9B952000B3AAAF /* BasicOptionDTO.swift */,
 				6457D1C62A9B459700B3AAAF /* TagDTO.swift */,
 			);
 			path = DTO;
@@ -1940,6 +1943,7 @@
 				155B72A12A8C882C0091A7F4 /* TrimOptionDetailOptionCollectionView.swift in Sources */,
 				6457D11B2A945C9500B3AAAF /* OptionSelectBasicItemCell.swift in Sources */,
 				64E26A522A8A3E2800F6BC3A /* TrimOptionDetailColorCell.swift in Sources */,
+				6457D1D92A9B952000B3AAAF /* BasicOptionDTO.swift in Sources */,
 				6457D14C2A95013D00B3AAAF /* TrimInquery.swift in Sources */,
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
 				6484A7512A8C82FE00434136 /* EnginePerformanceDescriptionView.swift in Sources */,

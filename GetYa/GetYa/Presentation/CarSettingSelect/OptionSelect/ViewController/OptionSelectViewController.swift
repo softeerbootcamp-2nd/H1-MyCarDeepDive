@@ -28,8 +28,10 @@ class OptionSelectViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: OptionSelectViewModel
     private var cancellables = Set<AnyCancellable>()
-    private let viewWillAppearEvent = PassthroughSubject<Void, Never>()
+    private let additionalViewWillAppearEvent = PassthroughSubject<Void, Never>()
+    private let basicViewWillAppearEvent = PassthroughSubject<Void, Never>()
     private let touchUpCategoryEvent = PassthroughSubject<Int, Never>()
+    private let touchUpBasicCategoryEvent = PassthroughSubject<Int, Never>()
     private let selectedOptionNumberList = PassthroughSubject<[Int], Never>()
     private let selectedPackageOptionNumberList = PassthroughSubject<[Int], Never>()
     private var viewControllers: [UIViewController] = []
@@ -65,12 +67,6 @@ class OptionSelectViewController: UIViewController {
         configureUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewWillAppearEvent.send()
-    }
-    
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
         configureSegmentedControl()
@@ -79,8 +75,10 @@ class OptionSelectViewController: UIViewController {
     // MARK: - Private Functions
     private func bind() {
         let input = OptionSelectViewModel.Input(
-            viewWillAppearEvent: viewWillAppearEvent.eraseToAnyPublisher(),
-            touchUpcategoryEvent: touchUpCategoryEvent.eraseToAnyPublisher(),
+            additionalViewWillAppearEvent: additionalViewWillAppearEvent.eraseToAnyPublisher(),
+            basicViewWillAppearEvent: basicViewWillAppearEvent.eraseToAnyPublisher(),
+            touchUpCategoryEvent: touchUpCategoryEvent.eraseToAnyPublisher(),
+            touchUpBasicCategoryEvent: touchUpBasicCategoryEvent.eraseToAnyPublisher(),
             selectedOptionNumberList: selectedOptionNumberList.eraseToAnyPublisher(),
             selectedPackageOptionNumberList: selectedPackageOptionNumberList.eraseToAnyPublisher()
         )
@@ -95,11 +93,27 @@ class OptionSelectViewController: UIViewController {
             })
             .store(in: &cancellables)
         
+        output.basicOptionArray
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                basicOptionViewController.setBasicOptionArray(optionArray: $0)
+            })
+            .store(in: &cancellables)
+        
         output.additionalTagOptionInquery
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
                 additionalOptionViewController.setTagOptionInquery(inquery: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.basicTagOptionArray
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                basicOptionViewController.setBasicOptionArray(optionArray: $0)
             })
             .store(in: &cancellables)
     }
@@ -116,11 +130,33 @@ class OptionSelectViewController: UIViewController {
     }
     
     private func setNotification() {
+        NotificationCenter.default.publisher(for: Notification.Name("AdditionalViewWillAppear"))
+            .sink(receiveValue: { [weak self] _ in
+                guard let self else { return }
+                additionalViewWillAppearEvent.send()
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name("BasicViewWillAppear"))
+            .sink(receiveValue: { [weak self] _ in
+                guard let self else { return }
+                basicViewWillAppearEvent.send()
+            })
+            .store(in: &cancellables)
+        
         NotificationCenter.default.publisher(for: Notification.Name("touchUpCategoryNotification"))
             .sink(receiveValue: { [weak self] in
                 guard let self,
                       let tagNumber = $0.userInfo?["tagNumber"] as? Int else { return }
                 touchUpCategoryEvent.send(tagNumber)
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name("touchUpBasicCategoryNotification"))
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let tagNumber = $0.userInfo?["tagNumber"] as? Int else { return }
+                touchUpBasicCategoryEvent.send(tagNumber)
             })
             .store(in: &cancellables)
         
