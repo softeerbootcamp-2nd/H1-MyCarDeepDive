@@ -1,11 +1,14 @@
+import { useContext } from 'react';
 import TrimInfo from '../TrimInfo';
+import { CarContext } from '@/context/CarProvider';
 
 function CurrentTrim() {
+  const { carSpec } = useContext(CarContext);
   return (
     <TrimInfo
       title='현재 트림'
-      trimName='Le Blanc (르블랑)'
-      trimPrice={40440000}
+      trimName={carSpec.trim.name}
+      trimPrice={carSpec.price}
     />
   );
 }

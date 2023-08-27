@@ -25,7 +25,7 @@ import {
 const initialState: InitialStateType = {
   carSpec: {
     id: 2,
-    price: 43460200,
+    price: 43460000,
     feature: {
       engine: '디젤 2.2',
       body: '7인승',
@@ -47,8 +47,8 @@ const initialState: InitialStateType = {
     interiorColor: {
       id: 10,
       name: '쿨그레이',
-      imgUrl: 'img.make-my-car.shop/icon/black.png',
-      price: 100000,
+      imgUrl: 'img.make-my-car.shop/interior/icon/YJY.jpg',
+      price: 0,
       chooseRate: 50,
     },
   },
@@ -203,7 +203,7 @@ const reducer = (state: InitialStateType, action: ActionType) => {
       return {
         carSpec: {
           id: 2,
-          price: 43460200,
+          price: 43460000,
           feature: {
             engine: '디젤 2.2',
             body: '7인승',
@@ -225,8 +225,8 @@ const reducer = (state: InitialStateType, action: ActionType) => {
           interiorColor: {
             id: 10,
             name: '쿨그레이',
-            imgUrl: 'img.make-my-car.shop/icon/black.png',
-            price: 100000,
+            imgUrl: 'img.make-my-car.shop/interior/icon/YJY.jpg',
+            price: 0,
             chooseRate: 50,
           },
         },

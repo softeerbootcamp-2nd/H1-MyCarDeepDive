@@ -1,8 +1,16 @@
 import TrimInfo from '../TrimInfo';
 
-function ChangeTrim() {
+interface Props {
+  wantedOtherColorTrim: any;
+}
+
+function ChangeTrim({ wantedOtherColorTrim }: Props) {
   return (
-    <TrimInfo title='변경 트림' trimName='Calligraphy' trimPrice={52540000} />
+    <TrimInfo
+      title='변경 트림'
+      trimName={wantedOtherColorTrim.trim_name}
+      trimPrice={wantedOtherColorTrim.price}
+    />
   );
 }
 

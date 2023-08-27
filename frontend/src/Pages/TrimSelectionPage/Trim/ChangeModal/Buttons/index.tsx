@@ -1,8 +1,10 @@
 import Button from '@/Components/Button';
+import getAllColor, { getInitialColorType } from '@/api/color/getAllColor';
 import { CarContext } from '@/context/CarProvider';
 import {
   SET_CARSPECID,
   SET_CARSPECPRICE,
+  SET_EXTERIORCOLOR,
   SET_TRIMID,
   SET_TRIMNAME,
 } from '@/context/CarProvider/type';
@@ -20,6 +22,7 @@ interface Props {
 
 function Buttons({ wantedTrim }: Props) {
   const { carDispatch } = useContext(CarContext);
+  const allTrimColor: getInitialColorType | undefined = getAllColor();
   const changeTrim = () => {
     if (
       wantedTrim.price === null ||
@@ -35,10 +38,26 @@ function Buttons({ wantedTrim }: Props) {
     carDispatch({ type: SET_CARSPECID, carSpecId: wantedTrim.carSpecId });
     carDispatch({ type: SET_TRIMNAME, trimName: wantedTrim.trimName });
     carDispatch({ type: SET_TRIMID, trimId: wantedTrim.trimId });
+
+    if (!allTrimColor) return;
+    const { color_id, name, img_url, price, choose_rate } =
+      allTrimColor?.data.exterior_color_response.available_colors[0];
+
+    carDispatch({
+      type: SET_EXTERIORCOLOR,
+      exteriorColor: {
+        id: color_id,
+        name,
+        imgUrl: img_url,
+        price,
+        chooseRate: choose_rate,
+      },
+    });
+
     closeModalHandler();
   };
   return (
-    <div className='flex justify-end gap-2.5'>
+    <div className='flex justify-end gap-2.5 mb-6'>
       <Button
         width='w-[120px]'
         height='h-[46px]'

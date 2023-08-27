@@ -17,7 +17,6 @@ import { getInteriorColorType } from '@/api/color/getInteriorColors';
 import { getExteriorColorType } from '@/api/color/getExteriorColor';
 import ChangerModal from '../ChangerModal';
 import { getTrimType } from '@/api/trim/getTrim';
-import useLogFetch from '@/hooks/useLogFetch';
 
 interface Props {
   classifiedInteriorColor: getInteriorColorType | undefined;
@@ -33,6 +32,7 @@ function InteriorDropDown({
 }: Props) {
   const [showOtherColor, setShowOtherColor] = useState(false);
   const [wantedOtherColor, setWantedOtherColor] = useState<any>();
+  const [wantedOtherColorTrim, setWantedOtherColorTrim] = useState<any>();
   const [showModal, setShowModal] = useState(false);
   const { carDispatch } = useContext(CarContext);
 
@@ -43,29 +43,26 @@ function InteriorDropDown({
     if (dataObject) {
       const colorInfo = JSON.parse(dataObject);
       setWantedOtherColor(colorInfo);
+      const index = getTrimInfo?.data.car_specs.findIndex(
+        id => id.trim_id === colorInfo.trim_id,
+      );
+      if (index === undefined || !getTrimInfo) return;
+      const wantedOtherColorTrim = getTrimInfo?.data.car_specs[index];
+      setWantedOtherColorTrim(wantedOtherColorTrim);
       setShowModal(true);
-      useLogFetch({
-        url: `/color/interior-colors/activity-log/${colorInfo.color_id}`,
-      });
     }
   };
 
   const changeHandler = () => {
     closeModalHandler();
     setView('interial');
-    const { color_id, name, img_url, price, choose_rate, trim_id } =
-      wantedOtherColor;
-    const index = getTrimInfo?.data.car_specs.findIndex(
-      id => id.trim_id === trim_id,
-    );
-
-    if (index === undefined || !getTrimInfo) return;
+    const { color_id, name, img_url, price, choose_rate } = wantedOtherColor;
     const {
       trim_id: trimId,
       trim_name,
       car_spec_id: carSpecId,
       price: carSpecPrice,
-    } = getTrimInfo.data.car_specs[index];
+    } = wantedOtherColorTrim;
 
     carDispatch({ type: SET_TRIMID, trimId });
     carDispatch({ type: SET_TRIMNAME, trimName: trim_name });
@@ -106,6 +103,7 @@ function InteriorDropDown({
 
       <ChangerModal
         wantedOtherColor={wantedOtherColor}
+        wantedOtherColorTrim={wantedOtherColorTrim}
         showModal={showModal}
         setShowModal={setShowModal}
         clickHandler={changeHandler}

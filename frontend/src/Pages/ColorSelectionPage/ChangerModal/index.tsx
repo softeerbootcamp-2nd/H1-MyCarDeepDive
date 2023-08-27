@@ -15,6 +15,7 @@ import { CarContext } from '@/context/CarProvider';
 
 interface Props extends ModalProps {
   wantedOtherColor: any;
+  wantedOtherColorTrim: any;
   clickHandler: () => void;
   type: 'exterial' | 'interial';
 }
@@ -24,11 +25,10 @@ function ChangerModal({
   setShowModal,
   wantedOtherColor,
   clickHandler,
-  type,
+  wantedOtherColorTrim,
 }: Props) {
-  const { color } = useContext(CarContext);
-  if (!wantedOtherColor) return;
-  const { price } = wantedOtherColor;
+  const { carSpec } = useContext(CarContext);
+  if (!wantedOtherColor || !wantedOtherColorTrim) return;
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <ModalContentsWrapper>
@@ -37,15 +37,9 @@ function ChangerModal({
           <Title />
           <Explain wantedOtherColor={wantedOtherColor} />
           <CurrentTrim />
-          <ChangeTrim />
+          <ChangeTrim wantedOtherColorTrim={wantedOtherColorTrim} />
           <UnderLine margin='mt-9 mb-[13px]' color='bg-grey-500' />
-          {type === 'exterial' && (
-            <ChangePrice priceGap={color.exteriorColor.price - price} />
-          )}
-          {type === 'interial' && (
-            <ChangePrice priceGap={color.interiorColor.price - price} />
-          )}
-
+          <ChangePrice priceGap={wantedOtherColorTrim.price - carSpec.price} />
           <Buttons
             wantedOtherColor={wantedOtherColor}
             clickHandler={clickHandler}
