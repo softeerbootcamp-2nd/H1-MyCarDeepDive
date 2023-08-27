@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSelectUseCase {
+class DefaultCarSettingUseCase: CarSettingUseCase, TrimSelectUseCase, ColorSelectUseCase, OptionSelectUseCase {
     // MARK: - Dependency
     var trimSelect = CurrentValueSubject<TrimSelectModel?, Never>(nil)
     var trimInquery = CurrentValueSubject<TrimInquery?, Never>(nil)
@@ -47,6 +47,26 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSel
     }
     
     // MARK: - Functions
+    func fetchContractionQuotation() -> ContractionQuotation? {
+        guard let trimSelect = trimSelect.value,
+              let exteriorColorSelect = exteriorColorSelect.value,
+              let interiorColorSelect = interiorColorSelect.value
+        else { return nil }
+        let optionSelectArray = additionalOptionSelectArray.value
+        let packageOptionSelectArray = additionalPackageOptionSelectArray.value
+        let optionInPackage = packageOptionSelectArray
+            .map { $0.additionalOptionIDList ?? [] }
+            .flatMap { $0 }
+        
+        let additionalOptionIDList = optionSelectArray.map { $0.optionID } + optionInPackage
+        
+        return ContractionQuotation(
+            carSpecID: trimSelect.carSpecID,
+            trimID: trimSelect.trimID,
+            exteriorColorID: exteriorColorSelect.colorID,
+            interiorColorID: interiorColorSelect.colorID,
+            additionalOptionIDList: additionalOptionIDList)
+    }
 }
 
 // MARK: - TrimSelectUseCase
