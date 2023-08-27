@@ -17,16 +17,21 @@ class CarSettingSelectViewModel {
     // MARK: - Output
     struct Output {
         let contractionQuotation = PassthroughSubject<ContractionQuotation, Never>()
+        let smallTitle = PassthroughSubject<String, Never>()
+        let totalPrice = PassthroughSubject<Int, Never>()
+        let modelInfo = PassthroughSubject<(String, Int), Never>()
+        let colorInfo = PassthroughSubject<(String, Int, String, Int), Never>()
+        let optionInfo = PassthroughSubject<([String], [Int]), Never>()
     }
     
     // MARK: - Dependency
-    private let useCase: CarSettingUseCase
+    private let useCase: DefaultCarSettingUseCase
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Properties
     
     // MARK: - LifeCycle
-    init(useCase: CarSettingUseCase) {
+    init(useCase: DefaultCarSettingUseCase) {
         self.useCase = useCase
     }
     
@@ -39,6 +44,39 @@ class CarSettingSelectViewModel {
                 guard let self,
                       let contracitionQuotation = useCase.fetchContractionQuotation() else { return }
                 output.contractionQuotation.send(contracitionQuotation)
+            })
+            .store(in: &cancellables)
+        
+        useCase.smallTitle
+            .sink(receiveValue: {
+                output.smallTitle.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.totalPrice
+            .sink(receiveValue: {
+                output.totalPrice.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.modelTitle
+            .zip(useCase.modelPrice)
+            .sink(receiveValue: {
+                output.modelInfo.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.exteriorColorTitle
+            .zip(useCase.exteriorColorPrice, useCase.interiorColorTitle, useCase.interiorColorPrice)
+            .sink(receiveValue: {
+                output.colorInfo.send($0)
+            })
+            .store(in: &cancellables)
+        
+        useCase.optionTitles
+            .zip(useCase.optionPrices)
+            .sink(receiveValue: {
+                output.optionInfo.send($0)
             })
             .store(in: &cancellables)
        

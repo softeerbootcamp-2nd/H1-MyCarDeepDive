@@ -66,8 +66,8 @@ class BottomSheetSmallContentView: UIView {
     convenience init(nameText: String, priceValue: Int) {
         self.init(frame: .zero)
         
-        setNameText(text: nameText)
-        setPriceValue(value: priceValue)
+        setTrimName(text: nameText)
+        setTotalPrice(price: priceValue)
     }
     
     override init(frame: CGRect) {
@@ -144,12 +144,12 @@ class BottomSheetSmallContentView: UIView {
     }
     
     // MARK: - Functions
-    func setNameText(text: String) {
+    func setTrimName(text: String) {
         self.nameLabel.text = text
     }
     
-    func setPriceValue(value: Int) {
-        self.priceLabel.text = value.toPriceFormat
+    func setTotalPrice(price: Int) {
+        self.priceLabel.text = price.toPriceFormat + "원"
     }
     
     // MARK: - Objc Functions

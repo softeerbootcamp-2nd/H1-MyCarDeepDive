@@ -20,7 +20,7 @@ class OptionSummaryContentView: UIView {
     }
     
     // MARK: - UI properties
-    private let titleLabel = CommonLabel(
+    let titleLabel = CommonLabel(
         fontType: .mediumBody3,
         color: .GetYaPalette.gray100)
     private let nameAndPriceStackView: UIStackView = UIStackView().set {
@@ -31,6 +31,14 @@ class OptionSummaryContentView: UIView {
     }
     
     // MARK: - Lifecycles
+    init(titleText: String) {
+        super.init(frame: .zero)
+        
+        setupViews()
+        configureUI()
+        setTitle(text: titleText)
+    }
+    
     init(titleText: String, optionNames: [String], optionPrices: [Int]) {
         super.init(frame: .zero)
         

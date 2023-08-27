@@ -35,21 +35,10 @@ class BottomSheetView: UIView {
     private let containerView = UIView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private lazy var smallContentView = BottomSheetSmallContentView(
-        nameText: "Le Blanc(르블랑)",
-        priceValue: 43460000
-    ).set {
+    private lazy var smallContentView = BottomSheetSmallContentView().set {
         $0.delegate = self
     }
-    private lazy var largeContentView = BottomSheetLargeContentView(
-        modelName: "펠리세이드 디젤 2.2 2WD Le Blanc 7인승",
-        modelPrice: 42450000,
-        colorNames: ["외장 - 어비스 블랙펄", "내장 - 어비스 블랙펄"],
-        colorPrices: [0, 0],
-        optionNames: ["컴포트 II", "2열 통풍 시트"],
-        optionPrices: [1090000, 790000],
-        trimName: "Le Blanc(르블랑)"
-    ).set {
+    private lazy var largeContentView = BottomSheetLargeContentView().set {
         $0.delegate = self
         $0.isHidden = true
     }
@@ -150,6 +139,29 @@ class BottomSheetView: UIView {
                 equalTo: bottomAnchor,
                 constant: Constants.LargeContentView.bottomMargin)
         ])
+    }
+    
+    // MARK: - Functions
+    func setSmallTitle(text: String) {
+        smallContentView.setTrimName(text: text)
+        largeContentView.setTrimName(text: text)
+    }
+    
+    func setTotalPrice(price: Int) {
+        smallContentView.setTotalPrice(price: price)
+        largeContentView.setTotalPrice(price: price)
+    }
+    
+    func setModelInfo(info: (String, Int)) {
+        largeContentView.setModelInfo(info: info)
+    }
+    
+    func setColorInfo(info: (String, Int, String, Int)) {
+        largeContentView.setColorInfo(info: info)
+    }
+    
+    func setOptionInfoArray(texts: [String], prices: [Int]) {
+        largeContentView.setOptionInfoArray(texts: texts, prices: prices)
     }
 }
 

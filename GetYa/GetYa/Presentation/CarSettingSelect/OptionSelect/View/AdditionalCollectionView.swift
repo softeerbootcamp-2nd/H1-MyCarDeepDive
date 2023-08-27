@@ -225,13 +225,6 @@ class AdditionalCollectionView: UICollectionView {
                             } else {
                                 self.selectedPackageOptionIDList.append(datum.optionID)
                             }
-                            optionList.forEach { optionID in
-                                if self.selectedOptionIDList.contains(optionID) {
-                                    self.selectedOptionIDList = self.selectedOptionIDList.filter { $0 != optionID }
-                                } else {
-                                    self.selectedOptionIDList.append(optionID)
-                                }
-                            }
                         })
                         return cell
                     }

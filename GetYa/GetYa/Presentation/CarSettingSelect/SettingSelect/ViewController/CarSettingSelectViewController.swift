@@ -58,6 +58,46 @@ class CarSettingSelectViewController: UIViewController {
         
         let output = viewModel.transform(input: input)
         
+        output.smallTitle
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setSmallTitle(text: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.totalPrice
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setTotalPrice(price: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.modelInfo
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setModelInfo(info: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.colorInfo
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setColorInfo(info: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.optionInfo
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setOptionInfoArray(texts: $0.0, prices: $0.1)
+            })
+            .store(in: &cancellables)
+        
         output.contractionQuotation
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
