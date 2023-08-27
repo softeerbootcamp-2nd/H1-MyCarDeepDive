@@ -12,9 +12,9 @@ class BasicCollectionView: UICollectionView {
         static let categoryItemCount: Int = 7
     }
     
-    enum Sections: Hashable, CaseIterable {
+    enum Sections: Hashable {
         case category
-        case all
+        case all(itemCount: Int)
     }
 
     enum Items: Hashable {
@@ -24,6 +24,7 @@ class BasicCollectionView: UICollectionView {
     
     // MARK: - Properties
     typealias DataSource = UICollectionViewDiffableDataSource<Sections, Items>
+    private var cateogroySnapshot = NSDiffableDataSourceSnapshot<Sections, Items>()
     private var diffableDatasource: DataSource!
     private var itemCount: Int = 0
     private var selectedCategoryIndexPath: IndexPath = [0, 0]
@@ -67,10 +68,10 @@ class BasicCollectionView: UICollectionView {
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _ ) -> NSCollectionLayoutSection? in
             
-            switch Sections.allCases[sectionIndex] {
-            case .category:
+            switch sectionIndex {
+            case 0:
                 return self.configureCategoryLayout()
-            case .all:
+            default:
                 return self.configureItemLayout()
             }
         }
@@ -187,7 +188,8 @@ class BasicCollectionView: UICollectionView {
         types.forEach {
             snapshot.appendItems([.category(type: $0)])
         }
-        diffableDatasource.apply(snapshot, completion: { [weak self] in
+        cateogroySnapshot = snapshot
+        diffableDatasource.apply(cateogroySnapshot, completion: { [weak self] in
             guard let self else { return }
             selectItem(at: [0, 0], animated: false, scrollPosition: .init())
         })
@@ -195,16 +197,10 @@ class BasicCollectionView: UICollectionView {
     
     func updateItemSnapShot(data: [BasicOption]) {
         self.itemCount = data.count
-        var snapshot = diffableDatasource.snapshot()
-        if !snapshot.sectionIdentifiers.contains(.all) {
-            snapshot.appendSections([.all])
-        } else {
-            let items = snapshot.itemIdentifiers(inSection: .all)
-            snapshot.deleteItems(items)
-            snapshot.reloadSections([.all])
-        }
+        var snapshot = cateogroySnapshot
+        snapshot.appendSections([.all(itemCount: data.count)])
         
-        snapshot.appendItems(data.map { .all(datum: $0) }, toSection: .all)
+        snapshot.appendItems(data.map { .all(datum: $0) }, toSection: .all(itemCount: data.count))
         diffableDatasource.apply(snapshot)
     }
     
