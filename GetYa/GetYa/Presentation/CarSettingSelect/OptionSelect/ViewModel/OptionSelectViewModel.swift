@@ -13,6 +13,8 @@ class OptionSelectViewModel {
     struct Input {
         let viewWillAppearEvent: AnyPublisher<Void, Never>
         let touchUpcategoryEvent: AnyPublisher<Int, Never>
+        let selectedOptionNumberList: AnyPublisher<[Int], Never>
+        let selectedPackageOptionNumberList: AnyPublisher<[Int], Never>
     }
     
     // MARK: - Output
@@ -50,6 +52,20 @@ class OptionSelectViewModel {
             })
             .store(in: &cancellables)
         
+        input.selectedOptionNumberList
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                useCase.storeSelectOptionList(optionNumbers: $0)
+            })
+            .store(in: &cancellables)
+        
+        input.selectedPackageOptionNumberList
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                useCase.storeSelectPackageOptionList(optionNumbers: $0)
+            })
+            .store(in: &cancellables)
+        
         useCase.additionalOptionInqeury
             .sink(receiveValue: {
                 guard let additionalOptionInquery = $0 else { return }
@@ -57,7 +73,7 @@ class OptionSelectViewModel {
             })
             .store(in: &cancellables)
         
-        useCase.additionTagOptionInquery
+        useCase.additionalTagOptionInquery
             .sink(receiveValue: {
                 output.additionalTagOptionInquery.send($0)
             })

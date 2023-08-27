@@ -11,9 +11,12 @@ import Combine
 protocol OptionSelectUseCase {
     var optionSelectRepository: OptionSelectRepository { get set }
     var additionalOptionInqeury: CurrentValueSubject<AdditionalOptionInquery?, Never> { get set }
-    var additionalOptionSelect: CurrentValueSubject<AdditionalOptionSelectModel?, Never> { get set }
-    var additionTagOptionInquery: PassthroughSubject<AdditionalTagOptionInquery, Never> { get set }
+    var additionalTagOptionInquery: PassthroughSubject<AdditionalTagOptionInquery, Never> { get set }
+    var additionalOptionSelectArray: CurrentValueSubject<[AdditionalOption], Never> { get set }
+    var additionalPackageOptionSelectArray: CurrentValueSubject<[AdditionalOption], Never> { get set }
     
     func fetchAdditionalOptions()
     func fetchAdditionalOptionsByTag(tagID: Int)
+    func storeSelectOptionList(optionNumbers: [Int])
+    func storeSelectPackageOptionList(optionNumbers: [Int])
 }

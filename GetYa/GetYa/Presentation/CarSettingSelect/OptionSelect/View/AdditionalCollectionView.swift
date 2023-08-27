@@ -17,10 +17,11 @@ class AdditionalCollectionView: UICollectionView {
         case all
         case other
     }
-
+    
     enum Items: Hashable {
         case category(type: TagCategoryType)
         case all(datum: AdditionalOption)
+        case packageItem(datum: AdditionalOption)
         case other(inquery: AdditionalTagOptionInquery)
     }
     
@@ -29,9 +30,20 @@ class AdditionalCollectionView: UICollectionView {
     private var diffableDatasource: DataSource!
     private var allItemCount: Int = 0
     private var selectedCategoryIndexPath: IndexPath = [0, 0]
-    private var selectedItemIndexPath: [IndexPath] = [] {
+    private var selectedOptionIDList: [Int] = [] {
         didSet {
-            print(selectedItemIndexPath)
+            NotificationCenter.default.post(
+                name: NSNotification.Name("selectedOptionNotification"),
+                object: nil,
+                userInfo: ["optionNumbers": selectedOptionIDList])
+        }
+    }
+    private var selectedPackageOptionIDList: [Int] = [] {
+        didSet {
+            NotificationCenter.default.post(
+                name: NSNotification.Name("selectedPackageOptionNotification"),
+                object: nil,
+                userInfo: ["optionNumbers": selectedPackageOptionIDList])
         }
     }
     
@@ -182,15 +194,43 @@ class AdditionalCollectionView: UICollectionView {
                         withReuseIdentifier: OptionSelectAdditionalItemCell.identifier,
                         for: indexPath) as? OptionSelectAdditionalItemCell {
                         cell.setData(datum: datum)
-                        cell.setSelectButtonIsSelected(isSelected: self.selectedItemIndexPath.contains(indexPath))
+                        cell.setSelectButtonIsSelected(isSelected: self.selectedOptionIDList.contains(datum.optionID))
                         cell.addActionLearnMoreViewButton(handler: {
                             print(indexPath.row)
                         })
                         cell.addActionSelectButton(handler: {
-                            if self.selectedItemIndexPath.contains(indexPath) {
-                                self.selectedItemIndexPath = self.selectedItemIndexPath.filter { $0 != indexPath }
+                            if self.selectedOptionIDList.contains(datum.optionID) {
+                                self.selectedOptionIDList = self.selectedOptionIDList.filter { $0 != datum.optionID }
                             } else {
-                                self.selectedItemIndexPath.append(indexPath)
+                                self.selectedOptionIDList.append(datum.optionID)
+                            }
+                        })
+                        return cell
+                    }
+                case .packageItem(let datum):
+                    if let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: OptionSelectAdditionalItemCell.identifier,
+                        for: indexPath) as? OptionSelectAdditionalItemCell {
+                        cell.setData(datum: datum)
+                        cell.setSelectButtonIsSelected(isSelected: self.selectedPackageOptionIDList.contains(datum.optionID))
+                        cell.addActionLearnMoreViewButton(handler: {
+                            print(indexPath.row)
+                        })
+                        
+                        guard let optionList = datum.additionalOptionIDList else { return UICollectionViewCell() }
+                        cell.addActionSelectButton(handler: {
+                            if self.selectedPackageOptionIDList.contains(datum.optionID) {
+                                self.selectedPackageOptionIDList = self.selectedPackageOptionIDList
+                                    .filter { $0 != datum.optionID }
+                            } else {
+                                self.selectedPackageOptionIDList.append(datum.optionID)
+                            }
+                            optionList.forEach { optionID in
+                                if self.selectedOptionIDList.contains(optionID) {
+                                    self.selectedOptionIDList = self.selectedOptionIDList.filter { $0 != optionID }
+                                } else {
+                                    self.selectedOptionIDList.append(optionID)
+                                }
                             }
                         })
                         return cell
@@ -231,6 +271,10 @@ class AdditionalCollectionView: UICollectionView {
     }
     
     // MARK: - Functions
+    func setAllItemCount(count: Int) {
+        allItemCount = count
+    }
+    
     func updateCategorySnapShot(types: [TagCategoryType]) {
         var snapshot = diffableDatasource.snapshot()
         snapshot.appendSections([.category])
@@ -245,7 +289,13 @@ class AdditionalCollectionView: UICollectionView {
     }
     
     func updateItemSnapShot(data: [AdditionalOption]) {
-        allItemCount = data.count
+        var snapshot = diffableDatasource.snapshot()
+        
+        snapshot.appendItems(data.map { .all(datum: $0) }, toSection: .all)
+        diffableDatasource.apply(snapshot)
+    }
+    
+    func updatePackageItemSnapShot(data: [AdditionalOption]) {
         var snapshot = diffableDatasource.snapshot()
         if snapshot.sectionIdentifiers.contains(.other) {
             snapshot.deleteSections([.other])
@@ -256,7 +306,7 @@ class AdditionalCollectionView: UICollectionView {
         }
         snapshot.appendSections([.all])
         
-        snapshot.appendItems(data.map { .all(datum: $0) }, toSection: .all)
+        snapshot.appendItems(data.map { .packageItem(datum: $0) }, toSection: .all)
         diffableDatasource.apply(snapshot)
     }
     

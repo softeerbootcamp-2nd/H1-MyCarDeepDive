@@ -7,16 +7,6 @@
 
 import UIKit
 
-struct AdditionalOptionItem: Hashable {
-    let id: Int
-    let imageURL: String
-    let selectRate: CGFloat
-    let optionName: String
-    let optionPrice: Int
-    let badgeName: String
-    let tagList: [Tag]
-}
-
 class OptionSelectAdditionalItemCell: UICollectionViewCell {
     enum Constants {
         enum ImageView {
@@ -91,6 +81,7 @@ class OptionSelectAdditionalItemCell: UICollectionViewCell {
         imageView.image = nil
         badgeLabel.isHidden = true
         selectButton.isSelected = false
+        selectButton.removeAction(identifiedBy: UIAction.Identifier("click"), for: .touchUpInside)
     }
     
     // MARK: - Private Functions
@@ -203,7 +194,7 @@ class OptionSelectAdditionalItemCell: UICollectionViewCell {
     }
     
     func addActionSelectButton(handler: @escaping () -> Void) {
-        selectButton.addAction(UIAction(handler: { _ in
+        selectButton.addAction(UIAction(identifier: UIAction.Identifier("click"), handler: { _ in
             self.selectButton.isSelected.toggle()
             handler()
         }), for: .touchUpInside)

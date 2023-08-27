@@ -30,6 +30,8 @@ class OptionSelectViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private let viewWillAppearEvent = PassthroughSubject<Void, Never>()
     private let touchUpCategoryEvent = PassthroughSubject<Int, Never>()
+    private let selectedOptionNumberList = PassthroughSubject<[Int], Never>()
+    private let selectedPackageOptionNumberList = PassthroughSubject<[Int], Never>()
     private var viewControllers: [UIViewController] = []
     private var currentSegmentedIndex: Int = 0 {
         didSet {
@@ -78,7 +80,9 @@ class OptionSelectViewController: UIViewController {
     private func bind() {
         let input = OptionSelectViewModel.Input(
             viewWillAppearEvent: viewWillAppearEvent.eraseToAnyPublisher(),
-            touchUpcategoryEvent: touchUpCategoryEvent.eraseToAnyPublisher()
+            touchUpcategoryEvent: touchUpCategoryEvent.eraseToAnyPublisher(),
+            selectedOptionNumberList: selectedOptionNumberList.eraseToAnyPublisher(),
+            selectedPackageOptionNumberList: selectedPackageOptionNumberList.eraseToAnyPublisher()
         )
         
         let output = viewModel.transform(input: input)
@@ -117,6 +121,22 @@ class OptionSelectViewController: UIViewController {
                 guard let self,
                       let tagNumber = $0.userInfo?["tagNumber"] as? Int else { return }
                 touchUpCategoryEvent.send(tagNumber)
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name("selectedOptionNotification"))
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let optionNumbers = $0.userInfo?["optionNumbers"] as? [Int] else { return }
+                selectedOptionNumberList.send(optionNumbers)
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name("selectedPackageOptionNotification"))
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let optionNumbers = $0.userInfo?["optionNumbers"] as? [Int] else { return }
+                selectedPackageOptionNumberList.send(optionNumbers)
             })
             .store(in: &cancellables)
     }
