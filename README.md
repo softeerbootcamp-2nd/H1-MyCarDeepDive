@@ -5,6 +5,7 @@
 프로젝트 겟차를 진행하게 된 H1 팀 <b>마이카 딥 다이브(MyCar Deep Dive)</b> 입니다 🙂
 <br>
 내 차 만들기 개선에 깊게 몰두하겠습니다 🌊
+
 </div>
 <br>
 
@@ -40,9 +41,37 @@
 </table>
 <br>
 
-## GitHub Convention
+## 배포
+🚙 [MyCarDeepDive WEB](https://make-my-car.shop)   
+<br>
 
-### 브랜치 구조
+## 🛠 기술 스택
+
+### 🌐 Frontend
+|역할|종류|
+|-|-|
+|Library|<img alt="RED" src ="https://img.shields.io/badge/REACT-61DAFB.svg?&style=for-the-badge&logo=React&logoColor=white"/> 
+|Language|<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+|Styling|<img src="https://img.shields.io/badge/tailwind css-06B6D4?style=for-the-badge&logo=tailwind css&logoColor=white">|
+|Formatting|![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white)|
+|Package Manager|<img src="https://img.shields.io/badge/varn-2C8EBB?style=for-the-badge&logo=varn&logoColor=white">|                                         
+|Version Control|![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) |
+|CI/CD|![GihubAction](https://img.shields.io/badge/githubactions-2088FF?style=for-the-badge&logo={githubactions}&logoColor={white}) <img alt="RED" src ="https://img.shields.io/badge/Amazon S3-569A31.svg?&style=for-the-badge&logo=AmazonS3&logoColor=white"/> |
+<br />
+
+### 🌸 Backend
+
+###  IOS
+
+### 🖥 Common
+|역할|종류|
+|-|-|
+|협업 관리|<img alt="RED" src ="https://img.shields.io/badge/Notion-000000.svg?&style=for-the-badge&logo=Notion&logoColor=white"/> <img src="https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">
+|디자인|<img alt="RED" src ="https://img.shields.io/badge/Figma-F24E1E.svg?&style=for-the-badge&logo=Figma&logoColor=white"/>|
+|API|<img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white">      
+
+<br />
+## 브랜치 구조
 
 <pre>
 main
@@ -56,6 +85,29 @@ ios-main
 ios-dev
   ios/feature/기능
 </pre>
+---
+
+### BE Main 브랜치
+https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/be-main
+### FE Main 브랜치
+https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/fe-main
+### iOS Main 브랜치
+https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/ios-main
+
+
+## Architecture
+![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/11d66869-aed1-4478-9ab9-e439e7705722)
+
+## CI/CD
+![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/8c90869a-87fe-4f50-a794-6344b872ef09)
+
+## ERD
+![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/785bec39-f8bf-49db-8bd0-976db353408d)
+
+## API Specs
+
+https://api.make-my-car.shop/docs/swagger
+
 
 ### Commit Convention
 
@@ -101,6 +153,6 @@ ios-dev
 
 ## 기획/디자인
 
-📝 [기획서 보기](https://www.figma.com/file/p1UkFMMha9P4UvMSgxjjUJ/Handoff_guidelines?node-id=1%3A6&mode=dev)
+📝 [기획서 보기](https://www.figma.com/file/p1UkFMMha9P4UvMSgxjjUJ/Handoff_guidelines?node-id=8%3A17111&mode=dev)
 
-🌈 [디자인 보기](https://www.figma.com/file/p1UkFMMha9P4UvMSgxjjUJ/Handoff_guidelines?node-id=8%3A17111&mode=dev)
+🌈 [디자인 보기](https://www.figma.com/file/p1UkFMMha9P4UvMSgxjjUJ/Handoff_guidelines?node-id=1%3A6&mode=dev)
