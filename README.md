@@ -23,6 +23,7 @@ https://api.make-my-car.shop/docs/swagger
 - Spring Data JPA
 - Querydsl
 - SwaggerUI/RestDocs
+- Spring Batch/Scheduler
 
 [Database]
 - MySQL 8.0.34
