@@ -6,6 +6,12 @@
 
 ![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/785bec39-f8bf-49db-8bd0-976db353408d)
 
+## Architecture
+![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/11d66869-aed1-4478-9ab9-e439e7705722)
+
+## CI/CD
+![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/8c90869a-87fe-4f50-a794-6344b872ef09)
+
 ## API Specs
 
 https://api.make-my-car.shop/docs/swagger
