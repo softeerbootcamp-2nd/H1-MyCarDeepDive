@@ -79,7 +79,7 @@ function ColorSelectionPage() {
     setInteriorCarImage(
       initialAllColor?.data.interior_color_response.available_colors[
         Math.max(idx, 0)
-      ].car_img_urls[0],
+      ]?.car_img_urls[0],
     );
   }, [classifiedInteriorColor]);
 

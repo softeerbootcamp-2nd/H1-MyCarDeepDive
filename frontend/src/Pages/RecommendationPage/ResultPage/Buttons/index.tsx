@@ -35,15 +35,20 @@ function Buttons({
   const allColor: getInitialColorType | undefined = getAllColor();
   const { carDispatch } = useContext(CarContext);
 
-  const interiorChooseRateIndex =
+  let interiorChooseRateIndex =
     allColor?.data.interior_color_response.available_colors.findIndex(
       color => color.color_id === interior_color.color_id,
     );
-  const exteriorChooseRateIndex =
+  let exteriorChooseRateIndex =
     allColor?.data.exterior_color_response.available_colors.findIndex(
       color => color.color_id === exterior_color.color_id,
     );
-  if (!interiorChooseRateIndex || !exteriorChooseRateIndex) return;
+
+  if (!interiorChooseRateIndex || interiorChooseRateIndex === -1)
+    interiorChooseRateIndex = 0;
+  if (!exteriorChooseRateIndex || exteriorChooseRateIndex === -1)
+    exteriorChooseRateIndex = 0;
+
   const interiorChooseRate =
     allColor?.data.interior_color_response.available_colors[
       interiorChooseRateIndex
