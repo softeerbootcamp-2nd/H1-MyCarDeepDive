@@ -8,10 +8,6 @@
 import UIKit
 
 extension UIImageView {
-    enum ImageType {
-        case thumbnail
-        case normal
-    }
     func setImage(urlString: String) {
         Task(operation: {
             do {
@@ -57,9 +53,7 @@ extension UIImageView {
         }
     }
     
-    private func setImage(image: UIImage?) {
-        DispatchQueue.main.async {
-            self.image = image
-        }
+    @MainActor private func setImage(image: UIImage?) {
+        self.image = image
     }
 }
