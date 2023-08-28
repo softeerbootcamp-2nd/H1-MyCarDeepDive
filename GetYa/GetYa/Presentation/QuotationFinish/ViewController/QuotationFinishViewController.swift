@@ -79,8 +79,8 @@ class QuotationFinishViewController: BaseViewController {
     }
     private let thumbnailView = QuotationFinishThumbnailView()
     private let carInfoView = CommonQuotationPreviewCarInfoView()
-    private let qoutateTableView = QuotationTableView()
-    private var quotateTableViewTopConstraint: NSLayoutConstraint!
+    private let quotateTableView = QuotationTableView()
+    private var quotateTableViewHeightConstraint: NSLayoutConstraint!
     private let totalNameAndPriceView: OptionNameAndPriceView = OptionNameAndPriceView().set {
         $0.setNameLabelColor(color: .GetYaPalette.gray400)
         $0.setNameLabelFont(fontType: .mediumBody3)
@@ -277,7 +277,7 @@ class QuotationFinishViewController: BaseViewController {
         contentView.addSubviews([
             thumbnailView,
             carInfoView,
-            qoutateTableView,
+            quotateTableView,
             totalNameAndPriceView,
             shareButton,
             pdfButton,
@@ -361,17 +361,17 @@ class QuotationFinishViewController: BaseViewController {
     private func configureQuotationTableView() {
         typealias Const = Constatns.QoutateTableView
         typealias ConstTable = QuotationTableView.Constants
-        quotateTableViewTopConstraint = qoutateTableView.heightAnchor.constraint(
+        quotateTableViewHeightConstraint = quotateTableView.heightAnchor.constraint(
             equalToConstant: ConstTable.headerHeight * 2 + Const.basicHeight)
         NSLayoutConstraint.activate([
-            qoutateTableView.topAnchor.constraint(equalTo: carInfoView.bottomAnchor),
-            qoutateTableView.leadingAnchor.constraint(
+            quotateTableView.topAnchor.constraint(equalTo: carInfoView.bottomAnchor),
+            quotateTableView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
                 constant: Const.leadingMargin),
-            qoutateTableView.trailingAnchor.constraint(
+            quotateTableView.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
                 constant: Const.trailingMargin),
-            quotateTableViewTopConstraint
+            quotateTableViewHeightConstraint
         ])
     }
     
@@ -382,9 +382,9 @@ class QuotationFinishViewController: BaseViewController {
         if optionCount != 0 {
             height += ConstTable.headerHeight + ConstTable.cellHeight * CGFloat(optionCount)
         }
-        quotateTableViewTopConstraint.isActive = false
-        quotateTableViewTopConstraint.constant = height
-        quotateTableViewTopConstraint.isActive = true
+        quotateTableViewHeightConstraint.isActive = false
+        quotateTableViewHeightConstraint.constant = height
+        quotateTableViewHeightConstraint.isActive = true
     }
     
     private func configureTotalNameAndPriceView() {
@@ -392,7 +392,7 @@ class QuotationFinishViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             totalNameAndPriceView.topAnchor.constraint(
-                equalTo: qoutateTableView.bottomAnchor,
+                equalTo: quotateTableView.bottomAnchor,
                 constant: Const.topMargin),
             totalNameAndPriceView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
@@ -525,7 +525,7 @@ class QuotationFinishViewController: BaseViewController {
                     carInquery.drivingSystemName,
                     carInquery.bodyName
                 ].joined(separator: " ・ ")))
-        qoutateTableView.setData(
+        quotateTableView.setData(
             colorNames: [carInquery.exteriorColorName, carInquery.interiorColorName],
             colorImageURLArray: [carInquery.exteriorColorImageURL, carInquery.interiorColorImageURL],
             colorPrices: [carInquery.exteriorColorPrice, carInquery.interiorColorPrice],

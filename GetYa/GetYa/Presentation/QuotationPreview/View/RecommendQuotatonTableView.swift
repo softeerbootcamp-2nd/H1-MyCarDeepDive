@@ -1,16 +1,16 @@
 //
-//  QuotationTableView.swift
+//  RecommendQuotatonTableView.swift
 //  GetYa
 //
-//  Created by 배남석 on 2023/08/19.
+//  Created by 배남석 on 2023/08/28.
 //
 
 import UIKit
 
-class QuotationTableView: UITableView {
+class RecommendQuotatonTableView: UITableView {
     enum Constants {
         static let headerHeight: CGFloat = .toScaledHeight(value: 42)
-        static let cellHeight: CGFloat = .toScaledHeight(value: 72)
+        static let cellHeight: CGFloat = .toScaledHeight(value: 140)
     }
     
     // MARK: - UI properties
@@ -20,6 +20,7 @@ class QuotationTableView: UITableView {
     private var colorNames: [String] = []
     private var colorPrices: [Int] = []
     private var optionList: [QuotationOption] = []
+    private var reviewTexts: [String] = []
     
     // MARK: - Lifecycles
     convenience init() {
@@ -48,9 +49,11 @@ class QuotationTableView: UITableView {
         backgroundColor = .GetYaPalette.gray700
         sectionHeaderTopPadding = 1
         contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
+        rowHeight = UITableView.automaticDimension
+        estimatedRowHeight = Constants.cellHeight
         register(
-            QuotationFinishCell.self,
-            forCellReuseIdentifier: QuotationFinishCell.identifier)
+            RecommendQuotationCell.self,
+            forCellReuseIdentifier: RecommendQuotationCell.identifier)
         register(
             CommonTableHeaderView.self,
             forHeaderFooterViewReuseIdentifier: CommonTableHeaderView.identifier)
@@ -70,11 +73,15 @@ class QuotationTableView: UITableView {
         self.reloadData()
     }
     
+    func setReviewTexts(texts: [String]) {
+        self.reviewTexts = texts
+    }
+    
     // MARK: - Objc Functions
 }
 
 // MARK: - UITableViewDelegate
-extension QuotationTableView: UITableViewDelegate {
+extension RecommendQuotatonTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: CommonTableHeaderView.identifier
@@ -104,7 +111,7 @@ extension QuotationTableView: UITableViewDelegate {
 }
 
 // MARK: - UITableViewDatasource
-extension QuotationTableView: UITableViewDataSource {
+extension RecommendQuotatonTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -119,8 +126,8 @@ extension QuotationTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: QuotationFinishCell.identifier,
-            for: indexPath) as? QuotationFinishCell else {
+            withIdentifier: RecommendQuotationCell.identifier,
+            for: indexPath) as? RecommendQuotationCell else {
             return UITableViewCell()
         }
         
@@ -135,6 +142,7 @@ extension QuotationTableView: UITableViewDataSource {
                 name: optionList[indexPath.row].optionName,
                 price: optionList[indexPath.row].price)
         }
+        cell.setText(text: reviewTexts[indexPath.row])
         return cell
     }
 }

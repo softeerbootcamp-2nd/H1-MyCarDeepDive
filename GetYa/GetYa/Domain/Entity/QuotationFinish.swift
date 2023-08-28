@@ -19,7 +19,7 @@ struct QuotationFinish: Codable {
     let interiorColorName: String
     let interiorColorImageURL: String
     let interiorColorPrice: Int
-    let optionList: [OptionInfo]
+    let optionList: [QuotationOption]
     let basicPrice: Int
     let pdfURL: String
     let totalPrice: Int
