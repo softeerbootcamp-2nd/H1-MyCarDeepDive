@@ -7,21 +7,7 @@
 
 import Combine
 
-struct DetailQuotationPreviewInput {
-    let viewDidLoad: AnyPublisher<Void, Never>
-    // 이 경우 화면에서 추천된 데이터들을 기반으로 2-1, 3-1화면으로 이동해야 합니다..
-    let customButtonEvent: AnyPublisher<Void, Never>
-    let quickQuoteEvent: AnyPublisher<Void, Never>
-}
-
-enum DetailQuotationPreviewState {
-    case none
-    case updateRecommendThumbnailKeywords
-    case gotoCustomPage
-    case gotoCompletionPage
-}
-
-protocol DetailQuotationPreviewViewModelable: ViewModelable 
-where Input == DetailQuotationPreviewInput,
-      State == DetailQuotationPreviewState,
+protocol DetailQuotationPreviewViewModelable: ViewModelable
+where Input == DetailQuotationPreviewViewModel.DetailQuotationPreviewInput,
+      State == DetailQuotationPreviewViewModel.DetailQuotationPreviewState,
       Output == AnyPublisher<State, Never> { }

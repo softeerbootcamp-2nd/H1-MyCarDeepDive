@@ -20,47 +20,66 @@ struct QuotationPreviewMainHeaderModel {
     var thumbnailKeywords: [String]
     var recommendCarProductOption: QuotationPreviewCarInfoModel
     var firstSectionTitle: String
-}
-
-final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewModel {
-    // TODO: 서버에서 받아와야 할 데이터
-    // MARK: - Properties
-    private var mainSectionHeader: QuotationPreviewMainHeaderModel = .init(
-        thumbnailKeywords: [],
-        recommendCarProductOption: .init(
+    var thumbnailUrl: String
+    
+    init(
+        thumbnailKeywords: [String] = [],
+        recommendCarProductOption: QuotationPreviewCarInfoModel = .init(
             carName: "",
             trimName: "",
             carPrice: "",
             carOptions: ""),
-        firstSectionTitle: "")
-    private var sectionHeaders: [String] = []
-    private var secondSectionFooter: String = ""
-    
-    init(
-        mainSectionHeader: QuotationPreviewMainHeaderModel,
-        sectionHeaders: [String],
-        secondSectionFooter: String
+        firstSectionTitle: String = "",
+        thumbnailUrl: String = ""
     ) {
-        self.mainSectionHeader = mainSectionHeader
-        self.sectionHeaders = sectionHeaders
-        self.secondSectionFooter = secondSectionFooter
-        super.init(
-            dataSource: QuotationPreviewCarProductOptionModel.mocks)
+        self.thumbnailKeywords = thumbnailKeywords
+        self.recommendCarProductOption = recommendCarProductOption
+        self.firstSectionTitle = firstSectionTitle
+        self.thumbnailUrl = thumbnailUrl
     }
-    override init() {
-        mainSectionHeader = .mock
-        sectionHeaders = QuotationPreviewHeaderTitleList.lists
-        secondSectionFooter = "48,120,000원"
-        super.init(dataSource: QuotationPreviewCarProductOptionModel.mocks)
-    }
+}
 
-    init(keywords: [String]) {
-        mainSectionHeader.thumbnailKeywords = keywords
-        mainSectionHeader = .mock
+final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewModel {
+    // MARK: - Input
+    struct DetailQuotationPreviewInput {
+        let viewDidLoadEvent: AnyPublisher<Void, Never>
+        let customButtonEvent: AnyPublisher<Void, Never>
+        let quickQuoteEvent: AnyPublisher<Void, Never>
+    }
+    
+    // MARK: - Output state
+    enum DetailQuotationPreviewState {
+        case none
+        case updateDetailQuotationPreview
+        case gotoCustomPage(DefaultTrimCarSpec)
+        case gotoCompletionPage(ContractionQuotation)
+    }
+    
+    // MARK: - Dependencies
+    private let quotationUseCase: QuotationUseCase!
+    
+    // MARK: - Properties
+    private var mainSectionHeader = QuotationPreviewMainHeaderModel()
+    private var sectionHeaders: [String] = []
+    private var secondSectionFooter: String = "데이터 불러오는 중입니다."
+    private var trimCarSpec = DefaultTrimCarSpec(
+        engineId: 0,
+        bodyId: 0,
+        drivingSystemId: 0)
+    private var contractionQuotation = ContractionQuotation(
+        carSpecID: 0,
+        trimID: 0,
+        exteriorColorID: 0,
+        interiorColorID: 0,
+        additionalOptionIDList: [])
+    private var subscriptions = Set<AnyCancellable>()
+
+    // MARK: - Lifecycles
+    init(keywords: [String], quotationUseCase: QuotationUseCase) {
+        self.quotationUseCase = quotationUseCase
         mainSectionHeader.thumbnailKeywords = keywords
         sectionHeaders = QuotationPreviewHeaderTitleList.lists
-        secondSectionFooter = "48,120,000원"
-        super.init(dataSource: QuotationPreviewCarProductOptionModel.mocks)
+        super.init(dataSource: [[]])
     }
 }
 
@@ -70,36 +89,97 @@ extension DetailQuotationPreviewViewModel: DetailQuotationPreviewViewModelable {
         return Publishers.MergeMany(
             customButtonEventChains(input),
             quickQuoteEventChains(input),
-            viewDidLoadChains(input)
+            viewDidLoadChains(input),
+            updateQuotationPreview()
         ).eraseToAnyPublisher()
     }
 }
 
 // MARK: - CharacterSelectSuccessViewModelable private function
 private extension DetailQuotationPreviewViewModel {
+    
+    func updateQuotationPreview() -> Output {
+        return quotationUseCase.carQuotation.map { [weak self] quotation -> State in
+            let carOptions = [
+                quotation.engineName,
+                quotation.drivingSystemName,
+                quotation.bodyName
+            ].joined(separator: " ・ ")
+            let exteriorColor = quotation.exteriorColor
+            let interiorColor = quotation.interiorColor
+            self?.trimCarSpec = DefaultTrimCarSpec(
+                engineId: quotation.engineID,
+                bodyId: quotation.bodyID,
+                drivingSystemId: quotation.drivingSystemID)
+            self?.contractionQuotation = ContractionQuotation(
+                carSpecID: quotation.carSpecID,
+                trimID: quotation.trimID,
+                exteriorColorID: exteriorColor.colorID,
+                interiorColorID: interiorColor.colorID,
+                additionalOptionIDList: [])
+            
+            let recommendCarProductOption = QuotationPreviewCarInfoModel(
+                carName: "펠리세이드",
+                trimName: quotation.trimName,
+                carPrice: quotation.trimPrice.toPriceFormat+"원",
+                carOptions: carOptions)
+                self?.mainSectionHeader.recommendCarProductOption = recommendCarProductOption
+                self?.mainSectionHeader.firstSectionTitle = "색상"
+                self?.mainSectionHeader.thumbnailUrl = quotation.carImageURL
+                self?.secondSectionFooter = quotation.totalPrice.toPriceFormat+"원"
+            let optionList: [[QuotationOption]] = [
+                [.init(optionID: exteriorColor.colorID,
+                       optionName: exteriorColor.colorName,
+                       optionImageURL: exteriorColor.colorImageURL,
+                       price: exteriorColor.price,
+                       comment : exteriorColor.comment),
+                 .init(optionID: interiorColor.colorID,
+                       optionName: interiorColor.colorName,
+                       optionImageURL: interiorColor.colorImageURL,
+                       price: interiorColor.price,
+                       comment: interiorColor.comment)],
+                quotation.options,
+                quotation.packages]
+                self?.setDataSource(with: optionList)
+            return .updateDetailQuotationPreview
+        }.eraseToAnyPublisher()
+    }
+    
     func customButtonEventChains(_ input: Input) -> Output {
         return input.customButtonEvent
-            .map { _ -> State in return .gotoCustomPage }
+            .map { [weak self] _ -> State in
+                guard let self else { return .none }
+                return .gotoCustomPage(trimCarSpec)
+            }
             .eraseToAnyPublisher()
     }
     
-    // 서버에서 받아와서 업데이트?!
     func quickQuoteEventChains(_ input: Input) -> Output {
         return input.quickQuoteEvent
-            .map { _ -> State in return .updateRecommendThumbnailKeywords }
+            .map { [weak self] _ -> State in
+                guard let self else { return .none }
+                return .gotoCompletionPage(contractionQuotation)
+            }
             .eraseToAnyPublisher()
     }
     
     func viewDidLoadChains(_ input: Input) -> Output {
-        return input.viewDidLoad
-            .map { _ -> State in return .none }
+        return input.viewDidLoadEvent
+            .map { [weak self] _ -> State in
+                self?.quotationUseCase.fetchCarQuotation()
+                return .none
+            }
             .eraseToAnyPublisher()
     }
 }
 
 // MARK: - CharacterSSTableViewAdapterDataSource
 extension DetailQuotationPreviewViewModel: DetailQuotationPreviewAdapterDataSource {
-    var secondSectionFooterItem: String {
+    var lastSectionHeaderItem: String {
+        sectionHeaders[2]
+    }
+    
+    var lastSectionFooterItem: String {
         secondSectionFooter
     }
     

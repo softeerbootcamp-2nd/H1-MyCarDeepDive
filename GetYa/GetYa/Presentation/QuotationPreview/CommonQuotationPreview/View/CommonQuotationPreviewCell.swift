@@ -59,7 +59,7 @@ final class CommonQuotationPreviewCell: UITableViewCell {
         padding: .init(top: 12, left: 12, bottom: 12, right: 12),
         fontType: Constants.ReviewdTextView.fontType,
         color: .GetYaPalette.acriveBlue,
-        text: "리뷰를 불러오고 있습니다 ..."
+        text: ""
     ).set {
         $0.layer.cornerRadius = Constants.ReviewdTextView.radius
         $0.clipsToBounds = true
@@ -69,8 +69,7 @@ final class CommonQuotationPreviewCell: UITableViewCell {
     // MARK: - Lifecycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-        setupUI()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -79,23 +78,28 @@ final class CommonQuotationPreviewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        let reset = QuotationPreviewCarProductOptionModel(
-            optionImage: "",
+        let reset = QuotationOption(
+            optionID: nil,
             optionName: "",
-            optionPrice: 0,
-            optionReview: nil)
+            optionImageURL: "",
+            price: 0,
+            comment: nil)
         configure(with: reset)
     }
     
     // MARK: - Functions
-    func configure(with productOptionModel: QuotationPreviewCarProductOptionModel) {
-        recommendCarOptionView.configureDetail(
-            imageURL: productOptionModel.optionImage,
-            title: productOptionModel.optionName,
-            price: productOptionModel.optionPrice)
-        reviewdTextView.text = productOptionModel.optionReview
+    func configureUI() {
+        selectionStyle = .none
+        setupUI()
     }
-    // MARK: - Objc Functions
+    func configure(with productOptionModel: QuotationOption) {
+        let url = productOptionModel.optionImageURL.replacingOccurrences(of: "\r", with: "")
+        recommendCarOptionView.configureDetail(
+            imageURL: url,
+            title: productOptionModel.optionName,
+            price: productOptionModel.price)
+        reviewdTextView.text = productOptionModel.comment
+    }
 }
 
 // MARK: - LayoutSupportable

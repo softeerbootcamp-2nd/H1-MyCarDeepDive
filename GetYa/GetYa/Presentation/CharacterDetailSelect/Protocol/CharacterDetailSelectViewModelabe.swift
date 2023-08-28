@@ -14,7 +14,7 @@ struct CharacterDetailSelectInput {
 }
 
 enum CharacterDetailSelectState {
-    case gotoDetailQuotationPreviewPage(userSelection: [String])
+    case gotoDetailQuotationPreviewPage(userSelection: [String], userSelectIndexList: [Int])
     case gotoNextQuestionPage
     case makeQuestions(
         numberOfSteps: Int,

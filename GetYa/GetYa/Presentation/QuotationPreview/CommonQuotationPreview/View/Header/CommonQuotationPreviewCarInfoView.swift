@@ -83,6 +83,10 @@ class CommonQuotationPreviewCarInfoView: UIView {
             $0.text = recommendCarInfo.carOptions
         }
     }
+    
+    func setCarOptionsLabelBottomConstraint() {
+        carOptionsLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
 }
 
 // MARK: - LayoutSupportable

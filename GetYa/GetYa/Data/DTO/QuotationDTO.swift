@@ -73,5 +73,4 @@ struct QuotationDTO: Decodable {
             totalPrice: totalPrice
         )
     }
-            
 }

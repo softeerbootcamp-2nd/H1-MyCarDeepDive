@@ -36,10 +36,10 @@ final class DetailQuotationPreviewThumbnailView: UIView {
             static let fontColor: UIColor = .GetYaPalette.gray200
         }
         enum RecommendCarImageView {
-            static let leadingMargin = CGFloat(62).scaledWidth
+            static let leadingMargin = CGFloat(162).scaledWidth
             static let topMargin = CGFloat(25).scaledHeight
             static let bottomMargin = CGFloat(11).scaledHeight
-            static let imageName: String = "characterSelectSuccessCar"
+            static let height = CGFloat(250).scaledHeight
         }
         enum RecommendCarBackgroundView {
             static let height = CGFloat(131).scaledHeight
@@ -58,9 +58,7 @@ final class DetailQuotationPreviewThumbnailView: UIView {
         color: Constants.RecommendSubDiscriptionView.fontColor,
         text: "전국의 Car master 분들이 엄선하여 추천했어요"
     )
-    private let recommendCarImageView = UIImageView(
-        image: .init(named: Constants.RecommendCarImageView.imageName)
-    ).set {
+    private let recommendCarImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
     }
@@ -132,6 +130,10 @@ final class DetailQuotationPreviewThumbnailView: UIView {
     func configureUI() {
         setupUI()
         bringSubviewToFront(recommendCarImageView)
+    }
+    
+    func configure(imageUrl: String) {
+        recommendCarImageView.setImage(urlString: imageUrl)
     }
     
     func configureRecommendKeywordStackView(_ texts: [String]) {
@@ -242,7 +244,7 @@ private extension DetailQuotationPreviewThumbnailView {
                 equalTo: recommendCarBackgroundView.topAnchor,
                 constant: -Const.bottomMargin),
             recommendSubDiscriptionView.heightAnchor.constraint(
-                lessThanOrEqualToConstant: Const.font.lineHeight)])
+                equalToConstant: Const.font.lineHeight)])
     }
     
     func configurerecommendCarImageView() {
@@ -257,8 +259,9 @@ private extension DetailQuotationPreviewThumbnailView {
             recommendCarImageView.trailingAnchor.constraint(
                 equalTo: trailingAnchor),
             recommendCarImageView.topAnchor.constraint(
-                greaterThanOrEqualTo: recommendSubDiscriptionView.bottomAnchor,
-                constant: Const.topMargin)])
+                equalTo: recommendDiscriptionView.bottomAnchor),
+            recommendCarImageView.heightAnchor.constraint(
+                lessThanOrEqualToConstant: Const.height)])
     }
     
     func configureRecommendCarBackgroundView() {
@@ -269,8 +272,6 @@ private extension DetailQuotationPreviewThumbnailView {
             recommendCarBackgroundView.trailingAnchor.constraint(
                 equalTo: trailingAnchor),
             recommendCarBackgroundView.bottomAnchor.constraint(
-                equalTo: bottomAnchor),
-            recommendCarBackgroundView.heightAnchor.constraint(
-                equalToConstant: Const.height)])
+                equalTo: bottomAnchor)])
     }
 }

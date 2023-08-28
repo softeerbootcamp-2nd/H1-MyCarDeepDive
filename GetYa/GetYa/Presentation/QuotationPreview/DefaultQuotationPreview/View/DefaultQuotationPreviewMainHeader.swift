@@ -1,19 +1,19 @@
 //
-//  DetailQuotationPreviewMainHeader.swift
+//  DefaultQuotationPreviewMainHeader.swift
 //  GetYa
 //
-//  Created by 양승현 on 2023/08/08.
+//  Created by 양승현 on 2023/08/18.
 //
 
 import UIKit
 
-final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
-    static let identifier = "DetailQuotationPreviewMainHeader"
+final class DefaultQuotationPreviewMainHeader: UITableViewHeaderFooterView {
+    static let identifier = "DefaultQuotationPreviewMainHeader"
     enum Constants {
         static let intrinsicContentHeight: CGFloat = {
-            let thumbnailViewHeight = DetailQuotationPreviewThumbnailView
-            .Constants
-            .intrinsicContentHeight
+            let thumbnailViewHeight = DefaultQuotationPreviewThumbnailView
+                .Constants
+                .intrinsicContentHeight
             let recommendCarInfoHeight = CommonQuotationPreviewCarInfoView
                 .Constants
                 .intrinsicContentHeight
@@ -25,14 +25,14 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
     }
     
     // MARK: - UI properties
-    private let thumbnailView = DetailQuotationPreviewThumbnailView()
+    private let thumbnailView = DefaultQuotationPreviewThumbnailView()
     private let recommendCarInfoView = CommonQuotationPreviewCarInfoView()
     private let sectionDivider = CommonQuotationPreviewTitleView()
     
     // MARK: - Lifecycles
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        configureUI()
+        setupUI()
     }
     
     convenience init() {
@@ -41,30 +41,21 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureUI()
+        setupUI()
     }
     
     // MARK: - Functions
-    func configureUI() {
-        setupUI()
-        recommendCarInfoView.setCarOptionsLabelBottomConstraint()
-    }
-    func configure(with: QuotationPreviewMainHeaderModel) {
-        setThumbnailView(with.thumbnailKeywords)
+    func configure(with: DefaultQuotationPreviewMainHeaderModel) {
+        setThumbnailView(with.carName, imageUrl: with.carImageUrl)
         setRecommendCarInfoView(with.recommendCarProductOption)
         setSectionDivider(with.firstSectionTitle)
-        thumbnailView.configure(imageUrl: with.thumbnailUrl)
     }
     
     func showAnimation() {
-        thumbnailView.setInitialCarImageForAnimation()
-        thumbnailView.showCarImageAnimation()
+        thumbnailView.showAnimation()
     }
     
     // MARK: - Private functions
-    private func setThumbnailView(_ thumbnailKeywords: [String]) {
-        thumbnailView.configureRecommendKeywordStackView(thumbnailKeywords)
-    }
     
     private func setRecommendCarInfoView(_ carInfo: QuotationPreviewCarInfoModel) {
         recommendCarInfoView.configure(with: carInfo)
@@ -73,12 +64,17 @@ final class DetailQuotationPreviewMainHeader: UITableViewHeaderFooterView {
     private func setSectionDivider(_ title: String) {
         sectionDivider.configureSectionTitle(with: title)
     }
+    
+    private func setThumbnailView(_ carName: String, imageUrl: String) {
+        thumbnailView.configure(carName: carName, carImageUrl: imageUrl)
+    }
 }
 
 // MARK: - LayoutSupportable
-extension DetailQuotationPreviewMainHeader: LayoutSupportable {
+extension DefaultQuotationPreviewMainHeader: LayoutSupportable {
     func setupViews() {
-        addSubviews([thumbnailView,
+        addSubviews([
+            thumbnailView,
             recommendCarInfoView,
             sectionDivider])
         
@@ -92,15 +88,17 @@ extension DetailQuotationPreviewMainHeader: LayoutSupportable {
 }
 
 // MARK: - LayoutSupportable private functions
-private extension DetailQuotationPreviewMainHeader {
+private extension DefaultQuotationPreviewMainHeader {
     func configureThumbnailView() {
-        typealias Const = DetailQuotationPreviewThumbnailView.Constants
+        typealias Const = DefaultQuotationPreviewThumbnailView.Constants
         NSLayoutConstraint.activate([
             thumbnailView.leadingAnchor.constraint(
                 equalTo: leadingAnchor),
             thumbnailView.trailingAnchor.constraint(
                 equalTo: trailingAnchor),
-            thumbnailView.topAnchor.constraint(equalTo: topAnchor)])
+            thumbnailView.topAnchor.constraint(equalTo: topAnchor),
+            thumbnailView.heightAnchor.constraint(
+                equalToConstant: Const.intrinsicContentHeight)])
     }
     
     func configureRecommendCarInfo() {
@@ -109,17 +107,14 @@ private extension DetailQuotationPreviewMainHeader {
             recommendCarInfoView.leadingAnchor.constraint(equalTo: leadingAnchor),
             recommendCarInfoView.trailingAnchor.constraint(equalTo: trailingAnchor),
             recommendCarInfoView.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor),
-            recommendCarInfoView.heightAnchor.constraint(lessThanOrEqualToConstant: Const.intrinsicContentHeight)])
+            recommendCarInfoView.heightAnchor.constraint(equalToConstant: Const.intrinsicContentHeight)])
     }
     
     func configureSectionDivider() {
-        typealias Const = CommonQuotationPreviewTitleView.Constants
         NSLayoutConstraint.activate([
             sectionDivider.leadingAnchor.constraint(equalTo: leadingAnchor),
             sectionDivider.trailingAnchor.constraint(equalTo: trailingAnchor),
             sectionDivider.topAnchor.constraint(equalTo: recommendCarInfoView.bottomAnchor),
-            sectionDivider.heightAnchor.constraint(
-                equalToConstant: Const.intrinsicContentHeight),
             sectionDivider.bottomAnchor.constraint(equalTo: bottomAnchor)])
     }
 }

@@ -10,7 +10,10 @@ import UIKit
 final class DetailQuotationPreviewFooterView: UITableViewHeaderFooterView {
     static let identifier = "DetailRecommendCarResultFooter"
     enum Constants {
-        static let intrinsicContentHeight: CGFloat = OnePixelDivider.topMargin + TotalMoneyDescriptionLabel.topMargin + GetYaFont.mediumBody3.lineHeight
+        static let intrinsicContentHeight: CGFloat = (
+            OnePixelDivider.topMargin +
+            TotalMoneyDescriptionLabel.topMargin +
+            GetYaFont.mediumBody3.lineHeight)
         enum OnePixelDivider {
             static let topMargin: CGFloat = .toScaledHeight(value: 20)
             static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
