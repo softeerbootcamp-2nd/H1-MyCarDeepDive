@@ -162,7 +162,6 @@ class QuotationFinishViewController: BaseViewController {
                 .firstIndex(where: {
                     $0 is TrimSelectViewController
                 }) {
-                print(trimViewControllerIndex)
             } else {
                 let provider = SessionProvider()
                 let useCase = DefaultCarSettingUseCase(
