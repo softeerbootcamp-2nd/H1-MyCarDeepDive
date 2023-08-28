@@ -66,8 +66,15 @@ https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/be-main
 https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/fe-main
 ### iOS Main 브랜치
 https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/ios-main
-## ERD
 
+
+## Architecture
+![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/11d66869-aed1-4478-9ab9-e439e7705722)
+
+## CI/CD
+![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/8c90869a-87fe-4f50-a794-6344b872ef09)
+
+## ERD
 ![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/785bec39-f8bf-49db-8bd0-976db353408d)
 
 ## API Specs
