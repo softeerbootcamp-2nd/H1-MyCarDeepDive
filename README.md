@@ -69,14 +69,31 @@
 |Version Control|![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) |
 |CI/CD|![GihubAction](https://img.shields.io/badge/githubactions-2088FF?style=for-the-badge&logo={githubactions}&logoColor={white}) <img alt="RED" src ="https://img.shields.io/badge/Amazon S3-569A31.svg?&style=for-the-badge&logo=AmazonS3&logoColor=white"/> |
 <br />
+
 ###  IOS
+|역할|종류|
+|-|-|
+|Library|<img alt="RED" src ="https://img.shields.io/badge/Combine-61DAFB.svg?&style=for-the-badge&logo=Swift&logoColor=white"/>
+|Language|<img src="https://img.shields.io/badge/UIKit-61DAFB.svg?&style=for-the-badge&logo=Swift&logoColor=white">
+|Styling|<img src="https://img.shields.io/badge/Async/await-61DAFB.svg?&style=for-the-badge&logo=Swift&logoColor=white"> <img alt=“RED” src ="https://img.shields.io/badge/NSLayoutAnchor-61DAFB.svg?&style=for-the-badge&logo=Swift&logoColor=white"/>|
+<br />
 
 ### 🖥 Common
 |역할|종류|
 |-|-|
 |협업 관리|<img alt="RED" src ="https://img.shields.io/badge/Notion-000000.svg?&style=for-the-badge&logo=Notion&logoColor=white"/> <img src="https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">
 |디자인|<img alt="RED" src ="https://img.shields.io/badge/Figma-F24E1E.svg?&style=for-the-badge&logo=Figma&logoColor=white"/>|
-|API|<img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white">      
+|API|<img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white">  
+
+## 화면
+
+[[프론트엔드 데모영상]<img width="1728" alt="image" src="https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/52223965/0b131953-5bfd-4e9c-ad02-fa966de289c0">](https://www.youtube.com/watch?v=THf_hKOR6ko)
+
+[[iOS 데모영상](https://youtu.be/ZK6m_CGFq_E)]
+
+<img width="375" alt="썸네일2" src="https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/52223965/d8099614-d5d9-4149-9d7b-0c801a428fcd">
+
+<br /><br />
 
 <br />
 ## 브랜치 구조
