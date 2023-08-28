@@ -102,7 +102,7 @@ function TrimSelectionPage() {
     const trimIndex = getTrimInfo?.data.car_specs.findIndex(
       trim => trim.car_spec_id === carSpec.id,
     );
-    if (trimIndex === undefined) return;
+    if (trimIndex === -1 || trimIndex === undefined) return;
     const trimImage = getTrimInfo?.data.car_specs[trimIndex].trim_img_url;
     if (!trimImage) return;
     setTrimImage(trimImage);
