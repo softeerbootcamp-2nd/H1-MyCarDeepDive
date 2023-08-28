@@ -5,6 +5,7 @@
 프로젝트 겟차를 진행하게 된 H1 팀 <b>마이카 딥 다이브(MyCar Deep Dive)</b> 입니다 🙂
 <br>
 내 차 만들기 개선에 깊게 몰두하겠습니다 🌊
+
 </div>
 <br>
 
@@ -40,9 +41,10 @@
 </table>
 <br>
 
-## GitHub Convention
+## 배포
+Web: https://make-my-car.shop
 
-### 브랜치 구조
+## 브랜치 구조
 
 <pre>
 main
@@ -56,6 +58,61 @@ ios-main
 ios-dev
   ios/feature/기능
 </pre>
+---
+
+### BE Main 브랜치
+https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/be-main
+### iOS Main 브랜치
+https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/fe-main
+### iOS Main 브랜치
+https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/ios-main
+## ERD
+
+![](https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/assets/73146678/785bec39-f8bf-49db-8bd0-976db353408d)
+
+## API Specs
+
+https://api.make-my-car.shop/docs/swagger
+
+## Tech Spec
+
+[Backend]
+- Java 11
+- Spring Boot 2.7.1
+- Spring Data JPA
+- Querydsl
+- SwaggerUI/RestDocs
+
+[Database]
+- MySQL 8.0.34
+- H2 Database
+- Flyway
+
+[Testing]
+- Jacoco
+- MockMVC
+
+[DevOps]
+- Github Action
+- Docker
+- Spotless
+- AWS EC2 (Ubuntu 18.04)
+- AWS S3
+- AWS CloudFront
+
+[Logging]
+- Actuator
+- Grafana
+- Prometheus
+- Filebeat
+- Logstash
+- ElasticSearch
+- Kibana
+
+[ETC]
+- AWS Parameter Store
+
+
 
 ### Commit Convention
 
