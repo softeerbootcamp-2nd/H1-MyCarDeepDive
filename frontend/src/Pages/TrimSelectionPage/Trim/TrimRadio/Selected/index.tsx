@@ -17,7 +17,7 @@ export interface Props {
   optionToolTipHandler: (
     x: number | undefined,
     y: number | undefined,
-    target: string,
+    targetId: number,
   ) => void;
 }
 
