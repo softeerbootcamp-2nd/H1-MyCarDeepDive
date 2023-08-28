@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.h1.mycardeepdive.pdf.ui.dto.SimpleOption;
+import java.time.LocalDateTime;
 import java.util.*;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
@@ -57,6 +58,7 @@ public class PdfInfoTest {
                         .optionList(optionList)
                         .basic_price(basicPrice)
                         .pdf_url(pdfUrl)
+                        .creationDate(LocalDateTime.now())
                         .build();
 
         // then
