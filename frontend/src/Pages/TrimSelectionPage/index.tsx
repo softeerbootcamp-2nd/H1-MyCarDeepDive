@@ -38,7 +38,7 @@ function TrimSelectionPage() {
   const [optionToolTipInfo, setOptionToolTopInfo] = useState({
     x: 0,
     y: 0,
-    name: '',
+    id: 0,
   });
 
   const wantedTrimHandler = ({
@@ -74,13 +74,13 @@ function TrimSelectionPage() {
   const optionToolTipHandler = (
     x: number | undefined,
     y: number | undefined,
-    target: string,
+    target: number,
   ) => {
     if (!x || !y) return;
     setOptionToolTopInfo({
       x: x - 12,
       y: y,
-      name: target,
+      id: target,
     });
     setShowOptionToolTip(true);
   };
