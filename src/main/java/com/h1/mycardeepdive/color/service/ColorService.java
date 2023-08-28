@@ -43,6 +43,7 @@ public class ColorService {
                 availableColorInfos.add(toExteriorColorInfo(exteriorColor, trim));
 
             } else {
+                // todo(else문 최소화)
                 unavailableColors.add(exteriorColor);
                 unavailableColorInfos.add(toExteriorColorInfo(exteriorColor, trim));
             }
@@ -50,6 +51,7 @@ public class ColorService {
         allExteriorColors.removeAll(availableColors);
         allExteriorColors.removeAll(unavailableColors);
         for (ExteriorColor exteriorColor : allExteriorColors) {
+            // todo(매직넘버로 묶기 0)
             Trim trim = exteriorColor.getTrimExteriorColors().get(0).getTrim();
             otherTrimColorInfos.add(toExteriorColorInfo(exteriorColor, trim));
         }
@@ -76,6 +78,7 @@ public class ColorService {
                 availableColors.add(interiorColor);
                 availableColorInfos.add(toInteriorColorInfo(interiorColor, trim));
             } else {
+                // todo(else문 최소화)
                 unavailableColors.add(interiorColor);
                 unavailableColorInfos.add(toInteriorColorInfo(interiorColor, trim));
             }
@@ -83,6 +86,7 @@ public class ColorService {
         allInteriorColors.removeAll(availableColors);
         allInteriorColors.removeAll(unavailableColors);
         for (InteriorColor interiorColor : allInteriorColors) {
+            // todo(매직넘버로 묶기 0)
             Trim trim = interiorColor.getTrimInteriorColors().get(0).getTrim();
             otherTrimColorInfos.add(toInteriorColorInfo(interiorColor, trim));
         }
@@ -101,6 +105,7 @@ public class ColorService {
                         .findFirst()
                         .orElseThrow();
         ColorResponse interiorColorResponse = findInteriorColors(trimId, exteriorColor.getId());
+        // todo(매직넘버로 묶기 0)
         ColorInfo interiorColorInfo = interiorColorResponse.getAvailable_colors().get(0);
         Long interiorId = interiorColorInfo.getColor_id();
         ColorResponse colorResponse = findExteriorColors(trimId, interiorId);
@@ -111,6 +116,7 @@ public class ColorService {
             ExteriorColor exteriorColor, Long interiorColorId) {
         List<ColorCombination> colorCombinations = exteriorColor.getColorCombinations();
         for (ColorCombination colorCombination : colorCombinations) {
+            // todo(선택): 삼항연산자?
             if (colorCombination.getInteriorColor().getId().equals(interiorColorId)) {
                 return true;
             }

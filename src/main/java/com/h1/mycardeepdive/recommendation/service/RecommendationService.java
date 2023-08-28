@@ -25,6 +25,7 @@ public class RecommendationService {
 
     public RecommendationResponse findRecommendation(Long ageGroupId, Long lifeStyleId) {
         Recommendation recommendation =
+        // todo(예외 처리)
                 recommendationRepository
                         .findByAgeGroupIdAndLifeStyleId(ageGroupId, lifeStyleId)
                         .orElseThrow();
@@ -48,6 +49,7 @@ public class RecommendationService {
                 customRecommendation.getCustomRecommendationCars();
         for (CustomRecommendationCar customRecommendationCar : customRecommendationCars) {
             long price = customRecommendationCar.getRecommendationCar().getPrice();
+            // todo(조건분기 메서드 분리)
             if (price < maxBudget) {
                 return toRecommendationResponse(customRecommendationCar.getRecommendationCar());
             }

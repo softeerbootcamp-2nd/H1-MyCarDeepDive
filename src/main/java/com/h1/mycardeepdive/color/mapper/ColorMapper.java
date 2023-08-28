@@ -29,6 +29,7 @@ public class ColorMapper {
     }
 
     public static ColorInfo toExteriorColorInfo(ExteriorColor exteriorColor, Trim trim) {
+        // todo(맥직넘버)
         List<Long> interiorIds =
                 exteriorColor.getColorCombinations().stream()
                         .map(ColorCombination::getInteriorColor)

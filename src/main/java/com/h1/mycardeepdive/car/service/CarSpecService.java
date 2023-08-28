@@ -41,6 +41,7 @@ public class CarSpecService {
                             getBasicOptionUrls(trim.getId()));
             carSpecInfos.add(carSpecInfo);
         }
+        // todo(매직넘버로 묶기 2L)
         return new CarSpecResponse(carSpecInfos, 2L);
     }
 
@@ -63,6 +64,9 @@ public class CarSpecService {
     }
 
     private List<String> getBasicOptionNames(Long trimId) {
+        // todo(매직넘버로 묶기 2L)
+        // todo(enum 또는 자바 상수)
+        // todo(else if)
         if (trimId == 1) {
             return List.of("전방 충돌 방지 보조", "내비 기반 크루즈 컨트롤", "세이프티 파워 윈도우");
         } else if (trimId == 2) {
@@ -116,6 +120,7 @@ public class CarSpecService {
     }
 
     public CarSpecResponse findCarSpecsByCarSpecId(Long carSpecId) {
+        // todo(에러 추가)
         CarSpec carSpec = carSpecRepository.findById(carSpecId).orElseThrow();
         return findCarSpecsBySpec(
                 carSpec.getEngine().getId(),
