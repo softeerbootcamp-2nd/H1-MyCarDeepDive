@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class RecommendQuotationViewController: UIViewController {
+class RecommendQuotationViewController: BaseViewController {
     enum Constatns {
         enum ThumbnailView {
             static let height: CGFloat = .toScaledHeight(value: 490)
@@ -288,8 +288,4 @@ class RecommendQuotationViewController: UIViewController {
             leftAndRightButtonStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-    
-    // MARK: - Functions
-    
-    // MARK: - Objc Functions
 }

@@ -7,12 +7,9 @@
 
 import UIKit
 
-class LifeStylePeekViewController: UIViewController {
-    
+class LifeStylePeekViewController: BaseViewController {
     // MARK: - UI properties
     private let contentView = LifeStylePeekContentView()
-    
-    // MARK: - Properties
     
     // MARK: - Lifecycles
     override func viewDidLoad() {
@@ -30,22 +27,7 @@ class LifeStylePeekViewController: UIViewController {
     private func configureUI() {
         self.view.backgroundColor = .white
         
-        configureNavigationBar()
         configureContentView()
-    }
-    
-    private func configureNavigationBar() {
-        let image = UIImage(named: "Black_Logo")
-        navigationItem.title = ""
-        navigationItem.titleView = UIImageView(image: image)
-        navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "arrow.left")?
-            .withTintColor(
-            .GetYaPalette.gray0,
-            renderingMode: .alwaysOriginal)
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left")?
-            .withTintColor(
-            .GetYaPalette.gray0,
-            renderingMode: .alwaysOriginal)
     }
     
     private func configureContentView() {
