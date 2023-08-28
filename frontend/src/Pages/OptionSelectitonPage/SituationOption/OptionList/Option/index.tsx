@@ -76,12 +76,20 @@ function Option({
       {checkSelected() ? (
         <SelectedButton
           optionIdList={[additional_option_id]}
-          optionData={{ name: option_name, price: price }}
+          optionData={{
+            name: option_name,
+            price: price,
+            imgUrl: option_img_url,
+          }}
         />
       ) : (
         <UnSelectedButton
           optionIdList={[additional_option_id]}
-          optionData={{ name: option_name, price: price }}
+          optionData={{
+            name: option_name,
+            price: price,
+            imgUrl: option_img_url,
+          }}
         />
       )}
     </div>

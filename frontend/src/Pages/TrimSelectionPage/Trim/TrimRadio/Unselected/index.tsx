@@ -20,7 +20,7 @@ export interface Props {
   optionToolTipHandler: (
     x: number | undefined,
     y: number | undefined,
-    target: string,
+    targetId: number,
   ) => void;
 }
 
@@ -36,10 +36,14 @@ function Unselected({
   ];
 
   const optionClickHandler = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>, index: number, option: string) => {
+    (
+      e: React.MouseEvent<HTMLButtonElement>,
+      index: number,
+      optionId: number,
+    ) => {
       const x = optionRefs[index].current?.getBoundingClientRect().x;
       const y = optionRefs[index].current?.getBoundingClientRect().y;
-      optionToolTipHandler(x, y, option);
+      optionToolTipHandler(x, y, optionId);
       e.stopPropagation();
     },
     [],
@@ -103,7 +107,13 @@ function Unselected({
                   ref={optionRefs[index]}
                   key={index}
                   className='gap-y-[6px] font-body4-regular text-secondary underline underline-offset-4 cursor-pointer'
-                  onClick={e => optionClickHandler(e, index, option)}
+                  onClick={e =>
+                    optionClickHandler(
+                      e,
+                      index,
+                      carSpecData.basic_option_ids[index],
+                    )
+                  }
                 >
                   {option}
                 </button>

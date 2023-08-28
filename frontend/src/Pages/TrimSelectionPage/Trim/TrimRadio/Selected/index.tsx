@@ -18,7 +18,7 @@ export interface Props {
   optionToolTipHandler: (
     x: number | undefined,
     y: number | undefined,
-    target: string,
+    targetId: number,
   ) => void;
 }
 
@@ -33,14 +33,12 @@ function Selected({ carSpecData, optionToolTipHandler }: Props) {
     (
       e: React.MouseEvent<HTMLButtonElement>,
       index: number,
-      option: string,
       optionId: number,
     ) => {
       const x = optionRefs[index].current?.getBoundingClientRect().x;
       const y = optionRefs[index].current?.getBoundingClientRect().y;
-      optionToolTipHandler(x, y, option);
+      optionToolTipHandler(x, y, optionId);
       e.stopPropagation();
-      console.log(optionId);
     },
     [],
   );
@@ -97,7 +95,6 @@ function Selected({ carSpecData, optionToolTipHandler }: Props) {
                     optionClickHandler(
                       e,
                       index,
-                      option,
                       carSpecData.basic_option_ids[index],
                     )
                   }
