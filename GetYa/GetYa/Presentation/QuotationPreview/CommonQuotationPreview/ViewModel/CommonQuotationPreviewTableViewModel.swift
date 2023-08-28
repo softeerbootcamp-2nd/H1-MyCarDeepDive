@@ -8,22 +8,22 @@
 // MARK: - ViewModel
 class CommonQuotationPreviewTableViewModel {
     // MARK: - Properties
-    private var dataSource: [[OptionInfo]]
+    private var dataSource: [[QuotationOption]]
     
     // MARK: - Lifecycles
-    init(dataSource: [[OptionInfo]]) {
+    init(dataSource: [[QuotationOption]]) {
         self.dataSource = dataSource
     }
     
     // MARK: - Functions
-    func setDataSource(with dataSource: [[OptionInfo]]) {
+    func setDataSource(with dataSource: [[QuotationOption]]) {
         self.dataSource = dataSource
     }
 }
 
 // MARK: - CommonRecommendResultTableViewDataSource
 extension CommonQuotationPreviewTableViewModel: CommonQuotationPreviewAdapterDataSource {
-    func cellItem(in section: Int, _ row: Int) -> OptionInfo {
+    func cellItem(in section: Int, _ row: Int) -> QuotationOption {
         return dataSource[section][row]
     }
     

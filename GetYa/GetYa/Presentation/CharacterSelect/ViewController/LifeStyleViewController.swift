@@ -55,7 +55,7 @@ class LifeStyleViewController: UIViewController {
         UIImage(named: "junior"),
         UIImage(named: "trendy")
     ]
-    private var selectedIndexPath: IndexPath? {
+    private(set) var selectedIndexPath: IndexPath? {
         didSet {
             contentView.setButtonIsEnabled(isEnabled: selectedIndexPath == nil ? false : true)
         }
@@ -153,7 +153,6 @@ extension LifeStyleViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        // TODO: 좀 더 효율적인 방법 찾아보기
         if indexPath.row != tagTexts.count {
             selectedIndexPath = indexPath
             

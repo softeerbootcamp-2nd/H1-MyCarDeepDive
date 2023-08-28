@@ -201,7 +201,7 @@ class OptionSelectTooltipView: UIView {
     }
 
     func setData(imageURL: String, tagName: String, optionName: String, optionPrice: Int) {
-        imageView.image = UIImage(systemName: "house")
+        imageView.setImage(urlString: imageURL)
         tagLabel.text = tagName
         optionNameLabel.text = optionName
         optionPriceLabel.text = optionPrice.toPriceFormat + "원"

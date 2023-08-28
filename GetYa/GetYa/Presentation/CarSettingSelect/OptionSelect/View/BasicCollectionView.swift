@@ -12,25 +12,22 @@ class BasicCollectionView: UICollectionView {
         static let categoryItemCount: Int = 7
     }
     
-    enum Sections: Hashable, CaseIterable {
+    enum Sections: Hashable {
         case category
-        case all
+        case all(itemCount: Int)
     }
 
     enum Items: Hashable {
         case category(type: TagCategoryType)
-        case all(datum: BasicOptionItem)
+        case all(datum: BasicOption)
     }
     
     // MARK: - Properties
     typealias DataSource = UICollectionViewDiffableDataSource<Sections, Items>
+    private var cateogroySnapshot = NSDiffableDataSourceSnapshot<Sections, Items>()
     private var diffableDatasource: DataSource!
-    private var currentSelectedCategoryIndexPath: IndexPath = [0, 0]
-    private var selectedItemIndexPath: [IndexPath] = [] {
-        didSet {
-            print(selectedItemIndexPath)
-        }
-    }
+    private var itemCount: Int = 0
+    private var selectedCategoryIndexPath: IndexPath = [0, 0]
     
     // MARK: - Lifecycles
     convenience init() {
@@ -71,10 +68,10 @@ class BasicCollectionView: UICollectionView {
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _ ) -> NSCollectionLayoutSection? in
             
-            switch Sections.allCases[sectionIndex] {
-            case .category:
+            switch sectionIndex {
+            case 0:
                 return self.configureCategoryLayout()
-            case .all:
+            default:
                 return self.configureItemLayout()
             }
         }
@@ -171,8 +168,11 @@ class BasicCollectionView: UICollectionView {
                     return UICollectionReusableView()
                 }
                 
-                header.setText(text: "전체 \(15)")
-                header.setPartText(text: "15", fontType: .mediumBody3, color: .GetYaPalette.primary)
+                header.setText(text: "전체 \(self.itemCount)")
+                header.setPartText(
+                    text: "\(self.itemCount)",
+                    fontType: .mediumBody3,
+                    color: .GetYaPalette.primary)
                 
                 return header
             }
@@ -188,18 +188,19 @@ class BasicCollectionView: UICollectionView {
         types.forEach {
             snapshot.appendItems([.category(type: $0)])
         }
-        diffableDatasource.apply(snapshot, completion: { [weak self] in
+        cateogroySnapshot = snapshot
+        diffableDatasource.apply(cateogroySnapshot, completion: { [weak self] in
             guard let self else { return }
             selectItem(at: [0, 0], animated: false, scrollPosition: .init())
-            collectionView(self, didSelectItemAt: [0, 0])
         })
     }
     
-    func updateItemSnapShot(data: [BasicOptionItem]) {
-        var snapshot = diffableDatasource.snapshot()
-        snapshot.deleteSections([.all])
-        snapshot.appendSections([.all])
-        snapshot.appendItems(data.map { .all(datum: $0) }, toSection: .all)
+    func updateItemSnapShot(data: [BasicOption]) {
+        self.itemCount = data.count
+        var snapshot = cateogroySnapshot
+        snapshot.appendSections([.all(itemCount: data.count)])
+        
+        snapshot.appendItems(data.map { .all(datum: $0) }, toSection: .all(itemCount: data.count))
         diffableDatasource.apply(snapshot)
     }
     
@@ -210,52 +211,14 @@ class BasicCollectionView: UICollectionView {
 extension BasicCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            currentSelectedCategoryIndexPath = indexPath
+            selectedCategoryIndexPath = indexPath
             
-            if indexPath.row == 0 {
-                updateItemSnapShot(data: [
-                    .init(
-                        id: 1,
-                        imageURL: "",
-                        optionName: "현대 스마트 센스 Ⅰ",
-                        tagList: [
-                            Tag(id: 1, name: "사용편의")
-                        ]),
-                    .init(
-                        id: 1,
-                        imageURL: "",
-                        optionName: "클러스터(12.3인치 컬러 LCD)",
-                        tagList: [
-                            Tag(id: 2, name: "사용편의")
-                        ]),
-                    .init(
-                        id: 3,
-                        imageURL: "",
-                        optionName: "빌트인 캠(보조배터리 포함)",
-                        tagList: [
-                            Tag(id: 1, name: "사용편의")
-                        ])
-                ])
-            } else {
-                updateItemSnapShot(data: [
-                    .init(
-                        id: 3,
-                        imageURL: "",
-                        optionName: "빌트인 캠(보조배터리 포함)",
-                        tagList: [
-                            Tag(id: 1, name: "사용편의")
-                        ]),
-                    .init(
-                        id: 1,
-                        imageURL: "",
-                        optionName: "현대 스마트 센스 Ⅰ",
-                        tagList: [
-                            Tag(id: 2, name: "사용편의")
-                        ])
-                ])
-            }
+            NotificationCenter.default.post(
+                name: NSNotification.Name("touchUpBasicCategoryNotification"),
+                object: nil,
+                userInfo: ["tagNumber": selectedCategoryIndexPath.row + 1])
         } else {
-            selectItem(at: currentSelectedCategoryIndexPath, animated: false, scrollPosition: .init())
+            selectItem(at: selectedCategoryIndexPath, animated: false, scrollPosition: .init())
         }
     }
 }

@@ -110,7 +110,7 @@ class OptionSelectImageCell: UICollectionViewCell {
     }
     
     // MARK: - Functions
-    func setImage(image: UIImage?) {
-        contentImageView.image = image
+    func setImage(imageURL: String) {
+        contentImageView.setImage(urlString: imageURL)
     }
 }

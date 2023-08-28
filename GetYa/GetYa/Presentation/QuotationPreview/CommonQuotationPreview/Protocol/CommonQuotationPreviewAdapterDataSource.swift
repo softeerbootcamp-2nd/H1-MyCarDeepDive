@@ -6,7 +6,7 @@
 //
 
 protocol CommonQuotationPreviewAdapterDataSource {
-    func cellItem(in section: Int, _ row: Int) -> OptionInfo
+    func cellItem(in section: Int, _ row: Int) -> QuotationOption
     func numberOfRows(in section: Int) -> Int
     var numberOfSections: Int { get }
 }

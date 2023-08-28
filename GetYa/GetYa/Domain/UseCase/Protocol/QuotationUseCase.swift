@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol QuotationUseCase {
-    var carQuotation: PassthroughSubject<QuotationModel, Never> { get set }
+    var carQuotation: PassthroughSubject<Quotation, Never> { get set }
     
     func fetchCarQuotation()
 }

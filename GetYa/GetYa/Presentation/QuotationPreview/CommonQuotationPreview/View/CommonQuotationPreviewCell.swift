@@ -78,12 +78,12 @@ final class CommonQuotationPreviewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        let reset = OptionInfo(
+        let reset = QuotationOption(
             optionID: nil,
             optionName: "",
             optionImageURL: "",
-            optionPrice: 0,
-            optionComment: nil)
+            price: 0,
+            comment: nil)
         configure(with: reset)
     }
     
@@ -92,13 +92,13 @@ final class CommonQuotationPreviewCell: UITableViewCell {
         selectionStyle = .none
         setupUI()
     }
-    func configure(with productOptionModel: OptionInfo) {
+    func configure(with productOptionModel: QuotationOption) {
         let url = productOptionModel.optionImageURL.replacingOccurrences(of: "\r", with: "")
         recommendCarOptionView.configureDetail(
             imageURL: url,
             title: productOptionModel.optionName,
-            price: productOptionModel.optionPrice)
-        reviewdTextView.text = productOptionModel.optionComment
+            price: productOptionModel.price)
+        reviewdTextView.text = productOptionModel.comment
     }
 }
 

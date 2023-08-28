@@ -24,7 +24,7 @@ struct QuotationModel {
     let trimId: Int
     let exteriorColor: ColorInfoModel
     let interiorColor: ColorInfoModel
-    let options: [OptionInfo]
-    let packages: [OptionInfo]
+    let options: [QuotationOption]
+    let packages: [QuotationOption]
     let totalPrice: Int
 }

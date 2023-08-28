@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class OptionSelectViewController: UIViewController {
     enum Constants {
@@ -21,8 +22,18 @@ class OptionSelectViewController: UIViewController {
     private var pageViewController: UIPageViewController = UIPageViewController(
         transitionStyle: .scroll,
         navigationOrientation: .horizontal)
+    private let additionalOptionViewController = AdditionalOptionViewController()
+    private let basicOptionViewController = BasicOptionViewController()
     
     // MARK: - Properties
+    private let viewModel: OptionSelectViewModel
+    private var cancellables = Set<AnyCancellable>()
+    private let additionalViewWillAppearEvent = PassthroughSubject<Void, Never>()
+    private let basicViewWillAppearEvent = PassthroughSubject<Void, Never>()
+    private let touchUpCategoryEvent = PassthroughSubject<Int, Never>()
+    private let touchUpBasicCategoryEvent = PassthroughSubject<Int, Never>()
+    private let selectedOptionNumberList = PassthroughSubject<[Int], Never>()
+    private let selectedPackageOptionNumberList = PassthroughSubject<[Int], Never>()
     private var viewControllers: [UIViewController] = []
     private var currentSegmentedIndex: Int = 0 {
         didSet {
@@ -38,10 +49,21 @@ class OptionSelectViewController: UIViewController {
     }
     
     // MARK: - Lifecycles
+    init(viewModel: OptionSelectViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bind()
         setupViews()
+        setNotification()
         configureUI()
     }
     
@@ -51,6 +73,51 @@ class OptionSelectViewController: UIViewController {
     }
     
     // MARK: - Private Functions
+    private func bind() {
+        let input = OptionSelectViewModel.Input(
+            additionalViewWillAppearEvent: additionalViewWillAppearEvent.eraseToAnyPublisher(),
+            basicViewWillAppearEvent: basicViewWillAppearEvent.eraseToAnyPublisher(),
+            touchUpCategoryEvent: touchUpCategoryEvent.eraseToAnyPublisher(),
+            touchUpBasicCategoryEvent: touchUpBasicCategoryEvent.eraseToAnyPublisher(),
+            selectedOptionNumberList: selectedOptionNumberList.eraseToAnyPublisher(),
+            selectedPackageOptionNumberList: selectedPackageOptionNumberList.eraseToAnyPublisher()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.additionalOptionInquery
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                additionalOptionViewController.setOptionInquery(inquery: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.basicOptionArray
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                basicOptionViewController.setBasicOptionArray(optionArray: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.additionalTagOptionInquery
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                additionalOptionViewController.setTagOptionInquery(inquery: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.basicTagOptionArray
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                basicOptionViewController.setBasicOptionArray(optionArray: $0)
+            })
+            .store(in: &cancellables)
+    }
+    
     private func setupViews() {
         view.addSubviews([
             segmentedControl,
@@ -59,7 +126,55 @@ class OptionSelectViewController: UIViewController {
         addChild(pageViewController)
         pageViewController.didMove(toParent: self)
         
-        viewControllers = [AdditionalOptionViewController(), BasicOptionViewController()]
+        viewControllers = [additionalOptionViewController, basicOptionViewController]
+    }
+    
+    private func setNotification() {
+        NotificationCenter.default.publisher(for: Notification.Name("AdditionalViewWillAppear"))
+            .sink(receiveValue: { [weak self] _ in
+                guard let self else { return }
+                additionalViewWillAppearEvent.send()
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name("BasicViewWillAppear"))
+            .sink(receiveValue: { [weak self] _ in
+                guard let self else { return }
+                basicViewWillAppearEvent.send()
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name("touchUpCategoryNotification"))
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let tagNumber = $0.userInfo?["tagNumber"] as? Int else { return }
+                touchUpCategoryEvent.send(tagNumber)
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name("touchUpBasicCategoryNotification"))
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let tagNumber = $0.userInfo?["tagNumber"] as? Int else { return }
+                touchUpBasicCategoryEvent.send(tagNumber)
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name("selectedOptionNotification"))
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let optionNumbers = $0.userInfo?["optionNumbers"] as? [Int] else { return }
+                selectedOptionNumberList.send(optionNumbers)
+            })
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name("selectedPackageOptionNotification"))
+            .sink(receiveValue: { [weak self] in
+                guard let self,
+                      let optionNumbers = $0.userInfo?["optionNumbers"] as? [Int] else { return }
+                selectedPackageOptionNumberList.send(optionNumbers)
+            })
+            .store(in: &cancellables)
     }
     
     private func configureUI() {

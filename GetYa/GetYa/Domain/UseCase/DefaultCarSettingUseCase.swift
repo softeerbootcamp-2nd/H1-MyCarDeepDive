@@ -8,8 +8,19 @@
 import Foundation
 import Combine
 
-class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase {
+class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase, OptionSelectUseCase {
     // MARK: - Dependency
+    var totalPrice = CurrentValueSubject<Int, Never>(0)
+    var smallTitle = PassthroughSubject<String, Never>()
+    var modelTitle = PassthroughSubject<String, Never>()
+    var modelPrice = CurrentValueSubject<Int, Never>(0)
+    var exteriorColorTitle = PassthroughSubject<String, Never>()
+    var exteriorColorPrice = CurrentValueSubject<Int, Never>(0)
+    var interiorColorTitle = PassthroughSubject<String, Never>()
+    var interiorColorPrice = CurrentValueSubject<Int, Never>(0)
+    var optionTitles = CurrentValueSubject<[String], Never>([])
+    var optionPrices = CurrentValueSubject<[Int], Never>([])
+    
     var trimSelect = CurrentValueSubject<TrimSelectModel?, Never>(nil)
     var trimInquery = CurrentValueSubject<TrimInquery?, Never>(nil)
     var trimSelectResult = PassthroughSubject<String, Never>()
@@ -22,23 +33,109 @@ class DefaultCarSettingUseCase: TrimSelectUseCase, ColorSelectUseCase {
     var exteriorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
     var interiorColorChangeResult = PassthroughSubject<ColorChangeType, Never>()
     
-    var optionSelectArray = CurrentValueSubject<[OptionSelectModel], Never>([])
+    var additionalOptionInqeury = CurrentValueSubject<AdditionalOptionInquery?, Never>(nil)
+    var basicOptionArray = CurrentValueSubject<[BasicOption], Never>([])
+    var basicTagOptionArray = CurrentValueSubject<[BasicOption], Never>([])
+    var additionalTagOptionInquery = PassthroughSubject<AdditionalTagOptionInquery, Never>()
+    var additionalOptionSelectArray = CurrentValueSubject<[AdditionalOption], Never>([])
+    var additionalPackageOptionSelectArray = CurrentValueSubject<[AdditionalOption], Never>([])
     
     // MARK: - Properties
     var trimSelectRepository: TrimSelectRepository
     var colorSelectRepository: ColorSelectRepository
+    var optionSelectRepository: OptionSelectRepository
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - LifeCycle
     init(
         trimSelectRepository: TrimSelectRepository,
-        colorSelectRepository: ColorSelectRepository
+        colorSelectRepository: ColorSelectRepository,
+        optionSelectRepository: OptionSelectRepository
     ) {
         self.trimSelectRepository = trimSelectRepository
         self.colorSelectRepository = colorSelectRepository
+        self.optionSelectRepository = optionSelectRepository
+        
+        bindForsBottomSheet()
     }
     
     // MARK: - Functions
+    func bindForsBottomSheet() {
+        self.trimSelect
+            .sink(receiveValue: {
+                guard let trimSelect = $0 else { return }
+                self.smallTitle.send(trimSelect.trimName)
+                self.totalPrice.send(trimSelect.trimPrice)
+                self.modelPrice.send(trimSelect.trimPrice)
+                self.modelTitle.send("\(trimSelect.trimName) \(trimSelect.trimTag.joined(separator: " "))")
+            })
+            .store(in: &cancellables)
+        
+        self.exteriorColorSelect
+            .sink(receiveValue: {
+                guard let exteriorColorSelect = $0 else { return }
+                self.totalPrice.send(
+                    self.modelPrice.value +
+                    self.optionPrices.value.reduce(0, +) +
+                    exteriorColorSelect.colorPrice +
+                    self.interiorColorPrice.value)
+                self.exteriorColorTitle.send(exteriorColorSelect.colorName)
+                self.exteriorColorPrice.send(exteriorColorSelect.colorPrice)
+            })
+            .store(in: &cancellables)
+        
+        self.interiorColorSelect
+            .sink(receiveValue: {
+                guard let interiorColorSelect = $0 else { return }
+                self.totalPrice.send(
+                    self.modelPrice.value +
+                    self.optionPrices.value.reduce(0, +) +
+                    self.exteriorColorPrice.value +
+                    interiorColorSelect.colorPrice)
+                self.interiorColorTitle.send(interiorColorSelect.colorName)
+                self.interiorColorPrice.send(interiorColorSelect.colorPrice)
+            })
+            .store(in: &cancellables)
+        
+        self.additionalOptionSelectArray
+            .sink(receiveValue: {
+                let packageNames = self.additionalPackageOptionSelectArray.value.map { $0.optionName }
+                let packagePrices = self.additionalPackageOptionSelectArray.value.map { $0.price }
+                self.optionTitles.send($0.map { $0.optionName } + packageNames)
+                self.optionPrices.send($0.map { $0.price } + packagePrices)
+            })
+            .store(in: &cancellables)
+        
+        self.additionalPackageOptionSelectArray
+            .sink(receiveValue: {
+                let optionNames = self.additionalOptionSelectArray.value.map { $0.optionName }
+                let optionPrices = self.additionalOptionSelectArray.value.map { $0.price }
+                self.optionTitles.send($0.map { $0.optionName } + optionNames)
+                self.optionPrices.send($0.map { $0.price } + optionPrices)
+            })
+            .store(in: &cancellables)
+    }
+    
+    func fetchContractionQuotation() -> ContractionQuotation? {
+        guard let trimSelect = trimSelect.value,
+              let exteriorColorSelect = exteriorColorSelect.value,
+              let interiorColorSelect = interiorColorSelect.value
+        else { return nil }
+        let optionSelectArray = additionalOptionSelectArray.value
+        let packageOptionSelectArray = additionalPackageOptionSelectArray.value
+        let optionInPackage = packageOptionSelectArray
+            .map { $0.additionalOptionIDList ?? [] }
+            .flatMap { $0 }
+        
+        let additionalOptionIDList = optionSelectArray.map { $0.optionID } + optionInPackage
+        
+        return ContractionQuotation(
+            carSpecID: trimSelect.carSpecID,
+            trimID: trimSelect.trimID,
+            exteriorColorID: exteriorColorSelect.colorID,
+            interiorColorID: interiorColorSelect.colorID,
+            additionalOptionIDList: additionalOptionIDList)
+    }
 }
 
 // MARK: - TrimSelectUseCase
@@ -48,9 +145,10 @@ extension DefaultCarSettingUseCase {
             do {
                 let trimInquery = try await trimSelectRepository.fetchTrimInquery(with: trimSubOptionSelect)
                 let recommendID = trimInquery.recommendTrimID
-                let recommendCarSpec = trimInquery.carSpecs[recommendID]
+                let recommendCarSpec = trimInquery.carSpecs[recommendID - 1]
                 self.trimSelect.send(
                     TrimSelectModel(
+                        carSpecID: recommendCarSpec.carSpecID,
                         trimID: recommendCarSpec.trimID,
                         trimTag: [
                             Engine.allCases[trimSubOptionSelect.engineID - 1].rawValue,
@@ -92,13 +190,12 @@ extension DefaultCarSettingUseCase {
                 let trimColorInquery = try await colorSelectRepository.fetchTrimColorInquery(with: trimSelect.trimID)
                 self.trimColorInquery.send(trimColorInquery)
                 
-                if let exteriorColorSelect = exteriorColorSelect.value,
-                   let interiorColorSelect = interiorColorSelect.value {
-                    self.exteriorColorSelect.send(exteriorColorSelect)
-                    self.interiorColorSelect.send(interiorColorSelect)
+                if trimColorInquery.exteriorColor.availableColors.contains(where: {
+                    $0.colorID == exteriorColorSelect.value?.colorID
+                }) {
+                    self.exteriorColorSelect.send(exteriorColorSelect.value)
                 } else {
                     let availableExteriorColor = trimColorInquery.exteriorColor.availableColors[0]
-                    let availableInteriorColor = trimColorInquery.interiorColor.availableColors[0]
                     self.exteriorColorSelect.send(
                         ColorSelectModel(
                             colorType: .exterior,
@@ -107,6 +204,14 @@ extension DefaultCarSettingUseCase {
                             colorPrice: availableExteriorColor.price,
                             trimID: availableExteriorColor.trimID,
                             oppositeColors: availableExteriorColor.oppositeColors))
+                }
+                
+                if trimColorInquery.interiorColor.availableColors.contains(where: {
+                    $0.colorID == interiorColorSelect.value?.colorID
+                }) {
+                    self.interiorColorSelect.send(interiorColorSelect.value)
+                } else {
+                    let availableInteriorColor = trimColorInquery.interiorColor.availableColors[0]
                     self.interiorColorSelect.send(
                         ColorSelectModel(
                             colorType: .interior,
@@ -132,6 +237,7 @@ extension DefaultCarSettingUseCase {
                     let trim = trimInquery.carSpecs.filter { $0.trimID == colorSelect.trimID }[0]
                     fetchTrimSelectLog(
                         trimSelectModel: TrimSelectModel(
+                            carSpecID: trim.carSpecID,
                             trimID: trim.trimID,
                             trimTag: trimSelect.trimTag,
                             trimName: trim.trimName,
@@ -174,6 +280,7 @@ extension DefaultCarSettingUseCase {
                     let trim = trimInquery.carSpecs.filter { $0.trimID == colorSelect.trimID }[0]
                     fetchTrimSelectLog(
                         trimSelectModel: TrimSelectModel(
+                            carSpecID: trim.carSpecID,
                             trimID: trim.trimID,
                             trimTag: trimSelect.trimTag,
                             trimName: trim.trimName,
@@ -273,12 +380,15 @@ extension DefaultCarSettingUseCase {
                             trimChangeModel: TrimChangeModel(
                                 trimSelectModel: trimSelect,
                                 otherTrimSelectModel: TrimSelectModel(
+                                    carSpecID: otherTrim.carSpecID,
                                     trimID: otherTrim.trimID,
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 interiorColorSelectModel: interiorColor,
-                                optionSelectModelArray: optionSelectArray.value)))
+                                optionSelectModel: additionalOptionSelectArray.value,
+                                packageOptionSelectModel: additionalPackageOptionSelectArray.value
+                            )))
                 } else {
                     fetchExteriorTrimColor(interiorColor: interiorColor)
                 }
@@ -293,12 +403,14 @@ extension DefaultCarSettingUseCase {
                             trimChangeModel: TrimChangeModel(
                                 trimSelectModel: trimSelect,
                                 otherTrimSelectModel: TrimSelectModel(
+                                    carSpecID: otherTrim.carSpecID,
                                     trimID: otherTrim.trimID,
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 exteriorColorSelectModel: exteriorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value),
+                                optionSelectModel: additionalOptionSelectArray.value,
+                                packageOptionSelectModel: additionalPackageOptionSelectArray.value),
                             colorSelectModel: interiorColor
                         ))
                 } else {
@@ -313,7 +425,8 @@ extension DefaultCarSettingUseCase {
                                     colorPrice: interiorColor.colorPrice,
                                     trimID: interiorColor.trimID,
                                     oppositeColors: interiorColor.oppositeColors),
-                                optionSelectModelArray: optionSelectArray.value),
+                                optionSelectModel: additionalOptionSelectArray.value,
+                                packageOptionSelectModel: additionalPackageOptionSelectArray.value),
                             colorSelectModel: interiorColor
                         ))
                 }
@@ -336,12 +449,15 @@ extension DefaultCarSettingUseCase {
                             trimChangeModel: TrimChangeModel(
                                 trimSelectModel: trimSelect,
                                 otherTrimSelectModel: TrimSelectModel(
+                                    carSpecID: otherTrim.carSpecID,
                                     trimID: otherTrim.trimID,
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 exteriorColorSelectModel: exteriorColor,
-                                optionSelectModelArray: optionSelectArray.value)))
+                                optionSelectModel: additionalOptionSelectArray.value,
+                                packageOptionSelectModel: additionalPackageOptionSelectArray.value
+                            )))
                 } else {
                     fetchInteriorTrimColor(exteriorColor: exteriorColor)
                 }
@@ -356,12 +472,14 @@ extension DefaultCarSettingUseCase {
                             trimChangeModel: TrimChangeModel(
                                 trimSelectModel: trimSelect,
                                 otherTrimSelectModel: TrimSelectModel(
+                                    carSpecID: otherTrim.carSpecID,
                                     trimID: otherTrim.trimID,
                                     trimTag: trimSelect.trimTag,
                                     trimName: otherTrim.trimName,
                                     trimPrice: otherTrim.price),
                                 interiorColorSelectModel: interiorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value),
+                                optionSelectModel: additionalOptionSelectArray.value,
+                                packageOptionSelectModel: additionalPackageOptionSelectArray.value),
                             colorSelectModel: exteriorColor
                         ))
                 } else {
@@ -376,11 +494,92 @@ extension DefaultCarSettingUseCase {
                                     trimID: exteriorColor.trimID,
                                     oppositeColors: exteriorColor.oppositeColors),
                                 interiorColorSelectModel: interiorColorSelect,
-                                optionSelectModelArray: optionSelectArray.value),
+                                optionSelectModel: additionalOptionSelectArray.value,
+                                packageOptionSelectModel: additionalPackageOptionSelectArray.value),
                             colorSelectModel: exteriorColor
                         ))
                 }
             }
         }
+    }
+}
+
+// MARK: - OptionSelectUseCase
+extension DefaultCarSettingUseCase {
+    func fetchAdditionalOptions() {
+        Task(operation: {
+            do {
+                guard let trimSelect = trimSelect.value else { return }
+                let additionalOptionInquery = try await self.optionSelectRepository
+                    .fetchAdditionalOption(with: trimSelect.carSpecID)
+                
+                self.additionalOptionInqeury.send(additionalOptionInquery)
+            } catch {
+                print("Car Spec ID에 해당하는 추가 옵션 리스트를 전송받지 못하였습니다.")
+            }
+        })
+    }
+    
+    func fetchBasicOptions() {
+        Task(operation: {
+            do {
+                guard let trimSelect = trimSelect.value else { return }
+                let basicOptionArray = try await self.optionSelectRepository
+                    .fetchBasicOption(with: trimSelect.carSpecID)
+                self.basicOptionArray.send(basicOptionArray)
+            } catch {
+                print("Car Spec ID에 해당하는 기본 옵션 리스트를 전송받지 못하였습니다.")
+            }
+        })
+    }
+    
+    func fetchAdditionalOptionsByTag(tagID: Int) {
+        Task(operation: {
+            do {
+                guard let trimSelect = trimSelect.value else { return }
+                
+                if tagID == 1 {
+                    self.additionalOptionInqeury.send(additionalOptionInqeury.value)
+                } else {
+                    let additionalTagOptionInquery = try await self.optionSelectRepository
+                        .fetchAdditionalOptionByTag(carSpecID: trimSelect.carSpecID, tagID: tagID)
+                    
+                    self.additionalTagOptionInquery.send(additionalTagOptionInquery)
+                }
+            } catch {
+                print("Car Spec ID와 Tag ID에 해당하는 추가 태그 옵션 리스트를 전송받지 못하였습니다.")
+            }
+        })
+    }
+    
+    func fetchBasicOptionsByTag(tagID: Int) {
+        if tagID == 1 || tagID == 2 {
+            basicOptionArray.send(basicOptionArray.value)
+        } else {
+            let basicTagOptionArray = basicOptionArray.value.filter { option in
+                !option.tagList.filter { tag in tag.id == tagID }.isEmpty
+            }
+            self.basicTagOptionArray.send(basicTagOptionArray)
+        }
+    }
+    
+    func storeSelectOptionList(optionNumbers: [Int]) {
+        guard let inqeury = additionalOptionInqeury.value else { return }
+        let optionSelectArray = inqeury.additionalOptionList
+            .filter { optionNumbers.contains($0.optionID) }
+        let price = additionalOptionSelectArray.value.map { $0.price }.reduce(0, +)
+        - optionSelectArray.map { $0.price }.reduce(0, +)
+        self.totalPrice.send(self.totalPrice.value - price)
+        additionalOptionSelectArray.send(optionSelectArray)
+    }
+    
+    func storeSelectPackageOptionList(optionNumbers: [Int]) {
+        guard let inqeury = additionalOptionInqeury.value else { return }
+        let optionSelectArray = inqeury.optionPackageList
+            .filter { optionNumbers.contains($0.optionID) }
+        let price = additionalPackageOptionSelectArray.value.map { $0.price }.reduce(0, +)
+        - optionSelectArray.map { $0.price }.reduce(0, +)
+        self.totalPrice.send(self.totalPrice.value - price)
+        additionalPackageOptionSelectArray.send(optionSelectArray)
     }
 }

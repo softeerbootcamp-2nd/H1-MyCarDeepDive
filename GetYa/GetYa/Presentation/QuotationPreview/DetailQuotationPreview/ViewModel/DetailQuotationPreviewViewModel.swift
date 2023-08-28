@@ -99,52 +99,50 @@ extension DetailQuotationPreviewViewModel: DetailQuotationPreviewViewModelable {
 private extension DetailQuotationPreviewViewModel {
     
     func updateQuotationPreview() -> Output {
-        return quotationUseCase
-            .carQuotation
-            .map { [weak self] quotationModel -> State in
-                let carOptions = [
-                    quotationModel.engineName,
-                    quotationModel.drivingSystemName,
-                    quotationModel.bodyName
-                ].joined(separator: " ・ ")
-                self?.trimCarSpec = DefaultTrimCarSpec(
-                    engineId: quotationModel.engineId,
-                    bodyId: quotationModel.bodyId,
-                    drivingSystemId: quotationModel.drivingSystemId)
-                self?.contractionQuotation = ContractionQuotation(
-                    carSpecID: quotationModel.carSpecId,
-                    trimID: quotationModel.trimId,
-                    exteriorColorID: quotationModel.exteriorColor.colorId,
-                    interiorColorID: quotationModel.interiorColor.colorId,
-                    additionalOptionIDList: [])
-                let recommendCarProductOption = QuotationPreviewCarInfoModel(
-                    carName: "펠리세이드",
-                    trimName: quotationModel.trimName,
-                    carPrice: quotationModel.trimPrice.toPriceFormat+"원",
-                    carOptions: carOptions)
+        return quotationUseCase.carQuotation.map { [weak self] quotation -> State in
+            let carOptions = [
+                quotation.engineName,
+                quotation.drivingSystemName,
+                quotation.bodyName
+            ].joined(separator: " ・ ")
+            let exteriorColor = quotation.exteriorColor
+            let interiorColor = quotation.interiorColor
+            self?.trimCarSpec = DefaultTrimCarSpec(
+                engineId: quotation.engineID,
+                bodyId: quotation.bodyID,
+                drivingSystemId: quotation.drivingSystemID)
+            self?.contractionQuotation = ContractionQuotation(
+                carSpecID: quotation.carSpecID,
+                trimID: quotation.trimID,
+                exteriorColorID: exteriorColor.colorID,
+                interiorColorID: interiorColor.colorID,
+                additionalOptionIDList: [])
+            
+            let recommendCarProductOption = QuotationPreviewCarInfoModel(
+                carName: "펠리세이드",
+                trimName: quotation.trimName,
+                carPrice: quotation.trimPrice.toPriceFormat+"원",
+                carOptions: carOptions)
                 self?.mainSectionHeader.recommendCarProductOption = recommendCarProductOption
                 self?.mainSectionHeader.firstSectionTitle = "색상"
-                self?.mainSectionHeader.thumbnailUrl = quotationModel.carImgUrl
-                self?.secondSectionFooter = quotationModel.totalPrice.toPriceFormat+"원"
-                let exteriorColor = quotationModel.exteriorColor
-                let interiorColor = quotationModel.interiorColor
-                
-                let optionList: [[OptionInfo]] = [
-                    [.init(optionID: exteriorColor.colorId,
-                           optionName: exteriorColor.colorName,
-                           optionImageURL: exteriorColor.colorIconUrl,
-                           optionPrice: exteriorColor.colorPrice,
-                           optionComment: exteriorColor.colorComment),
-                     .init(optionID: interiorColor.colorId,
-                           optionName: interiorColor.colorName,
-                           optionImageURL: interiorColor.colorIconUrl,
-                           optionPrice: interiorColor.colorPrice,
-                           optionComment: interiorColor.colorComment)],
-                    quotationModel.options,
-                    quotationModel.packages]
-                    self?.setDataSource(with: optionList)
-                return .updateDetailQuotationPreview
-            }.eraseToAnyPublisher()
+                self?.mainSectionHeader.thumbnailUrl = quotation.carImageURL
+                self?.secondSectionFooter = quotation.totalPrice.toPriceFormat+"원"
+            let optionList: [[QuotationOption]] = [
+                [.init(optionID: exteriorColor.colorID,
+                       optionName: exteriorColor.colorName,
+                       optionImageURL: exteriorColor.colorImageURL,
+                       price: exteriorColor.price,
+                       comment : exteriorColor.comment),
+                 .init(optionID: interiorColor.colorID,
+                       optionName: interiorColor.colorName,
+                       optionImageURL: interiorColor.colorImageURL,
+                       price: interiorColor.price,
+                       comment: interiorColor.comment)],
+                quotation.options,
+                quotation.packages]
+                self?.setDataSource(with: optionList)
+            return .updateDetailQuotationPreview
+        }.eraseToAnyPublisher()
     }
     
     func customButtonEventChains(_ input: Input) -> Output {

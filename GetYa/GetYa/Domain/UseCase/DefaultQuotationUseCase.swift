@@ -10,7 +10,7 @@ import Combine
 
 final class DefaultQuotationUseCase: QuotationUseCase {
     // MARK: - Properties
-    var carQuotation = PassthroughSubject<QuotationModel, Never>()
+    var carQuotation = PassthroughSubject<Quotation, Never>()
     var subscriptions = Set<AnyCancellable>()
     var userSelectedQuestionModel: CustomRecomendationModel
     

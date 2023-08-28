@@ -10,5 +10,5 @@ import Foundation
 protocol QuotationRepository {
     func fetchCarDetailRecommendation(
         with requestDTO: CustomRecomendation
-    ) async throws -> QuotationModel
+    ) async throws -> Quotation
 }

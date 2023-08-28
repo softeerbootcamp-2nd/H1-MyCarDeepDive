@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class CarSettingSelectViewController: UIViewController {
     enum Constatns {
@@ -26,13 +27,16 @@ class CarSettingSelectViewController: UIViewController {
     private var bottomSheetViewHeightConstaint: NSLayoutConstraint!
     
     // MARK: - Properties
-    private var trimSubOptionSelect: TrimSubOptionSelect
+    private let viewModel: CarSettingSelectViewModel
+    private var cancellables = Set<AnyCancellable>()
+    private let touchUpNextButton = PassthroughSubject<Void, Never>()
+    private let touchUpQuoteButton = PassthroughSubject<Void, Never>()
     private var viewControllers: [UIViewController] = []
     private var currentPageIndex: Int = 0
     
     // MARK: - LifeCycles
-    init(trimSubOptionSelect: TrimSubOptionSelect) {
-        self.trimSubOptionSelect = trimSubOptionSelect
+    init(viewModel: CarSettingSelectViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,11 +47,75 @@ class CarSettingSelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bind()
         setupViews()
+        setNotification()
         configureUI()
     }
     
     // MARK: - Functions
+    private func bind() {
+        let input = CarSettingSelectViewModel.Input(
+            touchUpNextButton: touchUpNextButton.eraseToAnyPublisher(),
+            touchUpQuoteButton: touchUpQuoteButton.eraseToAnyPublisher()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.smallTitle
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setSmallTitle(text: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.totalPrice
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setTotalPrice(price: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.modelInfo
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setModelInfo(info: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.colorInfo
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setColorInfo(info: $0)
+            })
+            .store(in: &cancellables)
+        
+        output.optionInfo
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                bottomSheetView.setOptionInfoArray(texts: $0.0, prices: $0.1)
+            })
+            .store(in: &cancellables)
+        
+        output.contractionQuotation
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                let viewController = LoadingViewController(
+                    viewModel: LoadingViewModel(
+                        contrationQuotation: $0,
+                        useCase: DefaultLoadingUseCase(
+                            repository: DefaultLoadingRepository(provider: SessionProvider()))))
+                navigationController?.pushViewController(viewController, animated: true)
+            })
+            .store(in: &cancellables)
+    }
+    
     private func setupViews() {
         addChild(pageViewController)
         view.addSubviews([
@@ -56,22 +124,16 @@ class CarSettingSelectViewController: UIViewController {
             bottomSheetView
         ])
         pageViewController.didMove(toParent: self)
-        
-        let trimSelectRepository = DefaultTrimSelectRepository(provider: SessionProvider())
-        let colorSelectRepository = DefaultColorSelectRepository(provider: SessionProvider())
-        let useCase = DefaultCarSettingUseCase(
-            trimSelectRepository: trimSelectRepository,
-            colorSelectRepository: colorSelectRepository)
-        let colorSelectViewController = ColorSelectViewController(
-            viewModel: ColorSelectViewModel(useCase: useCase))
-        let trimSelectViewController = TrimSelectViewController(
-            viewModel: TrimSelectViewModel(
-                trimSubOptionSelect: trimSubOptionSelect,
-                useCase: useCase))
-        viewControllers = [
-            trimSelectViewController,
-            colorSelectViewController,
-            OptionSelectViewController()]
+    }
+    
+    private func setNotification() {
+        NotificationCenter.default
+            .publisher(for: Notification.Name("touchUpQuoteButton"))
+            .sink(receiveValue: { [weak self] _ in
+                guard let self else { return }
+                touchUpQuoteButton.send()
+            })
+            .store(in: &cancellables)
     }
     
     private func configureUI() {
@@ -134,8 +196,11 @@ class CarSettingSelectViewController: UIViewController {
             bottomSheetViewHeightConstaint
         ])
     }
-    
+
     // MARK: - Functions
+    func setViewControllers(viewControllers: [UIViewController]) {
+        self.viewControllers = viewControllers
+    }
     
     // MARK: - Objc Functions
     @objc private func touchUpNavigationBackButton() {
@@ -189,17 +254,7 @@ extension CarSettingSelectViewController: BottomSheetDelegate {
                 direction: .forward,
                 animated: true)
         } else {
-            let viewController = LoadingViewController(
-                viewModel: LoadingViewModel(
-                    contrationQuotation: ContractionQuotation(
-                        carSpecID: 1,
-                        trimID: 1,
-                        exteriorColorID: 1,
-                        interiorColorID: 1,
-                        additionalOptionIDList: [1, 3, 4]),
-                    useCase: DefaultLoadingUseCase(
-                        repository: DefaultLoadingRepository(provider: SessionProvider()))))
-            navigationController?.pushViewController(viewController, animated: true)
+            touchUpNextButton.send()
         }
     }
 }

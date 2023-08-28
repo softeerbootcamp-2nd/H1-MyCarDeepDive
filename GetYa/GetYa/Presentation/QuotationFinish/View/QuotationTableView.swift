@@ -19,7 +19,7 @@ class QuotationTableView: UITableView {
     private var colorImageURLArray: [String] = []
     private var colorNames: [String] = []
     private var colorPrices: [Int] = []
-    private var optionList: [OptionInfo] = []
+    private var optionList: [QuotationOption] = []
     
     // MARK: - Lifecycles
     convenience init() {
@@ -49,8 +49,8 @@ class QuotationTableView: UITableView {
         sectionHeaderTopPadding = 1
         contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
         register(
-            QuotationFinishTableCell.self,
-            forCellReuseIdentifier: QuotationFinishTableCell.identifier)
+            QuotationFinishCell.self,
+            forCellReuseIdentifier: QuotationFinishCell.identifier)
         register(
             CommonTableHeaderView.self,
             forHeaderFooterViewReuseIdentifier: CommonTableHeaderView.identifier)
@@ -61,7 +61,7 @@ class QuotationTableView: UITableView {
         colorNames: [String],
         colorImageURLArray: [String],
         colorPrices: [Int],
-        optionList: [OptionInfo]
+        optionList: [QuotationOption]
     ) {
         self.colorNames = colorNames
         self.colorImageURLArray = colorImageURLArray
@@ -119,8 +119,8 @@ extension QuotationTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: QuotationFinishTableCell.identifier,
-            for: indexPath) as? QuotationFinishTableCell else {
+            withIdentifier: QuotationFinishCell.identifier,
+            for: indexPath) as? QuotationFinishCell else {
             return UITableViewCell()
         }
         
@@ -133,7 +133,7 @@ extension QuotationTableView: UITableViewDataSource {
             cell.setOption(
                 imageURL: optionList[indexPath.row].optionImageURL,
                 name: optionList[indexPath.row].optionName,
-                price: optionList[indexPath.row].optionPrice)
+                price: optionList[indexPath.row].price)
         }
         return cell
     }

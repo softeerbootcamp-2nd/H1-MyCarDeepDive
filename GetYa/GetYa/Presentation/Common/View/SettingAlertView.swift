@@ -173,6 +173,7 @@ class SettingAlertView: UIView {
             $0.setTitleTextColor(color: .GetYaPalette.acriveBlue)
             $0.setTitleFont(fontType: .mediumCaption1)
         }
+        if optionNames.isEmpty { view.isHidden = true }
         stackView.addArrangedSubview(view)
         totalPrice -= optionPrices.reduce(0, +)
     }

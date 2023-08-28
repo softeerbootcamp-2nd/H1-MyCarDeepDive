@@ -47,6 +47,7 @@ class ColorSelectContentView: UIScrollView {
                 $0.setImageURLArray(
                     imageURLArray: exteriorColor.availableColors[exteriorColorSelectIndex].carImageURLArray)
             })
+            exteriorContentView.setDataByTrimColor(color: exteriorColor.availableColors[exteriorColorSelectIndex])
         }
     }
     private var interiorColor: TrimColor? {
@@ -55,6 +56,13 @@ class ColorSelectContentView: UIScrollView {
             interiorContentView.setTrimColor(
                 color: interiorColor,
                 selectIndex: interiorColorSelectIndex)
+            interiorContentView.setupHeaderView(view: UIImageView().set {
+                $0.clipsToBounds = true
+                $0.contentMode = .scaleAspectFill
+                $0.translatesAutoresizingMaskIntoConstraints = false
+                $0.setImage(urlString: interiorColor.availableColors[interiorColorSelectIndex].carImageURLArray[0])
+            })
+            interiorContentView.setDataByTrimColor(color: interiorColor.availableColors[interiorColorSelectIndex])
         }
     }
     
@@ -210,12 +218,7 @@ class ColorSelectContentView: UIScrollView {
     ) {
         self.interiorColorSelectIndex = selectIndex
         self.interiorColor = interiorColor
-        interiorContentView.setupHeaderView(view: UIImageView().set {
-            $0.clipsToBounds = true
-            $0.contentMode = .scaleAspectFill
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.setImage(urlString: interiorColor.availableColors[selectIndex].carImageURLArray[0])
-        })
+
         guard let colorAndIndex = exteriorColor?.availableColors
             .enumerated()
             .filter({ $0.element.colorID == exteriorColorSelect.colorID }).first else { return }

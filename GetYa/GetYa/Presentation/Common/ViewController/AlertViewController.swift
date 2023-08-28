@@ -259,8 +259,11 @@ class AlertViewController: UIViewController {
                 colorPrice: interiorColorSelect.colorPrice)
         }
         
-        if !trimChangeModel.optionSelectModelArray.isEmpty {
-            
+        if let optionSelectModel = trimChangeModel.optionSelectModel,
+           let packageOptionSelectModel = trimChangeModel.packageOptionSelectModel {
+            let names = optionSelectModel.map { $0.optionName } + packageOptionSelectModel.map { $0.optionName }
+            let prices = optionSelectModel.map { $0.price } + packageOptionSelectModel.map { $0.price }
+            settingAlertView.setReleaseOption(optionNames: names, optionPrices: prices)
         }
         
         containerView.addSubview(settingAlertView)
