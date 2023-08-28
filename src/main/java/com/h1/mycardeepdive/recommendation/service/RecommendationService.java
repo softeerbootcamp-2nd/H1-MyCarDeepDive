@@ -7,6 +7,7 @@ import com.h1.mycardeepdive.exception.MyCarDeepDiveException;
 import com.h1.mycardeepdive.recommendation.domain.CustomRecommendation;
 import com.h1.mycardeepdive.recommendation.domain.CustomRecommendationCar;
 import com.h1.mycardeepdive.recommendation.domain.Recommendation;
+import com.h1.mycardeepdive.recommendation.domain.RecommendationCar;
 import com.h1.mycardeepdive.recommendation.domain.repository.CustomRecommendationRepository;
 import com.h1.mycardeepdive.recommendation.domain.repository.RecommendationRepository;
 import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationResponse;
@@ -54,13 +55,16 @@ public class RecommendationService {
         List<CustomRecommendationCar> customRecommendationCars =
                 customRecommendation.getCustomRecommendationCars();
         for (CustomRecommendationCar customRecommendationCar : customRecommendationCars) {
-            long price = customRecommendationCar.getRecommendationCar().getPrice();
-            // todo(조건분기 메서드 분리)
-            if (price < maxBudget) {
-                return toRecommendationResponse(customRecommendationCar.getRecommendationCar());
+            RecommendationCar recommendationCar = customRecommendationCar.getRecommendationCar();
+            if (isUnderBudget(recommendationCar, maxBudget)) {
+                return toRecommendationResponse(recommendationCar);
             }
         }
         return toRecommendationResponse(
                 customRecommendationCars.stream().findAny().orElseThrow().getRecommendationCar());
+    }
+
+    private boolean isUnderBudget(RecommendationCar recommendationCar, Long maxBudget) {
+        return recommendationCar.getPrice() < maxBudget;
     }
 }
