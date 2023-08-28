@@ -41,6 +41,10 @@
 </table>
 <br>
 
+## 배포
+🚙 [MyCarDeepDive WEB](https://make-my-car.shop)   
+<br>
+
 ## 🛠 기술 스택
 
 ### 🌐 Frontend
@@ -55,7 +59,9 @@
 |CI/CD|![GihubAction](https://img.shields.io/badge/githubactions-2088FF?style=for-the-badge&logo={githubactions}&logoColor={white}) <img alt="RED" src ="https://img.shields.io/badge/Amazon S3-569A31.svg?&style=for-the-badge&logo=AmazonS3&logoColor=white"/> |
 <br />
 
-### 🖥 Backend
+### 🌸 Backend
+
+###  IOS
 
 ### 🖥 Common
 |역할|종류|
@@ -65,10 +71,6 @@
 |API|<img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white">      
 
 <br />
-
-## 배포
-Web: https://make-my-car.shop
-
 ## 브랜치 구조
 
 <pre>
@@ -87,7 +89,7 @@ ios-dev
 
 ### BE Main 브랜치
 https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/be-main
-### iOS Main 브랜치
+### FE Main 브랜치
 https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/fe-main
 ### iOS Main 브랜치
 https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/ios-main
@@ -151,6 +153,6 @@ https://api.make-my-car.shop/docs/swagger
 
 ## 기획/디자인
 
-📝 [기획서 보기](https://www.figma.com/file/p1UkFMMha9P4UvMSgxjjUJ/Handoff_guidelines?node-id=1%3A6&mode=dev)
+📝 [기획서 보기](https://www.figma.com/file/p1UkFMMha9P4UvMSgxjjUJ/Handoff_guidelines?node-id=8%3A17111&mode=dev)
 
-🌈 [디자인 보기](https://www.figma.com/file/p1UkFMMha9P4UvMSgxjjUJ/Handoff_guidelines?node-id=8%3A17111&mode=dev)
+🌈 [디자인 보기](https://www.figma.com/file/p1UkFMMha9P4UvMSgxjjUJ/Handoff_guidelines?node-id=1%3A6&mode=dev)
