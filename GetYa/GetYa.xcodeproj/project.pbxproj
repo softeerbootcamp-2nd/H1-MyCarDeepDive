@@ -239,7 +239,6 @@
 		64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4842A77887E0003E2C1 /* AppCoordinator.swift */; };
 		64ADA4912A7788B00003E2C1 /* CommonProtocl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4902A7788B00003E2C1 /* CommonProtocl.swift */; };
 		64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4942A7788BC0003E2C1 /* CommonViewModel.swift */; };
-		64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4962A7788C10003E2C1 /* Etc.swift */; };
 		64ADA49F2A77890B0003E2C1 /* .swiftLint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */; };
 		64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4A42A789C5A0003E2C1 /* HomeViewController.swift */; };
 		64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ADA4AA2A78A4080003E2C1 /* HomeNavigationViewController.swift */; };
@@ -554,7 +553,6 @@
 		64ADA4902A7788B00003E2C1 /* CommonProtocl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonProtocl.swift; sourceTree = "<group>"; };
 		64ADA4922A7788B60003E2C1 /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		64ADA4942A7788BC0003E2C1 /* CommonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModel.swift; sourceTree = "<group>"; };
-		64ADA4962A7788C10003E2C1 /* Etc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Etc.swift; sourceTree = "<group>"; };
 		64ADA49E2A77890B0003E2C1 /* .swiftLint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftLint.yml; sourceTree = "<group>"; };
 		64ADA4A42A789C5A0003E2C1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		64ADA4AA2A78A4080003E2C1 /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationViewController.swift; sourceTree = "<group>"; };
@@ -783,7 +781,6 @@
 		159B2CF52A825CC5003F47D6 /* DetailQuotationPreview */ = {
 			isa = PBXGroup;
 			children = (
-				155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */,
 				155DDD0B2A83F204009AE2BC /* ViewController */,
 				155DDD032A82D028009AE2BC /* ViewModel */,
 				159B2CF22A823723003F47D6 /* Adapter */,
@@ -1215,7 +1212,6 @@
 				1506363A2A9390740057724E /* Protocol */,
 				15D2ABCD2A937EE900F7DE8E /* Persistence */,
 				15837B992A7E5900000FE728 /* CombineCocoa */,
-				64ADA47B2A7788150003E2C1 /* Etc */,
 				64ADA47A2A7788130003E2C1 /* Enum */,
 				64ADA4792A7788110003E2C1 /* Extension */,
 				64ADA4782A77880F0003E2C1 /* Service */,
@@ -1346,6 +1342,7 @@
 		64ADA47A2A7788130003E2C1 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */,
 				15DF95942A7C89DF0093EAC7 /* GetYaFont.swift */,
 				6484A7612A8CB8D900434136 /* AlertType.swift */,
 				6457CFBF2A93A76D00B3AAAF /* TagCategoryType.swift */,
@@ -1354,14 +1351,6 @@
 				6457D1AD2A96F26900B3AAAF /* TrimSubOptionType.swift */,
 			);
 			path = Enum;
-			sourceTree = "<group>";
-		};
-		64ADA47B2A7788150003E2C1 /* Etc */ = {
-			isa = PBXGroup;
-			children = (
-				64ADA4962A7788C10003E2C1 /* Etc.swift */,
-			);
-			path = Etc;
 			sourceTree = "<group>";
 		};
 		64ADA47C2A7788410003E2C1 /* Protocol */ = {
@@ -1928,7 +1917,6 @@
 				64E26A552A8A3E2800F6BC3A /* TrimHeaderView.swift in Sources */,
 				64E26A702A8C076500F6BC3A /* ColorLearnMoreView.swift in Sources */,
 				15A8A2A42A95EF97007C47AB /* ColorInfoModel.swift in Sources */,
-				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
 				6457D1AA2A968CE300B3AAAF /* MyActivityItemSource.swift in Sources */,
 				15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */,
 				150636402A9394710057724E /* QuotationDTO.swift in Sources */,
