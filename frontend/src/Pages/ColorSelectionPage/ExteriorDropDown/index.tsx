@@ -111,7 +111,6 @@ function ExteriorDropDown({
         showModal={showModal}
         setShowModal={setShowModal}
         clickHandler={changeHandler}
-        type='exterial'
       />
     </>
   );

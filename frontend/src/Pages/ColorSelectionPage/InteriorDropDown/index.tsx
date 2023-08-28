@@ -107,7 +107,6 @@ function InteriorDropDown({
         showModal={showModal}
         setShowModal={setShowModal}
         clickHandler={changeHandler}
-        type='interial'
       />
     </>
   );

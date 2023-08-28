@@ -17,7 +17,6 @@ interface Props extends ModalProps {
   wantedOtherColor: any;
   wantedOtherColorTrim: any;
   clickHandler: () => void;
-  type: 'exterial' | 'interial';
 }
 
 function ChangerModal({
@@ -33,9 +32,12 @@ function ChangerModal({
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <ModalContentsWrapper>
         <CloseModal />
-        <div className='mt-6 mx-8'>
-          <Title />
-          <Explain wantedOtherColor={wantedOtherColor} />
+        <div className='mt-6 mx-8 whitespace-pre'>
+          <Title description={`Calligraphy 트림으로\n변경하시겠어요?`} />
+          <Explain
+            wantedOtherColor={wantedOtherColor}
+            description='색상은 트림 변경 후 선택할 수 있어요.'
+          />
           <CurrentTrim />
           <ChangeTrim wantedOtherColorTrim={wantedOtherColorTrim} />
           <UnderLine margin='mt-9 mb-[13px]' color='bg-grey-500' />
