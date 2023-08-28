@@ -94,6 +94,7 @@ function InteriorItems({
   };
 
   const changeUnavailableColorHandler = () => {
+    setView('interial');
     closeModalHandler();
     const { color_id, name, img_url, price, choose_rate } =
       wantedUnavailableColor;
