@@ -232,7 +232,7 @@ extension LifeStyleViewController {
 // MARK: - LifeStyleCell Delegate
 extension LifeStyleViewController: LifeStyleCellDelegate {
     func touchUpButton(cell: UICollectionViewCell) {
-        if let cell = cell as? LifeStyleDetailCell {
+        if cell is LifeStyleDetailCell {
             navigationController?.pushViewController(
                 CharacterDetailSelectViewController(),
                 animated: true)

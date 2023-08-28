@@ -110,8 +110,35 @@ extension DetailQuotationPreviewViewController: ViewBindable {
                                 provider: SessionProvider())))),
                 animated: true)
         case .gotoCustomPage(let trimCarSpec):
-            // TODO: 2-1화면으로 이동해야 합니다. (추천 트림, 색상, 옵션 선택된 상태로)
-            print(trimCarSpec)
+            let provider = SessionProvider()
+            let useCase = DefaultCarSettingUseCase(
+                trimSelectRepository: DefaultTrimSelectRepository(provider: provider),
+                colorSelectRepository: DefaultColorSelectRepository(provider: provider),
+                optionSelectRepository: DefaultOptionSelectRepository(provider: provider))
+            let carSettingSelectViewController = CarSettingSelectViewController(
+                viewModel: CarSettingSelectViewModel(useCase: useCase))
+            let trimSelectViewController = TrimSelectViewController(
+                viewModel: TrimSelectViewModel(
+                    trimSubOptionSelect: TrimSubOptionSelect(
+                        engineID: trimCarSpec.engineID,
+                        bodyID: trimCarSpec.bodyID,
+                        drivingSystemID: trimCarSpec.drivingSystemID),
+                    useCase: useCase))
+            let colorSelectViewController = ColorSelectViewController(
+                viewModel: ColorSelectViewModel(useCase: useCase))
+            let optionSelectViewController = OptionSelectViewController(
+                viewModel: OptionSelectViewModel(useCase: useCase))
+            
+            carSettingSelectViewController.setViewControllers(
+                viewControllers: [
+                    trimSelectViewController,
+                    colorSelectViewController,
+                    optionSelectViewController])
+            guard let homeViewController = self.navigationController?.viewControllers.first else { return }
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                .removeAllViewContrllerExcept(
+                    to: homeViewController,
+                    nextViewController: carSettingSelectViewController)
         }
     }
 }

@@ -73,7 +73,7 @@ final class DefaultQuotationPreviewViewController: BaseViewController {
 // MARK: - CustomOrQuoteSelectViewDelegate
 extension DefaultQuotationPreviewViewController: CustomOrQuoteSelectViewDelegate {
     func gotoCustomPage() {
-        // TODO: 3-1화면으로 이동해야합니다. (추천 트림, 색상, 옵션 선택된 상태로)
+        
     }
     
     func gotoQuotePage() {

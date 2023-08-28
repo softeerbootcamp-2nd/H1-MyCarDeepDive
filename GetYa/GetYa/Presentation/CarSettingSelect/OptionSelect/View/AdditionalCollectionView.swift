@@ -71,6 +71,7 @@ class AdditionalCollectionView: UICollectionView {
         delegate = self
         contentInsetAdjustmentBehavior = .never
         configureCollectionViewDataSource()
+        configureCollectionViewSectionDatasource()
         register(
             OptionSelectCategoryCell.self,
             forCellWithReuseIdentifier: OptionSelectCategoryCell.identifier)
@@ -212,12 +213,12 @@ class AdditionalCollectionView: UICollectionView {
                         withReuseIdentifier: OptionSelectAdditionalItemCell.identifier,
                         for: indexPath) as? OptionSelectAdditionalItemCell {
                         cell.setData(datum: datum)
-                        cell.setSelectButtonIsSelected(isSelected: self.selectedPackageOptionIDList.contains(datum.optionID))
+                        cell.setSelectButtonIsSelected(
+                            isSelected: self.selectedPackageOptionIDList.contains(datum.optionID))
                         cell.addActionLearnMoreViewButton(handler: {
                             print(indexPath.row)
                         })
                         
-                        guard let optionList = datum.additionalOptionIDList else { return UICollectionViewCell() }
                         cell.addActionSelectButton(handler: {
                             if self.selectedPackageOptionIDList.contains(datum.optionID) {
                                 self.selectedPackageOptionIDList = self.selectedPackageOptionIDList
@@ -241,7 +242,9 @@ class AdditionalCollectionView: UICollectionView {
                 }
                 return UICollectionViewCell()
             })
-        
+    }
+    
+    private func configureCollectionViewSectionDatasource() {
         diffableDatasource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if kind == UICollectionView.elementKindSectionHeader {
                 guard let header = collectionView.dequeueReusableSupplementaryView(

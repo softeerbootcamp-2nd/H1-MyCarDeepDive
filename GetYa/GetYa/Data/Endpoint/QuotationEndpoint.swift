@@ -12,7 +12,7 @@ struct QuotationEndpoint {
     static let shared = QuotationEndpoint()
     
     func fetchCarDetailRecommendationOption(
-        with requestDTO: CustomRecomendation
+        with requestDTO: CustomRecomendationDTO
     ) -> Endpoint<QuotationDTO> {
         return Endpoint<QuotationDTO>(
             method: .get,

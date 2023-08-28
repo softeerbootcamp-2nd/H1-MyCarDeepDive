@@ -12,8 +12,8 @@ struct CustomRecomendationModel {
     let personalValueId: Int
     let maxBudget: Int
     
-    func toDTO() -> CustomRecomendation {
-        CustomRecomendation(
+    func toDTO() -> CustomRecomendationDTO {
+        CustomRecomendationDTO(
             drivingExperienceId: drivingExperienceId,
             familyMembersId: familyMembersId,
             carPurposeId: carPurposeId,
