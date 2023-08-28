@@ -5,23 +5,19 @@ import Button from '../ColorItems/Button';
 import Image from '../ColorItems/Image';
 import Icon from '../ColorItems/Icon';
 import Tag from '../ColorItems/Tag';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CarContext } from '@/context/CarProvider';
 import { initialColorType } from '@/api/color/getAllColor';
-import {
-  SET_EXTERIORCOLOR,
-  SET_INTERIORCOLOR,
-} from '@/context/CarProvider/type';
+import { SET_INTERIORCOLOR } from '@/context/CarProvider/type';
 import ColorItems from '../ColorItems';
 import { getInteriorColorType } from '@/api/color/getInteriorColors';
-import { getExteriorColorType } from '@/api/color/getExteriorColor';
 import useLogFetch from '@/hooks/useLogFetch';
+import { closeModalHandler } from '@/utils';
+import UnavailableChangerModal from '../UnavailableChangerModal';
 
 interface Props {
   initialColor: initialColorType | undefined;
   classifiedInteriorColor: getInteriorColorType | undefined;
-  classifiedExteriorColor: getExteriorColorType | undefined;
-  setExteriorCarImage: React.Dispatch<React.SetStateAction<string[]>>;
   setInteriorCarImage: React.Dispatch<React.SetStateAction<string | undefined>>;
   setView: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -29,11 +25,11 @@ interface Props {
 function InteriorItems({
   initialColor,
   classifiedInteriorColor,
-  classifiedExteriorColor,
-  setExteriorCarImage,
   setInteriorCarImage,
   setView,
 }: Props) {
+  const [wantedUnavailableColor, setWantedUnavailableColor] = useState<any>();
+  const [showModal, setShowModal] = useState(false);
   const { color, carDispatch } = useContext(CarContext);
   useEffect(() => {
     if (!initialColor) return;
@@ -63,15 +59,8 @@ function InteriorItems({
     const dataObject = currentTarget.getAttribute('data-object');
     if (!dataObject) return;
     const colorInfo = JSON.parse(dataObject);
-    const {
-      color_id,
-      name,
-      img_url,
-      price,
-      choose_rate,
-      opposite_color_ids,
-      car_img_urls,
-    } = colorInfo;
+    const { color_id, name, img_url, price, choose_rate, car_img_urls } =
+      colorInfo;
 
     useLogFetch({
       url: `/color/interior-colors/activity-log/${color_id}`,
@@ -88,85 +77,102 @@ function InteriorItems({
       },
     });
     if (car_img_urls) setInteriorCarImage(car_img_urls[0]);
+  };
 
-    if (opposite_color_ids.indexOf(color.exteriorColor.id) !== -1) return;
+  const clickUnavailableColorHandler = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLButtonElement>) => {
+    const dataObject = currentTarget.getAttribute('data-object');
+    if (dataObject) {
+      const colorInfo = JSON.parse(dataObject);
+      setWantedUnavailableColor(colorInfo);
+      setShowModal(true);
+      useLogFetch({
+        url: `/color/exterior-colors/activity-log/${colorInfo.color_id}`,
+      });
+    }
+  };
 
-    if (!classifiedExteriorColor) return;
-    const {
-      color_id: id,
-      name: colorName,
-      img_url: imgUrl,
-      price: colorPrice,
-      choose_rate: chooseRate,
-      car_img_urls: carImgUrls,
-    } = classifiedExteriorColor?.data.available_colors[0];
+  const changeUnavailableColorHandler = () => {
+    setView('interial');
+    closeModalHandler();
+    const { color_id, name, img_url, price, choose_rate } =
+      wantedUnavailableColor;
 
     carDispatch({
-      type: SET_EXTERIORCOLOR,
-      exteriorColor: {
-        id,
-        name: colorName,
-        imgUrl,
-        price: colorPrice,
-        chooseRate,
+      type: SET_INTERIORCOLOR,
+      interiorColor: {
+        id: color_id,
+        name,
+        imgUrl: img_url,
+        price,
+        chooseRate: choose_rate,
       },
     });
-    if (carImgUrls) setExteriorCarImage(carImgUrls);
   };
 
   return (
-    <ColorItems>
-      {classifiedInteriorColor?.data.available_colors.map(
-        (interiorColor, index) => {
-          return (
-            <Items
-              colorType={'interior'}
-              colorName={interiorColor.name}
-              key={index}
-            >
-              <Button
+    <>
+      <ColorItems>
+        {classifiedInteriorColor?.data.available_colors.map(
+          (interiorColor, index) => {
+            return (
+              <Items
+                colorType={'interior'}
                 colorName={interiorColor.name}
-                data={interiorColor}
-                clickHandler={clickHandler}
+                key={index}
               >
-                <Image
+                <Button
                   colorName={interiorColor.name}
-                  imgUrl={interiorColor.img_url}
-                />
-                {interiorColor.name === color.interiorColor.name && (
-                  <Icon imgUrl={CheckCircle} type='available' />
-                )}
-                {index === 0 && <Tag description='Best' />}
-              </Button>
-            </Items>
-          );
-        },
-      )}
-      {classifiedInteriorColor?.data.unavailable_colors.map(
-        (interiorColor, index) => {
-          return (
-            <Items
-              colorType={'interior'}
-              colorName={interiorColor.name}
-              key={index}
-            >
-              <Button
+                  data={interiorColor}
+                  clickHandler={clickHandler}
+                >
+                  <Image
+                    colorName={interiorColor.name}
+                    imgUrl={interiorColor.img_url}
+                  />
+                  {interiorColor.name === color.interiorColor.name && (
+                    <Icon imgUrl={CheckCircle} type='available' />
+                  )}
+                  {index === 0 && <Tag description='Best' />}
+                </Button>
+              </Items>
+            );
+          },
+        )}
+        {classifiedInteriorColor?.data.unavailable_colors.map(
+          (interiorColor, index) => {
+            return (
+              <Items
+                colorType={'interior'}
                 colorName={interiorColor.name}
-                data={interiorColor}
-                clickHandler={clickHandler}
+                key={index}
               >
-                <Image
+                <Button
                   colorName={interiorColor.name}
-                  imgUrl={interiorColor.img_url}
-                />
+                  data={interiorColor}
+                  clickHandler={clickUnavailableColorHandler}
+                >
+                  <Image
+                    colorName={interiorColor.name}
+                    imgUrl={interiorColor.img_url}
+                  />
 
-                <Icon imgUrl={Exclamation} type='unavailable' />
-              </Button>
-            </Items>
-          );
-        },
-      )}
-    </ColorItems>
+                  <Icon imgUrl={Exclamation} type='unavailable' />
+                </Button>
+              </Items>
+            );
+          },
+        )}
+      </ColorItems>
+      <UnavailableChangerModal
+        type='interial'
+        wantedUnavailableColor={wantedUnavailableColor}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        clickHandler={changeUnavailableColorHandler}
+      />
+    </>
   );
 }
 

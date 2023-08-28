@@ -15,8 +15,8 @@ import { CarContext } from '@/context/CarProvider';
 
 interface Props extends ModalProps {
   wantedOtherColor: any;
+  wantedOtherColorTrim: any;
   clickHandler: () => void;
-  type: 'exterial' | 'interial';
 }
 
 function ChangerModal({
@@ -24,28 +24,24 @@ function ChangerModal({
   setShowModal,
   wantedOtherColor,
   clickHandler,
-  type,
+  wantedOtherColorTrim,
 }: Props) {
-  const { color } = useContext(CarContext);
-  if (!wantedOtherColor) return;
-  const { price } = wantedOtherColor;
+  const { carSpec } = useContext(CarContext);
+  if (!wantedOtherColor || !wantedOtherColorTrim) return;
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <ModalContentsWrapper>
         <CloseModal />
-        <div className='mt-6 mx-8'>
-          <Title />
-          <Explain wantedOtherColor={wantedOtherColor} />
+        <div className='mt-6 mx-8 whitespace-pre'>
+          <Title description={`Calligraphy 트림으로\n변경하시겠어요?`} />
+          <Explain
+            wantedOtherColor={wantedOtherColor}
+            description='색상은 트림 변경 후 선택할 수 있어요.'
+          />
           <CurrentTrim />
-          <ChangeTrim />
+          <ChangeTrim wantedOtherColorTrim={wantedOtherColorTrim} />
           <UnderLine margin='mt-9 mb-[13px]' color='bg-grey-500' />
-          {type === 'exterial' && (
-            <ChangePrice priceGap={color.exteriorColor.price - price} />
-          )}
-          {type === 'interial' && (
-            <ChangePrice priceGap={color.interiorColor.price - price} />
-          )}
-
+          <ChangePrice priceGap={wantedOtherColorTrim.price - carSpec.price} />
           <Buttons
             wantedOtherColor={wantedOtherColor}
             clickHandler={clickHandler}

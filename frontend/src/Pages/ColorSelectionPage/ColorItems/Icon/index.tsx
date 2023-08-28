@@ -10,7 +10,9 @@ function Icon({ imgUrl, type }: IconProps) {
       <img
         src={imgUrl}
         alt='mark'
-        className={`absolute z-20 ${type === 'unavailable' && 'w-7'}`}
+        className={`absolute z-20 ${
+          type === 'unavailable' && 'w-6 top-[-10px] right-[-10px]'
+        }`}
       />
     </>
   );

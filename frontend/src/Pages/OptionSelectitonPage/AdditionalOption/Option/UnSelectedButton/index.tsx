@@ -5,7 +5,7 @@ import checkOptionPrimaryIcon from '@/assets/icon/primary-check-option.svg';
 
 interface Props {
   optionIdList: number[] | undefined;
-  optionData: { name: string; price: number };
+  optionData: { name: string; price: number; imgUrl: string };
 }
 
 function UnSelectedButton({ optionIdList, optionData }: Props) {

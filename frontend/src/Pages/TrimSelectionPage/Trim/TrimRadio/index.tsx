@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react';
 import { CarContext } from '@/context/CarProvider';
 import getTrim, { getTrimType } from '@/api/trim/getTrim';
 import { SET_CARSPECID, SET_CARSPECPRICE } from '@/context/CarProvider/type';
+import UnderLine from '@/Components/UnderLine';
 
 export interface Props {
   wantedTrimHandler: (e: React.MouseEvent<HTMLInputElement>) => void;
@@ -11,7 +12,7 @@ export interface Props {
   optionToolTipHandler: (
     x: number | undefined,
     y: number | undefined,
-    target: string,
+    targetId: number,
   ) => void;
 }
 
@@ -39,20 +40,27 @@ function TrimRadio({
   if (carSpecData === undefined) return null;
 
   return carSpecData.data.car_specs.map((car, index) => {
-    return car.trim_name === carSpec.trim.name ? (
-      <Selected
-        key={index}
-        carSpecData={car}
-        optionToolTipHandler={optionToolTipHandler}
-      />
-    ) : (
-      <Unselected
-        key={index}
-        carSpecData={car}
-        wantedTrimHandler={wantedTrimHandler}
-        setShowModal={setShowModal}
-        optionToolTipHandler={optionToolTipHandler}
-      />
+    return (
+      <>
+        {car.trim_id === carSpec.trim.id ? (
+          <Selected
+            key={index}
+            carSpecData={car}
+            optionToolTipHandler={optionToolTipHandler}
+          />
+        ) : (
+          <Unselected
+            key={index}
+            carSpecData={car}
+            wantedTrimHandler={wantedTrimHandler}
+            setShowModal={setShowModal}
+            optionToolTipHandler={optionToolTipHandler}
+          />
+        )}
+        {index !== carSpecData.data.car_specs.length - 1 && (
+          <UnderLine margin='' />
+        )}
+      </>
     );
   });
 }

@@ -1,3 +1,5 @@
+import { priceToString } from '@/utils';
+
 function ChangePrice({ priceGap }: { priceGap: number }) {
   return (
     <div className='flex justify-between'>
@@ -7,8 +9,8 @@ function ChangePrice({ priceGap }: { priceGap: number }) {
 
       <p className='font-h3-medium'>
         {priceGap >= 0
-          ? `+${priceGap.toLocaleString('en-US')}`
-          : `-${priceGap.toLocaleString('en-US')}`}
+          ? `+${priceToString(priceGap)}`
+          : `${priceToString(priceGap)}`}
         원
       </p>
     </div>

@@ -75,6 +75,12 @@ function ColorSelectionPage() {
         Math.max(idx, 0)
       ],
     );
+
+    setInteriorCarImage(
+      initialAllColor?.data.interior_color_response.available_colors[
+        Math.max(idx, 0)
+      ]?.car_img_urls[0],
+    );
   }, [classifiedInteriorColor]);
 
   useEffect(() => {
@@ -82,12 +88,6 @@ function ColorSelectionPage() {
   }, []);
 
   useEffect(() => {
-    setInitialExteriorColor(
-      initialAllColor?.data.exterior_color_response.available_colors[0],
-    );
-    setInitialInteriorColor(
-      initialAllColor?.data.interior_color_response.available_colors[0],
-    );
     const initialExteriorCarImage =
       initialAllColor?.data.exterior_color_response.available_colors.find(
         exteriorColor => exteriorColor.color_id === color.exteriorColor.id,
@@ -136,18 +136,14 @@ function ColorSelectionPage() {
         <ExteriorItems
           initialColor={initialExteriorColor}
           classifiedExteriorColor={classifiedExteriorColor}
-          classifiedInteriorColor={classifiedInteriorColor}
           setExteriorCarImage={setExteriorCarImage}
-          setInteriorCarImage={setInteriorCarImage}
           setView={setView}
         />
 
         <ExteriorDropDown
           classifiedExteriorColor={classifiedExteriorColor}
-          classifiedInteriorColor={classifiedInteriorColor}
           getTrimInfo={getTrimInfo}
           setExteriorCarImage={setExteriorCarImage}
-          setInteriorCarImage={setInteriorCarImage}
           setView={setView}
         />
         <UnderLine margin='mb-6' />
@@ -159,13 +155,10 @@ function ColorSelectionPage() {
         <InteriorItems
           initialColor={initialInteriorColor}
           classifiedInteriorColor={classifiedInteriorColor}
-          classifiedExteriorColor={classifiedExteriorColor}
-          setExteriorCarImage={setExteriorCarImage}
           setInteriorCarImage={setInteriorCarImage}
           setView={setView}
         />
         <InteriorDropDown
-          classifiedExteriorColor={classifiedExteriorColor}
           classifiedInteriorColor={classifiedInteriorColor}
           getTrimInfo={getTrimInfo}
           setView={setView}

@@ -33,7 +33,7 @@ export interface InitialStateType {
   };
 
   optionIdList: number[];
-  optionData: { name: string; price: number }[];
+  optionData: { name: string; price: number; imgUrl: string }[];
 }
 
 export interface CarContextType extends InitialStateType {
@@ -109,11 +109,11 @@ interface OptionDeleteAction {
 
 interface OptionAddDataAction {
   type: 'ADD_OPTION_DATA';
-  optionData: { name: string; price: number };
+  optionData: { name: string; price: number; imgUrl: string };
 }
 interface OptionDeleteDataAction {
   type: 'DELETE_OPTION_DATA';
-  optionData: { name: string; price: number };
+  optionData: { name: string; price: number; imgUrl: string };
 }
 interface OptionAddListAction {
   type: 'ADD_OPTION_LIST';
@@ -121,10 +121,13 @@ interface OptionAddListAction {
 }
 interface OptionAddListDataAction {
   type: 'ADD_OPTION_DATA_LIST';
-  optionData: { name: string; price: number }[];
+  optionData: { name: string; price: number; imgUrl: string }[];
 }
 interface SetDefaultAction {
   type: 'SET_DEFAULT';
+}
+interface SetOptionDefaultAction {
+  type: 'SET_OPTION_DEFAULT';
 }
 
 export type ActionType =
@@ -143,7 +146,8 @@ export type ActionType =
   | OptionDeleteDataAction
   | OptionAddListAction
   | OptionAddListDataAction
-  | SetDefaultAction;
+  | SetDefaultAction
+  | SetOptionDefaultAction;
 
 export const SET_CARSPECID = 'SET_CARSPECID';
 export const SET_CARSPECPRICE = 'SET_CARSPECPRICE';
@@ -161,3 +165,4 @@ export const DELETE_OPTION_DATA = 'DELETE_OPTION_DATA';
 export const ADD_OPTION_LIST = 'ADD_OPTION_LIST';
 export const ADD_OPTION_DATA_LIST = 'ADD_OPTION_DATA_LIST';
 export const SET_DEFAULT = 'SET_DEFAULT';
+export const SET_OPTION_DEFAULT = 'SET_OPTION_DEFAULT';

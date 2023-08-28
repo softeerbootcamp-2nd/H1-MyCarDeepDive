@@ -20,12 +20,13 @@ import {
   ADD_OPTION_DATA_LIST,
   ADD_OPTION_LIST,
   SET_DEFAULT,
+  SET_OPTION_DEFAULT,
 } from './type';
 
 const initialState: InitialStateType = {
   carSpec: {
     id: 2,
-    price: 43460200,
+    price: 43460000,
     feature: {
       engine: '디젤 2.2',
       body: '7인승',
@@ -47,8 +48,8 @@ const initialState: InitialStateType = {
     interiorColor: {
       id: 10,
       name: '쿨그레이',
-      imgUrl: 'img.make-my-car.shop/icon/black.png',
-      price: 100000,
+      imgUrl: 'img.make-my-car.shop/interior/icon/YJY.jpg',
+      price: 0,
       chooseRate: 50,
     },
   },
@@ -203,7 +204,7 @@ const reducer = (state: InitialStateType, action: ActionType) => {
       return {
         carSpec: {
           id: 2,
-          price: 43460200,
+          price: 43460000,
           feature: {
             engine: '디젤 2.2',
             body: '7인승',
@@ -225,11 +226,18 @@ const reducer = (state: InitialStateType, action: ActionType) => {
           interiorColor: {
             id: 10,
             name: '쿨그레이',
-            imgUrl: 'img.make-my-car.shop/icon/black.png',
-            price: 100000,
+            imgUrl: 'img.make-my-car.shop/interior/icon/YJY.jpg',
+            price: 0,
             chooseRate: 50,
           },
         },
+        optionIdList: [],
+        optionData: [],
+      };
+
+    case SET_OPTION_DEFAULT:
+      return {
+        ...state,
         optionIdList: [],
         optionData: [],
       };

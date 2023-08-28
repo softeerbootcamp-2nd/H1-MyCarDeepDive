@@ -6,18 +6,6 @@ import Title from './Title';
 import UnlockColor from './UnlockColor';
 import UnlockOption from './UnlockOption';
 import Buttons from './Buttons';
-import interiorArtificialLeatherBlack from '@/assets/image/interior-artificial-leather-black.png';
-import parkingAidSystem from '@/assets/image/parking-aid-system.png';
-import comport2Square from '@/assets/image/comport2-square.png';
-
-const UnlockColorData = [
-  { image: interiorArtificialLeatherBlack, name: '내장 - 인조 가죽 (블랙)' },
-];
-
-const UnlockOptionData = [
-  { image: parkingAidSystem, name: '주차보조 시스템' },
-  { image: comport2Square, name: '컴포트 II' },
-];
 
 export interface Props extends ModalProps {
   wantedTrim: {
@@ -25,19 +13,26 @@ export interface Props extends ModalProps {
     price: number | null;
     trimId: number | null;
     trimName: string | null;
+    trimImage: string | null;
   };
+  setTrimImage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function ChangeModal({ showModal, setShowModal, wantedTrim }: Props) {
+function ChangeModal({
+  showModal,
+  setShowModal,
+  wantedTrim,
+  setTrimImage,
+}: Props) {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <ModalContentsWrapper>
         <CloseModal />
         <div className='mt-6 mx-8'>
           <Title />
-          <UnlockColor unlockList={UnlockColorData} />
-          <UnlockOption unlockList={UnlockOptionData} />
-          <Buttons wantedTrim={wantedTrim} />
+          <UnlockColor />
+          <UnlockOption />
+          <Buttons wantedTrim={wantedTrim} setTrimImage={setTrimImage} />
         </div>
       </ModalContentsWrapper>
     </Modal>

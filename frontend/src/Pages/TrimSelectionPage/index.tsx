@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/Components/Button';
 import CarRotation from '@/Components/CarRotation';
@@ -18,14 +18,20 @@ import Title from './Trim/Title';
 import CompareButton from './Trim/CompareButton';
 import TrimRadio from './Trim/TrimRadio';
 import ChangeModal from './Trim/ChangeModal';
+import getTrim, { getTrimType } from '@/api/trim/getTrim';
+import { CarContext } from '@/context/CarProvider';
 
 function TrimSelectionPage() {
   const navigation = useNavigate();
+  const { carSpec } = useContext(CarContext);
+  const getTrimInfo: getTrimType | undefined = getTrim();
+  const [trimImage, setTrimImage] = useState<string>('');
   const [wantedTrim, setWantedTrim] = useState({
     carSpecId: null,
     price: null,
     trimId: null,
     trimName: null,
+    trimImage: null,
   });
   const [showModal, setShowModal] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
@@ -38,7 +44,7 @@ function TrimSelectionPage() {
   const [optionToolTipInfo, setOptionToolTopInfo] = useState({
     x: 0,
     y: 0,
-    name: '',
+    id: 0,
   });
 
   const wantedTrimHandler = ({
@@ -54,6 +60,7 @@ function TrimSelectionPage() {
       price: carSpecInfo.price,
       trimId: carSpecInfo.trimId,
       trimName: carSpecInfo.trimName,
+      trimImage: carSpecInfo.trimImage,
     }));
   };
 
@@ -74,13 +81,13 @@ function TrimSelectionPage() {
   const optionToolTipHandler = (
     x: number | undefined,
     y: number | undefined,
-    target: string,
+    targetId: number,
   ) => {
     if (!x || !y) return;
     setOptionToolTopInfo({
       x: x - 12,
       y: y,
-      name: target,
+      id: targetId,
     });
     setShowOptionToolTip(true);
   };
@@ -91,12 +98,22 @@ function TrimSelectionPage() {
     });
   }, []);
 
+  useEffect(() => {
+    const trimIndex = getTrimInfo?.data.car_specs.findIndex(
+      trim => trim.car_spec_id === carSpec.id,
+    );
+    if (trimIndex === -1 || trimIndex === undefined) return;
+    const trimImage = getTrimInfo?.data.car_specs[trimIndex].trim_img_url;
+    if (!trimImage) return;
+    setTrimImage(trimImage);
+  }, [getTrimInfo]);
+
   return (
     <>
       <SelectionCarWrapper>
         <ReRecommendCardLink />
         <Background />
-        <CarRotation rotation={false} carImageUrl={['/palisade/base.png']} />
+        <CarRotation rotation={false} carImageUrl={[trimImage]} />
       </SelectionCarWrapper>
 
       <FeatureAndTrimSelectionWrapper>
@@ -145,6 +162,7 @@ function TrimSelectionPage() {
         showModal={showModal}
         setShowModal={setShowModal}
         wantedTrim={wantedTrim}
+        setTrimImage={setTrimImage}
       />
 
       <OptionToolTip

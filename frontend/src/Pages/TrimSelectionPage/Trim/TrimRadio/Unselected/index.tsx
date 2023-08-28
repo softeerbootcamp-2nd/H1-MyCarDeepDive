@@ -13,13 +13,14 @@ export interface Props {
     summary: string;
     basic_option_ids: number[];
     basic_option_names: string[];
+    trim_img_url: string;
   };
   wantedTrimHandler: (e: React.MouseEvent<HTMLInputElement>) => void;
   setShowModal: (value: boolean) => void;
   optionToolTipHandler: (
     x: number | undefined,
     y: number | undefined,
-    target: string,
+    targetId: number,
   ) => void;
 }
 
@@ -38,14 +39,12 @@ function Unselected({
     (
       e: React.MouseEvent<HTMLButtonElement>,
       index: number,
-      option: string,
       optionId: number,
     ) => {
       const x = optionRefs[index].current?.getBoundingClientRect().x;
       const y = optionRefs[index].current?.getBoundingClientRect().y;
-      optionToolTipHandler(x, y, option);
+      optionToolTipHandler(x, y, optionId);
       e.stopPropagation();
-      console.log(optionId);
     },
     [],
   );
@@ -56,6 +55,7 @@ function Unselected({
     trimId: carSpecData.trim_id,
     trimName: carSpecData.trim_name,
     price: carSpecData.price,
+    trimImage: carSpecData.trim_img_url,
   };
 
   return (
@@ -111,7 +111,6 @@ function Unselected({
                     optionClickHandler(
                       e,
                       index,
-                      option,
                       carSpecData.basic_option_ids[index],
                     )
                   }
