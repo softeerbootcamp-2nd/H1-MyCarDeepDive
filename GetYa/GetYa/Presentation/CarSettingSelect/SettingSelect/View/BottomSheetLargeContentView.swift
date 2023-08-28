@@ -20,9 +20,12 @@ class BottomSheetLargeContentView: UIView {
         enum TitleLabel {
             static let topMargin: CGFloat = CGFloat(12).scaledHeight
         }
+        enum ScrollView {
+            static let topMargin: CGFloat = CGFloat(12).scaledHeight
+            static let height: CGFloat = CGFloat(355).scaledHeight
+        }
         enum OptionSummaryStackView {
             static let topMargin: CGFloat = CGFloat(12).scaledHeight
-            static let height: CGFloat = CGFloat(320).scaledHeight
         }
         enum TrimNamelabel {
             static let bottomMargin: CGFloat = CGFloat(-14).scaledHeight
@@ -36,6 +39,11 @@ class BottomSheetLargeContentView: UIView {
     }
     
     // MARK: - UI properties
+    private let scrollView: UIScrollView = UIScrollView().set {
+        $0.showsVerticalScrollIndicator = false
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+    }
     private lazy var chevronButton: UIButton = UIButton().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(
@@ -67,6 +75,11 @@ class BottomSheetLargeContentView: UIView {
         font: GetYaFont.mediumBody3.uiFont,
         buttonBackgroundColorType: .primary
     ).set {
+        $0.addAction(
+            UIAction(handler: { _ in
+                NotificationCenter.default.post(name: NSNotification.Name("touchUpQuoteButton"), object: nil)
+            }),
+            for: .touchUpInside)
         $0.setTitle("견적내기", for: .normal)
     }
     
@@ -74,28 +87,8 @@ class BottomSheetLargeContentView: UIView {
     weak var delegate: BottomSheetLargeContentDelegate?
     
     // MARK: - Lifecycles
-    init(
-        modelName: String,
-        modelPrice: Int,
-        colorNames: [String],
-        colorPrices: [Int],
-        optionNames: [String],
-        optionPrices: [Int],
-        trimName: String
-    ) {
-        super.init(frame: .zero)
-        
-        setupViews()
-        configureUI()
-        setReceipt(
-            modelName: modelName,
-            modelPrice: modelPrice,
-            colorNames: colorNames,
-            colorPrices: colorPrices,
-            optionNames: optionNames,
-            optionPrices: optionPrices)
-        let totalPrice = modelPrice + colorPrices.reduce(0, +) + optionPrices.reduce(0, +)
-        setTrimReceipt(name: trimName, pirce: totalPrice)
+    convenience init() {
+        self.init(frame: .zero)
     }
     
     override init(frame: CGRect) {
@@ -117,11 +110,12 @@ class BottomSheetLargeContentView: UIView {
         addSubviews([
             chevronButton,
             titleLabel,
-            optionSummaryStackView,
+            scrollView,
             trimNameLabel,
             totalPriceLabel,
             quoteButton
         ])
+        scrollView.addSubview(optionSummaryStackView)
     }
     
     private func configureUI() {
@@ -130,6 +124,7 @@ class BottomSheetLargeContentView: UIView {
         
         configureChevronButton()
         configureTitleLabel()
+        configureScrollView()
         configureOptionSummaryStackView()
         configureTrimNameLabel()
         configureTotalPriceLabel()
@@ -154,14 +149,21 @@ class BottomSheetLargeContentView: UIView {
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
         ])
     }
+    private func configureScrollView() {
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.heightAnchor.constraint(equalToConstant: Constants.ScrollView.height)
+        ])
+    }
     private func configureOptionSummaryStackView() {
         NSLayoutConstraint.activate([
-            optionSummaryStackView.topAnchor.constraint(
-                equalTo: titleLabel.bottomAnchor,
-                constant: Constants.OptionSummaryStackView.topMargin),
-            optionSummaryStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            optionSummaryStackView.trailingAnchor.constraint(
-                equalTo: trailingAnchor)
+            optionSummaryStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            optionSummaryStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            optionSummaryStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            optionSummaryStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            optionSummaryStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
     private func configureTrimNameLabel() {
@@ -191,48 +193,47 @@ class BottomSheetLargeContentView: UIView {
     }
     
     // MARK: - Functions
-    
-    // TODO: 이 밑에 로직들은 데이터 들어오는거에 달라질 예정 (임시인 것임)
-    func setReceipt(
-        modelName: String,
-        modelPrice: Int,
-        colorNames: [String],
-        colorPrices: [Int],
-        optionNames: [String],
-        optionPrices: [Int]
-    ) {
-        setModelReceipt(name: modelName, price: modelPrice)
-        setColorReceipt(names: colorNames, prices: colorPrices)
-        setOptionReceipt(names: optionNames, prices: optionPrices)
+    func setModelInfo(info: (String, Int)) {
+        optionSummaryStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+        
+        let newSummaryView = OptionSummaryContentView(titleText: "모델")
+        newSummaryView.setOptionDatum(text: info.0, price: info.1)
+        optionSummaryStackView.addArrangedSubview(newSummaryView)
     }
     
-    private func setModelReceipt(name: String, price: Int) {
-        let newView = OptionSummaryContentView(
-            titleText: "모델",
-            optionNames: [name],
-            optionPrices: [price])
-        optionSummaryStackView.addArrangedSubview(newView)
+    func setColorInfo(info: (String, Int, String, Int)) {
+        if let view = optionSummaryStackView.arrangedSubviews
+            .map({ $0 as? OptionSummaryContentView })
+            .filter({ $0?.titleLabel.text == "색상" }).first {
+            view?.removeFromSuperview()
+        }
+        
+        let newSummaryView = OptionSummaryContentView(titleText: "색상")
+        newSummaryView.setOptionDatum(text: "외장 - " + info.0, price: info.1)
+        newSummaryView.setOptionDatum(text: "내장 - " + info.2, price: info.3)
+        optionSummaryStackView.addArrangedSubview(newSummaryView)
     }
     
-    private func setColorReceipt(names: [String], prices: [Int]) {
-        let newView = OptionSummaryContentView(
-            titleText: "색상",
-            optionNames: names,
-            optionPrices: prices)
-        optionSummaryStackView.addArrangedSubview(newView)
+    func setOptionInfoArray(texts: [String], prices: [Int]) {
+        if let view = optionSummaryStackView.arrangedSubviews
+            .map({ $0 as? OptionSummaryContentView })
+            .filter({ $0?.titleLabel.text == "옵션" }).first {
+            view?.removeFromSuperview()
+        }
+        
+        let newSummaryView = OptionSummaryContentView(titleText: "옵션")
+        newSummaryView.setOptionData(texts: texts, prices: prices)
+        optionSummaryStackView.addArrangedSubview(newSummaryView)
     }
     
-    private func setOptionReceipt(names: [String], prices: [Int]) {
-        let newView = OptionSummaryContentView(
-            titleText: "옵션",
-            optionNames: names,
-            optionPrices: prices)
-        optionSummaryStackView.addArrangedSubview(newView)
+    func setTrimName(text: String) {
+        trimNameLabel.text = text
     }
     
-    func setTrimReceipt(name: String, pirce: Int) {
-        trimNameLabel.text = name
-        totalPriceLabel.text = pirce.toPriceFormat
+    func setTotalPrice(price: Int) {
+        totalPriceLabel.text = price.toPriceFormat + "원"
     }
     
     // MARK: - Objc Functions

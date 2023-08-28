@@ -22,6 +22,12 @@ class BasicOptionViewController: UIViewController {
         collectionView.updateCategorySnapShot(types: TagCategoryType.allCases)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("BasicViewWillAppear"), object: nil)
+    }
+    
     // MARK: - Private Functions
     private func setupViews() {
         view.addSubview(collectionView)
@@ -41,6 +47,9 @@ class BasicOptionViewController: UIViewController {
     }
     
     // MARK: - Functions
+    func setBasicOptionArray(optionArray: [BasicOption]) {
+        collectionView.updateItemSnapShot(data: optionArray)
+    }
     
     // MARK: - Objc Functions
 }

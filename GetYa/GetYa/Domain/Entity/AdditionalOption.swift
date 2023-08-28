@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct AdditionalOption: Hashable {
+struct AdditionalOption: Codable, Hashable {
     let optionID: Int
     let optionImageURL: String
-    let selectRate: CGFloat
+    let selectRate: Int
     let optionName: String
     let optionSummary: String
     let tagList: [Tag]
     let badgeName: String
     let price: Int
+    var additionalOptionIDList: [Int]? = nil
 }

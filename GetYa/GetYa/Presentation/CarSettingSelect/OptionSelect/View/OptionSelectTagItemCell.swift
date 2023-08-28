@@ -7,19 +7,6 @@
 
 import UIKit
 
-struct OptionTagItem: Hashable {
-    let name: String
-    let price: Int
-    let imageURL: String
-    let xPosition: CGFloat
-    let yPosition: CGFloat
-}
-
-struct OptionTagData: Hashable {
-    let tagImageURL: String
-    let items: [OptionTagItem]
-}
-
 class OptionSelectTagItemCell: UICollectionViewCell {
     enum Constants {
         enum ImageView {
@@ -48,13 +35,11 @@ class OptionSelectTagItemCell: UICollectionViewCell {
     }
     
     // MARK: - UI properties
-    private let imageView: UIImageView = UIImageView(image: UIImage(named: "LifeStylePeekForYou")).set {
+    private let imageView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
     }
-    private lazy var collectionView = OptionSelectImageCollectionView().set {
-        $0.selectDelegate = self
-    }
+    private lazy var collectionView = OptionSelectImageCollectionView()
     private let descriptionLabel = CommonLabel(
         fontType: .regularCaption1,
         color: .GetYaPalette.gray500,
@@ -172,10 +157,17 @@ class OptionSelectTagItemCell: UICollectionViewCell {
     }
     
     // MARK: - Functions
-    func setData(datum: OptionTagData) {
-        imageView.image = UIImage(named: "LifeStylePeekForYou") // data.tagImageURL
-        collectionView.setImageURLArray(URLArray: datum.items.map { $0.imageURL })
-        datum.items.forEach { item in
+    func setData(inqeury: AdditionalTagOptionInquery, tagName: String) {
+        plusButtons.forEach {
+            $0.removeFromSuperview()
+        }
+        tooltipViews.forEach {
+            $0.removeFromSuperview()
+        }
+        
+        imageView.setImage(urlString: inqeury.tagImageURL)
+        collectionView.setImageURLArray(URLArray: inqeury.options.map { $0.optionImageURL })
+        inqeury.options.forEach { item in
             let calculatePositions = calculateTooltipPosition(
                 xPosition: item.xPosition.scaledWidth,
                 yPosition: item.yPosition.scaledHeight)
@@ -199,7 +191,11 @@ class OptionSelectTagItemCell: UICollectionViewCell {
                 startX: calculatePositions.tooltipX,
                 startY: calculatePositions.tooltipY,
                 tipYType: calculatePositions.tooltipYType)
-            tooltipView.setData(imageURL: "", tagName: "사용편의", optionName: item.name, optionPrice: item.price)
+            tooltipView.setData(
+                imageURL: item.optionImageURL,
+                tagName: tagName,
+                optionName: item.optionName,
+                optionPrice: item.price)
             let plusButton = PlusButton(frame: CGRect(
                 x: item.xPosition,
                 y: item.yPosition,
@@ -219,12 +215,5 @@ class OptionSelectTagItemCell: UICollectionViewCell {
             tooltipViews.append(tooltipView)
         }
         addSubviews(tooltipViews)
-    }
-}
-
-// MARK: - OptionSelectImageCollectionViewDelegate
-extension OptionSelectTagItemCell: OptionSelectImageCollectionViewDelegate {
-    func touchUpCell(index: Int) {
-        print(index)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AdditionalOptionList: Hashable {
-    let optionPackageList: [AdditionalOptionPackage]
+struct AdditionalOptionInquery: Codable, Hashable {
+    let optionPackageList: [AdditionalOption]
     let additionalOptionList: [AdditionalOption]
 }

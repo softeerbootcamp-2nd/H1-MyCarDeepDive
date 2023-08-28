@@ -22,6 +22,12 @@ class AdditionalOptionViewController: UIViewController {
         collectionView.updateCategorySnapShot(types: Array(TagCategoryType.allCases[1...]))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("AdditionalViewWillAppear"), object: nil)
+    }
+    
     // MARK: - Private Functions
     private func setupViews() {
         view.addSubview(collectionView)
@@ -41,6 +47,15 @@ class AdditionalOptionViewController: UIViewController {
     }
     
     // MARK: - Functions
+    func setOptionInquery(inquery: AdditionalOptionInquery) {
+        collectionView.setAllItemCount(count: inquery.optionPackageList.count + inquery.additionalOptionList.count)
+        collectionView.updatePackageItemSnapShot(data: inquery.optionPackageList)
+        collectionView.updateItemSnapShot(data: inquery.additionalOptionList)
+    }
+    
+    func setTagOptionInquery(inquery: AdditionalTagOptionInquery) {
+        collectionView.updateTagItemSnasphot(inquery: inquery)
+    }
     
     // MARK: - Objc Functions
 

@@ -8,6 +8,7 @@
 import Foundation
 
 struct TrimSelectModel {
+    var carSpecID: Int
     var trimID: Int
     var trimTag: [String]
     var trimName: String

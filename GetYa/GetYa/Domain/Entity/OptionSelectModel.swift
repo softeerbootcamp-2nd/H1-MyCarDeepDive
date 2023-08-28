@@ -8,6 +8,7 @@
 import Foundation
 
 struct OptionSelectModel {
+    var optionID: Int
     var optionName: String
     var optionPrice: Int
 }

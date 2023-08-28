@@ -164,12 +164,36 @@ class QuotationFinishViewController: BaseViewController {
                 }) {
                 print(trimViewControllerIndex)
             } else {
+                let provider = SessionProvider()
+                let useCase = DefaultCarSettingUseCase(
+                    trimSelectRepository: DefaultTrimSelectRepository(provider: provider),
+                    colorSelectRepository: DefaultColorSelectRepository(provider: provider),
+                    optionSelectRepository: DefaultOptionSelectRepository(provider: provider))
+                let carSettingSelectViewController = CarSettingSelectViewController(
+                    viewModel: CarSettingSelectViewModel(useCase: useCase))
+                let trimSelectViewController = TrimSelectViewController(
+                    viewModel: TrimSelectViewModel(
+                        trimSubOptionSelect: TrimSubOptionSelect(
+                            engineID: 1,
+                            bodyID: 1,
+                            drivingSystemID: 1),
+                        useCase: useCase))
+                let colorSelectViewController = ColorSelectViewController(
+                    viewModel: ColorSelectViewModel(useCase: useCase))
+                let optionSelectViewController = OptionSelectViewController(
+                    viewModel: OptionSelectViewModel(useCase: useCase))
+                
+                carSettingSelectViewController.setViewControllers(
+                    viewControllers: [
+                        trimSelectViewController,
+                        colorSelectViewController,
+                        optionSelectViewController])
+                
                 guard let homeViewController = self.navigationController?.viewControllers.first else { return }
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
                     .removeAllViewContrllerExcept(
                         to: homeViewController,
-                        nextViewController: CarSettingSelectViewController(
-                            trimSubOptionSelect: TrimSubOptionSelect(engineID: 1, bodyID: 1, drivingSystemID: 1)))
+                        nextViewController: carSettingSelectViewController)
             }
         })
         $0.setRightButton(title: "구매/상담", handler: { [weak self] in

@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol OptionSelectImageCollectionViewDelegate: AnyObject {
-    func touchUpCell(index: Int)
-}
-
 class OptionSelectImageCollectionView: UICollectionView {
     enum Constatns {
         static let spacing: CGFloat = .toScaledWidth(value: 12)
@@ -26,14 +22,7 @@ class OptionSelectImageCollectionView: UICollectionView {
     
     // MARK: - Properties
     private var imageURLArray: [String] = []
-    weak var selectDelegate: OptionSelectImageCollectionViewDelegate?
-    private var selectedIndexPath: IndexPath? {
-        didSet {
-            if let indexPath = selectedIndexPath {
-                selectDelegate?.touchUpCell(index: indexPath.row)
-            }
-        }
-    }
+    private var selectedIndexPath: IndexPath?
     
     // MARK: - Lifecycles
     convenience init() {
@@ -106,7 +95,7 @@ extension OptionSelectImageCollectionView: UICollectionViewDataSource {
             withReuseIdentifier: OptionSelectImageCell.identifier,
             for: indexPath
         ) as? OptionSelectImageCell else { return UICollectionViewCell() }
-        cell.setImage(image: UIImage(systemName: "house"))
+        cell.setImage(imageURL: imageURLArray[indexPath.row])
         
         return cell
     }
