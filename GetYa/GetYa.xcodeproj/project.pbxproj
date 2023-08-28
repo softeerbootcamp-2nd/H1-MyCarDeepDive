@@ -63,11 +63,8 @@
 		15940E802A91F4EC0042A5F5 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15940E7F2A91F4EC0042A5F5 /* UIImage+.swift */; };
 		159B2CF92A825D07003F47D6 /* DetailQuotationPreviewAdapterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CF82A825D07003F47D6 /* DetailQuotationPreviewAdapterDataSource.swift */; };
 		159B2CFE2A825F5F003F47D6 /* CommonQuotationPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2CFD2A825F5F003F47D6 /* CommonQuotationPreviewCell.swift */; };
-		15A738822A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A738812A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift */; };
-		15A738842A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A738832A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift */; };
 		15D026392A94B068001D1659 /* QuotationOptionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D026382A94B068001D1659 /* QuotationOptionDTO.swift */; };
 		15D0263B2A94B5CE001D1659 /* QuotationColorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D0263A2A94B5CE001D1659 /* QuotationColorDTO.swift */; };
-		15D0263C2A94BB12001D1659 /* DefaultQuotationPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1D2172A8EF4B80048DAC7 /* DefaultQuotationPreviewViewController.swift */; };
 		15D2ABBC2A9350FD00F7DE8E /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */; };
 		15D2ABC22A93567C00F7DE8E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC12A93567C00F7DE8E /* Status.swift */; };
 		15D2ABC62A9357C100F7DE8E /* TrimInqueryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2ABC52A9357C100F7DE8E /* TrimInqueryDTO.swift */; };
@@ -86,11 +83,6 @@
 		15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95962A7C89F50093EAC7 /* UIColor+GetYaPalette.swift */; };
 		15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */; };
 		15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+.swift */; };
-		15E1D2162A8EF3D10048DAC7 /* DefaultQuotationPreviewMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1D2152A8EF3D10048DAC7 /* DefaultQuotationPreviewMainHeader.swift */; };
-		15E1D21A2A8EF4F60048DAC7 /* DefaultQuotationPreviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1D2192A8EF4F60048DAC7 /* DefaultQuotationPreviewTableView.swift */; };
-		15E1D21C2A8EFA670048DAC7 /* DefaultQuotationPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1D21B2A8EFA670048DAC7 /* DefaultQuotationPreviewViewModel.swift */; };
-		15E1D21E2A8FEA550048DAC7 /* DefaultQuotationPreviewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1D21D2A8FEA550048DAC7 /* DefaultQuotationPreviewModelable.swift */; };
-		15E1D2202A8FF4970048DAC7 /* DefaultQuotationPreviewTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1D21F2A8FF4970048DAC7 /* DefaultQuotationPreviewTableViewAdapter.swift */; };
 		6412D07A2A7E57B0001E4005 /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6412D0792A7E57B0001E4005 /* HyundaiSansHeadKRRegular.ttf */; };
 		6412D07C2A7E607D001E4005 /* LifeStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D07B2A7E607D001E4005 /* LifeStyleCell.swift */; };
 		6412D0802A7F75DB001E4005 /* LifeStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */; };
@@ -374,8 +366,6 @@
 		159B2CF32A82374E003F47D6 /* DetailQuotationPreviewTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewTableViewAdapter.swift; sourceTree = "<group>"; };
 		159B2CF82A825D07003F47D6 /* DetailQuotationPreviewAdapterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuotationPreviewAdapterDataSource.swift; sourceTree = "<group>"; };
 		159B2CFD2A825F5F003F47D6 /* CommonQuotationPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonQuotationPreviewCell.swift; sourceTree = "<group>"; };
-		15A738812A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewThumbnailCardView.swift; sourceTree = "<group>"; };
-		15A738832A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewThumbnailView.swift; sourceTree = "<group>"; };
 		15D026382A94B068001D1659 /* QuotationOptionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationOptionDTO.swift; sourceTree = "<group>"; };
 		15D0263A2A94B5CE001D1659 /* QuotationColorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationColorDTO.swift; sourceTree = "<group>"; };
 		15D2ABBB2A9350FD00F7DE8E /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
@@ -402,12 +392,6 @@
 		15DF95982A7C8A110093EAC7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+.swift"; sourceTree = "<group>"; };
-		15E1D2152A8EF3D10048DAC7 /* DefaultQuotationPreviewMainHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewMainHeader.swift; sourceTree = "<group>"; };
-		15E1D2172A8EF4B80048DAC7 /* DefaultQuotationPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewViewController.swift; sourceTree = "<group>"; };
-		15E1D2192A8EF4F60048DAC7 /* DefaultQuotationPreviewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewTableView.swift; sourceTree = "<group>"; };
-		15E1D21B2A8EFA670048DAC7 /* DefaultQuotationPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewViewModel.swift; sourceTree = "<group>"; };
-		15E1D21D2A8FEA550048DAC7 /* DefaultQuotationPreviewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewModelable.swift; sourceTree = "<group>"; };
-		15E1D21F2A8FF4970048DAC7 /* DefaultQuotationPreviewTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationPreviewTableViewAdapter.swift; sourceTree = "<group>"; };
 		6412D0792A7E57B0001E4005 /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
 		6412D07B2A7E607D001E4005 /* LifeStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStyleCell.swift; sourceTree = "<group>"; };
 		6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStyleViewController.swift; sourceTree = "<group>"; };
@@ -700,7 +684,6 @@
 				64B998A22A9C2EDB007F258E /* ViewController */,
 				64B998A12A9C2ED7007F258E /* ViewModel */,
 				15059ABB2A88A15400303C01 /* CommonQuotationPreview */,
-				15A7387F2A8A4B85009EF6F9 /* DefaultQuotationPreview */,
 				159B2CF52A825CC5003F47D6 /* DetailQuotationPreview */,
 			);
 			path = QuotationPreview;
@@ -858,29 +841,6 @@
 				155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */,
 			);
 			path = Protocol;
-			sourceTree = "<group>";
-		};
-		15A7387F2A8A4B85009EF6F9 /* DefaultQuotationPreview */ = {
-			isa = PBXGroup;
-			children = (
-				15E1D21D2A8FEA550048DAC7 /* DefaultQuotationPreviewModelable.swift */,
-				15E1D21B2A8EFA670048DAC7 /* DefaultQuotationPreviewViewModel.swift */,
-				15E1D21F2A8FF4970048DAC7 /* DefaultQuotationPreviewTableViewAdapter.swift */,
-				15E1D2172A8EF4B80048DAC7 /* DefaultQuotationPreviewViewController.swift */,
-				15A738802A8A4B8E009EF6F9 /* View */,
-			);
-			path = DefaultQuotationPreview;
-			sourceTree = "<group>";
-		};
-		15A738802A8A4B8E009EF6F9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				15A738812A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift */,
-				15A738832A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift */,
-				15E1D2152A8EF3D10048DAC7 /* DefaultQuotationPreviewMainHeader.swift */,
-				15E1D2192A8EF4F60048DAC7 /* DefaultQuotationPreviewTableView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		15D2ABB42A93112B00F7DE8E /* Endpoint */ = {
@@ -1961,14 +1921,11 @@
 				6457D1112A945C6E00B3AAAF /* BasicOptionViewController.swift in Sources */,
 				6457D1C52A9B448E00B3AAAF /* AdditionalOptionPackageDTO.swift in Sources */,
 				6457D1A82A96875300B3AAAF /* PdfIdDTO.swift in Sources */,
-				15A738822A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift in Sources */,
-				15A738842A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift in Sources */,
 				64E26A572A8A3E2800F6BC3A /* TrimLearnMoreView.swift in Sources */,
 				155776F72A911D6000E3C0E1 /* SessionProvider.swift in Sources */,
 				6457D1B22A97C67B00B3AAAF /* TrimIdWithInteriorColorID.swift in Sources */,
 				6457D1462A94E8FF00B3AAAF /* TrimSelectEndpoint.swift in Sources */,
 				6412D0842A80ABCA001E4005 /* QuestionNumberView.swift in Sources */,
-				15E1D21C2A8EFA670048DAC7 /* DefaultQuotationPreviewViewModel.swift in Sources */,
 				155ED7222A7E5BE50052896A /* UITextField+Combine.swift in Sources */,
 				6457D1A22A967A6500B3AAAF /* LoadingEndpoint.swift in Sources */,
 				6457D1122A945C6E00B3AAAF /* AdditionalOptionViewController.swift in Sources */,
@@ -2034,12 +1991,10 @@
 				6457D15E2A95212200B3AAAF /* Color.swift in Sources */,
 				15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */,
 				64E26A4F2A8A3E2800F6BC3A /* TrimTooltipView.swift in Sources */,
-				15E1D21A2A8EF4F60048DAC7 /* DefaultQuotationPreviewTableView.swift in Sources */,
 				6457D1A42A967E7900B3AAAF /* ContractionQuotation.swift in Sources */,
 				6457D1422A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift in Sources */,
 				6457D19E2A967A4500B3AAAF /* DefaultLoadingRepository.swift in Sources */,
 				6484A79B2A90F3E800434136 /* AdditionalCollectionView.swift in Sources */,
-				15D0263C2A94BB12001D1659 /* DefaultQuotationPreviewViewController.swift in Sources */,
 				64ADA4BE2A7A26090003E2C1 /* Int+.swift in Sources */,
 				64ADA4C22A7A2DAC0003E2C1 /* CommonPageControl.swift in Sources */,
 				15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+.swift in Sources */,
@@ -2059,7 +2014,6 @@
 				64E26A682A8BC05C00F6BC3A /* ColorSelectColorCell.swift in Sources */,
 				64E26A5A2A8A3E2800F6BC3A /* TrimDetailViewController.swift in Sources */,
 				6412D09A2A8332E5001E4005 /* PeekQuestionView.swift in Sources */,
-				15E1D21E2A8FEA550048DAC7 /* DefaultQuotationPreviewModelable.swift in Sources */,
 				155EAB462A81F0AF00833B0E /* DetailQuotationPreviewMainHeader.swift in Sources */,
 				15D2ABC22A93567C00F7DE8E /* Status.swift in Sources */,
 				6457D1AE2A96F26900B3AAAF /* TrimSubOptionType.swift in Sources */,
@@ -2103,7 +2057,6 @@
 				64E26A532A8A3E2800F6BC3A /* TrimOptionContentCollectionView.swift in Sources */,
 				150636442A93AA560057724E /* DefaultQuotationRepository.swift in Sources */,
 				6412D09D2A8387E6001E4005 /* TooltipView.swift in Sources */,
-				15E1D2202A8FF4970048DAC7 /* DefaultQuotationPreviewTableViewAdapter.swift in Sources */,
 				155B72AC2A8C9A460091A7F4 /* QuestionContentView.swift in Sources */,
 				6457CFAC2A93941D00B3AAAF /* AdditionalOptionInquery.swift in Sources */,
 				155B72A32A8C88570091A7F4 /* BottomSheetView.swift in Sources */,
@@ -2154,7 +2107,6 @@
 				6457D19A2A9678C800B3AAAF /* DefaultLoadingUseCase.swift in Sources */,
 				155B72AF2A8CA0020091A7F4 /* QuestionDescriptionLabelModel+Mock.swift in Sources */,
 				155ED7202A7E5B890052896A /* UIButton+Combine.swift in Sources */,
-				15E1D2162A8EF3D10048DAC7 /* DefaultQuotationPreviewMainHeader.swift in Sources */,
 				64ADA4B82A7A1BF20003E2C1 /* CommonOptionImageView.swift in Sources */,
 				6457D18D2A966DC900B3AAAF /* PdfEmail.swift in Sources */,
 				64E26A642A8BBE6A00F6BC3A /* ColorContentView.swift in Sources */,
