@@ -23,7 +23,7 @@ const CacheProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const setByCache = useCallback((url: string, data: any): void => {
-    expirations.current[url] = Date.now() + 5000;
+    expirations.current[url] = Date.now() + 300000; // 5분
     cacheRef.current[url] = data;
   }, []);
 
