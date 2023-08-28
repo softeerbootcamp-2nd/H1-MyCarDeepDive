@@ -95,6 +95,7 @@ function ExteriorItems({
   };
 
   const changeUnavailableColorHandler = () => {
+    setView('exterial');
     closeModalHandler();
     const { color_id, name, img_url, price, choose_rate } =
       wantedUnavailableColor;
