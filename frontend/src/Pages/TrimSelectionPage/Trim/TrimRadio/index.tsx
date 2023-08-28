@@ -39,7 +39,7 @@ function TrimRadio({
   if (carSpecData === undefined) return null;
 
   return carSpecData.data.car_specs.map((car, index) => {
-    return car.trim_name === carSpec.trim.name ? (
+    return car.trim_id === carSpec.trim.id ? (
       <Selected
         key={index}
         carSpecData={car}

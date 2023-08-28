@@ -13,10 +13,17 @@ export interface Props extends ModalProps {
     price: number | null;
     trimId: number | null;
     trimName: string | null;
+    trimImage: string | null;
   };
+  setTrimImage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function ChangeModal({ showModal, setShowModal, wantedTrim }: Props) {
+function ChangeModal({
+  showModal,
+  setShowModal,
+  wantedTrim,
+  setTrimImage,
+}: Props) {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <ModalContentsWrapper>
@@ -25,7 +32,7 @@ function ChangeModal({ showModal, setShowModal, wantedTrim }: Props) {
           <Title />
           <UnlockColor />
           <UnlockOption />
-          <Buttons wantedTrim={wantedTrim} />
+          <Buttons wantedTrim={wantedTrim} setTrimImage={setTrimImage} />
         </div>
       </ModalContentsWrapper>
     </Modal>

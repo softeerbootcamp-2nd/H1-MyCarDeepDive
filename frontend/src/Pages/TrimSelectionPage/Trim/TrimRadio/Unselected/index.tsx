@@ -13,6 +13,7 @@ export interface Props {
     summary: string;
     basic_option_ids: number[];
     basic_option_names: string[];
+    trim_img_url: string;
   };
   wantedTrimHandler: (e: React.MouseEvent<HTMLInputElement>) => void;
   setShowModal: (value: boolean) => void;
@@ -35,17 +36,11 @@ function Unselected({
   ];
 
   const optionClickHandler = useCallback(
-    (
-      e: React.MouseEvent<HTMLButtonElement>,
-      index: number,
-      option: string,
-      optionId: number,
-    ) => {
+    (e: React.MouseEvent<HTMLButtonElement>, index: number, option: string) => {
       const x = optionRefs[index].current?.getBoundingClientRect().x;
       const y = optionRefs[index].current?.getBoundingClientRect().y;
       optionToolTipHandler(x, y, option);
       e.stopPropagation();
-      console.log(optionId);
     },
     [],
   );
@@ -56,6 +51,7 @@ function Unselected({
     trimId: carSpecData.trim_id,
     trimName: carSpecData.trim_name,
     price: carSpecData.price,
+    trimImage: carSpecData.trim_img_url,
   };
 
   return (
@@ -107,14 +103,7 @@ function Unselected({
                   ref={optionRefs[index]}
                   key={index}
                   className='gap-y-[6px] font-body4-regular text-secondary underline underline-offset-4 cursor-pointer'
-                  onClick={e =>
-                    optionClickHandler(
-                      e,
-                      index,
-                      option,
-                      carSpecData.basic_option_ids[index],
-                    )
-                  }
+                  onClick={e => optionClickHandler(e, index, option)}
                 >
                   {option}
                 </button>
