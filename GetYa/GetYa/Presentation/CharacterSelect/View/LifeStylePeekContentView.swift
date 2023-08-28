@@ -7,7 +7,6 @@
 
 import UIKit
 
-// TODO: 뷰 분할 후 swiftLint file-length, type_body_length 룰 삭제
 class LifeStylePeekContentView: UIScrollView {
     typealias Palette = UIColor.GetYaPalette
     
@@ -51,6 +50,7 @@ class LifeStylePeekContentView: UIScrollView {
             static let trailingMarign = CGFloat(-16).scaledWidth
             static let topMargin = CGFloat(18).scaledHeight
             static let height = CGFloat(81).scaledHeight
+            static let inset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
         }
         enum ForYouLabel {
             static let leadingMarign = CGFloat(16).scaledWidth
@@ -73,6 +73,7 @@ class LifeStylePeekContentView: UIScrollView {
             static let leadingMarign = CGFloat(16).scaledWidth
             static let trailingMarign = CGFloat(-16).scaledWidth
             static let height = CGFloat(68).scaledHeight
+            static let inset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
         }
         enum SecondQuestionView {
             static let leadingMarign = CGFloat(16).scaledWidth
@@ -84,6 +85,7 @@ class LifeStylePeekContentView: UIScrollView {
             static let leadingMarign = CGFloat(16).scaledWidth
             static let trailingMarign = CGFloat(-16).scaledWidth
             static let bottomMargin = CGFloat(-80).scaledHeight
+            static let inset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
         }
     }
     
@@ -106,9 +108,8 @@ class LifeStylePeekContentView: UIScrollView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.spacing = CGFloat(11).scaledWidth
     }
-    // TODO: 머지 후 medium Head1으로 폰트 변경해야함
     private let descriptionLabel = CommonLabel(
-        fontType: .mediumHead2,
+        fontType: .mediumHead1,
         color: UIColor.GetYaPalette.gray1000)
     private let personImageView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -123,14 +124,15 @@ class LifeStylePeekContentView: UIScrollView {
         fontType: .regularCaption1,
         color: Palette.gray400,
         text: "두 아이의 엄마")
-    private let personInterView = CommonTextView(
-        backgroundColor: Palette.acriveBlue.withAlphaComponent(0.1),
-        textColor: Palette.acriveBlue,
+    private let personInterView: CommonPaddingLabel = CommonPaddingLabel(
+        padding: Constants.PersonInterView.inset,
         fontType: .mediumBody2,
-        textAlignment: .center
+        color: Palette.acriveBlue,
+        text: "\"우리 아이들과 함께 타는 차는 항상\n안전해야 한다고 생각해요.\""
     ).set {
-        $0.configureText(text: "\"우리 아이들과 함께 타는 차는 항상\n안전해야 한다고 생각해요.\"")
+        $0.layer.backgroundColor = Palette.acriveBlue.withAlphaComponent(0.1).cgColor
         $0.layer.cornerRadius = CGFloat(4).scaledHeight
+        $0.textAlignment = .center
     }
     private let forYouLabel = CommonLabel(
         fontType: .mediumHead3,
@@ -147,28 +149,27 @@ class LifeStylePeekContentView: UIScrollView {
         color: Palette.gray50,
         text: "Interview")
     private let firstQuestionView = PeekQuestionView(text: "어떤 용도로 차를 사용하세요?")
-    private let firstAnswerView = CommonTextView(
-        backgroundColor: Palette.acriveBlue.withAlphaComponent(0.1),
-        textColor: Palette.acriveBlue,
-        fontType: .regularBody4
+    private let firstAnswerView = CommonPaddingLabel(
+        padding: Constants.FirstAnswerView.inset,
+        fontType: .regularBody4,
+        color: Palette.acriveBlue,
+        text: "저는 차를 타고 출퇴근도 하지만 주중에 아이들 픽업하거나 마트 갈 때도 자주 타곤 해요."
     ).set {
-        $0.configureText(text: "저는 차를 타고 출퇴근도 하지만 주중에 아이들 픽업하거나 마트 갈 때도 자주 타곤 해요.")
+        $0.layer.backgroundColor = Palette.acriveBlue.withAlphaComponent(0.1).cgColor
         $0.layer.cornerRadius = 8
     }
     private let secondQuestionView = PeekQuestionView(text: "차를 살 때 가장 중요하게 생각하는 부분이 뭔가요?")
-    private let secondAnswerView = CommonTextView(
-        backgroundColor: Palette.acriveBlue.withAlphaComponent(0.1),
-        textColor: Palette.acriveBlue,
-        fontType: .regularBody4
+    private let secondAnswerView = CommonPaddingLabel(
+        padding: Constants.SecondAnswerView.inset,
+        fontType: .regularBody4,
+        color: Palette.acriveBlue,
+        text: "저는 차를 살 때 안전을 중요하게 생각해요."
+        + "가족들이 같이 타는 차라 항상 사고에 경각심을 갖고 있죠."
+        + "펠리세이드는 그 점에서 뒷자석 에어백도 터지는 모델이라 안심이 되는 편이에요."
     ).set {
-        $0.configureText(
-            text: "저는 차를 살 때 안전을 중요하게 생각해요."
-            + "가족들이 같이 타는 차라 항상 사고에 경각심을 갖고 있죠."
-            + "펠리세이드는 그 점에서 뒷자석 에어백도 터지는 모델이라 안심이 되는 편이에요.")
         $0.layer.cornerRadius = 8
+        $0.layer.backgroundColor = Palette.acriveBlue.withAlphaComponent(0.1).cgColor
     }
-    
-    // MARK: - Properties
     
     // MARK: - Lifecycles
     convenience init() {
