@@ -71,7 +71,11 @@ class CommonOptionView: UIView {
     func configureDetail(imageURL: String, title: String, price: Int) {
         self.imageView.setImage(urlString: imageURL)
         self.titleLabel.text = title
-        self.priceLabel.text = price.toPriceFormat + "원"
+        if price == 0 {
+            self.priceLabel.text = "- 원"
+        } else {
+            self.priceLabel.text = price.toPriceFormat + "원"
+        }
     }
     
     private func configureLayout() {
