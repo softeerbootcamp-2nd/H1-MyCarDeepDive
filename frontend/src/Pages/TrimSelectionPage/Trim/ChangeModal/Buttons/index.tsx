@@ -3,7 +3,7 @@ import { CarContext } from '@/context/CarProvider';
 import {
   SET_CARSPECID,
   SET_CARSPECPRICE,
-  SET_DEFAULT,
+  SET_OPTION_DEFAULT,
   SET_TRIMID,
   SET_TRIMNAME,
 } from '@/context/CarProvider/type';
@@ -16,19 +16,23 @@ interface Props {
     price: number | null;
     trimId: number | null;
     trimName: string | null;
+    trimImage: string | null;
   };
+  setTrimImage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Buttons({ wantedTrim }: Props) {
+function Buttons({ wantedTrim, setTrimImage }: Props) {
   const { carDispatch } = useContext(CarContext);
   const changeTrim = () => {
     if (
       wantedTrim.price === null ||
       wantedTrim.carSpecId === null ||
       wantedTrim.trimName === null ||
-      wantedTrim.trimId === null
+      wantedTrim.trimId === null ||
+      wantedTrim.trimImage === null
     )
       return;
+    setTrimImage(wantedTrim.trimImage);
     carDispatch({
       type: SET_CARSPECPRICE,
       carSpecPrice: wantedTrim.price,
@@ -36,8 +40,7 @@ function Buttons({ wantedTrim }: Props) {
     carDispatch({ type: SET_CARSPECID, carSpecId: wantedTrim.carSpecId });
     carDispatch({ type: SET_TRIMNAME, trimName: wantedTrim.trimName });
     carDispatch({ type: SET_TRIMID, trimId: wantedTrim.trimId });
-    carDispatch({ type: SET_DEFAULT });
-
+    carDispatch({ type: SET_OPTION_DEFAULT });
     closeModalHandler();
   };
   return (

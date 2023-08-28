@@ -13,6 +13,7 @@ export interface Props {
     summary: string;
     basic_option_ids: number[];
     basic_option_names: string[];
+    trim_img_url: string;
   };
   wantedTrimHandler: (e: React.MouseEvent<HTMLInputElement>) => void;
   setShowModal: (value: boolean) => void;
@@ -54,6 +55,7 @@ function Unselected({
     trimId: carSpecData.trim_id,
     trimName: carSpecData.trim_name,
     price: carSpecData.price,
+    trimImage: carSpecData.trim_img_url,
   };
 
   return (

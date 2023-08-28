@@ -13,6 +13,7 @@ export interface getTrimType {
       summary: string;
       basic_option_ids: number[];
       basic_option_names: string[];
+      trim_img_url: string;
     }[];
     recommend_trim_id: number;
   };
