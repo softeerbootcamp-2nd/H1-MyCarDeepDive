@@ -10,7 +10,7 @@ function UnlockColor() {
     <div>
       <div className='font-body3-medium text-primary'>해제 색상</div>
       <UnderLine margin='mt-2 mb-3' />
-      <div className='flex'>
+      <div className='flex min-h-[60px]'>
         <UnlockItem
           image={color.exteriorColor.imgUrl}
           name={`외장 - ${color.exteriorColor.name}`}
