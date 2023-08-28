@@ -16,6 +16,7 @@ import {
   SET_TRIMID,
   SET_TRIMNAME,
 } from '@/context/CarProvider/type';
+import getAllColor, { getInitialColorType } from '@/api/color/getAllColor';
 
 function Buttons({
   car_spec_id,
@@ -31,7 +32,29 @@ function Buttons({
   packages,
 }: recommendType) {
   const navigation = useNavigate();
+  const allColor: getInitialColorType | undefined = getAllColor();
   const { carDispatch } = useContext(CarContext);
+
+  const interiorChooseRateIndex =
+    allColor?.data.interior_color_response.available_colors.findIndex(
+      color => color.color_id === interior_color.color_id,
+    );
+  const exteriorChooseRateIndex =
+    allColor?.data.exterior_color_response.available_colors.findIndex(
+      color => color.color_id === exterior_color.color_id,
+    );
+  if (!interiorChooseRateIndex || !exteriorChooseRateIndex) return;
+  const interiorChooseRate =
+    allColor?.data.interior_color_response.available_colors[
+      interiorChooseRateIndex
+    ].choose_rate;
+  const exteriorChooseRate =
+    allColor?.data.exterior_color_response.available_colors[
+      exteriorChooseRateIndex
+    ].choose_rate;
+
+  if (interiorChooseRate === undefined || exteriorChooseRate === undefined)
+    return;
 
   const setRecommendData = () => {
     carDispatch({ type: SET_CARSPECID, carSpecId: car_spec_id });
@@ -52,7 +75,7 @@ function Buttons({
         name: exterior_color.color_name,
         imgUrl: exterior_color.color_icon_url,
         price: exterior_color.color_price,
-        chooseRate: 0,
+        chooseRate: exteriorChooseRate,
       },
     });
     carDispatch({
@@ -62,7 +85,7 @@ function Buttons({
         name: interior_color.color_name,
         imgUrl: interior_color.color_icon_url,
         price: interior_color.color_price,
-        chooseRate: 0,
+        chooseRate: interiorChooseRate,
       },
     });
     carDispatch({

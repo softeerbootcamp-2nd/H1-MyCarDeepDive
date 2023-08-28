@@ -5,7 +5,7 @@ import checkOptionIcon from '@/assets/icon/white-check-option.svg';
 
 interface Props {
   optionIdList: number[] | undefined;
-  optionData: { name: string; price: number };
+  optionData: { name: string; price: number; imgUrl: string };
 }
 
 function SelectedButton({ optionIdList, optionData }: Props) {
