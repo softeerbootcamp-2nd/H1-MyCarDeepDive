@@ -109,7 +109,7 @@ function CarRotation({ rotation, carImageUrl }: CarRotationProps) {
       ) : (
         <img
           className='w-[85%] z-10 ml-32'
-          src={carImageUrl[0]}
+          src={`https://${carImageUrl[0]}`}
           draggable={false}
         />
       )}
