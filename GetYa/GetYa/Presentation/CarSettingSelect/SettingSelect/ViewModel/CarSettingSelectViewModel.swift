@@ -83,7 +83,7 @@ class CarSettingSelectViewModel {
             .store(in: &cancellables)
         
         useCase.optionTitles
-            .combineLatest(useCase.optionPrices)
+            .zip(useCase.optionPrices)
             .sink(receiveValue: {
                 output.optionInfo.send($0)
             })
