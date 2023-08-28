@@ -11,7 +11,7 @@ function BottomButtons() {
         height='h-[52px]'
         variant='secondary'
         text='수정'
-        onClick={() => navigation(-1)}
+        onClick={() => navigation('/select/option')}
       />
       <Button
         width='w-[296px]'

@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function ShowQuotationButton() {
-  const { color, carSpec } = useContext(CarContext);
+  const { color, carSpec, optionData } = useContext(CarContext);
   const navigation = useNavigate();
   return (
     <div className='ml-2'>
@@ -15,7 +15,10 @@ function ShowQuotationButton() {
         variant='primaryBody4'
         rounded='4px'
         text={`${priceToString(
-          color.exteriorColor.price + color.interiorColor.price + carSpec.price,
+          carSpec.price +
+            color.exteriorColor.price +
+            color.interiorColor.price +
+            optionData.reduce((sum, item) => sum + item.price, 0),
         )} 원 견적내기`}
         onClick={() => navigation('/mycar/ready')}
       />
