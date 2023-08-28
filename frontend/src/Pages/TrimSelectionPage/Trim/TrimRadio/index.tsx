@@ -41,16 +41,14 @@ function TrimRadio({
 
   return carSpecData.data.car_specs.map((car, index) => {
     return (
-      <>
+      <div key={car.trim_name}>
         {car.trim_id === carSpec.trim.id ? (
           <Selected
-            key={index}
             carSpecData={car}
             optionToolTipHandler={optionToolTipHandler}
           />
         ) : (
           <Unselected
-            key={index}
             carSpecData={car}
             wantedTrimHandler={wantedTrimHandler}
             setShowModal={setShowModal}
@@ -60,7 +58,7 @@ function TrimRadio({
         {index !== carSpecData.data.car_specs.length - 1 && (
           <UnderLine margin='' />
         )}
-      </>
+      </div>
     );
   });
 }
