@@ -69,12 +69,20 @@ function OptionCard({
                 {optionIdList.includes(option_id) ? (
                   <SelectedButton
                     optionIdList={[option_id]}
-                    optionData={{ name: option_name, price: price }}
+                    optionData={{
+                      name: option_name,
+                      price: price,
+                      imgUrl: option_img_url,
+                    }}
                   />
                 ) : (
                   <UnSelectedButton
                     optionIdList={[option_id]}
-                    optionData={{ name: option_name, price: price }}
+                    optionData={{
+                      name: option_name,
+                      price: price,
+                      imgUrl: option_img_url,
+                    }}
                   />
                 )}
               </div>
