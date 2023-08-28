@@ -40,7 +40,7 @@ function InformationModal({ showModal, setShowModal }: ModalProps) {
           <CloseModal />
         </div>
         <div
-          className='w-full flex overflow-x-auto noScrollBar'
+          className='w-full flex noScrollBar overflow-x-hidden'
           ref={scrollRef}
         >
           <div className='w-full overflow-hidden flex-shrink-0'>
