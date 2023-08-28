@@ -51,7 +51,7 @@ final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewMode
     enum DetailQuotationPreviewState {
         case none
         case updateDetailQuotationPreview
-        case gotoCustomPage(DefaultTrimCarSpec)
+        case gotoCustomPage(TrimSubOptionSelect)
         case gotoCompletionPage(ContractionQuotation)
     }
     
@@ -62,15 +62,15 @@ final class DetailQuotationPreviewViewModel: CommonQuotationPreviewTableViewMode
     private var mainSectionHeader = QuotationPreviewMainHeaderModel()
     private var sectionHeaders: [String] = []
     private var secondSectionFooter: String = "데이터 불러오는 중입니다."
-    private var trimCarSpec = DefaultTrimCarSpec(
-        engineId: 0,
-        bodyId: 0,
-        drivingSystemId: 0)
+    private var trimCarSpec = TrimSubOptionSelect(
+        engineID: 1,
+        bodyID: 1,
+        drivingSystemID: 1)
     private var contractionQuotation = ContractionQuotation(
-        carSpecID: 0,
-        trimID: 0,
-        exteriorColorID: 0,
-        interiorColorID: 0,
+        carSpecID: 1,
+        trimID: 1,
+        exteriorColorID: 1,
+        interiorColorID: 1,
         additionalOptionIDList: [])
     private var subscriptions = Set<AnyCancellable>()
 
@@ -107,10 +107,10 @@ private extension DetailQuotationPreviewViewModel {
             ].joined(separator: " ・ ")
             let exteriorColor = quotation.exteriorColor
             let interiorColor = quotation.interiorColor
-            self?.trimCarSpec = DefaultTrimCarSpec(
-                engineId: quotation.engineID,
-                bodyId: quotation.bodyID,
-                drivingSystemId: quotation.drivingSystemID)
+            self?.trimCarSpec = TrimSubOptionSelect(
+                engineID: quotation.engineID,
+                bodyID: quotation.bodyID,
+                drivingSystemID: quotation.drivingSystemID)
             self?.contractionQuotation = ContractionQuotation(
                 carSpecID: quotation.carSpecID,
                 trimID: quotation.trimID,
@@ -132,7 +132,7 @@ private extension DetailQuotationPreviewViewModel {
                        optionName: exteriorColor.colorName,
                        optionImageURL: exteriorColor.colorImageURL,
                        price: exteriorColor.price,
-                       comment : exteriorColor.comment),
+                       comment: exteriorColor.comment),
                  .init(optionID: interiorColor.colorID,
                        optionName: interiorColor.colorName,
                        optionImageURL: interiorColor.colorImageURL,

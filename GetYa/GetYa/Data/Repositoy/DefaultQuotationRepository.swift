@@ -12,7 +12,7 @@ struct DefaultQuotationRepository: QuotationRepository {
     let provider = SessionProvider()
     
     func fetchCarDetailRecommendation(
-        with requestDTO: CustomRecomendation
+        with requestDTO: CustomRecomendationDTO
     ) async throws -> Quotation {
         let endpoint = Endpoints.shared.fetchCarDetailRecommendationOption(with: requestDTO)
         let commonDTO = try await provider.request(endpoint: endpoint)

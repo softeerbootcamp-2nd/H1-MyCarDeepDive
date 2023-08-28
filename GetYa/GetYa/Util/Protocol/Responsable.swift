@@ -17,16 +17,11 @@ enum ResponseType {
     case carSpec
     case carSpecTrims
     case carSpecActivityLog(tirmID: Int)
-    case carSpecComparison
     case exteriorColor
     case interiorColor
     case trimColor
     case carSpecAdditionalOption(carSpecId: Int)
     case carSpecBasicOptions(carSpecId: Int)
-    case optionsActivityLog(optionId: Int)
-    case optionsDetails(optionId: Int)
-    case packageOptionsActivityLog(optionId: Int)
-    case optionPackageDetails(optionId: Int)
     case optionCarSpecIdTagsTagId(carSpecID: Int, tagID: Int)
     case pdfID
     case pdfCarInfomation(pdfID: String)
@@ -65,9 +60,6 @@ enum ResponseType {
             return "pdf/\(pdfEmail.pdfID)/email/\(pdfEmail.emailName)"
         case .pdfURL(let pdfID):
             return "pdf/\(pdfID)"
-        default:
-            break
         }
-        return ""
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class CarSettingSelectViewController: UIViewController {
+class CarSettingSelectViewController: BaseViewController {
     enum Constatns {
         enum SettingProgressView {
             static let leadingMargin: CGFloat = CGFloat(16).scaledWidth
@@ -139,23 +139,9 @@ class CarSettingSelectViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
         
-        configureNavigationBar()
         configureSettingProgressView()
         configurePageViewController()
         configureBottomSheetView()
-    }
-    
-    private func configureNavigationBar() {
-        let image = UIImage(named: "Black_Logo")
-        self.navigationItem.title = ""
-        self.navigationItem.titleView = UIImageView(image: image)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "arrow.left")?.withTintColor(
-                .GetYaPalette.gray0,
-                renderingMode: .alwaysOriginal),
-            style: .plain,
-            target: self,
-            action: #selector(touchUpNavigationBackButton))
     }
     
     private func configureSettingProgressView() {
@@ -203,7 +189,7 @@ class CarSettingSelectViewController: UIViewController {
     }
     
     // MARK: - Objc Functions
-    @objc private func touchUpNavigationBackButton() {
+    override func touchUpNavigationBackButton() {
         if currentPageIndex != 0 {
             currentPageIndex -= 1
             settingProgressView.setCurrentSettingProgress(index: currentPageIndex)

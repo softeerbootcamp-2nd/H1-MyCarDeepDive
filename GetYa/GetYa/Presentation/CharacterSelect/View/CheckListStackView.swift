@@ -62,7 +62,6 @@ class CheckListStackView: UIStackView {
     }
 }
 
-// TODO: 고른 선택지에 대한 데이터 저장에 대해 고민해야함.
 extension CheckListStackView: CheckListItemViewDelegate {
     func tappedView(sender: UITapGestureRecognizer) {
         arrangedSubviews.map { $0 as? CheckListItemView }.forEach {

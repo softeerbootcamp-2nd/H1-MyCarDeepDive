@@ -15,7 +15,7 @@ struct ColorSelectEndpoint {
         return Endpoint(
             method: .get,
             responseType: .trimColor,
-            queryParams: TrimID(trimId: trimID))
+            queryParams: TrimIdDTO(trimID: trimID))
     }
     
     func fetchInteriorColor(
