@@ -2,15 +2,19 @@ package com.h1.mycardeepdive.recommendation.service;
 
 import static com.h1.mycardeepdive.recommendation.mapper.RecommendationMapper.toRecommendationResponse;
 
+import com.h1.mycardeepdive.exception.ErrorType;
+import com.h1.mycardeepdive.exception.MyCarDeepDiveException;
 import com.h1.mycardeepdive.recommendation.domain.CustomRecommendation;
 import com.h1.mycardeepdive.recommendation.domain.CustomRecommendationCar;
 import com.h1.mycardeepdive.recommendation.domain.Recommendation;
+import com.h1.mycardeepdive.recommendation.domain.RecommendationCar;
 import com.h1.mycardeepdive.recommendation.domain.repository.CustomRecommendationRepository;
 import com.h1.mycardeepdive.recommendation.domain.repository.RecommendationRepository;
 import com.h1.mycardeepdive.recommendation.ui.dto.RecommendationResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +31,11 @@ public class RecommendationService {
         Recommendation recommendation =
                 recommendationRepository
                         .findByAgeGroupIdAndLifeStyleId(ageGroupId, lifeStyleId)
-                        .orElseThrow();
+                        .orElseThrow(
+                                () ->
+                                        new MyCarDeepDiveException(
+                                                HttpStatus.BAD_REQUEST,
+                                                ErrorType.RECOMMENDATION_NOT_FOUND));
         return toRecommendationResponse(recommendation.getRecommendationCar(), recommendation);
     }
 
@@ -47,11 +55,16 @@ public class RecommendationService {
         List<CustomRecommendationCar> customRecommendationCars =
                 customRecommendation.getCustomRecommendationCars();
         for (CustomRecommendationCar customRecommendationCar : customRecommendationCars) {
-            long price = customRecommendationCar.getRecommendationCar().getPrice();
-            if (price < maxBudget) {
-                return toRecommendationResponse(customRecommendationCar.getRecommendationCar());
+            RecommendationCar recommendationCar = customRecommendationCar.getRecommendationCar();
+            if (isUnderBudget(recommendationCar, maxBudget)) {
+                return toRecommendationResponse(recommendationCar);
             }
         }
-        return toRecommendationResponse(customRecommendationCars.get(0).getRecommendationCar());
+        return toRecommendationResponse(
+                customRecommendationCars.stream().findAny().orElseThrow().getRecommendationCar());
+    }
+
+    private boolean isUnderBudget(RecommendationCar recommendationCar, Long maxBudget) {
+        return recommendationCar.getPrice() < maxBudget;
     }
 }

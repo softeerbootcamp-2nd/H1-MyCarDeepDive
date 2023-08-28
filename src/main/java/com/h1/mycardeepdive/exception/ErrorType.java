@@ -22,7 +22,8 @@ public enum ErrorType {
     COLOR_NOT_FOUND("COLOR-001", "해당 색상이 존재하지 않습니다."),
     TRIM_NOT_FOUND("TRIM-001", "해당 트림이 존재하지 않습니다."),
     TAG_NOT_FOUND("TAG-001", "해당 태그가 존재하지 않습니다."),
-    OPTION_NOT_FOUND("OPTION-001", "해당 옵션이 존재하지 않습니다.");
+    OPTION_NOT_FOUND("OPTION-001", "해당 옵션이 존재하지 않습니다."),
+    RECOMMENDATION_NOT_FOUND("RECOMMENDATION-001", "해당 추천 값이 존재하지 않습니다.");
     private final String code;
     private final String message;
 

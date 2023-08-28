@@ -1,6 +1,7 @@
 package com.h1.mycardeepdive.pdf.domain;
 
 import com.h1.mycardeepdive.pdf.ui.dto.SimpleOption;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Id;
@@ -29,6 +30,7 @@ public class PdfInfo {
     private List<SimpleOption> optionList;
     private long basic_price;
     private String pdf_url;
+    private LocalDateTime creationDate;
 
     @Builder
     public PdfInfo(
@@ -49,7 +51,8 @@ public class PdfInfo {
             long interior_color_price,
             long basic_price,
             List<SimpleOption> optionList,
-            String pdf_url) {
+            String pdf_url,
+            LocalDateTime creationDate) {
         this.id = id;
         this.car_image_url = car_image_url;
         this.car_name = car_name;
@@ -68,6 +71,7 @@ public class PdfInfo {
         this.optionList = optionList;
         this.basic_price = basic_price;
         this.pdf_url = pdf_url;
+        this.creationDate = creationDate;
     }
 
     public void setPdf_url(String pdf_url) {

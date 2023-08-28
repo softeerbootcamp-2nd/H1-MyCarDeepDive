@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ColorMapper {
+    private static final int INITIAL_IMAGE_NUMBER = 1;
+    private static final int LAST_IMAGE_NUMBER = 60;
+    private static final String IMAGE_DESTINATION = "/image_%03d.png";
+
     public static ColorInfo toInteriorColorInfo(InteriorColor interiorColor, Trim trim) {
         List<Long> exteriorIds =
                 interiorColor.getColorCombinations().stream()
@@ -40,11 +44,11 @@ public class ColorMapper {
                 trim.getName(),
                 exteriorColor.getName(),
                 exteriorColor.getImgUrl(),
-                IntStream.rangeClosed(1, 60)
+                IntStream.rangeClosed(INITIAL_IMAGE_NUMBER, LAST_IMAGE_NUMBER)
                         .mapToObj(
                                 number ->
                                         exteriorColor.getExteriorImgUrl()
-                                                + String.format("/image_%03d.png", number))
+                                                + String.format(IMAGE_DESTINATION, number))
                         .collect(Collectors.toList()),
                 exteriorColor.getPrice(),
                 exteriorColor.getChooseRate(),
