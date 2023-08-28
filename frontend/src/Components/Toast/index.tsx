@@ -42,10 +42,6 @@ function Toast({ success, message, showToast, setShowToast }: Props) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(timer);
-  }, [timer]);
-
   if (!showToast) return null;
   return (
     <div
