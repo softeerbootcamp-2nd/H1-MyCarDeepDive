@@ -21,7 +21,7 @@ class SettingAlertView: UIView {
     // MARK: - UI properties
     private let stackView: UIStackView = UIStackView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .white
+        $0.axis = .vertical
     }
     private let totalNameAndPriceView = OptionNameAndPriceView(nameText: "변경 금액").set {
         $0.setNameLabelColor(color: .GetYaPalette.acriveBlue)
@@ -35,7 +35,13 @@ class SettingAlertView: UIView {
     // MARK: - Properties
     private var totalPrice: Int = 0 {
         didSet {
-            totalNameAndPriceView.setPrice(value: totalPrice)
+            var text = ""
+            if totalPrice == 0 {
+                text = "-원"
+            } else {
+                text = totalPrice < 0 ? totalPrice.toPriceFormat + "원" : "+ \(totalPrice.toPriceFormat) 원"
+            }
+            totalNameAndPriceView.setPrice(text: text)
         }
     }
     
@@ -65,7 +71,6 @@ class SettingAlertView: UIView {
     
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .GetYaPalette.gray700
         
         configureStackView()
         configureLineView()
@@ -122,8 +127,8 @@ class SettingAlertView: UIView {
         }
         let otherTrimView = OptionSummaryContentView(
             titleText: "변경 트림",
-            optionName: trimName,
-            optionPrice: trimPrice
+            optionName: otherTrim,
+            optionPrice: otherTrimPirce
         ).set {
             $0.setTitleTextColor(color: .GetYaPalette.acriveBlue)
             $0.setTitleFont(fontType: .mediumCaption1)

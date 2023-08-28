@@ -88,6 +88,10 @@ class OptionNameAndPriceView: UIView {
         nameLabel.text = text
     }
     
+    func setPrice(text: String) {
+        priceLabel.text = text
+    }
+    
     func setPrice(value: Int) {
         priceLabel.text = value == 0 ? "-원" : value.toPriceFormat + "원"
     }

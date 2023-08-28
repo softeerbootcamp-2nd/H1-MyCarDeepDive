@@ -27,7 +27,6 @@ class ColorLearnMoreView: LearnMoreView {
     // MARK: - UI properties
     private let label = CommonLabel(fontType: .mediumBody4, color: .GetYaPalette.primary)
     private lazy var collectionView = ColorSelectMoreColorCollectionView().set {
-        $0.colorSelectDelegate = self
         $0.isHidden = true
     }
     private var collectionViewHeightConstraint: NSLayoutConstraint!
@@ -40,14 +39,11 @@ class ColorLearnMoreView: LearnMoreView {
     }
     
     // MARK: - Properties
+    private var colorArray: [Color] = []
     
     // MARK: - Lifecycles
-    init(text: String) {
-        super.init(frame: .zero)
-        
-        setupViews()
-        configureUI()
-        configureText(text: text)
+    convenience init() {
+        self.init(frame: .zero)
     }
     
     override init(frame: CGRect) {
@@ -121,36 +117,40 @@ class ColorLearnMoreView: LearnMoreView {
     }
     
     // MARK: - Functions
-    func configureText(text: String) {
-        label.text = text
+    func configureText(type: ColorType) {
+        switch type {
+        case .exterior:
+            label.text = "다른 외장 색상을 찾고 있나요?"
+        case .interior:
+            label.text = "다른 내장 색상을 찾고 있나요?"
+        }
     }
     
     func configureTextColor(color: UIColor) {
         label.textColor = color
     }
     
-    func setColorData(trimNames: [String], colorImages: [UIImage?]) {
+    func setColor(colorArray: [Color]) {
         typealias Const = Constants.CollectionView
-        if trimNames.count == 0 {
+        self.colorArray = colorArray
+        
+        if colorArray.count == 0 {
             collectionView.isHidden = true
             emptyLabel.isHidden = false
         } else {
             emptyLabel.isHidden = true
-            collectionView.setData(names: trimNames, images: colorImages)
+            collectionView.setColorArray(colorArray: colorArray)
             collectionView.isHidden = false
 
             collectionViewHeightConstraint.isActive = false
-            collectionViewHeightConstraint.constant = Const.height * ceil(CGFloat(trimNames.count) / 4)
+            collectionViewHeightConstraint.constant = Const.height * ceil(CGFloat(colorArray.count) / 4)
             collectionViewHeightConstraint.isActive = true
         }
     }
     
-    // MARK: - Objc Functions
-}
-
-// MARK: - ColorSelectMoreColorDelegate
-extension ColorLearnMoreView: ColorSelectMoreColorDelegate {
-    func touchUpMoreColorCell(index: Int) {
-        print(#function)
+    func setColorType(colorType: ColorType) {
+        collectionView.setColorType(type: colorType)
     }
+    
+    // MARK: - Objc Functions
 }

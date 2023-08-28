@@ -7,16 +7,8 @@
 
 import UIKit
 
-// TODO: 서버에서 들어오는 데이터에 따라 모델 만들기
-struct ColorSelectData {
-    let name: String
-    let colorImageURL: String
-    let carImageURL: String
-    let adoptionRate: Int
-}
-
 protocol ColorContentViewDelegate: AnyObject {
-    func touchUpLearnMoreViewButton(type: ColorContentView.ColorType, isExpanded: Bool)
+    func touchUpLearnMoreViewButton(type: ColorType, isExpanded: Bool)
 }
 
 class ColorContentView: UIView {
@@ -25,7 +17,7 @@ class ColorContentView: UIView {
             static let height: CGFloat = .toScaledHeight(value: 185)
         }
         enum TitleLabel {
-            static let topMargin: CGFloat = .toScaledHeight(value: 24)
+            static let topMargin: CGFloat = .toScaledHeight(value: 209)
             static let leadingMargin: CGFloat = .toScaledWidth(value: 16)
         }
         enum ColorNameLabel {
@@ -37,8 +29,7 @@ class ColorContentView: UIView {
             static let trailingMargin: CGFloat = .toScaledWidth(value: -16)
         }
         enum CollectionView {
-            static let topMargin: CGFloat = .toScaledHeight(value: 12)
-            static let height: CGFloat = .toScaledHeight(value: 64)
+            static let height: CGFloat = .toScaledHeight(value: 76.5)
         }
         enum LearnMoreView {
             static let topMargin: CGFloat = .toScaledHeight(value: 12)
@@ -51,31 +42,7 @@ class ColorContentView: UIView {
         }
     }
     
-    enum ColorType {
-        case exterior
-        case interior
-        
-        var title: String {
-            switch self {
-            case .exterior:
-                return "외장 색상"
-            case .interior:
-                return "내장 색상"
-            }
-        }
-        
-        var learnMoreText: String {
-            switch self {
-            case .exterior:
-                return "다른 외장 색상을 찾고 있나요?"
-            case .interior:
-                return "다른 내장 색상을 찾고 있나요?"
-            }
-        }
-    }
-    
     // MARK: - UI properties
-    private var titleLabelTopConstraint: NSLayoutConstraint!
     private let titleLabel = CommonLabel(
         fontType: .mediumHead3,
         color: .GetYaPalette.gray0)
@@ -85,9 +52,7 @@ class ColorContentView: UIView {
     private let adoptionRateLabel = CommonLabel(
         fontType: .mediumCaption1,
         color: .GetYaPalette.gray300)
-    private lazy var collectionView = ColorSelectColorCollectionView().set {
-        $0.colorSelectDelegate = self
-    }
+    private lazy var collectionView = ColorSelectColorCollectionView()
     private lazy var learnMoreView = ColorLearnMoreView().set {
         $0.delegate = self
     }
@@ -95,49 +60,20 @@ class ColorContentView: UIView {
     // MARK: - Properties
     weak var delegate: ColorContentViewDelegate?
     private var colorType: ColorType = .exterior
-    private var dataArray: [ColorSelectData] = [] {
+    private var trimColor: TrimColor? {
         didSet {
-            let names = dataArray.map { $0.name }
-            let colorImages = dataArray.map { $0.colorImageURL }
-            collectionView.setColorNames(names: names)
-            collectionView.setColorImages(images: [
-                UIImage(systemName: "house"),
-                UIImage(systemName: "person"),
-                UIImage(systemName: "airplane"),
-                UIImage(systemName: "car"),
-                UIImage(systemName: "bus"),
-                UIImage(systemName: "ferry")
-            ])
+            guard let trimColor else { return }
+            collectionView.setAvailableColorArray(colorArray: trimColor.availableColors)
+            collectionView.setUnAvailableColorArray(colorArray: trimColor.unAvailableColors)
             collectionView.reloadData()
-                        
-            setLearnMoreContentData(
-                trimNames: [
-                    "Caligraphy",
-                    "Caligraphy",
-                    "Prestige",
-                    "Exclusive",
-                    "Prestige",
-                    "Prestige"],
-                images: [
-                    UIImage(systemName: "house"),
-                    UIImage(systemName: "person"),
-                    UIImage(systemName: "airplane"),
-                    UIImage(systemName: "car"),
-                    UIImage(systemName: "bus"),
-                    UIImage(systemName: "ferry")])
+            setDataByTrimColor(color: trimColor.availableColors[0])
+            setLearnMoreContentData(colorArray: trimColor.otherTrimColors)
         }
     }
     
     // MARK: - Lifecycles
-    
-    // TODO: ColorArray가 서버에서 받을 데이터로 대체될 것임.
-    init(type: ColorType, headerView: UIView, dataArray: [ColorSelectData]) {
-        super.init(frame: .zero)
-        
-        setupViews()
-        setDataArray(dataArray: dataArray)
-        setupHeaderView(view: headerView)
-        configureUI()
+    convenience init(type: ColorType) {
+        self.init(frame: .zero)
         configureByColorType(type: type)
     }
     
@@ -166,24 +102,6 @@ class ColorContentView: UIView {
         ])
     }
     
-    private func setupHeaderView(view: UIView) {
-        addSubview(view)
-        
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: topAnchor),
-            view.leadingAnchor.constraint(equalTo: leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: trailingAnchor),
-            view.heightAnchor.constraint(equalToConstant: Constants.HeaderView.height)
-        ])
-        if let titleLabelTopConstraint {
-            titleLabelTopConstraint.isActive = false
-        }
-        titleLabelTopConstraint = titleLabel.topAnchor.constraint(
-            equalTo: view.bottomAnchor,
-            constant: Constants.TitleLabel.topMargin)
-        titleLabelTopConstraint.isActive = true
-    }
-    
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -197,15 +115,18 @@ class ColorContentView: UIView {
     private func configureByColorType(type: ColorType) {
         collectionView.setColorType(type: type)
         self.colorType = type
-        self.titleLabel.text = type.title
-        self.learnMoreView.configureText(text: type.learnMoreText)
+        self.titleLabel.text = type == .exterior ? "외장 색상" : "내장 색상"
+        self.learnMoreView.configureText(type: type)
     }
     
     private func configureTitleLabel() {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: Constants.TitleLabel.leadingMargin)
+                constant: Constants.TitleLabel.leadingMargin),
+            titleLabel.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: Constants.TitleLabel.topMargin)
         ])
     }
     
@@ -232,13 +153,8 @@ class ColorContentView: UIView {
     }
     
     private func configureCollectionView() {
-        collectionView.selectItem(at: [0, 0], animated: false, scrollPosition: .init())
-        collectionView.collectionView(collectionView.self, didSelectItemAt: [0, 0])
-        
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(
-                equalTo: colorNameLabel.bottomAnchor,
-                constant: Constants.CollectionView.topMargin),
+            collectionView.topAnchor.constraint(equalTo: colorNameLabel.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.heightAnchor.constraint(
@@ -261,13 +177,52 @@ class ColorContentView: UIView {
         ])
     }
     
-    // MARK: - Functions
-    func setDataArray(dataArray: [ColorSelectData]) {
-        self.dataArray = dataArray
+    private func selectCollectionViewCell(index: Int) {
+        collectionView.setSelectedIndexPath(index: index)
     }
     
-    func setLearnMoreContentData(trimNames: [String], images: [UIImage?]) {
-        learnMoreView.setColorData(trimNames: trimNames, colorImages: images)
+    // MARK: - Functions
+    func setupHeaderView(view: UIView) {
+        subviews.forEach {
+            if $0 is UIImageView || $0 is RotationView {
+                $0.removeFromSuperview()
+            }
+        }
+        
+        addSubview(view)
+        
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: topAnchor),
+            view.leadingAnchor.constraint(equalTo: leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: trailingAnchor),
+            view.heightAnchor.constraint(equalToConstant: Constants.HeaderView.height)
+        ])
+    }
+    
+    func setTrimColor(color: TrimColor, selectIndex: Int) {
+        trimColor = color
+        selectCollectionViewCell(index: selectIndex)
+    }
+    
+    func setSelectIndex(index: Int) {
+        selectCollectionViewCell(index: index)
+    }
+    
+    func reloadCollectionView() {
+        collectionView.reloadData()
+    }
+    
+    func setDataByTrimColor(color: Color) {
+        colorNameLabel.text = color.name
+        adoptionRateLabel.text = "\(color.selectRate)%의 구매자가 선택한"
+        adoptionRateLabel.configurePartTextColor(
+            partText: "\(color.selectRate)%",
+            partTextColor: .GetYaPalette.acriveBlue)
+    }
+    
+    func setLearnMoreContentData(colorArray: [Color]) {
+        learnMoreView.setColor(colorArray: colorArray)
+        learnMoreView.setColorType(colorType: colorType)
     }
     
     // MARK: - Objc Functions
@@ -277,16 +232,5 @@ class ColorContentView: UIView {
 extension ColorContentView: LearnMoreViewDelegate {
     func touchUpExpandButtonByIsSelected(sender: LearnMoreView, isSelected: Bool) {
         delegate?.touchUpLearnMoreViewButton(type: colorType, isExpanded: isSelected)
-    }
-}
-
-// MARK: - ColorSelectColorCollectionViewDelegate
-extension ColorContentView: ColorSelectColorDelegate {
-    func touchUpColorCell(index: Int) {
-        colorNameLabel.text = dataArray[index].name
-        adoptionRateLabel.text = "\(dataArray[index].adoptionRate)%의 구매자가 선택한"
-        adoptionRateLabel.configurePartTextColor(
-            partText: "\(dataArray[index].adoptionRate)%",
-            partTextColor: .GetYaPalette.acriveBlue)
     }
 }

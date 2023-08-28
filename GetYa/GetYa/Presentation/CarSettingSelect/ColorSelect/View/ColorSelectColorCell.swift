@@ -18,9 +18,16 @@ class ColorSelectColorCell: UICollectionViewCell {
             static let height: CGFloat = .toScaledHeight(value: 20)
             static let width: CGFloat = .toScaledHeight(value: 40)
         }
+        enum ContentImageView {
+            static let topMargin: CGFloat = .toScaledHeight(value: 12.5)
+        }
         enum SelectedImageView {
             static let height: CGFloat = .toScaledHeight(value: 24)
             static let width: CGFloat = .toScaledHeight(value: 24)
+        }
+        enum ExclamationmarkImageView {
+            static let height: CGFloat = .toScaledHeight(value: 25)
+            static let width: CGFloat = .toScaledHeight(value: 25)
         }
     }
     
@@ -37,11 +44,15 @@ class ColorSelectColorCell: UICollectionViewCell {
     }
     private let contentImageView: UIImageView = UIImageView().set {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = CGFloat(4).scaledHeight
+        $0.clipsToBounds = true
     }
     private let selectedView: UIView = UIView().set {
         $0.isHidden = true
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .GetYaPalette.primary.withAlphaComponent(0.5)
+        $0.layer.cornerRadius = CGFloat(4).scaledHeight
+        $0.clipsToBounds = true
     }
     private lazy var selectedImageView: UIImageView = UIImageView(
         image: UIImage(named: "White-Check-Circle")
@@ -49,14 +60,21 @@ class ColorSelectColorCell: UICollectionViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
         selectedView.addSubview($0)
     }
+    private let exclamationmarkImageView: UIImageView = UIImageView().set {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
+        let config = UIImage.SymbolConfiguration(paletteColors: [
+            .white,
+            .GetYaPalette.gray500
+        ])
+        $0.image = UIImage(systemName: "exclamationmark.circle.fill")?
+            .applyingSymbolConfiguration(config)
+        $0.isHidden = true
+    }
     
     // MARK: - Properties
     static let identifier = "ColorSelectColorCell"
-    override var isSelected: Bool {
-        didSet {
-            selectedView.isHidden = !isSelected
-        }
-    }
     
     // MARK: - Lifecycles
     override init(frame: CGRect) {
@@ -80,6 +98,7 @@ class ColorSelectColorCell: UICollectionViewCell {
         contentImageView.image = nil
         tagView.isHidden = true
         selectedView.isHidden = true
+        exclamationmarkImageView.isHidden = true
     }
     
     // MARK: - Private Functions
@@ -87,23 +106,22 @@ class ColorSelectColorCell: UICollectionViewCell {
         addSubviews([
             contentImageView,
             tagView,
-            selectedView
+            selectedView,
+            exclamationmarkImageView
         ])
     }
     
     private func configureUI() {
-        clipsToBounds = true
-        layer.cornerRadius = CGFloat(4).scaledHeight
-        
         configureTagView()
         configureContentImageView()
         configureSelectedView()
         configureSelectedImageView()
+        configureExclamationmarkImageView()
     }
     
     private func configureTagView() {
         NSLayoutConstraint.activate([
-            tagView.topAnchor.constraint(equalTo: topAnchor),
+            tagView.topAnchor.constraint(equalTo: contentImageView.topAnchor),
             tagView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tagView.heightAnchor.constraint(equalToConstant: Constatns.TagView.height),
             tagView.widthAnchor.constraint(equalToConstant: Constatns.TagView.width)
@@ -111,8 +129,12 @@ class ColorSelectColorCell: UICollectionViewCell {
     }
     
     private func configureContentImageView() {
+        typealias Const = Constatns.ContentImageView
+        
         NSLayoutConstraint.activate([
-            contentImageView.topAnchor.constraint(equalTo: topAnchor),
+            contentImageView.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: Const.topMargin),
             contentImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             contentImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -121,7 +143,7 @@ class ColorSelectColorCell: UICollectionViewCell {
     
     private func configureSelectedView() {
         NSLayoutConstraint.activate([
-            selectedView.topAnchor.constraint(equalTo: topAnchor),
+            selectedView.topAnchor.constraint(equalTo: contentImageView.topAnchor),
             selectedView.leadingAnchor.constraint(equalTo: leadingAnchor),
             selectedView.trailingAnchor.constraint(equalTo: trailingAnchor),
             selectedView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -139,9 +161,21 @@ class ColorSelectColorCell: UICollectionViewCell {
         ])
     }
     
+    private func configureExclamationmarkImageView() {
+        typealias Const = Constatns.ExclamationmarkImageView
+        
+        NSLayoutConstraint.activate([
+            exclamationmarkImageView.centerYAnchor.constraint(equalTo: contentImageView.topAnchor),
+            exclamationmarkImageView.centerXAnchor.constraint(equalTo: contentImageView.trailingAnchor),
+            exclamationmarkImageView.heightAnchor.constraint(equalToConstant: Const.height),
+            exclamationmarkImageView.widthAnchor.constraint(equalToConstant: Const.width)
+        ])
+    }
+    
     // MARK: - Functions
-    func setImage(image: UIImage?) {
-        contentImageView.image = image
+    func setImageURL(imageURL: String, isAvailable: Bool) {
+        contentImageView.setImage(urlString: imageURL)
+        exclamationmarkImageView.isHidden = isAvailable
     }
     
     func setExteriorTagViewIsHidden(number: Int, isHidden: Bool) {
@@ -152,6 +186,10 @@ class ColorSelectColorCell: UICollectionViewCell {
     func setInteriorTagViewIsHidden(isHidden: Bool) {
         tagView.text = "Best"
         tagView.isHidden = isHidden
+    }
+    
+    func setSelectedImageViewIsHidden(isHidden: Bool) {
+        selectedView.isHidden = isHidden
     }
     
     // MARK: - Objc Functions

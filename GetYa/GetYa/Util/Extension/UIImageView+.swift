@@ -49,7 +49,8 @@ extension UIImageView {
             DefaultGetYaCacheService.shared.write(urlString, data: data)
             
             let maybeImage = UIImage(data: data)
-            guard let thumbnail = await maybeImage?.thumbnail else {
+            guard let size = maybeImage?.size,
+                  let thumbnail = await maybeImage?.byPreparingThumbnail(ofSize: size) else {
                 throw ImageLoadError.badImage
             }
             return thumbnail

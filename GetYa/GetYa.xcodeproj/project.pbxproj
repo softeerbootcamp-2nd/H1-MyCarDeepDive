@@ -114,7 +114,6 @@
 		641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5212A7B7D2A00CF88C0 /* HomeContentView.swift */; };
 		641AB5262A7BA07300CF88C0 /* CheckListStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5252A7BA07300CF88C0 /* CheckListStackView.swift */; };
 		641AB5282A7BA0F300CF88C0 /* CheckListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641AB5272A7BA0F300CF88C0 /* CheckListItemView.swift */; };
-		6457CFA82A938F8700B3AAAF /* TrimSubOptionSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */; };
 		6457CFAA2A938F8E00B3AAAF /* TrimOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA92A938F8E00B3AAAF /* TrimOption.swift */; };
 		6457CFAC2A93941D00B3AAAF /* AdditionalOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAB2A93941D00B3AAAF /* AdditionalOptionList.swift */; };
 		6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFAD2A93942D00B3AAAF /* AdditionalOptionPackage.swift */; };
@@ -155,9 +154,20 @@
 		6457D14A2A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */; };
 		6457D14C2A95013D00B3AAAF /* TrimInquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D14B2A95013D00B3AAAF /* TrimInquery.swift */; };
 		6457D14E2A95016D00B3AAAF /* TrimCarSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */; };
+		6457D1522A95126700B3AAAF /* DefaultColorSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1512A95126700B3AAAF /* DefaultColorSelectRepository.swift */; };
+		6457D1542A95127100B3AAAF /* ColorRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1532A95127100B3AAAF /* ColorRepository.swift */; };
+		6457D1562A95133600B3AAAF /* ColorSelectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1552A95133600B3AAAF /* ColorSelectEndpoint.swift */; };
+		6457D1582A951A2500B3AAAF /* TrimColorInqueryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1572A951A2500B3AAAF /* TrimColorInqueryDTO.swift */; };
+		6457D15A2A951BBD00B3AAAF /* TrimColorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1592A951BBD00B3AAAF /* TrimColorDTO.swift */; };
+		6457D15C2A951BC300B3AAAF /* ColorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D15B2A951BC300B3AAAF /* ColorDTO.swift */; };
+		6457D15E2A95212200B3AAAF /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D15D2A95212200B3AAAF /* Color.swift */; };
+		6457D1602A9523F000B3AAAF /* TrimColorInquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D15F2A9523F000B3AAAF /* TrimColorInquery.swift */; };
+		6457D1622A9523FF00B3AAAF /* TrimColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1612A9523FF00B3AAAF /* TrimColor.swift */; };
+		6457D1642A952E4F00B3AAAF /* TrimID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1632A952E4F00B3AAAF /* TrimID.swift */; };
+		6457D1682A9597F500B3AAAF /* ColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1672A9597F500B3AAAF /* ColorType.swift */; };
+		6457D16A2A95A5EF00B3AAAF /* ColorChangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1692A95A5EF00B3AAAF /* ColorChangeType.swift */; };
 		6457D16C2A95D4DE00B3AAAF /* DefaultQuotationFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D16B2A95D4DE00B3AAAF /* DefaultQuotationFinishUseCase.swift */; };
 		6457D16E2A95D4EA00B3AAAF /* QuotationFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D16D2A95D4EA00B3AAAF /* QuotationFinishUseCase.swift */; };
-		6457D1702A95D50600B3AAAF /* DefaultQuotationFinishRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D16F2A95D50600B3AAAF /* DefaultQuotationFinishRepository.swift */; };
 		6457D1722A95D51600B3AAAF /* QuotationFinishEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1712A95D51600B3AAAF /* QuotationFinishEndpoint.swift */; };
 		6457D1742A95D54000B3AAAF /* QuotationFinishRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1732A95D54000B3AAAF /* QuotationFinishRepository.swift */; };
 		6457D1762A95DD0000B3AAAF /* QuotationFinishDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1752A95DD0000B3AAAF /* QuotationFinishDTO.swift */; };
@@ -175,14 +185,13 @@
 		6457D1A82A96875300B3AAAF /* PdfIdDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1A72A96875300B3AAAF /* PdfIdDTO.swift */; };
 		6457D1AA2A968CE300B3AAAF /* MyActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1A92A968CE300B3AAAF /* MyActivityItemSource.swift */; };
 		6457D1AC2A96963700B3AAAF /* PdfUrlDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1AB2A96963700B3AAAF /* PdfUrlDTO.swift */; };
-		6457D1422A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1412A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift */; };
-		6457D1442A94C64600B3AAAF /* TrimSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1432A94C64600B3AAAF /* TrimSelectRepository.swift */; };
-		6457D1462A94E8FF00B3AAAF /* TrimSelectEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1452A94E8FF00B3AAAF /* TrimSelectEndpoint.swift */; };
-		6457D1482A94EA6B00B3AAAF /* TrimCarSpecDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1472A94EA6B00B3AAAF /* TrimCarSpecDTO.swift */; };
-		6457D14A2A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */; };
-		6457D14C2A95013D00B3AAAF /* TrimInquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D14B2A95013D00B3AAAF /* TrimInquery.swift */; };
-		6457D14E2A95016D00B3AAAF /* TrimCarSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */; };
 		6457D1AE2A96F26900B3AAAF /* TrimSubOptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1AD2A96F26900B3AAAF /* TrimSubOptionType.swift */; };
+		6457D1B02A97C62000B3AAAF /* TrimIdWithExteriorColorID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1AF2A97C62000B3AAAF /* TrimIdWithExteriorColorID.swift */; };
+		6457D1B22A97C67B00B3AAAF /* TrimIdWithInteriorColorID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1B12A97C67B00B3AAAF /* TrimIdWithInteriorColorID.swift */; };
+		6457D1B42A97D76000B3AAAF /* ColorChangeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1B32A97D76000B3AAAF /* ColorChangeModel.swift */; };
+		6457D1B62A97E45A00B3AAAF /* TrimChangeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D1B52A97E45A00B3AAAF /* TrimChangeModel.swift */; };
+		6457D1B72A988EF700B3AAAF /* TrimSubOptionSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CFA72A938F8700B3AAAF /* TrimSubOptionSelect.swift */; };
+		6457D1B92A9B39DC00B3AAAF /* DefaultQuotationFinishRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457D16F2A95D50600B3AAAF /* DefaultQuotationFinishRepository.swift */; };
 		6484A7372A8C78CF00434136 /* DetailQuotationPreviewViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD062A82D3B2009AE2BC /* DetailQuotationPreviewViewModelable.swift */; };
 		6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155EAB422A81163300833B0E /* DetailQuotationPreviewThumbnailView.swift */; };
 		6484A7392A8C78F400434136 /* QuotationPreviewHeaderTitleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155DDD0D2A840F7D009AE2BC /* QuotationPreviewHeaderTitleList.swift */; };
@@ -453,6 +462,18 @@
 		6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionSelectDTO.swift; sourceTree = "<group>"; };
 		6457D14B2A95013D00B3AAAF /* TrimInquery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimInquery.swift; sourceTree = "<group>"; };
 		6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpec.swift; sourceTree = "<group>"; };
+		6457D1512A95126700B3AAAF /* DefaultColorSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColorSelectRepository.swift; sourceTree = "<group>"; };
+		6457D1532A95127100B3AAAF /* ColorRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRepository.swift; sourceTree = "<group>"; };
+		6457D1552A95133600B3AAAF /* ColorSelectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectEndpoint.swift; sourceTree = "<group>"; };
+		6457D1572A951A2500B3AAAF /* TrimColorInqueryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColorInqueryDTO.swift; sourceTree = "<group>"; };
+		6457D1592A951BBD00B3AAAF /* TrimColorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColorDTO.swift; sourceTree = "<group>"; };
+		6457D15B2A951BC300B3AAAF /* ColorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDTO.swift; sourceTree = "<group>"; };
+		6457D15D2A95212200B3AAAF /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		6457D15F2A9523F000B3AAAF /* TrimColorInquery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColorInquery.swift; sourceTree = "<group>"; };
+		6457D1612A9523FF00B3AAAF /* TrimColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimColor.swift; sourceTree = "<group>"; };
+		6457D1632A952E4F00B3AAAF /* TrimID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimID.swift; sourceTree = "<group>"; };
+		6457D1672A9597F500B3AAAF /* ColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorType.swift; sourceTree = "<group>"; };
+		6457D1692A95A5EF00B3AAAF /* ColorChangeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChangeType.swift; sourceTree = "<group>"; };
 		6457D16B2A95D4DE00B3AAAF /* DefaultQuotationFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationFinishUseCase.swift; sourceTree = "<group>"; };
 		6457D16D2A95D4EA00B3AAAF /* QuotationFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationFinishUseCase.swift; sourceTree = "<group>"; };
 		6457D16F2A95D50600B3AAAF /* DefaultQuotationFinishRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuotationFinishRepository.swift; sourceTree = "<group>"; };
@@ -474,14 +495,11 @@
 		6457D1A72A96875300B3AAAF /* PdfIdDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfIdDTO.swift; sourceTree = "<group>"; };
 		6457D1A92A968CE300B3AAAF /* MyActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyActivityItemSource.swift; sourceTree = "<group>"; };
 		6457D1AB2A96963700B3AAAF /* PdfUrlDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfUrlDTO.swift; sourceTree = "<group>"; };
-		6457D1412A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTrimSelectRepository.swift; sourceTree = "<group>"; };
-		6457D1432A94C64600B3AAAF /* TrimSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectRepository.swift; sourceTree = "<group>"; };
-		6457D1452A94E8FF00B3AAAF /* TrimSelectEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelectEndpoint.swift; sourceTree = "<group>"; };
-		6457D1472A94EA6B00B3AAAF /* TrimCarSpecDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpecDTO.swift; sourceTree = "<group>"; };
-		6457D1492A94EC9F00B3AAAF /* TrimSubOptionSelectDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionSelectDTO.swift; sourceTree = "<group>"; };
-		6457D14B2A95013D00B3AAAF /* TrimInquery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimInquery.swift; sourceTree = "<group>"; };
-		6457D14D2A95016D00B3AAAF /* TrimCarSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCarSpec.swift; sourceTree = "<group>"; };
 		6457D1AD2A96F26900B3AAAF /* TrimSubOptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSubOptionType.swift; sourceTree = "<group>"; };
+		6457D1AF2A97C62000B3AAAF /* TrimIdWithExteriorColorID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimIdWithExteriorColorID.swift; sourceTree = "<group>"; };
+		6457D1B12A97C67B00B3AAAF /* TrimIdWithInteriorColorID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimIdWithInteriorColorID.swift; sourceTree = "<group>"; };
+		6457D1B32A97D76000B3AAAF /* ColorChangeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChangeModel.swift; sourceTree = "<group>"; };
+		6457D1B52A97E45A00B3AAAF /* TrimChangeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimChangeModel.swift; sourceTree = "<group>"; };
 		6484A7472A8C82FE00434136 /* SubOptionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOptionDetailViewController.swift; sourceTree = "<group>"; };
 		6484A7482A8C82FE00434136 /* EngineDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailViewController.swift; sourceTree = "<group>"; };
 		6484A74A2A8C82FE00434136 /* EngineDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDetailContentView.swift; sourceTree = "<group>"; };
@@ -833,6 +851,7 @@
 				6457D1712A95D51600B3AAAF /* QuotationFinishEndpoint.swift */,
 				6457D1A12A967A6500B3AAAF /* LoadingEndpoint.swift */,
 				6457D1452A94E8FF00B3AAAF /* TrimSelectEndpoint.swift */,
+				6457D1552A95133600B3AAAF /* ColorSelectEndpoint.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -949,18 +968,11 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		6457CFCB2A93CEE500B3AAAF /* CarSettingSelect */ = {
-			isa = PBXGroup;
-			children = (
-				6457CFCC2A93CF0700B3AAAF /* View */,
-				6457CFCD2A93CF0B00B3AAAF /* ViewController */,
-			);
-			path = CarSettingSelect;
-			sourceTree = "<group>";
-		};
 		6457CFCC2A93CF0700B3AAAF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				64E26A612A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift */,
+				64E26A402A8A3E2800F6BC3A /* SettingProgressView.swift */,
 				64E26A3B2A8A3E2800F6BC3A /* BottomSheetLargeContentView.swift */,
 				64E26A332A8A3E2800F6BC3A /* BottomSheetSmallContentView.swift */,
 				64E26A372A8A3E2800F6BC3A /* BottomSheetView.swift */,
@@ -1108,6 +1120,15 @@
 				6484A7732A8E4CD100434136 /* LoadingViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6457D1B82A9B2D7400B3AAAF /* SettingSelect */ = {
+			isa = PBXGroup;
+			children = (
+				6457CFCC2A93CF0700B3AAAF /* View */,
+				6457CFCD2A93CF0B00B3AAAF /* ViewController */,
+			);
+			path = SettingSelect;
 			sourceTree = "<group>";
 		};
 		647FBF132A7CB5C900507AE9 /* View */ = {
@@ -1366,6 +1387,8 @@
 				15DF95942A7C89DF0093EAC7 /* GetYaFont.swift */,
 				6484A7612A8CB8D900434136 /* AlertType.swift */,
 				6457CFBF2A93A76D00B3AAAF /* TagCategoryType.swift */,
+				6457D1672A9597F500B3AAAF /* ColorType.swift */,
+				6457D1692A95A5EF00B3AAAF /* ColorChangeType.swift */,
 				6457D1AD2A96F26900B3AAAF /* TrimSubOptionType.swift */,
 			);
 			path = Enum;
@@ -1443,11 +1466,16 @@
 				15A8A2A92A95F4AA007C47AB /* CustomRecomendationModel.swift */,
 				6457D1272A9465AF00B3AAAF /* ColorSelectModel.swift */,
 				6457D1252A9465A500B3AAAF /* OptionSelectModel.swift */,
+				6457D15F2A9523F000B3AAAF /* TrimColorInquery.swift */,
+				6457D1612A9523FF00B3AAAF /* TrimColor.swift */,
+				6457D15D2A95212200B3AAAF /* Color.swift */,
 				6457D1772A95DE6300B3AAAF /* QuotationFinish.swift */,
 				6457D18C2A966DC900B3AAAF /* PdfEmail.swift */,
 				156F82232A9713520076E740 /* AdditionalTrimCarSpec.swift */,
 				6457D1A32A967E7900B3AAAF /* ContractionQuotation.swift */,
 				155674BC2A97C03700629DD8 /* DefaultTrimCarSpec.swift */,
+				6457D1B32A97D76000B3AAAF /* ColorChangeModel.swift */,
+				6457D1B52A97E45A00B3AAAF /* TrimChangeModel.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1457,6 +1485,7 @@
 			children = (
 				64ADA4822A77886F0003E2C1 /* Protocol */,
 				150636432A93AA560057724E /* DefaultQuotationRepository.swift */,
+				6457D1512A95126700B3AAAF /* DefaultColorSelectRepository.swift */,
 				6457D16F2A95D50600B3AAAF /* DefaultQuotationFinishRepository.swift */,
 				6457D19D2A967A4500B3AAAF /* DefaultLoadingRepository.swift */,
 				6457D1412A94C63A00B3AAAF /* DefaultTrimSelectRepository.swift */,
@@ -1473,6 +1502,12 @@
 				15D026382A94B068001D1659 /* OptionInfoDTO.swift */,
 				1506363F2A9394710057724E /* QuotationDTO.swift */,
 				6457D1752A95DD0000B3AAAF /* QuotationFinishDTO.swift */,
+				6457D1572A951A2500B3AAAF /* TrimColorInqueryDTO.swift */,
+				6457D1592A951BBD00B3AAAF /* TrimColorDTO.swift */,
+				6457D15B2A951BC300B3AAAF /* ColorDTO.swift */,
+				6457D1632A952E4F00B3AAAF /* TrimID.swift */,
+				6457D1AF2A97C62000B3AAAF /* TrimIdWithExteriorColorID.swift */,
+				6457D1B12A97C67B00B3AAAF /* TrimIdWithInteriorColorID.swift */,
 				6457D1A52A96867400B3AAAF /* ContractionQuotationDTO.swift */,
 				6457D1A72A96875300B3AAAF /* PdfIdDTO.swift */,
 				6457D1AB2A96963700B3AAAF /* PdfUrlDTO.swift */,
@@ -1488,6 +1523,7 @@
 			children = (
 				64ADA4882A77888C0003E2C1 /* RepositoyProtocol.swift */,
 				150636412A93A8F00057724E /* QuotationRepository.swift */,
+				6457D1532A95127100B3AAAF /* ColorRepository.swift */,
 				6457D1732A95D54000B3AAAF /* QuotationFinishRepository.swift */,
 				6457D19F2A967A5100B3AAAF /* LoadingRepository.swift */,
 				6457D1432A94C64600B3AAAF /* TrimSelectRepository.swift */,
@@ -1535,8 +1571,7 @@
 		64E26A0E2A895B9C00F6BC3A /* CarSettingSelect */ = {
 			isa = PBXGroup;
 			children = (
-				64E26A5F2A8B3DED00F6BC3A /* Common */,
-				6457CFCB2A93CEE500B3AAAF /* CarSettingSelect */,
+				6457D1B82A9B2D7400B3AAAF /* SettingSelect */,
 				64E26A2D2A8A3E2800F6BC3A /* TrimSelect */,
 				64E26A0C2A895B7E00F6BC3A /* ColorSelect */,
 				64E26A0D2A895B8600F6BC3A /* OptionSelect */,
@@ -1597,23 +1632,6 @@
 				64E26A6B2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift */,
 				64E26A6D2A8BF41400F6BC3A /* ColorSelectMoreColorCell.swift */,
 				64E26A692A8BE5E200F6BC3A /* ColorSelectContentView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		64E26A5F2A8B3DED00F6BC3A /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				64E26A602A8B3DF100F6BC3A /* View */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		64E26A602A8B3DF100F6BC3A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				64E26A612A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift */,
-				64E26A402A8A3E2800F6BC3A /* SettingProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1785,6 +1803,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6457D1B92A9B39DC00B3AAAF /* DefaultQuotationFinishRepository.swift in Sources */,
+				6457D1B72A988EF700B3AAAF /* TrimSubOptionSelect.swift in Sources */,
 				6457D1212A945D1A00B3AAAF /* OptionSelectTagItemCell.swift in Sources */,
 				6484A7932A90F29400434136 /* CommonQuotationPreviewAdapterDataSource.swift in Sources */,
 				6457CFD72A93D13400B3AAAF /* QuotationFinishViewModel.swift in Sources */,
@@ -1793,7 +1813,7 @@
 				6484A7542A8C835D00434136 /* CommonView.swift in Sources */,
 				6484A7862A902D0800434136 /* QuotationFinishViewController.swift in Sources */,
 				6484A73E2A8C791C00434136 /* GetYaFont.swift in Sources */,
-				6457CFA82A938F8700B3AAAF /* TrimSubOptionSelect.swift in Sources */,
+				6457D15C2A951BC300B3AAAF /* ColorDTO.swift in Sources */,
 				6484A73D2A8C791500434136 /* UIView+.swift in Sources */,
 				6484A7622A8CB8D900434136 /* AlertType.swift in Sources */,
 				6484A73C2A8C790A00434136 /* ConvenienceInit.swift in Sources */,
@@ -1814,6 +1834,8 @@
 				6484A7382A8C78CF00434136 /* DetailQuotationPreviewThumbnailView.swift in Sources */,
 				15A8A2A22A95EB86007C47AB /* QuotationModel.swift in Sources */,
 				64C57BFF2A8C788900113E56 /* DetailQuotationPreviewTableView.swift in Sources */,
+				6457D16A2A95A5EF00B3AAAF /* ColorChangeType.swift in Sources */,
+				64C57BFE2A8C787D00113E56 /* QuotationPreviewCarProductOptionModel+Mock.swift in Sources */,
 				155B72B62A8CA4C50091A7F4 /* QuestionSliderViewModel+Mock.swift in Sources */,
 				6484A74E2A8C82FE00434136 /* SubOptionDetailViewController.swift in Sources */,
 				64C57BFD2A8C785800113E56 /* CommonQuotationPreviewTableViewAdapter.swift in Sources */,
@@ -1833,8 +1855,10 @@
 				6484A74F2A8C82FE00434136 /* EngineDetailViewController.swift in Sources */,
 				6457CFC02A93A76D00B3AAAF /* TagCategoryType.swift in Sources */,
 				64ADA48F2A7788AA0003E2C1 /* PresentationCoordinator.swift in Sources */,
+				6457D1642A952E4F00B3AAAF /* TrimID.swift in Sources */,
 				64E26A622A8B3E0100F6BC3A /* SettingSelectTitleBackgroundVIew.swift in Sources */,
 				15D2ABBC2A9350FD00F7DE8E /* Responsable.swift in Sources */,
+				6457D1582A951A2500B3AAAF /* TrimColorInqueryDTO.swift in Sources */,
 				6484A7952A90F2EE00434136 /* OptionSelectCategoryCell.swift in Sources */,
 				64E26A6A2A8BE5E200F6BC3A /* ColorSelectContentView.swift in Sources */,
 				155776F42A911CAA00E3C0E1 /* EndpointProvider.swift in Sources */,
@@ -1847,12 +1871,14 @@
 				6457D16E2A95D4EA00B3AAAF /* QuotationFinishUseCase.swift in Sources */,
 				641AB5202A7B7CF400CF88C0 /* CharacterSelectViewController.swift in Sources */,
 				64ADA4952A7788BC0003E2C1 /* CommonViewModel.swift in Sources */,
+				6457D1B62A97E45A00B3AAAF /* TrimChangeModel.swift in Sources */,
 				6457D1112A945C6E00B3AAAF /* BasicOptionViewController.swift in Sources */,
 				6457D1A82A96875300B3AAAF /* PdfIdDTO.swift in Sources */,
 				15A738822A8A4B9D009EF6F9 /* DefaultQuotationPreviewThumbnailCardView.swift in Sources */,
 				15A738842A8A8E1B009EF6F9 /* DefaultQuotationPreviewThumbnailView.swift in Sources */,
 				64E26A572A8A3E2800F6BC3A /* TrimLearnMoreView.swift in Sources */,
 				155776F72A911D6000E3C0E1 /* SessionProvider.swift in Sources */,
+				6457D1B22A97C67B00B3AAAF /* TrimIdWithInteriorColorID.swift in Sources */,
 				6457D1462A94E8FF00B3AAAF /* TrimSelectEndpoint.swift in Sources */,
 				6412D0842A80ABCA001E4005 /* QuestionNumberView.swift in Sources */,
 				15E1D21C2A8EFA670048DAC7 /* DefaultQuotationPreviewViewModel.swift in Sources */,
@@ -1860,8 +1886,10 @@
 				6457CFB62A9395D100B3AAAF /* OptionDetail.swift in Sources */,
 				6457D1A22A967A6500B3AAAF /* LoadingEndpoint.swift in Sources */,
 				6457D1122A945C6E00B3AAAF /* AdditionalOptionViewController.swift in Sources */,
+				6457D1542A95127100B3AAAF /* ColorRepository.swift in Sources */,
 				155EAB3A2A80824B00833B0E /* DetailQuotationPreviewViewController.swift in Sources */,
 				155DDD0A2A835FEF009AE2BC /* DetailQuotationPreviewSecionHeaderView.swift in Sources */,
+				6457D1522A95126700B3AAAF /* DefaultColorSelectRepository.swift in Sources */,
 				15D8CC8F2A892A38009B19B9 /* CommonQuotationPreviewTableViewModel.swift in Sources */,
 				64ADA4BC2A7A22780003E2C1 /* CommonLabel.swift in Sources */,
 				15040FC92A8E4C5E00DDC411 /* TagViewCell.swift in Sources */,
@@ -1884,11 +1912,11 @@
 				64E26A6E2A8BF41400F6BC3A /* ColorSelectMoreColorCell.swift in Sources */,
 				64E26A592A8A3E2800F6BC3A /* TrimSelectViewController.swift in Sources */,
 				64ADA4A52A789C5A0003E2C1 /* HomeViewController.swift in Sources */,
+				6457D1682A9597F500B3AAAF /* ColorType.swift in Sources */,
 				6484A7522A8C82FE00434136 /* EngineLearnMoreView.swift in Sources */,
 				15040FC72A8DFC0800DDC411 /* CharacterDetailSelectViewModelabe.swift in Sources */,
 				155776ED2A910D6900E3C0E1 /* Encodable+toDictionary.swift in Sources */,
 				64E26A552A8A3E2800F6BC3A /* TrimHeaderView.swift in Sources */,
-				6457D1702A95D50600B3AAAF /* DefaultQuotationFinishRepository.swift in Sources */,
 				64E26A702A8C076500F6BC3A /* ColorLearnMoreView.swift in Sources */,
 				15A8A2A42A95EF97007C47AB /* ColorInfoModel.swift in Sources */,
 				64ADA4972A7788C10003E2C1 /* Etc.swift in Sources */,
@@ -1903,6 +1931,7 @@
 				6457D1982A9678B600B3AAAF /* LoadingViewModel.swift in Sources */,
 				6484A7A12A91F40800434136 /* OptionSelectItemLearnMoreView.swift in Sources */,
 				6484A7902A90444100434136 /* PurchaseView.swift in Sources */,
+				6457D1562A95133600B3AAAF /* ColorSelectEndpoint.swift in Sources */,
 				6484A7822A8F266A00434136 /* QuotationFinishTableCell.swift in Sources */,
 				64ADA4892A77888C0003E2C1 /* RepositoyProtocol.swift in Sources */,
 				155B72A12A8C882C0091A7F4 /* TrimOptionDetailOptionCollectionView.swift in Sources */,
@@ -1911,6 +1940,7 @@
 				6457D14C2A95013D00B3AAAF /* TrimInquery.swift in Sources */,
 				64ADA4AB2A78A4080003E2C1 /* HomeNavigationViewController.swift in Sources */,
 				6484A7512A8C82FE00434136 /* EnginePerformanceDescriptionView.swift in Sources */,
+				6457D15E2A95212200B3AAAF /* Color.swift in Sources */,
 				15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */,
 				64E26A4F2A8A3E2800F6BC3A /* TrimTooltipView.swift in Sources */,
 				15E1D21A2A8EF4F60048DAC7 /* DefaultQuotationPreviewTableView.swift in Sources */,
@@ -1947,6 +1977,7 @@
 				6457D1762A95DD0000B3AAAF /* QuotationFinishDTO.swift in Sources */,
 				6412D0862A80AC92001E4005 /* LifeStyleDetailCell.swift in Sources */,
 				155B72A82A8C8FB20091A7F4 /* TrimSubOptionContentStackView.swift in Sources */,
+				6457D1622A9523FF00B3AAAF /* TrimColor.swift in Sources */,
 				6484A7532A8C82FE00434136 /* SubOptionDetailSegmentedControl.swift in Sources */,
 				6457D1442A94C64600B3AAAF /* TrimSelectRepository.swift in Sources */,
 				155B72B22A8CA02D0091A7F4 /* CharacterDetailSelectViewModel.swift in Sources */,
@@ -1960,6 +1991,7 @@
 				6457D1362A9498B200B3AAAF /* DefaultCarSettingUseCase.swift in Sources */,
 				6457D1A02A967A5100B3AAAF /* LoadingRepository.swift in Sources */,
 				156A96A82A8C03A300AE1477 /* CharacterDetailQuestionListView.swift in Sources */,
+				6457D1B42A97D76000B3AAAF /* ColorChangeModel.swift in Sources */,
 				156A969F2A8BD1BE00AE1477 /* CharacterDetailSelectViewController.swift in Sources */,
 				6457D11F2A945C9500B3AAAF /* OptionSelectImageCell.swift in Sources */,
 				156A96AB2A8C03D400AE1477 /* QuestionViewSendable.swift in Sources */,
@@ -1975,6 +2007,7 @@
 				155DDD182A855182009AE2BC /* LeftAndRightButtonStackView.swift in Sources */,
 				155EAB372A7F5FCD00833B0E /* ProgressView.swift in Sources */,
 				64ADA4402A7787770003E2C1 /* AppDelegate.swift in Sources */,
+				6457D15A2A951BBD00B3AAAF /* TrimColorDTO.swift in Sources */,
 				64E26A532A8A3E2800F6BC3A /* TrimOptionContentCollectionView.swift in Sources */,
 				150636442A93AA560057724E /* DefaultQuotationRepository.swift in Sources */,
 				6412D09D2A8387E6001E4005 /* TooltipView.swift in Sources */,
@@ -1986,6 +2019,7 @@
 				155B72AB2A8C9A2E0091A7F4 /* UIColor+.swift in Sources */,
 				6457D1AC2A96963700B3AAAF /* PdfUrlDTO.swift in Sources */,
 				15040FC22A8D3CAB00DDC411 /* DetailQuestionCarPriceSelectView.swift in Sources */,
+				6457D1602A9523F000B3AAAF /* TrimColorInquery.swift in Sources */,
 				150636392A9389270057724E /* DiskCache.swift in Sources */,
 				155776E12A90D27300E3C0E1 /* Endpoint.swift in Sources */,
 				64E26A662A8BC04F00F6BC3A /* ColorSelectColorCollectionView.swift in Sources */,
@@ -2001,6 +2035,7 @@
 				1506363E2A9392480057724E /* CustomRecomendation.swift in Sources */,
 				64E26A452A8A3E2800F6BC3A /* CarSettingSelectViewController.swift in Sources */,
 				6457CFAE2A93942D00B3AAAF /* AdditionalOptionPackage.swift in Sources */,
+				6457D1B02A97C62000B3AAAF /* TrimIdWithExteriorColorID.swift in Sources */,
 				6457D1322A94988600B3AAAF /* ColorSelectUseCase.swift in Sources */,
 				64E26A6C2A8BF3B600F6BC3A /* ColorSelectMoreColorCollectionView.swift in Sources */,
 				1506364A2A9460610057724E /* CommonDTO.swift in Sources */,

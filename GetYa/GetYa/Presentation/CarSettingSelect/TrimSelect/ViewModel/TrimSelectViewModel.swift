@@ -18,6 +18,7 @@ class TrimSelectViewModel {
     // MARK: - Output
     struct Output {
         let trimInquery = PassthroughSubject<(TrimInquery?, [String]), Never>()
+        let trimSelectModel = PassthroughSubject<TrimSelectModel, Never>()
         let trimSelectResult = PassthroughSubject<String, Never>()
     }
     
@@ -74,9 +75,15 @@ class TrimSelectViewModel {
             })
             .store(in: &cancellables)
         
+        useCase.trimSelect
+            .sink(receiveValue: {
+                guard let trimSelectModel = $0 else { return }
+                output.trimSelectModel.send(trimSelectModel)
+            })
+            .store(in: &cancellables)
+        
         useCase.trimSelectResult
-            .sink(receiveValue: { [weak self] in
-                guard let self else { return }
+            .sink(receiveValue: {
                 output.trimSelectResult.send($0)
             })
             .store(in: &cancellables)
