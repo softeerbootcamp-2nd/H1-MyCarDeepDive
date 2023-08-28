@@ -17,8 +17,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import net.logstash.logback.marker.Markers;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +28,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class OptionsService {
 
+    public static final String OPTION = "option";
+    public static final String PACKAGE = "package";
     private final OptionsRepository optionsRepository;
 
     private final PackageRepository packageRepository;
@@ -73,12 +75,12 @@ public class OptionsService {
     }
 
     public boolean userClickedOptionLog(Long optionId) {
-        log.info(Markers.append("option", optionId), "option");
+        log.info(Markers.append(OPTION, optionId), OPTION);
         return true;
     }
 
-    public boolean userClickedPackageLog(Long optionId) {
-        log.info(Markers.append("package", optionId), "package");
+    public boolean userClickedPackageLog(Long packageId) {
+        log.info(Markers.append(PACKAGE, packageId), PACKAGE);
         return true;
     }
 

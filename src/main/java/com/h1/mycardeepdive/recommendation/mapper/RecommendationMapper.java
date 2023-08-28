@@ -61,7 +61,7 @@ public class RecommendationMapper {
                 toRecommendationColorInfo(exteriorColor),
                 RecommendationColorInfoMapper.toRecommendationColorInfo(interiorColor),
                 recommendationOptionInfos,
-                recommendationPackageDtos,
+                List.of(),
                 totalPrice);
     }
 
@@ -109,7 +109,7 @@ public class RecommendationMapper {
                 toRecommendationColorInfo(exteriorColor),
                 RecommendationColorInfoMapper.toRecommendationColorInfo(interiorColor),
                 recommendationOptionInfos,
-                recommendationPackageDtos,
+                List.of(),
                 totalPrice);
     }
 }

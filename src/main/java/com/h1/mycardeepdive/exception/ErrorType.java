@@ -17,11 +17,13 @@ public enum ErrorType {
     UNEXPECTED_SERVER_ERROR("SERVER-001", "서버 관리자에게 문의하세요."),
     FONT_ERROR("FONT-001", "폰트 가져오기 실패했습니다."),
     PDF_NOT_FOUND("PDF-001", "해당 PDF ID가 존재하지 않습니다."),
+    PDF_CREATE_ERROR("PDF-002", "PDF 생성 중 문제가 발생했습니다."),
     CAR_SPEC_NOT_FOUND("CAR-SPEC-001", "해당 CarSpec이 존재하지 않습니다."),
     COLOR_NOT_FOUND("COLOR-001", "해당 색상이 존재하지 않습니다."),
     TRIM_NOT_FOUND("TRIM-001", "해당 트림이 존재하지 않습니다."),
     TAG_NOT_FOUND("TAG-001", "해당 태그가 존재하지 않습니다."),
-    OPTION_NOT_FOUND("OPTION-001", "해당 옵션이 존재하지 않습니다.");
+    OPTION_NOT_FOUND("OPTION-001", "해당 옵션이 존재하지 않습니다."),
+    RECOMMENDATION_NOT_FOUND("RECOMMENDATION-001", "해당 추천 값이 존재하지 않습니다.");
     private final String code;
     private final String message;
 

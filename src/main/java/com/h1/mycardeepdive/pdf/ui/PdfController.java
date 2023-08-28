@@ -22,8 +22,8 @@ public class PdfController {
     public ApiResponse<Boolean> sendEmail(
             @PathVariable("email") String email, @PathVariable("pdf-id") String pdfId)
             throws Exception {
-        mailService.createMessage(email, pdfId);
-        return new ApiResponse<>(true);
+        boolean sendResult = mailService.sendMessage(email, pdfId);
+        return new ApiResponse<>(sendResult);
     }
 
     @PostMapping("/pdfId")
