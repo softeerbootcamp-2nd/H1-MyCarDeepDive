@@ -17,6 +17,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.BaseFont;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -127,6 +128,7 @@ public class PdfService {
                         .interior_color_price(interiorColor.getPrice())
                         .optionList(simpleOptionList)
                         .basic_price(carSpec.getPrice())
+                        .creationDate(LocalDateTime.now())
                         .build();
         pdfInfo = pdfRepository.save(pdfInfo);
         byte[] pdfBytes = generatePdf(pdfInfo.getId());
@@ -149,7 +151,7 @@ public class PdfService {
         return new PdfUrlResponse(pdfInfo.getPdf_url());
     }
 
-    public byte[] generatePdf(String pdfId) throws Exception {
+    public byte[] generatePdf(String pdfId) throws IOException, DocumentException {
         PdfInfo pdfInfo =
                 pdfRepository
                         .findById(pdfId)
