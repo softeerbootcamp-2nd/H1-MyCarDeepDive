@@ -29,7 +29,6 @@
 		155B72A22A8C88420091A7F4 /* TrimOptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A382A8A3E2800F6BC3A /* TrimOptionDetailView.swift */; };
 		155B72A32A8C88570091A7F4 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A372A8A3E2800F6BC3A /* BottomSheetView.swift */; };
 		155B72A52A8C888E0091A7F4 /* BottomSheetLargeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3B2A8A3E2800F6BC3A /* BottomSheetLargeContentView.swift */; };
-		155B72A72A8C88D30091A7F4 /* TrimOptionDetailOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A342A8A3E2800F6BC3A /* TrimOptionDetailOptionCell.swift */; };
 		155B72A82A8C8FB20091A7F4 /* TrimSubOptionContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A362A8A3E2800F6BC3A /* TrimSubOptionContentStackView.swift */; };
 		155B72A92A8C8FCB0091A7F4 /* TrimSubOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A3E2A8A3E2800F6BC3A /* TrimSubOptionView.swift */; };
 		155B72AA2A8C8FEB0091A7F4 /* OptionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A112A895C1700F6BC3A /* OptionSelectViewController.swift */; };
@@ -89,6 +88,7 @@
 		15DF95972A7C89F50093EAC7 /* UIColor+GetYaPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF95962A7C89F50093EAC7 /* UIColor+GetYaPalette.swift */; };
 		15DF959B2A7C8A1D0093EAC7 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959A2A7C8A1D0093EAC7 /* UIFont+.swift */; };
 		15DF959D2A7C8A330093EAC7 /* NSMutableAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF959C2A7C8A330093EAC7 /* NSMutableAttributedString+.swift */; };
+		15F544EF2A9C7099005DC5BE /* TrimOptionDetailOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E26A342A8A3E2800F6BC3A /* TrimOptionDetailOptionCell.swift */; };
 		6412D07A2A7E57B0001E4005 /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6412D0792A7E57B0001E4005 /* HyundaiSansHeadKRRegular.ttf */; };
 		6412D07C2A7E607D001E4005 /* LifeStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D07B2A7E607D001E4005 /* LifeStyleCell.swift */; };
 		6412D0802A7F75DB001E4005 /* LifeStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412D07F2A7F75DB001E4005 /* LifeStyleViewController.swift */; };
@@ -1847,6 +1847,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15F544EF2A9C7099005DC5BE /* TrimOptionDetailOptionCell.swift in Sources */,
 				6457D1B92A9B39DC00B3AAAF /* DefaultQuotationFinishRepository.swift in Sources */,
 				6457D1B72A988EF700B3AAAF /* TrimSubOptionSelect.swift in Sources */,
 				6457D1212A945D1A00B3AAAF /* OptionSelectTagItemCell.swift in Sources */,
@@ -2006,9 +2007,7 @@
 				6457CFDA2A93D14F00B3AAAF /* ColorSelectViewModel.swift in Sources */,
 				6484A7842A902B6600434136 /* OptionSummaryContentView.swift in Sources */,
 				156F82242A9713520076E740 /* AdditionalTrimCarSpec.swift in Sources */,
-				155B72A72A8C88D30091A7F4 /* TrimOptionDetailOptionCell.swift in Sources */,
 				6457D1BD2A9B3AD800B3AAAF /* DefaultOptionSelectRepository.swift in Sources */,
-				155B72A72A8C88D30091A7F4 /* TrimOptionDetailOptionCell.swift in Sources */,
 				6484A7742A8E4CD100434136 /* LoadingViewController.swift in Sources */,
 				641AB5222A7B7D2A00CF88C0 /* HomeContentView.swift in Sources */,
 				64ADA4852A77887E0003E2C1 /* AppCoordinator.swift in Sources */,
