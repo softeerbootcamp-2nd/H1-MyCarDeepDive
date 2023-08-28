@@ -21,6 +21,23 @@ class CharacterSelectViewController: BaseViewController {
     private lazy var progressView = ProgressView().set {
             $0.translatesAutoresizingMaskIntoConstraints = true
     }
+    lazy var ageViewController = {
+        let questionView = CharacterDetailQuestionListView(textArray: checkListTexts)
+        return BaseCharacterSelectPageViewController(
+            curPageIndex: 1,
+            totalPageIndex: 2,
+            questionView: questionView
+        ).set {
+            $0.setQuestionIndexView(currentIndex: 1, totalIndex: 2)
+            $0.setQuestionDescriptionLabel(
+                defaultText: "나이를 알려주세요",
+                highlightText: "나이")
+            $0.delegate = self
+        }
+    }()
+    lazy var lifeStyleViewController = LifeStyleViewController().set {
+        $0.delegate = self
+    }
     
     // MARK: - Properties
     private var viewControllers: [UIViewController] = []
@@ -29,6 +46,7 @@ class CharacterSelectViewController: BaseViewController {
         "30대",
         "40대",
         "50대 이상"]
+    private var selectedAge: Int = 1
     // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,23 +61,6 @@ class CharacterSelectViewController: BaseViewController {
         view.addSubviews([progressView, pageViewController.view])
         pageViewController.didMove(toParent: self)
         
-        let ageViewController = {
-            let questionView = CharacterDetailQuestionListView(textArray: checkListTexts)
-            return BaseCharacterSelectPageViewController(
-                curPageIndex: 1,
-                totalPageIndex: 2,
-                questionView: questionView
-            ).set {
-                $0.setQuestionIndexView(currentIndex: 1, totalIndex: 2)
-                $0.setQuestionDescriptionLabel(
-                    defaultText: "나이를 알려주세요",
-                    highlightText: "나이")
-                $0.delegate = self
-            }
-        }()
-        let lifeStyleViewController = LifeStyleViewController().set {
-            $0.delegate = self
-        }
         viewControllers = [ageViewController, lifeStyleViewController]
     }
     
@@ -119,9 +120,8 @@ class CharacterSelectViewController: BaseViewController {
 // MARK: - BaseCharacterSelectpageViewDelegate
 extension CharacterSelectViewController: BaseCharacterSelectpageViewDelegate {
     func touchUpBaseCharacterSelectPageView(_ viewController: BaseCharacterSelectPageViewController) {
-        // TODO: 서버한테 보낼 사용자 나이
         guard let selectedIdx = viewController.selectedItemIndex else { return }
-        
+        selectedAge = selectedIdx + 1
         if let viewController = viewControllers.last {
             pageViewController.setViewControllers(
                 [viewController],
@@ -135,8 +135,15 @@ extension CharacterSelectViewController: BaseCharacterSelectpageViewDelegate {
 // MARK: - LifeStyleViewController Delegate
 extension CharacterSelectViewController: LifeStyleViewControllerDelegate {
     func touchUpSuccessButton(sender: UIButton) {
-        let quotationViewModel = DefaultQuotationPreviewViewModel()
-        let quotationViewController = DefaultQuotationPreviewViewController(viewModel: quotationViewModel)
-        navigationController?.pushViewController(quotationViewController, animated: true)
+        guard let liftStyleIndex = lifeStyleViewController.selectedIndexPath?.row else { return }
+        
+        let viewController = RecommendQuotationViewController(
+            viewModel: RecommendQuotationViewModel(
+                characterSelectModel: CharacterSelectModel(
+                    ageGroupId: selectedAge,
+                    lifeStyleId: liftStyleIndex + 1),
+                useCase: DefaultRecommendQuotationUseCase(
+                    repository: DefaultRecommendQuotationRepository(provider: SessionProvider()))))
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
