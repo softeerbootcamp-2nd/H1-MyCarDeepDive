@@ -240,7 +240,13 @@
         <div th:each="option : ${options}">
             <div class="option-row">
                 <span class="option-name" th:text="${option.option_name}"></span>
-                <span class="option-price" th:text="${option.option_price} + ' 원'"></span>
+                <span class="option-price" th:if="${option.option_price == 0}">
+    -
+</span>
+                <span class="option-price" th:unless="${option.option_price == 0}"
+                      th:text="${option.option_price} + ' 원'">
+</span>
+
             </div>
         </div>
     </div>

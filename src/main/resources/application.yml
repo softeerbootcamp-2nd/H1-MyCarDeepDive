@@ -6,6 +6,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  batch:
+    jdbc:
+      initialize-schema: always
 management:
   endpoints:
     web:
@@ -130,6 +133,9 @@ spring:
   data:
     mongodb:
       uri: ${mongo.url}
+  sql:
+    init:
+      mode: always
 cloud:
   aws:
     credentials:
