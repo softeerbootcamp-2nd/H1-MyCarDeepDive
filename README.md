@@ -81,45 +81,6 @@ https://github.com/softeerbootcamp-2nd/H1-MyCarDeepDive/tree/ios-main
 
 https://api.make-my-car.shop/docs/swagger
 
-## Tech Spec
-
-[Backend]
-- Java 11
-- Spring Boot 2.7.1
-- Spring Data JPA
-- Querydsl
-- SwaggerUI/RestDocs
-
-[Database]
-- MySQL 8.0.34
-- H2 Database
-- Flyway
-
-[Testing]
-- Jacoco
-- MockMVC
-
-[DevOps]
-- Github Action
-- Docker
-- Spotless
-- AWS EC2 (Ubuntu 18.04)
-- AWS S3
-- AWS CloudFront
-
-[Logging]
-- Actuator
-- Grafana
-- Prometheus
-- Filebeat
-- Logstash
-- ElasticSearch
-- Kibana
-
-[ETC]
-- AWS Parameter Store
-
-
 
 ### Commit Convention
 
